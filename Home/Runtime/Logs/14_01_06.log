@@ -1,0 +1,75 @@
+[ 2014-01-06T10:48:57+08:00 ] 58.246.66.2 /uniqlo/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001291s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001370s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000512s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000378s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000104s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000518s ]
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '����' )  [ RunTime:0.001071s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '���' )  [ RunTime:0.000204s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�˶�' )  [ RunTime:0.000163s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�Ӽ�' )  [ RunTime:0.000152s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '��ѧ' )  [ RunTime:0.000162s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined index: cityn /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 27 行.
+NOTIC: [8] Undefined index: pro /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 28 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.027304s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.027369s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001129s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001539s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001046s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.002007s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.005885s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001369s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001433s ]
+
+[ 2014-01-06T10:48:59+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=9&pro=%E4%B8%8A%E6%B5%B7
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.001793s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001891s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000344s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000400s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000610s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000386s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000379s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000083s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+

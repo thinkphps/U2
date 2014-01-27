@@ -1,0 +1,3 @@
+<?php
+//000000000001a:2:{i:0;a:8:{s:2:"id";s:3:"214";s:7:"num_iid";s:11:"35093614127";s:5:"title";s:48:"男装 ND快干短裤13US 080799 优衣库UNIQLO";s:3:"num";s:3:"385";s:5:"price";s:6:"299.00";s:7:"pic_url";s:73:"Upload/goods/2013/2013-10/2013-10-21/b9f30b95052303e7e1d8035064c818c9.png";s:10:"detail_url";s:68:"http://item.taobao.com/item.htm?id=35093614127&spm=2014.21366151.0.0";s:7:"ccateid";s:2:"52";}i:1;a:8:{s:2:"id";s:4:"1654";s:7:"num_iid";s:11:"22747852842";s:5:"title";s:36:"男装 全棉中裤E UNIQLO优衣库";s:3:"num";s:3:"212";s:5:"price";s:5:"99.00";s:7:"pic_url";s:66:"Upload/goods/2013/2013-11/2013-11-11/2013-11-11-16/22747852842.png";s:10:"detail_url";s:68:"http://item.taobao.com/item.htm?id=22747852842&spm=2014.21366151.0.0";s:7:"ccateid";s:2:"52";}}
+?>

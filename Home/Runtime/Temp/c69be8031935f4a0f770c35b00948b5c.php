@@ -1,0 +1,3 @@
+<?php
+//000000000001a:2:{i:0;a:8:{s:2:"id";s:3:"988";s:7:"num_iid";s:11:"19451809068";s:5:"title";s:54:"婴儿/新生儿 夹层长裤A  080009 优衣库UNIQLO";s:3:"num";s:3:"124";s:5:"price";s:5:"79.00";s:7:"pic_url";s:73:"Upload/goods/2013/2013-10/2013-10-21/eb394017005555e5f08b81730dcaa5fe.png";s:10:"detail_url";s:68:"http://item.taobao.com/item.htm?id=19451809068&spm=2014.21366151.0.0";s:7:"ccateid";s:2:"86";}i:1;a:8:{s:2:"id";s:3:"995";s:7:"num_iid";s:11:"19451661854";s:5:"title";s:49:"婴儿/幼儿 夹层长裤 080003 优衣库UNIQLO";s:3:"num";s:2:"71";s:5:"price";s:5:"99.00";s:7:"pic_url";s:73:"Upload/goods/2013/2013-10/2013-10-21/987470616ef4347efadd574b41074bd5.png";s:10:"detail_url";s:68:"http://item.taobao.com/item.htm?id=19451661854&spm=2014.21366151.0.0";s:7:"ccateid";s:2:"86";}}
+?>

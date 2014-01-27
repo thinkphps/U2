@@ -1,0 +1,50 @@
+<?php
+require_once('init.php');
+require_once('TopSdk.php');
+set_time_limit(0);
+ini_set('memory_limit','200M');
+$root_dir = realpath(dirname(dirname(__FILE__)));
+$db = new DB();
+$c = new TopClient;
+$c->appkey = $db->appkey;
+$c->secretKey = $db->secretKey;
+$c->format = 'json';
+$products = new ItemGetRequest;//获取商品详细信息
+$products->setFields('approve_status,props_name');
+    $offset = 0;
+	$limit = 200;
+    $ke = 1;
+	while($ke>0){
+    $sql = "select `id`,`num_iid`,`approve_status`,`item_bn` from `u_goods` where 1 limit $offset,$limit";
+	$result = $db->mysqlfetch($sql);
+	unset($sql);
+	if(empty($result)){
+	$ke = 0;
+	}else{
+	foreach($result as $k=>$v){
+	if($v['id']==1816){
+	$products->setNumIid($v['num_iid']);
+	$product = $c->execute($products, $db->token);
+	$product_arr = (array)$product->item;
+    $proarr = explode(';',$product_arr['props_name']);
+	foreach($proarr as $kp=>$vp){
+    $vparr = explode(':',$vp);
+	if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
+	$item_bn = $vparr[3];
+	break;
+	}
+	}
+	}
+	//if($v['item_bn']=='0'){
+	if($v['id']==1816){
+	$sql = "update `u_goods` set `approve_status`='".$product_arr['approve_status']."',`item_bn`='".$item_bn."' where `id`='".$v['id']."'";
+	$db->mysqlquery($sql);
+	unset($sql);
+	}
+	}
+	}
+	$offset+=$limit;
+	sleep(2);
+	unset($result);
+	}
+exit;

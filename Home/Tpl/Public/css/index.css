@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+.index-bar{
+  background: url(../images/index/index-bar.jpg) repeat-x;
+  width: 950px;
+  height: 77px;
+  top: -430px;
+}
+.index-bar-place li{
+  background-color: transparent;
+  margin: 0;
+  font-size: 15px;
+}
+li.index-p-checked,.index-bar-place li:hover{
+  background-color: #e70012;
+}
+.index-bar p{
+  left: 308px;
+  top: 80px;
+}
+.index-gender{
+  width: 340px;
+}
+.index-gender .index-gender-div{
+  background: url(../images/index/index-gender.jpg) no-repeat 5px center;
+  width: 15px;
+}
+.index-archor{
+  background: url(../images/index/index-archor.png) no-repeat;
+  width: 255px;
+  height: 57px;
+  top: 0;
+  right: -37px;
+  color: #fff;
+  font-size: 20px;
+  padding-top: 20px;
+}
+.index-archor span{
+  position: absolute;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  left: 67px;
+  top: 43px;
+  font-size: 16px;
+}
+.index-bin{
+  background-color: #fff;
+  height: 430px;
+}
+.index-bin, .index-slide{
+  width: 950px;
+}
+.index-box{
+  width: 988px;
+  height: 0;
+  overflow: hidden;
+}
+.index-box .index-bin{
+  top: -430px;
+}
+.index-slide{
+  height: 180px;
+}
+.index-suit{
+  height: 180px;
+  padding: 125px 0;
+}
+.index-slide-container{
+  width: 840px;
+}
+.index-slide-container li{
+  margin: 0 15px;
+}
+.index-slide .mini-kv-prev{
+  left: 15px;
+}
+.index-slide .mini-kv-next{
+  right: 15px;
+}
+.index-box-btn{
+  width: 950px;
+  height: 15px;
+  border-top: 3px solid #e2000f;
+}
+.index-btn{
+  background: url(../images/index/index-btn.jpg) no-repeat 0 -15px;
+  width: 125px;
+  height: 15px;
+  left: 50%;
+  margin-left: -62px;
+  bottom: 3px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><if condition="$result['id'] neq ''">{$result.id}<else/>Uniqlo</if></title>
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/bootstrap.css?575" />
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/bootstrap-theme.css?575" />
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/uniqlo.css?575" />
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{:U('Index/index')}">优衣库后台</a>
+  </div>
+  
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><if condition="$aid neq ''">{$nick}<else/>请登录</if></a></li>
+      <li><button type="button" class="btn btn-warning" id='loginout'>退出</button></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>

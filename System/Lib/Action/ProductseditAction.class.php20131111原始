@@ -1,0 +1,474 @@
+<?php
+class ProductseditAction extends Action{
+	private $aid;
+	private $nick;
+	public function _initialize(){
+	$this->aid = session('aid');
+	$this->nick = session('nickn');
+    $this->assign('aid',$this->aid);
+    $this->assign('nick',$this->nick);
+	}
+public function index(){
+    if(!empty($this->aid)){
+	$id = trim($this->_get('id'));
+	if($id>0){
+	$keyword = trim($this->_request('keyword'));
+	$istag = $this->_request('ist');
+	$cate1 = $this->_request('cate1');
+	$cate2 = $this->_request('cate2');
+	$isdoubt = $this->_request('isdoubt');
+	
+	$goodmodel = M('Goods');
+	$customcate = M('Customcate');
+	$windex = M('Windex')->field('*')->select();;
+	$tag = M('Tag');
+    $gtmodel = M('Goodtag');
+	$result = $goodmodel->field('*')->where(array('id'=>$id))->find();
+
+	$goodtaglist = M('Goodtag')->field('*')->where(array('good_id'=>$result['id']))->select();
+	$list = $tag->field('id,name,parent_id,type')->where(array('parent_id'=>0))->select();
+	foreach($list as $k=>$v){
+	$tagtype = $tag->field('id,name,parent_id,type')->group('type')->where(array('parent_id'=>$v['id']))->select();
+	foreach($tagtype as $k3=>$v3){
+	 $type2 = $tag->field('id,name,parent_id,type')->where(array('parent_id'=>$v['id'],'type'=>$v3['type']))->select();
+	 foreach($type2 as $k4=>$v4){
+       foreach($goodtaglist as $k5=>$v5){
+          if($v4['id']==$v5['tag_id']){
+           $type2[$k4]['sel'] = 1;
+		   break;
+		  }
+	   }
+	 }
+	 $tagtype[$k3]['type2'] = $type2;
+	}
+    $list[$k]['ctag'] = $tagtype;
+	}
+
+    $gtaglist = $gtmodel->field('*')->where(array('good_id'=>$id))->order('id asc')->group('wid')->select();
+	//温度
+	$temarr = array();
+	for($i=-10;$i<=40;$i++){
+    $temarr[] = $i;
+	}
+	//取出自定义分类
+	$ccatelist = $customcate->field('*')->where(array('gtype'=>$gtaglist[0]['gtype'],'isud'=>$gtaglist[0]['isud']))->select();
+
+	$this->assign('list',$list);
+	$this->assign('result',$result);
+	$this->assign('gtaglist',$gtaglist);
+	$this->assign('windex',$windex);
+	$this->assign('temarr',$temarr);
+	$this->assign('ccatelist',$ccatelist);
+	
+	$this->assign('keyword',$keyword);
+	$this->assign('istag',$istag);
+	$this->assign('cate1',$cate1);
+	$this->assign('cate2',$cate2);
+	$this->assign('isdoubt',$isdoubt);
+	$this->assign('p',$_GET['p']);
+    $this->display();
+	}else{
+    $this->error('参数错误',U('Products/index'));
+	}
+    }else{
+    $this->display('Login/index');
+    }
+}
+public function doedit(){
+    if(!empty($this->aid)){
+	$id = trim($this->_post('id'));
+	$num_iid = trim($this->_post('num_iid'));
+    $originalid = trim($this->_post('originalid'));
+	if($id>0){
+	$goods = M('Goods');
+	$gtmodel = M('Goodtag');
+	if(empty($originalid)){
+    $tag = array();
+	$arr = $_POST;
+	$tagarr = array();
+	$arr['gtype'] = $arr['gtype']?$arr['gtype']:'0';
+	$arr['isud'] = $arr['isud']?$arr['isud']:'0';
+	$arr['ccate'] =$arr['ccate']?$arr['ccate']:0;
+	unset($_POST);
+	$taglist = M('Tag')->field('id')->where(array('parent_id'=>0))->select();
+	$i = 0;
+	$tagcount = count($taglist);
+    foreach($taglist as $k=>$v){
+      if(!empty($arr['tag'.$v['id']])){
+      foreach($arr['tag'.$v['id']] as $k1=>$v1){
+       if($v1 && !empty($v1)){
+		   $tagarr[] = $v1;
+		  //查询是否已经有次标记了
+		  $tagresult = $gtmodel->field('id')->where(array('wid'=>$arr['widf'],'good_id'=>$id,'tag_id'=>$v1))->find();
+		  if(empty($tagresult)){
+          $data = array('wid'=>$arr['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>$v1,
+			            'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp']);
+		  $gtmodel->add($data);
+		  }else{
+           $data = array('wid'=>$arr['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>$v1,
+			            'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp'],);
+          $gtmodel->where(array('id'=>$tagresult['id']))->save($data);
+		  }
+		  unset($tagresult);
+		  //有两个天气指数时才走这里开始
+		  if(!empty($arr['wid2'])){
+		  $tagresult2 = $gtmodel->field('id')->where(array('wid'=>$arr['wids'],'good_id'=>$id,'tag_id'=>$v1))->find();
+		  if(empty($tagresult2)){
+          $data = array('wid'=>$arr['wid2'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>$v1,
+			            'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp2'],
+                        'etm'=>$arr['etp2']);
+		  $gtmodel->add($data);
+		  }else{
+           $data = array('wid'=>$arr['wid2'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>$v1,
+			            'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp2'],
+                        'etm'=>$arr['etp2'],);
+          $gtmodel->where(array('id'=>$tagresult2['id']))->save($data);
+		  unset($tagresult2);
+		  }		  
+		  }
+		  //有两个天气指数时才走这里结束  
+	   }
+	  }
+	}else{
+		$i++;
+	}
+	}
+	//如果只有温度
+	if($i==$tagcount){
+	$tagresult = $gtmodel->field('id')->where(array('wid'=>$arr['widf'],'good_id'=>$id))->find();
+	if(empty($tagresult)){
+    $data = array('wid'=>$arr['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>0,
+		                'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp']);
+	$gtmodel->add($data);
+	}else{
+    $data = array('wid'=>$arr['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>0,
+		                'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp']);
+	$gtmodel->where(array('wid'=>$arr['wid'],'good_id'=>$id))->save($data);
+	}
+	unset($tagresult);
+	//如果有多指数
+		  if(!empty($arr['wid2'])){
+		  $tagresult2 = $gtmodel->field('id')->where(array('wid'=>$arr['wids'],'good_id'=>$id))->find();
+          if(empty($tagresult2)){
+          $data = array('wid'=>$arr['wid2'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>0,
+		                'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp']);
+	     $gtmodel->add($data);
+		  }else{
+          $data = array('wid'=>$arr['wid2'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$arr['gtype'],
+			            'isud'=>$arr['isud'],
+			            'tag_id'=>0,
+		                'ccateid'=>$arr['ccate'],
+                        'stm'=>$arr['stp'],
+                        'etm'=>$arr['etp']);
+	     $gtmodel->where(array('wid'=>$arr['wid2'],'good_id'=>$id))->save($data);          
+		  }
+		  }
+	}
+	
+	//更新的时候删除去掉的标签
+    $glist = $gtmodel->field('id,tag_id')->where(array('good_id'=>$id))->select();
+	$teltag = array();
+    
+	if(!empty($tagarr)){
+    $tagarr = array_flip($tagarr);
+    foreach($glist as $k=>$v){
+    if(!array_key_exists($v['tag_id'],$tagarr)){
+    $gtmodel->where(array('good_id'=>$id,'tag_id'=>$v['tag_id']))->delete();
+	}
+    }
+    }
+    $goodarr['type'] = $arr['gtype'];
+	$goodarr['isud'] = $arr['isud'];
+	if(!empty($arr['cy'])){
+    $goodarr['isdoubt'] = $arr['cy'];
+	}else{
+    $goodarr['isdoubt'] = '1';
+	}
+    $goodarr['istag'] = '2';
+	$goods->where(array('id'=>$id))->save($goodarr);
+    $this->success('编辑成功',U('Productsedit/index',array('id'=>$id)));
+	}else{
+     $olist = $gtmodel->field('*')->where(array('good_id'=>$originalid))->select();
+	 $oresult = $goods->field('isdoubt')->where(array('id'=>$originalid))->find();
+	 if(!empty($olist)){
+     //取出实际商品的打标签情况
+	 $ylist = $gtmodel->field('*')->where(array('good_id'=>$id))->select();
+	 if(!empty($ylist)){
+       $ocount = count($olist);
+       $ycount = count($ylist);
+	   if($ocount>=$ycount){
+        foreach($olist as $k=>$v){
+        if(!empty($ylist[$k])){
+            $data = array('wid'=>$v['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$v['gtype'],
+			            'isud'=>$v['isud'],
+			            'tag_id'=>$v['tag_id'],
+				        'ccateid'=>$v['ccateid'],
+                        'stm'=>$v['stp'],
+                        'etm'=>$v['etp'],);
+          $gtmodel->where(array('id'=>$ylist[$k]['id']))->save($data);       
+		}else{
+          $data = array('wid'=>$v['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$v['gtype'],
+			            'isud'=>$v['isud'],
+			            'tag_id'=>$v['tag_id'],
+			            'ccateid'=>$v['ccateid'],
+                        'stm'=>$v['stm'],
+                        'etm'=>$v['etm']);
+		  $gtmodel->add($data); 
+		}
+		}
+	   }else{//原来的商品标签大于提交过来那个商品的
+         foreach($ylist as $k=>$v){
+          if(!empty($olist[$k])){
+            $data = array('wid'=>$v['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$v['gtype'],
+			            'isud'=>$v['isud'],
+			            'tag_id'=>$v['tag_id'],
+				        'ccateid'=>$v['ccateid'],
+                        'stm'=>$v['stp'],
+                        'etm'=>$v['etp'],);
+          $gtmodel->where(array('id'=>$v['id']))->save($data);  
+		  }else{
+           $gtmodel->where(array('id'=>$v['id']))->delete();
+		  }
+		 }
+	   }
+	 }else{
+       foreach($olist as $k=>$v){
+          $data = array('wid'=>$v['wid'],
+			            'good_id'=>$id,
+                        'num_iid'=>$num_iid,
+                        'gtype'=>$v['gtype'],
+			            'isud'=>$v['isud'],
+			            'tag_id'=>$v['tag_id'],
+			            'ccateid'=>$v['ccateid'],
+                        'stm'=>$v['stm'],
+                        'etm'=>$v['etm']);
+		  $gtmodel->add($data);        
+	   }
+	 }
+	$goodarr['type'] = $olist[0]['gtype'];
+	$goodarr['isud'] = $olist[0]['isud'];
+    $goodarr['istag'] = '2';
+	$goodarr['isdoubt'] = $oresult['isdoubt'];
+	$goods->where(array('id'=>$id))->save($goodarr);
+	 $this->success('编辑成功',U('Productsedit/index',array('id'=>$id)));
+	 }else{
+      $this->error('所选商品还没有设定标签',U('Productsedit/index',array('id'=>$id)));
+	 }
+	}
+	}else{
+    $this->error('参数错误',U('Products/index'));
+	}
+    }else{
+    $this->display('Login/index');
+    }
+}
+
+public function ajaxt(){
+    $selid = trim($this->_post('selid'));
+	//温度
+	$temarr = array();
+	for($i=-10;$i<=40;$i++){
+    $temarr[] = $i;
+	}
+	  switch($selid){
+      case 1 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==29){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==40){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 2 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==24){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==28){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 3 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==20){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==23){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 4 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==15){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==19){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 5 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==11){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==14){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 6 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==6){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==10){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+      case 7 :
+	  $str1 = '<option value="">请选择</option>';
+      $str2 = '<option value="">请选择</option>';
+      foreach($temarr as $k=>$v){
+	  if($v==-10){
+      $str1.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str1.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  if($v==5){
+      $str2.='<option value="'.$v.'" selected="selected">'.$v.'</option>';
+	  }else{
+      $str2.='<option value="'.$v.'">'.$v.'</option>';
+	  }
+	  }
+	  break;
+	  }
+      $arr['stm1'] = $str1;
+	  $arr['stm2'] = $str2;
+	  echo json_encode($arr);
+}
+
+public function ajaxcate(){
+     $gtype = trim($this->_post('gtype'));
+	 $isud = trim($this->_post('isud'));
+	 if(!empty($gtype) && !empty($isud)){
+      $customcate = M('Customcate');
+	  $list = $customcate->field('*')->where(array('gtype'=>$gtype,'isud'=>$isud))->select();
+	  $str = '';
+	  if(!empty($list)){
+	  foreach($list as $k=>$v){
+      $str.='<input type="radio" name="ccate" value="'.$v['id'].'">'.$v['name'].'&nbsp;&nbsp;';
+	  }
+      $arr['flag'] = true;
+	  $arr['str'] = $str;
+	  }else{
+      $arr['flag'] = false;
+	  $arr['msg'] = '没有数据';
+	  }
+	 }else{
+      $arr['flag'] = false;
+	  $arr['msg'] = '参数错误';
+	 }
+	 echo json_encode($arr);
+}
+}

@@ -1,0 +1,55 @@
+[ 2014-01-23T15:00:33+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=7&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000583s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000696s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000348s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000457s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000698s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000586s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000387s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000326s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000398s ]
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2014-01-23T17:26:40+08:00 ] 58.246.66.2 /uniqlo/index.php/Sendcity/sendpro
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000474s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000533s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000306s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000353s ]
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+
+[ 2014-01-23T17:27:20+08:00 ] 58.246.66.2 /uniqlo/index.php/Sendcity/sendpro
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000515s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000585s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+
+[ 2014-01-23T17:36:51+08:00 ] 58.246.66.2 /uniqlo/index.php/Sendcity/sendpro
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000583s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000694s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000400s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000454s ]
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+

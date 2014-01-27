@@ -1,0 +1,456 @@
+<include file="Public:header"/>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="{:U('Index/index')}">首页</a></li>
+    <li><a href="{:U('Products/index')}">商品管理</a></li>
+    <li class="active"><strong>编辑商品</strong></li>
+  </ol>
+  <form class="form-horizontal products-edit" role="form" action="{:U('Productsedit/doedit')}" method='post'>
+  <input type='hidden' name='id' value='{$result.id}'>
+  <input type='hidden' name='num_iid' value='{$result.num_iid}'>
+  <input type='hidden' name='widf' value="{$gtaglist[0]['wid']}">
+  <input type='hidden' name='wids' value="{$gtaglist[1]['wid']}">
+    <div class="form-group">
+      <label class="col-lg-1 control-label">性别：</label>
+      <div class="row col-lg-12">
+        <div class="col-lg-1">
+          <select class="form-control" name='gtype' id='gtypeid'>
+            <option value="">请选择</option>
+            <option value="0" <if condition="$gtaglist[0]['gtype'] eq '0'">selected='selected'</if>>ALL</option>
+            <option value="1" <if condition="$gtaglist[0]['gtype'] eq '1'">selected='selected'</if>>WOMEN</option>
+            <option value="2" <if condition="$gtaglist[0]['gtype'] eq '2'">selected='selected'</if>>MEN</option>
+            <option value="3" <if condition="$gtaglist[0]['gtype'] eq '3'">selected='selected'</if>>KIDS</option>
+          </select>
+        </div>
+        <label class="pull-left control-label">部位：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='isud' id='isudid'>
+            <option value="">请选择</option>
+            <option value="1" <if condition="$gtaglist[0]['isud'] eq '1'">selected='selected'</if>>上装</option>
+            <option value="2" <if condition="$gtaglist[0]['isud'] eq '2'">selected='selected'</if>>下装</option>
+            <option value="4" <if condition="$gtaglist[0]['isud'] eq '4'">selected='selected'</if>>套装</option>
+            <option value="3" <if condition="$gtaglist[0]['isud'] eq '3'">selected='selected'</if>>配饰</option>
+            <option value="5" <if condition="$gtaglist[0]['isud'] eq '5'">selected='selected'</if>>内衣</option>
+          </select>
+        </div>
+        <label class="pull-left control-label">指数1：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis1' onchange="changezhishu('1')">
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[0]['wid'] eq $wvo['id']">selected='selected' <elseif condition="$wvo['id'] eq 8"/>selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm1'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[0]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm1'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[0]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+        <label class="pull-left control-label" id='clickaddstm'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</label>
+      </div>
+    </div>
+    <!--新添加的指数-->
+
+     <div class="form-group addstm" id="delz2" <if condition="$gtaglist[1] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数2：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis2' onchange="changezhishu('2')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[1]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm2'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[1]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm2'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[1]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('2')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+
+    <div class="form-group addstm" id="delz3" <if condition="$gtaglist[2] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数3：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis3' onchange="changezhishu('3')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[2]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm3'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[2]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm3'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[2]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('3')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+
+    <div class="form-group addstm" id="delz4" <if condition="$gtaglist[3] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数4：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis4' onchange="changezhishu('4')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[3]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm4'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[3]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm4'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[3]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('4')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+
+    <div class="form-group addstm" id="delz5" <if condition="$gtaglist[4] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数5：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis5' onchange="changezhishu('5')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[4]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm5'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[4]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm5'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[4]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('5')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+
+    <div class="form-group addstm" id="delz6" <if condition="$gtaglist[5] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数6：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis6' onchange="changezhishu('6')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[5]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm6'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[5]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm6'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[5]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('6')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+
+    <div class="form-group addstm" id="delz7" <if condition="$gtaglist[6] neq ''">style="display:block;"<else/>style="display:none;"</if>
+      <label class="col-lg-1 control-label"></label>
+      <div class="row col-lg-12">
+        <label class="pull-left control-label">指数7：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='wid[]' id='zhis7' onchange="changezhishu('7')">
+		    <option value=''>请选择</option>
+		    <volist id='wvo' name='windex'>
+            <option value="{$wvo.id}" <if condition="$gtaglist[6]['wid'] eq $wvo['id']">selected='selected'</if>>{$wvo.wname}</option>
+            </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">气温：</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='stp[]' id='stm7'>
+            <option value="">请选择</option>
+		  <volist id='tvo' name='temarr'>
+            <option value="{$tvo}" <if condition="$gtaglist[6]['stm'] eq $tvo">selected='selected'</if>>{$tvo}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C —</label>
+        <div class="col-lg-1">
+          <select class="form-control" name='etp[]' id='etm7'>
+            <option value="">请选择</option>
+			<volist id='tvo2' name='temarr'>
+            <option value="{$tvo2}" <if condition="$gtaglist[6]['etm'] eq $tvo2">selected='selected'</if>>{$tvo2}</option>
+          </volist>
+          </select>
+        </div>
+        <label class="pull-left control-label">&deg;C</label>
+		<label class="pull-left control-label" onclick="delzhishu('7')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</label>
+      </div>
+    </div>
+	<!--新添加的指数-->
+<volist id='lvo' name='list'>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">{$lvo.name}：</label>
+      <div class="col-lg-10">
+        <!--<label class="checkbox-inline">
+          <input type="checkbox" class="allselect" value="option1"> 全选
+        </label>-->
+		<volist id='tvo' name="lvo['ctag']">
+		<if condition="$gtaglist[0]['gtype'] egt '0'">
+		<div class="clearfix tsex{$tvo.type}" <if condition="$gtaglist[0]['gtype'] neq $tvo['type']">style="display:none;"</if>>
+		<if condition="$tvo['type'] eq 1"><label class="checkbox-inline nopdl tags-1">WOMEN</label><elseif condition="$tvo['type'] eq 2"/><label class="checkbox-inline nopdl tags-2">MEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 3"/><label class="checkbox-inline nopdl tags-3">KIDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></if>
+		<volist id='cvo' name="tvo['type2']">
+        <label class="checkbox-inline">
+          <input type="checkbox" value="{$cvo.id}" class='delch' name="tag{$lvo.id}[]" <if condition="$cvo['sel'] eq 1"> checked='checked'</if>> {$cvo.name}
+        </label>
+		 </volist>
+		 </div>
+		 <else/>
+		<div class="clearfix tsex{$tvo.type}">
+		<if condition="$tvo['type'] eq 1"><label class="checkbox-inline nopdl tags-1">WOMEN</label><elseif condition="$tvo['type'] eq 2"/><label class="checkbox-inline nopdl tags-2">MEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 3"/><label class="checkbox-inline nopdl tags-3">KIDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></if>
+		<volist id='cvo' name="tvo['type2']">
+        <label class="checkbox-inline">
+          <input type="checkbox" value="{$cvo.id}" class='delch' name="tag{$lvo.id}[]" <if condition="$cvo['sel'] eq 1"> checked='checked'</if>> {$cvo.name}
+        </label>
+		 </volist>
+		 </div>
+		 </if>
+		</volist>
+      </div>
+    </div>
+   </volist>
+      <div class="form-group">
+      <label class="col-lg-1 control-label">选择自定义分类：</label>
+      <div class="col-lg-10" id='zidy'>
+      	{$str}
+	  <if condition="$ccatelist neq ''">
+      <volist id='cvo' name='ccatelist'>
+       <input type="radio" name="ccate" value="{$cvo.id}" <if condition="$cvo['id'] eq $gtaglist[0]['ccateid']">checked='checked'</if>>{$cvo.name}&nbsp;&nbsp;
+	  </volist>
+	  </if>
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="col-lg-1 control-label">复制ID：</label>
+      <div class="col-lg-10">
+        <label class="radio-inline">
+          <input type="text" name="originalid" value='' >
+        </label>
+      </div>
+    </div>
+<div class="text-center">
+        <button type="submit" class="btn btn-success">保存</button>
+	  <label class="checkbox-inline">
+        <input type="checkbox" name='cy' value='2' <if condition="$result['isdoubt'] eq '2'">checked="checked" </if>/>存疑
+      </label>
+	  <label class="checkbox-inline">
+               <a href="{:U('Products/index',array('p'=>$p,'keyword'=>$keyword,'ist'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt))}">返回</a>
+      </label>
+    </div>
+  </form>
+  <hr />
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-lg-1 control-label">后台ID</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.id}</span>
+        <img src="__ROOT__/{$result.pic_url}" alt="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">商品名称</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.title}</span>
+        <img src="__ROOT__/{$result.pic_url}" alt="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">商品数字ID</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.num_iid}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">分类</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.cname}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">价格</label>
+      <div class="col-lg-10">
+        <span class="help-block">￥{$result.price}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">淘宝ID</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.num_iid}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">商品编码</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.outer_id}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">商品属性</label>
+      <div class="col-lg-10">
+        <span class="help-block">{$result.props_name}</span>
+      </div>
+    </div>
+  </form>
+</div>
+<include file="Public:footer"/>
+<script type='text/javascript'>
+var ur = '{:U('Productsedit/ajaxt')}';
+var ur2 = '{:U('Productsedit/ajaxcate')}';
+var ur3 = '{:U('Productsedit/ajaxt2')}';
+$(function(){	
+ $('#isudid').change(function(){
+	 var gtypevalue = $('#gtypeid option:selected').val();
+	 if(gtypevalue<=0){
+       alert('请选择性别');
+	  }else{
+      var isuevalue = $('#isudid option:selected').val();
+	  if(isuevalue){
+       $.post(ur2,{gtype:gtypevalue,isud :isuevalue},function(data,status){
+		   var da = eval("("+data+")");
+		   if(da.flag){
+              $('#zidy').html(da.str);
+			}else{
+             alert(da.msg);
+             $('#zidy').html('');
+				}
+		   
+		   });
+	  }
+	  }
+	 });
+
+$('#gtypeid').change(function(){
+	$('.delch').removeAttr("checked");
+	var gtypevalue = $('#gtypeid option:selected').val();
+	if(gtypevalue>0){
+		$('.clearfix').css('display','none');
+        $('.tsex'+gtypevalue).css('display','block');
+	}else{
+        $('.clearfix').css('display','block');
+		}
+	});
+//点击添加显示指数
+$('#clickaddstm').click(function(){
+    $(".addstm:hidden").each(function(i,val){
+		if(i==0){
+         $(this).css('display','block');
+		}
+		});
+});
+})
+//删除指数标签
+function delzhishu(id){
+$('#zhis'+id).find(':selected').prop('selected',false);
+$('#stm'+id).find(':selected').prop('selected',false);
+$('#etm'+id).find(':selected').prop('selected',false);
+$('#delz'+id).css('display','none');
+}
+
+function changezhishu(id){
+var selvalue = $('#zhis'+id+' option:selected').val();
+$.post(ur,{
+	selid : selvalue
+	},function(data,status){
+	var da = eval("("+data+")");
+        $('#stm'+id).html(da.stm1);
+		$('#etm'+id).html(da.stm2);
+		});
+}
+</script>

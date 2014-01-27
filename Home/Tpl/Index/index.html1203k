@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我的专属衣柜</title>
+  <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/uniqlo.css?45" />
+</head>
+<body>
+<div class="mb20 tc">
+  <img src="__TMPL__Public/images/index-header.jpg" alt="" />
+</div>
+<div class="uniqlo">
+  <div class="index-wea mini-wea">
+    <span class="mini-beta">测试版</span>
+    <i id="nio-img" class="nio-0" title="天气"></i>
+    <ul class="mini-wea-ul fl">
+      <li class="clear">
+        <strong id="nio-city" class="ft18" title="城市">城市</strong>
+        <div class="mini-change-city fl pr">
+          <a href="javascript:;" class="mini-change-btn fl" title="切换城市">切换</a>
+          <form class="mini-city linkageselect pa none">
+            <a href="javascript:;" class="mini-city-close mini-btn">关闭</a>
+            <label>省份<select class="level_1"></select></label>
+            <label>城市<select class="level_2"></select></label>
+            <input type="submit" value="切换" />
+          </form>
+        </div>
+        <span id="nio-date" title="2013年00月00日">2013年00月00日</span>
+        <span id="nio-day" title="星期">星期</span>
+      </li>
+      <li class="clear ft36">
+        <strong id="nio-low">00°</strong>
+        <strong>~</strong>
+        <strong id="nio-high">00°</strong>
+        <b id="nio-wea" class="ft14">天气</b>
+      </li>
+      <li class="clear">
+        <ul class="mini-week">
+          <li class="mini-checked">
+            <em id="nio-tem1">00°</em>
+            <small id="nio-day1">星期</small>
+          </li>
+          <li>
+            <em id="nio-tem2">00°</em>
+            <small id="nio-day2">星期</small>
+          </li>
+          <li>
+            <em id="nio-tem3">00°</em>
+            <small id="nio-day3">星期</small>
+          </li>
+          <li>
+            <em id="nio-tem4">00°</em>
+            <small id="nio-day4">星期</small>
+          </li>
+          <li>
+            <em id="nio-tem5">00°</em>
+            <small id="nio-day5">星期</small>
+          </li>
+          <li class="noborder">
+            <em id="nio-tem6">00°</em>
+            <small id="nio-day6">星期</small>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p id="nio-tip" class="mini-wea-tips fl" title="正在加载天气数据，请稍等...">正在加载天气数据，请稍等...</p>
+  </div>
+
+  <div class="index-box pr">
+
+    <div class="index-bar pr tc">
+      <div class="mini-gender-bin index-gender index-first-gender tc fl">
+        <ul class="mini-gender fl">
+          <li class="mini-gender-checked">
+            <a href="javascript:;" id='0' class="mini-gender-all">All</a>
+          </li>
+          <li>
+            <a href="javascript:;" id='1'class="mini-gender-women">WOMEN</a>
+          </li>
+          <li>
+            <a href="javascript:;" id='2' class="mini-gender-men">MEN</a>
+          </li>
+          <li>
+            <a href="javascript:;" data-page="index" class="mini-gender-kids" id='3'>KIDS BABY</a>
+          </li>
+        </ul>
+      </div>
+      <!-- <p class="mini-gender-tips pa none">你还可以点击套装，筛选查看居家类套装哦</p> -->
+      <ul class="index-bar-place fl">
+        <li class="index-p-0 index-p-checked" id='0'>全部</li>
+        <li class="index-p-1" id='{$business}'>商务</li>
+		    <li class="index-p-1 index-p-kids none" id='{$gosch}'>上学</li>
+        <li class="index-p-5" id='{$ourism}'>逛街</li>
+        <li class="index-p-3" id='{$sport}'>运动</li>
+        <li class="index-p-4" id='{$jujia}'>居家</li>
+      </ul>
+      <div class="mini-gender-bin index-gender tc fl">
+        <div class="mini-gender fl pr">
+          <a href="javascript:;" class="mini-gender-suit">套装</a>
+          <div class="mini-gender-tips pa ft14 none">
+            <b class="mini-gender-close mini-btn">关闭</b>
+            <span class="mini-btn"></span>
+            <p>您还可以点击“套装”，筛选查看家居套装噢</p>
+          </div>
+        </div>
+      </div>
+      
+      <a href="{$uniurl}mini.php/Index/index" class="index-archor pa">
+        <span class="mini-beta">测试版</span>
+        <strong>去优衣柜搭搭</strong><br /><b>LET'S GO</b>
+      </a>
+    </div>
+
+    <div id="nio-kv" class="index-bin pr" data-page="index">
+      <p class="index-filter-fail pa none">暂时没有符合条件的衣物，请试试其他选择吧</p>
+      <div class="index-single mini-kv pr">
+        <div class="mini-kv-slide pr" data-pos="#net-top">
+          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
+          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
+          <div class="mini-kv-container">
+            <ul id='upc'>
+            <volist id='uvo' name='reulist'>
+              <li>
+                <img src="{$uvo.pic_url}" id="1" place="家居1" tag="淑女1" url="{$uvo.detail_url}" rest="{$uvo.num}" price="{$uvo.price}" alt="{$uvo.title}" miniUrl="{$uniurl}mini.php/Index/index/num/{$uvo.num_iid}">
+              </li>
+            </volist>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mini-kv-slide pr" data-pos="#net-bot">
+          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
+          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
+          <div class="mini-kv-container">
+            <ul id='downc'>
+            <volist id='dvo' name='redlist'>
+              <li>
+                <img src="{$dvo.pic_url}" id="10" place="家居2" tag="淑女10" url="{$dvo.detail_url}" rest="{$dvo.num}" price="{$dvo.price}" alt="{$dvo.title}" miniUrl="{$uniurl}mini.php/Index/index/num/{$dvo.num_iid}">
+              </li>
+            </volist>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="index-suit mini-kv pr none">
+        <div class="mini-kv-slide pr">
+          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
+          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
+          <div class="mini-kv-container">
+            <ul id='taoz'>
+              <li>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mini-kv-hover tc pa none">
+        <p class="ft16">¥ <strong class="ft18">85.00</strong></p>
+        <small>剩余库存 <span>129</span> 件</small>
+        <a class="ft14" href="http://detail.tmall.com/item.htm?id=18942416200" target="_blank">【手机应用专享价】女装 羊毛混纺V领开衫10</a>
+        <a href="javascript:;" class="mini-kv-add pa">收入衣柜</a>
+      </div>
+      
+      <a href="javascript:;" class="mini-net-empty pa tc" <if condition="$reulist eq '' && $redlist eq ''">style="display:block;"<else/>style="display:none;"</if> id='tishi'>
+        <h3>很抱歉！</h3>
+        <p>没有找到符合您需求的衣物<br>请试试其他选择</p>
+      </a>
+    </div>
+  </div>
+  <div class="index-box-btn pr">
+    <a href="javascript:;" class="index-btn pa">收起</a>
+  </div>
+
+</div>
+<div class="mt20 mb20 tc">
+  <img src="__TMPL__Public/images/bot.jpg" alt="">
+  <img src="__TMPL__Public/images/footer.jpg" alt="" />
+</div>
+
+<script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
+<script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/nio-weather.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
+<script type='text/javascript'>
+var getgood = '{:U('Index/ajaxgood')}';
+var imgpath = '__TMPL__Public';
+var goodurl = '{:U('Index/getgood')}';
+var sendurl = '{$uniurl}';
+var cityn = '{$cityn}';
+var provi = '{$provi}';
+$(function(){
+	window.imgpath = imgpath;
+	$.weather.init({
+    imgpath : imgpath,
+	city : cityn || null,
+    callback: function(city, temper, info){
+      var avg = getavg(temper.high,temper.low);
+      $.weather.avg = avg;
+      $.weather.getgurl = goodurl;
+	  var pron,cookcity;
+		cookcity = provi;
+		if(cookcity){
+			pron = provi;
+		}else{
+			pron = remote_ip_info.province;
+		}
+      $.post(getgood,{tem:avg,pro:pron},function(data,status){
+        var da = eval("("+data+")");
+        if(da.ustr){
+          $('#upc').html(da.ustr);
+        }else{
+          $('#upc').html('');
+        }
+        if(da.dstr){
+          $('#downc').html(da.dstr);
+        }else{
+          $('#downc').html('');
+        }
+        $.uniqlo.kvSlider();
+        if(!da.ustr && !da.dstr){
+          $('#tishi').show();
+        }else{
+          $('#tishi').hide();
+        }
+      });
+    }
+  });
+
+  $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
+    var that = $(this)
+    $.uniqlo.index.togClass(that, 'mini-checked')
+    $.weather.init({
+      index : that.index() + 1,
+      imgpath : window.imgpath,
+      callback: function(city, temper, info){
+        var avg = getavg(temper.high,temper.low);
+        $.weather.avg = avg;
+        $.post(goodurl,{
+          tem : avg,
+          cid : $.weather.occasion,
+          sid : $.weather.sex,
+          tid : $.weather.set			
+        },function(data,status){
+          var da = eval("("+data+")");
+          if(da){
+            if(da.flag1=='p'){
+              if($.weather.set==1){
+                if(da.ustr){
+                  $('#upc').html(da.ustr);
+                }
+                if(da.dstr){
+                  $('#downc').html(da.dstr);
+                }
+              }else{
+                $('#upc').html(da.ustr);
+                $('#downc').html(da.dstr);
+              }
+            }
+            if(da.flag=='t'){
+              $('#taoz').html(da.tstr);
+            }
+			$.uniqlo.kvSlider();
+            if($.weather.set==1){
+              if(!da.ustr && !da.dstr && !da.tstr){
+                $('#tishi').css('display','block');
+              }else if(da.tstr){
+                $('#tishi').css('display','none');	
+              }
+            }else{
+              if(!da.ustr && !da.dstr){
+                $('#tishi').show();
+              }else{
+                $('#tishi').hide();
+              }		
+            }
+          }
+        });
+      }
+    })
+  })
+})
+function getgoods(cid,sid,tid){
+	$.post(goodurl,{
+   tem : $.weather.avg,
+   cid : cid,
+   sid : sid,
+   tid : tid
+ },function(data,status){
+   var da = eval("("+data+")");
+   if(da){
+     if(da.flag1=='p'){
+       if(tid==1){
+         if(da.ustr){
+           $('#upc').html(da.ustr);
+         }
+         if(da.dstr){
+           $('#downc').html(da.dstr);
+         }
+       }else{
+         $('#upc').html(da.ustr);
+         $('#downc').html(da.dstr);	
+       }
+     }
+     if(da.flag=='t'){
+       $('#taoz').html(da.tstr);
+     }
+	 $.uniqlo.kvSlider();
+     if(tid==1){
+       if(!da.ustr && !da.dstr && !da.tstr){
+         $('#tishi').css('display','block');
+       }else if(da.tstr){
+         $('#tishi').css('display','none');	
+       }
+     }else{
+       if(!da.ustr && !da.dstr){
+         $('#tishi').css('display','block');
+       }else{
+         $('#tishi').css('display','none');	
+       }		
+     }	
+   }
+
+ });
+}
+function getavg(high,low){
+  var avg = Math.ceil((low+high)/2);
+  return avg;
+}
+function sendcity(pro,city){
+	$.post(sendurl+'mini.php/Sendcity/sendpro',{proname:pro,cityname:city},function(data,status){
+		
+	});
+}
+</script>
+</body>
+</html>
+

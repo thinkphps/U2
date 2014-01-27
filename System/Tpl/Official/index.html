@@ -1,0 +1,263 @@
+<include file="Public:header"/>
+<div class="container official">
+  <ol class="breadcrumb">
+    <li><a href="{index.html}:U('Index/index')}">首页</a></li>
+    <li class="active"><strong>官方推送</strong></li>
+  </ol>
+  <p class="well-sm">
+    <span class="pull-left">方案一：当天气温≤</span>
+    <span class="col-lg-1" style="margin-top:-6px;">
+      <input type="text" class="form-control" <if condition="$tm neq 0">value="{$tm}"<else/>value="25"</if> id='lttem'/>
+    </span>℃时，用户看到以下推荐商品
+  </p>
+  <div class="row text-center">
+  	<if condition="$list1 neq ''">
+  	<volist id='vo' name='list1' key='key'>
+     <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">{$vo.num_iid}</p>
+          <p><input type="text" class="form-control hide" id='spid1{$key}' value='{$vo.num_iid}'></p>
+          <span id='rid1{$key}' style='display:none;'>{$vo.id}</span>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <if condition="$key ELT 4">
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key},1,1);">保存</button>
+          <else/>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key},1,2);">保存</button>
+          </if>
+        </div>
+      </div>
+    </div> 		
+   </volist>
+   <else/>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid10'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(0,1,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid11'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(1,1,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid12'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(2,1,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid13'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(3,1,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid14'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(4,1,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid15'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(5,1,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid16'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(6,1,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid17'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(7,1,2);">保存</button>
+        </div>
+      </div>
+    </div>
+   </if>
+  </div>
+  <p class="well-sm">方案二：当天气温＞<span id='twotm'><if condition="$tm neq 0">{$tm}<else/>25</if></span>℃时，用户看到以下推荐商品</p>
+  <div class="row text-center">
+  	<if condition="$list2 neq ''">
+  	<volist id='vo2' name='list2' key='key2'>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">{$vo2.num_iid}</p>
+          <p><input type="text" class="form-control hide" id='spid2{$key2}' value='{$vo2.num_iid}'></p>
+          <span id='rid2{$key2}' style='display:none;'>{$vo2.id}</span>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <if condition="$key2 ELT 4">
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key2},2,1);">保存</button>
+          <else/>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key2},2,2);">保存</button>
+          </if>
+        </div>
+      </div>
+    </div>  		
+   </volist>
+   <else/>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid20'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(0,2,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid21'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(1,2,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid22'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(2,2,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid23'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(3,2,1);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid24'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(4,2,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid25'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(5,2,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid26'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(6,2,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <div class="caption">
+          <p>商品数字ID：</p>
+          <p class="js-official-id">18632267046</p>
+          <p><input type="text" class="form-control hide" id='spid27'></p>
+          <button type="button" class="btn btn-info js-official-alter">替换</button>
+          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(7,2,2);">保存</button>
+        </div>
+      </div>
+    </div>
+    </if>
+  </div>
+</div>
+<include file="Public:footer"/>
+<script type='text/javascript'>
+var url = "{:U('Official/add')}";
+	/*
+    type:1为方案一2为方案2
+	issue:1为上装2为下装
+	*/
+function reco(id,type,issue){
+var kuid = $('#spid'+type+id).val();
+var lttem = $('#lttem').val();
+var rid = $('#rid'+type+id).text();
+
+  $.post(url,{kuid:kuid,type:type,rid:rid,issue:issue,lttem:lttem},function(data,status){
+	  var da = eval("("+data+")");
+	  if(da.flag){
+	  $('#spid'+type+id).val(da.num_iid);
+	  $('#lttem').val(da.stm);
+	  if(da.rid){
+      $('#rid'+type+id).text(da.rid);
+       }
+      $('#twotm').text(lttem);
+	  }else{
+       //alert(da.msg);
+	  }
+	  });
+}
+</script>

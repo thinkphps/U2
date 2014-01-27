@@ -1,0 +1,108 @@
+@charset "utf-8";
+html, body, div, span, h1, h2, h3, h4, h5, h6,
+p, a, del, em, img, b, i, dl, dt, dd, sub, sup,
+small, strong, ol, ul, li, fieldset, form, label,
+input, button, select, option,
+table, caption, tbody, tfoot, thead, tr, th, td{
+	margin: 0;
+	padding: 0;
+}
+img,fieldset{
+	border: 0;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+	text-decoration: none;
+	*zoom: 1;
+}
+
+/*== global preset ==*/
+.fl{
+	float: left;
+	_display:inline;
+}
+.fr{
+	float: right;
+	_display:inline;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+.mt20{
+	margin-top: 20px;
+}
+.fb{
+	font-weight: bold;
+}
+.ft12{
+	font-size: 12px;
+}
+.ft14{
+	font-size: 14px;
+}
+.ft16{
+	font-size: 16px;
+}
+.ft18{
+	font-size: 18px;
+}
+.ft36{
+	font-size: 36px;
+}
+.tc{
+	text-align: center;
+}
+.pr{
+	position: relative;
+}
+.pa{
+	position: absolute;
+}
+.pf{
+	position: fixed;
+	_position: absolute;
+}
+.none{
+	display: none;
+}
+.show{
+	display: block;
+}
+.noborder{
+	border: 0 none!important;
+}
+.nomargin{
+	margin: 0!important;
+}
+.clear {
+  *zoom: 1;
+}
+.clear:before,
+.clear:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clear:after {
+  clear: both;
+}
+body{
+	background-color: #e6e6e6;
+	font: 12px "Microsoft Yahei","微软雅黑", Arial;
+}
+.uniqlo{
+	width: 950px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #fff;
+	position: relative;
+}

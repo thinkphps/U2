@@ -1,0 +1,1784 @@
+[ 2013-12-31T09:41:03+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.003157s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003266s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001946s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002009s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.062838s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.030748s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.037108s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000087s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000113s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T09:41:09+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000518s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000594s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000344s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000398s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000675s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000381s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.001698s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.761879s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.203902s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003339s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.009881s ]
+
+[ 2013-12-31T09:41:11+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000518s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000585s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000475s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000554s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000381s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000370s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000070s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.005226s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.017173s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002720s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003440s ]
+
+[ 2013-12-31T09:41:12+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000489s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000555s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000310s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000574s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000365s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004840s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.008972s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.005111s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003387s ]
+
+[ 2013-12-31T09:41:13+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=__15&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000495s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000561s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000587s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000392s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000379s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000071s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '15' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.005046s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '15' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003432s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '15' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003814s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '15' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.004168s ]
+
+[ 2013-12-31T09:41:14+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000493s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000748s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000416s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000371s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.021206s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003906s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003966s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.004500s ]
+
+[ 2013-12-31T09:41:15+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000510s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000584s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000802s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000451s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000374s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000071s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002542s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002669s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002010s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001956s ]
+
+[ 2013-12-31T09:41:16+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000491s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000557s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000582s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000382s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000369s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002752s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003097s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003887s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002307s ]
+
+[ 2013-12-31T09:41:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000754s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000835s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000360s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000415s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000582s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000394s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000072s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '20' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.001120s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '20' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001055s ]
+
+[ 2013-12-31T09:41:20+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=1&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000514s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000579s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000365s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000561s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.003995s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '8' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002908s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '8' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001232s ]
+
+[ 2013-12-31T09:41:23+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=2&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000500s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000566s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000581s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000384s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000373s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '14' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.001272s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '14' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001269s ]
+
+[ 2013-12-31T09:41:23+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000527s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000597s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000325s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000378s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000602s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000370s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000067s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND (  (u_goodtag.tag_id IN(8,14,20))  ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004241s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND (  (u_goodtag.tag_id IN(8,14,20))  ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003460s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND (  (u_goodtag.tag_id IN(8,14,20))  ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002731s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND (  (u_goodtag.tag_id IN(8,14,20))  ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003079s ]
+
+[ 2013-12-31T09:41:23+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000556s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000652s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000346s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000405s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000534s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000383s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000383s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000075s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000075s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:12:34+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000506s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000593s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000384s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000082s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:27:15+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000490s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000558s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000365s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000576s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000385s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000383s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000082s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000081s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:27:25+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000500s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000576s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000321s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000390s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:28:11+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=undefined&sid=1&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000539s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000614s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000378s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000586s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000385s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000072s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = 'undefined' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002578s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = 'undefined' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001267s ]
+
+[ 2013-12-31T10:28:12+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=undefined&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000324s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000377s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000589s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000384s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000071s ]
+
+[ 2013-12-31T10:28:12+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000553s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000648s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000343s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000401s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000509s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000415s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000079s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:28:13+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000491s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000557s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000321s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000587s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000387s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000375s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000070s ]
+NOTIC: [8] Undefined variable: cidarr /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 285 行.
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002580s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001381s ]
+
+[ 2013-12-31T10:28:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000502s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000577s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000321s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000509s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000441s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000392s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000141s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '8' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003677s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '8' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002246s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '8' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004312s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '8' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002742s ]
+
+[ 2013-12-31T10:28:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000493s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000527s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000164s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000155s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000084s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000101s ]
+
+[ 2013-12-31T10:28:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000561s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000314s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000367s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000572s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000070s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '7' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.024946s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '7' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001925s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '7' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003904s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '7' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002438s ]
+
+[ 2013-12-31T10:28:19+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000485s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000311s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000570s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000070s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004613s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.004210s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004252s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.003166s ]
+
+[ 2013-12-31T10:28:19+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=3_9&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000491s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000556s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000608s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000383s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002276s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000918s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002069s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002298s ]
+
+[ 2013-12-31T10:28:20+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000562s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000369s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000591s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000072s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000165s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000158s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000088s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000104s ]
+
+[ 2013-12-31T10:29:14+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000504s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000571s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000349s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000402s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000564s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000385s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000082s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:29:41+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000565s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000664s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000403s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000590s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000382s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000071s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000125s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000158s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000089s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000094s ]
+
+[ 2013-12-31T10:29:48+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=3_9&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000490s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000558s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000614s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000685s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000387s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000069s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '9' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002835s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '9' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002512s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '9' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003795s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '9' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002183s ]
+
+[ 2013-12-31T10:29:49+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000562s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000372s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000576s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000381s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '10' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004073s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '10' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.004010s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '10' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.004021s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '10' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002772s ]
+
+[ 2013-12-31T10:29:50+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000327s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000380s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000590s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000396s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000379s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000075s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.018617s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.001460s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.003636s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002211s ]
+
+[ 2013-12-31T10:29:50+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000561s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000328s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000382s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000590s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000396s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000069s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '14' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002529s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '14' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000760s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '14' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.002270s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '14' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.002201s ]
+
+[ 2013-12-31T10:29:50+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=2&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000502s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000404s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '14' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000085s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '14' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000082s ]
+
+[ 2013-12-31T10:29:51+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000362s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000416s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000583s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000072s ]
+
+[ 2013-12-31T10:29:52+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000490s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000557s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000396s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000382s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000094s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000093s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '2' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '13' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000077s ]
+
+[ 2013-12-31T10:31:13+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000502s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000383s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000611s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000397s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000390s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000080s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:31:15+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000567s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000643s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000393s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000381s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000079s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:31:17+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem=9&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000558s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000582s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000586s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000373s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '9' ) AND ( `etm` >= '9' ) LIMIT 1   [ RunTime:0.000217s ]
+
+[ 2013-12-31T10:31:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem=10&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000483s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000615s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '10' ) AND ( `etm` >= '10' ) LIMIT 1   [ RunTime:0.000176s ]
+
+[ 2013-12-31T10:31:19+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem=9&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000569s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000371s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '9' ) AND ( `etm` >= '9' ) LIMIT 1   [ RunTime:0.000068s ]
+
+[ 2013-12-31T10:31:19+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem=8&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000484s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000385s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000368s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000075s ]
+
+[ 2013-12-31T10:31:20+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=3_9&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000485s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000551s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000594s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000387s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000371s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000082s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000080s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000079s ]
+
+[ 2013-12-31T10:31:21+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000497s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000359s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000412s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000386s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000372s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000067s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000114s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000145s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000090s ]
+
+[ 2013-12-31T10:31:21+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000497s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000575s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000384s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000379s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000110s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000105s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000083s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000093s ]
+
+[ 2013-12-31T10:31:22+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000776s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000862s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000377s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000448s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000575s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000386s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000067s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000109s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000110s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000084s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000090s ]
+
+[ 2013-12-31T10:31:23+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000497s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000564s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000377s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000615s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000431s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000086s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000082s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000078s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000073s ]
+
+[ 2013-12-31T10:31:23+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000504s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000571s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000396s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000588s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000394s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000095s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000091s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000082s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000082s ]
+
+[ 2013-12-31T10:31:24+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=1
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000503s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000570s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000622s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000397s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000380s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '20' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) AND ( u_goodtag.tag_id = '20' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000074s ]
+
+[ 2013-12-31T10:31:25+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000566s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000329s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000386s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000581s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000395s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000424s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000069s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000096s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000091s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000082s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '20' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000087s ]
+
+[ 2013-12-31T10:31:25+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=7_13_19&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000494s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000561s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000342s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000396s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000576s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000421s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000375s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000086s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000083s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000074s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '19' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000075s ]
+
+[ 2013-12-31T10:31:26+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=8_14_20&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000496s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000389s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000576s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000385s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+
+[ 2013-12-31T10:31:27+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000486s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000553s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000569s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000386s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000065s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000108s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000102s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000081s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '3' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '16' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000088s ]
+
+[ 2013-12-31T10:31:29+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000497s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000564s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000378s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000150s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000150s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000081s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000097s ]
+
+[ 2013-12-31T10:31:30+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000504s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000571s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000583s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000383s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000066s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000115s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000145s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000089s ]
+
+[ 2013-12-31T10:31:32+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000552s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000618s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000583s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000387s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000376s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000068s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000151s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000150s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000084s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000100s ]
+
+[ 2013-12-31T10:31:32+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000492s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000558s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000599s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000393s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000383s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000075s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T10:31:33+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=2&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000505s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000577s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000319s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000380s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000589s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000396s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000383s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000069s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000121s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000146s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000085s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '2' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000099s ]
+
+[ 2013-12-31T10:31:33+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000503s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000593s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000397s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000381s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000069s ]
+
+[ 2013-12-31T10:31:34+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=3&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000497s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000324s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000610s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000401s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000067s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000110s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000107s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000089s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.gtype = '3' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000093s ]
+
+[ 2013-12-31T10:32:09+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000499s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000567s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000369s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000520s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000382s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000145s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000097s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T11:32:29+08:00 ] 180.159.87.159 /uniqlo/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000380s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000478s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000587s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000503s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000459s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000081s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000081s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000431s ]
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '����' )  [ RunTime:0.000070s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '���' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�˶�' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�Ӽ�' )  [ RunTime:0.000070s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '��ѧ' )  [ RunTime:0.000070s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined index: cityn /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 27 行.
+NOTIC: [8] Undefined index: pro /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 28 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.070915s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.070992s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000262s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000292s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000152s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000283s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001138s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000407s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000466s ]
+
+[ 2013-12-31T11:32:31+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%E4%B8%8A%E6%B5%B7
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000502s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000666s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000381s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000082s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T11:37:29+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000558s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000657s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000404s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000827s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000584s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000567s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000083s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000080s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T11:56:44+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000574s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000673s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000348s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000406s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000590s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000387s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000438s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000080s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T13:46:26+08:00 ] 14.17.18.152 /uniqlo/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000409s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000505s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000418s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000398s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000083s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000081s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000420s ]
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '����' )  [ RunTime:0.000070s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '���' )  [ RunTime:0.000072s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�˶�' )  [ RunTime:0.000097s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�Ӽ�' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '��ѧ' )  [ RunTime:0.000068s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined index: cityn /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 27 行.
+NOTIC: [8] Undefined index: pro /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 28 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.007410s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007469s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000235s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000281s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000145s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000281s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001089s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000426s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000506s ]
+
+[ 2013-12-31T14:25:03+08:00 ] 180.159.87.159 /uniqlo/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000403s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000494s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000414s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000497s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000080s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000078s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000418s ]
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '����' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '���' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�˶�' )  [ RunTime:0.000072s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�Ӽ�' )  [ RunTime:0.000068s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '��ѧ' )  [ RunTime:0.000068s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined index: cityn /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 27 行.
+NOTIC: [8] Undefined index: pro /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 28 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.007836s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007914s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000269s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000273s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000155s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000282s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001126s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000460s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000537s ]
+
+[ 2013-12-31T14:25:06+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%E4%B8%8A%E6%B5%B7
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000500s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000570s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000586s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000395s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000417s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000080s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000081s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:25:17+08:00 ] 180.159.87.159 /uniqlo/index.php
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000325s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000482s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000422s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000387s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000081s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+SQL: SHOW COLUMNS FROM `u_tag` [ RunTime:0.000419s ]
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '����' )  [ RunTime:0.000071s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '���' )  [ RunTime:0.000069s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�˶�' )  [ RunTime:0.000091s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '�Ӽ�' )  [ RunTime:0.000087s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+SQL: SELECT `id`,`type` FROM `u_tag` WHERE ( `name` = '��ѧ' )  [ RunTime:0.000070s ]
+NOTIC: [2] Invalid argument supplied for foreach() /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 7 行.
+NOTIC: [8] Undefined variable: fir /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: sec /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined variable: th /superdata/kimi/uniqlo/Home/Lib/Model/TagModel.class.php 第 18 行.
+NOTIC: [8] Undefined index: cityn /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 27 行.
+NOTIC: [8] Undefined index: pro /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 28 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.007816s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007879s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.000247s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000278s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000145s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.000281s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001096s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.000393s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000456s ]
+
+[ 2013-12-31T14:25:18+08:00 ] 180.159.87.159 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%E4%B8%8A%E6%B5%B7
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000488s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000553s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000313s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000366s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000570s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000384s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000376s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:26:34+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000496s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000347s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000402s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000584s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000386s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000079s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000080s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:29:02+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000503s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000571s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000612s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000382s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000071s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000153s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000143s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000081s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000093s ]
+
+[ 2013-12-31T14:31:29+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000506s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000573s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000314s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000368s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000611s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000411s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000385s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000076s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000076s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:31:39+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=4_10_16&sid=1&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000496s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000325s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000378s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000605s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000398s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000382s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000067s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000144s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '1' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000139s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE ( u_goodtag.wid = '6' ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goods.outer_id desc  [ RunTime:0.000078s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid FROM `u_goodtag` INNER JOIN u_goods on u_goods.id=u_goodtag.good_id WHERE (  (u_goodtag.wid IN(5,7,8))  ) AND ( u_goodtag.gtype = '1' ) AND ( u_goodtag.isud = '2' ) AND ( u_goodtag.tag_id = '4' ) AND ( u_goods.approve_status = 'onsale' ) AND ( u_goods.num >= '15' ) GROUP BY u_goodtag.good_id ORDER BY u_goodtag.wid asc,u_goods.outer_id desc  [ RunTime:0.000089s ]
+
+[ 2013-12-31T14:31:45+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000505s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000327s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000381s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000578s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000381s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000070s ]
+
+[ 2013-12-31T14:31:45+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=8&cid=0&sid=0&tid=0
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000514s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000576s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000323s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000377s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000538s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000385s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000377s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '8' ) AND ( `etm` >= '8' ) LIMIT 1   [ RunTime:0.000072s ]
+
+[ 2013-12-31T14:31:52+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000555s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000652s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000369s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000426s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000572s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000384s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000377s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000074s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000073s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:33:23+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000521s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000589s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000336s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000389s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000725s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000390s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000079s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000076s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2013-12-31T14:33:41+08:00 ] 58.246.66.2 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=8&pro=%C9%CF%BA%A3
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000671s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000769s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000377s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000436s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000649s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000383s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000077s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000079s ]
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/kimi/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+

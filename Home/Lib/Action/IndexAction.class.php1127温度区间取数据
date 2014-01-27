@@ -1,0 +1,375 @@
+<?php
+// 本类由系统自动生成，仅供测试用途
+class IndexAction extends Action {
+    public function index(){
+    $SA_IP = get_client_ip();
+    $city     = getIPLoc_sina($SA_IP);
+		//取得官方推荐数据
+	$rem = M('Recommend');
+	$tag = D('Tag');
+	switch($city['province']){
+		case '上海' :	
+		case '江苏' :
+		case '浙江' :
+		case '福建' :
+		case '台湾' :
+		case '湖北' :
+		case '湖南' :
+		case '江西' :
+		case '安徽' :
+		case '广东' :
+		case '广西' :
+		case '海南' :
+		case '重庆' :
+		case '贵州' :
+		case '四川' :
+		case '云南' :
+		case '西藏' :
+		case '香港' :
+		case '澳门' :
+	    $reulist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'2'))->select();//上装	    		
+		break;
+		case '辽宁' :
+		case '吉林' :
+		case '黑龙江' :
+		case '内蒙古' :
+		case '北京' :
+		case '天津' :
+		case '河北' :
+		case '山西' :
+		case '山东' :	
+		case '河南' :	
+		case '陕西' :	
+		case '宁夏' :	
+		case '甘肃' :	
+		case '青海' :	
+		case '新疆' :	
+	    $reulist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'2'))->select();//上装	    		
+		break;			
+	}
+ 
+    //取得场合id 
+    $business = $tag->gettagid('商务');
+    $ourism = $tag->gettagid('逛街');
+	$sport = $tag->gettagid('运动');
+	$jujia = $tag->gettagid('居家');
+	$gosch = $tag->gettagid('上学');
+	
+	$this->assign('reulist',$reulist);
+	$this->assign('redlist',$redlist);
+	
+	$this->assign('business',$business);
+	$this->assign('ourism',$ourism);
+	$this->assign('sport',$sport);
+	$this->assign('jujia',$jujia);
+	$this->assign('gosch',$gosch);
+	$this->assign('cityn',$_SESSION['cityn']);
+	$this->assign('provi',$_SESSION['pro']);
+	$this->assign('uniurl',C('UNIQLOURL'));
+
+	$this->display();
+    }
+//ajax取数据
+public function ajaxgood(){
+    $type = trim($this->_request('tageid')); //场合id
+    $sex = trim($this->_request('sexid'));//性别id
+	$tem = trim($this->_request('tem'));//平均温度
+	$pro = trim($this->_post('pro'));//省
+	$goodtag = M('Goodtag');
+	if($tem<=-10){
+	$tem = -10;	
+	}
+	//取得推荐
+		//取得官方推荐数据
+	$rem = M('Recommend');
+	switch($pro){
+		case '上海' :	
+		case '江苏' :
+		case '浙江' :
+		case '福建' :
+		case '台湾' :
+		case '湖北' :
+		case '湖南' :
+		case '江西' :
+		case '安徽' :
+		case '广东' :
+		case '广西' :
+		case '海南' :
+		case '重庆' :
+		case '贵州' :
+		case '四川' :
+		case '云南' :
+		case '西藏' :
+		case '香港' :
+		case '澳门' :
+	    $reulist = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'2'))->select();//上装	    		
+		break;
+		case '辽宁' :
+		case '吉林' :
+		case '黑龙江' :
+		case '内蒙古' :
+		case '北京' :
+		case '天津' :
+		case '河北' :
+		case '山西' :
+		case '山东' :	
+		case '河南' :	
+		case '陕西' :	
+		case '宁夏' :	
+		case '甘肃' :	
+		case '青海' :	
+		case '新疆' :	
+	    $reulist = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'2'))->select();//上装	    		
+		break;	
+		default :
+	    $reulist = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'2'))->select();//上装				
+	}
+	
+	if(isset($tem)){
+	//取出温度对应的商品数据 
+	$where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	$uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+	
+	$where2 = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	$dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+
+	//组织数据
+	foreach($uclothes as $k=>$v){
+	$reulist[] = $v;//上装
+	}
+   foreach($dclothes as $k=>$v){
+	$redlist[] = $v;//下装
+	}
+	}
+	$ustr = '';
+	if(!empty($reulist)){
+    foreach($reulist as $k=>$v){
+      $ustr.='<li><img fg="'.$v['ccateid'].'" src="'.$v['pic_url'].'" id="1" place="家居1" tag="淑女1" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
+              </li>';
+      }
+    $arr['ustr'] = $ustr;
+	$arr['flag'] = true;   
+	}
+	
+	$dstr = '';
+	if(!empty($redlist)){
+	foreach($redlist as $k=>$v){
+    $dstr.='<li><img fg="'.$v['ccateid'].'" src="'.$v['pic_url'].'" id="10" place="家居2" tag="淑女10" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
+              </li>';
+	}
+    $arr['dstr'] = $dstr;
+	$arr['flag'] = true;
+    }
+	echo json_encode($arr);
+}
+//点击按钮取数据
+public function getgood(){
+	$tem = trim($this->_request('tem'));//平均温度
+	$cid = trim($this->_post('cid'));//场合形如1_2_3全部为0
+	$sid = trim($this->_post('sid'));//性别id形如1,2,3 all为0
+	$tid = trim($this->_post('tid'));//套装id
+	$pro = trim($this->_post('pro'));//省
+	if($tem<=-10){
+	$tem = -10;	
+	}
+	$cid = $cid?$cid:0;
+	$sid = $sid?$sid:0;
+	$tid = $tid?$tid:0;
+	$goodtag = M('Goodtag');
+	switch($tid){
+		case 0 : //没有选中套装
+    if($cid==0 && $sid==0){//场合跟性别都为0
+		//取得官方推荐数据
+	$rem = M('Recommend');
+
+	switch($pro){
+		case '上海市' :	
+		case '江苏省' :
+		case '浙江省' :
+		case '福建省' :
+		case '台湾省' :
+		case '湖北省' :
+		case '湖南省' :
+		case '江西省' :
+		case '安徽省' :
+		case '广东省' :
+		case '广西' :
+		case '海南省' :
+		case '重庆市' :
+		case '贵州省' :
+		case '四川省' :
+		case '云南省' :
+		case '西藏' :
+		case '香港' :
+		case '澳门' :
+	    $uclothes = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'1'))->select();//上装
+	    $dclothes = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'2'))->select();//上装$dclothes	    		
+		break;
+		case '辽宁省' :
+		case '吉林省' :
+		case '黑龙江省' :
+		case '内蒙古' :
+		case '北京市' :
+		case '天津市' :
+		case '河北省' :
+		case '山西省' :
+		case '山东省' :	
+		case '河南省' :	
+		case '陕西省' :	
+		case '宁夏' :	
+		case '甘肃省' :	
+		case '青海省' :	
+		case '新疆' :	
+	    $uclothes = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'1'))->select();//上装
+	    $dclothes = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'2','u_recommend.isud'=>'2'))->select();//上装	    		
+		break;
+		default :
+	    $reulist = $rem->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'1'))->select();//上装
+	    $redlist = $rem->cache(true)->join('u_goods on u_goods.num_iid=u_recommend.num_iid')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where(array('u_recommend.type'=>'1','u_recommend.isud'=>'2'))->select();//上装		
+	}
+	if(isset($tem)){
+	//取出天气指数所对应的商品数据 
+	$where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	$reulist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+	
+	$where2 = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	$redlist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+
+	//组织数据
+	foreach($reulist as $k=>$v){
+	$uclothes[] = $v;//上装
+	}
+   foreach($redlist as $k=>$v){
+	$dclothes[] = $v;//下装
+	}
+	}		
+		}else if($sid==0 && $cid!='0'){//性别为all
+		 $cidarr = explode('_',$cid);
+		 $cidstr = '';
+		 foreach($cidarr as $k=>$v){
+		  if($v){
+		 $cidstr.=$v.',';
+		  }
+		 }
+		 $cidstr = rtrim($cidstr,',');
+		 //上装
+		 $where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$cidstr.')'),'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+		 //下装
+		 $where2 = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$cidstr.')'),'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();	
+		 	 
+		}else if($sid!=0 && $cid=='0'){
+		 $where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'1','u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+		 //下装
+		 $where2 = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'2','u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();					
+		}else if($sid!=0 && $cid!='0'){//性别跟场合都不为0
+		$cidarr = explode('_',$cid);
+		switch($sid){
+			case 1 : //女
+			$ctagid = $cidarr[0];
+			break;
+			case 2 :
+			$ctagid = $cidarr[1];
+			break;
+			case 3 :
+			$ctagid = $cidarr[2];
+			break;		
+		}
+		//上装
+
+	    $where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>$ctagid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));	
+	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+		//下装 
+		 $where2 = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>$ctagid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();	
+		 		
+		}
+		break;
+		case 1 : //选了套装
+		if($sid==0){//性别为all
+		 if(!empty($cid)){
+		 $cidarr = explode('_',$cid);
+		 }
+		 $cidstr = '';
+		 foreach($cidarr as $k=>$v){
+		 if($v){
+		 $cidstr.=$v.',';
+		 }
+		 }
+		 $cidstr = rtrim($cidstr,',');		
+		 //套装
+		 $where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.isud'=>'4','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+		 if(!empty($cidstr)){
+         $where['u_goodtag.tag_id'] = array('exp','IN('.$cidstr.')');
+		 }
+	     $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();
+
+		}else if($sid>0){//优选性别
+		if(!empty($cid)){
+		$cidarr = explode('_',$cid);
+		}
+		switch($sid){
+			case 1 : //女
+			$ctagid = $cidarr[0];
+			break;
+			case 2 :
+			$ctagid = $cidarr[1];
+			break;
+			case 3 :
+			$ctagid = $cidarr[2];
+			break;		
+		}
+	
+		//套装
+	    $where = array('u_goodtag.stm'=>array(array('elt',$tem),array('eq','0'),'or'),'u_goodtag.etm'=>array(array('egt',$tem),array('eq','0'),'or'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'4','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','50'));
+		if($ctagid){
+        $where['u_goodtag.tag_id'] = $ctagid;
+		}
+	    $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.list_time desc')->select();				
+		}
+		break;		
+	}
+    
+	//上装
+	$ustr = '';
+	if(!empty($uclothes)){
+    foreach($uclothes as $k=>$v){
+      $ustr.='<li><img fg="'.$v['ccateid'].'" src="'.$v['pic_url'].'" id="1" place="家居1" tag="淑女1" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
+              </li>';
+      }	
+	}
+    $arr['ustr'] = $ustr;
+	$arr['flag1'] = 'p';	
+	//下装
+	$dstr = '';
+	if(!empty($dclothes)){
+	foreach($dclothes as $k=>$v){
+    $dstr.='<li><img fg="'.$v['ccateid'].'" src="'.$v['pic_url'].'" id="10" place="家居2" tag="淑女10" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
+              </li>';
+	}
+    }
+    $arr['dstr'] = $dstr;
+	$arr['flag1'] = 'p';
+	//套装
+	$tstr = '';
+	if(!empty($tclothes)){
+	foreach($tclothes as $k=>$v){
+    $tstr.='<li>
+                <img src="'.$v['pic_url'].'" id="10" place="家居2" tag="淑女10" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'">
+              </li>';
+	}
+    }
+    $arr['tstr'] = $tstr;
+	$arr['flag'] = 't';	
+
+	echo json_encode($arr);
+}
+}

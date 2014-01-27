@@ -1,0 +1,750 @@
+@charset "utf-8";
+
+.header,.footer{
+	width: 950px;
+}
+.footer{
+	margin-top: 30px;
+}
+.header img,.footer img{
+	position: relative;
+	z-index: -1;
+}
+
+/*==simple reset==*/
+body,ul,li,p,img,h1,h2,h3,h4,h5{
+	padding: 0;
+	margin: 0;
+	border:0;
+}
+body{
+	font: 12px "Microsoft Yahei";
+	background: #e6e6e6;
+}
+ul,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+
+/*==utilities==*/
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+.pull-left{
+	float: left;
+}
+.pull-right{
+	float: right;
+}
+.pr{
+	position: relative;
+}
+.pa{
+	position: absolute;
+}
+.hide,.none{
+	display: none;
+}
+.text-right{
+	text-align: right;
+}
+.text-left{
+	text-align: left;
+}
+.text-center{
+	text-align: center;
+}
+.mt20{
+	margin-top: 20px;
+}
+.padlf{
+	padding-left: 1.5em;
+}
+.center{
+	margin-left: auto;
+	margin-right: auto;
+}
+.overflow{
+	overflow: hidden;
+}
+
+/*==nio-list==*/
+.nio-weather,.nio-minisite{
+	width: 950px;
+	z-index: 2;
+}
+.nio-list{
+	background: #fff;
+	color: #fff;
+	font-size: 14px;
+	position: relative;
+	z-index: 3;
+}
+.nio-list,.nio-detail,.nio-detail ul{
+	width: 670px;
+	height: 80px;
+}
+.nio-detail li{
+	float: left;
+	width: 117px;
+	height: 80px;
+}
+.nio-color1{
+	background-color: #cb0000;
+}
+.nio-color2{
+	background-color: #f21d1d;
+}
+.nio-detail .nio-color3{
+	background-color: #ff4d4d;
+	padding: 10px;
+	width: 97px;
+	height: 60px;
+}
+.nio-color1 p{
+	text-align: center;
+}
+.nio-color2{
+	font-size: 57px;
+	text-align: center;
+	line-height: 80px;
+}
+.nio-shift{
+	background-color: #fff;
+	padding: 0 2px;
+	font-size: 10px;
+	font-weight: bold;
+	-webkit-text-size-adjust:none;
+	text-decoration: none;
+	color: #f21d1d;
+	margin-top: 3px;
+}
+.nio-city{
+	display: inline-block;
+	width: 65px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.nio-detail .nio-heart{
+	background: url(../images/nioweather/index/nio-heart.jpg) no-repeat 15px center;
+	color: #353535;
+	padding: 20px 0 10px 40px;
+	width: 279px;
+	height: 50px;
+}
+
+/*==nio-tab==*/
+.nio-tabs{
+	width: 280px;
+	height: 80px;
+}
+.nio-tabs li{
+	float: left;
+}
+.nio-tab{
+	background: #a0a0a0 url(../images/nioweather/index/nio-line.png) no-repeat right center;
+	width: 56px;
+	height: 50px;
+	padding: 15px 0;
+	text-align: center;
+	float: left;
+	color: #fff;
+	cursor: pointer;
+	z-index: 2;
+}
+.nio-active .nio-tab{
+	background-color: #d2d2d2;
+}
+.nio-nobg{
+	background-image: none;
+}
+
+/*==weather icons==*/
+
+.nio-weather i,.mini-temp i{
+	background: url(../images/nioweather/index/nio-icons.png) no-repeat 30px;
+	display: block;
+	margin: 0 auto;
+}
+.nio-color1 i{
+	width: 72px;
+	height: 55px;
+}
+.nio-tab i{
+	width: 50px;
+	height: 30px;
+	margin-bottom: 5px;
+}
+.mini-temp i{
+	width: 55px;
+	height: 35px;
+}
+/*== nio-color1 ==*/
+.nio-color1 .nio-0{
+	background-position: 10px 0;
+}
+.nio-color1 .nio-1{
+	background-position: -80px 0;
+}
+.nio-color1 .nio-2{
+	background-position: -168px 0;
+}
+.nio-color1 .nio-3{
+	background-position: -255px 0;
+}
+.nio-color1 .nio-4{
+	background-position: -345px 0;
+}
+.nio-color1 .nio-5{
+	background-position: -431px 0;
+}
+.nio-color1 .nio-6{
+	background-position: -609px 0;
+}
+.nio-color1 .nio-7{
+	background-position: -698px 0;
+}
+.nio-color1 .nio-8{
+	background-position: -791px 0;
+}
+.nio-color1 .nio-9{
+	background-position: -885px 0;
+}
+.nio-color1 .nio-10{
+	background-position: 10px -125px;
+}
+.nio-color1 .nio-11{
+	background-position: -76px -125px;
+}
+.nio-color1 .nio-12{
+	background-position: -164px -125px;
+}
+.nio-color1 .nio-13{
+	background-position: -255px -122px;
+}
+.nio-color1 .nio-14{
+	background-position: -342px -125px;
+}
+.nio-color1 .nio-15{
+	background-position: -423px -125px;
+}
+.nio-color1 .nio-16{
+	background-position: -511px -121px;
+}
+.nio-color1 .nio-17{
+	background-position: -603px -119px;
+}
+.nio-color1 .nio-18{
+	background-position: -698px -121px;
+}
+.nio-color1 .nio-19{
+	background-position: -791px -121px;
+}
+.nio-color1 .nio-20{
+	background-position: -884px -121px;
+}
+.nio-color1 .nio-21{
+	background-position: -342px -242px;
+}
+.nio-color1 .nio-22{
+	background-position: -424px -242px;
+}
+.nio-color1 .nio-23{
+	background-position: -508px -242px;
+}
+.nio-color1 .nio-24{
+	background-position: -602px -242px;
+}
+.nio-color1 .nio-25{
+	background-position: -704px -242px;
+}
+.nio-color1 .nio-26{
+	background-position: -795px -244px;
+}
+.nio-color1 .nio-27{
+	background-position: -875px -244px;
+}
+.nio-color1 .nio-28{
+	background-position: -963px -244px;
+}
+.nio-color1 .nio-29{
+	background-position: 10px -244px;
+}
+.nio-color1 .nio-30{
+	background-position: -73px -244px;
+}
+.nio-color1 .nio-31{
+	background-position: -172px -244px;
+}
+.nio-color1 .nio-53{
+	background-position: -257px -240px;
+}
+
+/*== nio-tab ==*/
+.nio-tab .nio-0{
+	background-position: 6px -429px;
+}
+.nio-tab .nio-1{
+	background-position: -84px -429px;
+}
+.nio-tab .nio-2{
+	background-position: -171px -429px;
+}
+.nio-tab .nio-3{
+	background-position: -253px -429px;
+}
+.nio-tab .nio-4{
+	background-position: -349px -429px;
+}
+.nio-tab .nio-5{
+	background-position: -433px -429px;
+}
+.nio-tab .nio-6{
+	background-position: -614px -429px;
+}
+.nio-tab .nio-7{
+	background-position: -704px -429px;
+}
+.nio-tab .nio-8{
+	background-position: -800px -429px;
+}
+.nio-tab .nio-9{
+	background-position: -888px -429px;
+}
+.nio-tab .nio-10{
+	background-position: 6px -549px;
+}
+.nio-tab .nio-11{
+	background-position: -83px -549px;
+}
+.nio-tab .nio-12{
+	background-position: -176px -549px;
+}
+.nio-tab .nio-13{
+	background-position: -261px -546px;
+}
+.nio-tab .nio-14{
+	background-position: -345px -546px;
+}
+.nio-tab .nio-15{
+	background-position: -425px -546px;
+}
+.nio-tab .nio-16{
+	background-position: -515px -542px;
+}
+.nio-tab .nio-17{
+	background-position: -612px -542px;
+}
+.nio-tab .nio-18{
+	background-position: -706px -548px;
+}
+.nio-tab .nio-19{
+	background-position: -799px -551px;
+}
+.nio-tab .nio-20{
+	background-position: -890px -547px;
+}
+.nio-tab .nio-21{
+	background-position: -346px -656px;
+}
+.nio-tab .nio-22{
+	background-position: -430px -656px;
+}
+.nio-tab .nio-23{
+	background-position: -508px -653px;
+}
+.nio-tab .nio-24{
+	background-position: -610px -653px;
+}
+.nio-tab .nio-25{
+	background-position: -707px -653px;
+}
+.nio-tab .nio-26{
+	background-position: -800px -653px;
+}
+.nio-tab .nio-27{
+	background-position: -888px -653px;
+}
+.nio-tab .nio-28{
+	background-position: -968px -649px;
+}
+.nio-tab .nio-29{
+	background-position: 4px -656px;
+}
+.nio-tab .nio-30{
+	background-position: -80px -654px; 
+}
+.nio-tab .nio-31{
+	background-position: -173px -654px;
+}
+.nio-tab .nio-53{
+	background-position: -263px -654px; 
+}
+
+/*==mini-temp==*/
+.mini-temp .nio-0{
+	background-position: 15px -728px;
+}
+.mini-temp .nio-1{
+	background-position: -76px -728px;
+}
+.mini-temp .nio-2{
+	background-position: -164px -728px;
+}
+.mini-temp .nio-3{
+	background-position: -249px -728px;
+}
+.mini-temp .nio-4{
+	background-position: -343px -728px;
+}
+.mini-temp .nio-5{
+	background-position: -426px -728px;
+}
+.mini-temp .nio-6{
+	background-position: -607px -728px;
+}
+.mini-temp .nio-7{
+	background-position: -697px -728px;
+}
+.mini-temp .nio-8{
+	background-position: -793px -728px;
+}
+.mini-temp .nio-9{
+	background-position: -882px -728px;
+}
+.mini-temp .nio-10{
+	background-position: 12px -847px;
+}
+.mini-temp .nio-11{
+	background-position: -76px -847px;
+}
+.mini-temp .nio-12{
+	background-position: -168px -847px;
+}
+.mini-temp .nio-13{
+	background-position: -258px -844px;
+}
+.mini-temp .nio-14{
+	background-position: -337px -843px;
+}
+.mini-temp .nio-15{
+	background-position: -418px -843px;
+}
+.mini-temp .nio-16{
+	background-position: -509px -843px;
+}
+.mini-temp .nio-17{
+	background-position: -606px -843px;
+}
+.mini-temp .nio-18{
+	background-position: -699px -846px;
+}
+.mini-temp .nio-19{
+	background-position: -793px -850px;
+}
+.mini-temp .nio-20{
+	background-position: -882px -843px;
+}
+.mini-temp .nio-21{
+	background-position: -338px -953px;
+}
+.mini-temp .nio-22{
+	background-position: -422px -953px;
+}
+.mini-temp .nio-23{
+	background-position: -501px -953px;
+}
+.mini-temp .nio-24{
+	background-position: -602px -953px;
+}
+.mini-temp .nio-25{
+	background-position: -699px -953px;
+}
+.mini-temp .nio-26{
+	background-position: -794px -950px;
+}
+.mini-temp .nio-27{
+	background-position: -879px -951px;
+}
+.mini-temp .nio-28{
+	background-position: -959px -950px;
+}
+.mini-temp .nio-29{
+	background-position: 11px -953px;
+}
+.mini-temp .nio-30{
+	background-position: -72px -953px;
+}
+.mini-temp .nio-31{
+	background-position: -166px -953px;
+}
+.mini-temp .nio-53{
+	background-position: -255px -953px;
+}
+
+/*==nio-showcase==*/
+.nio-heart h4{
+	font-size: 14px;
+	font-weight: bold;
+}
+.nio-heart h4 a{
+	background: #f21d1d;
+	color: #fff;
+	padding: 1px 8px;
+}
+.nio-heart p{
+	line-height: 1.8;
+}
+.nio-showcases{
+	width: 1016px;
+	left: 33px;
+	z-index: 1;
+	height: 0;
+	overflow: hidden;
+}
+.nio-showcase{
+	width: 950px;
+	height: 452px;
+	position: absolute;
+	top: -520px;
+	left: 0;
+	border-bottom: 5px solid #f00;
+}
+.nio-close{
+	background: url(../images/nioweather/index/nio-close.jpg) no-repeat;
+	width: 88px;
+	height: 12px;
+	left: 50%;
+	bottom: -12px;
+	margin-left: -44px;
+	text-indent: -299em;
+}
+.nio-open{
+	background-position: 0 -12px;
+}
+/*==nio-box==*/
+.nio-boxs{
+	width: 896px;
+	height: 452px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+	display: none;
+}
+.nio-box1{
+	background: url(../images/nioweather/index/nio-box1.jpg) no-repeat;
+}
+.nio-box2{
+	background: url(../images/nioweather/index/nio-box2.jpg) no-repeat;
+}
+.nio-box3{
+	background: url(../images/nioweather/index/nio-box3.jpg) no-repeat;
+}
+.nio-box4{
+	background: url(../images/nioweather/index/nio-box4.jpg) no-repeat;
+}
+.roundabout-holder {
+	margin: 32px auto 0;
+	height: 420px;
+	width: 696px;
+}
+.roundabout-moveable-item {
+	width: 180px;
+	height: 420px;
+}
+.roundabout-in-focus {
+	cursor: auto;
+}
+.nio-box img{
+	width: 100%;
+}
+/*==nio-list2==*/
+.nio-list2{
+	background: url(../images/nioweather/index/nio-list.jpg) no-repeat;
+	width: 54px;
+	height: 452px;
+}
+.nio-list2 li,.nio-list2 a{
+	display: block;
+	width: 54px;
+	height: 113px;
+	text-indent: -299em;
+}
+.nio-curr2 a{
+	background: url(../images/nioweather/index/nio-caret.png) no-repeat 100% 50%;
+}
+.nio-area{
+	background: #fff url(../images/nioweather/index/nio-showcase.jpg) no-repeat 219px 95px;
+	padding-top: 26px;
+}
+.nio-area,.nio-ul{
+	width: 896px;
+	height: 426px;
+	margin: 0 auto;
+}
+.nio-gomini{
+	background: url(../images/nioweather/index/nio-go.jpg) no-repeat;
+	text-indent: -299em;
+	width: 185px;
+	height: 30px;
+	left: 50%;
+	top: 0;
+	margin-left: -70px;
+	z-index: 2;
+}
+.nio-container{
+	width: 848px;
+	margin-left: 22px;
+}
+.nio-container ul{
+	position: relative;
+	width: 9999em;
+	height: 426px;
+}
+.nio-container li{
+	width: 211px;
+	float: left;
+	margin-left: 1px;
+}
+.nio-container .pr{
+	position: relative;
+	width: 211px;
+	height: 180px;
+	text-align: center;
+	/*overflow: hidden;*/
+	margin-bottom: 1px;
+}
+.nio-mask{
+	background: url(../images/nioweather/index/nio-mask.png) no-repeat;
+	position: absolute;
+	width: 201px;
+	height: 62px;
+	left: 0;
+	bottom: 0;
+	font: 12px "SimSun";
+	padding: 5px;
+	display: none;
+	text-align: left;
+}
+.nio-boxs .nio-mask{
+	width: 170px;
+}
+.nio-container .pr:hover .nio-mask,.roundabout-in-focus .pr:hover .nio-mask,.roundabout-in-focus .none{
+	display: block;
+}
+.nio-mask a{
+	color: #010101;
+}
+.nio-mask p{
+	color: #f00;
+}
+.nio-more,.nio-like,.nio-delete{
+	position: absolute;
+	bottom: 0;
+}
+.nio-mask .nio-more{
+	background: #f00;
+	color: #fff;
+	left: 6px;
+	padding: 1px 4px;
+}
+.nio-like,.nio-delete{
+	background: url(../images/nioweather/index/nio-red.jpg) no-repeat;
+	width: 23px;
+	height: 23px;
+	right: 0;
+	text-indent: -299em;
+}
+.nio-purchase,.nio-hot{
+	background: url(../images/nioweather/index/nio-icon.png) no-repeat;
+}
+.nio-purchase{
+	width: 118px;
+	height: 25px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	display: block;
+	margin-bottom: 8px;
+}
+.nio-hot{
+	background-position: -6px -30px;
+	width: 37px;
+	height: 24px;
+	display: inline-block;
+	vertical-align: middle;
+	text-indent: -299em;
+}
+.nio-prev,.nio-next{
+	background: url(../images/nioweather/index/nio-bullets.png) no-repeat;
+	width: 16px;
+	height: 25px;
+	text-indent: -299em;
+	position: absolute;
+	top: 50%;
+	margin-top: -12px;
+}
+.nio-prev{
+	left: 10px;
+}
+.nio-next{
+	background-position: -16px 0;
+	right: 10px;
+}
+.nio-aside{
+	background: #7d7d7d;
+	width: 53px;
+	height: 300px;
+	padding: 0 2px 5px;
+	right: -66px;
+	top: 0;
+	text-align: center;
+}
+.nio-aside .text-center{
+	color: #fff;
+	line-height: 25px;
+}
+.nio-aside .pa{
+	background: url(../images/nioweather/index/nio-aside.jpg) no-repeat;
+	width: 5px;
+	height: 11px;
+	left: -5px;
+	top: 6px;
+}
+.nio-aside a{
+	background: #fff;
+	margin-top: 2px;
+	display: block;
+	padding: 2px;
+	position: relative;
+}
+.nio-aside a span{
+	background: #f00;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 53px;
+	height: 16px;
+	line-height: 16px;
+	color: #fff;
+	display: none;
+}
+.aside-curr a{
+	background: #f00;
+}
+.nio-aside a:hover span,.aside-curr a span{
+	display: block;
+}

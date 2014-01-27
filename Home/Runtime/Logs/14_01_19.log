@@ -1,0 +1,59 @@
+[ 2014-01-19T03:59:00+08:00 ] 66.249.64.27 /uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem=
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000491s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000557s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000319s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000416s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000689s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000432s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000354s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '' ) AND ( `etm` >= '' ) LIMIT 1   [ RunTime:0.000197s ]
+
+[ 2014-01-19T04:04:36+08:00 ] 66.249.64.27 /uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000631s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000743s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000401s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000575s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000373s ]
+SQL: SHOW COLUMNS FROM `u_recommend` [ RunTime:0.000445s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '1' )  [ RunTime:0.000072s ]
+SQL: SELECT u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url FROM `u_recommend` LEFT JOIN u_goods on u_goods.num_iid=u_recommend.num_iid WHERE ( u_recommend.type = '1' ) AND ( u_recommend.isud = '2' )  [ RunTime:0.000076s ]
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 98 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+NOTIC: [8] Undefined index: ccateid /superdata/uyiku/uniqlo/Home/Lib/Action/IndexAction.class.php 第 110 行.
+
+[ 2014-01-19T04:06:17+08:00 ] 66.249.64.29 /uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.000559s ]
+INFO: [ route_check ] --END-- [ RunTime:0.000667s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000324s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000376s ]
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+NOTIC: 建议使用I方法替代_request
+SQL: SHOW COLUMNS FROM `u_goodtag` [ RunTime:0.000598s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000371s ]
+SQL: SHOW COLUMNS FROM `u_windex` [ RunTime:0.000367s ]
+SQL: SELECT `id` FROM `u_windex` WHERE ( `stm` <= '' ) AND ( `etm` >= '' ) LIMIT 1   [ RunTime:0.000068s ]
+

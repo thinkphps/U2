@@ -1,0 +1,47 @@
+<include file="Public:header"/>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="shop.html">门店管理</a></li>
+    <li class="active"><strong>新建门店</strong></li>
+  </ol>
+  <form class="form-horizontal" role="form" action="{:U('Shop/add')}" method='post'>
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label">门店名称</label>
+      <div class="col-lg-3">
+        <input type="text" class="form-control" id="inputName" placeholder="门店名称" name='sname' value='{$shop.sname}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddr" class="col-lg-2 control-label">门店地址</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" id="inputAddr" placeholder="门店地址" name='address' value='{$shop.saddress}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTime" class="col-lg-2 control-label">营业时间</label>
+      <div class="col-lg-2">
+        <input type="datetime" class="form-control" id="inputTime" placeholder="10:00 - 22:00" name='stime' value='{$shop.tradetime}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTel" class="col-lg-2 control-label">店铺电话</label>
+      <div class="col-lg-2">
+        <input type="tel" class="form-control" id="inputTel" placeholder="010-88888888" name='call' value='{$shop.scall}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputInof" class="col-lg-2 control-label">商品范围</label>
+      <div class="col-lg-4">
+        <input type="text" class="form-control" id="inputInof" placeholder="服装" name='range' value='{$shop.sange}'>
+      </div>
+      <input type='hidden' name='id' value='{$shop.id}'>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <button type="submit" class="btn btn-success">提交</button>
+      </div>
+    </div>
+  </form>
+</div>
+<include file="Public:footer"/>
