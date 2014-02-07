@@ -1,53 +1,69 @@
 <?php
 
-class APIAction extends Action {
-    public $products ;
-    public $key;
-    public $app;
+class APIAction extends Action
+{
 
-    public function UpdateProductsWithColor(){
-
-        $products	 =  $_POST['products'] ;
-        $key      = $_POST['key'];
-        $app = $_POST['app'];
-
-        $return_msg = array(
-            '0' =>	'success',
-            '1' =>	'missing parameter',
-            '2'	=>  'parameter error'
+    public function UpdateProductsWithColor()
+    {
+        $returnProductValue = array(
+            'code' => -1,
+            'msg' => array(
+                'success' => '',
+                'error' => ''
+            )
         );
 
-        $return_code = array(
-            'success' =>	'1',
-            'error' =>	'-1',
+        //$callback=$_GET["callback"];
+
+        $app = $_GET['app'];
+        $key = $_GET['key'];
+        $products = $_GET['products'];
+        $batchid = $_GET['batchid'];
+
+        //$products1 = unserialize(base64_decode());
+
+        //$strRequest = file_get_contents('php://input');
+        /*$strRequest = $this->_param('data');
+        $Request = json_decode($strRequest,true);*/
+
+        /*	$app = $Request['app'];
+            $key = $Request['key'];
+            $products =  $Request['products'];
+            $batchid = $Request['batchid'];*/
+
+        if (!isset($products) || !isset($key) || !isset($app) || !isset($batchid) ||
+            empty($products) || empty($key) || empty($app) || empty($batchid)
+        ) {
+            $returnProductValue['msg']['error'] = '1. 传递参数错误';
+        } else {
+            $productSyn = D('ProductSyn');
+            $returnProductValue = $productSyn->UpdateUQProduct($app, $key, $products, $batchid);
+        }
+        $json = json_encode($returnProductValue);
+
+        $this->ajaxReturn($returnProductValue, 'JSONP');
+        //echo $callback."($json)";
+//        echo $callback.'('.$json.')';
+
+    }
+
+    public function Test()
+    {
+
+        $intputValue = array(
+            'app' => 'baiyi',
+            'key' => '123456789',
+            'batchid' => '20140120',
+            'products' => array()
         );
 
-        $return_arr = array(
-            'code'=>$return_code['success'],
-            'msg'=>$return_msg[0]
-        );
+        for ($i = 0; $i < 4; $i++) {
+            $intputValue['products'][$i]['uq'] = 'UQ1234560' . $i;
+            $intputValue['products'][$i]['type'] = -1;
 
-        if ( !isset($products) ||
-            !isset($key)  ||
-            !isset($app)  ) {
-
-            $return_arr['code'] = $return_code['error'];
-            $return_arr['msg'] = $return_msg[1];
-
-        }else if ( empty($products) ||
-            empty($key) ||
-            empty($app) ) {
-
-            $return_arr['code'] = $return_code['error'];
-            $return_arr['msg'] = $return_msg[2];
-
-        }else{
-            $return_arr['code'] = $return_code['success'];
-            $return_arr['msg'] = $return_msg[0];
         }
 
-        $this->ajaxReturn($return_arr,'JSON');
-
+        $this->ajaxReturn($intputValue, 'JSON');
     }
 
 }

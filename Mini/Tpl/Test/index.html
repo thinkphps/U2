@@ -1,0 +1,89 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>jquery ajax</title>
+    <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function ()
+        {
+            var postData =
+            {
+                "app": "baiyi",
+                "key": "123456789",
+                "batchid": "20140120",
+                "products": [
+                    {
+                        "uq": "UQ08077602",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345601",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345602",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345603",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345604",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345605",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345606",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345607",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345608",
+                        "type": -1
+                    },
+                    {
+                        "uq": "UQ12345609",
+                        "type": -1
+                    }
+                ]
+            };
+
+            $('#send_ajax').click(function (){
+                var apiurl = 'http://localhost:8888/u/mini.php/API/UpdateProductsWithColor.html';
+                //var apiurl = 'http://phoneicolor.networking.io/uniqlo/mini.php/API/UpdateProductsWithColor';
+
+                $.ajax({
+                    url:apiurl, //后台处理程序
+                    type: 'get',         //数据发送方式
+                    dataType: 'jsonp',     //接受数据格式
+                    jsonp: "callback",
+                    data: postData,
+                    success:update_page //回传函数(这里是函数名)
+                });
+            });
+
+
+        });
+
+        function update_page (json) //回传函数实体
+        {
+            $("#result").html(JSON.stringify(json));
+        }
+    </script>
+</head>
+<body>
+
+<div id="result"></div>
+<button id="send_ajax">提交</button>
+</body>
+</html>
