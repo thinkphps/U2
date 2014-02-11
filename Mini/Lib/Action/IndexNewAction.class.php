@@ -128,6 +128,24 @@ class IndexNewAction extends Action {
 	if(!empty($isbuy)){
      $clothes[$k]['buy'] = 1;
 	}
+       //add color,uq,gender, added by David
+       $productSyn = D('ProductSyn');
+       $returnOjb =  $productSyn->GetProductColorByID($clothes[$k]['num_iid']);
+       if (isset($returnOjb))
+       {
+           $uq_color = array();
+           for($i = 0; $i < count($returnOjb); $i++)
+           {
+               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
+               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
+               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
+               $clothes[$k]['color'] = json_encode($uq_color);
+               $clothes[$k]['gender'] = $returnOjb[$i]['sex'];
+               $clothes[$k]['uq'] = $returnOjb[$i]['uq'];
+           }
+       }
+       //end
+
    }
 	$pants = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
    foreach($pants as $k=>$v){
@@ -157,6 +175,23 @@ class IndexNewAction extends Action {
 	if(!empty($isbuy)){
      $pants[$k]['buy'] = 1;
 	}
+       //add color,uq,gender, added by David
+       $productSyn = D('ProductSyn');
+       $returnOjb =  $productSyn->GetProductColorByID($pants[$k]['num_iid']);
+       if (isset($returnOjb))
+       {
+           $uq_color = array();
+           for($i = 0; $i < count($returnOjb); $i++)
+           {
+               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
+               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
+               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
+               $pants[$k]['color'] = json_encode($uq_color);
+               $pants[$k]['gender'] = $returnOjb[$i]['sex'];
+               $pants[$k]['uq'] = $returnOjb[$i]['uq'];
+           }
+       }
+       //end
    }
    
    //取出性别所对应的tagid
@@ -752,7 +787,7 @@ public function ajaxgood(){
 	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
 
     $dstr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
+           </li>';
 	}
     $arr['dstr'] = $dstr;
 	$arr['flag'] = true;
