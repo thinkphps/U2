@@ -40,8 +40,9 @@ class ProductSynModel extends Model{
     private function CheckUpdateUQProduct($app,$key,$uqProductCounts){
 
         date_default_timezone_set('PRC');
-        $currentDateTime = date('Y-m-d H:i:s', time());
-        $currentDate = date('Y-m-d',$currentDateTime);
+        $tempCurrentTime = time();
+        $currentDateTime = date('Y-m-d H:i:s', $tempCurrentTime);
+        $currentDate = date('Y-m-d',$tempCurrentTime);
 
         $returnValue = '';
         $currentInvokeCounts = 0;
@@ -55,7 +56,7 @@ class ProductSynModel extends Model{
         $result = $appKey->field('id,invoketime,counts')->where($map)->find();
         if(isset($result))
         {
-            $lastInvokeDate = date('Y-m-d',$result['invoketime']);
+            $lastInvokeDate = date('Y-m-d',strtotime($result['invoketime']));
             $lastInvokeCounts = $result['counts'];
             $currentInvokeCounts = $lastInvokeCounts;
 
