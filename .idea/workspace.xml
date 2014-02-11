@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29660174-b3b6-4d0b-a9aa-c7ee8dd52406" name="Default" comment="2014/1/27">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php" afterPath="$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php" />
+    <list default="true" id="29660174-b3b6-4d0b-a9aa-c7ee8dd52406" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="uniqlo.iws" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="IndexNewAction.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="5" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.30612245" vertical-offset="1260" max-vertical-offset="22335">
+            <state line="100" column="5" selection-start="2614" selection-end="2614" vertical-scroll-proportion="-0.6400742" vertical-offset="1770" max-vertical-offset="22335">
               <folding>
                 <element signature="n#_initialize#0;n#IndexNewAction#0;n#!!top" expanded="false" />
               </folding>
@@ -349,7 +348,11 @@
       <created>1392087940694</created>
       <updated>1392087940694</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="2014/1/27">
+      <created>1392088024814</created>
+      <updated>1392088024814</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -500,7 +503,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="5" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.30612245" vertical-offset="1260" max-vertical-offset="22335">
+        <state line="100" column="5" selection-start="2614" selection-end="2614" vertical-scroll-proportion="-0.6400742" vertical-offset="1770" max-vertical-offset="22335">
           <folding>
             <element signature="n#_initialize#0;n#IndexNewAction#0;n#!!top" expanded="false" />
           </folding>
