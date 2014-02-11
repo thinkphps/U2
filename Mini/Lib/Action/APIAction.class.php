@@ -66,7 +66,7 @@ class APIAction extends Action
                     $returnValue['color'][$i]['id'] = $returnOjb[$i]['colorid'];
                     $returnValue['color'][$i]['code'] = $returnOjb[$i]['colorcode'];
                     $returnValue['color'][$i]['name'] = $returnOjb[$i]['colorname'];
-                    $returnValue['gender'] = $returnOjb[$i]['sex'];
+                    $returnValue['gender'] = $returnOjb[$i]['gender'];
                     $returnValue['uq'] = $returnOjb[$i]['uq'];
                 }
             }
