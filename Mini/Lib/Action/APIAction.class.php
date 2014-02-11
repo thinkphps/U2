@@ -47,23 +47,34 @@ class APIAction extends Action
 
     }
 
-    public function Test()
+    public function GetProductColorByID()
     {
+        $id = $_GET['id'];
 
-        $intputValue = array(
-            'app' => 'baiyi',
-            'key' => '123456789',
-            'batchid' => '20140120',
-            'products' => array()
-        );
+        $returnValue = array();
 
-        for ($i = 0; $i < 4; $i++) {
-            $intputValue['products'][$i]['uq'] = 'UQ1234560' . $i;
-            $intputValue['products'][$i]['type'] = -1;
+        //$id = '17141542788';
 
+        if (isset($id) &&  ! empty($id) )
+        {
+            $productSyn = D('ProductSyn');
+            $returnOjb =  $productSyn->GetProductColorByID($id);
+            if (isset($returnOjb))
+            {
+                for($i = 0; $i < count($returnOjb); $i++)
+                {
+                    $returnValue['color'][$i]['id'] = $returnOjb[$i]['colorid'];
+                    $returnValue['color'][$i]['code'] = $returnOjb[$i]['colorcode'];
+                    $returnValue['color'][$i]['name'] = $returnOjb[$i]['colorname'];
+                    $returnValue['gender'] = $returnOjb[$i]['sex'];
+                    $returnValue['uq'] = $returnOjb[$i]['uq'];
+                }
+            }
         }
 
-        $this->ajaxReturn($intputValue, 'JSON');
+        $json = json_encode($returnValue);
+
+        $this->ajaxReturn($returnValue, 'JSON');
     }
 
 }

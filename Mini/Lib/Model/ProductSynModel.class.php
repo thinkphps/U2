@@ -154,4 +154,14 @@ class ProductSynModel extends Model{
         return $returnProduct;
     }
 
+    public function GetProductColorByID($id)
+    {
+        $goods = M('Goods');
+        return $goods->join('u_products on u_goods.num_iid=u_products.num_iid')
+            ->join('u_settings on u_settings.`key` = u_goods.gender')
+            ->join('u_color on u_color.id = left(u_products.cvalue,2)')
+            ->field('distinct distinct left(u_products.cvalue,2) as colorid, u_color.color_code as colorcode,u_color.color_name as colorname,left(u_goods.item_bn,8) as uq ,u_settings.value as sex ')
+            ->where(array('u_products.num_iid'=>$id))
+            ->select();
+    }
 } 

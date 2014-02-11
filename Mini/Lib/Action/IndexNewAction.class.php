@@ -156,7 +156,7 @@ class IndexNewAction extends Action {
 	$isbuy = $buy->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
 	if(!empty($isbuy)){
      $pants[$k]['buy'] = 1;
-	}	
+	}
    }
    
    //取出性别所对应的tagid
