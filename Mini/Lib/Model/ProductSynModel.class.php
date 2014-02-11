@@ -20,11 +20,6 @@ class ProductSynModel extends Model{
 
         $currentDateTime = date('Y-m-d H:i:s', time());
 
-        $postArray ='[{"data":{"hello":"world"},"type":"1234","date":"2012-10-30 17:6:9","user":"000000000000000","time_stamp":1351587969902}, {"data":{"hello":"world"},"type":"1234","date":"2012-10-30 17:12:53","user":"000000000000000","time_stamp":1351588373519}]';
-
-
-        $de_json = json_decode($postArray,TRUE);
-
         $uqProductCounts = count($uqproduct);
 
         $checkmsg = $this->CheckUpdateUQProduct($app,$key,$uqProductCounts);
@@ -45,8 +40,9 @@ class ProductSynModel extends Model{
     private function CheckUpdateUQProduct($app,$key,$uqProductCounts){
 
         date_default_timezone_set('PRC');
-        $currentDateTime = date('Y-m-d H:i:s', time());
-        $currentDate = date('Y-m-d',$currentDateTime);
+        $tempCurrentTime = time();
+        $currentDateTime = date('Y-m-d H:i:s', $tempCurrentTime);
+        $currentDate = date('Y-m-d',$tempCurrentTime);
 
         $returnValue = '';
         $currentInvokeCounts = 0;
@@ -60,13 +56,13 @@ class ProductSynModel extends Model{
         $result = $appKey->field('id,invoketime,counts')->where($map)->find();
         if(isset($result))
         {
-            $lastInvokeDate = date('Y-m-d',$result['invoketime']);
+            $lastInvokeDate = date('Y-m-d',strtotime($result['invoketime']));
             $lastInvokeCounts = $result['counts'];
             $currentInvokeCounts = $lastInvokeCounts;
 
             if($currentDate == $lastInvokeDate)
             {
-                if($lastInvokeCounts < $apiCounts)
+                if($lastInvokeCounts <= $apiCounts)
                 {
                     $tableRowCounts = $settings->getTableRowCounts();
                     if($uqProductCounts <= $tableRowCounts)
@@ -159,4 +155,30 @@ class ProductSynModel extends Model{
         return $returnProduct;
     }
 
+    public function GetProductColorByID($id)
+    {
+        $goods = M('Goods');
+        return $goods
+            ->join('u_products on u_goods.num_iid=u_products.num_iid')
+            ->join('u_settings on u_settings.`key` = u_goods.gender')
+            ->join('u_color on u_color.id = left(u_products.cvalue,2)')
+            ->field('distinct distinct left(u_products.cvalue,2) as colorid, u_color.color_code as colorcode,u_color.color_name as colorname,left(u_goods.item_bn,8) as uq ,u_settings.value as gender ')
+            ->where(array('u_products.num_iid'=>$id))
+            ->select();
+
+
+//        return $goods
+//            ->join('u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq')
+//            ->join('u_settings on u_settings.`key` = u_goods.gender')
+//            ->join('u_color on u_color.id = u_products_beubeu.color')
+//            ->field('
+//                    distinct u_products_beubeu.color as colorid,
+//                    u_color.color_code as colorcode,
+//                    u_color.color_name as colorname,
+//                    left(u_goods.item_bn,8) as uq ,
+//                    u_settings.value as gender
+//                    ')
+//            ->where(array('u_goods.num_iid'=>$id))
+//            ->select();
+    }
 } 

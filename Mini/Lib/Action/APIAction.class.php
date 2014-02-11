@@ -1,6 +1,7 @@
 <?php
 
-class APIAction extends Action {
+class APIAction extends Action
+{
 
     public function UpdateProductsWithColor()
     {
@@ -8,64 +9,72 @@ class APIAction extends Action {
             'code' => -1,
             'msg' => array(
                 'success' => '',
-                'error' =>	''
+                'error' => ''
             )
         );
-		
-		//$callback=$_GET["callback"];
 
-        $app =  $_GET['app'];
-		$key =  $_GET['key'];
-		$products =  $_GET['products'];
-		$batchid =  $_GET['batchid'];
-		
-		//$products1 = unserialize(base64_decode());
+        //$callback=$_GET["callback"];
 
-		//$strRequest = file_get_contents('php://input');
-		/*$strRequest = $this->_param('data');
-		$Request = json_decode($strRequest,true);*/
-		
-	/*	$app = $Request['app'];
-		$key = $Request['key'];
-		$products =  $Request['products'];
-		$batchid = $Request['batchid'];*/
+        $app = $_GET['app'];
+        $key = $_GET['key'];
+        $products = $_GET['products'];
+        $batchid = $_GET['batchid'];
 
-        if ( !isset($products) || !isset($key) || !isset($app)|| !isset($batchid)||
-            empty($products)|| empty($key)|| empty($app) || empty($batchid))
-        {
+        //$products1 = unserialize(base64_decode());
+
+        //$strRequest = file_get_contents('php://input');
+        /*$strRequest = $this->_param('data');
+        $Request = json_decode($strRequest,true);*/
+
+        /*	$app = $Request['app'];
+            $key = $Request['key'];
+            $products =  $Request['products'];
+            $batchid = $Request['batchid'];*/
+
+        if (!isset($products) || !isset($key) || !isset($app) || !isset($batchid) ||
+            empty($products) || empty($key) || empty($app) || empty($batchid)
+        ) {
             $returnProductValue['msg']['error'] = '1. 传递参数错误';
+        } else {
+            $productSyn = D('ProductSyn');
+            $returnProductValue = $productSyn->UpdateUQProduct($app, $key, $products, $batchid);
         }
-		else
-		{
-			$productSyn = D('ProductSyn');
-            $returnProductValue = $productSyn->UpdateUQProduct($app,$key,$products,$batchid);
-        }
-		$json = json_encode($returnProductValue);
+        $json = json_encode($returnProductValue);
 
-		$this->ajaxReturn($returnProductValue,'JSONP');
-		//echo $callback."($json)"; 
-		//echo $callback.'('.$json.')';
+        $this->ajaxReturn($returnProductValue, 'JSONP');
+        //echo $callback."($json)";
+//        echo $callback.'('.$json.')';
 
     }
 
-    public function Test()
+    public function GetProductColorByID()
     {
-		
-        $intputValue = array(
-            'app' => 'baiyi',
-            'key' => '123456789',
-            'batchid' => '20140120',
-            'products' => array()
-        );
+        $id = $_GET['id'];
 
-        for($i = 0; $i < 4; $i++)
+        $returnValue = array();
+
+        //$id = '17141542788';
+
+        if (isset($id) &&  ! empty($id) )
         {
-            $intputValue['products'][$i]['uq'] = 'UQ1234560'.$i;
-            $intputValue['products'][$i]['type'] = -1;
-
+            $productSyn = D('ProductSyn');
+            $returnOjb =  $productSyn->GetProductColorByID($id);
+            if (isset($returnOjb))
+            {
+                for($i = 0; $i < count($returnOjb); $i++)
+                {
+                    $returnValue['color'][$i]['id'] = $returnOjb[$i]['colorid'];
+                    $returnValue['color'][$i]['code'] = $returnOjb[$i]['colorcode'];
+                    $returnValue['color'][$i]['name'] = $returnOjb[$i]['colorname'];
+                    $returnValue['gender'] = $returnOjb[$i]['gender'];
+                    $returnValue['uq'] = $returnOjb[$i]['uq'];
+                }
+            }
         }
 
-        $this->ajaxReturn($intputValue,'JSON');
+        $json = json_encode($returnValue);
+
+        $this->ajaxReturn($returnValue, 'JSON');
     }
 
 }
