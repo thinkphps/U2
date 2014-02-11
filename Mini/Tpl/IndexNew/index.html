@@ -45,7 +45,7 @@
 		<if condition="$user['is_active'] eq 0">
 			<a href="javascript:;" class="mini-logout js-click" data-id="#logout">退出登录</a>
 		<else />
-			<a href="{:U('Index/loginout')}" class="mini-logout">退出登录</a>
+			<a href="{:U('IndexNew/loginout')}" class="mini-logout">退出登录</a>
 		</if>
 	</if>
     <a href="http://uniqlo.tmall.com/" target="_blank" class="mini-homepage fr">前往优衣库天猫旗舰店</a>
@@ -53,96 +53,21 @@
 
   <div class="mini-cabnet pr clear">
     <div class="mini-cab pr fl">
-      <h2 class="mini-cab-title pa tc">搭配间</h2>
-      <div method="" class="mini-cab-bin pr">
-        <a href="javascript:;" class="mini-cab-clear pa none">清空</a>
-        <a href="javascript:;" class="mini-cab-empty pa tc">
-          将衣物加入衣柜后<br />就可以在这里搭搭看咯<br />快在下方选衣服吧
-        </a>
-        <div class="mini-cab-tips pa tc none">
-          <h3>优衣柜推荐</h3>
-          <p>左右切换，选择最心仪搭配</p>
-          <h3>自己搭搭</h3>
-          <p>点击柜中衣物，自己搭搭看</p>
-          <a href="javascript:;">知道了！开始搭配</a>
-        </div>
-        <div class="mini-cab-slide pr" id="cab-top">
-          <div class="mini-cab-detail pa none">
-            <span class="mini-btn"></span>
-            <!-- <a href="javascript:;" class="mini-detail-close mini-btn">关闭</a> -->
-            <h3><a href="#" target="_blank">default title</a></h3>
-            <p>
-              剩余库存 <span>default rest</span> 件
-            </p>
-            <p>
-              <a href="#" target="_blank" class="mini-buy-now fr">我要购买</a>
-              <i>¥</i> <strong>default price</strong>
-            </p>
+          <div class="baiyi_fl" id=""><div class="fold_btn"><a href="#"></a></div></div>
+          <a href="#" class="mini-cab-buy2"><i></i>我要购买</a>
+          <a href="#" class="mini-cab-save2">保存此搭配</a>
+          <div class="mini-cab-share2">
+              <span>将此搭配分享到：</span>
+              <div class="bshare-custom">
+                  <a title="分享到QQ空间" class="bshare-qzone"></a>
+                  <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                  <a title="分享到人人网" class="bshare-renren"></a>
+                  <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+              </div>
+              <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+              <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
           </div>
-          <a href="javascript:;" class="mini-cab-prev mini-btn">prev</a>
-          <a href="javascript:;" class="mini-cab-next mini-btn">next</a>
-          <div class="mini-cab-container">
-            <ul>
-              <!-- <li><a href="#"><img src="__TMPL__Public/images/index/a.png" alt=""></a></li> -->
-            </ul>
-          </div>
-        </div>
-        <div class="mini-cab-slide pr" id="cab-bot">
-          <div class="mini-cab-detail pa none">
-            <span class="mini-btn"></span>
-            <!-- <a href="javascript:;" class="mini-detail-close mini-btn">关闭</a> -->
-            <h3><a href="#" target="_blank">default title</a></h3>
-            <p>
-              剩余库存 <span>default rest</span> 件
-            </p>
-            <p>
-              <a href="#" target="_blank" class="mini-buy-now fr">我要购买</a>
-              <i>¥</i> <strong>default price</strong>
-            </p>
-          </div>
-          <a href="javascript:;" class="mini-cab-prev mini-btn">prev</a>
-          <a href="javascript:;" class="mini-cab-next mini-btn">next</a>
-          <div class="mini-cab-container">
-            <ul>
-              <!-- <li><a href="#"><img src="__TMPL__Public/images/index/b.png" alt=""></a></li> -->
-            </ul>
-          </div>
-        </div>
-        <p class="mt20 tc">
-          <a href="javascript:;" class="mini-cab-buy none">我要购买</a>
-        </p>
-        <form class="mini-cab-choose pa tc none">
-          <a href="javascript:;" class="mini-cab-close mini-btn"></a>
-          <p>选择购买类型</p>
-          <p class="ft12">
-            <label><input type="radio" name="cloth-type" pos="#cab-top">上装</label>
-            <label><input type="radio" name="cloth-type" pos="#cab-bot">下装</label>
-          </p>
-        </form>
       </div>
-      <div class="mini-cab-share">
-        <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style_24x24 clear">
-          <a class="jiathis_button_tsina"></a>
-          <a class="jiathis_button_qzone"></a>
-          <a class="jiathis_button_tqq"></a>
-          <a class="jiathis_button_kaixin001"></a>
-          <a class="jiathis_button_renren"></a>
-        </div>
-        <script type="text/javascript" >
-        var jiathis_config={
-          url:"http://uniqlo.bigodata.com.cn/",
-          summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
-          title : " ",
-          pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
-          shortUrl:false,
-          hideMore:false
-        }
-        </script>
-        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-        <!-- JiaThis Button END -->
-      </div>
-    </div>
     <div class="mini-net pr fl">
       <div class="mini-net-hd clear">
         我的优衣柜
@@ -186,16 +111,42 @@
       </div>
 
       <div class="mini-net-hover pa none" data-id="">
-        <h3 class="tc">清新生活</h3>
-        <img src="" alt="">
-        <p>
-          <a href="#" class="mini-net-detail fr fb" target="_blank">详情</a>
-          <span>约会装</span> <strong>99</strong>元
-        </p>
-        <a href="javascript:;" class="mini-net-like fl">我喜欢</a>
-        <a href="javascript:;" class="mini-net-had fl">已买入</a>
-        <div class="mini-net-tips pa">点击试穿</div>
-        <a href="javascript:;" class="mini-net-del mini-btn">删除</a>
+          <a href="#" class="mini-net-close pa"></a>
+
+          <div class="fl mini-net-hover_left pa">
+            <h3 class="tc">清新生活</h3>
+            <img src="" alt="">
+            <p>
+              <a href="#" class="mini-net-detail fr fb" target="_blank">详情</a>
+              <span>约会装</span> <strong>99</strong>元
+            </p>
+            <a href="javascript:;" class="mini-net-like fl">我喜欢</a>
+            <a href="javascript:;" class="mini-net-had fl">已买入</a>
+            <div class="mini-net-tips pa">点击试穿</div>
+            <a href="javascript:;" class="mini-net-del mini-btn">删除</a>
+          </div>
+
+          <div class="fr mini-net-hover_right color none">
+              <h3 class="tc">
+                  选择颜色
+              </h3>
+              <ul>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+                  <li><a href="#"><img src="images/index/color1.png" width="25" height="25"></a></li>
+
+              </ul>
+          </div>
+
         <div class="mini-net-confirm pa tc none">
           <span class="mini-btn"></span>
           <h4>确定要将该衣服移出衣柜吗？</h4>
@@ -891,7 +842,7 @@ var mfarr = '{$mfarr}';
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/mainnew.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript">
 var gurl = '{:U('IndexNew/delg')}';
