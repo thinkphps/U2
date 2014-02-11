@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29660174-b3b6-4d0b-a9aa-c7ee8dd52406" name="Default" comment="">
+    <list default="true" id="29660174-b3b6-4d0b-a9aa-c7ee8dd52406" name="Default" comment="2014/1/27">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php" afterPath="$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html" afterPath="$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mini/Tpl/Public/js/miannew.js" afterPath="$PROJECT_DIR$/Mini/Tpl/Public/js/miannew.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="uniqlo.iws" />
@@ -30,7 +30,7 @@
       <file leaf-file-name="IndexNewAction.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="410" column="4" selection-start="13351" selection-end="13351" vertical-scroll-proportion="-149.375" vertical-offset="2565" max-vertical-offset="22410">
+            <state line="158" column="13" selection-start="6877" selection-end="6877" vertical-scroll-proportion="-47.4" vertical-offset="0" max-vertical-offset="22410">
               <folding />
             </state>
           </provider>
@@ -39,7 +39,46 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="338" column="88" selection-start="13738" selection-end="13741" vertical-scroll-proportion="2.107209" vertical-offset="3930" max-vertical-offset="26160">
+            <state line="971" column="18" selection-start="41878" selection-end="41878" vertical-scroll-proportion="0.41941747" vertical-offset="14349" max-vertical-offset="26895">
+              <folding>
+                <element signature="n#style#0;n#a#0;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#2;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#9;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#2;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#div#23;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Mini/Tpl/Index/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="47" selection-start="0" selection-end="59168" vertical-scroll-proportion="-0.625" vertical-offset="1020" max-vertical-offset="26895">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uniqlonew.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/css/uniqlonew.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="19" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="35985">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/uniqlo/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="20" selection-start="2177" selection-end="3239" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="38400">
               <folding />
             </state>
           </provider>
@@ -59,9 +98,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php" />
-        <option value="$USER_HOME$/Desktop/uniqlo/index.html" />
         <option value="$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html" />
-        <option value="$PROJECT_DIR$/Mini/Tpl/Public/js/miannew.js" />
       </list>
     </option>
   </component>
@@ -97,7 +134,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -133,6 +169,58 @@
               <option name="myItemId" value="Tpl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uniqlo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="U2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mini" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tpl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uniqlo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="U2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mini" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tpl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -153,6 +241,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="IndexNew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uniqlo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="U2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mini" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tpl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Index" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -212,6 +322,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,10 +332,10 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Mini/Tpl/Public" />
       <recent name="$PROJECT_DIR$/Mini/Lib/Action" />
     </key>
   </component>
@@ -268,15 +379,6 @@
       <created>1390803137398</created>
       <updated>1390803137398</updated>
     </task>
-    <task id="LOCAL-00001" summary="2014/1/27">
-      <created>1392021775546</created>
-      <updated>1392021775546</updated>
-    </task>
-    <task id="LOCAL-00002" summary="2014/1/27&#10;">
-      <created>1392021825291</created>
-      <updated>1392021825291</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -286,11 +388,11 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15912762" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27059773" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25767368" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -298,7 +400,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833335" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -317,30 +419,41 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="2014/1/27" />
-    <MESSAGE value="2014/1/27&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="2014/1/27&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="2014/1/27" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php">
+    <entry file="file://$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="410" column="4" selection-start="13351" selection-end="13351" vertical-scroll-proportion="0.0" vertical-offset="6039" max-vertical-offset="22410">
-          <folding />
+        <state line="54" column="4" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="26160">
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#9;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#div#23;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html">
+    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/css/uniqlonew.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="88" selection-start="13738" selection-end="13741" vertical-scroll-proportion="0.0" vertical-offset="5070" max-vertical-offset="26160">
+        <state line="16" column="19" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="35985">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Desktop/uniqlo/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="845" column="24" selection-start="40318" selection-end="40318" vertical-scroll-proportion="0.0" vertical-offset="12675" max-vertical-offset="38400">
+        <state line="58" column="20" selection-start="2177" selection-end="3239" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="38400">
           <folding />
         </state>
       </provider>
@@ -376,14 +489,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="33402" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Test/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1410" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Home/Tpl/Public/css/uniqlo1226.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="426" column="18" selection-start="7598" selection-end="7598" vertical-scroll-proportion="0.0" vertical-offset="6390" max-vertical-offset="32790">
+        <state line="426" column="18" selection-start="7598" selection-end="7598" vertical-scroll-proportion="11.132404" vertical-offset="0" max-vertical-offset="32790">
           <folding />
         </state>
       </provider>
@@ -393,79 +501,60 @@
         <state line="26" column="19" selection-start="820" selection-end="820" vertical-scroll-proportion="0.4909091" vertical-offset="0" max-vertical-offset="550" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Index/index.html">
+    <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/APIAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="47" selection-start="2567" selection-end="2615" vertical-scroll-proportion="0.0" vertical-offset="1311" max-vertical-offset="32832">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexAction.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="22410" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/uniqlo/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="20" selection-start="2177" selection-end="3239" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="38400">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/css/uniqlonew.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-10.518784" vertical-offset="5880" max-vertical-offset="35985">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/css/uniqlo.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="1" selection-start="358" selection-end="358" vertical-scroll-proportion="0.45617172" vertical-offset="0" max-vertical-offset="34845">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/images/mini/mini-cab.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="40" selection-start="329" selection-end="329" vertical-scroll-proportion="-1.2101313" vertical-offset="780" max-vertical-offset="18870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Public/js/miannew.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="211" column="28" selection-start="7897" selection-end="7913" vertical-scroll-proportion="0.33208254" vertical-offset="2988" max-vertical-offset="18870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="24" selection-start="3118" selection-end="3118" vertical-scroll-proportion="0.16085272" vertical-offset="1552" max-vertical-offset="22410" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/uniqlo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="845" column="24" selection-start="40318" selection-end="40318" vertical-scroll-proportion="0.0" vertical-offset="12675" max-vertical-offset="38400">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/lotusphp_runtime/Cache/Adapter/CacheAdapter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/APIAction.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+        <state line="16" column="19" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="35985">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Mini/Lib/Action/IndexNewAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="410" column="4" selection-start="13351" selection-end="13351" vertical-scroll-proportion="-149.375" vertical-offset="2565" max-vertical-offset="22410">
+        <state line="158" column="13" selection-start="6877" selection-end="6877" vertical-scroll-proportion="-47.4" vertical-offset="0" max-vertical-offset="22410">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mini/Tpl/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="47" selection-start="0" selection-end="59168" vertical-scroll-proportion="-0.625" vertical-offset="1020" max-vertical-offset="26895">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Mini/Tpl/IndexNew/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="88" selection-start="13738" selection-end="13741" vertical-scroll-proportion="2.107209" vertical-offset="3930" max-vertical-offset="26160">
-          <folding />
+        <state line="971" column="18" selection-start="41878" selection-end="41878" vertical-scroll-proportion="0.41941747" vertical-offset="14349" max-vertical-offset="26895">
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#div#7;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#9;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#p#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#div#23;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
