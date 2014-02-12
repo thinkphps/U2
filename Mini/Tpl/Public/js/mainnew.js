@@ -489,7 +489,13 @@ jQuery(function($){
 
         //新的购买功能
         cabnet.cabbuy2.on('click',function(){
-            cabnet.buybtns.show();
+            if(cabnet.buybtns.is(":hidden")){
+                cabnet.buybtns.show();
+            }
+            else{
+                cabnet.buybtns.hide();
+            }
+
 //            console.log(Model.GetDIY());
         });
 
@@ -503,13 +509,18 @@ jQuery(function($){
 
             var barcode = "";
             for(var i in o){
-                barcode = "img[uq='UQ105111']";//barcode = "img[uq='" + o[0].barcode.substring(0,8) + "']";
-
+//                barcode = "img[uq='UQ105111']";
+                barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
+                console.log(barcode);
                 //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
                 var img = cabnet.net.find(barcode);
                 if(img.length > 0){
+                    var title = img.attr("alt");
+                    if(title.length > 10){
+                        title = title.substring(0,10) + "...";
+                    }
                     //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li><a target="_blank" href="'+ img.attr("url") +'" >'+ img.attr("alt") +'</a></li>'));
+                    cabnet.buybtns.find("ul").append($('<li><a target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
                 }
                 else{
 
@@ -519,6 +530,13 @@ jQuery(function($){
 //                alert(barcode);
             }
         }
+
+
+        //保存当前搭配
+        cabnet.cabsave2.on("click",function(){
+            //获取购买列表中的内容
+
+        });
 
 
 
@@ -657,11 +675,12 @@ jQuery(function($){
 
         /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
         cabnet.hoverBox.on("click","span[name='barcode']",function(){
-//            Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
+            Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
 //            Model.DressingByBarcode('UQ12345611')
-            Model.Dressing(17098);
+//            Model.Dressing(17098);
 //            Model.Dressing(17055);
         });
+
 
 
         function succNfail(){
@@ -1370,6 +1389,8 @@ jQuery(function($){
                 img.eq(i + 1).attr('src', temp)
             }
         }
+
+
 
     }($))
 
