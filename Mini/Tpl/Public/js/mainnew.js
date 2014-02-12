@@ -5,7 +5,27 @@ jQuery(function($){
     var key="8f1a6e3f182904ad22170f56c890e533";
     loadMymodel(touchid,key);
 
+    var jiathis_config={
+        url:"http://uniqlo.bigodata.com.cn/",
+        summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
+        title : " ",
+        pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
+        shortUrl:false,
+        hideMore:false
+    }
+    funcShare = function(){
+        var src = Model.GetDIY(); // 取出当前搭配图片
 
+        jiathis_config={
+            url:"http://uniqlo.bigodata.com.cn/",
+            summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
+            title : " ",
+            pic:src,
+            shortUrl:false,
+            hideMore:false
+        }
+        // 执行分享操作
+    }
 
 
 
@@ -168,6 +188,7 @@ jQuery(function($){
             baiyifl : $('div.baiyi_fl'),
             cabbuy2 :$('a.mini-cab-buy2'),                         //我要购买按钮
             buybtns : $('div.buy_btns'),                            //购买详细列表
+            cabsave2 : $('a.mini-cab-save2'),                      //保存此搭配按钮
             cabSlide  : $('div.mini-cab-slide'),                 // cab-slide框
             cabTips   : $('div.mini-cab-tips'),                  // cab提示框
             cabBuy    : $('a.mini-cab-buy'),                     // cab购买按钮
@@ -214,6 +235,15 @@ jQuery(function($){
 
         /* == net交互 == */
 
+        function hideDiv(){
+            cabnet.hoverBox.hide();
+            cabnet.hoverIsOpen = false;
+            cabnet.netConfirm.hide();
+            cabnet.netFail.hide();
+            clearTimeout(cabnet.netFail.timer);
+            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked');
+        }
+
         cabnet.net.on('add', function(e, id){                  // 注册netSlide的被添加自定义事件
             if(cabnet.netIsEmpty){
                 cabnet.netEmpty.addClass('mini-net-scale')         // 隐藏net为空提示框
@@ -255,7 +285,7 @@ jQuery(function($){
             netHoverCallback.call(this, pos, restSlide)          // 图片悬浮的callback里处理细节
 
             cabnet.hoverBox.css({                                // 显示图片悬浮框
-                left: position.left + 26,
+                left: position.left + 20,
                 top: position.top + top
             }).show()
             cabnet.hoverIsOpen = true
@@ -263,12 +293,7 @@ jQuery(function($){
 
         cabnet.hoverBox.on('mouseleave', function(){           // hoverBox鼠标离开后隐藏全部
 
-            cabnet.hoverBox.hide()
-            cabnet.hoverIsOpen = false
-            cabnet.netConfirm.hide()
-            cabnet.netFail.hide()
-            clearTimeout(cabnet.netFail.timer)
-            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
+            hideDiv();
 
         })
 //            .on('click', function(){                             // 点击任意位置添加至搭配间
@@ -276,34 +301,23 @@ jQuery(function($){
 //        })
             .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
 
-            cabnet.netConfirm.show()
-            e.stopPropagation()
+                cabnet.netConfirm.show()
+                e.stopPropagation()
 
-        }).on('click', 'a.mini-net-detail', function(e){
-            e.stopPropagation()
-        })
+            }).on('click', 'a.mini-net-detail', function(e){
+                e.stopPropagation()
+            })
 
 
         cabnet.minicabnet.on("mouseenter",function(){
-
-            cabnet.hoverBox.hide()
-            cabnet.hoverIsOpen = false
-            cabnet.netConfirm.hide()
-            cabnet.netFail.hide()
-            clearTimeout(cabnet.netFail.timer)
-            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
-
+            hideDiv();
+        }).on("mouseleave",function(){
+            hideDiv();
         });
 
+
         cabnet.baiyifl.on("mouseenter",function(){
-
-            cabnet.hoverBox.hide()
-            cabnet.hoverIsOpen = false
-            cabnet.netConfirm.hide()
-            cabnet.netFail.hide()
-            clearTimeout(cabnet.netFail.timer)
-            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
-
+            hideDiv();
         });
 //         uniqlo.netContainer.on("mouseenter",function(){
 //            console.log(2);
@@ -475,22 +489,55 @@ jQuery(function($){
 
         //新的购买功能
         cabnet.cabbuy2.on('click',function(){
-            var clothesArr = Model.GetCurrClothesArr();
-            console.log(clothesArr);
-            cabnet.buybtns.find("ul").html("");
-//            for (var i in clothesArr)
-//            {
-//
-//                //根据衣服ID获取衣服URL
-//
-//
-//
-//                cabnet.buybtns.find("ul").append($('<li><a  >'+ clothesArr[i].Title +'</a></li>'))
-//                alert("衣服名："+clothesArr[i].Title+"衣服ID："+clothesArr[i].ID+"衣服价格："+clothesArr[i].Price+"衣服款号："+clothesArr[i].barcode);
-//            }
+            if(cabnet.buybtns.is(":hidden")){
+                cabnet.buybtns.show();
+            }
+            else{
+                cabnet.buybtns.hide();
+            }
 
+//            console.log(Model.GetDIY());
+        });
+
+        //当前穿着回调，每次穿衣时会执行这个函数。  返回模特身上当前穿着的衣服
+        //获取衣服UQ号去查找淘宝信息
+        Model.CurrClothesCallback = beu_getallclothes;
+        function beu_getallclothes(o){
+
+            //清空购买列表
+            cabnet.buybtns.find("ul").html("");
+
+            var barcode = "";
+            for(var i in o){
+//                barcode = "img[uq='UQ105111']";
+                barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
+                console.log(barcode);
+                //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
+                var img = cabnet.net.find(barcode);
+                if(img.length > 0){
+                    var title = img.attr("alt");
+                    if(title.length > 10){
+                        title = title.substring(0,10) + "...";
+                    }
+                    //将衣服信息增加到购买列表
+                    cabnet.buybtns.find("ul").append($('<li><a target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                }
+                else{
+
+                }
+                console.log(img);
+
+//                alert(barcode);
+            }
+        }
+
+
+        //保存当前搭配
+        cabnet.cabsave2.on("click",function(){
+            //获取购买列表中的内容
 
         });
+
 
 
         cabnet.cabChoose.on('click', 'a', function(){
@@ -628,11 +675,12 @@ jQuery(function($){
 
         /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
         cabnet.hoverBox.on("click","span[name='barcode']",function(){
-//            Model.DressingByBarcode($(this).attr("barcode"));
+            Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
 //            Model.DressingByBarcode('UQ12345611')
-            Model.Dressing(17098);
-            Model.Dressing(17055);
+//            Model.Dressing(17098);
+//            Model.Dressing(17055);
         });
+
 
 
         function succNfail(){
@@ -731,7 +779,7 @@ jQuery(function($){
             if(colors != undefined){
                 var len = colors.length;
                 for(var i = 0;i < len;i++ ){
-                    ulColor.append($('<li><span name="barcode" barcode="'+ uq + colors[i].id
+                    ulColor.append($('<li title="'+ colors[i].name +'"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
                         +'" style="display:block;cursor:pointer; width:25px; height:25px; border-radius:22.5px; background-color:'+  colors[i].code
                         +';"></span></li>'));
                 }
@@ -1341,6 +1389,8 @@ jQuery(function($){
                 img.eq(i + 1).attr('src', temp)
             }
         }
+
+
 
     }($))
 

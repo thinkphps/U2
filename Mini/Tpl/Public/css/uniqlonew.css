@@ -240,8 +240,8 @@ body{
 .mini-cab-buy2{ display:block; float:left; width:137px; height:39px; line-height:39px; font-size:14px; background:#e70012; color:#FFF;}
 .mini-cab-buy2 i{ display:block; float:left; width:28px; height:28px; background:url(../images/mini/mini-cab.png) 0 -244px no-repeat; margin:5px 8px 0 20px;}
 
-.buy_btns{ left:0px; top:419px; z-index:999;}
-.buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; width:137px; height:35px; line-height:35px; text-align:center; color:#666;}
+.buy_btns{ left:0px; bottom:70px; z-index:999;}
+.buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; width:167px; height:35px; line-height:35px; text-align:center; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
 .mini-cab-save2{ display:block; float:left; width:137px; height:39px; line-height:39px; text-align:center; font-size:12px; background:#d1d1d1; color:#606060;}
