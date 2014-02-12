@@ -186,7 +186,7 @@ class IndexNewAction extends Action {
                $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
                $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
                $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
-               $clothes[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
+               $pants[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
                $pants[$k]['gender'] = $returnOjb[$i]['gender'];
                $pants[$k]['uq'] = $returnOjb[$i]['uq'];
            }
