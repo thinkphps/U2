@@ -77,4 +77,25 @@ class APIAction extends Action
         $this->ajaxReturn($returnValue, 'JSON');
     }
 
+    public function GetTaobaoInfoByUQ()
+    {
+        $id = $_GET['id'];
+        $taobaoInfo = array();
+
+        if(isset($id))
+        {
+            substr($id,0,8);
+            $goods = M('Goods');
+
+            $mapgoods['item_bn'] = array('like',substr($id,0,8).'%');
+            $value = $goods->cache(true)->field('num_iid')->where($mapgoods)->find();
+            if(isset($value))
+            {
+                $taobaoInfo['id'] = $value['num_iid'];
+            }
+        }
+        $json = json_encode($taobaoInfo);
+        $this->ajaxReturn($json, 'JSON');
+    }
+
 }

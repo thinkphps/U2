@@ -73,7 +73,7 @@ class IndexNewAction extends Action {
 	$time = date('Y-m-d H:i:s');
 	
 	$collection = M('Collection');
-	$goods = M('Goods');
+	$goods = M('beubeu_goods');
 	$areas = M('Areas');
 	$shop = M('Shop');
 	$goodtag = M('Goodtag');
@@ -100,7 +100,7 @@ class IndexNewAction extends Action {
 	}
 	}
 	//取出收场数据
-	$clothes = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'1','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
+	$clothes = $goods->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')->field('u_beubeu_goods.id as gid,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_beubeu_goods.isud'=>'1','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
    foreach($clothes as $k=>$v){
     switch($v['type']){
 		case '1' :
@@ -147,7 +147,7 @@ class IndexNewAction extends Action {
        //end
 
    }
-	$pants = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
+	$pants = $goods->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')->field('u_beubeu_goods.id as gid,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_beubeu_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
    foreach($pants as $k=>$v){
    	switch($v['type']){
 		case 1 :
@@ -589,7 +589,7 @@ public function getdapeijian(){
   if($id>0){
   	//if(!empty($_SESSION['token'])){
   	$collection = M('Collection');
-	$goods = M('Goods');
+	$goods = M('beubeu_goods');
 	$goodtag = M('Goodtag');
    	$cgtag = $goodtag->field('u_goodtag.wid,u_goodtag.gtype,u_goodtag.ccateid')->where(array('u_goodtag.num_iid'=>$id))->group('wid')->find();
    	$tag = $goodtag->field('u_goodtag.gtype,u_goodtag.tag_id,u_goodtag.ftag_id')->where(array('u_goodtag.wid'=>$cgtag['wid'],'u_goodtag.num_iid'=>$id))->select();
@@ -620,11 +620,11 @@ public function getdapeijian(){
 
 	if($po=='cab-top'){
 		//场合
-    $where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goods.num'=>array('egt','15'));
+    $where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_beubeu_goods.num'=>array('egt','15'));
 	//风格
-    $where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
+    $where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 	//都符合的
-    $where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
+    $where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 
 	if($cgtag['gtype']=='3' && ($cgtag['ccateid']!=75 && $cgtag['ccateid']!=86)){
     $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
@@ -637,11 +637,11 @@ public function getdapeijian(){
 	}
 	}else if($po=='cab-bot'){
      //场合
-	$where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goods.num'=>array('egt','15'));	
+	$where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_beubeu_goods.num'=>array('egt','15'));
 	//风格
-	$where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
+	$where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 	//全部
-	$where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
+	$where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 
 	if($cgtag['gtype']=='3' && ($cgtag['ccateid']!=75 && $cgtag['ccateid']!=86)){
     $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
@@ -660,11 +660,11 @@ public function getdapeijian(){
 	 $where3['u_goodtag.wid'] = array('exp','IN('.$wstr.')');
 	}
     //全部
-	$allclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where3)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+	$allclothes = $goodtag->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where($where3)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
     //场合
-	$tclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+	$tclothes = $goodtag->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where($where1)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
 	//风格
-	$ftclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where2)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+	$ftclothes = $goodtag->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where($where2)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
    
 	foreach($tclothes as $k=>$v){
      $allclothes[] = $v;
@@ -701,16 +701,16 @@ public function ajaxgood(){
 	//取出温度对应的商品数据 
 	$widvalue = $windex->getwindex($tem);
 	$wvalue = $widvalue['str'];
-	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$uclothesx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$uclothesx = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
+	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$uclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
 	$windex->saomo($uclothesx,$uclothes);
 
-	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$dclothesx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$dclothesx = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
+	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$dclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
 	$windex->saomo($dclothesx,$dclothes);
 
 	//组织数据
@@ -828,16 +828,16 @@ public function getgood(){
 	}
 	if(isset($tem)){
 	//上装
-	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$reulistx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$reulist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$reulistx = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
+	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$reulist = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
     $windex->saomo($reulistx,$reulist);
 
-	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$redlistx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$redlist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$redlistx = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
+	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
+	$redlist = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
 	$windex->saomo($redlistx,$redlist);
 
 	//组织数据
@@ -933,28 +933,28 @@ public function getgood(){
          $where1 = $where;
 		 //上装
          $where1['u_goodtag.isud'] = '1';
-		 $where1['u_goods.approve_status'] = 'onsale';
-		 $where1['u_goods.num'] = array('egt','15');
-	     $uclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+		 $where1['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where1['u_beubeu_goods.num'] = array('egt','15');
+	     $uclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
          $where1x = $where;
 		 $where1x['u_goodtag.wid'] = $widvalue['wid'];
          $where1x['u_goodtag.isud'] = '1';
-		 $where1x['u_goods.approve_status'] = 'onsale';
-		 $where1x['u_goods.num'] = array('egt','15');
-	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+		 $where1x['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where1x['u_beubeu_goods.num'] = array('egt','15');
+	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where1x)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
          $windex->saomo($uclothes,$uclothesy);
 
 		 //下装
          $where2x = $where;
 		 $where2x['u_goodtag.wid'] = $widvalue['wid'];
          $where2x['u_goodtag.isud'] = '2';
-		 $where2x['u_goods.approve_status'] = 'onsale';
-		 $where2x['u_goods.num'] = array('egt',15);
-	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+		 $where2x['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where2x['u_beubeu_goods.num'] = array('egt',15);
+	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
          $where['u_goodtag.isud'] = '2';
-		 $where['u_goods.approve_status'] = 'onsale';
-		 $where['u_goods.num'] = array('egt',15);
-	     $dclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+		 $where['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where['u_beubeu_goods.num'] = array('egt',15);
+	     $dclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
          $windex->saomo($dclothes,$dclothesy);
 
          //吧当天的指数数据放前边
@@ -1159,13 +1159,13 @@ public function getgood(){
 		 //套装
 		 $where1 = $where;
 		 $where1['u_goodtag.wid'] = $widvalue['wid'];
-		 $where1['u_goods.approve_status'] = 'onsale';
-		 $where1['u_goods.num'] = array('egt','15');
-	     $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+		 $where1['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where1['u_beubeu_goods.num'] = array('egt','15');
+	     $tclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
 
-		 $where['u_goods.approve_status'] = 'onsale';
-		 $where['u_goods.num'] = array('egt','15');
-	     $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
+		 $where['u_beubeu_goods.approve_status'] = 'onsale';
+		 $where['u_beubeu_goods.num'] = array('egt','15');
+	     $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
 		 $windex->saomo($tclothes,$tclothesy);
          foreach($tclothesy as $tk=>$tv){
 		 if(!empty($tv)){
@@ -1272,7 +1272,7 @@ public function getgood(){
 		}
 
 		//套装
-	    $where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'4','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
+	    $where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'4','u_beubeu_goods.approve_status'=>'onsale','u_beubeu_goods.num'=>array('egt','15'));
 	    if(!empty($ctagid)){
 	     $wh2['u_goodtag.tag_id'] = array('exp','IN('.$ctagid.')');
         }
@@ -1300,8 +1300,8 @@ public function getgood(){
 	  }
 	    $where1 = $where;
 		$where1['u_goodtag.wid'] = $widvalue['wid'];
-	    $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	    $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
+	    $tclothes = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
+	    $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_beubeu_goods.outer_id desc')->select();
 		$windex->saomo($tclothes,$tclothesy);
         foreach($tclothesy as $tk=>$tv){
 		if(!empty($tv)){
