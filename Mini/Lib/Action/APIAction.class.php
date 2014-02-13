@@ -83,7 +83,7 @@ class APIAction extends Action
         $u_id = $_SESSION['u_id'];
         $goodInfo = array();
 
-        if(isset($id))
+        if(isset($id) && ! empty($id))
         {
             $collection = M('Collection');
             $goods = M('beubeu_goods');
@@ -98,7 +98,7 @@ class APIAction extends Action
             //取出收藏数据
             $clothes = $goods
                 ->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')
-                ->field('u_beubeu_goods.id as gid,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')
+                ->field('u_beubeu_goods.id as gid,u_beubeu_goods.isud as isud,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')
                 ->where($mapgoods)
                 ->order('u_collection.id desc')
                 ->select();
@@ -176,6 +176,7 @@ class APIAction extends Action
 
                 $taobaoInfo['data-like'] =  $clothes[0]['love'];
                 $taobaoInfo['data-had'] =  $clothes[0]['buy'];
+                $taobaoInfo['isud'] = $clothes[0]['isud'];
 
                 $taobaoInfo['color'] =  $clothes[0]['color'];
                 $taobaoInfo['gender'] =  $clothes[0]['gender'];
