@@ -72,8 +72,6 @@ class APIAction extends Action
             }
         }
 
-        $json = json_encode($returnValue);
-
         $this->ajaxReturn($returnValue, 'JSON');
     }
 
@@ -180,8 +178,7 @@ class APIAction extends Action
             }
         }
 
-        $json = json_encode($taobaoInfo);
-        $this->ajaxReturn($json, 'JSON');
+        $this->ajaxReturn($taobaoInfo, 'JSON');
     }
 
 }
