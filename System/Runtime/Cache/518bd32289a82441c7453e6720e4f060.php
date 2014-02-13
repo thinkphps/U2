@@ -35,6 +35,7 @@
   <a href="<?php echo U('Shop/index');?>" class="btn btn-success btn-lg">门店管理</a>
   <a href="<?php echo U('Tags/index');?>" class="btn btn-success btn-lg">标签管理</a>
   <a href="<?php echo U('Official/index');?>" class="btn btn-success btn-lg">官方推送</a>
+  <a href="<?php echo U('Feedback/index');?>" class="btn btn-success btn-lg">客户反馈</a>
 </div>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/bootstrap.js"></script>

@@ -39,7 +39,6 @@ class APIAction extends Action
             $productSyn = D('ProductSyn');
             $returnProductValue = $productSyn->UpdateUQProduct($app, $key, $products, $batchid);
         }
-        $json = json_encode($returnProductValue);
 
         $this->ajaxReturn($returnProductValue, 'JSONP');
         //echo $callback."($json)";
