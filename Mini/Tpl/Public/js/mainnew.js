@@ -275,7 +275,7 @@ jQuery(function($){
 
             e.stopPropagation()
             if(uniqlo.sliding) return
-//            alert(1);
+
             var position = $(this).position()
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
@@ -299,14 +299,14 @@ jQuery(function($){
 //            .on('click', function(){                             // 点击任意位置添加至搭配间
 //            addCabCallback.call(this)                            // 添加至左侧的callback
 //        })
-            .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
+        .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
 
-                cabnet.netConfirm.show()
-                e.stopPropagation()
+            cabnet.netConfirm.show()
+            e.stopPropagation()
 
-            }).on('click', 'a.mini-net-detail', function(e){
-                e.stopPropagation()
-            })
+        }).on('click', 'a.mini-net-detail', function(e){
+            e.stopPropagation()
+        })
 
 
         cabnet.minicabnet.on("mouseenter",function(){
@@ -495,23 +495,19 @@ jQuery(function($){
             else{
                 cabnet.buybtns.hide();
             }
-
-//            console.log(Model.GetDIY());
         });
+
+
 
         //当前穿着回调，每次穿衣时会执行这个函数。  返回模特身上当前穿着的衣服
         //获取衣服UQ号去查找淘宝信息
         Model.CurrClothesCallback = beu_getallclothes;
         function beu_getallclothes(o){
-
             //清空购买列表
             cabnet.buybtns.find("ul").html("");
-
             var barcode = "";
             for(var i in o){
-//                barcode = "img[uq='UQ105111']";
                 barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
-                console.log(barcode);
                 //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
                 var img = cabnet.net.find(barcode);
                 if(img.length > 0){
@@ -520,24 +516,40 @@ jQuery(function($){
                         title = title.substring(0,10) + "...";
                     }
                     //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li><a target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    cabnet.buybtns.find("ul").append($('<li><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
                 }
                 else{
 
                 }
-                console.log(img);
 
-//                alert(barcode);
             }
         }
-
 
         //保存当前搭配
         cabnet.cabsave2.on("click",function(){
             //获取购买列表中的内容
+            var barcode = "";
+            cabnet.buybtns.find("ul li a").each(function(){
+                console.log( $(this).attr("barcode"));
+                barcode =  "img[uq='" + $(this).attr("barcode") + "']";
+                var img = cabnet.net.find(barcode);
+                if(img.length == 0){
+                    //调用接口，获取详细的衣服信息，然后加入衣柜
+                    var id = 19921218435;
+                    if(id>0){
+                        addwardrobe(id, function(){
+                            cabnet.miniMask.show()
+                            cabnet.miniFail.show()
+                        }, function(){
+                            cabnet.miniMask.show()
+                            cabnet.miniSucc.show()
+                            addNetCallback.call(this, id)
+                        })
+                    }
+                }
 
+            });
         });
-
 
 
         cabnet.cabChoose.on('click', 'a', function(){
@@ -676,11 +688,7 @@ jQuery(function($){
         /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
         cabnet.hoverBox.on("click","span[name='barcode']",function(){
             Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
-//            Model.DressingByBarcode('UQ12345611')
-//            Model.Dressing(17098);
-//            Model.Dressing(17055);
         });
-
 
 
         function succNfail(){
