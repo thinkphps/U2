@@ -434,7 +434,7 @@ class IndexNewAction extends Action {
 	cookie('uniq_user_id',null);
 	session_destroy();
 	//$this->success('退出成功',U('Index/index'));
-	$this->redirect('Index/index');
+	$this->redirect('IndexNew/index');
   }
 
 //登录
