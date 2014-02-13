@@ -92,15 +92,11 @@ class APIAction extends Action
             $buy = M('Buy');
 
             $mapgoods['left(u_beubeu_goods.item_bn,8)'] = substr($id,0,8);
-            $mapgoods['u_beubeu_goods.isud'] = '1';
-            $mapgoods['u_collection.is_delete'] = '0';
 
             //取出收藏数据
             $clothes = $goods
-                ->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')
-                ->field('u_beubeu_goods.id as gid,u_beubeu_goods.isud as isud,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')
+                ->field('u_beubeu_goods.id as gid,u_beubeu_goods.isud as isud,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')
                 ->where($mapgoods)
-                ->order('u_collection.id desc')
                 ->select();
             foreach($clothes as $k=>$v){
                 switch($v['type']){
