@@ -374,14 +374,10 @@
             </div>
           </div>
           <div class="mini-baby-ul none">
-            <ul class="clear tc">
-              <li><a href="javascript:;" id="aaaaa">茄克</a></li>
-              <li><a href="javascript:;" id="aaaaa">羽绒服</a></li>
-              <li><a href="javascript:;" id="aaaaa">外套</a></li>
-              <li><a href="javascript:;" id="aaaaa">大衣</a></li>
-              <li><a href="javascript:;" id="aaaaa">牛仔裤</a></li>
-              <li><a href="javascript:;" id="aaaaa">长裤</a></li>
-              <li><a href="javascript:;" id="aaaaa">卫裤</a></li>
+            <ul class="clear tc" data-pos="baby">
+              <volist id='bvo' name='babycate'>
+              <li><a href="javascript:;" id="{$bvo.id}">{$bvo.name}</a></li>
+              </volist>
             </ul>
           </div>
         </div>
@@ -1010,20 +1006,58 @@ $(function(){
 	$('#downc').html(da.dstr);
 	}
 	}else{
-	$('#upc').html(da.ustr);
-	$('#downc').html(da.dstr);	
+    //如果是婴幼儿走这里
+    if(sid==4){
+        if(da.fl==1){
+        $('#upc').html(da.ustr);
+        $('#downc').html(da.dstr);          
+        }else{
+          $('#taoz').html(da.ustr);
+        } 
+    }else{
+        $('#upc').html(da.ustr);
+        $('#downc').html(da.dstr);
+    }
 	}
 	}
     if(da.fl==1){
+    if(sid==4){
+      $('.index-single').removeClass('none');
+      $('.index-suit').addClass('none');
+      $('.index-suit').css('display','none');
+      $('.index-single').css('display','block');
+     }
 	$('#tishi').css('display','none');
 	$('#qtm').removeClass('none');
 	}else{
+     if(tid==1){
+      $('.index-single').addClass('none');
+      $('.index-suit').removeClass('none');
+      $('.index-suit').css('display','block');
+      $('.index-single').css('display','none');
+     }else{    
+      if(sid==4){
+      $('.index-single').addClass('none');
+      $('.index-suit').removeClass('none');
+      $('.index-suit').css('display','block');
+      $('.index-single').css('display','none');         
+      }else{
+      $('.index-single').removeClass('none');
+      $('.index-suit').addClass('none');
+      $('.index-suit').css('display','none');
+      $('.index-single').css('display','block');
+      }   
+     }
 	$('#tishi').css('display','none');
 	$('#qtm').addClass('none');
 	}
 	if(da.flag=='t'){
      $('#taoz').html(da.tstr);
-	}
+	}else{
+        if(tid==1){
+           $('#taoz').html('');
+        }
+    }
 	$.uniqlo.kvSlider();
 	if($.weather.set==1){
 	if(!da.ustr && !da.dstr && !da.tstr){
@@ -1175,32 +1209,71 @@ $(function(){
 	if(da.flag1=='p'){
 	if(tid==1){
 	if(da.ustr){
-	$('#upc').html(da.ustr);
+	    $('#upc').html(da.ustr);
 	}
 	if(da.dstr){
-	$('#downc').html(da.dstr);
+	    $('#downc').html(da.dstr);
 	}
 	}else{
-	$('#upc').html(da.ustr);
-	$('#downc').html(da.dstr);	
+	//如果是婴幼儿走这里
+	if(sid==4){
+	    if(da.fl==1){
+        $('#upc').html(da.ustr);
+        $('#downc').html(da.dstr);	        
+	    }else{
+	      $('#taoz').html(da.ustr);
+	    } 
+	}else{
+	    $('#upc').html(da.ustr);
+	    $('#downc').html(da.dstr);
+	}
 	}
 	}
 	 if(da.fl==1){
+	 if(sid==4){
+	  $('.index-single').removeClass('none');
+	  $('.index-suit').addClass('none');
+	  $('.index-suit').css('display','none');
+      $('.index-single').css('display','block');
+	 }
 	 $('#tishi').css('display','none');
      $('#qtm').removeClass('none');
 	}else{
+	 if(tid==1){
+      $('.index-single').addClass('none');
+      $('.index-suit').removeClass('none');
+      $('.index-suit').css('display','block');
+      $('.index-single').css('display','none');
+     }else{    
+      if(sid==4){
+      $('.index-single').addClass('none');
+      $('.index-suit').removeClass('none');
+      $('.index-suit').css('display','block');
+      $('.index-single').css('display','none');         
+      }else{
+      $('.index-single').removeClass('none');
+      $('.index-suit').addClass('none');
+      $('.index-suit').css('display','none');
+      $('.index-single').css('display','block');
+      }   
+     }	    
+
 	 $('#tishi').css('display','none');
      $('#qtm').addClass('none');
 	}
 	if(da.flag=='t'){
      $('#taoz').html(da.tstr);
+	}else{
+	    if(tid==1){
+	       $('#taoz').html('');
+	    }
 	}
     $.uniqlo.kvSlider();
 	if(tid==1){
 	if(!da.ustr && !da.dstr && !da.tstr){
 	$('#tishi').css('display','block');
 	}else if(da.tstr){
-	$('#tishi').css('display','none');	
+	$('#tishi').css('display','none');
 	}
 	}
 	/*else{

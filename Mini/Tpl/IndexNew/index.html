@@ -210,7 +210,13 @@
     </div>
 
     <!-- 未登录 start -->
-    <!-- <div class="mini-mask pf"></div><div class="mini-login pa tc"><p>您需要登录后才能使用专属优衣柜哦！</p><a href="/mini.php/Index/login.html" class="mini-login-btn">立即登录</a></div> -->
+    <!-- <if condition="$token eq ''">
+    <div class="mini-mask pf"></div>
+    <div class="mini-login pa tc">
+      <p>您需要登录后才能使用专属优衣柜哦！</p>
+      <a href="{:U('Index/login')}" class="mini-login-btn">立即登录</a>
+    </div>
+    </if> -->
     <!-- 未登录 end -->
 </div>
 
@@ -284,13 +290,16 @@
                 <a href="javascript:;" data-key="men" id='2' class="mini-gender-men">MEN</a>
             </li>
             <li>
-                <a href="javascript:;" data-key="kids" class="mini-gender-kids" id='3' class="mini-gender-men">KIDS BABY</a>
+                <a href="javascript:;" data-key="kids" class="mini-gender-kids" id='3'>KIDS</a>
+            </li>
+            <li>
+                <a href="javascript:;" data-key="baby" class="mini-gender-baby" id='4'>BABY</a>
             </li>
         </ul>
     </div>
 
     <div class="mini-cate-ps clear tc">
-        <div class="mini-cate-place fl">
+        <div class="mini-cate-place pr fl">
             <a href="javascript:;" class="mini-p-0 mini-cate-checked">全部</a>
             <ul class="mini-place-ul clear fl pr">
                 <li class="mini-p-1" id='{$cbusiness}'>商务</li>
@@ -299,6 +308,7 @@
                 <li class="mini-p-4" id='{$cjujia}'>居家</li>
 
             </ul>
+            <div class="mini-place-mask pa"></div>
         </div>
         <div class="mini-cate-style fl">
             <a href="javascript:;" class="mini-s-0 mini-cate-checked">全部</a>
@@ -333,35 +343,44 @@
                     <span class="mini-btn mini-design-r"></span>
                 </a>
             </h3>
+            <div>
+                <div>
+                    <div class="fl">
+                        <div class="mini-design-bin tc pr">
+                            <ul class="clear" data-pos="left">
+                                <volist id='ucvo' name='ucuslist'>
+                                    <li><a href="javascript:;" id='{$ucvo.id}'>{$ucvo.name}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="mini-design-btn pr">
+                            <a href="javascript:;" class="mini-design-more mini-btn">more</a>
+                        </div>
+                    </div>
 
-            <div class="fl">
-                <div class="mini-design-bin tc pr">
-                    <ul class="clear" data-pos="left">
-                        <volist id='ucvo' name='ucuslist'>
-                            <li><a href="javascript:;" id='{$ucvo.id}'>{$ucvo.name}</a></li>
+                    <div class="fr">
+                        <div class="mini-design-bin tc pr">
+                            <ul class="clear" data-pos="right">
+                                <volist id='dcvo' name='dcuslist'>
+                                    <if condition="$dcvo['name'] neq ''">
+                                        <li><a href="javascript:;" id='{$dcvo.id}'>{$dcvo.name}</a></li>
+                                    </if>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="mini-design-btn pr">
+                            <a href="javascript:;" class="mini-design-more mini-btn">more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mini-baby-ul none">
+                    <ul class="clear tc" data-pos="baby">
+                        <volist id='bvo' name='babycate'>
+                            <li><a href="javascript:;" id="{$bvo.id}">{$bvo.name}</a></li>
                         </volist>
                     </ul>
                 </div>
-                <div class="mini-design-btn pr">
-                    <a href="javascript:;" class="mini-design-more mini-btn">more</a>
-                </div>
             </div>
-
-            <div class="fr">
-                <div class="mini-design-bin tc pr">
-                    <ul class="clear" data-pos="right">
-                        <volist id='dcvo' name='dcuslist'>
-                            <if condition="$dcvo['name'] neq ''">
-                                <li><a href="javascript:;" id='{$dcvo.id}'>{$dcvo.name}</a></li>
-                            </if>
-                        </volist>
-                    </ul>
-                </div>
-                <div class="mini-design-btn pr">
-                    <a href="javascript:;" class="mini-design-more mini-btn">more</a>
-                </div>
-            </div>
-
         </div>
 
     </div>
@@ -885,6 +904,7 @@
     var mflist = '{$mflist}';
     var cclist = '{$cclist}';
     var cflist = '{$cflist}';
+    var bflist = '{$bflist}';
     var mcarr = '{$mcarr}';//all时候的场合
     var mfarr = '{$mfarr}';
 </script>
@@ -922,6 +942,7 @@ var ckeckusermobileurl = '{:U('Login/check_user_mobile_exists')}';
 var loginurl = '{:U('Login/login')}';
 var activeurl = '{:U('Login/active')}';
 var relateurl = '{:U('Login/relate')}';
+var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
 var getcorlorurl = '{:U('API/GetProductColorByID')}';
 var getgoodinfobyuqurl = '{:U('API/GetGoodInfoByUQ')}';
 $(function(){
@@ -999,19 +1020,57 @@ $(function(){
                                     $('#downc').html(da.dstr);
                                 }
                             }else{
-                                $('#upc').html(da.ustr);
-                                $('#downc').html(da.dstr);
+                                //如果是婴幼儿走这里
+                                if(sid==4){
+                                    if(da.fl==1){
+                                        $('#upc').html(da.ustr);
+                                        $('#downc').html(da.dstr);
+                                    }else{
+                                        $('#taoz').html(da.ustr);
+                                    }
+                                }else{
+                                    $('#upc').html(da.ustr);
+                                    $('#downc').html(da.dstr);
+                                }
                             }
                         }
                         if(da.fl==1){
+                            if(sid==4){
+                                $('.index-single').removeClass('none');
+                                $('.index-suit').addClass('none');
+                                $('.index-suit').css('display','none');
+                                $('.index-single').css('display','block');
+                            }
                             $('#tishi').css('display','none');
                             $('#qtm').removeClass('none');
                         }else{
+                            if(tid==1){
+                                $('.index-single').addClass('none');
+                                $('.index-suit').removeClass('none');
+                                $('.index-suit').css('display','block');
+                                $('.index-single').css('display','none');
+                            }else{
+                                if(sid==4){
+                                    $('.index-single').addClass('none');
+                                    $('.index-suit').removeClass('none');
+                                    $('.index-suit').css('display','block');
+                                    $('.index-single').css('display','none');
+                                }else{
+                                    $('.index-single').removeClass('none');
+                                    $('.index-suit').addClass('none');
+                                    $('.index-suit').css('display','none');
+                                    $('.index-single').css('display','block');
+                                }
+                            }
                             $('#tishi').css('display','none');
                             $('#qtm').addClass('none');
                         }
                         if(da.flag=='t'){
                             $('#taoz').html(da.tstr);
+                        }else{
+                            if(tid==1){
+                                $('#taoz').html('');
+                            }
                         }
                         $.uniqlo.kvSlider();
                         if($.weather.set==1){
@@ -1170,19 +1229,58 @@ function getgoods(zid,fid,cid,sid,tid){
                         $('#downc').html(da.dstr);
                     }
                 }else{
-                    $('#upc').html(da.ustr);
-                    $('#downc').html(da.dstr);
+                    //如果是婴幼儿走这里
+                    if(sid==4){
+                        if(da.fl==1){
+                            $('#upc').html(da.ustr);
+                            $('#downc').html(da.dstr);
+                        }else{
+                            $('#taoz').html(da.ustr);
+                        }
+                    }else{
+                        $('#upc').html(da.ustr);
+                        $('#downc').html(da.dstr);
+                    }
                 }
             }
             if(da.fl==1){
+                if(sid==4){
+                    $('.index-single').removeClass('none');
+                    $('.index-suit').addClass('none');
+                    $('.index-suit').css('display','none');
+                    $('.index-single').css('display','block');
+                }
                 $('#tishi').css('display','none');
                 $('#qtm').removeClass('none');
             }else{
+                if(tid==1){
+                    $('.index-single').addClass('none');
+                    $('.index-suit').removeClass('none');
+                    $('.index-suit').css('display','block');
+                    $('.index-single').css('display','none');
+                }else{
+                    if(sid==4){
+                        $('.index-single').addClass('none');
+                        $('.index-suit').removeClass('none');
+                        $('.index-suit').css('display','block');
+                        $('.index-single').css('display','none');
+                    }else{
+                        $('.index-single').removeClass('none');
+                        $('.index-suit').addClass('none');
+                        $('.index-suit').css('display','none');
+                        $('.index-single').css('display','block');
+                    }
+                }
+
                 $('#tishi').css('display','none');
                 $('#qtm').addClass('none');
             }
             if(da.flag=='t'){
                 $('#taoz').html(da.tstr);
+            }else{
+                if(tid==1){
+                    $('#taoz').html('');
+                }
             }
             $.uniqlo.kvSlider();
             if(tid==1){
@@ -1204,11 +1302,37 @@ function getgoods(zid,fid,cid,sid,tid){
 }
 function delgo(id){
     if(id>0){
+//删除cokkie里的数据
+        var flagisud = '';
+        $.post(isuturl,{id:id},function(data,status){
+            if(data['code']==1){
+                if(data['isud']==1){
+                    flagisud = 'u';
+                }else if(data['isud']==2){
+                    flagisud = 'd';
+                }
+                var noiid = getCookie('nologiid'+flagisud);
+                if(noiid){
+                    var arrnoiid = noiid.split('_'),aalength = arrnoiid.length;
+                    var str = '';
+                    for(var u=0;u<aalength;u++){
+                        if(id!=arrnoiid[u] && arrnoiid[u]){
+                            str+=arrnoiid[u]+'_';
+                        }
+                    }
+                    addCookie('nologiid'+flagisud,str);
+                }
+            }
+        });
+//删除cokkie里的数据
         $.post(gurl,{id:id},function(data,status){
         });
     }
 }
-
+$(window).on('beforeunload', function(){
+    addCookie('nologiidu','',-1);
+    addCookie('nologiidd','',-1);
+})
 function addbuy(id,flag){
     if(id>0){
         $.post(buyurl,{id:id,flag:flag},function(data,status){
@@ -1231,25 +1355,90 @@ function getavg(high,low){
 }
 function addwardrobe(id, onFailCallback, onSuccCallback){
     if(id>0){
-        $.post(addwarurl,{id:id},function(data,status){
-            if(data['code'] < 0){
-                //未登录状态收入衣柜
-                if(data['code'] == -1 ){
-                    $.Register.showMask().register.show();
-                }else if(data['code'] == -2){
+        //没有登录的时候可以加三件
+        if(!luid){
+            var flagisud = '';
+            $.post(isuturl,{id:id},function(data,status){
+                if(data['code']==1){
+                    if(data['isud']==1){
+                        flagisud = 'u';
+                    }else if(data['isud']==2){
+                        flagisud = 'd';
+                    }
+
+                    var noiid = getCookie('nologiid'+flagisud);
+                    if(noiid){
+                        var arrnoiid = noiid.split('_'),aalength = arrnoiid.length;
+                        if(aalength<=3){
+                            var k = 0;
+                            for(var i=0;i<aalength;i++){
+                                if(arrnoiid[i]){
+                                    if(arrnoiid[i]!=id){
+                                        k = 1;
+                                    }else{
+                                        k = 0;
+                                        onFailCallback();
+                                        break;
+                                    }
+                                }
+                            }
+                            if(k==1){
+                                addCookie('nologiid'+flagisud,noiid+id+'_');
+                                onSuccCallback();
+                            }
+                        }else{
+                            $.Register.showMask().register.show();
+                        }
+                    }else{
+                        addCookie('nologiid'+flagisud,id+'_');
+                        onSuccCallback();
+                    }
+
+                }else if(data['code']==-2){
                     onFailCallback();
-                }else if(data['code'] == -3){
-                    $('.mini-mask').show();
-                    $('.mini-relate').show();
-                }//else if(data['code'] == -4){
-                //$('#relateMobile').val(data['msg']);
-                //$('.mini-mask').show();
-                //$('.mini-activate-notice').show();
-                //}
-            }else{
-                onSuccCallback();
-            }
-        });
+                }
+            });
+            //没有登录的时候可以加三件
+        }else{
+            $.post(addwarurl,{id:id},function(data,status){
+                if(data['code'] < 0){
+                    //未登录状态收入衣柜
+                    if(data['code'] == -1 ){
+                        $.Register.showMask().register.show();
+                    }else if(data['code'] == -2){
+                        onFailCallback();
+                    }else if(data['code'] == -3){
+                        $('.mini-mask').show();
+                        $('.mini-relate').show();
+                    }//else if(data['code'] == -4){
+                    //$('#relateMobile').val(data['msg']);
+                    //$('.mini-mask').show();
+                    //$('.mini-activate-notice').show();
+                    //}
+                }else{
+                    onSuccCallback();
+                }
+            });
+        }
+    }
+}
+
+function addCookie(objName,objValue,objHours){
+    var str = objName + "=" + escape(objValue);
+    if(objHours > 0){
+        var date = new Date();
+        var ms = objHours*3600*1000;
+        date.setTime(date.getTime() + ms);
+        str += "; expires=" + date.toGMTString();
+    }
+    document.cookie = str;
+}
+
+function getCookie(objName){
+    var arrStr = document.cookie.split("; ");
+    for(var i = 0;i < arrStr.length;i ++){
+        var temp = arrStr[i].split("=");
+        if(temp[0] == objName) return unescape(temp[1]);
     }
 }
 function sendcity(pro,city){
@@ -1527,7 +1716,7 @@ function do_register(){
                         $('#msg_error').html(data['msg']);
                         return false;
                     }else{
-                        $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked},function(data){
+                        $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
                             if(data['code'] > 0){
                                 $('.mini-reg-submit').addClass('disabled');
                                 $('.mini-reg-submit').attr('disabled','disabled');
@@ -1542,7 +1731,7 @@ function do_register(){
                     }
                 });
             }else{
-                $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked},function(data){
+                $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
                     if(data['code'] > 0){
                         $('.mini-reg-submit').addClass('disabled');
                         $('.mini-reg-submit').attr('disabled','disabled');
@@ -1571,8 +1760,11 @@ function do_login(){
     if($('#remember_login').prop('checked')){
         is_remember_login = 1;
     }
-    $.post(loginurl,{user_name:user_name,password:password,is_remember_login:is_remember_login},function(data){
+    $.post(loginurl,{user_name:user_name,password:password,is_remember_login:is_remember_login,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
         if(data['code'] > 0){
+            //删除没有登录时添加的三件衣服
+            addCookie('nologiidu','',-1);
+            addCookie('nologiidd','',-1);
             window.location.reload()
         }else{
             $('#login_error_msg').html(data['msg']);
