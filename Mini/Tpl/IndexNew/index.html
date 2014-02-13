@@ -427,18 +427,7 @@
 
 <div class="mt30 mb20 index-bin2 pr">
     <div class="u_map fl">
-        <h3>离您最近的优衣库UNIQLO门店</h3>
-        <div class="mb15">
-            <select name="" id="" onchange="changeSelect(this,'selectTest0')" class="mr10" style="width:150px;">
-                <option selected="selected" value="44444">徐汇区</option>
-                <option value="55555">闵行区</option>
-            </select>
-            <select name="" id="" onchange="changeSelect(this,'selectTest0')" style="width:200px;">
-                <option selected="selected" value="44444">日月光中心店</option>
-                <option value="55555">越秀中心店</option>
-            </select>
-        </div>
-        <div class="u_map_con"></div>
+        <iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/map/index.html"></iframe>
     </div>
 
     <div class="u_banner fr">
@@ -934,6 +923,7 @@ var loginurl = '{:U('Login/login')}';
 var activeurl = '{:U('Login/active')}';
 var relateurl = '{:U('Login/relate')}';
 var getcorlorurl = '{:U('API/GetProductColorByID')}';
+var getgoodinfobyuqurl = '{:U('API/GetGoodInfoByUQ')}';
 $(function(){
     var miniMask = $('div.mini-mask')
     $('#mini-activate-succ').click(function(){
