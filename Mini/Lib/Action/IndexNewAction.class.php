@@ -107,6 +107,24 @@ class IndexNewAction extends Action {
 	if(!empty($isbuy)){
      $clothes[$k]['buy'] = 1;
 	}
+
+       //add color,uq,gender, added by David
+       $productSyn = D('ProductSyn');
+       $returnOjb =  $productSyn->GetProductColorByID($clothes[$k]['num_iid']);
+       if (isset($returnOjb))
+       {
+           $uq_color = array();
+           for($i = 0; $i < count($returnOjb); $i++)
+           {
+               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
+               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
+               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
+               $clothes[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
+               $clothes[$k]['gender'] = $returnOjb[$i]['gender'];
+               $clothes[$k]['uq'] = $returnOjb[$i]['uq'];
+           }
+       }
+       //end
    }
 	$pants = $goods->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')->field('u_beubeu_goods.id as gid,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_beubeu_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
    foreach($pants as $k=>$v){
@@ -135,7 +153,24 @@ class IndexNewAction extends Action {
 	$isbuy = $buy->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
 	if(!empty($isbuy)){
      $pants[$k]['buy'] = 1;
-	}	
+	}
+       //add color,uq,gender, added by David
+       $productSyn = D('ProductSyn');
+       $returnOjb =  $productSyn->GetProductColorByID($pants[$k]['num_iid']);
+       if (isset($returnOjb))
+       {
+           $uq_color = array();
+           for($i = 0; $i < count($returnOjb); $i++)
+           {
+               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
+               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
+               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
+               $pants[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
+               $pants[$k]['gender'] = $returnOjb[$i]['gender'];
+               $pants[$k]['uq'] = $returnOjb[$i]['uq'];
+           }
+       }
+       //end
    }
    
    //取出性别所对应的tagid
