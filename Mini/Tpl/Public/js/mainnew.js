@@ -519,8 +519,6 @@ jQuery(function($){
             cabnet.buybtns.find("ul").html("");
             var barcode = "";
             for(var i in o){
-                console.log(o);
-                console.log(o.title);
                 barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
                 //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
                 var img = cabnet.net.find(barcode);
