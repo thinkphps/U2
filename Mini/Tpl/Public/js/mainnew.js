@@ -1292,7 +1292,7 @@ jQuery(function($){
         mflist = $.parseJSON(mflist)
         cclist = $.parseJSON(cclist)
         cflist = $.parseJSON(cflist)
-	bflist = $.parseJSON(bflist)
+	    bflist = $.parseJSON(bflist)
 
         $.each([wclist, mclist, cclist], function(index, arr) {
             for(var i = arr.length; i --;){
@@ -1342,7 +1342,7 @@ jQuery(function($){
         $.uniqlo.women = [wclist,wflist]
         $.uniqlo.men = [mclist,mflist]
         $.uniqlo.kids = [cclist,cflist]
-    $.uniqlo.baby = [cclist,bflist]
+        $.uniqlo.baby = [cclist,bflist]
 
         index.gender.on('click', 'a', function(){                  // 内页性别切换
             //kimi

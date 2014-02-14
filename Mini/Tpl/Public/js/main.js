@@ -562,14 +562,14 @@ jQuery(function($){
       var src = ' src="' + cabnet.hoverBox.data('src') + '"'
       var ids = ' id="' + id + '"'
       var sex = cabnet.hoverBox.data('sex')
-      var fg = +cabnet.hoverBox.data('fg')
+      //var fg = +cabnet.hoverBox.data('fg')
 
       if(!cabnet.cab.isEmpty && cabnet.cab.sex !== sex){        
         if(cabnet.cab.pos !== pos || (cabnet.cab.pos == pos && !cabnet.cab.ajax)){
           return cabnet.netFail.trigger('shown', true)
         }
       }
-      if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
+      /*if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
         if(cabnet.cab.fg == 75){
 
           if(fg != 86)  return cabnet.netFail.trigger('shown')
@@ -584,7 +584,7 @@ jQuery(function($){
 
         }
       }
-      cabnet.cab.fg = fg
+      cabnet.cab.fg = fg*/
 
       cabnet.cab.sex = sex
 
@@ -911,7 +911,7 @@ jQuery(function($){
 
       if('stop' === str) return false
 
-      cate.design.left.length = cate.design.right.length = 0  // 将数组清零
+      cate.design.left.length = cate.design.right.length = cate.design.baby.length = 0  // 将数组清零
 
       $.uniqlo.zid = $.weather.set = 0
       getgoods(0,$.uniqlo.fid,$.uniqlo.occasion,$.weather.sex,$.weather.set)
@@ -923,6 +923,7 @@ jQuery(function($){
 
     cate.design.left = []                                     // 选中的上衣id数组
     cate.design.right = []                                    // 选中的下衣id数组
+    cate.design.baby = []                                     // 选中的baby id数组
 
     cate.design.on('click', 'li a', function(){               // 其他任何款式
       if(index.suitIsOpen) {
@@ -947,6 +948,7 @@ jQuery(function($){
       
       var leftLen = cate.design.left.length
       var rightLen = cate.design.right.length
+      var babyLen = cate.design.baby.length
 
       if(leftLen + rightLen == 28 || leftLen + rightLen == 0){
         $.uniqlo.zid = 0
@@ -965,8 +967,11 @@ jQuery(function($){
           }
         }
       }
+      if(babyLen){
+        $.uniqlo.zid = cate.design.baby.join('_')
+      }
 
-      if(leftLen + rightLen === 0){
+      if(leftLen + rightLen === 0 && !babyLen){
         return cate.designAll.trigger('click')
       }
       $.weather.set = 0
@@ -1052,6 +1057,7 @@ jQuery(function($){
     mflist = $.parseJSON(mflist)
     cclist = $.parseJSON(cclist)
     cflist = $.parseJSON(cflist)
+    bflist = $.parseJSON(bflist)
 
     $.each([wclist, mclist, cclist], function(index, arr) {
       for(var i = arr.length; i --;){
@@ -1070,7 +1076,7 @@ jQuery(function($){
         case('潮'): mflist[i].c = 11;break;
         case('斯文'): mflist[i].c = 12;break;
         case('自然'): mflist[i].c = 13;break;
-        case('酷'): mflist[i].c = 14;break;
+        case('酷'): mflist[i].c = 24;break;
         case('成熟'): mflist[i].c = 15;break;
         case('休闲'): mflist[i].c = 6;break;
         case('复古'): mflist[i].c = 17;break;
@@ -1091,12 +1097,17 @@ jQuery(function($){
         case('学院'): cflist[i].c = 28;break;
       }
     }
+    for(var i = bflist.length; i--;){
+      switch(bflist[i].name){
+        case('酷'): bflist[i].c = 24;break;
+      }
+    }
 
     $.uniqlo.all = [mcarr,mfarr]
     $.uniqlo.women = [wclist,wflist]
     $.uniqlo.men = [mclist,mflist]
     $.uniqlo.kids = [cclist,cflist]
-    $.uniqlo.baby = [cclist,cflist]
+    $.uniqlo.baby = [cclist,bflist]
 
     index.gender.on('click', 'a', function(){                  // 内页性别切换
       //kimi
