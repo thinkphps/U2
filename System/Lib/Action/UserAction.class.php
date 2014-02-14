@@ -26,14 +26,17 @@ class UserAction extends Action{
                 "FROM uniqlo.u_user u WHERE DATE(createtime) BETWEEN '$startdate' AND '$enddate'";
         }else{
             $sql = "SELECT tb_inc.dn as registdate,tb_sum.ucount as uercount,tb_inc.ucount as incusercount,tb_taobao.ucount as inctbusercount FROM"
-                ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u WHERE NOT taobao_name = '' GROUP BY DATE(createtime)) tb_taobao,"
-                ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u GROUP BY DATE(createtime)) tb_inc,"
+                ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u GROUP BY DATE(createtime)) tb_inc "
+                ."INNER JOIN "
                 ."(SELECT tb_today.dn, sum(tb_his.ucount) as ucount FROM"
                 ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u GROUP BY DATE(createtime)) tb_today,"
                 ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u GROUP BY DATE(createtime)) tb_his "
                 ."WHERE tb_today.dn >=tb_his.dn group by tb_today.dn)tb_sum "
-                ."WHERE tb_sum.dn=tb_inc.dn and tb_taobao.dn=tb_inc.dn "
-                ."AND tb_inc.dn BETWEEN '$startdate' AND '$enddate' "
+                ."ON (tb_sum.dn=tb_inc.dn) "
+                ."LEFT JOIN "
+                ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u WHERE NOT taobao_name = '' GROUP BY DATE(createtime)) tb_taobao "
+                ."ON (tb_taobao.dn=tb_inc.dn) "
+                ."WHERE tb_inc.dn BETWEEN '$startdate' AND '$enddate' "
                 ."ORDER BY tb_inc.dn ";
             if (!empty($p)){
                 $sql = $sql."limit $p->firstRows,$p->maxRows";
@@ -46,7 +49,7 @@ class UserAction extends Action{
     //验证日期格式是否合法
     private function validateDate($date,$defvalue)
     {
-        $formats = ['Y/m/d','d/m/Y','yyyymmdd'];
+        $formats = array('Y/m/d','d/m/Y','yyyymmdd');
         foreach ( $formats as $f => $format ){
             $d = DateTime::createFromFormat($format, $date);
             if ($d && $d->format($format) == $date){

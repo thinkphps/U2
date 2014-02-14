@@ -10,55 +10,45 @@ class FeedbackAction extends Action{
     }
     public function index(){
         if(!empty($this->aid)){
-            $goodmodel = M('leave');
+            $leavemodel = M('Leave');
             $keyword = trim($this->_request('keyword'));
-            $catid = $this->_request('ist');
-            $cate1 = $this->_request('cate1');
-            $cate2 = $this->_request('cate2');
-            $isdoubt = $this->_request('isdoubt');
-            $pagestr = '';
-            import("@.ORG.Pageyu");
-            if(!empty($cate1)){
-                $pagestr.="/cate1/".$cate1;
-            }
-            if(!empty($cate2)){
-                $map['catid'] = $cate2;
-                $pagestr.="/cate2/".$cate2;
-            }
+            $daterange = $this->_request('daterange');
+            $catid = $this->_request('catid');
+            $pagestr = "";
             if(!empty($keyword)){
-                $where['id'] = $keyword;
-                $where['num_iid']  = $keyword;
-                $where['title']  = array('like','%'.$keyword.'%');
-                $where['_logic'] = 'or';
-                $map['_complex'] = $where;
-                $pagestr.="/keyword/".$keyword;
+                $map['content']  = array('like','%'.$keyword.'%');
+                $pagestr.="?keyword=".$keyword;
             }
             if(!empty($catid)){
-                $map['$catid'] = $catid;
-                $pagestr.="/ist/".$catid;
+                $map['catid'] = $catid;
+                if(empty($pagestr)){
+                    $pagestr.="?catid=".$catid;
+                }else{
+                    $pagestr.="&catid=".$catid;
+                }
             }
-            if(!empty($isdoubt)){
-                $map['isdoubt'] = $isdoubt;
-                $pagestr.="/isdoubt/".$isdoubt;
+            //        保存查询条件
+            if(!empty($daterange)){
+                $rangedate = $this->splitdaterange($daterange);
+                $map['DATE(createtime)']  = array('between',$rangedate[0].','.$rangedate[1]);
+                if(empty($pagestr)){
+                    $pagestr ="?daterange=".$daterange;
+                }else{
+                    $pagestr.="&daterange=".$daterange;
+                }
             }
-            $count = $goodmodel->where($map)->count();
+                //        取得分页
+            $count = $leavemodel->where($map)->count();
+            import("@.ORG.Pageyu");
             $p = new Page($count,20,$pagestr);
-            $goods = $goodmodel->field('*')->where($map)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
+            $leaves = $leavemodel->field('*')->where($map)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
             $page = $p->showPage();
-            //取得分类
-            $onecate = $cate->field('*')->where(array('parent_id'=>0))->select();
-            if(!empty($cate1)){
-                $twocate = $cate->field('*')->where(array('pcid'=>$cate1))->select();
-            }
-            $this->assign('goods',$goods);
+
+            $this->assign('leaves',$leaves);
             $this->assign('page',$page);
             $this->assign('keyword',$keyword);
-            $this->assign('$catid',$catid);
-            $this->assign('onecate',$onecate);
-            $this->assign('twocate',$twocate);
-            $this->assign('cate1',$cate1);
-            $this->assign('cate2',$cate2);
-            $this->assign('isdoubt',$isdoubt);
+            $this->assign('catid',$catid);
+            $this->assign('daterange',$daterange);
             $this->assign('p',$_GET['p']);
             $this->display();
             exit;
@@ -73,27 +63,91 @@ class FeedbackAction extends Action{
     }
 
     public function download(){
-        $cate1 = $this->_request('id');
+        $leavemodel = M('Leave');
+        $keyword = trim($this->_request('keyword'));
+        $daterange = $this->_request('daterange');
+        $catid = $this->_request('catid');
+        if(!empty($keyword)){
+            $map['content']  = array('like','%'.$keyword.'%');
+        }
+        if(!empty($catid)){
+            $map['catid'] = $catid;
+        }
+        //        保存查询条件
+        if(!empty($daterange)){
+            $rangedate = $this->splitdaterange($daterange);
+            $map['DATE(createtime)']  = array('between',$rangedate[0].','.$rangedate[1]);
+        }
+        $leaves = $leavemodel->field('*')->where($map)->order('id desc')->select();
 
         /** 加载PHPExcel包 */
         Vendor ( 'Excel.Classes.PHPExcel' );
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getActiveSheet()->setTitle(date('Y-m-d',time()));
         $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', '日期')
-            ->setCellValue('B1', '总用户数')
-            ->setCellValue('C1', '当日新增用户数')
-            ->setCellValue('D1', '当日新增关联淘宝用户数');
+            ->setCellValue('A1', '主题')
+            ->setCellValue('B1', '内容')
+            ->setCellValue('C1', '用户')
+            ->setCellValue('D1', '创建时间');
         $baseRow = 2;
+        foreach ( $leaves as $r => $dataRow ){
+            $row = $baseRow + $r;
+            $theme = "";
+            switch($dataRow['catid']){
+                case 1:
+                    $theme = "设计风格";
+                    break;
+                case 2:
+                    $theme = "使用体验";
+                    break;
+                case 3:
+                    $theme = "功能建议";
+                    break;
+                case 4:
+                    $theme = "其他建议";
+                    break;
+            }
 
-        $filename = "according_user_regist_".date('Y-m-d',time()).'.xlsx';
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A'.$row, $theme)
+                ->setCellValue('B'.$row, $dataRow['content'])
+                ->setCellValue('C'.$row, $dataRow['ip'])
+                ->setCellValue('D'.$row, $dataRow['createtime']);
+        }
+
+        $filename = "user_leave_".date('Y-m-d',time()).'.xlsx';
         header ( 'Content-Disposition: attachment;filename="'.$filename);
-        header ( 'Content-Type: applicationnd.ms-excel' );
+        header ( 'Content-Type: application/vnd.ms-excel' );
         header ( 'Cache-Control: max-age=0' );
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save('php://output');
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);
+        exit;
     }
 
+    private function splitdaterange($daterange){
+        $startdate = "1900-01-01";
+        $enddate = "9900-01-01";
+        if (!empty($daterange)){
+            $list = explode('-', $daterange);
+            $startdate = current($list);
+            $enddate = end($list);
+            $startdate = $this->validateDate(trim($startdate),"1900-01-01");
+            $enddate = $this->validateDate(trim($enddate),"9900-01-01");
+        }
+        return array($startdate,$enddate);
+    }
+    //验证日期格式是否合法
+    private function validateDate($date,$defvalue)
+    {
+        $formats = array('Y/m/d','d/m/Y','yyyymmdd');
+        foreach ( $formats as $f => $format ){
+            $d = DateTime::createFromFormat($format, $date);
+            if ($d && $d->format($format) == $date){
+                return $date;
+            }
+        }
+        return $defvalue;
+    }
 }

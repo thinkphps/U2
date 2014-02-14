@@ -5,18 +5,19 @@
     <li class="active"><strong>客户反馈</strong></li>
   </ol>
 
-  <form class="form-inline form-group" role="form" action="{:U('Products/index')}" method='post'>
+  <form class="form-inline form-group" role="form" action="{:U('Feedback/index')}" method='post'>
     <div class="form-group">
       <label class="sr-only" for="exampleInputEmail2">请输入关键字</label>
-      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="请输入关键字" name='keyword' value='{$keyword}'>
+      <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" name='keyword' value='{$keyword}'>
     </div>
     <div class="form-group">
       <label >选择开始结束日期</label>
-      <input type="text" style="width: 200px" name="iptdaterange" id="iptdaterange" class="form-control" />
+      <input type="text" style="width: 200px" name="daterange" id="daterange"
+             class="form-control" value="{$daterange}" />
     </div>
     <div class="form-group">
         <label >选择主题</label>
-        <select name='ist'>
+        <select name='catid'>
             <option value=''>请选择主题</option>
             <option value='1' <if condition="$catid eq 1"> selected='selected'</if>>设计风格</option>
             <option value='2' <if condition="$catid eq 2"> selected='selected'</if>>使用体验</option>
@@ -38,12 +39,16 @@
       </tr>
     </thead>
     <tbody>
-    <volist id='vo' name='feedback'>
+    <volist id='vo' name='leaves'>
       <tr>
-        <td>{$vo.id}</td>
-        <td>{$vo.id}</td>
-        <td>{$vo.cname}</td>
-        <td>{$vo.cname}</td>
+        <td>
+            <if condition="$vo.catid eq 1">设计风格</if>
+            <if condition="$vo.catid eq 2">使用体验</if>
+            <if condition="$vo.catid eq 3">功能建议</if>
+            <if condition="$vo.catid eq 4">其他建议</if>
+        <td>{$vo.content}</td>
+        <td>{$vo.ip}</td>
+        <td>{$vo.createtime}</td>
       </tr>
      </volist>
     </tbody>
@@ -71,8 +76,9 @@
 <script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#iptdaterange').daterangepicker(
+        $('#daterange').daterangepicker(
                 {
+                    format: 'YYYY/MM/DD',
                     locale:{
                         applyLabel: '选择',
                         cancelLabel: '取消',
