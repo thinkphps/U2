@@ -238,12 +238,14 @@ jQuery(function($){
 
         //点击弹出您附近门店的地图图层
         cabnet.showMap.on('click',function(){
+            cabnet.miniMask.show();
             cabnet.mapLightBox.show();
         });
 
         //点击关闭地图图层
         cabnet.mapClose.on('click',function(){
             cabnet.mapLightBox.hide();
+            succNfail.call(this);
         });
 
         /* == net交互 == */
