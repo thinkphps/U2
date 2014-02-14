@@ -514,6 +514,10 @@
         <a href="javascript:;" class="mini-succ-enter">进入优衣柜</a>
     </p>
 </div>
+<div class="mini-savesucc mini-pop tc pf none">
+    <a href="javascript:;" class="mini-succ-close mini-btn">关闭</a>
+    <h2>当前搭配已保存到优衣柜</h2>
+</div>
 
 <!-- 半透明浮层 -->
 <if condition="$is_allow_register eq 0">
@@ -1058,9 +1062,6 @@ $(function(){
                             }
                             $('#tishi').css('display','none');
                             $('#qtm').removeClass('none');
-                            //新版：暂不需要推荐衣服
-                            $('#upc').html("");
-                            $('#downc').html("");
                         }else{
                             if(tid==1){
                                 $('.index-single').addClass('none');
@@ -1271,9 +1272,6 @@ function getgoods(zid,fid,cid,sid,tid){
                 }
                 $('#tishi').css('display','none');
                 $('#qtm').removeClass('none');
-                //新版：暂不需要推荐衣服
-                $('#upc').html("");
-                $('#downc').html("");
             }else{
                 if(tid==1){
                     $('.index-single').addClass('none');

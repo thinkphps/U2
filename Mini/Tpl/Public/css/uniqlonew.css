@@ -159,7 +159,7 @@ body{
 }
 .mini-cab-empty,.mini-login,.mini-net-empty,
 .mini-cab-tips,.mini-net-tips,.mini-aside-succ,
-.mini-succ,.mini-fail,.mini-register,.mini-fetch,
+.mini-succ,.mini-savesucc,.mini-fail,.mini-register,.mini-fetch,
 .mini-fetch-succ,.mini-change-succ,.mini-clause,
 .mini-reg-succ,.mini-activate,.mini-activate-timeout,
 .mini-activate-fail,.mini-activate-succ,
@@ -244,7 +244,7 @@ body{
 
 .fdd{ position:fixed; _position:absolute; top:129px; right:50%; margin-right:75px; z-index:100;  }
 
-.baiyi_fl{ background:#fff; width:400px; height:533px;}
+.baiyi_fl{ background:#fff; width:400px; height:533px;position:relative;}
 .mini-cab-buy2{ display:block; float:left; width:137px; height:39px; line-height:39px; font-size:14px; background:#e70012; color:#FFF;}
 .mini-cab-buy2 i{ display:block; float:left; width:28px; height:28px; background:url(../images/mini/mini-cab.png) 0 -244px no-repeat; margin:5px 8px 0 20px;}
 
@@ -257,7 +257,7 @@ body{
 
 
 
-.fold_btn{ width:28px; height:492px; position:absolute; left:0; top:50px; background:url(../images/mini/fold_btn.png) 0 0 no-repeat; z-index:30000;}
+.fold_btn{ width:28px;  position:absolute; left:0; top:50px; background:url(../images/mini/fold_btn.png) 0 0 no-repeat; z-index:30000;}
 .fold_btn a{ display:block; width:28px; height:52px; margin:200px 0 0 0;}
 
 .expansion_btn{width:28px; height:519px; background:url(../images/mini/expansion_btn.png) 0 0 no-repeat; z-index:101; position:absolute; margin-left:-28px; margin-top:31px;}
@@ -1396,7 +1396,7 @@ a.mini-kv-add{
     font-weight: bold;
     overflow: hidden;
 }
-.mini-succ,.mini-fail{
+.mini-succ,.mini-fail,.mini-savesucc{
     background: #fff url(../images/mini/mini-succ.jpg) no-repeat center 28px;
     border: 3px solid #d1d1d1;
     width: 428px;
@@ -1405,7 +1405,7 @@ a.mini-kv-add{
     z-index: 6;
     padding-top: 105px;
 }
-.mini-succ h2,.mini-fail h2{
+.mini-succ h2,.mini-fail h2,.mini-savesucc h2{
     color: #99cc36;
     font-size: 20px;
     font-weight: normal;
@@ -1413,7 +1413,7 @@ a.mini-kv-add{
 .mini-fail h2{
     color: #e70012;
 }
-.mini-succ h3,.mini-fail h3{
+.mini-succ h3,.mini-fail h3,.mini-savesucc h3{
     font-size: 16px;
     color: #606060;
     font-weight: normal;
