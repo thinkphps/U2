@@ -138,6 +138,15 @@ body{
   color: #bbb;
 }
 
+/*==     新旧版切换按钮样式   ==*/
+.version_n{ width:30px; height:106px; background:url(../images/mini/Version_icon.png) 0 0 no-repeat; position:fixed;_position: absolute;top:350px;left: 50%; margin-left: 485px; z-index:999;}
+.version_o{ width:30px; height:106px; background:url(../images/mini/Version_icon.png) 0 -106px no-repeat; position:fixed;_position: absolute;top:350px;left: 50%; margin-left: 485px; z-index:999;}
+.version_n a.new_v{ display:block; float:left; width:30px; height:53px; cursor:default;}
+.version_n a.old_v{ display:block; float:left; width:30px; height:53px;}
+
+.version_o a.new_v{ display:block; float:left; width:30px; height:53px;}
+.version_o a.old_v{ display:block; float:left; width:30px; height:53px; cursor:default;}
+
 /*== filter ==*/
 
 .mini-cab-title,.mini-cab-empty,.mini-hd{

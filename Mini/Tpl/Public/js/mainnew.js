@@ -204,8 +204,10 @@ jQuery(function($){
             miniAside : $('div.mini-aside'),                     // mini-aside
             miniSucc  : $('div.mini-succ'),                      // alert提示框
             miniFail  : $('div.mini-fail'),                      // fail提示框
-            miniMask  : $('div.mini-mask')                      // 半透明浮层
-//            getColorUrl : "{:U('API/GetProductColorByID')}"
+            miniMask  : $('div.mini-mask'),                      // 半透明浮层
+            mapLightBox : $('div.map_light_box'),             //地图弹窗
+            showMap : $('a.fj_shop'),                              //您附近门店按钮
+            mapClose : $('a.light_box_close')                   //地图弹窗关闭按钮
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
@@ -232,6 +234,16 @@ jQuery(function($){
         })
 
         /*************************end*****************************/
+
+        //点击弹出您附近门店的地图图层
+        cabnet.showMap.on('click',function(){
+            cabnet.mapLightBox.show();
+        });
+
+        //点击关闭地图图层
+        cabnet.mapClose.on('click',function(){
+            cabnet.mapLightBox.hide();
+        });
 
         /* == net交互 == */
 

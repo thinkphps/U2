@@ -21,6 +21,11 @@
     </script>
 </head>
 <body>
+<div class="version_n">
+    <a href="javascript:;" class="new_v"></a>
+    <a href="{:U('Index/Index')}" class="old_v"></a>
+</div>
+
 <!-- <div class="mt20 mb20 tc">
   <img src="__TMPL__Public/images/header.jpg" alt="" />
 </div> -->
@@ -222,6 +227,7 @@
 
 <div class="mini-wea fb clear pr">
     <span class="mini-beta">测试版</span>
+    <a href="javascript:;" class="fj_shop"></a>
     <p id="nio-tip" class="mini-wea-tips fl" title="正在加载天气数据，请稍等...">正在加载天气数据，请稍等...</p>
     <i id="nio-img" class="nio-0" title="天气"></i>
     <ul class="mini-wea-ul fl">
@@ -738,6 +744,15 @@
     <button id="relateButton" name="relateButton" onclick="return do_relate();">刷新激活状态</button>
 </div>
 
+<!-- 地图弹窗 -->
+<div class="map_light_box none">
+    <a href="javascript:;" class="light_box_close"></a>
+    <h3>离您最近的优衣库UNIQLO门店</h3>
+    <div class="light_box_u_map_con">
+        <iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/map/index.html"></iframe>
+    </div>
+</div>
+
 <!-- 隐私权保护声明 -->
 <div class="mini-clause mini-pop pf none">
     <h3>隐私声明</h3>
@@ -1043,6 +1058,9 @@ $(function(){
                             }
                             $('#tishi').css('display','none');
                             $('#qtm').removeClass('none');
+                            //新版：暂不需要推荐衣服
+                            $('#upc').html("");
+                            $('#downc').html("");
                         }else{
                             if(tid==1){
                                 $('.index-single').addClass('none');
@@ -1064,6 +1082,7 @@ $(function(){
                             }
                             $('#tishi').css('display','none');
                             $('#qtm').addClass('none');
+
                         }
                         if(da.flag=='t'){
                             $('#taoz').html(da.tstr);
@@ -1252,6 +1271,9 @@ function getgoods(zid,fid,cid,sid,tid){
                 }
                 $('#tishi').css('display','none');
                 $('#qtm').removeClass('none');
+                //新版：暂不需要推荐衣服
+                $('#upc').html("");
+                $('#downc').html("");
             }else{
                 if(tid==1){
                     $('.index-single').addClass('none');
@@ -1274,6 +1296,7 @@ function getgoods(zid,fid,cid,sid,tid){
 
                 $('#tishi').css('display','none');
                 $('#qtm').addClass('none');
+
             }
             if(da.flag=='t'){
                 $('#taoz').html(da.tstr);
