@@ -1,0 +1,80 @@
+<include file="Public:header"/>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="{:U('Index/index')}">首页</a></li>
+    <li class="active"><strong>注册用户统计</strong></li>
+  </ol>
+  <form class="form-inline form-group" role="form" action="{:U('User/index')}" method='post'>
+    <div class="form-group">
+        <label >注册日期</label>
+        <input type="text" style="width: 200px" name="daterange" id="daterange"
+               class="form-control" value="{$daterange}" />
+    </div>
+    <button type="submit" class="btn btn-success">搜索</button>
+      <a id="ecdownload" class="btn btn-success" href="">导出EXCEL</a>
+  </form>
+
+  <table class="table table-striped table-hover text-center table-responsive table-condensed">
+    <thead>
+      <tr>
+        <th>日期</th>
+        <th>总用户数</th>
+        <th>当日新增用户数</th>
+        <th>当日新增关联淘宝用户数</th>
+      </tr>
+    </thead>
+    <tbody>
+    <volist id='vo' name='usercount'>
+      <tr>
+        <td>{$vo.registdate}</td>
+        <td>{$vo.uercount}</a></td>
+        <td>{$vo.incusercount}</td>
+        <td>{$vo.inctbusercount}</td>
+      </tr>
+     </volist>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <ul class="pagination">
+    {$page}
+    </ul>
+  </div>
+</div>
+<include file="Public:footer"/>
+
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
+<script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#daterange').daterangepicker(
+                {
+                    format: 'YYYY/MM/DD',
+                    locale:{
+
+                        applyLabel: '选择',
+                        cancelLabel: '取消',
+                        fromLabel: '开始',
+                        toLabel: '截止',
+                        weekLabel: '周',
+                        daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                        monthNames: moment()._lang._monthsShort.slice(),
+                        firstDay: 0
+                    }
+                }
+
+
+        );
+    });
+</script>
+<script type="text/javascript">
+    //var ur = '{:U('User/download')}';
+    $(function(){
+        $('#ecdownload').click(function(){
+            var selvalue = $('#daterange').val();
+            var ur = '{:U('User/download')}';
+            ur = ur + "?daterange=" + selvalue
+            $('#ecdownload').attr('href',ur);
+        });
+    })
+</script>

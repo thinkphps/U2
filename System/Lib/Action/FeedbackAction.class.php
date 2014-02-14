@@ -1,175 +1,99 @@
 <?php
 class FeedbackAction extends Action{
-	private $aid;
-	private $nick;
-	public function _initialize(){
-	$this->aid = session('aid');
-	$this->nick = session('nickn');
-    $this->assign('aid',$this->aid);
-    $this->assign('nick',$this->nick);
-	}
-	public function index(){
-	if(!empty($this->aid)){
-    $keyword = trim($this->_post('keyword'));
-	$shop = M('Shop');
-	import("@.ORG.Pageyu");
-	if(empty($keyword)){
-	$count = $shop->count();
-	$p = new Page($count,8);
-	$shops = $shop->field('*')->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
-	}else{
-	$where = array('sname'=>array('like','%'.$keyword.'%'));
-	$count = $shop->where($where)->count();
-	$p = new Page($count,8);
-	$shops = $shop->field('*')->where($where)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();		
-	}
-	$page = $p->showPage();
-	$this->assign('shop',$shops);
-	$this->assign('page',$page);
-	$this->display();	
-    }else{
-    $this->display('Login/index');
-    }	
-	}
-	
-	public function create(){
-	if(!empty($this->aid)){
-	$this->display();	
-    }else{
-    $this->display('Login/index');
-    }		
-	}
-    public function add(){
- 	if(!empty($this->aid)){
- 	$id = $this->_post('id');	
-	$sname = trim($this->_post('sname'));
-	if(empty($sname)){
-	$this->error('名称不能为空',U('Feedback/create'));
-		exit;
-	}
-	$address = trim($this->_post('address'));
-	if(empty($address)){
-	$this->error('地址不能为空',U('Feedback/create'));
-		exit;
-	}
-	$stime = trim($this->_post('stime'));
-	if(empty($stime)){
-	$this->error('营业时间不能为空',U('Feedback/create'));
-		exit;
-	}
-	$call = trim($this->_post('call'));
-	if(empty($call)){
-	$this->error('电话不能为空',U('Feedback/create'));
-		exit;
-	}
-	$range = trim($this->_post('range'));
-	if(empty($range)){
-	$this->error('商品范围不能为空',U('Feedback/create'));
-		exit;
-	}
-	$time = date('Y-m-d H:i:s');
-	$shop = M('Shop');
-	if(!empty($id)){
-	$data = array('sname'=>$sname,
-	              'saddress'=>$address,
-				  'tradetime'=>$stime,
-				  'scall'=>$call,
-				  'sange'=>$range,
-				  'uptime'=>$time);
-    $res = $shop->where(array('id'=>$id))->save($data);		
-	}else{
-	$data = array('sname'=>$sname,
-	              'saddress'=>$address,
-				  'tradetime'=>$stime,
-				  'scall'=>$call,
-				  'sange'=>$range,
-				  'createtime'=>$time,
-				  'uptime'=>$time,
-				  '__hash__'=>$_POST['__hash__']);
-	  $shop->create($data);
-      $res = $shop->add();
-	  }
-	  if($res){
-	  	$this->success('提交成功',U('Feedback/index'));
-		  exit;
-	  }else{
-	  	$this->error('提交失败',U('Feedback/create'));
-		exit;
-	  }	
-    }else{
-    $this->display('Login/index');
-    }   	
+    private $aid;
+    private $nick;
+    public function _initialize(){
+        $this->aid = session('aid');
+        $this->nick = session('nickn');
+        $this->assign('aid',$this->aid);
+        $this->assign('nick',$this->nick);
     }
-  public function shopedit(){
-  	if(!empty($this->aid)){
-  	$id = trim($this->_get('id'));
-	if($id>0){
-	$shop = M('Shop');
-	$shops = $shop->field('*')->where(array('id'=>$id))->find();
-	$this->assign('shop',$shops);	
-	$this->display('create');	
-	}else{
-	$this->error('参数错误',U('Feedback/index'));
-	}
-    }else{
-    $this->display('Login/index');
-    }
-  }
-  public function del(){
-  	if(!empty($this->aid)){
-  	$id = trim($this->_get('id'));
-	if($id>0){
-	$res = M('Shop')->where(array('id'=>$id))->delete();
-	if($res){
-	  	$this->success('删除成功',U('Feedback/index'));
-		  exit;
-	  }else{
-	  	$this->error('删除失败',U('Feedback/index'));
-		exit;
-	  }
-	}else{
-	$this->error('参数错误',U('Feedback/index'));
-	}		 		
-    }else{
-    $this->display('Login/index');
-    }
-  }
- public function export(){
-		if(!empty($this->aid)){
-	   $file = $_FILES['Filedata'];
-		$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        //设置上传文件类型
-        $allowExts = array('csv');
-		$root_dir = realpath(dirname(dirname(__FILE__)));
-		if(in_array($extension,$allowExts)){
-		$handle = fopen($file['tmp_name'],'r');
-		$i = 0;
-		$tag = M('Goodtag');
-		$good = M('Goods');
-		$time = date('Y-m-d H:i:s');
-        while($data = fgetcsv($handle)){
-	     if($i>0){
-	     //插入主分类
-	     $data = array('sname'=>trim($data[0]),
-			           'saddress'=>trim($data[1]),
-			           'tradetime'=>trim($data[2]),
-			           'scall'=>$data[3],
-			           'sange'=>$data[4],
-			           'pname'=>$data[5],
-			           'cname'=>$data[6],
-			           'aname'=>$data[7],
-			           'createtime'=>$time,
-				       'uptime'=>$time,);
-		 $res = $tag->add($data);
-	     }
-		 $i++;
-        }
+    public function index(){
+        if(!empty($this->aid)){
+            $goodmodel = M('leave');
+            $keyword = trim($this->_request('keyword'));
+            $catid = $this->_request('ist');
+            $cate1 = $this->_request('cate1');
+            $cate2 = $this->_request('cate2');
+            $isdoubt = $this->_request('isdoubt');
+            $pagestr = '';
+            import("@.ORG.Pageyu");
+            if(!empty($cate1)){
+                $pagestr.="/cate1/".$cate1;
+            }
+            if(!empty($cate2)){
+                $map['catid'] = $cate2;
+                $pagestr.="/cate2/".$cate2;
+            }
+            if(!empty($keyword)){
+                $where['id'] = $keyword;
+                $where['num_iid']  = $keyword;
+                $where['title']  = array('like','%'.$keyword.'%');
+                $where['_logic'] = 'or';
+                $map['_complex'] = $where;
+                $pagestr.="/keyword/".$keyword;
+            }
+            if(!empty($catid)){
+                $map['$catid'] = $catid;
+                $pagestr.="/ist/".$catid;
+            }
+            if(!empty($isdoubt)){
+                $map['isdoubt'] = $isdoubt;
+                $pagestr.="/isdoubt/".$isdoubt;
+            }
+            $count = $goodmodel->where($map)->count();
+            $p = new Page($count,20,$pagestr);
+            $goods = $goodmodel->field('*')->where($map)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
+            $page = $p->showPage();
+            //取得分类
+            $onecate = $cate->field('*')->where(array('parent_id'=>0))->select();
+            if(!empty($cate1)){
+                $twocate = $cate->field('*')->where(array('pcid'=>$cate1))->select();
+            }
+            $this->assign('goods',$goods);
+            $this->assign('page',$page);
+            $this->assign('keyword',$keyword);
+            $this->assign('$catid',$catid);
+            $this->assign('onecate',$onecate);
+            $this->assign('twocate',$twocate);
+            $this->assign('cate1',$cate1);
+            $this->assign('cate2',$cate2);
+            $this->assign('isdoubt',$isdoubt);
+            $this->assign('p',$_GET['p']);
+            $this->display();
+            exit;
         }else{
-        	$this->error('文件格式必须是csv格式',U('Feedback/index'));
-			exit;
+            $this->display('Login/index');
         }
-		}else{
-    $this->display('Login/index');
     }
+
+    public function _empty(){
+        header("HTTP/1.1 404 Not Found");
+        $this->error('次方法不存在',U('Index/index'));
     }
+
+    public function download(){
+        $cate1 = $this->_request('id');
+
+        /** 加载PHPExcel包 */
+        Vendor ( 'Excel.Classes.PHPExcel' );
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->setTitle(date('Y-m-d',time()));
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '日期')
+            ->setCellValue('B1', '总用户数')
+            ->setCellValue('C1', '当日新增用户数')
+            ->setCellValue('D1', '当日新增关联淘宝用户数');
+        $baseRow = 2;
+
+        $filename = "according_user_regist_".date('Y-m-d',time()).'.xlsx';
+        header ( 'Content-Disposition: attachment;filename="'.$filename);
+        header ( 'Content-Type: applicationnd.ms-excel' );
+        header ( 'Cache-Control: max-age=0' );
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        $objPHPExcel->disconnectWorksheets();
+        unset($objPHPExcel);
+    }
+
 }
