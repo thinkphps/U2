@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //更新商品
 require_once('init.php');
 require_once('TopSdk.php');
@@ -52,13 +52,15 @@ foreach($goods as $k=>$v){
 	$product = $c->execute($products, $db->token);
 	$product_arr = (array)$product->item;
 	//更新goods
-    $proarr = explode(';',$product_arr['props_name']);
+        $proarr = explode(';',$product_arr['props_name']);
 	foreach($proarr as $kp=>$vp){
-    $vparr = explode(':',$vp);
-	if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
+        if($kp==0){
+        $vparr = explode(':',$vp);
+	//if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
 	$item_bn = $vparr[3];
-	break;
-	}
+	//break;
+	//}
+        }
 	}
 	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
     $db->mysqlquery($sql);
@@ -130,7 +132,18 @@ foreach($goods as $k=>$v){
     $cname.=$cv['name'].'-';
 	}
 	$cname = rtrim($cname,'-');
-	$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
+	//更新goods
+        $proarr = explode(';',$product_arr['props_name']);
+	foreach($proarr as $kp=>$vp){
+        if($kp==0){
+        $vparr = explode(':',$vp);
+	//if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
+	$item_bn = $vparr[3];
+	//break;
+	//}
+        }
+	}
+	$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$item_bn."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
     $db->mysqlquery($sql);
     $goods_id = mysql_insert_id();
     unset($sql);
