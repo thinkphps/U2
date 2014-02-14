@@ -1107,7 +1107,7 @@ li.mini-cate-checked,.mini-cate-ps li:hover{
 /*== mini-gender ==*/
 
 .mini-gender-bin{
-  width: 240px;
+  width: 205px;
   height: 55px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -1126,6 +1126,7 @@ li.mini-cate-checked,.mini-cate-ps li:hover{
 }
 a.mini-gender-all{
   background-position: 0 -61px;
+  font-size: 28px;
 }
 a.mini-gender-women{
   background-position: -53px -61px;

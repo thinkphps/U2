@@ -1,4 +1,3 @@
-
 <?php
 // 优衣库mini站,author:kimi
 class IndexNewAction extends Action {
@@ -6,12 +5,6 @@ class IndexNewAction extends Action {
 	public $appkey;
 	public $client;
 	public $uniq_user_name;
-	public function _initialize(){
-    $this->appkey = C('TAOAPIKEY');
-    $this->secretKey = C('TAOSECRET');
-	$this->callback_url = C('TAOCAABACK');
-	Vendor('Taobao.TopSdk');
-	}
     public function index(){
 	if(cookie('uniq_user_name') && cookie('uniq_user_id')){
 		session("uniq_user_name",cookie('uniq_user_name'));
@@ -56,19 +49,6 @@ class IndexNewAction extends Action {
 	}
 	//echo $is_allow_register.$is_phone.$is_active;
 	$this->assign('is_show',$is_show);
-	$this->client = new TopClient;
-	$this->client->format = 'json';
-	$this->client->appkey = $this->appkey;
-	$this->client->secretKey = $this->secretKey;
-    $token = $_SESSION['token'];
-	/*if(empty($token)){
-	$this->assign('token',$token);
-	$this->display();
-	}else{*/
-    $req = new UserBuyerGetRequest;
-    $req->setFields("nick,sex");
-    $resp = $this->client->execute($req, session('token'));
-	//$nick = $resp->user->nick;
 	
 	$time = date('Y-m-d H:i:s');
 	
@@ -85,13 +65,12 @@ class IndexNewAction extends Action {
 	//$res = $user->add(array('token'=>$token,'nick'=>$nick,'createtime'=>$time));
 	$u_id = 0;
 	}else{
-	
 	$u_id = $result['id'];
 	}
     $_SESSION['u_id'] = $u_id;
 	//放到收藏里去
 	$num_iid = $_SESSION['num_iid'];
-	if(!empty($num_iid)){
+	if(!empty($num_iid) && !empty($u_id)){
 	$cresult = $collection->field('id')->where(array('num_iid'=>$num_iid,'uid'=>$u_id))->find();
 	if(empty($cresult)){
 		if(session("uniq_user_id")){
@@ -128,24 +107,6 @@ class IndexNewAction extends Action {
 	if(!empty($isbuy)){
      $clothes[$k]['buy'] = 1;
 	}
-       //add color,uq,gender, added by David
-       $productSyn = D('ProductSyn');
-       $returnOjb =  $productSyn->GetProductColorByID($clothes[$k]['num_iid']);
-       if (isset($returnOjb))
-       {
-           $uq_color = array();
-           for($i = 0; $i < count($returnOjb); $i++)
-           {
-               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
-               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
-               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
-               $clothes[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
-               $clothes[$k]['gender'] = $returnOjb[$i]['gender'];
-               $clothes[$k]['uq'] = $returnOjb[$i]['uq'];
-           }
-       }
-       //end
-
    }
 	$pants = $goods->join('u_collection on u_beubeu_goods.num_iid=u_collection.num_iid')->field('u_beubeu_goods.id as gid,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_beubeu_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
    foreach($pants as $k=>$v){
@@ -174,76 +135,22 @@ class IndexNewAction extends Action {
 	$isbuy = $buy->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
 	if(!empty($isbuy)){
      $pants[$k]['buy'] = 1;
-	}
-       //add color,uq,gender, added by David
-       $productSyn = D('ProductSyn');
-       $returnOjb =  $productSyn->GetProductColorByID($pants[$k]['num_iid']);
-       if (isset($returnOjb))
-       {
-           $uq_color = array();
-           for($i = 0; $i < count($returnOjb); $i++)
-           {
-               $uq_color[$i]['id'] = $returnOjb[$i]['colorid'];
-               $uq_color[$i]['code'] = $returnOjb[$i]['colorcode'];
-               $uq_color[$i]['name'] = $returnOjb[$i]['colorname'];
-               $pants[$k]['color'] = str_replace('"',"'", json_encode($uq_color));
-               $pants[$k]['gender'] = $returnOjb[$i]['gender'];
-               $pants[$k]['uq'] = $returnOjb[$i]['uq'];
-           }
-       }
-       //end
+	}	
    }
    
    //取出性别所对应的tagid
    $tag = M('Tag');
-   $wclist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>1,'type'=>'1','isshow'=>'1'))->select();//女性场合
-   foreach($wclist as $k=>$v){
-   	$wclist[$k]['c'] = $k+1;
-   }
-   $wflist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>2,'type'=>'1','isshow'=>'1'))->select();//女性风格
-   foreach($wflist as $k=>$v){
-   	$wflist[$k]['c'] = $k+1;
-   }
-   $mclist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>1,'type'=>'2','isshow'=>'1'))->select();//男性场合
-   foreach($mclist as $k=>$v){
-   	$mclist[$k]['c'] = $k+1;
-   }
-   $mflist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>2,'type'=>'2','isshow'=>'1'))->select();//男性风格
-   foreach($mflist as $k=>$v){
-   	$mflist[$k]['c'] = $k+1;
-   }
-    $cclist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>1,'type'=>'3','isshow'=>'1'))->select();//小孩场合
-   foreach($cclist as $k=>$v){
-   	$cclist[$k]['c'] = $k+1;
-   }
-    $cflist = $tag->cache(true)->field('id,name')->where(array('parent_id'=>2,'type'=>'3','isshow'=>'1'))->select();//小孩风格
-   foreach($cflist as $k=>$v){
-   	$cflist[$k]['c'] = $k+1;
-   }
-   //取出推荐商品
-    //$SA_IP = get_client_ip();
-    //$city     = getIPLoc_sina($SA_IP);
+   $recomodel = D('Reco');
+   $wclist = $recomodel->getfc('1','1','1');//女性场合
+   $wflist = $recomodel->getfc('2','1','1');//女性风格
+   $mclist = $recomodel->getfc('1','2','1');//男性场合
+   $mflist = $recomodel->getfc('2','2','1');//男性风格
+   $cclist = $recomodel->getfc('1','3','1');//小孩场合
+   $cflist = $recomodel->getfc('2','3','1');//小孩风格
+   $bflist = $recomodel->getfc('2','4','1');//baby风格
 		//取得官方推荐数据
 	$windex = D('Windex');
 	$tag = D('Tag');
-	/*$recogood = $windex->getrecommend($city['province']);
-	$reulist = $recogood[0];
-	$redlist = $recogood[1];
-    foreach($reulist as $k=>$v){
-   	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>2))->find();
-	$reulist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>1))->find();
-	$reulist[$k]['tagname2'] = $gtag2['name'];
-	}
-	foreach($redlist as $k=>$v){
-   	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>2))->find();
-	$redlist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>1))->find();
-	$redlist[$k]['tagname2'] = $gtag2['name'];
-	}*/
-    //取得场合id 
     $cbusiness = $tag->gettagid('商务',1);
 	$mcarr[] = array('id'=>$cbusiness,'name'=>'商务','c'=>1);
     $courism = $tag->gettagid('逛街',1);
@@ -262,12 +169,12 @@ class IndexNewAction extends Action {
 	$fjujia = $tag->gettagid('学院',2);
 	$mfarr[] = array('id'=>$fjujia,'name'=>'学院','c'=>9);
 
+    //取出婴幼儿装的分类
+    $babycate = $customcate->cache(true)->field('id,name')->where(array('gtype'=>'4'))->select();
     //取出自定义分类
 	$ucuslist = array();//上装
 	$dcuslist = array();//下装
-    //$custom = $customcate->cache(true)->field('id,name')->where(array('isud'=>'1'))->order('orderby')->group('name')->select();
-    $custom = $customcate->field('id,name')->where(array('isud'=>'1'))->group('name')->select();
-    //echo $customcate->getLastSql();exit;
+    $custom = $customcate->cache(true)->field('id,name')->where(array('isud'=>'1'))->group('name')->select();
 	foreach($custom as $k=>$v){
     $idlist = $customcate->cache(true)->field('id')->where(array('name'=>$v['name'],'isud'=>'1'))->select();
 	$idstr = '';
@@ -280,6 +187,7 @@ class IndexNewAction extends Action {
 
     $ucuslist[] = array('id'=>$idstr,'name'=>$v['name']);
 	}
+
 	//转换自定义分类显示顺序s
 	$k1 = 0;$k2 = 0;$k3 = 0;$k4 = 0;$k5 = 0;$k6 = 0;$k7 = 0;$k8 = 0;$k9 = 0;
 	$k10 = 0;$k11 = 0;$k12 = 0;$k13 = 0;$k14 = 0;$k15 = 0;$k16 = 0;$k17 = 0;
@@ -364,7 +272,7 @@ class IndexNewAction extends Action {
 	$newucuslist[4] = $ucuslist[11];
 	$newucuslist[5] = $ucuslist[19];
 	$newucuslist[6] = $ucuslist[5];
-	$newucuslist[7] = $ucuslist[22];
+	//$newucuslist[7] = $ucuslist[22];
 	$newucuslist[8] = $ucuslist[12];
 	$newucuslist[9] = $ucuslist[21];
 	$newucuslist[10] = $ucuslist[13];
@@ -380,8 +288,7 @@ class IndexNewAction extends Action {
 	$newucuslist[20] = $ucuslist[3];
 	$newucuslist[21] = $ucuslist[10];
 	$newucuslist[22] = $ucuslist[4];
-		
-	
+    
 	//转换自定义分类显示顺序e
     $dcustom = $customcate->cache(true)->field('id,name')->where(array('isud'=>'2'))->group('name')->select();
 	foreach($dcustom as $k=>$v){
@@ -459,6 +366,7 @@ class IndexNewAction extends Action {
 	$this->assign('mflist',json_encode($mflist));//男性风格
 	$this->assign('cclist',json_encode($cclist));//小孩场合
 	$this->assign('cflist',json_encode($cflist));//小孩风格
+	$this->assign('bflist',json_encode($bflist));//baby风格
 	$this->assign('mcarr',json_encode($mcarr));
 	$this->assign('mfarr',json_encode($mfarr));
 
@@ -475,10 +383,7 @@ class IndexNewAction extends Action {
 	//自定义分类
 	$this->assign('ucuslist',$newucuslist);
 	$this->assign('dcuslist',$newdcuslist);
-	//$this->assign('cityn',$_SESSION[$SA_IP.'cityn']);
-	//$this->assign('provi',$_SESSION[$SA_IP.'pro']);
-
-    $this->assign('cityn',cookie('cityn'));
+	$this->assign('cityn',cookie('cityn'));
 	$this->assign('provi',cookie('pro'));
 	$this->assign('uniurl',C('UNIQLOURL'));
 	$this->assign('uniq_user_name',$this->uniq_user_name);
@@ -488,6 +393,7 @@ class IndexNewAction extends Action {
 	$this->assign('is_mobile_active',$is_mobile_active);
 	$this->assign('mobile',$mobile);
 	$this->assign('user',$result);
+    $this->assign('babycate',$babycate);
 	$this->display();
 	//}
     }
@@ -528,7 +434,7 @@ class IndexNewAction extends Action {
 	cookie('uniq_user_id',null);
 	session_destroy();
 	//$this->success('退出成功',U('Index/index'));
-	$this->redirect('Index/index');
+	$this->redirect('IndexNew/index');
   }
 
 //登录
@@ -626,15 +532,10 @@ public function getdapeijian(){
 	//都符合的
     $where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 
-	if($cgtag['gtype']=='3' && ($cgtag['ccateid']!=75 && $cgtag['ccateid']!=86)){
-    $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-    $where2['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-	$where3['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-	}else if($cgtag['gtype']=='3' && ($cgtag['ccateid']==75 || $cgtag['ccateid']==86)){
-    $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-    $where2['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-	$where3['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-	}
+    $where1['u_goodtag.ccateid'] = array('neq',116);
+    $where2['u_goodtag.ccateid'] = array('neq',116);
+	$where3['u_goodtag.ccateid'] = array('neq',116);
+
 	}else if($po=='cab-bot'){
      //场合
 	$where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_beubeu_goods.num'=>array('egt','15'));
@@ -642,16 +543,11 @@ public function getdapeijian(){
 	$where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
 	//全部
 	$where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_beubeu_goods.num'=>array('egt','15'));
+    
+    $where1['u_goodtag.ccateid'] = array('neq',116);
+    $where2['u_goodtag.ccateid'] = array('neq',116);
+	$where3['u_goodtag.ccateid'] = array('neq',116);
 
-	if($cgtag['gtype']=='3' && ($cgtag['ccateid']!=75 && $cgtag['ccateid']!=86)){
-    $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-    $where2['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-	$where3['u_goodtag.ccateid'] = array(array('neq',116),array('exp','NOT IN(75,86)'),'and');
-	}else if($cgtag['gtype']=='3' && ($cgtag['ccateid']==75 || $cgtag['ccateid']==86)){
-    $where1['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-    $where2['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-	$where3['u_goodtag.ccateid'] = array(array('neq',116),array('exp','IN(75,86)'),'and');
-	}
 	}
     if($cgtag['wid']!=8){
      $wstr = rtrim($wstr,',');
@@ -674,7 +570,7 @@ public function getdapeijian(){
 	}
 	$dstr = '';
 	foreach($allclothes as $k=>$v){
-	$dstr.='<li><img id="'.$v['id'].'" price="'.$v['price'].'"  url="'.$v['detail_url'].'"data-original="'.__ROOT__.'/'.$v['pic_url'].'" alt="'.$v['title'].'" rest="'.$v['num'].'"><Span>qqq</Span></li>';
+	$dstr.='<li><img id="'.$v['id'].'" price="'.$v['price'].'"  url="'.$v['detail_url'].'"data-original="'.__ROOT__.'/'.$v['pic_url'].'" alt="'.$v['title'].'" rest="'.$v['num'].'"></li>';	
 	}
 	echo $dstr;
   //}	
@@ -787,7 +683,7 @@ public function ajaxgood(){
 	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
 
     $dstr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-           </li>';
+              </li>';
 	}
     $arr['dstr'] = $dstr;
 	$arr['flag'] = true;
@@ -932,7 +828,9 @@ public function getgood(){
 
          $where1 = $where;
 		 //上装
+		 if($sid!=4){//婴幼儿没有上下装
          $where1['u_goodtag.isud'] = '1';
+         }
 		 $where1['u_beubeu_goods.approve_status'] = 'onsale';
 		 $where1['u_beubeu_goods.num'] = array('egt','15');
 	     $uclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
@@ -945,6 +843,7 @@ public function getgood(){
          $windex->saomo($uclothes,$uclothesy);
 
 		 //下装
+		 if($sid!=4){//婴幼儿没有上下装
          $where2x = $where;
 		 $where2x['u_goodtag.wid'] = $widvalue['wid'];
          $where2x['u_goodtag.isud'] = '2';
@@ -956,6 +855,7 @@ public function getgood(){
 		 $where['u_beubeu_goods.num'] = array('egt',15);
 	     $dclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.outer_id desc')->select();
          $windex->saomo($dclothes,$dclothesy);
+         }
 
          //吧当天的指数数据放前边
          foreach($uclothesy as $kx=>$vx){
@@ -964,9 +864,11 @@ public function getgood(){
 		 }
 		 }
          $uclothesy = array();
+         if(!empty($dclothesy)){
          foreach($dclothesy as $kx=>$vx){
 	     if(!empty($vx)){
          $dclothes[] = $vx;
+		 }
 		 }
 		 }
          $dclothesy = array();
@@ -1381,7 +1283,8 @@ public function getgood(){
     if($tid==0){
 	if($cid!=0 || $sid!=0){
 	if(empty($uclothes) && empty($dclothes)){
- 	$recogood = $windex->getrecommend($pro);
+	$recomodel = D('Reco');
+ 	$recogood = $recomodel->getrec($tem);
 	$uclothes = $recogood[0];
 	$dclothes = $recogood[1];
 	$arr['fl'] = 1;
@@ -1446,7 +1349,6 @@ public function getgood(){
     }
     $arr['dstr'] = $dstr;
 	$arr['flag1'] = 'p';
-
 	//套装
 	$tstr = '';
 	if(!empty($tclothes)){
@@ -1459,7 +1361,9 @@ public function getgood(){
 	}
     }
     $arr['tstr'] = $tstr;
+    if(!empty($tstr)){
 	$arr['flag'] = 't';	
+	}
 
 	echo json_encode($arr);
 }
@@ -1519,6 +1423,5 @@ public function updateActive(){
 	//return json_encode($returnArr);
 	*/
 }
-
 
 }

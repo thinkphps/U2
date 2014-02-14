@@ -202,6 +202,7 @@ body{
 .mini-gender-women,
 .mini-gender-men,
 .mini-gender-kids,
+.mini-gender-baby,
 .mini-p-0,.mini-s-0{
     text-indent: 200%;
     overflow: hidden;
@@ -228,7 +229,7 @@ body{
 /*== mini-cab ==*/
 
 .mini-cab{
-    background-image: url(../images/mini/mini-cab.jpg);
+    /*background-image: url(../images/mini/mini-cab.jpg);*/
     width: 400px;
     height: 602px;
     padding: 30px 0 0 0;
@@ -1120,6 +1121,12 @@ li.mini-cate-checked,.mini-cate-ps li:hover{
 .mini-design ul{
     width: 356px;
 }
+.mini-baby-ul ul{
+  width: 625px;
+}
+.mini-baby-ul{
+  margin-bottom: 13px;
+}
 .mini-design li{
     *float: left;
     *margin-bottom: 2px;
@@ -1181,47 +1188,54 @@ li.mini-cate-checked,.mini-cate-ps li:hover{
 /*== mini-gender ==*/
 
 .mini-gender-bin{
-    width: 182px;
-    height: 55px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  width: 205px;
+  height: 55px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .mini-gender li,.mini-gender a{
-    width: 55px;
-    height: 55px;
-    float: left;
-    _display: inline;
-    margin-right: 5px;
+  width: 49px;
+  height: 49px;
+  float: left;
+  _display: inline;
+  margin-right: 2px;
 }
 .mini-gender a{
-    background: url(../images/mini/mini-gender.png) no-repeat 0 -55px;
-    color: #a0a0a0;
-    font: bold 12px/55px "Microsoft Yahei";
+  background: url(../images/mini/mini-gender.png) no-repeat 0 -55px;
+  color: #a0a0a0;
+  font: bold 12px/49px "Microsoft Yahei";
 }
 a.mini-gender-all{
-    background-position: 0 -55px;
+  background-position: 0 -61px;
+  font-size: 28px;
 }
 a.mini-gender-women{
-    background-position: -58px -55px;
+  background-position: -53px -61px;
 }
 a.mini-gender-men{
-    background-position: -118px -55px;
+  background-position: -107px -61px;
 }
 a.mini-gender-kids{
-    background-position: -178px -55px;
+  background-position: -160px -61px;
+}
+a.mini-gender-baby{
+  background-position: -214px -61px;
 }
 .mini-gender-checked .mini-gender-all{
     background-position: 0 0;
     color: #fff;
 }
 .mini-gender-checked .mini-gender-women{
-    background-position: -58px 0;
+  background-position: -53px 0;
 }
 .mini-gender-checked .mini-gender-men{
-    background-position: -118px 0;
+  background-position: -107px 0;
 }
 .mini-gender-checked .mini-gender-kids{
-    background-position: -178px 0;
+  background-position: -160px 0;
+}
+.mini-gender-checked .mini-gender-baby{
+  background-position: -214px 0;
 }
 a.mini-gender-kids{
     height: 43px;
@@ -1229,11 +1243,14 @@ a.mini-gender-kids{
     line-height: 15px;
 }
 a.mini-gender-suit{
-    background-position: -234px -55px;
+  background-position: -265px -56px;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
 }
 .mini-gender-checked .mini-gender-suit{
-    background-position: -234px 0;
-    color: #fff;
+  background-position: -265px 0;
+  color: #fff;
 }
 .mini-design .mini-gender{
     top: 42px;
@@ -1961,31 +1978,33 @@ li.index-p-checked,.index-bar-place li:hover{
     padding-left: 15px;
 }
 .index-first-gender .mini-gender{
-    background-position: 262px center;
-    padding-left: 13px;
-    padding-right: 10px;
+  background-position: 262px center;
+  padding-left: 5px;
 }
 .index-gender div.mini-gender{
-    margin-left: 0;
+  margin-left: 0;
 }
 a.index-archor{
-    background: url(../images/index/index-archor.png) no-repeat;
-    width: 255px;
-    height: 57px;
-    top: 0;
-    right: -37px;
-    color: #fff;
-    font-size: 20px;
-    padding-top: 20px;
+  background: url(../images/index/index-archor.png) no-repeat;
+  width: 255px;
+  height: 44px;
+  top: 0;
+  right: -37px;
+  color: #fff;
+  font-size: 22px;
+  padding-top: 33px;
 }
 .index-archor b{
-    position: absolute;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    left: 67px;
-    top: 43px;
-    font-size: 16px;
-    font-weight: normal;
+  position: absolute;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  left: 120px;
+  top: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  background: url(../images/index/index-arrow.png) no-repeat right center;
+  padding-right: 15px;
+  display: block;
 }
 .index-bin{
     background-color: #fff;
@@ -2022,25 +2041,32 @@ a.index-archor{
     right: 15px;
 }
 .index-box-btn{
-    width: 950px;
-    height: 15px;
-    border-top: 3px solid #e2000f;
+  width: 950px;
+  height: 15px;
+  border-top: 3px solid #e2000f;
+  position: absolute;
+  left: 0;
+  top: 120px;
+  z-index: 5;
 }
 .index-btn{
-    background: url(../images/index/index-btn.jpg) no-repeat 0 -15px;
-    width: 125px;
-    height: 15px;
-    left: 50%;
-    margin-left: -62px;
-    bottom: 3px;
+  background: url(../images/index/index-btn.png) no-repeat 0 -18px;
+  width: 35px;
+  height: 18px;
+  left: 50%;
+  margin-left: -17px;
 }
 .mini-beta{
-    position: absolute;
-    color: #fff;
-    font-size: 11px;
-    left: 560px;
-    font-weight: normal;
-    -webkit-transform: scale(0.9);
+  background: #83000a;
+  padding: 2px 6px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  position: absolute;
+  color: #fff;
+  font-size: 11px;
+  left: 560px;
+  font-weight: normal;
+  -webkit-transform: scale(0.9);
 }
 .mini-wea .mini-beta{
     left: 353px;
@@ -2050,8 +2076,8 @@ a.index-archor{
     left: 773px;
 }
 .index-archor .mini-beta{
-    left: 190px;
-    top: 20px;
+  left: 60px;
+  top: 14px;
 }
 
 /*== mini-register ==*/
@@ -2408,4 +2434,19 @@ p .mini-clause-btn{
 }
 .disabled{
     background: #ccc;
+}
+.mini-place-mask{
+  background: #000;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  width: 311px;
+  height: 77px;
+  right: 1px;
+  top: 0;
+  z-index: 2;
+  display: none;
+}
+.index-bar .mini-place-mask{
+  width: 308px;
+  left: 347px;
 }

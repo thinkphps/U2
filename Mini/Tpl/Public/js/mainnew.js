@@ -275,7 +275,7 @@ jQuery(function($){
 
             e.stopPropagation()
             if(uniqlo.sliding) return
-//            alert(1);
+
             var position = $(this).position()
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
@@ -299,14 +299,14 @@ jQuery(function($){
 //            .on('click', function(){                             // 点击任意位置添加至搭配间
 //            addCabCallback.call(this)                            // 添加至左侧的callback
 //        })
-            .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
+        .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
 
-                cabnet.netConfirm.show()
-                e.stopPropagation()
+            cabnet.netConfirm.show()
+            e.stopPropagation()
 
-            }).on('click', 'a.mini-net-detail', function(e){
-                e.stopPropagation()
-            })
+        }).on('click', 'a.mini-net-detail', function(e){
+            e.stopPropagation()
+        })
 
 
         cabnet.minicabnet.on("mouseenter",function(){
@@ -495,23 +495,19 @@ jQuery(function($){
             else{
                 cabnet.buybtns.hide();
             }
-
-//            console.log(Model.GetDIY());
         });
+
+
 
         //当前穿着回调，每次穿衣时会执行这个函数。  返回模特身上当前穿着的衣服
         //获取衣服UQ号去查找淘宝信息
         Model.CurrClothesCallback = beu_getallclothes;
         function beu_getallclothes(o){
-
             //清空购买列表
             cabnet.buybtns.find("ul").html("");
-
             var barcode = "";
             for(var i in o){
-//                barcode = "img[uq='UQ105111']";
                 barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
-                console.log(barcode);
                 //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
                 var img = cabnet.net.find(barcode);
                 if(img.length > 0){
@@ -520,24 +516,44 @@ jQuery(function($){
                         title = title.substring(0,10) + "...";
                     }
                     //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li><a target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    cabnet.buybtns.find("ul").append($('<li><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
                 }
                 else{
 
                 }
-                console.log(img);
 
-//                alert(barcode);
             }
         }
-
 
         //保存当前搭配
         cabnet.cabsave2.on("click",function(){
             //获取购买列表中的内容
+            var barcode = "";
+            var imgfind = "";
+            cabnet.buybtns.find("ul li a").each(function(){
+                barcode =  $(this).attr("barcode");
+                imgfind =  "img[uq='" + $(this).attr("barcode") + "']";
+                var img = cabnet.net.find(imgfind);
+                if(img.length == 0){
+                    //调用接口，获取详细的衣服信息，然后加入衣柜
+                    $.get(getgoodinfobyuqurl,{id:barcode},function(data){
+                        var id = data.id;
 
+                        if(id>0){
+                            addwardrobe(id, function(){
+//                            cabnet.miniMask.show()
+//                            cabnet.miniFail.show()
+                            }, function(){
+                            cabnet.miniMask.show()
+                            cabnet.miniSucc.show()
+                                addNetCallback2.call(this,data, id)
+                            })
+                        }
+                    });
+                }
+
+            });
         });
-
 
 
         cabnet.cabChoose.on('click', 'a', function(){
@@ -676,11 +692,7 @@ jQuery(function($){
         /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
         cabnet.hoverBox.on("click","span[name='barcode']",function(){
             Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
-//            Model.DressingByBarcode('UQ12345611')
-//            Model.Dressing(17098);
-//            Model.Dressing(17055);
         });
-
 
 
         function succNfail(){
@@ -718,14 +730,14 @@ jQuery(function($){
             var src = ' src="' + cabnet.hoverBox.data('src') + '"'
             var ids = ' id="' + id + '"'
             var sex = cabnet.hoverBox.data('sex')
-            var fg = +cabnet.hoverBox.data('fg')
+            //var fg = +cabnet.hoverBox.data('fg')
 
             if(!cabnet.cab.isEmpty && cabnet.cab.sex !== sex){
                 if(cabnet.cab.pos !== pos || (cabnet.cab.pos == pos && !cabnet.cab.ajax)){
                     return cabnet.netFail.trigger('shown', true)
                 }
             }
-            if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
+            /*if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
                 if(cabnet.cab.fg == 75){
 
                     if(fg != 86)  return cabnet.netFail.trigger('shown')
@@ -740,7 +752,7 @@ jQuery(function($){
 
                 }
             }
-            cabnet.cab.fg = fg
+            cabnet.cab.fg = fg*/
 
             cabnet.cab.sex = sex
 
@@ -772,7 +784,6 @@ jQuery(function($){
             var uq = this.getAttribute('uq');
             var colors = eval(this.getAttribute('color'));
 
-//            alert(colors.length)
             var ulColor = cabnet.hoverBox.find(".color ul");
             ulColor.html("");
             //循环得到颜色li
@@ -800,6 +811,7 @@ jQuery(function($){
                 'rests': rests,
                 'url' : url,                                        // 保存图片url
                 'gender':gender,
+                'color':null,
                 'uq':uq
             })
         }
@@ -860,14 +872,53 @@ jQuery(function($){
             var fg  = ' fg="' + cabnet.kvHover.data('fg') + '"'
 
             //根据ID去服务器获取颜色、uq等信息
-            $.get(getcorlorurl,{id:id},function(data){;
-                var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
-                var gender = ' gender="' + data.gender + '"';
-                var uq = ' uq="' + data.uq + '"';
+            if ( cabnet.kvHover.data('color') == undefined){
+                $.get(getcorlorurl,{id:id},function(data){;
+                    var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
+                    var gender = ' gender="' + data.gender + '"';
+                    var uq = ' uq="' + data.uq + '"';
+                    var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
+                    $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
+                    cabnet.net.trigger('add', id)                         // 触发netSlide的被添加自定义事件
+                });
+            }
+            else{
+                var color = ' color="' + cabnet.kvHover.data('color') + '"';
+                var gender = ' gender="' + cabnet.kvHover.data('gender') + '"';
+                var uq = ' uq="' + cabnet.kvHover.data('uq') + '"';
                 var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
                 $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
                 cabnet.net.trigger('add', id)                         // 触发netSlide的被添加自定义事件
-            });
+            }
+        }
+
+        function addNetCallback2(data){
+            var pos = "";
+            if(data.isud == 1){
+                pos = "#net-top";
+            }
+            else{
+                pos = "#net-bot";
+            }
+            var pos = pos;
+            var src = ' src="' + data.src + '"'
+            var sex = ' sex="' + data.sex + '"'
+            var tag = ' tag="' + data.tag + '"'
+            var csex= ' csex="' + data.csex + '"'
+            var url = ' url="' + data.url + '"'
+            var place = ' place="' + data.place + '"'
+            var price = ' price="' + data.price + '"'
+            var alt = ' alt="' + data.alt + '"'
+            var rest = ' rest="' + data.rest + '"'
+            var ids = ' id="' + data.id + '"'
+            var fg  = ' fg="' + data.fg + '"'
+            var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
+            var gender = ' gender="' + data.gender + '"';
+            var uq = ' uq="' + data.uq + '"';
+            var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
+            $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
+            cabnet.net.trigger('add', data.id)                         // 触发netSlide的被添加自定义事件
+
         }
 
         function delNetCallback(){
@@ -913,6 +964,8 @@ jQuery(function($){
             singleSlide: $('div.index-single'),
             suitSlide: $('div.index-suit'),
             suitIsOpen: false,
+            babyMask: $('div.mini-place-mask'),
+            babyUl: $('div.mini-baby-ul'),
 
             closeBin: function(){
                 index.bin.add(index.bar).animate({'top': '-507px'}, 600, function(){
@@ -938,15 +991,15 @@ jQuery(function($){
         index.genderLi = index.gender.find('li')
         index.all = index.genderLi.eq(0)
 
-        $.fn.animateBG = function(x, y, speed) {
-            var pos = this.css('background-position').split(' ')
-            this.x = pos[0] || 0
-            this.y = pos[1] || 0
-            $.Animation(this, {x: x, y: y}, {duration: speed}).progress(function(e) {
-                this.css('background-position', e.tweens[0].now + 'px ' + e.tweens[1].now + 'px')
-            })
-            return this
-        }
+//        $.fn.animateBG = function(x, y, speed) {
+//            var pos = this.css('background-position').split(' ')
+//            this.x = pos[0] || 0
+//            this.y = pos[1] || 0
+//            $.Animation(this, {x: x, y: y}, {duration: speed}).progress(function(e) {
+//                this.css('background-position', e.tweens[0].now + 'px ' + e.tweens[1].now + 'px')
+//            })
+//            return this
+//        }
 
         index.bin.on('binOpen', function(){                       // 下拉框展开时一切归位
             index.togClass(index.p0, 'index-p-checked')
@@ -957,16 +1010,16 @@ jQuery(function($){
 
             index.suitSlide.trigger('suitClose')
 
-            index.btn.animate({
-                'bottom': '15px'
-            }, 600).animateBG(0, 0, 600)
+//            index.btn.animate({
+//                'bottom': '15px'
+//            }, 600).animateBG(0, 0, 600)
 
         })
         index.bin.on('binClose', function(){                      // 下拉框收缩
 
-            index.btn.animate({
-                'bottom': '3px'
-            }, 600).animateBG(0, -15, 600)
+//            index.btn.animate({
+//                'bottom': '3px'
+//            }, 600).animateBG(0, -15, 600)
 
         })
 
@@ -1093,7 +1146,7 @@ jQuery(function($){
 
             if('stop' === str) return false
 
-            cate.design.left.length = cate.design.right.length = 0  // 将数组清零
+            cate.design.left.length = cate.design.right.length = cate.design.baby.length = 0  // 将数组清零
 
             $.uniqlo.zid = $.weather.set = 0
             getgoods(0,$.uniqlo.fid,$.uniqlo.occasion,$.weather.sex,$.weather.set)
@@ -1105,6 +1158,7 @@ jQuery(function($){
 
         cate.design.left = []                                     // 选中的上衣id数组
         cate.design.right = []                                    // 选中的下衣id数组
+	cate.design.baby = []                                     // 选中的baby id数组
 
         cate.design.on('click', 'li a', function(){               // 其他任何款式
             if(index.suitIsOpen) {
@@ -1129,6 +1183,7 @@ jQuery(function($){
 
             var leftLen = cate.design.left.length
             var rightLen = cate.design.right.length
+	    var babyLen = cate.design.baby.length
 
             if(leftLen + rightLen == 28 || leftLen + rightLen == 0){
                 $.uniqlo.zid = 0
@@ -1147,8 +1202,11 @@ jQuery(function($){
                     }
                 }
             }
+ 	    if(babyLen){
+        	$.uniqlo.zid = cate.design.baby.join('_')
+      	    }
 
-            if(leftLen + rightLen === 0){
+            if(leftLen + rightLen === 0 && !babyLen){
                 return cate.designAll.trigger('click')
             }
             $.weather.set = 0
@@ -1234,6 +1292,7 @@ jQuery(function($){
         mflist = $.parseJSON(mflist)
         cclist = $.parseJSON(cclist)
         cflist = $.parseJSON(cflist)
+	    bflist = $.parseJSON(bflist)
 
         $.each([wclist, mclist, cclist], function(index, arr) {
             for(var i = arr.length; i --;){
@@ -1252,7 +1311,7 @@ jQuery(function($){
                 case('潮'): mflist[i].c = 11;break;
                 case('斯文'): mflist[i].c = 12;break;
                 case('自然'): mflist[i].c = 13;break;
-                case('酷'): mflist[i].c = 14;break;
+                case('酷'): mflist[i].c = 24;break;
                 case('成熟'): mflist[i].c = 15;break;
                 case('休闲'): mflist[i].c = 6;break;
                 case('复古'): mflist[i].c = 17;break;
@@ -1273,11 +1332,17 @@ jQuery(function($){
                 case('学院'): cflist[i].c = 28;break;
             }
         }
+	    for(var i = bflist.length; i--;){
+	      switch(bflist[i].name){
+	        case('酷'): bflist[i].c = 24;break;
+	      }
+	    }
 
         $.uniqlo.all = [mcarr,mfarr]
         $.uniqlo.women = [wclist,wflist]
         $.uniqlo.men = [mclist,mflist]
         $.uniqlo.kids = [cclist,cflist]
+        $.uniqlo.baby = [cclist,bflist]
 
         index.gender.on('click', 'a', function(){                  // 内页性别切换
             //kimi
@@ -1306,6 +1371,14 @@ jQuery(function($){
             getgoods($.uniqlo.zid,$.uniqlo.fid,$.uniqlo.occasion,sid,$.weather.set);
             //kimi
         }).on('genderChange', function(e, key){
+      if(key == 'baby'){
+        index.babyMask.show()
+        index.babyUl.show().prev().hide()
+        cate.ps.trigger('cateUlHide')
+      } else {
+        index.babyMask.hide()
+        index.babyUl.hide().prev().show()
+      }
             if(key){
                 setUl($.uniqlo[key][0], 'place', 'p')
                 setUl($.uniqlo[key][1], 'style', 's')
