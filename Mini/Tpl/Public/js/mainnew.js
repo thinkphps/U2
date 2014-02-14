@@ -208,10 +208,12 @@ jQuery(function($){
             miniSaveSucc : $('div.mini-savesucc'),              //弹出对话框
             mapLightBox : $('div.map_light_box'),             //地图弹窗
             showMap : $('a.fj_shop'),                              //您附近门店按钮
-            mapClose : $('a.light_box_close')                   //地图弹窗关闭按钮
+            mapClose : $('a.light_box_close'),                   //地图弹窗关闭按钮
+            map:$('div.u_map')                                   //地图
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
+        cabnet.mapLightBox.hide();
 
         /*************************addby jack.wu   2014年2月11日*****************************/
             //cab框隐藏
