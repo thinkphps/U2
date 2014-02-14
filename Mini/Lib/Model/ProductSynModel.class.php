@@ -124,12 +124,12 @@ class ProductSynModel extends Model{
                     $map['color'] = substr($baiyiuq,8);
                     unset($map['status']);
 
-                    $result = $productsbeubeu->field('uq,color')->where($map)->find();
+                    $result = $productsbeubeu->field('*')->where($map)->find();
                     $map['status'] = $type;
 
                     if(isset($result))
                     {
-                        $productsbeubeu->setField($map);
+                        $productsbeubeu->where('id='.$result['id'])->save($map);
                     }
                     else
                     {
