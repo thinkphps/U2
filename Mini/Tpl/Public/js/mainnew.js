@@ -533,7 +533,7 @@ jQuery(function($){
                         title = title.substring(0,15) + "...";
                     }
                     //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    cabnet.buybtns.find("ul").append($('<li title="'+ img.attr("alt") +'"><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
                 }
                 else{
 
