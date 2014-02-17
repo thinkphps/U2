@@ -174,7 +174,7 @@ jQuery(function($){
             hoverBox  : $('div.mini-net-hover'),                 // 图片悬浮框
             hoverIsOpen: false,
             netTips   : $('div.mini-net-tips'),
-            net       : $('div.mini-net2'),                       // 右侧net框
+            net       : $('div.mini-net'),                       // 右侧net框
             netConfirm: $('div.mini-net-confirm'),               // 删除确认框
             netSlide  : $('div.mini-net-slide'),                 // 两个图片切换框
             netIsEmpty: true,                                    // net默认为空
@@ -232,8 +232,8 @@ jQuery(function($){
             cabnet.btnExpansion.hide();
             //显示左边的cab框
             cabnet.cab.show();
-            //将衣柜宽度设置为55%
-            cabnet.net.width("55%");
+            //将衣柜宽度设置为57.8%，只显示3件衣服
+            cabnet.net.width("57.8%");
         })
 
         /*************************end*****************************/
@@ -360,41 +360,44 @@ jQuery(function($){
                 cabnet.netConfirm.hide()
                 e.stopPropagation()
 
-            })
-        //kimi
-        cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
-            addbuy(cabnet.hoverBox.data('id'),2)
-            e.stopPropagation()
+    })
+		//kimi
+    cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
+      //addbuy(cabnet.hoverBox.data('id'),2)
+      e.stopPropagation()
 
             var that = $(this)
             var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
 
-            that.addClass('mini-net-checked')
+      //that.addClass('mini-net-checked')
+      that.toggleClass('mini-net-checked')
+      if(that.hasClass('mini-net-checked')){
+        img.data('had', true)
+        addbuy(cabnet.hoverBox.data('id'),2,1)
+      } else {
+        img.removeData('had')
+        addbuy(cabnet.hoverBox.data('id'),2,0)
+      }
 
-            if(that.hasClass('mini-net-checked')){
-                img.data('had', true)
-            } else {
-                img.removeData('had')
-            }
+    })
+		//kimi
+    cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
+      //kimi
+      //addbuy(cabnet.hoverBox.data('id'),1)
+	  //kimi
+      e.stopPropagation()
 
-        })
-        //kimi
-        cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
-            //kimi
-            addbuy(cabnet.hoverBox.data('id'),1)
-            //kimi
-            e.stopPropagation()
-
-            var that = $(this)
-            var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
-
-            that.addClass('mini-net-checked')
-
-            if(that.hasClass('mini-net-checked')){
-                img.data('like', true)
-            } else {
-                img.removeData('like')
-            }
+      var that = $(this)
+      var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
+      //that.addClass('mini-net-checked')
+      $(this).toggleClass('mini-net-checked');
+      if(that.hasClass('mini-net-checked')){
+        img.data('like', true)
+        addbuy(cabnet.hoverBox.data('id'),1,1)//添加
+      } else {
+        img.removeData('like')
+        addbuy(cabnet.hoverBox.data('id'),1,0)//取消
+      }
 
         })
 
@@ -527,7 +530,7 @@ jQuery(function($){
                 if(img.length > 0){
                     var title = img.attr("alt");
                     if(title.length > 8){
-                        title = title.substring(0,8) + "...";
+                        title = title.substring(0,15) + "...";
                     }
                     //将衣服信息增加到购买列表
                     cabnet.buybtns.find("ul").append($('<li><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
@@ -821,9 +824,9 @@ jQuery(function($){
             if(colors != undefined){
                 var len = colors.length;
                 for(var i = 0;i < len;i++ ){
-                    ulColor.append($('<li title="'+ colors[i].name +'"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
+                    ulColor.append($('<li title="'+ colors[i].name +'"><div style="border: 1px solid #F00;"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
                         +'" style="display:block;cursor:pointer; width:25px; height:25px; border-radius:22.5px; background-color:'+  colors[i].code
-                        +';"></span></li>'));
+                        +';"></span></li></div>'));
                 }
             }
             cabnet.netLike.addClass($(this).data('like') ? 'mini-net-checked' : '')

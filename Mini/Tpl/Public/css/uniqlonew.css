@@ -252,8 +252,8 @@ body{
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; width:167px; height:35px; line-height:35px; text-align:center; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
-.mini-cab-save2{ display:block; float:left; width:137px; height:39px; line-height:39px; text-align:center; font-size:12px; background:#d1d1d1; color:#606060;}
-.mini-cab-share2{ float:left; margin:3px 0 0 13px; color:#666;}
+.mini-cab-save2{ display:block; float:left; width:107px; height:39px; line-height:39px; text-align:center; font-size:12px; background:#d1d1d1; color:#606060;}
+.mini-cab-share2{ float:left; margin:3px 0 0 13px; color:#666; padding-top: 5px;}
 
 
 
@@ -508,20 +508,21 @@ a.mini-buy-now,.mini-change-submit,.mini-reg-check,
 
 
 .mini-net2{
-    background: url(../images/mini/mini-net2.jpg) 0 bottom no-repeat;
-    width:55%;
-    height: 602px;
+  background: url(../images/mini/mini-net2.jpg) 0 bottom no-repeat;
+  width:100%;
+  height: 602px;
 }
 
 .mini-net-container li{
-    margin: 0 12px;
+  margin: 0 2px;
 }
+
+.mini-net-container li img{ width:180px;}
 
 .mini-net2 .mini-net-container li{
-    margin: 0 15px;
+  margin: 0 5px;	
 }
 
-.mini-net2 .mini-net-container li img{ width: 160px;}
 
 .mini-net-hd{
     padding: 10px 0 10px 0;
@@ -666,10 +667,11 @@ a.mini-net-empty{
 }
 
 .mini-net-hover2 .mini-net-hover_right{
-    width:170px;
-    height: 260px;
-    border-left:1px solid #ddd;
-}
+	float:right;
+ 	width:170px;
+	height: 260px;
+	border-left:1px solid #ddd;
+	}
 .mini-net-hover2 .mini-net-hover_right h3{ font-size:12px; color:#666; font-weight:normal; width:170px; border-bottom:1px solid #ddd; padding:10px 0 15px 0; margin:0 0 12px 0;}
 .mini-net-hover2 .mini-net-hover_right ul{ display:block; margin:0 0 0 12px; overflow:hidden;}
 .mini-net-hover2 .mini-net-hover_right ul li{ float:left; margin:2px;}
@@ -678,6 +680,12 @@ a.mini-net-empty{
 .mini-net-hover2 .child a{ display:block; float:left; background:#a0a0a0; padding:5px 22px; margin:3px 1px; color:#FFF; }
 .mini-net-hover2 .child a:hover{ background:#e70012;}
 
+.mini-net-hover3{ left:-180px;}
+.mini-net-hover3 .mini-net-hover_right{ float:left;}
+.mini-net-hover3 .mini-net-hover_left{ right:0;}
+.mini-net-hover3 .mini-net-hover_right{
+	border-right:1px solid #ddd;
+	}
 a.mini-net-close{ display:block; width:33px; height:33px; background:url(../images/mini/close.png) 0 0 no-repeat; z-index:10; right:-16px; top:-16px;}
 
 .mini-net-hover h3{
