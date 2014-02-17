@@ -4,7 +4,6 @@ class GetisutAction extends Action{
 	public function index(){
 		
 		$id	 = trim($this->_post('id'));
-		$id = $id?intval($id):0;
 		if($id>0){
 		$goodtag = M('Goodtag');
 		$list = $goodtag->field('isud')->where(array('num_iid'=>$id))->find();

@@ -238,7 +238,7 @@ jQuery(function($){
 
         /*************************end*****************************/
 
-        //点击弹出您附近门店的地图图层
+            //点击弹出您附近门店的地图图层
         cabnet.showMap.on('click',function(){
             cabnet.miniMask.show();
             cabnet.mapLightBox.show();
@@ -316,14 +316,14 @@ jQuery(function($){
 //            .on('click', function(){                             // 点击任意位置添加至搭配间
 //            addCabCallback.call(this)                            // 添加至左侧的callback
 //        })
-        .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
+            .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
 
-            cabnet.netConfirm.show()
-            e.stopPropagation()
+                cabnet.netConfirm.show()
+                e.stopPropagation()
 
-        }).on('click', 'a.mini-net-detail', function(e){
-            e.stopPropagation()
-        })
+            }).on('click', 'a.mini-net-detail', function(e){
+                e.stopPropagation()
+            })
 
 
         cabnet.minicabnet.on("mouseenter",function(){
@@ -769,21 +769,21 @@ jQuery(function($){
                 }
             }
             /*if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
-                if(cabnet.cab.fg == 75){
+             if(cabnet.cab.fg == 75){
 
-                    if(fg != 86)  return cabnet.netFail.trigger('shown')
+             if(fg != 86)  return cabnet.netFail.trigger('shown')
 
-                } else if(cabnet.cab.fg == 86) {
+             } else if(cabnet.cab.fg == 86) {
 
-                    if(fg != 75)  return cabnet.netFail.trigger('shown')
+             if(fg != 75)  return cabnet.netFail.trigger('shown')
 
-                } else {
+             } else {
 
-                    if(fg == 75 || fg == 86) return cabnet.netFail.trigger('shown')
+             if(fg == 75 || fg == 86) return cabnet.netFail.trigger('shown')
 
-                }
-            }
-            cabnet.cab.fg = fg*/
+             }
+             }
+             cabnet.cab.fg = fg*/
 
             cabnet.cab.sex = sex
 
@@ -1189,7 +1189,7 @@ jQuery(function($){
 
         cate.design.left = []                                     // 选中的上衣id数组
         cate.design.right = []                                    // 选中的下衣id数组
-	cate.design.baby = []                                     // 选中的baby id数组
+        cate.design.baby = []                                     // 选中的baby id数组
 
         cate.design.on('click', 'li a', function(){               // 其他任何款式
             if(index.suitIsOpen) {
@@ -1214,7 +1214,7 @@ jQuery(function($){
 
             var leftLen = cate.design.left.length
             var rightLen = cate.design.right.length
-	    var babyLen = cate.design.baby.length
+            var babyLen = cate.design.baby.length
 
             if(leftLen + rightLen == 28 || leftLen + rightLen == 0){
                 $.uniqlo.zid = 0
@@ -1233,9 +1233,9 @@ jQuery(function($){
                     }
                 }
             }
- 	    if(babyLen){
-        	$.uniqlo.zid = cate.design.baby.join('_')
-      	    }
+            if(babyLen){
+                $.uniqlo.zid = cate.design.baby.join('_')
+            }
 
             if(leftLen + rightLen === 0 && !babyLen){
                 return cate.designAll.trigger('click')
@@ -1323,7 +1323,7 @@ jQuery(function($){
         mflist = $.parseJSON(mflist)
         cclist = $.parseJSON(cclist)
         cflist = $.parseJSON(cflist)
-	    bflist = $.parseJSON(bflist)
+        bflist = $.parseJSON(bflist)
 
         $.each([wclist, mclist, cclist], function(index, arr) {
             for(var i = arr.length; i --;){
@@ -1363,11 +1363,11 @@ jQuery(function($){
                 case('学院'): cflist[i].c = 28;break;
             }
         }
-	    for(var i = bflist.length; i--;){
-	      switch(bflist[i].name){
-	        case('酷'): bflist[i].c = 24;break;
-	      }
-	    }
+        for(var i = bflist.length; i--;){
+            switch(bflist[i].name){
+                case('酷'): bflist[i].c = 24;break;
+            }
+        }
 
         $.uniqlo.all = [mcarr,mfarr]
         $.uniqlo.women = [wclist,wflist]
@@ -1402,14 +1402,14 @@ jQuery(function($){
             getgoods($.uniqlo.zid,$.uniqlo.fid,$.uniqlo.occasion,sid,$.weather.set);
             //kimi
         }).on('genderChange', function(e, key){
-      if(key == 'baby'){
-        index.babyMask.show()
-        index.babyUl.show().prev().hide()
-        cate.ps.trigger('cateUlHide')
-      } else {
-        index.babyMask.hide()
-        index.babyUl.hide().prev().show()
-      }
+            if(key == 'baby'){
+                index.babyMask.show()
+                index.babyUl.show().prev().hide()
+                cate.ps.trigger('cateUlHide')
+            } else {
+                index.babyMask.hide()
+                index.babyUl.hide().prev().show()
+            }
             if(key){
                 setUl($.uniqlo[key][0], 'place', 'p')
                 setUl($.uniqlo[key][1], 'style', 's')
