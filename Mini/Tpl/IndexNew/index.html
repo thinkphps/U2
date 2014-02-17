@@ -455,7 +455,8 @@
 
 </div>
 
-<div class="mt30 mb20 index-bin2 pr">
+<div class="mt30 mb20 index-bin2 pr" id="mapdiv">
+    <a href="javascript:;" class="none light_box_close"></a>
     <div class="u_map fl">
         <h3> 查找您附近的优衣库UNIQLO门店</h3>
         <div class="u_map_con">
@@ -756,14 +757,7 @@
     <button id="relateButton" name="relateButton" onclick="return do_relate();">刷新激活状态</button>
 </div>
 
-<!-- 地图弹窗 -->
-<div class="map_light_box mini-pop ">
-    <a href="javascript:;" class="light_box_close"></a>
-    <h3> 查找您附近的优衣库UNIQLO门店</h3>
-    <div class="light_box_u_map_con">
-        <iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/Map/index.html"></iframe>
-    </div>
-</div>
+
 
 <!-- 隐私权保护声明 -->
 <div class="mini-clause mini-pop pf none">
@@ -973,15 +967,8 @@ var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
 var getcorlorurl = '{:U('API/GetProductColorByID')}';
 var getgoodinfobyuqurl = '{:U('API/GetGoodInfoByUQ')}';
 $(function(){
-    $('div.map_light_box').hide();
 
 
-
-    var miniMask = $('div.mini-mask')
-    $('#mini-activate-succ').click(function(){
-        $('.mini-activate-succ').hide();
-        miniMask.hide();
-    })
     window.imgpath = imgpath;
     $.weather.init({
         imgpath : imgpath,

@@ -209,11 +209,18 @@ jQuery(function($){
             mapLightBox : $('div.map_light_box'),             //地图弹窗
             showMap : $('a.fj_shop'),                              //您附近门店按钮
             mapClose : $('a.light_box_close'),                   //地图弹窗关闭按钮
-            map:$('div.u_map')                                   //地图
+            map:$('div.u_map')                                  //地图
+
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-        cabnet.mapLightBox.hide();
+
+        $('#mini-activate-succ').click(function(){
+            $('.mini-activate-succ').hide();
+            cabnet.miniMask.hide();
+        })
+
+//        cabnet.mapLightBox.addClass("position","fixed");
 
         /*************************addby jack.wu   2014年2月11日*****************************/
             //cab框隐藏
@@ -241,14 +248,37 @@ jQuery(function($){
             //点击弹出您附近门店的地图图层
         cabnet.showMap.on('click',function(){
             cabnet.miniMask.show();
-            cabnet.mapLightBox.show();
+//            cabnet.mapLightBox.show();
+            $('#mapdiv').addClass("map_light_box");
+            $('#mapdiv').find("a.light_box_close").show();
+            $('#mapdiv').removeClass("mt30");
+            $('#mapdiv').removeClass("mb20");
+            $('#mapdiv').removeClass("index-bin2");
+            $('#mapdiv').removeClass("pr");
+
         });
 
         //点击关闭地图图层
         cabnet.mapClose.on('click',function(){
-            cabnet.mapLightBox.hide();
+//            cabnet.mapLightBox.hide();
+            $('#mapdiv').removeClass("map_light_box");
+            $('#mapdiv').find("a.light_box_close").hide();
+            $('#mapdiv').addClass("mt30");
+            $('#mapdiv').addClass("mb20");
+            $('#mapdiv').addClass("index-bin2");
+            $('#mapdiv').addClass("pr");
             succNfail.call(this);
         });
+
+        cabnet.miniMask.on('click',function(){
+            $('#mapdiv').addClass("mt30");
+            $('#mapdiv').addClass("mb20");
+            $('#mapdiv').addClass("index-bin2");
+            $('#mapdiv').addClass("pr");
+            $('#mapdiv').removeClass("map_light_box");
+            $('#mapdiv').find("a.light_box_close").hide();
+        });
+
 
         /* == net交互 == */
 
