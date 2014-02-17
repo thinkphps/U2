@@ -60,3 +60,6 @@ table.text-center th{
 	margin-right: 10px;
 	margin-bottom: 5px;
 }
+.official .row{
+	height: 360px;
+}

@@ -466,22 +466,31 @@ public function delg(){
 public function addlove(){
 $id = trim($this->_post('id'));//Collectio表的num_iid
 $flag = trim($this->_post('flag'));
+$isdel = trim($this->_post('isdel'));
 if($id>0){
 //if(!empty($_SESSION['token'])){
 	if($flag==1){
 	$love = M('Love');
 	$time = date('Y-m-d H:i:s');
+    if($isdel==1){
 	$cresult = $love->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
 	if(empty($cresult)){
 	$love->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
 	}
+    }else if($isdel==0){
+      $love->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();    
+    }
 	}else if($flag==2){
 	$buy = M('Buy');
 	$time = date('Y-m-d H:i:s');
+    if($isdel==1){
 	$cresult = $buy->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
 	if(empty($cresult)){
 	$buy->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
-	}		
+	}
+    }else if($isdel==0){
+     $buy->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();    
+    }		
 	}
 //}
 }

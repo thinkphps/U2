@@ -254,37 +254,40 @@ jQuery(function($){
     })
 		//kimi
     cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
-      addbuy(cabnet.hoverBox.data('id'),2)
+      //addbuy(cabnet.hoverBox.data('id'),2)
       e.stopPropagation()
 
       var that = $(this)
       var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
 
-      that.addClass('mini-net-checked')
-
+      //that.addClass('mini-net-checked')
+      that.toggleClass('mini-net-checked')
       if(that.hasClass('mini-net-checked')){
         img.data('had', true)
+        addbuy(cabnet.hoverBox.data('id'),2,1)
       } else {
         img.removeData('had')
+        addbuy(cabnet.hoverBox.data('id'),2,0)
       }
 
     })
 		//kimi
     cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
       //kimi
-      addbuy(cabnet.hoverBox.data('id'),1)
+      //addbuy(cabnet.hoverBox.data('id'),1)
 	  //kimi
       e.stopPropagation()
 
       var that = $(this)
       var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
-
-      that.addClass('mini-net-checked')
-
+      //that.addClass('mini-net-checked')
+      $(this).toggleClass('mini-net-checked');
       if(that.hasClass('mini-net-checked')){
         img.data('like', true)
+        addbuy(cabnet.hoverBox.data('id'),1,1)//添加
       } else {
         img.removeData('like')
+        addbuy(cabnet.hoverBox.data('id'),1,0)//取消
       }
 
     })

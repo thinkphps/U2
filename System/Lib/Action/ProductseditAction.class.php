@@ -97,7 +97,7 @@ public function index(){
 		break;
 	    case 4 :
 		if($gtaglist[0]['isud']==6){
-		$str.="<span style='color:red;'>BADY-婴幼儿装</span>";	
+		$str.="<span style='color:red;'>BABY-婴幼儿装</span>";	
 		}
 		break;	
       }	
@@ -386,14 +386,14 @@ public function doedit(){
     $goodarr['isdoubt'] = '1';
 	}
     $goodarr['istag'] = '2';
-	$goodarr['Gender'] = $arr['Gender'];
+	$goodarr['gender'] = $arr['gender'];
 	$goods->where(array('id'=>$id))->save($goodarr);
 
     $this->success('编辑成功',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'],'keyword'=>$keyword,'istag'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt)));
 
 	}else{//复制id的标签
      $olist = $gtmodel->field('*')->where(array('good_id'=>$originalid))->select();
-	 $oresult = $goods->field('Gender,isdoubt')->where(array('id'=>$originalid))->find();
+	 $oresult = $goods->field('gender,isdoubt')->where(array('id'=>$originalid))->find();
 	 if(!empty($olist)){
      //取出实际商品的打标签情况
 	 $ylist = $gtmodel->field('*')->where(array('good_id'=>$id))->select();
@@ -467,7 +467,7 @@ public function doedit(){
 	$goodarr['isud'] = $olist[0]['isud'];
     $goodarr['istag'] = '2';
 	$goodarr['isdoubt'] = $oresult['isdoubt'];
-	$goodarr['Gender'] = $oresult['Gender'];
+	$goodarr['gender'] = $oresult['gender'];
 	$goods->where(array('id'=>$id))->save($goodarr);
 	 $this->success('编辑成功',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'],'keyword'=>$keyword,'istag'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt)));
 	 }else{
@@ -673,7 +673,7 @@ public function ajaxcate(){
 		break;
 		case 4 :
 		if($isud==6){
-		$str.="<span style='color:red;'>BADY-婴幼儿装</span>";	
+		$str.="<span style='color:red;'>BABY-婴幼儿装</span>";	
 		}
 		break;
       }

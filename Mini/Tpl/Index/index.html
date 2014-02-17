@@ -127,7 +127,7 @@
       </div>
       <div class="mini-cab-share">
         <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style_24x24 clear">
+        <div class="jiathis_style_24x24 clear" onmouseover="funcShare()">
           <a class="jiathis_button_tsina"></a>
           <a class="jiathis_button_qzone"></a>
           <a class="jiathis_button_tqq"></a>
@@ -143,6 +143,21 @@
           shortUrl:false,
           hideMore:false
         }
+      funcShare = function(){
+       var src = $('div.mini-cab-container').map(function(){
+        return this.getElementsByTagName('img')[0].src
+         })
+
+            jiathis_config={
+            url:"http://uniqlo.bigodata.com.cn/",
+            summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
+            title : " ",
+            pic:src[0]+ "||" +src[1],
+            shortUrl:false,
+            hideMore:false
+            }
+            // 执行分享操作
+        }        
         </script>
         <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
         <!-- JiaThis Button END -->
@@ -1324,9 +1339,9 @@ $(window).on('beforeunload', function(){
 		addCookie('nologiidu','',-1);
 		addCookie('nologiidd','',-1);	
 })
-function addbuy(id,flag){
+function addbuy(id,flag,isdel){
 	if(id>0){
-	$.post(buyurl,{id:id,flag:flag},function(data,status){
+	$.post(buyurl,{id:id,flag:flag,isdel:isdel},function(data,status){
 		
 	});
 	}
@@ -1374,14 +1389,14 @@ function addwardrobe(id, onFailCallback, onSuccCallback){
   	}	
   	}
   	if(k==1){
-    addCookie('nologiid'+flagisud,noiid+id+'_');
+    addCookie('nologiid'+flagisud,noiid+id+'_',0);
   	onSuccCallback();		
   	}	
   	}else{
   	$.Register.showMask().register.show();
   	}
   	}else{
-  	addCookie('nologiid'+flagisud,id+'_');
+  	addCookie('nologiid'+flagisud,id+'_',0);
   	onSuccCallback();
   	}
   	 		
