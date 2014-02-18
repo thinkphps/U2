@@ -2380,7 +2380,7 @@ p .mini-clause-btn{
 }
 
 
-.tsxx1{ width:504px; height:376px; background:url(../images/mini/tsxx1.png) 0 0 no-repeat; position:absolute; top:90px; left:50%; margin-left:11px; z-index:991;  }
+.tsxx1{ width:504px; height:376px; background:url(../images/mini/tsxx1.png) 0 0 no-repeat; position:fixed; top:90px; left:50%; margin-left:11px; z-index:991;  }
 .tsxx1 a{ display:block; background:#dd000a; width:95px; height:39px; line-height:39px; font-size:18px; color:#FFF; text-align:center; margin:220px 0 0 160px;}
 
 .tsxx2{ width:883px; height:691px; position:absolute; top:159px; right:50%; margin-right:-408px; z-index:991;  }
