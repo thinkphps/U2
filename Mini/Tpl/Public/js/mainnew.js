@@ -123,7 +123,7 @@ jQuery(function($){
             return this.netContainer.nioSlider({
                 prev: '.mini-net-prev',
                 next: '.mini-net-next',
-                width: 218,
+                width: 185,
                 min : 4
             })
         },
