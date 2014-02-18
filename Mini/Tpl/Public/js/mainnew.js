@@ -325,11 +325,11 @@ jQuery(function($){
             var position = $(this).position()
             var thisSlide = $(e.delegateTarget)
             var hoverBoxLeft = position.left + 20;
-            if( thisSlide.width() == 549 && position.left == 370){
+            if( thisSlide.width() == 549 && position.left == 375){
                 hoverBoxLeft = 190;
                 cabnet.hoverBox.addClass("mini-net-hover3");
             }
-            else if(thisSlide.width() == 950 && position.left == 738){
+            else if(thisSlide.width() == 950 && position.left == 747){
                 hoverBoxLeft = 588;
                 cabnet.hoverBox.addClass("mini-net-hover3");
             }
