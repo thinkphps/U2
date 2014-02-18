@@ -828,14 +828,14 @@ jQuery(function($){
                     var imgUrl = colors[i].code;
                     var lastname = "";
                     if( imgUrl != null){
-                        if( CheckImgExists(rootPath + "/" + imgUrl)){
-                            lastname = imgUrl;
-                            alert(1);
-                        }
-                        else
-                        {
-                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
-                        }
+                          lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+//                        if( CheckImgExists(rootPath + "/" + imgUrl)){
+//                            lastname = imgUrl;
+//                        }
+//                        else
+//                        {
+//                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+//                        }
                     }
 
                     ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
