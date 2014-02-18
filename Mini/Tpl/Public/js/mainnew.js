@@ -5,27 +5,6 @@ jQuery(function($){
     var key="8f1a6e3f182904ad22170f56c890e533";
     loadMymodel(touchid,key);
 
-    var jiathis_config={
-        url:"http://uniqlo.bigodata.com.cn/",
-        summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
-        title : " ",
-        pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
-        shortUrl:false,
-        hideMore:false
-    }
-    funcShare = function(){
-        var src = Model.GetDIY(); // 取出当前搭配图片
-
-        jiathis_config={
-            url:"http://uniqlo.bigodata.com.cn/",
-            summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
-            title : " ",
-            pic:src,
-            shortUrl:false,
-            hideMore:false
-        }
-        // 执行分享操作
-    }
 
 
 
@@ -849,7 +828,14 @@ jQuery(function($){
                     var imgUrl = colors[i].code;
                     var lastname = "";
                     if( imgUrl != null){
-                        lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+                        if( CheckImgExists(rootPath + "/" + imgUrl)){
+                            lastname = imgUrl;
+                            alert(1);
+                        }
+                        else
+                        {
+                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+                        }
                     }
 
                     ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
@@ -886,6 +872,18 @@ jQuery(function($){
                 'color':null,
                 'uq':uq
             })
+        }
+
+        //判断图片是否存在
+        function CheckImgExists(imgurl) {
+            var ImgObj = new Image(); //判断图片是否存在
+            ImgObj.src = imgurl;
+            //没有图片，则返回-1
+            if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         function cabAjaxCallback(tag, id, src, pos){           // 这里的ajaxCallback只是测试用

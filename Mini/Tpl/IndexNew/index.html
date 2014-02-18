@@ -76,13 +76,38 @@
             <!--<span>将此搭配分享到：</span>-->
             <!-- JiaThis Button BEGIN -->
             <div class="jiathis_style_24x24" onmouseover="funcShare()">
-                <a class="jiathis_button_qzone"></a>
                 <a class="jiathis_button_tsina"></a>
-                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_qzone"></a>
                 <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_tqq"></a>
                 <a class="jiathis_button_renren"></a>
             </div>
+            <script type="text/javascript">
+                var jiathis_config={
+                    url:"http://uniqlo.bigodata.com.cn/",
+                    summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
+                    title : " ",
+                    pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
+                    shortUrl:false,
+                    hideMore:false
+                }
+                funcShare = function(){
+                    var src = Model.GetDIY(); // 取出当前搭配图片
+
+                    jiathis_config={
+                        url:"http://uniqlo.bigodata.com.cn/",
+                        summary:"#我的专属衣柜# 每日的穿衣搭配，你要花多少时间呢？气温变化快，穿衣搭配烦，场合切换多，换装时间短……幸好我有优衣库出品的优衣柜，帮我根据天气、场合、风格选出合适的搭配组合。现在点击链接，你也可以免费拥有专属衣柜哦！",
+                        title : " ",
+                        pic:src,
+                        shortUrl:false,
+                        hideMore:false
+                    }
+                    // 执行分享操作
+                }
+            </script>
             <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+
             <!-- JiaThis Button END -->
         </div>
     </div>
