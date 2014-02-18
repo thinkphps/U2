@@ -21,6 +21,14 @@
     </script>
 </head>
 <body>
+
+<!--提示-->
+
+<div class="tsxx2">
+    <div class="tsxx2_img"></div>
+    <div class="tsxx2_inf"><a href="javascript:;" id="tsClose">知道了</a></div>
+</div>
+
 <div class="version_n">
     <a href="javascript:;" class="new_v"></a>
     <a href="{:U('Index/index')}" class="old_v"></a>
@@ -561,6 +569,8 @@
     <else />
     <div class="mini-mask pf"></div>
 </if>
+
+<div class="mini-mask2 pf none"></div>
 <!-- 注册1、2 -->
 <form class="mini-register mini-pop pf <if condition="$is_allow_register eq 0">none</if>">
 <a href="javascript:;" class="mini-form-close mini-btn">关闭</a><!-- David -->

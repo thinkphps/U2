@@ -2021,6 +2021,18 @@ a.index-archor{
   z-index: 5;
   cursor: pointer;
 }
+
+.mini-mask2{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    cursor: pointer;
+}
 .mini-register,.mini-login,.mini-fetch,
 .mini-change-password,.mini-clause,
 .mini-reg-succ,.mini-activate,.mini-activate-timeout,
@@ -2366,3 +2378,12 @@ p .mini-clause-btn{
   width: 308px;
   left: 347px;
 }
+
+
+.tsxx1{ width:504px; height:376px; background:url(../images/mini/tsxx1.png) 0 0 no-repeat; position:absolute; top:90px; left:50%; margin-left:11px; z-index:991;  }
+.tsxx1 a{ display:block; background:#dd000a; width:95px; height:39px; line-height:39px; font-size:18px; color:#FFF; text-align:center; margin:220px 0 0 160px;}
+
+.tsxx2{ width:883px; height:691px; position:absolute; top:159px; right:50%; margin-right:-408px; z-index:991;  }
+.tsxx2_img{ float:left; width:400px; height:533px; background:url(../images/mini/tsxx2_img.jpg) 0 0 no-repeat;}
+.tsxx2_inf{ float:right; width:463px; height:433px; background:url(../images/mini/tsxx2_inf.png) 0 0 no-repeat;}
+.tsxx2_inf a{ display:block; background:#dd000a; width:95px; height:39px; line-height:39px; font-size:18px; color:#FFF; text-align:center; margin:300px 0 0 168px;}

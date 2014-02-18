@@ -139,39 +139,48 @@ jQuery(function($){
 
   !(function($){
 
-    var cabnet = {                                         // 集中声明变量
-      list      : [],                                      // 保存已添加的图片id
-      hoverBox  : $('div.mini-net-hover'),                 // 图片悬浮框
-      hoverIsOpen: false,
-      netTips   : $('div.mini-net-tips'),
-      net       : $('div.mini-net'),                       // 右侧net框
-      netConfirm: $('div.mini-net-confirm'),               // 删除确认框
-      netSlide  : $('div.mini-net-slide'),                 // 两个图片切换框
-      netIsEmpty: true,                                    // net默认为空
-      netChoose : $('a.mini-net-choose'),                  // 挑选衣服按钮
-      netFail   : $('div.mini-net-fail'),                  // 性别不符
-      cab       : $('div.mini-cab'),                       // 左侧的cab框
-      cabSlide  : $('div.mini-cab-slide'),                 // cab-slide框
-      cabTips   : $('div.mini-cab-tips'),                  // cab提示框
-      cabBuy    : $('a.mini-cab-buy'),                     // cab购买按钮
-      cabClear  : $('a.mini-cab-clear'),                   // cab清空按钮
-      cabPrev   : $('a.mini-cab-prev'),                    // cab-prev按钮
-      cabNext   : $('a.mini-cab-next'),                    // cab-next按钮
-      cabChoose : $('form.mini-cab-choose'),               // cab-choose框
-      cabDetail : $('div.mini-cab-detail'),                // cab-detail框
-      buyIsShow : false,                                   // cab-choose默认隐藏
-      cabEmpty  : $('a.mini-cab-empty'),                   // cab-empty框
-      netLike   : $('a.mini-net-like'),                    // net-like按钮
-      netHad    : $('a.mini-net-had'),                     // net-had按钮
-      miniAside : $('div.mini-aside'),                     // mini-aside
-      miniSucc  : $('div.mini-succ'),                      // alert提示框
-      miniFail  : $('div.mini-fail'),                      // fail提示框
-      miniMask  : $('div.mini-mask')                       // 半透明浮层
-    }
+      var cabnet = {                                         // 集中声明变量
+          list      : [],                                      // 保存已添加的图片id
+          hoverBox  : $('div.mini-net-hover'),                 // 图片悬浮框
+          hoverIsOpen: false,
+          netTips   : $('div.mini-net-tips'),
+          net       : $('div.mini-net'),                       // 右侧net框
+          netConfirm: $('div.mini-net-confirm'),               // 删除确认框
+          netSlide  : $('div.mini-net-slide'),                 // 两个图片切换框
+          netIsEmpty: true,                                    // net默认为空
+          netChoose : $('a.mini-net-choose'),                  // 挑选衣服按钮
+          netFail   : $('div.mini-net-fail'),                  // 性别不符
+          cab       : $('div.mini-cab'),                       // 左侧的cab框
+          cabSlide  : $('div.mini-cab-slide'),                 // cab-slide框
+          cabTips   : $('div.mini-cab-tips'),                  // cab提示框
+          cabBuy    : $('a.mini-cab-buy'),                     // cab购买按钮
+          cabClear  : $('a.mini-cab-clear'),                   // cab清空按钮
+          cabPrev   : $('a.mini-cab-prev'),                    // cab-prev按钮
+          cabNext   : $('a.mini-cab-next'),                    // cab-next按钮
+          cabChoose : $('form.mini-cab-choose'),               // cab-choose框
+          cabDetail : $('div.mini-cab-detail'),                // cab-detail框
+          buyIsShow : false,                                   // cab-choose默认隐藏
+          cabEmpty  : $('a.mini-cab-empty'),                   // cab-empty框
+          netLike   : $('a.mini-net-like'),                    // net-like按钮
+          netHad    : $('a.mini-net-had'),                     // net-had按钮
+          miniAside : $('div.mini-aside'),                     // mini-aside
+          miniSucc  : $('div.mini-succ'),                      // alert提示框
+          miniFail  : $('div.mini-fail'),                      // fail提示框
+          miniMask  : $('div.mini-mask'),                       // 半透明浮层
+          tsClose : $('#tsClose'),                            //提示层
+          miniMask2  : $('div.mini-mask2')                      // 半透明浮层
+      }
     cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
+      cabnet.miniMask2.show();
 
-    /* == net交互 == */
+      cabnet.tsClose.on('click',function(){
+          $("div.tsxx1").hide();
+          cabnet.miniMask2.hide();
+      });
+
+
+      /* == net交互 == */
 
     cabnet.net.on('add', function(e, id){                  // 注册netSlide的被添加自定义事件
       if(cabnet.netIsEmpty){

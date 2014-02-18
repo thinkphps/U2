@@ -184,15 +184,27 @@ jQuery(function($){
             miniSucc  : $('div.mini-succ'),                      // alert提示框
             miniFail  : $('div.mini-fail'),                      // fail提示框
             miniMask  : $('div.mini-mask'),                      // 半透明浮层
+
             miniSaveSucc : $('div.mini-savesucc'),              //弹出对话框
             mapLightBox : $('div.map_light_box'),             //地图弹窗
             showMap : $('a.fj_shop'),                              //您附近门店按钮
             mapClose : $('a.light_box_close'),                   //地图弹窗关闭按钮
             map:$('div.u_map'),                                 //地图
-            colorImg : $('ul.color-img')
+            colorImg : $('ul.color-img'),
+            tsClose : $('#tsClose'),                            //提示层
+            miniMask2  : $('div.mini-mask2')                      // 半透明浮层
+
 
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
+
+        cabnet.miniMask2.show();
+
+        cabnet.tsClose.on('click',function(){
+            $("div.tsxx2").hide();
+            cabnet.miniMask2.hide();
+        });
+
 
         $('#mini-activate-succ').click(function(){
             $('.mini-activate-succ').hide();
