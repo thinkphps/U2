@@ -166,19 +166,21 @@ class ProductSynModel extends Model{
 //            ->where(array('u_products.num_iid'=>$id))
 //            ->select();
 
-
+//由于客户需要展示图片，所以将所有的颜色改成图片地址。
         return $goods
             ->join('u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq')
             ->join('u_settings on u_settings.`key` = u_goods.gender')
             ->join('u_color on u_color.id = u_products_beubeu.color')
+            ->join('u_products on u_products.num_iid=u_goods.num_iid and left(u_products.cvalue,2)=u_products_beubeu.color')
             ->field('
                     distinct u_products_beubeu.color as colorid,
-                    u_color.color_code as colorcode,
+                    u_products.url  as colorcode,
                     u_color.color_name as colorname,
                     left(u_goods.item_bn,8) as uq ,
                     u_settings.value as gender
                     ')
             ->where(array('u_goods.num_iid'=>$id))
+            ->group('uq,colorid')
             ->select();
     }
 } 
