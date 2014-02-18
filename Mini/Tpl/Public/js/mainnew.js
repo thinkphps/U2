@@ -847,7 +847,10 @@ jQuery(function($){
                 var len = colors.length;
                 for(var i = 0;i < len;i++ ){
                     var imgUrl = colors[i].code;
-                    var lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+                    var lastname = "";
+                    if( imgUrl != null){
+                        lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+                    }
 
                     ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
                         'style="background:url(' + lastname +') center no-repeat; background-size:cover;">' +
