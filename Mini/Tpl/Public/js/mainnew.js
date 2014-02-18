@@ -215,7 +215,6 @@ jQuery(function($){
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-
         $('#mini-activate-succ').click(function(){
             $('.mini-activate-succ').hide();
             cabnet.miniMask.hide();
@@ -406,42 +405,46 @@ jQuery(function($){
 
     })
 		//kimi
-    cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
-      //addbuy(cabnet.hoverBox.data('id'),2)
-      e.stopPropagation()
+        cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
+            //addbuy(cabnet.hoverBox.data('id'),2)
+            e.stopPropagation()
 
             var that = $(this)
             var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
 
-      //that.addClass('mini-net-checked')
-      that.toggleClass('mini-net-checked')
-      if(that.hasClass('mini-net-checked')){
-        img.data('had', true)
-        addbuy(cabnet.hoverBox.data('id'),2,1)
-      } else {
-        img.removeData('had')
-        addbuy(cabnet.hoverBox.data('id'),2,0)
-      }
+            //that.addClass('mini-net-checked')
+            that.toggleClass('mini-net-checked')
+            if(that.hasClass('mini-net-checked')){
+                img.data('had', true)
+                img.attr("data-had",1);
+                addbuy(cabnet.hoverBox.data('id'),2,1)
+            } else {
+                img.removeData('had')
+                img.attr("data-had","");
+                addbuy(cabnet.hoverBox.data('id'),2,0)
+            }
 
-    })
+        })
 		//kimi
-    cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
-      //kimi
-      //addbuy(cabnet.hoverBox.data('id'),1)
-	  //kimi
-      e.stopPropagation()
+        cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
+            //kimi
+            //addbuy(cabnet.hoverBox.data('id'),1)
+            //kimi
+            e.stopPropagation()
 
-      var that = $(this)
-      var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
-      //that.addClass('mini-net-checked')
-      $(this).toggleClass('mini-net-checked');
-      if(that.hasClass('mini-net-checked')){
-        img.data('like', true)
-        addbuy(cabnet.hoverBox.data('id'),1,1)//添加
-      } else {
-        img.removeData('like')
-        addbuy(cabnet.hoverBox.data('id'),1,0)//取消
-      }
+            var that = $(this)
+            var img = cabnet.netSlide.find('#' + cabnet.hoverBox.data('id'))
+            //that.addClass('mini-net-checked')
+            $(this).toggleClass('mini-net-checked');
+            if(that.hasClass('mini-net-checked')){
+                img.data('like', true)
+                img.attr("data-like",1);
+                addbuy(cabnet.hoverBox.data('id'),1,1)//添加
+            } else {
+                img.removeData('like')
+                img.attr("data-like","");
+                addbuy(cabnet.hoverBox.data('id'),1,0)//取消
+            }
 
         })
 
@@ -795,6 +798,8 @@ jQuery(function($){
             var src = ' src="' + cabnet.hoverBox.data('src') + '"'
             var ids = ' id="' + id + '"'
             var sex = cabnet.hoverBox.data('sex')
+            var like = ' data-like="' + cabnet.hoverBox.data('data-like') + '"';
+            var had = ' data-had="' + cabnet.hoverBox.data('data-had')+'"';
             //var fg = +cabnet.hoverBox.data('fg')
 
             if(!cabnet.cab.isEmpty && cabnet.cab.sex !== sex){
@@ -805,7 +810,7 @@ jQuery(function($){
 
             cabnet.cab.sex = sex
 
-            $(pos).find('ul').html('<li><img ' + ids + src + url + price + rest + alt + ' /></li>')
+            $(pos).find('ul').html('<li><img ' + ids + src + url + price + rest + alt +  like + had +' /></li>')
 
             cabnet.cab.trigger('add', [pos, id])                 // 触发cab的被添加自定义事件
         }
@@ -819,6 +824,8 @@ jQuery(function($){
             var tag = this.getAttribute('tag')
             var csex = this.getAttribute('csex')
             var fg = this.getAttribute('fg')
+            var like = this.getAttribute("data-like");
+            var had = this.getAttribute("data-had");
 
             cabnet.hoverBox
                 .find('h3.tc').text((csex?(csex+': ') : '') + tag + '风格')
@@ -839,19 +846,24 @@ jQuery(function($){
             if(colors != undefined){
                 var len = colors.length;
                 for(var i = 0;i < len;i++ ){
+                    var imgUrl = colors[i].code;
+                    var lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
 
                     ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
-                        'style="background:url('+ colors[i].code +') center no-repeat;">' +
+                        'style="background:url(' + lastname +') center no-repeat; background-size:cover;">' +
                         '<span>'+ colors[i].name +'</span></a><i>已选中</i></li>'));
-
-
-//                    ulColor.append($('<li title="'+ colors[i].name +'"><div style="border: 1px solid #F00;"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
-//                        +'" style="display:block;cursor:pointer; width:25px; height:25px; border-radius:22.5px; background-color:'+  colors[i].code
-//                        +';"></span></li></div>'));
                 }
             }
-            cabnet.netLike.addClass($(this).data('like') ? 'mini-net-checked' : '')
-            cabnet.netHad.addClass($(this).data('had') ? 'mini-net-checked' : '')
+//            cabnet.netLike.addClass($(this).data('like') ? 'mini-net-checked' : '')
+//            cabnet.netHad.addClass($(this).data('had') ? 'mini-net-checked' : '')
+
+            if(like == 1){
+                cabnet.netLike.addClass("mini-net-checked");
+            }
+
+            if(had == 1){
+                cabnet.netHad.addClass("mini-net-checked");
+            }
 
             cabnet.hoverBox.data({
                 'pos': pos,                                        // 保存thisSlide映射到cab的id
@@ -863,6 +875,8 @@ jQuery(function($){
                 'sex' : this.getAttribute('sex'),
                 'price': price,
                 'alt': alt,
+                'data-like':like,
+                'data-had':had,
                 'rests': rests,
                 'url' : url,                                        // 保存图片url
                 'gender':gender,
@@ -925,6 +939,8 @@ jQuery(function($){
             var rest = ' rest="' + cabnet.kvHover.data('rest') + '"'
             var ids = ' id="' + id + '"'
             var fg  = ' fg="' + cabnet.kvHover.data('fg') + '"'
+            var like = ' data-like="' + cabnet.hoverBox.data('data-like') + '"';
+            var had = ' data-had="' + cabnet.hoverBox.data('data-had')+'"';
 
             //根据ID去服务器获取颜色、uq等信息
             if ( cabnet.kvHover.data('color') == undefined){
@@ -932,7 +948,7 @@ jQuery(function($){
                     var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
                     var gender = ' gender="' + data.gender + '"';
                     var uq = ' uq="' + data.uq + '"';
-                    var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
+                    var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + like + had +' />'
                     $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
                     cabnet.net.trigger('add', id)                         // 触发netSlide的被添加自定义事件
                 });
@@ -941,7 +957,7 @@ jQuery(function($){
                 var color = ' color="' + cabnet.kvHover.data('color') + '"';
                 var gender = ' gender="' + cabnet.kvHover.data('gender') + '"';
                 var uq = ' uq="' + cabnet.kvHover.data('uq') + '"';
-                var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
+                var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + like + had +' />'
                 $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
                 cabnet.net.trigger('add', id)                         // 触发netSlide的被添加自定义事件
             }
@@ -967,10 +983,12 @@ jQuery(function($){
             var rest = ' rest="' + data.rest + '"'
             var ids = ' id="' + data.id + '"'
             var fg  = ' fg="' + data.fg + '"'
+            var like = ' data-like="' + cabnet.hoverBox.data('data-like') + '"';
+            var had = ' data-had="' + cabnet.hoverBox.data('data-had')+'"';
             var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
             var gender = ' gender="' + data.gender + '"';
             var uq = ' uq="' + data.uq + '"';
-            var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + ' />'
+            var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + like + had + ' />'
             $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
             cabnet.net.trigger('add', data.id)                         // 触发netSlide的被添加自定义事件
 
