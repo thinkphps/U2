@@ -209,7 +209,8 @@ jQuery(function($){
             mapLightBox : $('div.map_light_box'),             //地图弹窗
             showMap : $('a.fj_shop'),                              //您附近门店按钮
             mapClose : $('a.light_box_close'),                   //地图弹窗关闭按钮
-            map:$('div.u_map')                                  //地图
+            map:$('div.u_map'),                                 //地图
+            colorImg : $('ul.color-img')
 
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
@@ -279,7 +280,6 @@ jQuery(function($){
             $('#mapdiv').find("a.light_box_close").hide();
         });
 
-
         /* == net交互 == */
 
         function hideDiv(){
@@ -318,13 +318,27 @@ jQuery(function($){
             uniqlo.netSlider()                                   // 运行net slider
         })
 
-        cabnet.netSlide.on('mousemove', 'img', function(e){    // netSlide图片悬浮效果
+        cabnet.netSlide.on('mousemove', 'img ', function(e){    // netSlide图片悬浮效果
 
             e.stopPropagation()
             if(uniqlo.sliding) return
 
             var position = $(this).position()
             var thisSlide = $(e.delegateTarget)
+            var hoverBoxLeft = position.left + 20;
+            if( thisSlide.width() == 549 && position.left == 370){
+                hoverBoxLeft = 190;
+                cabnet.hoverBox.addClass("mini-net-hover3");
+            }
+            else if(thisSlide.width() == 950 && position.left == 738){
+                hoverBoxLeft = 588;
+                cabnet.hoverBox.addClass("mini-net-hover3");
+            }
+            else{
+                cabnet.hoverBox.removeClass("mini-net-hover3");
+            }
+
+
             var pos = thisSlide.data('pos')
             var top = pos === '#cab-top' ? 56 : 322
             var restSlide = thisSlide.siblings('div.mini-net-slide')
@@ -332,7 +346,7 @@ jQuery(function($){
             netHoverCallback.call(this, pos, restSlide)          // 图片悬浮的callback里处理细节
 
             cabnet.hoverBox.css({                                // 显示图片悬浮框
-                left: position.left + 20,
+                left: hoverBoxLeft,
                 top: position.top + top
             }).show()
             cabnet.hoverIsOpen = true
@@ -752,8 +766,10 @@ jQuery(function($){
 
 
         /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
-        cabnet.hoverBox.on("click","span[name='barcode']",function(){
-//            alert($(this).attr("barcode"));
+        cabnet.hoverBox.on("click","a[name='barcode']",function(){
+            cabnet.colorImg.find("li").removeClass("pro-selected");
+            $(this).parent().addClass("pro-selected");
+
             Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
 //            Model.DressingByBarcode('UQ08851140','15581');
         });
@@ -765,21 +781,6 @@ jQuery(function($){
                 uniqlo.scrollTo(0)
             }
         }
-
-        /**********改为点击色块试穿衣服，这里的代码删掉   2014年2月11日 18:07:03**********/
-//        $(document).mousemove(function(e){
-//            var div = $(e.target).closest('div')
-//            if(cabnet.kvIsOpen && !div.is(cabnet.kvHover)){
-//                cabnet.kvHover.hide()
-//                cabnet.kvIsOpen = false
-//            }
-//
-//            if(cabnet.hoverIsOpen && !div.is(cabnet.hoverBox) && !div.is(cabnet.netTips)){
-//                if(div.is(cabnet.netFail) || div.is(cabnet.netConfirm)) return
-//                cabnet.hoverBox.hide()
-//                cabnet.hoverIsOpen = false
-//            }
-//        })
 
         /* == cab、net、kv系列回调函数 == */
 
@@ -801,22 +802,6 @@ jQuery(function($){
                     return cabnet.netFail.trigger('shown', true)
                 }
             }
-            /*if(!cabnet.cab.isEmpty && cabnet.cab.sex == 3 && cabnet.cab.pos !== pos){
-             if(cabnet.cab.fg == 75){
-
-             if(fg != 86)  return cabnet.netFail.trigger('shown')
-
-             } else if(cabnet.cab.fg == 86) {
-
-             if(fg != 75)  return cabnet.netFail.trigger('shown')
-
-             } else {
-
-             if(fg == 75 || fg == 86) return cabnet.netFail.trigger('shown')
-
-             }
-             }
-             cabnet.cab.fg = fg*/
 
             cabnet.cab.sex = sex
 
@@ -854,9 +839,15 @@ jQuery(function($){
             if(colors != undefined){
                 var len = colors.length;
                 for(var i = 0;i < len;i++ ){
-                    ulColor.append($('<li title="'+ colors[i].name +'"><div style="border: 1px solid #F00;"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
-                        +'" style="display:block;cursor:pointer; width:25px; height:25px; border-radius:22.5px; background-color:'+  colors[i].code
-                        +';"></span></li></div>'));
+
+                    ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
+                        'style="background:url('+ colors[i].code +') center no-repeat;">' +
+                        '<span>'+ colors[i].name +'</span></a><i>已选中</i></li>'));
+
+
+//                    ulColor.append($('<li title="'+ colors[i].name +'"><div style="border: 1px solid #F00;"><span name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id
+//                        +'" style="display:block;cursor:pointer; width:25px; height:25px; border-radius:22.5px; background-color:'+  colors[i].code
+//                        +';"></span></li></div>'));
                 }
             }
             cabnet.netLike.addClass($(this).data('like') ? 'mini-net-checked' : '')
