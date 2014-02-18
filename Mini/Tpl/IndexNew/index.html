@@ -1067,7 +1067,7 @@ $(function(){
                                 }
                             }else{
                                 //如果是婴幼儿走这里
-                                if(sid==4){
+                                if($.weather.sex==4){
                                     if(da.fl==1){
                                         $('#upc').html(da.ustr);
                                         $('#downc').html(da.dstr);
@@ -1081,7 +1081,7 @@ $(function(){
                             }
                         }
                         if(da.fl==1){
-                            if(sid==4){
+                            if($.weather.sex==4){
                                 $('.index-single').removeClass('none');
                                 $('.index-suit').addClass('none');
                                 $('.index-suit').css('display','none');
@@ -1090,13 +1090,13 @@ $(function(){
                             $('#tishi').css('display','none');
                             $('#qtm').removeClass('none');
                         }else{
-                            if(tid==1){
+                            if($.weather.set==1){
                                 $('.index-single').addClass('none');
                                 $('.index-suit').removeClass('none');
                                 $('.index-suit').css('display','block');
                                 $('.index-single').css('display','none');
                             }else{
-                                if(sid==4){
+                                if($.weather.sex==4){
                                     $('.index-single').addClass('none');
                                     $('.index-suit').removeClass('none');
                                     $('.index-suit').css('display','block');
@@ -1115,7 +1115,7 @@ $(function(){
                         if(da.flag=='t'){
                             $('#taoz').html(da.tstr);
                         }else{
-                            if(tid==1){
+                            if($.weather.set==1){
                                 $('#taoz').html('');
                             }
                         }
