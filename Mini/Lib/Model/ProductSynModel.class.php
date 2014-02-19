@@ -112,6 +112,8 @@ class ProductSynModel extends Model{
 
         $goods = M('Goods');
 
+        $product = M('Products');
+
         for($i = 0; $i < count($uqproduct); $i++)
         {
             $baiyiuq =  $uqproduct[$i]['uq'];
@@ -141,13 +143,22 @@ class ProductSynModel extends Model{
 
                     // get goods title from goods
                     $mapgoods['item_bn'] = array('like',substr($baiyiuq,0,8).'%');
-                    $goodsResult = $goods->field('title')->where($mapgoods)->find();
+                    $goodsResult = $goods->field('title,num_iid')->where($mapgoods)->find();
                     $goodsName = '';
+                    $goodsUrl = '';
                     if(isset($goodsResult))
                     {
                         $goodsName = $goodsResult['title'];
+
+                        $productUrlResult = $product->field('url')->where($goodsResult['num_iid'])->find();
+                        if(isset($productUrlResult))
+                        {
+                            $goodsUrl = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/'.$productUrlResult['url'];
+                            $goodsUrl = substr($goodsUrl,0,strlen($goodsUrl)-3).'jpg';
+                        }
                     }
                     $returnProduct[$i]['name'] = $goodsName;
+                    $returnProduct[$i]['url'] = $goodsUrl;
                 }
             }
         }
@@ -183,4 +194,5 @@ class ProductSynModel extends Model{
             ->group('uq,colorid')
             ->select();
     }
+
 } 
