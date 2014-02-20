@@ -152,7 +152,7 @@ jQuery(function($){
             list      : [],                                      // 保存已添加的图片id
             hoverBox  : $('div.mini-net-hover'),                 // 图片悬浮框
             hoverIsOpen: false,
-            netTips   : $('div.mini-net-tips'),
+            netTips   : $('div.mini-net-tips'),                 //点击试穿
             net       : $('div.mini-net'),                       // 右侧net框
             netConfirm: $('div.mini-net-confirm'),               // 删除确认框
             netSlide  : $('div.mini-net-slide'),                 // 两个图片切换框
@@ -161,7 +161,7 @@ jQuery(function($){
             netFail   : $('div.mini-net-fail'),                  // 性别不符
             cab       : $('div.mini-cab'),                       // 左侧的cab框
             //addby jack.wu 2014年2月11日 13:47:06
-            btnFold  : $('div.fold_btn'),                           //左侧的cab框隐藏按钮
+            btnFold  : $('div.fold_btn a'),                           //左侧的cab框隐藏按钮
             btnExpansion : $('div.expansion_btn'),              //左侧的cab框显示按钮
             minicabnet : $('div.mini-cabnet'),
             baiyifl : $('div.baiyi_fl'),
@@ -187,7 +187,7 @@ jQuery(function($){
 
             miniSaveSucc : $('div.mini-savesucc'),              //弹出对话框
             mapLightBox : $('div.map_light_box'),             //地图弹窗
-            showMap : $('a.fj_shop'),                              //您附近门店按钮
+            showMap : $('[name="shopinfo"]'),                              //您附近门店按钮
             mapClose : $('a.light_box_close'),                   //地图弹窗关闭按钮
             map:$('div.u_map'),                                 //地图
             colorImg : $('ul.color-img'),
@@ -328,7 +328,6 @@ jQuery(function($){
                 cabnet.hoverBox.removeClass("mini-net-hover3");
             }
 
-
             var pos = thisSlide.data('pos')
             var top = pos === '#cab-top' ? 56 : 322
             var restSlide = thisSlide.siblings('div.mini-net-slide')
@@ -346,18 +345,14 @@ jQuery(function($){
 
             hideDiv();
 
+        }).on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
+
+            cabnet.netConfirm.show()
+            e.stopPropagation()
+
+        }).on('click', 'a.mini-net-detail', function(e){
+            e.stopPropagation()
         })
-//            .on('click', function(){                             // 点击任意位置添加至搭配间
-//            addCabCallback.call(this)                            // 添加至左侧的callback
-//        })
-            .on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
-
-                cabnet.netConfirm.show()
-                e.stopPropagation()
-
-            }).on('click', 'a.mini-net-detail', function(e){
-                e.stopPropagation()
-            })
 
 
         cabnet.minicabnet.on("mouseenter",function(){
@@ -370,15 +365,6 @@ jQuery(function($){
         cabnet.baiyifl.on("mouseenter",function(){
             hideDiv();
         });
-//         uniqlo.netContainer.on("mouseenter",function(){
-//            console.log(2);
-//            cabnet.hoverBox.hide()
-//            cabnet.hoverIsOpen = false
-//            cabnet.netConfirm.hide()
-//            cabnet.netFail.hide()
-//            clearTimeout(cabnet.netFail.timer)
-//            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
-//        });
 
 
         cabnet.netConfirm.on('click', false)                   // confirm点击任意位置不冒泡
@@ -394,8 +380,8 @@ jQuery(function($){
                 cabnet.netConfirm.hide()
                 e.stopPropagation()
 
-    })
-		//kimi
+            })
+        //kimi
         cabnet.netHad.on('click', function(e){                 // '喜欢'与'已买入'的类名切换
             //addbuy(cabnet.hoverBox.data('id'),2)
             e.stopPropagation()
@@ -416,7 +402,7 @@ jQuery(function($){
             }
 
         })
-		//kimi
+        //kimi
         cabnet.netLike.on('click', function(e){                // '喜欢'与'已买入'的类名切换
             //kimi
             //addbuy(cabnet.hoverBox.data('id'),1)
@@ -544,81 +530,6 @@ jQuery(function($){
             }
         })
 
-        //新的购买功能
-        cabnet.cabbuy2.on('click',function(){
-            if(cabnet.buybtns.is(":hidden")){
-                cabnet.buybtns.show();
-            }
-            else{
-                cabnet.buybtns.hide();
-            }
-        });
-
-        //当前穿着回调，每次穿衣时会执行这个函数。  返回模特身上当前穿着的衣服
-        //获取衣服UQ号去查找淘宝信息
-        Model.CurrClothesCallback = beu_getallclothes;
-        function beu_getallclothes(o){
-            //清空购买列表
-            cabnet.buybtns.find("ul").html("");
-            var barcode = "";
-            for(var i in o){
-                barcode = "img[uq='" + o[i].barcode.substring(0,8) + "']";
-                //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
-                var img = cabnet.net.find(barcode);
-                if(img.length > 0){
-                    var title = img.attr("alt");
-                    if(title.length > 8){
-                        title = title.substring(0,15) + "...";
-                    }
-                    //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li title="'+ img.attr("alt") +'"><a barcode="'+ o[i].barcode.substring(0,8) +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
-                }
-                else{
-
-                }
-
-            }
-        }
-
-        //保存当前搭配
-        cabnet.cabsave2.on("click",function(){
-            //获取购买列表中的内容
-            var barcode = "";
-            var imgfind = "";
-            var j = 0;
-            cabnet.buybtns.find("ul li a").each(function(){
-
-                barcode =  $(this).attr("barcode");
-                imgfind =  "img[uq='" + $(this).attr("barcode") + "']";
-                var img = cabnet.net.find(imgfind);
-                if(img.length == 0){
-                    j = j + 1;
-                    //调用接口，获取详细的衣服信息，然后加入衣柜
-                    $.get(getgoodinfobyuqurl,{id:barcode},function(data){
-                        var id = data.id;
-                        if(id>0){
-                            addwardrobe(id, function(){
-//                            cabnet.miniMask.show()
-//                            cabnet.miniFail.show()
-                            }, function(){
-//                            cabnet.miniMask.show()
-//                            cabnet.miniSucc.show()
-                                addNetCallback2.call(this,data, id)
-                            })
-                        }
-                    });
-                }
-
-            });
-            if(j > 0){
-                cabnet.miniMask.show();
-                cabnet.miniSaveSucc.show();
-            }
-            else{
-                cabnet.miniMask.show();
-                cabnet.miniSaveSucc.show();
-            }
-        });
 
 
         cabnet.cabChoose.on('click', 'a', function(){
@@ -758,16 +669,115 @@ jQuery(function($){
             succNfail.call(this);
         });
 
-
-        /******点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37*****/
+        /************穿衣、购买功能 开始 ***************/
+        //点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37
         cabnet.hoverBox.on("click","a[name='barcode']",function(){
             cabnet.colorImg.find("li").removeClass("pro-selected");
-            $(this).parent().addClass("pro-selected");
+            var barcode = $(this).attr("barcode");
 
-            Model.DressingByBarcode($(this).attr("barcode"),$(this).attr("gender"));
-//            Model.DressingByBarcode('UQ08851140','15581');
+            Model.DressingByBarcode(barcode,$(this).attr("gender"));
+
+//            if(Clothingexisting(barcode.substring(0,8))){
+//                $(this).parent().addClass("pro-selected");
+//            }
         });
 
+        //点击试穿，默认穿上第一个颜色的衣服
+        cabnet.netTips.on("click",function(){
+            var firstLi = cabnet.colorImg.find("li").eq(0);
+            var firstColor = firstLi.find("a");
+            Model.DressingByBarcode(firstColor.attr("barcode"),firstColor.attr("gender"));
+        });
+
+        function Clothingexisting(barcode){
+            var bool = false;
+            var item = cabnet.buybtns.find("ul li a[barcode='"+barcode+"']");
+            if(item.length > 0){
+                bool = true;
+            }
+            return bool;
+        }
+
+
+        //新的购买功能
+        cabnet.cabbuy2.on('click',function(){
+            if(cabnet.buybtns.is(":hidden")){
+                cabnet.buybtns.show();
+            }
+            else{
+                cabnet.buybtns.hide();
+            }
+        });
+
+        //当前穿着回调，每次穿衣时会执行这个函数。  返回模特身上当前穿着的衣服
+        //获取衣服UQ号去查找淘宝信息
+        Model.CurrClothesCallback = beu_getallclothes;
+        function beu_getallclothes(o){
+            //清空购买列表
+            cabnet.buybtns.find("ul").html("");
+            var barcode = "";
+            var uqcode = "";
+            for(var i in o){
+                barcode = o[i].barcode;
+                uqcode = barcode.substring(0,8);
+                //使用uq号去页面中查找衣服的名称、购买地址，如果找不到，则调用接口从数据库中取
+                var img = cabnet.net.find("img[uq='"+ o[i].barcode.substring(0,8) +"']");
+                if(img.length > 0){
+                    var title = img.attr("alt");
+                    if(title.length > 8){
+                        title = title.substring(0,15) + "...";
+                    }
+                    //将衣服信息增加到购买列表
+                    cabnet.buybtns.find("ul").append($('<li title="'+ img.attr("alt") +'"><a barcode="'+barcode+'" uqrcode="'+ uqcode +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    //将衣服颜色缩略图设置为选中状态
+                    cabnet.colorImg.find("li a[barcode='"+ barcode +"']").parent().addClass("pro-selected");
+                }
+                else{
+
+                }
+            }
+        }
+
+        //保存当前搭配
+        cabnet.cabsave2.on("click",function(){
+            //获取购买列表中的内容
+            var uqcode = "";
+            var imgfind = "";
+            var j = 0;
+            cabnet.buybtns.find("ul li a").each(function(){
+                uqcode =  $(this).attr("uqcode");
+                imgfind =  "img[uq='" + uqcode + "']";
+                var img = cabnet.net.find(imgfind);
+                if(img.length == 0){
+                    j = j + 1;
+                    //调用接口，获取详细的衣服信息，然后加入衣柜
+                    $.get(getgoodinfobyuqurl,{id:uqcode},function(data){
+                        var id = data.id;
+                        if(id>0){
+                            addwardrobe(id, function(){
+//                            cabnet.miniMask.show()
+//                            cabnet.miniFail.show()
+                            }, function(){
+//                            cabnet.miniMask.show()
+//                            cabnet.miniSucc.show()
+                                addNetCallback2.call(this,data, id)
+                            })
+                        }
+                    });
+                }
+
+            });
+            if(j > 0){
+                cabnet.miniMask.show();
+                cabnet.miniSaveSucc.show();
+            }
+            else{
+                cabnet.miniMask.show();
+                cabnet.miniSaveSucc.show();
+            }
+        });
+
+        /************穿衣、购买功能  结束**************/
 
         function succNfail(){
             cabnet.miniMask.hide()
@@ -831,16 +841,20 @@ jQuery(function($){
             var uq = this.getAttribute('uq');
             var colors = eval(this.getAttribute('color'));
 
-            var ulColor = cabnet.hoverBox.find(".color ul");
-            ulColor.html("");
+            var colorUL = cabnet.hoverBox.find(".color ul");
+            colorUL.html("");
             //循环得到颜色li
             if(colors != undefined){
                 var len = colors.length;
+                var colorLI = "";
+                var barcode = "";
                 for(var i = 0;i < len;i++ ){
+                    colorLI = $("<li></li>");
                     var imgUrl = colors[i].code;
+                    barcode = uq + colors[i].id;
                     var lastname = "";
                     if( imgUrl != null){
-                          lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
+                        lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
 //                        if( CheckImgExists(rootPath + "/" + imgUrl)){
 //                            lastname = imgUrl;
 //                        }
@@ -849,14 +863,16 @@ jQuery(function($){
 //                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
 //                        }
                     }
-
-                    ulColor.append($('<li title="'+ colors[i].name +'"><a name="barcode" gender="'+gender+'" barcode="'+ uq + colors[i].id + '" href="javascript:;" ' +
+                    colorLI.attr("title",colors[i].name);
+                    colorLI.append('<a name="barcode" gender="'+gender+'" barcode="'+ barcode + '" href="javascript:;" ' +
                         'style="background:url(' + lastname +') center no-repeat; background-size:cover;">' +
-                        '<span>'+ colors[i].name +'</span></a><i>已选中</i></li>'));
+                    '<span>'+ colors[i].name +'</span></a><i>已选中</i>');
+                    if(Clothingexisting(barcode)){
+                        colorLI.addClass("pro-selected");
+                    }
+                    colorUL.append(colorLI);
                 }
             }
-//            cabnet.netLike.addClass($(this).data('like') ? 'mini-net-checked' : '')
-//            cabnet.netHad.addClass($(this).data('had') ? 'mini-net-checked' : '')
 
             if(like == 1){
                 cabnet.netLike.addClass("mini-net-checked");
