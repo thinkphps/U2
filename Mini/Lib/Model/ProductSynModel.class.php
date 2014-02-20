@@ -150,11 +150,12 @@ class ProductSynModel extends Model{
                     {
                         $goodsName = $goodsResult['title'];
 
-                        $productUrlResult = $product->field('url')->where($goodsResult['num_iid'])->find();
+                        $productUrlResult = $product->field('url')->where(array('num_iid'=>$goodsResult['num_iid']))->find();
                         if(isset($productUrlResult))
                         {
                             $goodsUrl = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/'.$productUrlResult['url'];
                             $goodsUrl = substr($goodsUrl,0,strlen($goodsUrl)-3).'jpg';
+                            unset($productUrlResult);
                         }
                     }
                     $returnProduct[$i]['name'] = $goodsName;
