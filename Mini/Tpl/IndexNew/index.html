@@ -1099,6 +1099,9 @@ $(function(){
                             }
                             $('#tishi').css('display','none');
                             $('#qtm').removeClass('none');
+                            //暂时去掉默认推荐样式
+                            $("#upc").html("");
+                            $("#downc").html("");
                         }else{
                             if($.weather.set==1){
                                 $('.index-single').addClass('none');
@@ -1120,7 +1123,6 @@ $(function(){
                             }
                             $('#tishi').css('display','none');
                             $('#qtm').addClass('none');
-
                         }
                         if(da.flag=='t'){
                             $('#taoz').html(da.tstr);
@@ -1161,15 +1163,15 @@ $(function(){
 
         allpopform.formregister.on('click', 'a.mini-form-close', function(){
             allpopform.formregister.hide();
-            miniMask.hide();
+            $("div.mini-mask").hide();
         })
         allpopform.formlogin.on('click', 'a.mini-form-close', function(){
             allpopform.formlogin.hide();
-            miniMask.hide();
+            $("div.mini-mask").hide();
         })
         allpopform.formfetch.on('click', 'a.mini-form-close', function(){
             allpopform.formfetch.hide();
-            miniMask.hide();
+            $("div.mini-mask").hide();
         })
     })
     /* =============== mini-aside =============== */
@@ -1309,6 +1311,9 @@ function getgoods(zid,fid,cid,sid,tid){
                 }
                 $('#tishi').css('display','none');
                 $('#qtm').removeClass('none');
+                //暂时去掉默认推荐样式
+                $("#upc").html("");
+                $("#downc").html("");
             }else{
                 if(tid==1){
                     $('.index-single').addClass('none');
