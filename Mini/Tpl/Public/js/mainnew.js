@@ -684,6 +684,7 @@ jQuery(function($){
 
         //点击试穿，默认穿上第一个颜色的衣服
         cabnet.netTips.on("click",function(){
+            cabnet.colorImg.find("li").removeClass("pro-selected");
             var firstLi = cabnet.colorImg.find("li").eq(0);
             var firstColor = firstLi.find("a");
             Model.DressingByBarcode(firstColor.attr("barcode"),firstColor.attr("gender"));
