@@ -190,7 +190,7 @@ class ProductSynModel extends Model{
                     left(u_goods.item_bn,8) as uq ,
                     u_settings.value as gender
                     ')
-            ->where(array('u_goods.num_iid'=>$id))
+            ->where(array('u_goods.num_iid'=>$id,'u_products_beubeu.status'=>'1'))
             ->group('uq,colorid')
             ->select();
     }
