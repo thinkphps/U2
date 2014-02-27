@@ -140,6 +140,7 @@ var weather = {
 		}
 	},
 	setText : function(info, option){
+
 		var time  = this.time();
 		var index = option.index || 1;
 		var temp = this.temp(info['temp' + index]);
@@ -147,8 +148,9 @@ var weather = {
 		var arrIndex
 		var dataStr = time[index - 1].year + 'Äê' + time[index - 1].month + 'ÔÂ' + time[index - 1].date + 'ÈÕ'
 
+
 		$('#nio-img').attr({'title': info['img_title' + num] || info['weather' + index], 'class': 'nio-' + (info['img' + num] || 0)});
-		$('#nio-kv').css('background-image', 'url('+option.imgpath+'/images/index/uniqlo-bg/'+ (info['img' + num] || 0) + '.jpg)');
+        $('#nio-kv').css('background-image', 'url('+option.imgpath+'/images/index/uniqlo-bg/'+ (info['img' + num] || 0) + '.jpg)');
 		$('#nio-city').text(option.city).attr('title', option.city);
 		$('#nio-date').text(dataStr).attr('title', dataStr);
 		$('#nio-day').text(time[index - 1].day).attr('title', time[index - 1].day);
@@ -281,7 +283,7 @@ location.submit(function(){
             $.weather.set = $.weather.set?$.weather.set:0;
 	var JSONP=document.createElement("script");  
     JSONP.type="text/javascript";  
-    JSONP.src="http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;  
+    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;  
     document.getElementsByTagName("head")[0].appendChild(JSONP); 
 
 			/*$.post($.weather.getgurl,{
