@@ -2,6 +2,7 @@
 <div class="uniqlo">
   <div class="index-wea mini-wea">
     <span class="mini-beta">测试版</span>
+    <a href="javascript:;" class="fj_shop " id="shopinfo"></a>
     <i id="nio-img" class="nio-0" title="天气"></i>
     <ul class="mini-wea-ul fl">
       <li class="clear">
@@ -157,6 +158,15 @@
     <a href="javascript:;" class="index-btn pa">收起</a>
   </div>
 
+  <!-- 地图弹窗 -->
+  <div class="map_light_box none" id="mapdiv">
+      <a href="javascript:;" class="light_box_close" id="closemap"></a>
+      <h3>查找您附近的优衣库UNIQLO门店</h3>
+      <div class="light_box_u_map_con" id="allmap">
+      </div>
+  </div>
+
+
 </div>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/jquery.js"></script>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/citys.js"></script>
@@ -165,19 +175,34 @@
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/LinkageSelect/location.js"></script>
 <script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/main.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=490472aa5a1a905fe261a5a00ed1d86c"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/Map/H.min.js"></script>
 <script type='text/javascript'>
 var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
 var imgpath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public';
 var goodurl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood';
 var sendurl = '{$uniurl}';
-var cityn = '{$cityn}';
+//var cityn = '{$cityn}';
 //var provi = '{$provi}';
 var provi = '';
+var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
 $(function(){
+
+    $("#shopinfo").on("click",function(){
+
+       $("#mapdiv").show();
+        H.locateByCity(remote_ip_info);
+    });
+
+    $("#closemap").on("click",function(){
+        $("#mapdiv").hide();
+    });
+
+
 	window.imgpath = imgpath;
 	$.weather.init({
     imgpath : imgpath,
-	city : cityn || null,
+	city : remote_ip_info.city || null,
     callback: function(city, temper, info){
       var avg = getavg(temper.high,temper.low);
       $.weather.avg = avg;

@@ -99,7 +99,7 @@
         </div>
       </div>
       
-      <a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php" class="index-archor pa" target="_blank">
+      <a href="http://uniqlo.bigodata.com.cn/mini.php" class="index-archor pa" target="_blank">
         <span class="mini-beta">≤‚ ‘∞Ê</span>
         <b>LET'S GO</b><strong>»•–Èƒ‚ ‘“¬º‰</strong>
       </a>
@@ -531,6 +531,7 @@ if(da.flag1=='p'){
 	}
 	if(da.flag=='t'){
      $('#taoz').html(da.tstr);
+     $.uniqlo.kvSlider();
 	}
 	if($.weather.set==1){
 	if(!da.ustr && !da.dstr && !da.tstr){
@@ -545,7 +546,6 @@ if(da.flag1=='p'){
 	$('#tishi').css('display','none');	
 	}		
 	}
-	$.uniqlo.kvSlider();
 	}
    function jsonpCallbackm(data){
 
