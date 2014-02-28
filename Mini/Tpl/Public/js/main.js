@@ -172,7 +172,7 @@ jQuery(function($){
       }
     cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-      cabnet.miniMask2.show();
+//      cabnet.miniMask2.show();
 
       cabnet.tsClose.on('click',function(){
           $("div.tsxx1").hide();

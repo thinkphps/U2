@@ -132,16 +132,16 @@
             </a>
         </div>
         <if condition="$clothes eq '' && $pants eq ''">
-        <a href="javascript:;" class="mini-net-empty pa tc">
-            <h3>
-                您暂时还没有衣物收入衣柜
-            </h3>
-            <p>
-                快在下方收入自己
-                <br />
-                喜欢的衣服吧
-            </p>
-        </a>
+            <a href="javascript:;" class="mini-net-empty pa tc">
+                <h3>
+                    您暂时还没有衣物收入衣柜
+                </h3>
+                <p>
+                    快在下方收入自己
+                    <br />
+                    喜欢的衣服吧
+                </p>
+            </a>
         </if>
         <div class="mini-net-slide mini-net-margin pr" id="net-top" data-pos="#cab-top">
             <a href="javascript:;" class="mini-net-prev mini-btn">
@@ -211,9 +211,9 @@
                     选择颜色
                 </h3>
                 <dl class="sale-colors">
-                <ul class="color-img">
-                    <li><a href="javascript:;"><img src="" width="25" height="25" /></a></li>
-                </ul>
+                    <ul class="color-img">
+                        <li><a href="javascript:;"><img src="" width="25" height="25" /></a></li>
+                    </ul>
                 </dl>
             </div>
 
@@ -497,11 +497,6 @@
             <iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/Map/index.html"></iframe>
         </div>
     </div>
-
-    <!--<div class="u_banner fr">-->
-    <!--<a href="javascript:;"><img src="__TMPL__Public/images/mini/b1.jpg" width="300" height="135" /></a>-->
-    <!--<a href="javascript:;"><img src="__TMPL__Public/images/mini/b2.jpg" width="300" height="210" /></a>-->
-    <!--</div>-->
 </div>
 
 <ul class="mini-aside pf">
@@ -570,7 +565,7 @@
     <div class="mini-mask pf"></div>
 </if>
 
-<div class="mini-mask2 pf none"></div>
+<div class="mini-mask2 pf"></div>
 <!-- 注册1、2 -->
 <form class="mini-register mini-pop pf <if condition="$is_allow_register eq 0">none</if>">
 <a href="javascript:;" class="mini-form-close mini-btn">关闭</a><!-- David -->
@@ -977,6 +972,7 @@
 <script type="text/javascript" src="__TMPL__Public/js/mainnew.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 
+
 <script type="text/javascript">
 var gurl = '{:U('IndexNew/delg')}';
 var buyurl = '{:U('IndexNew/addlove')}';
@@ -1003,8 +999,9 @@ var relateurl = '{:U('Login/relate')}';
 var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
 var getcorlorurl = '{:U('API/GetProductColorByID')}';
 var getgoodinfobyuqurl = '{:U('API/GetGoodInfoByUQ')}';
-
+var getweatherurl = '{:U('API/GetWeatherByCityID')}';
 var rootPath = '{:__ROOT__}';
+
 
 $(function(){
     window.imgpath = imgpath;
@@ -1397,11 +1394,11 @@ $(window).on('beforeunload', function(){
     addCookie('nologiidd','',-1);
 })
 function addbuy(id,flag,isdel){
-	if(id>0){
-	$.post(buyurl,{id:id,flag:flag,isdel:isdel},function(data,status){
-		
-	});
-	}
+    if(id>0){
+        $.post(buyurl,{id:id,flag:flag,isdel:isdel},function(data,status){
+
+        });
+    }
 }
 //取出添加到大配件衣服的tag信息
 function adddapei(id,po){
@@ -1417,73 +1414,73 @@ function getavg(high,low){
     return avg;
 }
 function addwardrobe(id, onFailCallback, onSuccCallback){
-  if(id>0){
-  	//没有登录的时候可以加三件
-  	if(!luid){
-  	var flagisud = '';
-  	$.post(isuturl,{id:id},function(data,status){
-  	if(data['code']==1){
-  	if(data['isud']==1){
-  	flagisud = 'u';	
-  	}else if(data['isud']==2){
-  	flagisud = 'd';	
-  	}
-  	
-  	var noiid = getCookie('nologiid'+flagisud);
-  	if(noiid){
-  	var arrnoiid = noiid.split('_'),aalength = arrnoiid.length;
-  	if(aalength<=3){
-  	var k = 0;
-  	for(var i=0;i<aalength;i++){
-  	if(arrnoiid[i]){
-  	if(arrnoiid[i]!=id){
-  		k = 1;
-  	}else{
-  		k = 0;
-     onFailCallback();
-  	break;
-  	}	
-  	}	
-  	}
-  	if(k==1){
-    addCookie('nologiid'+flagisud,noiid+id+'_',0);
-  	onSuccCallback();		
-  	}	
-  	}else{
-  	$.Register.showMask().register.show();
-  	}
-  	}else{
-  	addCookie('nologiid'+flagisud,id+'_',0);
-  	onSuccCallback();
-  	}
-  	 		
-  	}else if(data['code']==-2){
-  	onFailCallback();	
-  	}
-  	});
-  	//没有登录的时候可以加三件
-  	}else{
-    $.post(addwarurl,{id:id},function(data,status){
-      if(data['code'] < 0){
-			//未登录状态收入衣柜
-			if(data['code'] == -1 ){
-				$.Register.showMask().register.show();
-			}else if(data['code'] == -2){
-				onFailCallback();
-			}else if(data['code'] == -3){
-				$('.mini-mask').show();
-				$('.mini-relate').show();
-			}//else if(data['code'] == -4){
-				//$('#relateMobile').val(data['msg']);
-				//$('.mini-mask').show();
-				//$('.mini-activate-notice').show();
-			//}
-	  }else{
-			onSuccCallback();
-      }
-    });
-   }
-  }
+    if(id>0){
+        //没有登录的时候可以加三件
+        if(!luid){
+            var flagisud = '';
+            $.post(isuturl,{id:id},function(data,status){
+                if(data['code']==1){
+                    if(data['isud']==1){
+                        flagisud = 'u';
+                    }else if(data['isud']==2){
+                        flagisud = 'd';
+                    }
+
+                    var noiid = getCookie('nologiid'+flagisud);
+                    if(noiid){
+                        var arrnoiid = noiid.split('_'),aalength = arrnoiid.length;
+                        if(aalength<=3){
+                            var k = 0;
+                            for(var i=0;i<aalength;i++){
+                                if(arrnoiid[i]){
+                                    if(arrnoiid[i]!=id){
+                                        k = 1;
+                                    }else{
+                                        k = 0;
+                                        onFailCallback();
+                                        break;
+                                    }
+                                }
+                            }
+                            if(k==1){
+                                addCookie('nologiid'+flagisud,noiid+id+'_',0);
+                                onSuccCallback();
+                            }
+                        }else{
+                            $.Register.showMask().register.show();
+                        }
+                    }else{
+                        addCookie('nologiid'+flagisud,id+'_',0);
+                        onSuccCallback();
+                    }
+
+                }else if(data['code']==-2){
+                    onFailCallback();
+                }
+            });
+            //没有登录的时候可以加三件
+        }else{
+            $.post(addwarurl,{id:id},function(data,status){
+                if(data['code'] < 0){
+                    //未登录状态收入衣柜
+                    if(data['code'] == -1 ){
+                        $.Register.showMask().register.show();
+                    }else if(data['code'] == -2){
+                        onFailCallback();
+                    }else if(data['code'] == -3){
+                        $('.mini-mask').show();
+                        $('.mini-relate').show();
+                    }//else if(data['code'] == -4){
+                    //$('#relateMobile').val(data['msg']);
+                    //$('.mini-mask').show();
+                    //$('.mini-activate-notice').show();
+                    //}
+                }else{
+                    onSuccCallback();
+                }
+            });
+        }
+    }
 }
 
 function addCookie(objName,objValue,objHours){

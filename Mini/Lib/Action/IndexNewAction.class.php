@@ -874,6 +874,11 @@ class IndexNewAction extends Action {
                     //上装
                     if($sid!=4){//婴幼儿没有上下装
                         $where1['u_goodtag.isud'] = '1';
+                        //取得百一推荐的数据
+                        $hundred = array('u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'1');
+                        $hundred['u_beubeu_goods.sort'] = array('gt','0');
+                        $hresult = $windex->getHundred($hundred);
+                        //取得百一推荐的数据
                     }
                     $where1['u_beubeu_goods.approve_status'] = 'onsale';
                     $where1['u_beubeu_goods.num'] = array('egt','15');
@@ -888,6 +893,11 @@ class IndexNewAction extends Action {
 
                     //下装
                     if($sid!=4){//婴幼儿没有上下装
+                        //取得百一推荐的数据
+                        $hundred = array('u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'2');
+                        $hundred['u_beubeu_goods.sort'] = array('gt','0');
+                        $hdresult = $windex->getHundred($hundred);
+                        //取得百一推荐的数据
                         $where2x = $where;
                         $where2x['u_goodtag.wid'] = $widvalue['wid'];
                         $where2x['u_goodtag.isud'] = '2';
@@ -907,7 +917,23 @@ class IndexNewAction extends Action {
                             $uclothes[] = $vx;
                         }
                     }
+                    //去除百一重复数据
+                    $windex->saomo($hresult,$uclothes);
+                    $uarr = $uclothes;
+                    $uclothes = array();
+                    foreach($hresult as $kx=>$vx){
+                        if(!empty($vx)){
+                            $uclothes[] = $vx;
+                        }
+                    }
+                    foreach($uarr as $kx=>$vx){
+                        if(!empty($vx)){
+                            $uclothes[] = $vx;
+                        }
+                    }
+                    //去除百一重复数据
                     $uclothesy = array();
+                    $uarr = array();
                     if(!empty($dclothesy)){
                         foreach($dclothesy as $kx=>$vx){
                             if(!empty($vx)){
@@ -916,6 +942,20 @@ class IndexNewAction extends Action {
                         }
                     }
                     $dclothesy = array();
+                    $windex->saomo($hdresult,$dclothes);
+                    $darr = $dclothes;
+                    $dclothes = array();
+                    foreach($hdresult as $kx=>$vx){
+                        if(!empty($vx)){
+                            $dclothes[] = $vx;
+                        }
+                    }
+                    foreach($darr as $kx=>$vx){
+                        if(!empty($vx)){
+                            $dclothes[] = $vx;
+                        }
+                    }
+                    $darr = array();
                     if(!empty($cid) && !empty($fid)){
                         if(!$is_g1 && !$is_g2){
                             foreach($cidarr2 as $kc=>$vc){
