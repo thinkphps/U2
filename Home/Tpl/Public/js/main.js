@@ -593,7 +593,6 @@ jQuery(function($){
           index.binIsOpen = true
         })
         index.box.animate({'height': 507}, 600)
-
         index.bin.trigger('binOpen')
       },
       togClass: function(ele, cls){
@@ -705,7 +704,9 @@ jQuery(function($){
 
     index.wea.on('mouseenter', function(){
       if(!index.binIsOpen){
-        index.openBin()
+          setTimeout(function(){
+              index.openBin();
+          },2000);
       }
     })
 
