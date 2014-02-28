@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/css/uniqlo.css?45" />
+<link rel="stylesheet" type="text/css" href="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/css/uniqlo.css?45" />
 <div class="uniqlo">
   <div class="index-wea mini-wea">
     <span class="mini-beta">测试版</span>
@@ -73,9 +73,6 @@
           <li>
             <a href="javascript:;" data-page="index" class="mini-gender-kids" id='3'>KIDS BABY</a>
           </li>
-          <li>
-          	<a href="javascript:;" data-key="baby" data-page="index" class="mini-gender-baby" id='4'>BABY</a>
-          </li>
         </ul>
       </div>
       <!-- <p class="mini-gender-tips pa none">你还可以点击套装，筛选查看居家类套装哦</p> -->
@@ -87,7 +84,6 @@
         <li class="index-p-3" id='7_13_19'>运动</li>
         <li class="index-p-4" id='8_14_20'>居家</li>
       </ul>
-      <div class="mini-place-mask pa"></div>
       <div class="mini-gender-bin index-gender tc fl">
         <div class="mini-gender fl pr">
           <a href="javascript:;" class="mini-gender-suit">套装</a>
@@ -99,9 +95,9 @@
         </div>
       </div>
       
-      <a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php" class="index-archor pa" target="_blank">
+      <a href="http://uniqlo.bigodata.com.cn/mini.php" class="index-archor pa" target="_blank">
         <span class="mini-beta">测试版</span>
-        <b>LET'S GO</b><strong>去虚拟试衣间</strong>
+        <strong>去虚拟试衣间</strong><br /><b>LET'S GO</b>
       </a>
     </div>
 
@@ -158,17 +154,17 @@
   </div>
 
 </div>
-<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/jquery.js"></script>
-<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/citys.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/jquery.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
-<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/nio-weather.js"></script>
-<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/LinkageSelect/location.js"></script>
-<script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/js/main.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/nio-weather.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/Home/Tpl/Public/js/main.js"></script>
 <script type='text/javascript'>
-var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
-var imgpath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public';
-var goodurl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood';
+var getgood = 'http://uniqlo.bigodata.com.cn/index.php/Index/ajaxgood';
+var imgpath = 'http://uniqlo.bigodata.com.cn/Home/Tpl/Public';
+var goodurl = 'http://uniqlo.bigodata.com.cn/index.php/Index/getgood';
 var sendurl = '{$uniurl}';
 var cityn = '{$cityn}';
 //var provi = '{$provi}';
@@ -191,7 +187,7 @@ $(function(){
 		}
 	var JSONP=document.createElement("script");  
     JSONP.type="text/javascript";  
-    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;  
+    JSONP.src="http://uniqlo.bigodata.com.cn/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;  
     document.getElementsByTagName("head")[0].appendChild(JSONP); 
 
       /*$.post(getgood,{tem:avg,pro:$.pron},function(data,status){
@@ -227,7 +223,7 @@ $(function(){
         $.weather.avg = avg;
 	var JSONP=document.createElement("script");  
     JSONP.type="text/javascript";  
-    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;  
+    JSONP.src="http://uniqlo.bigodata.com.cn/index.php/Index/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;  
     document.getElementsByTagName("head")[0].appendChild(JSONP); 
 
         /*$.post(goodurl,{
@@ -304,7 +300,7 @@ function jsonpCallback(da){
 function getgoods(cid,sid,tid){
 	var JSONP=document.createElement("script");  
     JSONP.type="text/javascript";  
-    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
+    JSONP.src="http://uniqlo.bigodata.com.cn/index.php/Index/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
     document.getElementsByTagName("head")[0].appendChild(JSONP); 
 
 	/*$.post(goodurl,{
@@ -368,55 +364,17 @@ function jsonpCallback2(da){
                   $('#downc').html(da.dstr);
                 }
               }else{
-			//如果是婴幼儿走这里
-			if(da.sid==4){
-				if(da.fl==1){
-				$('#upc').html(da.ustr);
-				$('#downc').html(da.dstr);          
-				}else{
-				  $('#taoz').html(da.ustr);
-				} 
-			   }else{
-				$('#upc').html(da.ustr);
-				$('#downc').html(da.dstr);
-			   }
-             }
+                $('#upc').html(da.ustr);
+                $('#downc').html(da.dstr);
+              }
             }
             if(da.flag=='t'){
               $('#taoz').html(da.tstr);
-            }else{
-	        if($.weather.set==1){
-	          $('#taoz').html('');
-	        }
-	       }
+            }
 			if(da.fl==1){
-			 if(da.sid==4){
-			  $('.index-single').removeClass('none');
-			  $('.index-suit').addClass('none');
-			  $('.index-suit').css('display','none');
-			  $('.index-single').css('display','block');
-			 }
 			$('#tishi').css('display','none');
 			 $('#qtm').removeClass('none');
 			}else{
-			 if($.weather.set==1){
-			  $('.index-single').addClass('none');
-			  $('.index-suit').removeClass('none');
-			  $('.index-suit').css('display','block');
-			  $('.index-single').css('display','none');
-			 }else{    
-			  if(da.sid==4){
-			  $('.index-single').addClass('none');
-			  $('.index-suit').removeClass('none');
-			  $('.index-suit').css('display','block');
-			  $('.index-single').css('display','none');         
-			  }else{
-			  $('.index-single').removeClass('none');
-			  $('.index-suit').addClass('none');
-			  $('.index-suit').css('display','none');
-			  $('.index-single').css('display','block');
-			  }   
-			 }
 			 $('#tishi').css('display','none');
 			 $('#qtm').addClass('none');
 			}
@@ -439,55 +397,17 @@ function jsonpCallback3(da){
            $('#downc').html(da.dstr);
          }
        }else{
-    //如果是婴幼儿走这里
-    if(da.sid==4){
-        if(da.fl==1){
-        $('#upc').html(da.ustr);
-        $('#downc').html(da.dstr);          
-        }else{
-          $('#taoz').html(da.ustr);
-        } 
-    }else{
-        $('#upc').html(da.ustr);
-        $('#downc').html(da.dstr);
-    }		 
-    }
-    }
+         $('#upc').html(da.ustr);
+         $('#downc').html(da.dstr);	
+       }
+     }
      if(da.flag=='t'){
        $('#taoz').html(da.tstr);
-     }else{
-	    if($.weather.set==1){
-	       $('#taoz').html('');
-	    }
-	}
+     }
 	 if(da.fl==1){
-	 if(da.sid==4){
-	  $('.index-single').removeClass('none');
-	  $('.index-suit').addClass('none');
-	  $('.index-suit').css('display','none');
-      $('.index-single').css('display','block');
-	 }
 	 $('#tishi').css('display','none');
      $('#qtm').removeClass('none');
 	}else{
-	 if($.weather.set==1){
-      $('.index-single').addClass('none');
-      $('.index-suit').removeClass('none');
-      $('.index-suit').css('display','block');
-      $('.index-single').css('display','none');
-     }else{    
-      if(da.sid==4){
-      $('.index-single').addClass('none');
-      $('.index-suit').removeClass('none');
-      $('.index-suit').css('display','block');
-      $('.index-single').css('display','none');         
-      }else{
-      $('.index-single').removeClass('none');
-      $('.index-suit').addClass('none');
-      $('.index-suit').css('display','none');
-      $('.index-single').css('display','block');
-      }   
-     }
 	 $('#tishi').css('display','none');
      $('#qtm').addClass('none');
 	}
@@ -507,7 +427,7 @@ function getavg(high,low){
   return avg;
 }
 function sendcity(pro,city){
-	 var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
+	 var url = "http://uniqlo.bigodata.com.cn/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
     // 创建script标签，设置其属性
     var script = document.createElement('script');
     script.setAttribute('src', url);
@@ -531,6 +451,7 @@ if(da.flag1=='p'){
 	}
 	if(da.flag=='t'){
      $('#taoz').html(da.tstr);
+     $.uniqlo.kvSlider();
 	}
 	if($.weather.set==1){
 	if(!da.ustr && !da.dstr && !da.tstr){
@@ -545,9 +466,5 @@ if(da.flag1=='p'){
 	$('#tishi').css('display','none');	
 	}		
 	}
-	$.uniqlo.kvSlider();
-	}
-   function jsonpCallbackm(data){
-
 	}
 </script>
