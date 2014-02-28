@@ -493,8 +493,8 @@
     <a href="javascript:;" class="none light_box_close"></a>
     <div class="u_map fl">
         <h3> 查找您附近的优衣库UNIQLO门店</h3>
-        <div class="u_map_con">
-            <iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/Map/index.html"></iframe>
+        <div class="u_map_con" id="allmap">
+            <!--<iframe  style="width: 100%;height: 100%" frameBorder=0 scrolling=no  src="__ROOT__/Map/index.html"></iframe>-->
         </div>
     </div>
 </div>
@@ -969,9 +969,10 @@
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/mainnew.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=490472aa5a1a905fe261a5a00ed1d86c"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/mainnew.js"></script>
 
 <script type="text/javascript">
 var gurl = '{:U('IndexNew/delg')}';
@@ -1001,7 +1002,7 @@ var getcorlorurl = '{:U('API/GetProductColorByID')}';
 var getgoodinfobyuqurl = '{:U('API/GetGoodInfoByUQ')}';
 var getweatherurl = '{:U('API/GetWeatherByCityID')}';
 var rootPath = '{:__ROOT__}';
-
+var tmplPath = '{:__TMPL__Public}';
 
 $(function(){
     window.imgpath = imgpath;

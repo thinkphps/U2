@@ -193,12 +193,11 @@ jQuery(function($){
             colorImg : $('ul.color-img'),
             tsClose : $('#tsClose'),                            //提示层
             miniMask2  : $('div.mini-mask2')                      // 半透明浮层
-
-
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
 //        cabnet.miniMask2.show();
+        H.locateByCity(remote_ip_info);
 
         cabnet.tsClose.on('click',function(){
             $("div.tsxx2").hide();
