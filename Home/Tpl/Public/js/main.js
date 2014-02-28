@@ -600,7 +600,7 @@ jQuery(function($){
       }
     }
 
-    index.bin.prepend('<p class="index-final-tip">注：衣物实际库存请参照优衣库官方网站</p>')
+    index.bin.prepend('<p class="index-final-tip">注：衣物实际库存及价格请参照优衣库官方网站</p>')
     index.genderLi = index.gender.find('li')
     index.all = index.genderLi.eq(0)
 
