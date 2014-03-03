@@ -180,4 +180,21 @@ class APIAction extends Action
         $this->ajaxReturn($taobaoInfo, 'JSON');
     }
 
+    //根据城市ID获取天气信息
+    public function GetWeatherByCityID()
+    {
+        $id = $_GET['id'];
+        $Weather = D('Weather');
+        $returnObj =  $Weather->GetWeatherInfoByID($id);
+        $weatherInfo["cityname"] = $returnObj[0]['commoncityname'];
+        $weatherInfo["weather1"] = json_decode($returnObj[0]['weather1'],true);
+        $weatherInfo["weather2"] = json_decode($returnObj[0]['weather2'],true);
+        $weatherInfo["weather3"] = json_decode($returnObj[0]['weather3'],true);
+        $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
+        $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
+        $weatherInfo["weather6"] = json_decode($returnObj[0]['weather6'],true);
+
+        $this->ajaxReturn($weatherInfo, 'JSON');
+    }
+
 }
