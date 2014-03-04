@@ -567,6 +567,7 @@ jQuery(function($){
       btn : $('a.index-btn'),
       binIsOpen: false,
       wea : $('div.index-wea'),
+      weaArea:$('#divArea'),
       bar : $('div.index-bar'),
       p0 : $('li.index-p-0'),
       gender: $('ul.mini-gender'),
@@ -702,13 +703,19 @@ jQuery(function($){
       }, 3000)
     })
 
-    index.wea.on('mouseenter', function(){
-      if(!index.binIsOpen){
-          setTimeout(function(){
+      //首页弹出层热区缩小范围
+//    index.wea.on('mouseenter', function(){
+//      if(!index.binIsOpen){
+//          setTimeout(function(){
+//              index.openBin();
+//          },2000);
+//      }
+//    })
+      index.weaArea.on('mouseenter',function(){
+          if(!index.binIsOpen){
               index.openBin();
-          },2000);
-      }
-    })
+          }
+      });
 
     $.uniqlo.index = index
 

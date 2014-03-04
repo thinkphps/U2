@@ -1624,6 +1624,14 @@ li.mini-bot-range{
   height: 120px;
 }
 
+.mini-wea-area{
+    top: 60px;
+    left: 175px;
+    width: 600px;
+    height: 80px;
+    position: inherit;
+}
+
 a.fj_shop{ display:block; background:url(../images/mini/fj_shop.png) 0 0 no-repeat; width:113px; height:42px; position: absolute; top:15px; right:12px;}
 a.fj_shop:hover{ background:url(../images/mini/fj_shop.png) 0 -41px no-repeat;}
 
