@@ -1973,7 +1973,7 @@ a.index-archor{
 }
 .index-box-btn{
   width: 950px;
-  height: 15px;
+  height: 0px;
   border-top: 3px solid #e2000f;
   position: relative;
   left: 0;
