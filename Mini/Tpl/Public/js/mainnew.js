@@ -974,7 +974,11 @@ jQuery(function($){
             //根据ID去服务器获取颜色、uq等信息
             if ( cabnet.kvHover.data('color') == undefined){
                 $.get(getcorlorurl,{id:id},function(data){;
-                    var color = ' color="' + JSON.stringify(data.color).replace(/\"/g,"'") + '"';
+                    var jsonColor = "";
+                    if (data.color != undefined){
+                        jsonColor = JSON.stringify(data.color).replace(/\"/g,"'");
+                    }
+                    var color = ' color="' + jsonColor + '"';
                     var gender = ' gender="' + data.gender + '"';
                     var uq = ' uq="' + data.uq + '"';
                     var img = '<img' + src + sex + csex + tag + url + place + price + alt + rest + ids + fg + color + gender + uq + like + had +' />'

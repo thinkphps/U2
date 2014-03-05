@@ -209,6 +209,8 @@ jQuery(function($){
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
                 callback: function(city, temper, info){
+                    //根据修改后的城市切换贴图位置
+                    H.locateByCity(remote_ip_info);
                     //kimi
                     var avg = getavg(temper.high,temper.low);
                     $.weather.avg = avg;

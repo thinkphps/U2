@@ -1395,7 +1395,8 @@ function adddapei(id,po){
     }
 }
 function getavg(high,low){
-    var avg = Math.ceil((low+high)/2);
+    //修复气温求平均值没有转换为INT类型的bug
+    var avg = Math.ceil((parseInt(low)+parseInt(high))/2);
     return avg;
 }
 function addwardrobe(id, onFailCallback, onSuccCallback){

@@ -966,12 +966,12 @@
 <script type="text/javascript" src="__TMPL__Public/js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=490472aa5a1a905fe261a5a00ed1d86c"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=490472aa5a1a905fe261a5a00ed1d86c"></script>
-<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/mainnew.js"></script>
 
 <script type="text/javascript">
@@ -1411,7 +1411,8 @@ function adddapei(id,po){
     }
 }
 function getavg(high,low){
-    var avg = Math.ceil((low+high)/2);
+    //修复气温求平均值没有转换为INT类型的bug
+    var avg = Math.ceil((parseInt(low)+parseInt(high))/2);
     return avg;
 }
 function addwardrobe(id, onFailCallback, onSuccCallback){
