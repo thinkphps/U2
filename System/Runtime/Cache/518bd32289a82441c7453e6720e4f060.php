@@ -36,6 +36,7 @@
   <a href="<?php echo U('Tags/index');?>" class="btn btn-success btn-lg">标签管理</a>
   <a href="<?php echo U('Official/index');?>" class="btn btn-success btn-lg">官方推送</a>
   <a href="<?php echo U('Feedback/index');?>" class="btn btn-success btn-lg">客户反馈</a>
+  <a href="<?php echo U('User/index');?>" class="btn btn-success btn-lg">注册用户统计</a>
 </div>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/bootstrap.js"></script>

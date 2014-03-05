@@ -171,15 +171,8 @@ class ProductSynModel extends Model{
     public function GetProductColorByID($id)
     {
         $goods = M('Goods');
-//        return $goods
-//            ->join('u_products on u_goods.num_iid=u_products.num_iid')
-//            ->join('u_settings on u_settings.`key` = u_goods.gender')
-//            ->join('u_color on u_color.id = left(u_products.cvalue,2)')
-//            ->field('distinct distinct left(u_products.cvalue,2) as colorid, u_color.color_code as colorcode,u_color.color_name as colorname,left(u_goods.item_bn,8) as uq ,u_settings.value as gender ')
-//            ->where(array('u_products.num_iid'=>$id))
-//            ->select();
 
-//由于客户需要展示图片，所以将所有的颜色改成图片地址。
+        //由于客户需要展示图片，所以将所有的颜色改成图片地址。
         return $goods
             ->join('INNER JOIN u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq')
             ->join('INNER JOIN u_settings on u_settings.key = u_goods.gender')
@@ -194,6 +187,7 @@ class ProductSynModel extends Model{
                     ')
             ->where(array('u_goods.num_iid'=>$id,'u_products_beubeu.status'=>'1'))
             ->group('uq,colorid')
+            ->order('u_products_beubeu.id')
             ->select();
     }
 
