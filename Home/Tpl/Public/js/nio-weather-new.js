@@ -2,20 +2,21 @@
  * Created with JetBrains WebStorm.
  * User: Mos,jack.wu
  * Date: 13-5-30
- * Time: ÉÏÎç11:40
+ * Time: ï¿½ï¿½ï¿½ï¿½11:40
  * To change this template use File | Settings | File Templates.
  */
 jQuery(function($){
 
     var weather = {
+        currentOption : "",
         tips : [
-            'Çë×¢Òâ·ÀÊî½µÎÂ£¬ÒË´©¶ÌÐä¡¢±³ÐÄ¡¢¶ÌÈ¹¡¢¶Ì¿ã¡¢±¡ÐÍTÐô',
-            'ÎçÊ±±ÜÃâÔÚ»§Íâ¾ÃÁô£¬´©¶ÌÈ¹/¿ã¡¢¶ÌÌ××°¡¢TÐô¡¢³¤ÈÞÃÞ¶ÌÐä',
-            '±¡ÐÍÃÞÉ¼+Å£×Ð¿ã/ÐÝÏÐ¿ã£¬»òÕëÖ¯Á¬ÒÂÈ¹ÊÇ²»´íµÄÑ¡Ôñ',
-            '°×Ìì´©³¤Ðä³ÄÉÀ+±¡ÐÍÌ××°£¬ÅäÅ£×ÐÉÀ¿ã£¬ÍíÉÏ¼Ó¼þÕëÖ¯ÉÀ°É',
-            'ÃÀÀûÅ«Ã«ÒÂ¡¢»ì·Ä/ÑòÃ«/ÑòÈÞÉÀ¡¢·çÒÂ¡¢Á¬Ã±ÇÑ¿Ë¸Ï½ô´©ÆðÀ´',
-            'ÓðÈÞ·þ»òÑòÃ«»ì·Ä¶Ì´óÒÂ£¬ÄÚÅä¾«·ÄÃÀÀûÅ«Ã«ÒÂ+Î§½í',
-            'ÒË´©ºñÓðÈÞ·þ¡¢Ò¡Á£ÈÞÍâÌ×+ÓðÈÞ±³ÐÄ£¬ÅäÉÏÃ±×ÓºÍÊÖÌ×'
+            'ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½î½µï¿½Â£ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ä¡¢ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½È¹ï¿½ï¿½ï¿½Ì¿ã¡¢ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½',
+            'ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¹/ï¿½ã¡¢ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¶ï¿½ï¿½ï¿½',
+            'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¼+Å£ï¿½Ð¿ï¿½/ï¿½ï¿½ï¿½Ð¿ã£¬ï¿½ï¿½ï¿½ï¿½Ö¯ï¿½ï¿½ï¿½ï¿½È¹ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½',
+            'ï¿½ï¿½ï¿½ì´©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½Ï¼Ó¼ï¿½ï¿½ï¿½Ö¯ï¿½ï¿½ï¿½ï¿½',
+            'ï¿½ï¿½ï¿½ï¿½Å«Ã«ï¿½Â¡ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½Ã«/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½ï¿½Ã±ï¿½Ñ¿Ë¸Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+            'ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½Ã«ï¿½ï¿½Ä¶Ì´ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ä¾«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å«Ã«ï¿½ï¿½+Î§ï¿½ï¿½',
+            'ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½Ò¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½Þ±ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½Óºï¿½ï¿½ï¿½ï¿½ï¿½'
         ],
         time : function(){
             var
@@ -24,7 +25,7 @@ jQuery(function($){
                 month = now.getMonth(),
                 date = now.getDate(),
                 day = now.getDay(),
-                arr = ['ÖÜÈÕ','ÖÜÒ»','ÖÜ¶þ','ÖÜÈý','ÖÜËÄ','ÖÜÎå','ÖÜÁù'],
+                arr = ['ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½Ò»','ï¿½Ü¶ï¿½','ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½'],
                 second = new Date(year, month, date + 1),
                 third  = new Date(year, month, date + 2),
                 forth  = new Date(year, month, date + 3),
@@ -76,11 +77,16 @@ jQuery(function($){
         ajax : function(code, option){
             var that = this,
                 city = option.city;
+            that.currentOption = option;
+            var JSONP=document.createElement("script");
+            JSONP.type="text/javascript";
+            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code;
+            document.getElementsByTagName("head")[0].appendChild(JSONP);
 
-            //µ÷ÓÃ½Ó¿Ú£¬ÌìÆøÐÅÏ¢
-            $.get(getweatherurl,{id:code},function(data){
-                that.setText(data,option);
-            });
+            //ï¿½ï¿½ï¿½Ã½Ó¿Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//            $.get(getweatherurl,{id:code},function(data){
+//                that.setText(data,option);
+//            });
         },
         setText : function(info, option){
 
@@ -98,7 +104,7 @@ jQuery(function($){
 
             $('#nio-kv').css('background-image', 'url('+option.imgpath+'/images/index/uniqlo-bg/'+ weatherinfo.di + '.jpg)');
             $('#nio-city').text(option.city).attr('title', option.city);
-            $('#nio-date').text(time[index - 1].year + 'Äê' + time[index - 1].month + 'ÔÂ' + time[index - 1].date + 'ÈÕ');
+            $('#nio-date').text(time[index - 1].year + 'ï¿½ï¿½' + time[index - 1].month + 'ï¿½ï¿½' + time[index - 1].date + 'ï¿½ï¿½');
             $('#nio-day').text(time[index - 1].day).attr('title', time[index - 1].day);
             $('#nio-wea').text(weatherinfo.wt);
             $('#nio-low').html(weatherinfo.lt + '&deg;');
@@ -166,7 +172,7 @@ jQuery(function($){
             option.city = city
             if(citys[i]) this.ajax(citys[i].i, option);
             else {
-                option.city = 'ÉÏº£';
+                option.city = 'ï¿½Ïºï¿½';
                 this.ajax(101020100, option);
             }
         }
@@ -178,12 +184,12 @@ jQuery(function($){
 // $.weather.init({
 // 		city : city,
 // 		callback: function(city, temper, info){
-// 			// city ³ÇÊÐÃû
+// 			// city ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 // 			// temper: {
-//			// 	low: ×îµÍÆøÎÂ
-//			// 	high: ×î¸ßÆøÎÂ
+//			// 	low: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			// 	high: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //			// }
-// 			// info ÕûÌõinfoÊý¾Ý
+// 			// info ï¿½ï¿½ï¿½ï¿½infoï¿½ï¿½ï¿½
 // 		}
 // })
     /*=================================*/
@@ -211,15 +217,15 @@ jQuery(function($){
             city = option.last().text(),
             temp = city.slice(-1);
 
-        if(city !== 'ÇëÑ¡Ôñ'){
-            if(province !== 'Ì¨ÍåÊ¡'){
-                if( province === 'Ïã¸Û' || province === '°ÄÃÅ'){
+        if(city !== 'ï¿½ï¿½Ñ¡ï¿½ï¿½'){
+            if(province !== 'Ì¨ï¿½ï¿½Ê¡'){
+                if( province === 'ï¿½ï¿½ï¿½' || province === 'ï¿½ï¿½ï¿½ï¿½'){
                     city = province;
                 } else {
-                    city = city.slice(0, (temp === 'Çø' ? -2 : -1));
+                    city = city.slice(0, (temp === 'ï¿½ï¿½' ? -2 : -1));
                 }
             }
-            $('#nio-tip').text('ÕýÔÚ¼ÓÔØÌìÆøÊý¾Ý£¬ÇëÉÔµÈ...').attr('title', 'ÕýÔÚ¼ÓÔØÌìÆøÊý¾Ý£¬ÇëÉÔµÈ...');
+            $('#nio-tip').text('ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Ôµï¿½...').attr('title', 'ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Ôµï¿½...');
             $.pron = prov;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
                 callback: function(city, temper, info){
@@ -276,14 +282,14 @@ jQuery(function($){
 
                      }
                      });*/
-                    //Íùmimi´«³ÇÊÐ
+                    //ï¿½ï¿½mimiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     sendcity(city,info.city);
                 }
             });
             that.hide();
             $.uniqlo.index.togClass($.uniqlo.index.week.find('li').first(), 'mini-checked')
 
-        } else alert('ÇëÑ¡Ôñ³ÇÊÐ£¡');
+        } else alert('ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ð£ï¿½');
         return false;
 
     }).on('click', 'a.mini-city-close', function(){
