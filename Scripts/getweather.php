@@ -1,6 +1,7 @@
 <?php
 require_once('init.php');
 require_once('TopSdk.php');
+set_time_limit(0);
 $db = new DB();
 cleartable($db);
 $weathercity = getcityinfo($db);
@@ -447,10 +448,17 @@ function gettempnumber($temp){
 }
 
 function myjsonencode($jsonobj){
+//    urlencode
+
+    $jsonobj["wt"] = urlencode($jsonobj["wt"]);
+    $jsonobj["dw"] = urlencode($jsonobj["dw"]);
+    $jsonobj["nw"] = urlencode($jsonobj["nw"]);
     $code = json_encode($jsonobj);
-//    $utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $string), ENT_NOQUOTES, 'UTF-8');
-    return preg_replace("#\\\u([0-9a-f]+)#ie", "iconv('UCS-2',
-    'UTF-8', pack('H4', '\\1'))", $code);
+////    $utf8string = html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", $string), ENT_NOQUOTES, 'UTF-8');
+//    return preg_replace("#\\\u([0-9a-f]+)#ie", "iconv('UCS-2',
+//    'UTF-8', pack('H4', '\\1'))", $code);
+
+    return $code;
 }
 
 function checkemptyweather($weather){
@@ -482,14 +490,17 @@ function updateweather($list,$db){
     $isexit = false;
     foreach($list as $weather){
         if($isexit==false){
-            $sql = $sql."(".$weather["channelid"].",'".$weather["cityid"]."','".$weather["updatetime"]."','".$weather["weather1"]."','".
-                $weather["weather2"]."','".$weather["weather3"]."','".$weather["weather4"]."','".
-                $weather["weather5"]."','".$weather["weather6"]."')";
+            $sql = $sql."(".$weather["channelid"].",'".$weather["cityid"]."','".$weather["updatetime"]."','".urldecode($weather["weather1"])."','".
+                urldecode($weather["weather2"])."','".urldecode($weather["weather3"])."','".urldecode($weather["weather4"])."','".
+                urldecode($weather["weather5"])."','".urldecode($weather["weather6"])."')";
             $isexit = true;
         }else{
-            $sql = $sql.",(".$weather["channelid"].",'".$weather["cityid"]."','".$weather["updatetime"]."','".$weather["weather1"]."','".
-                $weather["weather2"]."','".$weather["weather3"]."','".$weather["weather4"]."','".
-                $weather["weather5"]."','".$weather["weather6"]."')";
+//            $sql = $sql.",(".$weather["channelid"].",'".$weather["cityid"]."','".$weather["updatetime"]."','".$weather["weather1"]."','".
+//                $weather["weather2"]."','".$weather["weather3"]."','".$weather["weather4"]."','".
+//                $weather["weather5"]."','".$weather["weather6"]."')";
+            $sql = $sql.",(".$weather["channelid"].",'".$weather["cityid"]."','".$weather["updatetime"]."','".urldecode($weather["weather1"])."','".
+                urldecode($weather["weather2"])."','".urldecode($weather["weather3"])."','".urldecode($weather["weather4"])."','".
+                urldecode($weather["weather5"])."','".urldecode($weather["weather6"])."')";
         }
     }
     if($isexit==true){
