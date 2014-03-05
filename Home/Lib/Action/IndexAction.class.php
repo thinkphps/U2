@@ -416,8 +416,8 @@ class IndexAction extends Action {
         $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
         $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
         $weatherInfo["weather6"] = json_decode($returnObj[0]['weather6'],true);
-
-        echo $callback."($weatherInfo)";
+        $re = json_encode($weatherInfo);
+        echo $callback."($re)";
 
     }
 }
