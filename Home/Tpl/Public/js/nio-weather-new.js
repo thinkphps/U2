@@ -2,20 +2,20 @@
  * Created with JetBrains WebStorm.
  * User: Mos,jack.wu
  * Date: 13-5-30
- * Time: ä¸Šåˆ11:40
+ * Time: ÉÏÎç11:40
  * To change this template use File | Settings | File Templates.
  */
 jQuery(function($){
 
     var weather = {
         tips : [
-            'è¯·æ³¨æ„é˜²æš‘é™æ¸©ï¼Œå®œç©¿çŸ­è¢–ã€èƒŒå¿ƒã€çŸ­è£™ã€çŸ­è£¤ã€è–„å‹Tæ¤',
-            'åˆæ—¶é¿å…åœ¨æˆ·å¤–ä¹…ç•™ï¼Œç©¿çŸ­è£™/è£¤ã€çŸ­å¥—è£…ã€Tæ¤ã€é•¿ç»’æ£‰çŸ­è¢–',
-            'è–„å‹æ£‰æ‰+ç‰›ä»”è£¤/ä¼‘é—²è£¤ï¼Œæˆ–é’ˆç»‡è¿è¡£è£™æ˜¯ä¸é”™çš„é€‰æ‹©',
-            'ç™½å¤©ç©¿é•¿è¢–è¡¬è¡«+è–„å‹å¥—è£…ï¼Œé…ç‰›ä»”è¡«è£¤ï¼Œæ™šä¸ŠåŠ ä»¶é’ˆç»‡è¡«å§',
-            'ç¾åˆ©å¥´æ¯›è¡£ã€æ··çºº/ç¾Šæ¯›/ç¾Šç»’è¡«ã€é£è¡£ã€è¿å¸½èŒ„å…‹èµ¶ç´§ç©¿èµ·æ¥',
-            'ç¾½ç»’æœæˆ–ç¾Šæ¯›æ··çººçŸ­å¤§è¡£ï¼Œå†…é…ç²¾çººç¾åˆ©å¥´æ¯›è¡£+å›´å·¾',
-            'å®œç©¿åšç¾½ç»’æœã€æ‘‡ç²’ç»’å¤–å¥—+ç¾½ç»’èƒŒå¿ƒï¼Œé…ä¸Šå¸½å­å’Œæ‰‹å¥—'
+            'Çë×¢Òâ·ÀÊî½µÎÂ£¬ÒË´©¶ÌĞä¡¢±³ĞÄ¡¢¶ÌÈ¹¡¢¶Ì¿ã¡¢±¡ĞÍTĞô',
+            'ÎçÊ±±ÜÃâÔÚ»§Íâ¾ÃÁô£¬´©¶ÌÈ¹/¿ã¡¢¶ÌÌ××°¡¢TĞô¡¢³¤ÈŞÃŞ¶ÌĞä',
+            '±¡ĞÍÃŞÉ¼+Å£×Ğ¿ã/ĞİÏĞ¿ã£¬»òÕëÖ¯Á¬ÒÂÈ¹ÊÇ²»´íµÄÑ¡Ôñ',
+            '°×Ìì´©³¤Ğä³ÄÉÀ+±¡ĞÍÌ××°£¬ÅäÅ£×ĞÉÀ¿ã£¬ÍíÉÏ¼Ó¼şÕëÖ¯ÉÀ°É',
+            'ÃÀÀûÅ«Ã«ÒÂ¡¢»ì·Ä/ÑòÃ«/ÑòÈŞÉÀ¡¢·çÒÂ¡¢Á¬Ã±ÇÑ¿Ë¸Ï½ô´©ÆğÀ´',
+            'ÓğÈŞ·ş»òÑòÃ«»ì·Ä¶Ì´óÒÂ£¬ÄÚÅä¾«·ÄÃÀÀûÅ«Ã«ÒÂ+Î§½í',
+            'ÒË´©ºñÓğÈŞ·ş¡¢Ò¡Á£ÈŞÍâÌ×+ÓğÈŞ±³ĞÄ£¬ÅäÉÏÃ±×ÓºÍÊÖÌ×'
         ],
         time : function(){
             var
@@ -24,7 +24,7 @@ jQuery(function($){
                 month = now.getMonth(),
                 date = now.getDate(),
                 day = now.getDay(),
-                arr = ['å‘¨æ—¥','å‘¨ä¸€','å‘¨äºŒ','å‘¨ä¸‰','å‘¨å››','å‘¨äº”','å‘¨å…­'],
+                arr = ['ÖÜÈÕ','ÖÜÒ»','ÖÜ¶ş','ÖÜÈı','ÖÜËÄ','ÖÜÎå','ÖÜÁù'],
                 second = new Date(year, month, date + 1),
                 third  = new Date(year, month, date + 2),
                 forth  = new Date(year, month, date + 3),
@@ -77,7 +77,7 @@ jQuery(function($){
             var that = this,
                 city = option.city;
 
-            //è°ƒç”¨æ¥å£ï¼Œå¤©æ°”ä¿¡æ¯
+            //µ÷ÓÃ½Ó¿Ú£¬ÌìÆøĞÅÏ¢
             $.get(getweatherurl,{id:code},function(data){
                 that.setText(data,option);
             });
@@ -98,7 +98,7 @@ jQuery(function($){
 
             $('#nio-kv').css('background-image', 'url('+option.imgpath+'/images/index/uniqlo-bg/'+ weatherinfo.di + '.jpg)');
             $('#nio-city').text(option.city).attr('title', option.city);
-            $('#nio-date').text(time[index - 1].year + 'å¹´' + time[index - 1].month + 'æœˆ' + time[index - 1].date + 'æ—¥');
+            $('#nio-date').text(time[index - 1].year + 'Äê' + time[index - 1].month + 'ÔÂ' + time[index - 1].date + 'ÈÕ');
             $('#nio-day').text(time[index - 1].day).attr('title', time[index - 1].day);
             $('#nio-wea').text(weatherinfo.wt);
             $('#nio-low').html(weatherinfo.lt + '&deg;');
@@ -166,7 +166,7 @@ jQuery(function($){
             option.city = city
             if(citys[i]) this.ajax(citys[i].i, option);
             else {
-                option.city = 'ä¸Šæµ·';
+                option.city = 'ÉÏº£';
                 this.ajax(101020100, option);
             }
         }
@@ -178,12 +178,12 @@ jQuery(function($){
 // $.weather.init({
 // 		city : city,
 // 		callback: function(city, temper, info){
-// 			// city åŸå¸‚å
+// 			// city ³ÇÊĞÃû
 // 			// temper: {
-//			// 	low: æœ€ä½æ°”æ¸©
-//			// 	high: æœ€é«˜æ°”æ¸©
+//			// 	low: ×îµÍÆøÎÂ
+//			// 	high: ×î¸ßÆøÎÂ
 //			// }
-// 			// info æ•´æ¡infoæ•°æ®
+// 			// info ÕûÌõinfoÊı¾İ
 // 		}
 // })
     /*=================================*/
@@ -211,15 +211,15 @@ jQuery(function($){
             city = option.last().text(),
             temp = city.slice(-1);
 
-        if(city !== 'è¯·é€‰æ‹©'){
-            if(province !== 'å°æ¹¾çœ'){
-                if( province === 'é¦™æ¸¯' || province === 'æ¾³é—¨'){
+        if(city !== 'ÇëÑ¡Ôñ'){
+            if(province !== 'Ì¨ÍåÊ¡'){
+                if( province === 'Ïã¸Û' || province === '°ÄÃÅ'){
                     city = province;
                 } else {
-                    city = city.slice(0, (temp === 'åŒº' ? -2 : -1));
+                    city = city.slice(0, (temp === 'Çø' ? -2 : -1));
                 }
             }
-            $('#nio-tip').text('æ­£åœ¨åŠ è½½å¤©æ°”æ•°æ®ï¼Œè¯·ç¨ç­‰...').attr('title', 'æ­£åœ¨åŠ è½½å¤©æ°”æ•°æ®ï¼Œè¯·ç¨ç­‰...');
+            $('#nio-tip').text('ÕıÔÚ¼ÓÔØÌìÆøÊı¾İ£¬ÇëÉÔµÈ...').attr('title', 'ÕıÔÚ¼ÓÔØÌìÆøÊı¾İ£¬ÇëÉÔµÈ...');
             $.pron = prov;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
                 callback: function(city, temper, info){
@@ -276,14 +276,14 @@ jQuery(function($){
 
                      }
                      });*/
-                    //å¾€mimiä¼ åŸå¸‚
+                    //Íùmimi´«³ÇÊĞ
                     sendcity(city,info.city);
                 }
             });
             that.hide();
             $.uniqlo.index.togClass($.uniqlo.index.week.find('li').first(), 'mini-checked')
 
-        } else alert('è¯·é€‰æ‹©åŸå¸‚ï¼');
+        } else alert('ÇëÑ¡Ôñ³ÇÊĞ£¡');
         return false;
 
     }).on('click', 'a.mini-city-close', function(){
