@@ -678,7 +678,7 @@ a.mini-net-empty{
 .mini-net-hover2 .mini-net-hover_right ul li img{ width:25px; height:25px;}
 
 .mini-net-hover2 .child a{ display:block; float:left; background:#a0a0a0; padding:5px 22px; margin:3px 1px; color:#FFF; }
-.mini-net-hover2 .child a:hover{ background:#e70012;}
+/*.mini-net-hover2 .child a:hover{ background:#e70012;}*/
 
 .mini-net-hover3{ left:-180px;}
 .mini-net-hover3 .mini-net-hover_right{ float:left;}
