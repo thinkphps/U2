@@ -863,7 +863,8 @@ jQuery(function($){
 //                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
 //                        }
                     }
-                    colorLI.attr("title",colors[i].name);
+                    //tips显示色块名称和侧快代码
+                    colorLI.attr("title", colors[i].id + " " + colors[i].name);
                     colorLI.append('<a name="barcode" gender="'+gender+'" barcode="'+ barcode + '" href="javascript:;" ' +
                         'style="background:url(' + lastname +') center no-repeat; background-size:cover;">' +
                     '<span>'+ colors[i].name +'</span></a><i>已选中</i>');
