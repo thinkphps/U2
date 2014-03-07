@@ -672,45 +672,42 @@ jQuery(function($){
         });
 
         /************穿衣、购买功能 开始 ***************/
-        //点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37
-        cabnet.hoverBox.on("click","a[name='barcode']",function(){
-            cabnet.colorImg.find("li").removeClass("pro-selected");
-            var barcode = $(this).attr("barcode");
-            //如果性别为3：童装,则显示性别选择div
-            var sex = $(this).attr("sex");
 
+
+        function Dressing(barcode,gender,sex){
+            //如果性别为3：童装,则显示性别选择div
             if(sex == 3){
                 cabnet.btnboy.attr("barcode",barcode);
                 cabnet.btngril.attr("barcode",barcode);
-
-                if(cabnet.btnboy.attr("ischecked") == barcode){
-                    cabnet.btnboy.attr("barcode",barcode);
+                var ischecked = cabnet.net.find("img[uq='"+ barcode.substring(0,8) +"']").attr("ischecked");
+                if((barcode + "15581") == ischecked && Clothingexisting(barcode)){
                     cabnet.btnboy.css({"background":"#e70012"});
                 }
-                else if(cabnet.btngril.attr("ischecked") == barcode){
-                    cabnet.btngril.attr("barcode",barcode);
+                else if((barcode + "15583") == ischecked && Clothingexisting(barcode)){
                     cabnet.btngril.css({"background":"#e70012"});
                 }
                 else{
                     cabnet.btnboy.removeAttr("style");
                     cabnet.btngril.removeAttr("style");
-//                    if( barcode != cabnet.btnboy.attr("barcode")){
-//                        if(cabnet.btnboy.attr("ischecked") != "0"){
-//                            cabnet.btnboy.removeAttr("style");
-//                        }
-//                        else if(cabnet.btngril.attr("ischecked") != "0"){
-//                            cabnet.btngril.removeAttr("style");
-//                        }
-//                    }
                 }
 
                 cabnet.licolor.hide();
                 cabnet.lisex.show();
 
             }else{
-                Model.DressingByBarcode(barcode,$(this).attr("gender"));
+                Model.DressingByBarcode(barcode,gender);
             }
+        }
 
+        //点击色块将衣服添加到模特身上  addby jack.wu   2014年2月12日 11:39:37
+        cabnet.hoverBox.on("click","a[name='barcode']",function(){
+            cabnet.colorImg.find("li").removeClass("pro-selected");
+            var barcode = $(this).attr("barcode");
+            var gender = $(this).attr("gender");
+
+            var sex = $(this).attr("sex");
+
+           Dressing(barcode,gender,sex);
         });
 
 
@@ -720,6 +717,7 @@ jQuery(function($){
             $(this).css({"background":"#e70012"});
             $(this).attr("ischecked",barcode);
             cabnet.btngril.attr("ischecked","0");
+            cabnet.net.find("img[uq='"+ barcode.substring(0,8) +"']").attr("ischecked",barcode+gender);
             cabnet.btngril.removeAttr("style");
             Model.DressingByBarcode(barcode,gender);
         });
@@ -729,6 +727,7 @@ jQuery(function($){
             var gender = $(this).attr("gender");
             $(this).css({"background":"#e70012"});
             $(this).attr("ischecked",barcode);
+            cabnet.net.find("img[uq='"+ barcode.substring(0,8) +"']").attr("ischecked",barcode+gender);
             cabnet.btnboy.attr("ischecked","0");
             cabnet.btnboy.removeAttr("style");
             Model.DressingByBarcode(barcode,gender);
@@ -745,7 +744,7 @@ jQuery(function($){
             cabnet.colorImg.find("li").removeClass("pro-selected");
             var firstLi = cabnet.colorImg.find("li").eq(0);
             var firstColor = firstLi.find("a");
-            Model.DressingByBarcode(firstColor.attr("barcode"),firstColor.attr("gender"));
+            Dressing(firstColor.attr("barcode"),firstColor.attr("gender"),firstColor.attr("sex"));
         });
 
         function Clothingexisting(barcode){
@@ -905,7 +904,6 @@ jQuery(function($){
             cabnet.licolor.show();
             cabnet.lisex.hide();
 
-
             var colorUL = cabnet.hoverBox.find(".color ul");
             colorUL.html("");
             //循环得到颜色li
@@ -939,6 +937,8 @@ jQuery(function($){
                     colorUL.append(colorLI);
                 }
             }
+
+
 
             if(like == 1){
                 cabnet.netLike.addClass("mini-net-checked");
