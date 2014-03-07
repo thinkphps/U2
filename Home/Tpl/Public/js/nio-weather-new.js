@@ -136,8 +136,8 @@ jQuery(function($){
             $('#nio-tem6').html(info['weather6'].ht+ '&deg;');
 
             this[option.city] = info['cityname'];
-            var temper = {low: weatherinfo.lt,
-                high: weatherinfo.ht};
+            var temper = {low: parseInt(weatherinfo.lt),
+                high: parseInt(weatherinfo.ht)};
             if(typeof option.callback == 'function'){
                 option.callback(option.province, temper, info);
             }
@@ -227,7 +227,7 @@ jQuery(function($){
             $.pron = prov;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
                 callback: function(city, temper, info){
-                    var avg = getavg(temper.high,temper.low);
+                    var avg = getavg(parseInt(temper.high),parseInt(temper.low));
                     $.weather.avg = avg;
                     avg = avg?avg:0;
                     $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
