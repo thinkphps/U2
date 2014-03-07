@@ -155,14 +155,14 @@ jQuery(function($){
             $('#nio-low').html(temp.l);
             $('#nio-high').html(temp.h);
 
-            if(temp.av >19){
-                if(temp.av >= 29) arrIndex = 0
-                else if(temp.av >= 24) arrIndex = 1
+            if(avg >14){
+                if(avg >= 24) arrIndex = 0
+                else if(avg >= 19) arrIndex = 1
                 else arrIndex = 2
             } else {
-                if(temp.av >= 15) arrIndex = 3
-                else if(temp.av >= 11) arrIndex = 4
-                else if(temp.av >= 6) arrIndex = 5
+                if(avg >= 11) arrIndex = 3
+                else if(avg >= 6) arrIndex = 4
+                else if(avg >= 1) arrIndex = 5
                 else arrIndex = 6
             }
 
