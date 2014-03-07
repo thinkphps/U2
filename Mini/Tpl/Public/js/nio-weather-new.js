@@ -105,14 +105,14 @@ jQuery(function($){
             $('#nio-low').html(weatherinfo.lt + '&deg;');
             $('#nio-high').html(weatherinfo.ht + '&deg;');
 
-            if(avg >19){
-                if(avg >= 29) arrIndex = 0
-                else if(avg >= 24) arrIndex = 1
+            if(avg >14){
+                if(avg >= 24) arrIndex = 0
+                else if(avg >= 19) arrIndex = 1
                 else arrIndex = 2
             } else {
-                if(avg >= 15) arrIndex = 3
-                else if(avg >= 11) arrIndex = 4
-                else if(avg >= 6) arrIndex = 5
+                if(avg >= 11) arrIndex = 3
+                else if(avg >= 6) arrIndex = 4
+                else if(avg >= 1) arrIndex = 5
                 else arrIndex = 6
             }
 
