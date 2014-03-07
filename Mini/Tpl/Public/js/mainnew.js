@@ -184,7 +184,7 @@ jQuery(function($){
             miniSucc  : $('div.mini-succ'),                      // alert提示框
             miniFail  : $('div.mini-fail'),                      // fail提示框
             miniMask  : $('div.mini-mask'),                      // 半透明浮层
-
+            miniMask2  : $('div.mini-mask2'),                      // 半透明浮层
             miniSaveSucc : $('div.mini-savesucc'),              //弹出对话框
             mapLightBox : $('div.map_light_box'),             //地图弹窗
             showMap : $('[name="shopinfo"]'),                              //您附近门店按钮
@@ -192,7 +192,10 @@ jQuery(function($){
             map:$('div.u_map'),                                 //地图
             colorImg : $('ul.color-img'),
             tsClose : $('#tsClose'),                            //提示层
-            miniMask2  : $('div.mini-mask2')                      // 半透明浮层
+            btnboy : $('#boy'),                                 //儿童性别男
+            btngril : $('#gril'),
+            licolor : $('#licolor'),
+            lisex : $('#lisex')
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
@@ -673,13 +676,69 @@ jQuery(function($){
         cabnet.hoverBox.on("click","a[name='barcode']",function(){
             cabnet.colorImg.find("li").removeClass("pro-selected");
             var barcode = $(this).attr("barcode");
+            //如果性别为3：童装,则显示性别选择div
+            var sex = $(this).attr("sex");
 
-            Model.DressingByBarcode(barcode,$(this).attr("gender"));
+            if(sex == 3){
+                cabnet.btnboy.attr("barcode",barcode);
+                cabnet.btngril.attr("barcode",barcode);
 
-//            if(Clothingexisting(barcode.substring(0,8))){
-//                $(this).parent().addClass("pro-selected");
-//            }
+                if(cabnet.btnboy.attr("ischecked") == barcode){
+                    cabnet.btnboy.attr("barcode",barcode);
+                    cabnet.btnboy.css({"background":"#e70012"});
+                }
+                else if(cabnet.btngril.attr("ischecked") == barcode){
+                    cabnet.btngril.attr("barcode",barcode);
+                    cabnet.btngril.css({"background":"#e70012"});
+                }
+                else{
+                    cabnet.btnboy.removeAttr("style");
+                    cabnet.btngril.removeAttr("style");
+//                    if( barcode != cabnet.btnboy.attr("barcode")){
+//                        if(cabnet.btnboy.attr("ischecked") != "0"){
+//                            cabnet.btnboy.removeAttr("style");
+//                        }
+//                        else if(cabnet.btngril.attr("ischecked") != "0"){
+//                            cabnet.btngril.removeAttr("style");
+//                        }
+//                    }
+                }
+
+                cabnet.licolor.hide();
+                cabnet.lisex.show();
+
+            }else{
+                Model.DressingByBarcode(barcode,$(this).attr("gender"));
+            }
+
         });
+
+
+        cabnet.btnboy.on("click",function(){
+            var barcode = $(this).attr("barcode");
+            var gender = $(this).attr("gender");
+            $(this).css({"background":"#e70012"});
+            $(this).attr("ischecked",barcode);
+            cabnet.btngril.attr("ischecked","0");
+            cabnet.btngril.removeAttr("style");
+            Model.DressingByBarcode(barcode,gender);
+        });
+
+        cabnet.btngril.on("click",function(){
+            var barcode = $(this).attr("barcode");
+            var gender = $(this).attr("gender");
+            $(this).css({"background":"#e70012"});
+            $(this).attr("ischecked",barcode);
+            cabnet.btnboy.attr("ischecked","0");
+            cabnet.btnboy.removeAttr("style");
+            Model.DressingByBarcode(barcode,gender);
+        });
+
+        cabnet.lisex.on("mouseleave",function(){
+            cabnet.lisex.hide();
+            cabnet.licolor.show();
+        });
+
 
         //点击试穿，默认穿上第一个颜色的衣服
         cabnet.netTips.on("click",function(){
@@ -824,6 +883,7 @@ jQuery(function($){
             var price = this.getAttribute('price')
             var tag = this.getAttribute('tag')
             var csex = this.getAttribute('csex')
+            var sex = this.getAttribute('sex')
             var fg = this.getAttribute('fg')
             var like = this.getAttribute("data-like");
             var had = this.getAttribute("data-had");
@@ -840,6 +900,11 @@ jQuery(function($){
             var gender = this.getAttribute('gender');
             var uq = this.getAttribute('uq');
             var colors = eval(this.getAttribute('color'));
+            cabnet.btnboy.attr("gender","15581");
+            cabnet.btngril.attr("gender","15583");
+            cabnet.licolor.show();
+            cabnet.lisex.hide();
+
 
             var colorUL = cabnet.hoverBox.find(".color ul");
             colorUL.html("");
@@ -863,9 +928,9 @@ jQuery(function($){
 //                            lastname = rootPath + "/" + imgUrl.substring(0,imgUrl.lastIndexOf(".")) + ".jpg";
 //                        }
                     }
-                    //tips显示色块名称和侧快代码
+                    //tips显示色块名称和色块代码
                     colorLI.attr("title", colors[i].id + " " + colors[i].name);
-                    colorLI.append('<a name="barcode" gender="'+gender+'" barcode="'+ barcode + '" href="javascript:;" ' +
+                    colorLI.append('<a name="barcode" gender="'+gender+'"  sex="'+sex+'" barcode="'+ barcode + '" href="javascript:;" ' +
                         'style="background:url(' + lastname +') center no-repeat; background-size:cover;">' +
                     '<span>'+ colors[i].name +'</span></a><i>已选中</i>');
                     if(Clothingexisting(barcode)){
