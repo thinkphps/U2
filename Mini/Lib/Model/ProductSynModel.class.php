@@ -191,4 +191,27 @@ class ProductSynModel extends Model{
             ->select();
     }
 
+    /*leon 3.13 新增
+    通过uq号，获取色号和图片地址
+    */
+    public function GetProductColorByUqID($id)
+    {
+        $goods = M('Goods');
+
+        //由于客户需要展示图片，所以将所有的颜色改成图片地址。
+        return $goods
+            ->join('INNER JOIN u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq')
+            ->join('INNER JOIN u_color on u_color.id = u_products_beubeu.color')
+            ->join('INNER JOIN u_products on u_products.num_iid=u_goods.num_iid and left(u_products.cvalue,2)=u_products_beubeu.color')
+            ->field("
+                    distinct u_products_beubeu.color as colorid,
+                    CONCAT(LEFT(u_products.url,LENGTH(u_products.url)-3), 'jpg')  as url,
+                    left(u_goods.item_bn,8) as uq
+                    ")
+            ->where(array('u_products_beubeu.uq'=>$id,'u_products_beubeu.status'=>'1'))
+            ->group('uq,colorid')
+            ->order('u_products_beubeu.color')
+            ->select();
+    }
+
 } 

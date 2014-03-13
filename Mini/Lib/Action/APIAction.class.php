@@ -197,4 +197,32 @@ class APIAction extends Action
         $this->ajaxReturn($weatherInfo, 'JSON');
     }
 
+/*leon 3.13 新增
+通过uq号，获取色号和图片地址
+*/
+    public function GetProductColorByUqID()
+    {
+        $id = $_GET['id'];
+
+        $returnValue = array();
+
+        //$id = '17141542788';
+
+        if (isset($id) &&  ! empty($id) )
+        {
+            $productSyn = D('ProductSyn');
+            $returnOjb =  $productSyn->GetProductColorByUqID($id);
+            if (isset($returnOjb))
+            {
+                for($i = 0; $i < count($returnOjb); $i++)
+                {
+                    $returnValue['color'][$i]['uq'] = $returnOjb[$i]['uq'].$returnOjb[$i]['colorid'];
+                    $returnValue['color'][$i]['url'] = $returnOjb[$i]['url'];
+                }
+            }
+        }
+
+        $this->ajaxReturn($returnValue, 'JSON');
+    }
+
 }
