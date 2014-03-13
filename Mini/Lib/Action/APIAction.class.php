@@ -203,7 +203,7 @@ class APIAction extends Action
     public function GetProductColorByUqID()
     {
         $id = $_GET['id'];
-
+        $preStr = "http://uniqlo.bigodata.com.cn/";
         $returnValue = array();
 
         //$id = '17141542788';
@@ -217,7 +217,7 @@ class APIAction extends Action
                 for($i = 0; $i < count($returnOjb); $i++)
                 {
                     $returnValue['color'][$i]['uq'] = $returnOjb[$i]['uq'].$returnOjb[$i]['colorid'];
-                    $returnValue['color'][$i]['url'] = $returnOjb[$i]['url'];
+                    $returnValue['color'][$i]['url'] = $preStr.$returnOjb[$i]['url'];
                 }
             }
         }
