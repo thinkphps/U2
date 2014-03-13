@@ -202,6 +202,14 @@ jQuery(function($){
 //        cabnet.miniMask2.show();
         H.locateByCity(remote_ip_info);
 
+
+
+        //3秒后隐藏弹出tips
+        setTimeout(function(){
+            $("div.tsxx2").hide();
+            cabnet.miniMask2.hide();
+        }, 3000)
+
         cabnet.tsClose.on('click',function(){
             $("div.tsxx2").hide();
             cabnet.miniMask2.hide();
