@@ -222,7 +222,7 @@ class APIAction extends Action
             }
         }
 
-        $this->ajaxReturn($returnValue, 'JSON');
+        $this->ajaxReturn($returnValue, 'JSONP');
     }
 
 }
