@@ -648,6 +648,7 @@ jQuery(function($){
             cabnet.kvIsOpen = false
         });
 
+
         cabnet.kvHover.on('mouseleave', function(){            // kvHover自动隐藏
 
             cabnet.kvHover.hide()
