@@ -592,6 +592,7 @@ jQuery(function($){
 
         cabnet.kvSlide = $('div.mini-kv-slide')                // kv-slide框
         cabnet.kvHover = $('div.mini-kv-hover')                // kv-hover框
+
         cabnet.kvTimer = 0                                     // kv-hover框延迟
         cabnet.kvIsOpen = false                                // kv-hover状态
         cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hover价格
@@ -621,21 +622,34 @@ jQuery(function($){
 
             kvHoverCallback.call(this, pos, isIndexPage)         // 图片悬浮的callback里处理细节
 
-            cabnet.kvTimer = setTimeout(function(){
+            cabnet.kvHover.css({                               // 显示图片悬浮框
+                left: position.left + 55,
+                top: position.top + top
+            }).show()
+            cabnet.kvIsOpen = true
 
-                cabnet.kvHover.css({                               // 显示图片悬浮框
-                    left: position.left + 55,
-                    top: position.top + top
-                }).show()
-                cabnet.kvIsOpen = true
-
-            }, 100)
+//            cabnet.kvTimer = setTimeout(function(){
+//
+//                cabnet.kvHover.css({                               // 显示图片悬浮框
+//                    left: position.left + 55,
+//                    top: position.top + top
+//                }).show()
+//                cabnet.kvIsOpen = true
+//
+//            }, 100)
 
         }).on('mouseout', function(){
             clearTimeout(cabnet.kvTimer)
         })
 
+
+        $("div.mini-cate,div.index-single").on('mouseenter',function(){
+            cabnet.kvHover.hide()
+            cabnet.kvIsOpen = false
+        });
+
         cabnet.kvHover.on('mouseleave', function(){            // kvHover自动隐藏
+
             cabnet.kvHover.hide()
             cabnet.kvIsOpen = false
         }).on('click', 'a.mini-kv-add', function(){            // 点击添加衣柜
