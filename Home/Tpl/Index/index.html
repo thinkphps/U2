@@ -1,481 +1,444 @@
-<link rel="stylesheet" type="text/css" href="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/css/uniqlo.css?45" />
-<div class="uniqlo">
-  <div class="index-wea mini-wea">
-    <span class="mini-beta">测试版</span>
-    <i id="nio-img" class="nio-0" title="天气"></i>
-    <ul class="mini-wea-ul fl">
-      <li class="clear">
-        <strong id="nio-city" class="ft18" title="城市">城市</strong>
-        <div class="mini-change-city fl pr">
-          <a href="javascript:;" class="mini-change-btn fl" title="切换城市">切换</a>
-          <form class="mini-city linkageselect pa none">
-            <a href="javascript:;" class="mini-city-close mini-btn">关闭</a>
-            <label>省份<select class="level_1"></select></label>
-            <label>城市<select class="level_2"></select></label>
-            <input type="submit" value="切换" />
-          </form>
-        </div>
-        <span id="nio-date" title="2013年00月00日">2013年00月00日</span>
-        <span id="nio-day" title="星期">星期</span>
-      </li>
-      <li class="clear ft36">
-        <strong id="nio-low">00°</strong>
-        <strong>~</strong>
-        <strong id="nio-high">00°</strong>
-        <b id="nio-wea" class="ft14">天气</b>
-      </li>
-      <li class="clear">
-        <ul class="mini-week">
-          <li class="mini-checked">
-            <em id="nio-tem1">00°</em>
-            <small id="nio-day1">星期</small>
-          </li>
-          <li>
-            <em id="nio-tem2">00°</em>
-            <small id="nio-day2">星期</small>
-          </li>
-          <li>
-            <em id="nio-tem3">00°</em>
-            <small id="nio-day3">星期</small>
-          </li>
-          <li>
-            <em id="nio-tem4">00°</em>
-            <small id="nio-day4">星期</small>
-          </li>
-          <li>
-            <em id="nio-tem5">00°</em>
-            <small id="nio-day5">星期</small>
-          </li>
-          <li class="noborder">
-            <em id="nio-tem6">00°</em>
-            <small id="nio-day6">星期</small>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <p id="nio-tip" class="mini-wea-tips fl" title="正在加载天气数据，请稍等...">正在加载天气数据，请稍等...</p>
-  </div>
+<link href="__TMPL__Public/css/dressing_room.css" rel="stylesheet" type="text/css" />
+<div class="dr_header_con dr_header_bg1">
+    <!--头部-->
+    <div class="dr_header">
+        <!--头部-logo-->
+        <div class="dr_logo"><a href="#">优衣库虚拟试衣间</a></div>
 
-  <div class="index-box pr">
-
-    <div class="index-bar pr tc">
-      <div class="mini-gender-bin index-gender index-first-gender tc fl">
-        <ul class="mini-gender fl">
-          <li class="mini-gender-checked">
-            <a href="javascript:;" id='0' class="mini-gender-all">U</a>
-          </li>
-          <li>
-            <a href="javascript:;" id='1'class="mini-gender-women">WOMEN</a>
-          </li>
-          <li>
-            <a href="javascript:;" id='2' class="mini-gender-men">MEN</a>
-          </li>
-          <li>
-            <a href="javascript:;" data-page="index" class="mini-gender-kids" id='3'>KIDS BABY</a>
-          </li>
-        </ul>
-      </div>
-      <!-- <p class="mini-gender-tips pa none">你还可以点击套装，筛选查看居家类套装哦</p> -->
-      <ul class="index-bar-place fl">
-        <li class="index-p-0 index-p-checked" id='0'>全部</li>
-        <li class="index-p-1" id='3_9'>商务</li>
-		    <li class="index-p-1 index-p-kids none" id='__15'>上学</li>
-        <li class="index-p-5" id='4_10_16'>逛街</li>
-        <li class="index-p-3" id='7_13_19'>运动</li>
-        <li class="index-p-4" id='8_14_20'>居家</li>
-      </ul>
-      <div class="mini-gender-bin index-gender tc fl">
-        <div class="mini-gender fl pr">
-          <a href="javascript:;" class="mini-gender-suit">套装</a>
-          <div class="mini-gender-tips pa ft14 none">
-            <b class="mini-gender-close mini-btn">关闭</b>
-            <span class="mini-btn"></span>
-            <p>您还可以点击“套装”，筛选查看家居套装噢</p>
-          </div>
+        <!--头部-城市-->
+        <div class="dr_city">
+            <div class="city_name">
+                <h2>上海</h2>
+                <span>shanghai</span>
+            </div>
+            <div class="city">
+                <a href="#" class="change_city">切换城市</a>
+                <div class="near_un"><i class="city_wz"></i><a href="#">您附近的优衣库门店</a></div>
+            </div>
         </div>
-      </div>
-      
-      <a href="http://phoneicolor.networking.io/uniqlo/mini.php" class="index-archor pa" target="_blank">
-        <span class="mini-beta">测试版</span>
-        <strong>去虚拟试衣间</strong><br /><b>LET'S GO</b>
-      </a>
+
+        <!--头部-优惠-->
+        <div class="preferential">
+            <ul class="preferential_side_bar">
+                <li class="current"></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+            <ul class="preferential_con">
+                <li class="preferential_1">
+                    <i></i>
+                    <a>1优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                </li>
+                <li class="preferential_2">
+                    <i></i>
+                    <a>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                </li>
+                <li class="preferential_3">
+                    <i></i>
+                    <p>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
-    <div id="nio-kv" class="index-bin pr" data-page="index">
-      <p class="index-filter-fail pa none" id='qtm'>暂时没有符合条件的衣物，请试试其他选择吧</p>
-      <div class="index-single mini-kv pr">
-        <div class="mini-kv-slide pr" data-pos="#net-top">
-          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
-          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
-          <div class="mini-kv-container">
-            <ul id='upc'>
 
-            </ul>
-          </div>
-        </div>
+    <!--天气-->
+    <div class="weather">
 
-        <div class="mini-kv-slide pr" data-pos="#net-bot">
-          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
-          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
-          <div class="mini-kv-container">
-            <ul id='downc'>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="index-suit mini-kv pr none">
-        <div class="mini-kv-slide pr">
-          <a href="javascript:;" class="mini-kv-prev mini-btn">prev</a>
-          <a href="javascript:;" class="mini-kv-next mini-btn">next</a>
-          <div class="mini-kv-container">
-            <ul id='taoz'>
-              <li>
-                
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="mini-kv-hover tc pa none">
-        <p class="ft16">￥ <strong class="ft18">85.00</strong></p>
-        <small>剩余库存 <span>129</span> 件</small>
-        <a class="ft14" href="http://detail.tmall.com/item.htm?id=18942416200" target="_blank">【手机应用专享价】女装 羊毛混纺V领开衫10</a>
-        <a href="javascript:;" class="mini-kv-add pa" target="_blank">收入衣柜</a>
-      </div>
-      
-      <a href="javascript:;" class="mini-net-empty pa tc none" id='tishi'>
-        <!-- <h3>很抱歉！</h3> -->
-        <span>没有找到符合您需求的衣物<br>请试试其他选择</span>
-      </a>
+        <ul id="ulweek">
+            <li class="w_select" id="li_day0">
+                <i title="晴天" id="title_day0"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day0">20</p>
+                    <p class="w_t_2" id="l_day0">/15</p>
+                    <p class="w_t_week" id="week_day0">星期一</p>
+                    <p class="w_t_name" id="name_day0">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day1">
+                <i title="晴天" id="title_day1"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day1">20</p>
+                    <p class="w_t_2" id="l_day1">/15</p>
+                    <p class="w_t_week" id="week_day1">星期一</p>
+                    <p class="w_t_name" id="name_day1">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day2">
+                <i title="晴天" id="title_day2"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day2">20</p>
+                    <p class="w_t_2" id="l_day2">/15</p>
+                    <p class="w_t_week" id="week_day2">星期一</p>
+                    <p class="w_t_name" id="name_day2">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day3">
+                <i title="晴天" id="title_day3"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day3">20</p>
+                    <p class="w_t_2" id="l_day3">/15</p>
+                    <p class="w_t_week" id="week_day3">星期一</p>
+                    <p class="w_t_name" id="name_day3">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day4">
+                <i title="晴天" id="title_day4"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day4">20</p>
+                    <p class="w_t_2" id="l_day4">/15</p>
+                    <p class="w_t_week" id="week_day4">星期一</p>
+                    <p class="w_t_name" id="name_day4">晴转小雨</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="w_sq"><a href="#"></a></div>
+        <div class="w_zk" style="display:none;"><a href="#"></a></div>
+
     </div>
-  </div>
-  <div class="index-box-btn pr">
-    <a href="javascript:;" class="index-btn pa">收起</a>
-  </div>
+</div>
+
+
+<!--分类-->
+<div class="dr_main_con dr_main_con_bg1" id="div_main">
+    <div class="dr_main_con_sub_nav">
+        <ul class="rw_sub_nav" id="ulgender">
+            <li class="rw_all select"><a href="javascript:;" id="0"></a></li>
+            <li class="rw_nvzhuang"><a href="javascript:;" id="1"></a></li>
+            <li class="rw_nanzhuang"><a href="javascript:;" id="2"></a></li>
+            <li class="rw_tongzhuang"><a href="javascript:;" id="3"></a></li>
+            <li class="rw_yinyouer"><a href="javascript:;" id="4"></a></li>
+        </ul>
+        <ul class="ch_sub_nav" id="ul_index-bar-place">
+            <li class="ch_all select" id="0"><a href="javascript:;" ></a></li>
+            <li class="ch_shangwu" id="3_9"><a href="javascript:;" ></a></li>
+            <li class="index-p-1 index-p-kids none" id="__15" style="display: none;">上学</li>
+            <li class="ch_guangjie " id="4_10_16"><a href="javascript:;" ></a></li>
+            <li class="ch_yundong" id="7_13_19"><a href="javascript:;"></a></li>
+            <li class="ch_jujia" id="8_14_20"><a href="javascript:;" ></a></li>
+        </ul>
+        <ul class="tz_sub_nav" >
+            <li class="tz_sub_nav" id="div_mini-gender"><a href="javascript:;"></a></li>
+        </ul>
+        <a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html" class="youyigui_btn" target="_blank" ></a>
+    </div>
+
+    <div class="index-single mini-kv" id="div_index-bin">
+        <div class="mini-kv-slide" data-pos="#net-top">
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.12">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.13">next</a>
+            <div class="mini-kv-container">
+                <ul id="upc">
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="mini-kv-slide" data-pos="#net-bot">
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
+            <div class="mini-kv-container">
+                <ul id="downc">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="index-suit mini-kv" style="display: none;">
+        <div class="mini-kv-slide" >
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
+            <div class="mini-kv-container">
+                <ul id="taoz" style="left: 0px;">
+
+                </ul>
+            </div>
+        </div>
+    </div>
 
 </div>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/jquery.js"></script>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/citys.js"></script>
+
+<script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/nio-weather.js"></script>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/LinkageSelect/location.js"></script>
-<script type="text/javascript" src="http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public/js/main.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" charset="utf-8" src="__TMPL__Public/js/home.js"></script>
 <script type='text/javascript'>
-var getgood = 'http://phoneicolor.networking.io/uniqlo/index.php/Index/ajaxgood';
-var imgpath = 'http://phoneicolor.networking.io/uniqlo/Home/Tpl/Public';
-var goodurl = 'http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood';
+var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
+var imgpath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public';
+var goodurl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood';
 var sendurl = '{$uniurl}';
-var cityn = '{$cityn}';
-//var provi = '{$provi}';
 var provi = '';
+var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
 $(function(){
-	window.imgpath = imgpath;
-	$.weather.init({
-    imgpath : imgpath,
-	city : cityn || null,
-    callback: function(city, temper, info){
-      var avg = getavg(temper.high,temper.low);
-      $.weather.avg = avg;
-      $.weather.getgurl = goodurl;
-	  var pron,cookcity;
-		cookcity = provi;
-		if(cookcity){
-			pron = provi;
-		}else{
-			pron = remote_ip_info.province;
-		}
-	var JSONP=document.createElement("script");  
-    JSONP.type="text/javascript";  
-    JSONP.src="http://phoneicolor.networking.io/uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+pron;  
-    document.getElementsByTagName("head")[0].appendChild(JSONP); 
-
-      /*$.post(getgood,{tem:avg,pro:pron},function(data,status){
-        var da = eval("("+data+")");
-        if(da.ustr){
-          $('#upc').html(da.ustr);
-        }else{
-          $('#upc').html('');
-        }
-        if(da.dstr){
-          $('#downc').html(da.dstr);
-        }else{
-          $('#downc').html('');
-        }
-        $.uniqlo.kvSlider();
-        if(!da.ustr && !da.dstr){
-          $('#tishi').show();
-        }else{
-          $('#tishi').hide();
-        }
-      });*/
-    }
-  });
-
-  $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
-    var that = $(this)
-    $.uniqlo.index.togClass(that, 'mini-checked')
+    window.imgpath = imgpath;
     $.weather.init({
-      index : that.index() + 1,
-      imgpath : window.imgpath,
-      callback: function(city, temper, info){
-        var avg = getavg(temper.high,temper.low);
-        $.weather.avg = avg;
-	var JSONP=document.createElement("script");  
-    JSONP.type="text/javascript";  
-    JSONP.src="http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;  
-    document.getElementsByTagName("head")[0].appendChild(JSONP); 
+        imgpath : imgpath,
+        city : remote_ip_info.city || null,
+        callback: function(city, temper, info){
+            var avg = getavg(temper.high,temper.low);
+            $.weather.avg = avg;
+            $.weather.getgurl = goodurl;
+            var cookcity;
+            cookcity = provi;
+            if(cookcity){
+                $.pron = provi;
+            }else{
+                $.pron = remote_ip_info.province;
+            }
+            var JSONP=document.createElement("script");
+            JSONP.type="text/javascript";
+            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
+            document.getElementsByTagName("head")[0].appendChild(JSONP);
+        }
+    });
 
-        /*$.post(goodurl,{
-          tem : avg,
-          cid : $.weather.occasion,
-          sid : $.weather.sex,
-          tid : $.weather.set			
-        },function(data,status){
-          var da = eval("("+data+")");
-          if(da){
-            if(da.flag1=='p'){
-              if($.weather.set==1){
-                if(da.ustr){
-                  $('#upc').html(da.ustr);
-                }
-                if(da.dstr){
-                  $('#downc').html(da.dstr);
-                }
-              }else{
-                $('#upc').html(da.ustr);
-                $('#downc').html(da.dstr);
-              }
+    $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
+        var that = $(this)
+        $.uniqlo.index.togClass(that, 'w_select')
+        $.weather.init({
+            index : that.index() + 1,
+            imgpath : window.imgpath,
+            callback: function(city, temper, info){
+                var avg = getavg(temper.high,temper.low);
+                $.weather.avg = avg;
+                var JSONP=document.createElement("script");
+                JSONP.type="text/javascript";
+                JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
+                document.getElementsByTagName("head")[0].appendChild(JSONP);
             }
-            if(da.flag=='t'){
-              $('#taoz').html(da.tstr);
-            }
-			if(da.fl==1){
-			$('#tishi').css('display','none');
-			 $('#qtm').removeClass('none');
-			}else{
-			 $('#tishi').css('display','none');
-			 $('#qtm').addClass('none');
-			}
-			$.uniqlo.kvSlider();
-            if($.weather.set==1){
-              if(!da.ustr && !da.dstr && !da.tstr){
-                $('#tishi').css('display','block');
-              }else if(da.tstr){
-                $('#tishi').css('display','none');	
-              }
-            }*/
-			/*else{
-              if(!da.ustr && !da.dstr){
-                $('#tishi').show();
-              }else{
-                $('#tishi').hide();
-              }		
-            }*/
-          /*}
-        });*/
-      }
+        })
     })
-  })
 })
 
+
+function weatherJsonpCallback(data){
+    $.weather.setText(data,$.weather.currentOption);
+}
+
 function jsonpCallback(da){
-        if(da.ustr){
-          $('#upc').html(da.ustr);
-        }else{
-          $('#upc').html('');
-        }
-        if(da.dstr){
-          $('#downc').html(da.dstr);
-        }else{
-          $('#downc').html('');
-        }
-        $.uniqlo.kvSlider();
-        if(!da.ustr && !da.dstr){
-          $('#tishi').show();
-        }else{
-          $('#tishi').hide();
-        }
-	}
+    if(da.ustr){
+        $('#upc').html(da.ustr);
+    }else{
+        $('#upc').html('');
+    }
+    if(da.dstr){
+        $('#downc').html(da.dstr);
+    }else{
+        $('#downc').html('');
+    }
+    $.uniqlo.kvSlider();
+    if(!da.ustr && !da.dstr){
+        $('#tishi').show();
+    }else{
+        $('#tishi').hide();
+    }
+}
 function getgoods(cid,sid,tid){
-	var JSONP=document.createElement("script");  
-    JSONP.type="text/javascript";  
-	if(cid==0 && sid==0){
-		var pron,cookcity;
-		cookcity = provi;
-		if(cookcity){
-			pron = provi;
-		}else{
-			pron = remote_ip_info.province;
-		}
-		JSONP.src="http://phoneicolor.networking.io/uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+$.weather.avg+"&pro="+cid;  
-	}else{
-		JSONP.src="http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid;  
-	}
-    document.getElementsByTagName("head")[0].appendChild(JSONP); 
-
-	/*$.post(goodurl,{
-   tem : $.weather.avg,
-   cid : cid,
-   sid : sid,
-   tid : tid
- },function(data,status){
-   var da = eval("("+data+")");
-   if(da){
-     if(da.flag1=='p'){
-       if(tid==1){
-         if(da.ustr){
-           $('#upc').html(da.ustr);
-         }
-         if(da.dstr){
-           $('#downc').html(da.dstr);
-         }
-       }else{
-         $('#upc').html(da.ustr);
-         $('#downc').html(da.dstr);	
-       }
-     }
-     if(da.flag=='t'){
-       $('#taoz').html(da.tstr);
-     }
-	 if(da.fl==1){
-	 $('#tishi').css('display','none');
-     $('#qtm').removeClass('none');
-	}else{
-	 $('#tishi').css('display','none');
-     $('#qtm').addClass('none');
-	}
-	 $.uniqlo.kvSlider();
-     if(tid==1){
-       if(!da.ustr && !da.dstr && !da.tstr){
-         $('#tishi').css('display','block');
-       }else if(da.tstr){
-         $('#tishi').css('display','none');	
-       }
-     }
-	 /*else{
-       if(!da.ustr && !da.dstr){
-         $('#tishi').css('display','block');
-       }else{
-         $('#tishi').css('display','none');	
-       }		
-     }*/
-   /*}
-
- });*/
+    var JSONP=document.createElement("script");
+    JSONP.type="text/javascript";
+    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
+    document.getElementsByTagName("head")[0].appendChild(JSONP);
 }
 
 function jsonpCallback2(da){
-            if(da.flag1=='p'){
-              if($.weather.set==1){
-                if(da.ustr){
-                  $('#upc').html(da.ustr);
+    if(da.flag1=='p'){
+        if($.weather.set==1){
+            if(da.ustr){
+                $('#upc').html(da.ustr);
+            }
+            if(da.dstr){
+                $('#downc').html(da.dstr);
+            }
+        }else{
+            //如果是婴幼儿走这里
+            if(da.sid==4){
+                if(da.fl==1){
+                    $('#upc').html(da.ustr);
+                    $('#downc').html(da.dstr);
+                }else{
+                    $('#taoz').html(da.ustr);
                 }
-                if(da.dstr){
-                  $('#downc').html(da.dstr);
-                }
-              }else{
+            }else{
                 $('#upc').html(da.ustr);
                 $('#downc').html(da.dstr);
-              }
             }
-            if(da.flag=='t'){
-              $('#taoz').html(da.tstr);
+        }
+    }
+    if(da.flag=='t'){
+        $('#taoz').html(da.tstr);
+    }else{
+        if($.weather.set==1){
+            $('#taoz').html('');
+        }
+    }
+    if(da.fl==1){
+        if(da.sid==4){
+            $('.index-single').removeClass('none');
+            $('.index-suit').addClass('none');
+            $('.index-suit').css('display','none');
+            $('.index-single').css('display','block');
+        }
+        $('#tishi').css('display','none');
+        $('#qtm').removeClass('none');
+    }else{
+        if($.weather.set==1){
+            $('.index-single').addClass('none');
+            $('.index-suit').removeClass('none');
+            $('.index-suit').css('display','block');
+            $('.index-single').css('display','none');
+        }else{
+            if(da.sid==4){
+                $('.index-single').addClass('none');
+                $('.index-suit').removeClass('none');
+                $('.index-suit').css('display','block');
+                $('.index-single').css('display','none');
+            }else{
+                $('.index-single').removeClass('none');
+                $('.index-suit').addClass('none');
+                $('.index-suit').css('display','none');
+                $('.index-single').css('display','block');
             }
-			if(da.fl==1){
-			$('#tishi').css('display','none');
-			 $('#qtm').removeClass('none');
-			}else{
-			 $('#tishi').css('display','none');
-			 $('#qtm').addClass('none');
-			}
-			$.uniqlo.kvSlider();
-            if($.weather.set==1){
-              if(!da.ustr && !da.dstr && !da.tstr){
-                $('#tishi').css('display','block');
-              }else if(da.tstr){
-                $('#tishi').css('display','none');	
-              }
-            }
+        }
+        $('#tishi').css('display','none');
+        $('#qtm').addClass('none');
+    }
+    $.uniqlo.kvSlider();
+    if($.weather.set==1){
+        if(!da.ustr && !da.dstr && !da.tstr){
+            $('#tishi').css('display','block');
+        }else if(da.tstr){
+            $('#tishi').css('display','none');
+        }
+    }
 }
 function jsonpCallback3(da){
-     if(da.flag1=='p'){
-       if($.weather.set==1){
-         if(da.ustr){
-           $('#upc').html(da.ustr);
-         }
-         if(da.dstr){
-           $('#downc').html(da.dstr);
-         }
-       }else{
-         $('#upc').html(da.ustr);
-         $('#downc').html(da.dstr);	
-       }
-     }
-     if(da.flag=='t'){
-       $('#taoz').html(da.tstr);
-     }
-	 if(da.fl==1){
-	 $('#tishi').css('display','none');
-     $('#qtm').removeClass('none');
-	}else{
-	 $('#tishi').css('display','none');
-     $('#qtm').addClass('none');
-	}
-	 $.uniqlo.kvSlider();
-     if($.weather.set==1){
-       if(!da.ustr && !da.dstr && !da.tstr){
-         $('#tishi').css('display','block');
-       }else if((!da.ustr || !da.dstr) && !da.tstr){
-         $('#tishi').css('display','block');	
-       }else if(da.tstr){
-         $('#tishi').css('display','none');	
-       }
-     }
-	}
+    if(da.flag1=='p'){
+        if($.weather.set==1){
+            if(da.ustr){
+                $('#upc').html(da.ustr);
+            }
+            if(da.dstr){
+                $('#downc').html(da.dstr);
+            }
+        }else{
+            //如果是婴幼儿走这里
+            if(da.sid==4){
+                if(da.fl==1){
+                    $('#upc').html(da.ustr);
+                    $('#downc').html(da.dstr);
+                }else{
+                    $('#taoz').html(da.ustr);
+                }
+            }else{
+                $('#upc').html(da.ustr);
+                $('#downc').html(da.dstr);
+            }
+        }
+    }
+    if(da.flag=='t'){
+        $('#taoz').html(da.tstr);
+    }else{
+        if($.weather.set==1){
+            $('#taoz').html('');
+        }
+    }
+    if(da.fl==1){
+        if(da.sid==4){
+            $('.index-single').removeClass('none');
+            $('.index-suit').addClass('none');
+            $('.index-suit').css('display','none');
+            $('.index-single').css('display','block');
+        }
+        $('#tishi').css('display','none');
+        $('#qtm').removeClass('none');
+    }else{
+        if($.weather.set==1){
+            $('.index-single').addClass('none');
+            $('.index-suit').removeClass('none');
+            $('.index-suit').css('display','block');
+            $('.index-single').css('display','none');
+        }else{
+            if(da.sid==4){
+                $('.index-single').addClass('none');
+                $('.index-suit').removeClass('none');
+                $('.index-suit').css('display','block');
+                $('.index-single').css('display','none');
+            }else{
+                $('.index-single').removeClass('none');
+                $('.index-suit').addClass('none');
+                $('.index-suit').css('display','none');
+                $('.index-single').css('display','block');
+            }
+        }
+        $('#tishi').css('display','none');
+        $('#qtm').addClass('none');
+    }
+    $.uniqlo.kvSlider();
+    if($.weather.set==1){
+        if(!da.ustr && !da.dstr && !da.tstr){
+            $('#tishi').css('display','block');
+        }else if((!da.ustr || !da.dstr) && !da.tstr){
+            $('#tishi').css('display','block');
+        }else if(da.tstr){
+            $('#tishi').css('display','none');
+        }
+    }
+}
 function getavg(high,low){
-  var avg = Math.ceil((low+high)/2);
-  return avg;
+    var avg = Math.ceil((parseInt(low)+parseInt(high))/2);
+    return avg;
 }
 function sendcity(pro,city){
-	 var url = "http://phoneicolor.networking.io/uniqlo/mini.php/Sendcity/sendpro?callback=jsonpCallback&proname="+pro+"&cityname="+city;
+    var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
     // 创建script标签，设置其属性
     var script = document.createElement('script');
     script.setAttribute('src', url);
     // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script); 
+    document.getElementsByTagName('head')[0].appendChild(script);
 }
 
 function jsonpCallback4(da){
-if(da.flag1=='p'){
-	if($.weather.set==1){
-	if(da.ustr){
-	$('#upc').html(da.ustr);
-	}
-	if(da.dstr){
-	$('#downc').html(da.dstr);
-	}
-	}else{
-	$('#upc').html(da.ustr);
-	$('#downc').html(da.dstr);	
-	}
-	}
-	if(da.flag=='t'){
-     $('#taoz').html(da.tstr);
-     $.uniqlo.kvSlider();
-	}
-	if($.weather.set==1){
-	if(!da.ustr && !da.dstr && !da.tstr){
-	$('#tishi').css('display','block');
-	}else if(da.tstr){
-         $('#tishi').css('display','none');	
-       }
-	}else{
-	if(!da.ustr && !da.dstr){
-	$('#tishi').css('display','block');
-	}else{
-	$('#tishi').css('display','none');	
-	}		
-	}
-	}
+    if(da.flag1=='p'){
+        if($.weather.set==1){
+            if(da.ustr){
+                $('#upc').html(da.ustr);
+            }
+            if(da.dstr){
+                $('#downc').html(da.dstr);
+            }
+        }else{
+            $('#upc').html(da.ustr);
+            $('#downc').html(da.dstr);
+        }
+    }
+    if(da.flag=='t'){
+        $('#taoz').html(da.tstr);
+    }
+    if($.weather.set==1){
+        if(!da.ustr && !da.dstr && !da.tstr){
+            $('#tishi').css('display','block');
+        }else if(da.tstr){
+            $('#tishi').css('display','none');
+        }
+    }else{
+        if(!da.ustr && !da.dstr){
+            $('#tishi').css('display','block');
+        }else{
+            $('#tishi').css('display','none');
+        }
+    }
+    $.uniqlo.kvSlider();
+}
+function jsonpCallbackm(data){
+
+}
 </script>
+
+
