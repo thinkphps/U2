@@ -25,7 +25,7 @@ jQuery(function($){
                 month = now.getMonth(),
                 date = now.getDate(),
                 day = now.getDay(),
-                arr = ['周日','周一','周二','周三','周四','周五','周六'],
+                arr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
                 second = new Date(year, month, date + 1),
                 third  = new Date(year, month, date + 2),
                 forth  = new Date(year, month, date + 3),
@@ -90,7 +90,6 @@ jQuery(function($){
 
             var time  = this.time();
             var index = option.index || 1;
-            var num = option.second ? 0 : index * 2 - 1
             var arrIndex;
             var avg = 10;
             var weatherinfo = info['weather' + index];
@@ -98,16 +97,7 @@ jQuery(function($){
                 avg = Math.ceil( (parseInt(weatherinfo.lt) + parseInt(weatherinfo.ht)) / 2);
             }
 
-            $('#nio-img').attr({'title': weatherinfo.wt, 'class': 'nio-' + weatherinfo.di});
-
-            $('#nio-kv').css('background-image', 'url('+option.imgpath+'/images/index/uniqlo-bg/'+ weatherinfo.di + '.jpg)');
-            $('#nio-city').text(option.city).attr('title', option.city);
-            $('#nio-date').text(time[index - 1].year + '年' + time[index - 1].month + '月' + time[index - 1].date + '日');
-            $('#nio-day').text(time[index - 1].day).attr('title', time[index - 1].day);
-            $('#nio-wea').text(weatherinfo.wt);
-            $('#nio-low').html(weatherinfo.lt + '&deg;');
-            $('#nio-high').html(weatherinfo.ht + '&deg;');
-//气温降4度
+            //气温降4度
             if(avg >14){
                 if(avg >= 24) arrIndex = 0
                 else if(avg >= 19) arrIndex = 1
@@ -119,21 +109,40 @@ jQuery(function($){
                 else arrIndex = 6
             }
 
-            $('#nio-tip').text(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
+            //天气图标
+            $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) + 1)});
+            $('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) + 1)});
+            $('#title_day2').attr({'title': info['weather3'].wt, 'class': 'nio-' + (parseInt(info['weather3'].di) + 1)});
+            $('#title_day3').attr({'title': info['weather4'].wt, 'class': 'nio-' + (parseInt(info['weather4'].di) + 1)});
+            $('#title_day4').attr({'title': info['weather5'].wt, 'class': 'nio-' + (parseInt(info['weather5'].di) + 1)});
 
-            $('#nio-day1').text(time[0].day);
-            $('#nio-day2').text(time[1].day);
-            $('#nio-day3').text(time[2].day);
-            $('#nio-day4').text(time[3].day);
-            $('#nio-day5').text(time[4].day);
-            $('#nio-day6').text(time[5].day);
+            //星期几
+            $('#week_day0').text(time[0].day);
+            $('#week_day1').text(time[1].day);
+            $('#week_day2').text(time[2].day);
+            $('#week_day3').text(time[3].day);
+            $('#week_day4').text(time[4].day);
 
-            $('#nio-tem1').html(info['weather1'].ht+ '&deg;');
-            $('#nio-tem2').html(info['weather2'].ht+ '&deg;');
-            $('#nio-tem3').html(info['weather3'].ht+ '&deg;');
-            $('#nio-tem4').html(info['weather4'].ht+ '&deg;');
-            $('#nio-tem5').html(info['weather5'].ht+ '&deg;');
-            $('#nio-tem6').html(info['weather6'].ht+ '&deg;');
+            //最高温
+            $('#h_day0').html(info['weather1'].ht);
+            $('#h_day1').html(info['weather2'].ht);
+            $('#h_day2').html(info['weather3'].ht);
+            $('#h_day3').html(info['weather4'].ht);
+            $('#h_day4').html(info['weather5'].ht);
+
+            //最低温
+            $('#l_day0').html(info['weather1'].lt);
+            $('#l_day1').html(info['weather2'].lt);
+            $('#l_day2').html(info['weather3'].lt);
+            $('#l_day3').html(info['weather4'].lt);
+            $('#l_day4').html(info['weather5'].lt);
+
+            //文字描述
+            $('#name_day0').html(info['weather1'].wt);
+            $('#name_day1').html(info['weather2'].wt);
+            $('#name_day2').html(info['weather3'].wt);
+            $('#name_day3').html(info['weather4'].wt);
+            $('#name_day4').html(info['weather5'].wt);
 
             this[option.city] = info['cityname'];
             var temper = {low: weatherinfo.lt,
