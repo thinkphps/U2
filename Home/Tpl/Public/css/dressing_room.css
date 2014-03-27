@@ -1,0 +1,309 @@
+﻿@charset "utf-8";
+/*- Html Tags Reset -*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, figure {padding:0; margin:0; }
+body{ font:12px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif; background-color:#fff; color:#3c3c3c; }
+abbr,article,aside,bb,datagrid,datalist,details,dialog,event-source,figure,figcaption,footer,header,mark,menu,meter,nav,output,progress,section,time {display: block; height:auto; }
+table{border-collapse:collapse; border-spacing:0; }
+ol, ul{list-style:none outside; }
+h1, h2, h3, h4, h5, h6{font-size:100%; }
+fieldset, img{border:0 none; vertical-align:middle; }
+img {background:url(/images/loading.gif) no-repeat center center; }
+a{color:#333; text-decoration:none; }
+a:hover{color:#900; text-decoration:none; }
+em{font-style:normal; }
+input, textarea{padding:2px; }
+textarea{overflow-y:auto; }
+input,select,textarea {font:12px Arial,Tahoma,simsun; }
+button{overflow:visible; padding:0;vertical-align:middle; }
+button,label{cursor:pointer; }
+.clearfix:after{content:".";height:0;visibility:hidden;display:block;clear:both;font-size:0;line-height:0;}
+.clearfix{*zoom:1;}
+.line_rx{ background:url(../images/index_content.png) 0 0 repeat-x; font-size:1px; height:1px; line-height:1px; margin-bottom:10px;}
+
+/*主体*/
+
+
+/*头部*/
+.dr_header_con{ width:950px; height:162px; margin:0 auto; overflow:hidden;}
+.dr_header{ width:950px; height:82px; background:url(../images/dr_header_bg.png) 0 0 no-repeat; position: relative;}
+.dr_header_bg1{ background:url(../images/dr_header_bg1.jpg) 0 0 no-repeat;}
+.dr_header_bg2{ background:url(../images/dr_header_bg2.jpg) 0 0 no-repeat;}
+.dr_header_bg3{ background:url(../images/dr_header_bg3.jpg) 0 0 no-repeat;}
+.dr_header_bg4{ background:url(../images/dr_header_bg4.jpg) 0 0 no-repeat;}
+.dr_header_bg5{ background:url(../images/dr_header_bg5.jpg) 0 0 no-repeat;}
+
+/*头部-logo*/
+.dr_logo{ float:left; width:234px; height:82px;}
+.dr_logo a{ display:block; width:191px; height:51px; background:url(../images/dr_logo.png) 0 0 no-repeat; text-indent:-9999px; margin:16px 0 0 23px;}
+
+/*头部-城市*/
+.dr_city{ float:left; width:355px; height:46px; background:url(../images/line1.png) left 0 no-repeat; padding:18px 20px; overflow:hidden; }
+.city_name{ float:left; height:46px; border-right:1px solid #ddd; padding:0 20px 0 0; margin:0 20px 0 0; overflow:hidden;}
+.city_name h2{ font-size:26px; line-height:30px; font-weight:normal;}
+.city_name span{ color:#a1a1a1;}
+
+.city{ float:left; margin:1px 0 0 0;}
+.city a.change_city{ display:block; width:72px; height:22px; line-height:21px; background:#FF0000; color:#FFF; text-align:center;}
+.city .near_un{ display:block; height:20px; line-height:20px; margin:5px 0 0 0;}
+.city .near_un i{ display:block; float:left; width:20px; height:20px; background:url(../images/city_near_icon.png) 0 0 no-repeat; margin:0 8px 0 0;}
+.city .near_un a{ float:left; color:#666;}
+.city .near_un a:hover{ color:#F00;}
+
+/*头部-优惠*/
+.preferential{float:left; width:321px; height:82px; background:url(../images/line1.png) left 0 no-repeat; overflow:hidden; position:relative;}
+
+.preferential ul.preferential_side_bar{ width:10px; position:absolute; top:25px; right:10px; overflow:hidden;}
+.preferential ul.preferential_side_bar li{ display:block; width:8px; height:8px; background:url(../images/preferential_side_bar.png) 0 0 no-repeat; cursor:pointer; margin:0 0 4px 0; z-index:10;}
+.preferential ul.preferential_side_bar li.current{ background:url(../images/preferential_side_bar.png) 0 -8px no-repeat;}
+
+.preferential ul.preferential_con{ width:321px; height:82px; position:absolute; top:0; overflow:hidden;}
+.preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;} 
+.preferential ul.preferential_con li i{ display:block; float:left; width:58px; height:57px; margin:0 12px 0 0;}
+.preferential ul.preferential_con li a{ cursor:pointer; margin-top:10px; display:block;}
+.preferential ul.preferential_con li p{ margin-top:10px;}
+.preferential ul.preferential_con li p a{ color:#F00; display:inline;}
+
+.preferential ul.preferential_con li.preferential_1{border-top:3px solid #fc7574;}
+.preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) 0 0 no-repeat;}
+
+.preferential ul.preferential_con li.preferential_2{border-top:3px solid #2f5172;}
+.preferential ul.preferential_con li.preferential_2 i{ background:url(../images/preferential_icon.png) -58px 0 no-repeat;}
+
+.preferential ul.preferential_con li.preferential_3{border-top:3px solid #ffa800;}
+.preferential ul.preferential_con li.preferential_3 i{ background:url(../images/preferential_icon.png) -116px 0 no-repeat;}
+
+
+/*天气*/
+.weather{ width:950px; height:80px; background:url(../images/weather_bg.png) 0 0 no-repeat; position:relative; overflow:hidden;}
+
+.weather ul { display:block; float:left; height:80px; overflow:hidden;}
+.weather ul li{ float:left; height:50px; width:151px; background:url(../images/line2.png) right 0 no-repeat; color:#3c3c3c; overflow:hidden; padding:15px 12px; position:relative; cursor:pointer; opacity:0.9;}
+.weather ul li i{ display:block; float:left; width:50px; height:50px; margin:0 10px 0 0;}
+
+.weather ul li i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat;}
+.weather ul li i.nio-1{ background:url(../images/weather_icon.png) -50px 0 no-repeat;}
+.weather ul li i.nio-2{ background:url(../images/weather_icon.png) -100px 0 no-repeat;}
+.weather ul li i.nio-3{ background:url(../images/weather_icon.png) -150px 0 no-repeat;}
+.weather ul li i.nio-4{ background:url(../images/weather_icon.png) -200px 0 no-repeat;}
+.weather ul li i.nio-5{ background:url(../images/weather_icon.png) -250px 0 no-repeat;}
+.weather ul li i.nio-6{ background:url(../images/weather_icon.png) -300px 0 no-repeat;}
+.weather ul li i.nio-7{ background:url(../images/weather_icon.png) -350px 0 no-repeat;}
+.weather ul li i.nio-8{ background:url(../images/weather_icon.png) -400px 0 no-repeat;}
+.weather ul li i.nio-9{ background:url(../images/weather_icon.png) -450px 0 no-repeat;}
+.weather ul li i.nio-10{ background:url(../images/weather_icon.png) 0 -50px no-repeat;}
+.weather ul li i.nio-11{ background:url(../images/weather_icon.png) -50px -50px no-repeat;}
+.weather ul li i.nio-12{ background:url(../images/weather_icon.png) -100px -50px no-repeat;}
+.weather ul li i.nio-13{ background:url(../images/weather_icon.png) -150px -50px no-repeat;}
+.weather ul li i.nio-14{ background:url(../images/weather_icon.png) -200px -50px no-repeat;}
+.weather ul li i.nio-15{ background:url(../images/weather_icon.png) -250px -50px no-repeat;}
+.weather ul li i.nio-16{ background:url(../images/weather_icon.png) -300px -50px no-repeat;}
+.weather ul li i.nio-17{ background:url(../images/weather_icon.png) -350px -50px no-repeat;}
+.weather ul li i.nio-18{ background:url(../images/weather_icon.png) -400px -50px no-repeat;}
+.weather ul li i.nio-19{ background:url(../images/weather_icon.png) -450px -50px no-repeat;}
+.weather ul li i.nio-20{ background:url(../images/weather_icon.png) 0 -100px no-repeat;}
+.weather ul li i.nio-21{ background:url(../images/weather_icon.png) -50px -100px no-repeat;}
+.weather ul li i.nio-22{ background:url(../images/weather_icon.png) -100px -100px no-repeat;}
+.weather ul li i.nio-23{ background:url(../images/weather_icon.png) -150px -100px no-repeat;}
+.weather ul li i.nio-24{ background:url(../images/weather_icon.png) -200px -100px no-repeat;}
+.weather ul li i.nio-25{ background:url(../images/weather_icon.png) -250px -100px no-repeat;}
+.weather ul li i.nio-26{ background:url(../images/weather_icon.png) -300px -100px no-repeat;}
+.weather ul li i.nio-27{ background:url(../images/weather_icon.png) -350px -100px no-repeat;}
+.weather ul li i.nio-28{ background:url(../images/weather_icon.png) -400px -100px no-repeat;}
+.weather ul li i.nio-29{ background:url(../images/weather_icon.png) -450px -100px no-repeat;}
+.weather ul li i.nio-30{ background:url(../images/weather_icon.png) 0 -150px no-repeat;}
+.weather ul li i.nio-31{ background:url(../images/weather_icon.png) -50px -150px no-repeat;}
+.weather ul li i.nio-32{ background:url(../images/weather_icon.png) -100px -150px no-repeat;}
+.weather ul li i.nio-33{ background:url(../images/weather_icon.png) -150px -150px no-repeat;}
+
+.weather ul li.w_select i.nio-0{ background:url(../images/weather_icon.png) 0 -250px no-repeat;}
+.weather ul li.w_select i.nio-1{ background:url(../images/weather_icon.png) -50px -250px no-repeat;}
+.weather ul li.w_select i.nio-2{ background:url(../images/weather_icon.png) -100px -250px no-repeat;}
+.weather ul li.w_select i.nio-3{ background:url(../images/weather_icon.png) -150px -250px no-repeat;}
+.weather ul li.w_select i.nio-4{ background:url(../images/weather_icon.png) -200px -250px no-repeat;}
+.weather ul li.w_select i.nio-5{ background:url(../images/weather_icon.png) -250px -250px no-repeat;}
+.weather ul li.w_select i.nio-6{ background:url(../images/weather_icon.png) -300px -250px no-repeat;}
+.weather ul li.w_select i.nio-7{ background:url(../images/weather_icon.png) -350px -250px no-repeat;}
+.weather ul li.w_select i.nio-8{ background:url(../images/weather_icon.png) -400px -250px no-repeat;}
+.weather ul li.w_select i.nio-9{ background:url(../images/weather_icon.png) -450px -250px no-repeat;}
+.weather ul li.w_select i.nio-10{ background:url(../images/weather_icon.png) 0 -50px no-repeat;}
+.weather ul li.w_select i.nio-11{ background:url(../images/weather_icon.png) -50px -300px no-repeat;}
+.weather ul li.w_select i.nio-12{ background:url(../images/weather_icon.png) -100px -300px no-repeat;}
+.weather ul li.w_select i.nio-13{ background:url(../images/weather_icon.png) -150px -300px no-repeat;}
+.weather ul li.w_select i.nio-14{ background:url(../images/weather_icon.png) -200px -300px no-repeat;}
+.weather ul li.w_select i.nio-15{ background:url(../images/weather_icon.png) -250px -300px no-repeat;}
+.weather ul li.w_select i.nio-16{ background:url(../images/weather_icon.png) -300px -300px no-repeat;}
+.weather ul li.w_select i.nio-17{ background:url(../images/weather_icon.png) -350px -300px no-repeat;}
+.weather ul li.w_select i.nio-18{ background:url(../images/weather_icon.png) -400px -300px no-repeat;}
+.weather ul li.w_select i.nio-19{ background:url(../images/weather_icon.png) -450px -300px no-repeat;}
+.weather ul li.w_select i.nio-20{ background:url(../images/weather_icon.png) 0 -350px no-repeat;}
+.weather ul li.w_select i.nio-21{ background:url(../images/weather_icon.png) -50px -350px no-repeat;}
+.weather ul li.w_select i.nio-22{ background:url(../images/weather_icon.png) -100px -350px no-repeat;}
+.weather ul li.w_select i.nio-23{ background:url(../images/weather_icon.png) -150px -350px no-repeat;}
+.weather ul li.w_select i.nio-24{ background:url(../images/weather_icon.png) -200px -350px no-repeat;}
+.weather ul li.w_select i.nio-25{ background:url(../images/weather_icon.png) -250px -350px no-repeat;}
+.weather ul li.w_select i.nio-26{ background:url(../images/weather_icon.png) -300px -350px no-repeat;}
+.weather ul li.w_select i.nio-27{ background:url(../images/weather_icon.png) -350px -350px no-repeat;}
+.weather ul li.w_select i.nio-28{ background:url(../images/weather_icon.png) -400px -350px no-repeat;}
+.weather ul li.w_select i.nio-29{ background:url(../images/weather_icon.png) -450px -350px no-repeat;}
+.weather ul li.w_select i.nio-30{ background:url(../images/weather_icon.png) 0 -400px no-repeat;}
+.weather ul li.w_select i.nio-31{ background:url(../images/weather_icon.png) -50px -400px no-repeat;}
+.weather ul li.w_select i.nio-32{ background:url(../images/weather_icon.png) -100px -400px no-repeat;}
+.weather ul li.w_select i.nio-33{ background:url(../images/weather_icon.png) -150px -400px no-repeat;}
+
+.weather ul li p.w_t_1{ position:absolute; left:70px; top:2px; font-size:38px;}
+.weather ul li p.w_t_2{ position:absolute; left:115px; top:30px;}
+.weather ul li p.w_t_week{ position:absolute; left:115px; top:15px;}
+.weather ul li p.w_t_name{ position:absolute; left:72px; top:48px;}
+.weather ul li.w_select{ background:url(../images/w_select_bg.png) 0 0 no-repeat;}
+.weather ul li.w_select p.w_t_1{ color:#FFF;}
+.weather ul li.w_select p.w_t_2{ color:#FFF;}
+.weather ul li.w_select p.w_t_week{ color:#FFF;}
+.weather ul li.w_select p.w_t_name{ color:#FFF;}
+
+.w_sq{ position:absolute; top:0; right:0;}
+.w_sq a{ display:block; width:75px; height:80px; background:url(../images/w_sq.png) 0 0 no-repeat;}
+
+.w_zk{  position:absolute; top:0; right:0;}
+.w_zk a{ display:block; width:75px; height:80px; background:url(../images/w_zk.png) 0 0 no-repeat;}
+
+
+
+
+/*分类*/
+.dr_main_con{ width:950px; height:470px; margin:0 auto; position:relative;}
+.dr_main_con_bg1{ background:url(../images/dr_main_con_bg1.jpg) 0 0 no-repeat;}
+.dr_main_con_bg2{ background:url(../images/dr_main_con_bg2.jpg) 0 0 no-repeat;}
+.dr_main_con_bg3{ background:url(../images/dr_main_con_bg3.jpg) 0 0 no-repeat;}
+.dr_main_con_bg4{ background:url(../images/dr_main_con_bg4.jpg) 0 0 no-repeat;}
+.dr_main_con_bg5{ background:url(../images/dr_main_con_bg5.jpg) 0 0 no-repeat;}
+
+.dr_main_con_sub_nav{ width:950px; height:70px; background:url(../images/dr_main_con_sub_nav_bg.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul{ float:left; height:70px;}
+.dr_main_con_sub_nav ul li{ display:block; float:left; height:70px; width:70px; background:url(../images/line2.png) right 0 no-repeat;}
+.dr_main_con_sub_nav ul li.select{ background:#FFF;}
+.dr_main_con_sub_nav ul li a{ display:block; height:70px; width:70px;}
+
+/*分类1*/
+.dr_main_con_sub_nav ul li.rw_all a { background:url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nvzhuang a { background:url(../images/dr_main_con_sub_nav.png) -70px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nanzhuang a { background:url(../images/dr_main_con_sub_nav.png) -140px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.rw_tongzhuang a { background:url(../images/dr_main_con_sub_nav.png) -210px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.rw_yinyouer a { background:url(../images/dr_main_con_sub_nav.png) -280px 0 no-repeat;}
+
+.dr_main_con_sub_nav ul li.rw_all a:hover { background:url(../images/dr_main_con_sub_nav.png) 0 -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nvzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -70px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nanzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -140px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_tongzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_yinyouer a:hover { background:url(../images/dr_main_con_sub_nav.png) -280px -70px no-repeat;}
+
+.dr_main_con_sub_nav ul li.rw_all.select a { background:url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nvzhuang.select a { background:url(../images/dr_main_con_sub_nav.png) -70px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_nanzhuang.select a { background:url(../images/dr_main_con_sub_nav.png) -140px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_tongzhuang.select a { background:url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.rw_yinyouer.select a { background:url(../images/dr_main_con_sub_nav.png) -280px -70px no-repeat;}
+
+/*分类2*/
+.dr_main_con_sub_nav ul li.ch_all a { background:url(../images/dr_main_con_sub_nav.png) -350px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.ch_shangwu a { background:url(../images/dr_main_con_sub_nav.png) -420px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.ch_guangjie a { background:url(../images/dr_main_con_sub_nav.png) -490px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.ch_yundong a { background:url(../images/dr_main_con_sub_nav.png) -560px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.ch_jujia a { background:url(../images/dr_main_con_sub_nav.png) -630px 0 no-repeat;}
+
+.dr_main_con_sub_nav ul li.ch_all a:hover { background:url(../images/dr_main_con_sub_nav.png) -350px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_shangwu a:hover { background:url(../images/dr_main_con_sub_nav.png) -420px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_guangjie a:hover { background:url(../images/dr_main_con_sub_nav.png) -490px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_yundong a:hover { background:url(../images/dr_main_con_sub_nav.png) -560px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_jujia a:hover { background:url(../images/dr_main_con_sub_nav.png) -630px -70px no-repeat;}
+
+.dr_main_con_sub_nav ul li.ch_all.select a { background:url(../images/dr_main_con_sub_nav.png) -350px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.ch_shangwu.select a { background:url(../images/dr_main_con_sub_nav.png) -420px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_guangjie.select a { background:url(../images/dr_main_con_sub_nav.png) -490px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_yundong.select a { background:url(../images/dr_main_con_sub_nav.png) -560px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.ch_jujia.select a { background:url(../images/dr_main_con_sub_nav.png) -630px -70px no-repeat;}
+
+/*分类3*/
+.dr_main_con_sub_nav ul li.tz_sub_nav a { background:url(../images/dr_main_con_sub_nav.png) -700px 0 no-repeat;}
+.dr_main_con_sub_nav ul li.tz_sub_nav a:hover { background:url(../images/dr_main_con_sub_nav.png) -700px -70px no-repeat;}
+.dr_main_con_sub_nav ul li.tz_sub_nav.select a { background:url(../images/dr_main_con_sub_nav.png) -700px 0 no-repeat;}
+
+.youyigui_btn{ display:block; position:absolute; top:0; right:-25px; width:205px; height:70px; background:url(../images/youyigui_btn.png) 0 0 no-repeat;;}
+
+
+/* 衣服*/
+.mini-kv-slide{ width:926px; height:184px; background:url(../images/dr_main_con_yf_bg.png) 0 0 no-repeat; margin:9px 10px; position:relative;}
+.mini-kv-container{ width:812px; height:180px; overflow:hidden; position:relative; margin:0 auto;}
+.mini-kv-container ul{ width: 9999em; height:180px; position:relative;}
+.mini-kv-container ul li{ float:left; margin:3px 10px;}
+.mini-kv-container ul li img{ width:180px; height:180px;}
+
+.mini-kv-slide a.mini-btn{ display:block; width:8px; height:13px; position:absolute; top:50%; margin-top:-6px; text-indent:200%; overflow:hidden; white-space:nowrap;}
+.mini-kv-slide a.mini-kv-prev{ background:url(../images/mini-kv-btn.png) 0 0 no-repeat; left:10px;}
+.mini-kv-slide a.mini-kv-next{ background:url(../images/mini-kv-btn.png) -8px 0 no-repeat; right:10px;}
+.mini-kv-slide a.mini-kv-prev:hover{ background:url(../images/mini-kv-btn.png) 0 -13px no-repeat; left:10px;}
+.mini-kv-slide a.mini-kv-next:hover{ background:url(../images/mini-kv-btn.png) -8px -13px no-repeat; right:10px;}
+
+.index-suit{
+    height: 180px;
+    padding: 100px 0;
+}
+
+.none{
+    display: none;
+}
+
+.tc{
+    text-align: center;
+}
+
+.pa{
+    position: absolute;
+}
+.mini-kv-hover,.mini-kv-add{
+    background: url(../images/mini/mini-kv-hover.png) no-repeat;
+}
+.mini-kv-hover{
+    width: 186px;
+    height: 166px;
+    padding: 25px 15px;
+    top: 0;
+}
+.mini-kv-hover strong{
+    font-size: 30px;
+}
+.mini-kv-hover small{
+    color: #ffa800;
+}
+a.mini-kv-add{
+    background-position: 0 -216px;
+    width: 74px;
+    height: 26px;
+    top: 154px;
+    left: 68px;
+    display: block;
+    color: #e70012;
+    line-height: 25px;
+}
+.mini-kv-hover a.ft14{
+    display: block;
+    margin-top: 15px;
+    height: 40px;
+    color: #fff;
+    line-height: 20px;
+    font-weight: bold;
+    overflow: hidden;
+}
+.mini-place-mask{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 278px;
+    height: 70px;
+    right: 250px;
+    top: 0;
+    z-index: 2;
+    display: none;
+}
+.index-bar .mini-place-mask{
+    width: 308px;
+    left: 347px;
+}
