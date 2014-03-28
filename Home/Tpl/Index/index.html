@@ -115,7 +115,7 @@
         <ul class="ch_sub_nav" id="ul_index-bar-place">
             <li class="ch_all select" id="0"><a href="javascript:;" ></a></li>
             <li class="ch_shangwu" id="3_9"><a href="javascript:;" ></a></li>
-            <li class="ch_shangwu ch_shangxue" id="__15" style="display: none;"><a href="javascript:;" >上学</a></li>
+            <li class="none ch_shangxue" id="__15"><a href="javascript:;" ></a></li>
             <li class="ch_guangjie " id="4_10_16"><a href="javascript:;" ></a></li>
             <li class="ch_yundong" id="7_13_19"><a href="javascript:;"></a></li>
             <li class="ch_jujia" id="8_14_20"><a href="javascript:;" ></a></li>
@@ -176,6 +176,16 @@
 <div class="map_light_box none" id="mapdiv">
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
     <h3>查找您附近的优衣库UNIQLO门店</h3>
+    <div class="mb15">
+        <select name="" id="" onchange="changeSelect(this,'selectTest0')" class="mr10" style="width:150px;">
+            <option selected="selected" value="44444">徐汇区</option>
+            <option value="55555">闵行区</option>
+        </select>
+        <select name="" id="" onchange="changeSelect(this,'selectTest0')" style="width:200px;">
+            <option selected="selected" value="44444">日月光中心店</option>
+            <option value="55555">越秀中心店</option>
+        </select>
+    </div>
     <div class="light_box_u_map_con" id="allmap">
     </div>
 </div>
@@ -199,6 +209,10 @@ var sendurl = '{$uniurl}';
 var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
 $(function(){
+
+
+
+
     window.imgpath = imgpath;
     $.weather.init({
         imgpath : imgpath,
@@ -239,6 +253,10 @@ $(function(){
     })
 })
 
+//将店铺信息添加到地图中
+function mapBindMarker(data){
+    H.initData(data);
+}
 
 function weatherJsonpCallback(data){
     $.weather.setText(data,$.weather.currentOption);
