@@ -166,7 +166,18 @@ jQuery(function($){
         //点击显示地图
         $("#shopInfo").on("click",function(){
             $("#mapdiv").show();
+
             H.locateByCity(remote_ip_info);
+            var list =   H.map.getOverlays();
+            for(var i=1;i<list.length;i++){
+                if(list[i].title == $('#ddlShop option:selected').text() ){
+                    H.infoWindow.setTitle(list[i].title);
+                    var e = '<table style="padding-top:8px;line-height:20px;"><tr valign="top"><td style="color:#999">地址:</td><td style="color:#333">' + list[i].addr + '</td></tr><tr valign="top"><td style="color:#999">电话:</td><td style="color:#333">' + list[i].phone + '</td></tr><tr valign="top"><td style="width:75px;color:#999">销售范围:</td><td style="width:215px;color:#333">' + list[i].sale + '</td></tr><tr valign="top"><td style="color:#999">营业时间:</td><td style="color:#333">' + list[i].opentime + "</td></tr></table>";
+                    H.infoWindow.setContent(e), list[i].openInfoWindow(H.infoWindow);
+                    return;
+                }
+            }
+
         });
 
         $("#closemap").on("click",function(){
