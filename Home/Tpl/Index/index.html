@@ -13,7 +13,7 @@
             </div>
             <div class="city">
                 <a href="#" class="change_city">切换城市</a>
-                <div class="near_un"><i class="city_wz"></i><a href="#">您附近的优衣库门店</a></div>
+                <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#">您附近的优衣库门店</a></div>
             </div>
         </div>
 
@@ -172,14 +172,26 @@
 
 </div>
 
+<!-- 地图弹窗 -->
+<div class="map_light_box none" id="mapdiv">
+    <a href="javascript:;" class="light_box_close" id="closemap"></a>
+    <h3>查找您附近的优衣库UNIQLO门店</h3>
+    <div class="light_box_u_map_con" id="allmap">
+    </div>
+</div>
+
+
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="__TMPL__Public/js/home.js"></script>
 <script type='text/javascript'>
+var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index';
 var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
 var imgpath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public';
 var goodurl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood';
@@ -204,7 +216,7 @@ $(function(){
             }
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
+            JSONP.src=jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
         }
     });
@@ -220,7 +232,7 @@ $(function(){
                 $.weather.avg = avg;
                 var JSONP=document.createElement("script");
                 JSONP.type="text/javascript";
-                JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
+                JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
                 document.getElementsByTagName("head")[0].appendChild(JSONP);
             }
         })
@@ -253,7 +265,7 @@ function jsonpCallback(da){
 function getgoods(cid,sid,tid){
     var JSONP=document.createElement("script");
     JSONP.type="text/javascript";
-    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
+    JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
     document.getElementsByTagName("head")[0].appendChild(JSONP);
 }
 

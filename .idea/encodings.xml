@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/Home/Lib/Action/IndexAction.class.php" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index.html" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index_v2.10.0228_u1_5_地图显示和热区延迟两秒.html" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index_v2.11.0304_u1_5_热区修改&amp;天气接口修改.html" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index_v2.13.0307_u1_5_女装数据不对.html" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Public/js/Map/H.min.js" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Public/js/home.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Public/js/main-new.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Home/Tpl/Public/js/nio-weather-new.js" charset="UTF-8" />
   </component>
 </project>
 

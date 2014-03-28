@@ -163,6 +163,16 @@ jQuery(function($){
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
+        //点击显示地图
+        $("#shopInfo").on("click",function(){
+            $("#mapdiv").show();
+            H.locateByCity(remote_ip_info);
+        });
+
+        $("#closemap").on("click",function(){
+            $("#mapdiv").hide();
+        });
+
 
         $("#w_sq").on("click",function(){
             $("#div_main").hide();
