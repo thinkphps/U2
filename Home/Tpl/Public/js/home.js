@@ -163,26 +163,7 @@ jQuery(function($){
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-        //点击显示地图
-        $("#shopInfo").on("click",function(){
-            $("#mapdiv").show();
 
-            H.locateByCity(remote_ip_info);
-            var list =   H.map.getOverlays();
-            for(var i=1;i<list.length;i++){
-                if(list[i].title == $('#ddlShop option:selected').text() ){
-                    H.infoWindow.setTitle(list[i].title);
-                    var e = '<table style="padding-top:8px;line-height:20px;"><tr valign="top"><td style="color:#999">地址:</td><td style="color:#333">' + list[i].addr + '</td></tr><tr valign="top"><td style="color:#999">电话:</td><td style="color:#333">' + list[i].phone + '</td></tr><tr valign="top"><td style="width:75px;color:#999">销售范围:</td><td style="width:215px;color:#333">' + list[i].sale + '</td></tr><tr valign="top"><td style="color:#999">营业时间:</td><td style="color:#333">' + list[i].opentime + "</td></tr></table>";
-                    H.infoWindow.setContent(e), list[i].openInfoWindow(H.infoWindow);
-                    return;
-                }
-            }
-
-        });
-
-        $("#closemap").on("click",function(){
-            $("#mapdiv").hide();
-        });
 
 
         $("#w_sq").on("click",function(){
@@ -411,7 +392,7 @@ jQuery(function($){
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var addBtn = cabnet.kvHover.find('a.mini-kv-add')
-            var top = 110
+            var top = 160
             if(pos){
                 top = pos == '#net-top' ? 53 : 250
                 addBtn.text('收入衣柜')

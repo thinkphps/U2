@@ -12,7 +12,7 @@ jQuery(function($){
         tips : [
             '请注意防暑降温，宜穿短袖、背心、短裙、短裤、薄型T恤',
             '午时避免在户外久留，穿短裙/裤、短套装、T恤、长绒棉短袖',
-            '薄型棉杉+牛仔裤/休闲裤，或针织连衣裙是不错的选择',
+            '薄型棉杉+<a href="http://www.google.com" target="__blank">牛仔裤</a>/休闲裤，或针织连衣裙是不错的选择',
             '白天穿长袖衬衫+薄型套装，配牛仔裤，晚上加件针织衫吧',
             '美利奴毛衣、混纺/羊毛/羊绒衫、风衣、连帽茄克赶紧穿起来',
             '羽绒服或羊毛混纺短大衣，内配精纺美利奴毛衣+围巾',
@@ -82,7 +82,7 @@ jQuery(function($){
             that.currentOption = option;
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code;
+            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
 
         },
@@ -93,9 +93,14 @@ jQuery(function($){
             var arrIndex;
             var avg = 10;
             var weatherinfo = info['weather' + index];
+            //设置背景图片
+            this.setBackground(weatherinfo.wt);
+//            this.setBackground("多云转小雨");
             if(info['weather' + index].lt != null){
                 avg = Math.ceil( (parseInt(weatherinfo.lt) + parseInt(weatherinfo.ht)) / 2);
             }
+
+
 
             //气温降4度
             if(avg >14){
@@ -108,7 +113,33 @@ jQuery(function($){
                 else if(avg >= 1) arrIndex = 5
                 else arrIndex = 6
             }
+ 
+            //kimi
+			var cname = option.city?option.city:info.cityname;
+            $('#nio-city').text(info.cityname);
+			$('#cinpinyin').text(info.cbn);
+			$('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
+			$('#shopid').html(info.tradetime);
+			var str = '<option value="0">请选择</option>';	
+            $.each(info.plist,function(pin,pv){
+			    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+			});
+			$('#le1').html(str);
+			var str2 = '<option value="0">请选择</option>';	
+            $.each(info.plist,function(pin,pv){
+				if(pv.sel==1){
+                var sel = "selected='selected'";
+				}
+			    str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+			}); 
+			$('#spid').html(str2);
 
+			var str3 = '<option value="0">请选择</option>';	
+            $.each(info.clist,function(pin,pv){
+			    str3+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+			}); 
+			$('#scid').html(str3);
+			//kimi
             //天气图标
             $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) + 1)});
             $('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) + 1)});
@@ -144,6 +175,8 @@ jQuery(function($){
             $('#name_day3').html(info['weather4'].wt);
             $('#name_day4').html(info['weather5'].wt);
 
+
+
             this[option.city] = info['cityname'];
             var temper = {low: weatherinfo.lt,
                 high: weatherinfo.ht};
@@ -151,6 +184,40 @@ jQuery(function($){
                 option.callback(option.province, temper, info);
             }
         },
+        setBackground : function(str){
+            this.removeBackgroundClass();
+            if(str.indexOf("雪") > 0){
+                $("#div_header").addClass("dr_header_bg5")
+                $("#div_main").addClass("dr_main_con_bg5")
+            }
+            else if(str.indexOf("大雨") > 0 || str.indexOf("暴雨") > 0 ||
+                str.indexOf("雷雨") > 0 || str.indexOf("冰雹") > 0 ){
+                $("#div_header").addClass("dr_header_bg4")
+                $("#div_main").addClass("dr_main_con_bg4")
+            }
+            else if(str.indexOf("雨") > 0){
+                $("#div_header").addClass("dr_header_bg3")
+                $("#div_main").addClass("dr_main_con_bg3")
+            }
+            else if(str == "晴" > 0){
+                $("#div_header").addClass("dr_header_bg1")
+                $("#div_main").addClass("dr_main_con_bg1")
+            }
+            else{
+                $("#div_header").addClass("dr_header_bg2")
+                $("#div_main").addClass("dr_main_con_bg2")
+            }
+        },
+        removeBackgroundClass:function(){
+            for(var i = 1;i<=5;i++){
+                if($("#div_header").hasClass("dr_header_bg"+ i) && $("#div_main").hasClass("dr_main_con_bg"+ i)){
+                    $("#div_header").removeClass("dr_header_bg"+ i);
+                    $("#div_main").removeClass("dr_main_con_bg"+ i);
+                    break;
+                }
+            }
+        }
+        ,
         temp : function(str){
             var first, second, low = 0, high = 0;
             if(str){
@@ -212,7 +279,7 @@ jQuery(function($){
         sel.bind('.linkageselect .level_3');
     }
     var location = $('.mini-city');
-    $('.mini-change-btn').on('click', function(){
+    $('.change_city').on('click', function(){
         location.toggle();
     });
 

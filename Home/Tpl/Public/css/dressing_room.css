@@ -52,7 +52,7 @@ button,label{cursor:pointer; }
 /*头部-优惠*/
 .preferential{float:left; width:321px; height:82px; background:url(../images/line1.png) left 0 no-repeat; overflow:hidden; position:relative;}
 
-.preferential ul.preferential_side_bar{ width:10px; position:absolute; top:25px; right:10px; overflow:hidden;}
+.preferential ul.preferential_side_bar{ width:10px; position:absolute; top:25px; right:10px; overflow:hidden;z-index:1000;}
 .preferential ul.preferential_side_bar li{ display:block; width:8px; height:8px; background:url(../images/preferential_side_bar.png) 0 0 no-repeat; cursor:pointer; margin:0 0 4px 0; z-index:10;}
 .preferential ul.preferential_side_bar li.current{ background:url(../images/preferential_side_bar.png) 0 -8px no-repeat;}
 
@@ -318,4 +318,45 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 .light_box_u_map_con{ background:#555; width:760px; height:405px;}
 .mb15{
     margin-bottom: 15px;
+}
+
+/*kimi*/
+.mini-city{
+  background-color: #fff;
+  width: 342px;
+  height: 21px;
+  top: 20px;
+  left: 0px;
+  color: #555;
+  padding: 5px 12px;
+  border: 3px solid #ccc;
+}
+.mini-city input {
+    background: none repeat scroll 0 0 #FF0000;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.pa{
+  position: absolute;
+}
+.mini-city-close{
+  background-position: -33px -57px;
+  width: 8px;
+  height: 8px;
+  right: 10px;
+  top: 11px;
+}
+.mini-btn{
+  background: url(../images/mini/mini-btn.png) no-repeat;
+  position: absolute;
+}
+.mini-city select {
+    border: 1px solid #ABADB3;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 15px;
+    width: 95px;
 }

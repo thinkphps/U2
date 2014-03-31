@@ -1,5 +1,5 @@
-<link href="__TMPL__Public/css/dressing_room.css" rel="stylesheet" type="text/css" />
-<div class="dr_header_con dr_header_bg1">
+<link href="http://localhost/U2/Home/Tpl/Public/css/dressing_room.css" rel="stylesheet" type="text/css" />
+<div class="dr_header_con " id="div_header">
     <!--头部-->
     <div class="dr_header">
         <!--头部-logo-->
@@ -8,11 +8,17 @@
         <!--头部-城市-->
         <div class="dr_city">
             <div class="city_name">
-                <h2>上海</h2>
-                <span>shanghai</span>
+                <h2 id="nio-city">上海</h2>
+                <span id='cinpinyin'>shanghai</span>
             </div>
             <div class="city">
                 <a href="#" class="change_city">切换城市</a>
+		  <form class="mini-city linkageselect pa none">
+            <a href="javascript:;" class="mini-city-close mini-btn">关闭</a>
+            <label>省份<select class="level_1" id='le1'></select></label>
+            <label>城市<select class="level_2" id='le2'></select></label>
+            <input type="submit" value="切换" />
+          </form>
                 <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#">您附近的优衣库门店</a></div>
             </div>
         </div>
@@ -20,23 +26,22 @@
         <!--头部-优惠-->
         <div class="preferential">
             <ul class="preferential_side_bar">
-                <li class="current"></li>
-                <li></li>
-                <li></li>
+                <li class="current" id="tablink1" onclick="easytabs('1', '1');" onfocus="easytabs('1', '1');" onclick="return false;"></li>
+                <li id="tablink2" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');" onclick="return false;"></li>
+                <li id="tablink3" onmouseover="easytabs('1', '3');" onfocus="easytabs('1', '3');" onclick="return false;"></li>
             </ul>
-
-            <ul class="preferential_con">
-                <li class="preferential_1">
+            <ul class="preferential_con" id='scrollDiv'>
+                <li class="preferential_1" style="display:none;">
                     <i></i>
                     <a>1优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
                 </li>
-                <li class="preferential_2">
+                <li class="preferential_2" style="display:block;">
                     <i></i>
-                    <a>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                    <a id='shopid'>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
                 </li>
                 <li class="preferential_3">
                     <i></i>
-                    <p>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
+                    <p id='nio-tip'>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
                 </li>
             </ul>
         </div>
@@ -103,7 +108,7 @@
 
 
 <!--分类-->
-<div class="dr_main_con dr_main_con_bg4" id="div_main">
+<div class="dr_main_con" id="div_main">
     <div class="dr_main_con_sub_nav">
         <ul class="rw_sub_nav" id="ulgender">
             <li class="rw_all select"><a href="javascript:;" id="0"></a></li>
@@ -177,33 +182,34 @@
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
     <h3>查找您附近的优衣库UNIQLO门店</h3>
     <div class="mb15">
-        <select name="" id="" class="mr10" style="width:150px;">
+        <select name="" id="spid" class="mr10" style="width:150px;">
             <option selected="selected" value="44444">上海</option>
             <option value="55555">北京</option>
         </select>
-        <select name="" id=""  class="mr10" style="width:150px;">
+        <select name="" id="scid"  class="mr10" style="width:150px;">
             <option selected="selected" value="44444">徐汇区</option>
             <option value="55555">闵行区</option>
         </select>
         <select name="" id="ddlShop" style="width:200px;">
-            <option selected="selected" value="44444">上海南京西路店</option>
-            <option value="55555">重庆日月光中心广场店</option>
+          <option value='0'>请选择</option> 
         </select>
     </div>
     <div class="light_box_u_map_con" id="allmap">
     </div>
 </div>
 
-
-<script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
+<script>
+var baseurl='http://localhost/U2/',timer;
+</script>
+<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/jquery.js"></script>
+<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/nio-weather-new.js"></script>
+<!--<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/location.js"></script>-->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
-<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="__TMPL__Public/js/home.js"></script>
+<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/Map/H.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://localhost/U2/Home/Tpl/Public/js/home.js"></script>
 <script type='text/javascript'>
 var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index';
 var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
@@ -213,20 +219,6 @@ var sendurl = '{$uniurl}';
 var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
 $(function(){
-
-    $("#ddlShop").on("change",function(){
-        var list =   H.map.getOverlays();
-        for(var i=1;i<list.length;i++){
-            if(list[i].title == $('#ddlShop option:selected').text() ){
-                H.infoWindow.setTitle(list[i].title);
-                var e = '<table style="padding-top:8px;line-height:20px;"><tr valign="top"><td style="color:#999">地址:</td><td style="color:#333">' + list[i].addr + '</td></tr><tr valign="top"><td style="color:#999">电话:</td><td style="color:#333">' + list[i].phone + '</td></tr><tr valign="top"><td style="width:75px;color:#999">销售范围:</td><td style="width:215px;color:#333">' + list[i].sale + '</td></tr><tr valign="top"><td style="color:#999">营业时间:</td><td style="color:#333">' + list[i].opentime + "</td></tr></table>";
-                H.infoWindow.setContent(e), list[i].openInfoWindow(H.infoWindow);
-                return;
-            }
-        }
-    });
-
-
 
     window.imgpath = imgpath;
     $.weather.init({
@@ -491,6 +483,125 @@ function jsonpCallback4(da){
     }
     $.uniqlo.kvSlider();
 }
+$('#le1').on('change',function(){
+var pvalue = $('#le1 option:selected').val();
+    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpGetcity&pid="+pvalue;
+    // 创建script标签，设置其属性
+    var script = document.createElement('script');
+    script.setAttribute('src', url);
+    // 把script标签加入head，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script);
+});
+
+function jsonpGetcity(data){
+	var str = '<option value="0">请选择</option>';	
+      $.each(data.clist,function(pin,pv){
+	    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+			});
+    $('#le2').html(str);
+}
+//地图城市切换
+$('#spid').on('change',function(){
+var pid = $('#spid option:selected').val();
+    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity&pid="+pid+"&baiduid=1";
+    // 创建script标签，设置其属性
+    var script = document.createElement('script');
+    script.setAttribute('src', url);
+    // 把script标签加入head，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script);
+});
+
+function jsonpBaiduCity(data){
+	var str = '<option value="0">请选择</option>';	
+      $.each(data.clist,function(pin,pv){
+	    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+			});
+    $('#scid').html(str);
+	$('#ddlShop').html('<option value="0">请选择</option>');
+}
+
+$('#scid').on('change',function(){
+var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
+    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+pid+"&cid="+cid+"&baiduid=2";
+    // 创建script标签，设置其属性
+    var script = document.createElement('script');
+    script.setAttribute('src', url);
+    // 把script标签加入head，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script);
+});
+function jsonpBaiduCity2(data){
+	$('#ddlShop').html('<option value="0">请选择</option>');
+	var str = '<option value="0">请选择</option>';	
+      $.each(data.clist,function(pin,pv){
+	    str+="<option value='"+pv.longitude+"'>"+pv.sname+"</option>";
+			});
+    $('#ddlShop').html(str);
+}
+var tablink_idname = new Array("tablink")
+var tabcontent_idname = new Array("preferential_")
+var tabcount = new Array("3")
+var loadtabs = new Array("1")
+var autochangemenu = 1;
+var changespeed = 1;
+var stoponhover = 0;
+
+function easytabs(menunr, active) {
+	if (menunr == autochangemenu) {
+		currenttab = active;
+	}
+	if ((menunr == autochangemenu) && (stoponhover == 1)) {
+		stop_autochange()
+	} else if ((menunr == autochangemenu) && (stoponhover == 0)) {
+		counter = 0;
+	}
+	menunr = menunr - 1;
+	for (i = 1; i <= tabcount[menunr]; i++) {
+		$('#'+tablink_idname[menunr] + i).removeClass('current');
+		$('.'+tabcontent_idname[menunr] + i).css('display','none');
+	}
+	$('#'+tablink_idname[menunr] + active).addClass('current');
+	$('.'+tabcontent_idname[menunr] + active).css('display','block');
+}
+
+counter = 0;
+var totaltabs = tabcount[autochangemenu - 1];
+var currenttab = loadtabs[autochangemenu - 1];
+
+function start_autochange() {
+	counter = counter + 1;
+	timer = setTimeout("start_autochange()", 3000);
+	if (counter == changespeed + 1) {
+		currenttab++;
+		if (currenttab > totaltabs) {
+			currenttab = 1
+		}
+		easytabs(autochangemenu, currenttab);
+		restart_autochange();
+	}
+}
+
+function restart_autochange() {
+	clearTimeout(timer);
+	counter = 0;
+	start_autochange();
+}
+function stop_autochange() {
+	clearTimeout(timer);
+	counter = 0;
+}
+
+	var menucount = loadtabs.length;
+	var a = 0;
+	var b = 1;
+	do {
+		easytabs(b, loadtabs[a]);
+		a++;
+		b++;
+	} while (b <= menucount);
+	if (autochangemenu != 0) {
+		start_autochange();
+	}
+
 function jsonpCallbackm(data){
 
 }
