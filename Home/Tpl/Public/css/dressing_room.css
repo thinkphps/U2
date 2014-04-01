@@ -325,11 +325,12 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
   background-color: #fff;
   width: 342px;
   height: 21px;
-  top: 20px;
-  left: 0px;
+  top: 18px;
+  left: 346px;
   color: #555;
   padding: 5px 12px;
   border: 3px solid #ccc;
+  z-index:100;
 }
 .mini-city input {
     background: none repeat scroll 0 0 #FF0000;
