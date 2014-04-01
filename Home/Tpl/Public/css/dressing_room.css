@@ -350,7 +350,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
   top: 11px;
 }
 .mini-btn{
-  background: url(../images/mini/mini-btn.png) no-repeat;
+  background: url(../images/mini-btn.png) no-repeat;
   position: absolute;
 }
 .mini-city select {

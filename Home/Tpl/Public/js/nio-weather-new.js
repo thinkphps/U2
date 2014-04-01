@@ -126,19 +126,33 @@ jQuery(function($){
 			});
 			$('#le1').html(str);
 			var str2 = '<option value="0">请选择</option>';	
+			var scid = {};
             $.each(info.plist,function(pin,pv){
 				if(pv.sel==1){
                 var sel = "selected='selected'";
+				scid.selpid = pv.region_id;
 				}
 			    str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
 			}); 
 			$('#spid').html(str2);
 
-			var str3 = '<option value="0">请选择</option>';	
+			var str3 = '<option value="0">请选择</option>';
+			if(info.clist){
             $.each(info.clist,function(pin,pv){
-			    str3+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+			  if(pv.sel==1){
+                 var csel = "selected='selected'";
+				 scid.selcid = pv.region_id;
+				}
+			    str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
 			}); 
 			$('#scid').html(str3);
+			    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2";
+    // 创建script标签，设置其属性
+    var script = document.createElement('script');
+    script.setAttribute('src', url);
+    // 把script标签加入head，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script); 
+			}
 			//kimi
             //天气图标
             $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) + 1)});
