@@ -225,7 +225,7 @@ jQuery(function($){
                 $("#div_header").addClass("dr_header_bg3")
                 $("#div_main").addClass("dr_main_con_bg3")
             }
-            else if(str == "«Á" > 0){
+            else if(str == "«Á"){
                 $("#div_header").addClass("dr_header_bg1")
                 $("#div_main").addClass("dr_main_con_bg1")
             }
@@ -275,9 +275,6 @@ jQuery(function($){
                 option.city = '…œ∫£';
                 this.ajax(101020100, option);
             }
-
-
-
         }
     };
 
