@@ -77,8 +77,13 @@ jQuery(function($){
         ajax : function(code, option){
             var that = this,
                 city = option.city;
+            if(option.subindex){
+            var subindex = option.subindex;
+            }else{
+                var subindex = 0;
+            }
             if(option.subid){
-            var subid = option.subid;
+                var subid = option.subid;
             }else{
                 var subid = 0;
             }
@@ -86,12 +91,11 @@ jQuery(function($){
             that.currentOption = option;
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subid="+subid;
+            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
 
         },
         setText : function(info, option){
-
             var time  = this.time();
             var index = option.index || 1;
             var arrIndex;
@@ -134,7 +138,7 @@ jQuery(function($){
 			$('#le1').html(str);
 			var str2 = '<option value="0">请选择</option>';
             $.each(info.plist,function(pin,pv){
-				if(pv.sel==1){
+				if(pv.baidusel==1){
                 var sel = "selected='selected'";
 				scid.selpid = pv.region_id;
 				}
@@ -153,6 +157,8 @@ jQuery(function($){
 			});
 			$('#scid').html(str3);
                 if(option.shopid){
+                    alert(scid.selpid);
+                    alert(scid.selcid);
                     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
                     // 创建script标签，设置其属性
                     var script = document.createElement('script');
@@ -323,7 +329,7 @@ jQuery(function($){
             }
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             $.pron = prov;
-            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subid':'1',
+            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
                 callback: function(city, temper, info){
                     var avg = getavg(temper.high,temper.low);
                     $.weather.avg = avg;

@@ -58,21 +58,31 @@ class IndexnewAction extends Action{
     public function GetWeatherByCityID()
     {
         $id = trim($this->_request('id'));
-        $subid = trim($this->_request('subid'));//表示首页点击切换的动作
+        $subindex = trim($this->_request('subindex'));//表示首页点击切换的动作
+        $subid = trim($this->_request('subid'));//点击百度里边店铺的标记
+
         $callback=$_GET['callback'];
         $Weather = D('Getinfo');
         $returnObj =  $Weather->GetWeatherInfoByID($id);
 		//取得城市拼音
         $cbn = $Weather->getarea('',$id);//城市信息
+        /*if($subid==1){
+        $cbn = M('Areas')->field('region_id')->where(array('p_region_id'=>$cbn['region_id']))->find();
+        }*/
         $shop = $Weather->shopinfo($cbn['region_id']);
 		$pro = $Weather->getpca();//省列表
 		$clist = $Weather->getCityList($cbn['region_id'],$cbn['p_region_id']);
+
 		foreach($pro as $k=>$v){
-        if($v['region_id']==$cbn['p_region_id'] && $subid==1){
+        if($v['region_id']==$cbn['p_region_id'] && $subindex==1){
         $pro[$k]['sel'] = 1;
+        $pro[$k]['baidusel'] = 1;
 		break;
+		}else if($v['region_id']==$cbn['p_region_id']){
+        $pro[$k]['baidusel'] = 1;
+        }
 		}
-		}
+
 		foreach($clist as $k=>$v){
         if($v['region_id']==$cbn['region_id']){
         $clist[$k]['sel'] = 1;
@@ -98,7 +108,7 @@ class IndexnewAction extends Action{
  public function getcity(){
 	  $pid = trim($this->_request('pid'));//省id
 	  $baiduid = trim($this->_request('baiduid'));
-      $shopid = trim($this->_request('shopid'));
+      $shopid = trim($this->_request('shopid'));//店铺id
 	  $scid = trim($this->_request('cid'));
 	  $callback=$_GET['callback'];
 	  $area = M('Areas');

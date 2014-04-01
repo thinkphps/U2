@@ -37,7 +37,6 @@ class GetinfoModel extends Action{
 	  public function getarea($city='',$citybn=''){
  			 $area = M('Areas');
 			 if(!empty($city)){
-				 echo $city;
 			 $cbn = $area->field('region_id,p_region_id,citybn,pinying')->where(array('local_name'=>$city))->find();
 			 }else if(!empty($citybn)){
              $cbn = $area->field('region_id,p_region_id,citybn,pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
