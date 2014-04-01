@@ -302,7 +302,7 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/Map/H.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/home.js"></script>
-<script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/CoverScroll/jquery.coverscroll.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://localhost/U2//Home/Tpl/Public/js/CoverScroll/jquery.coverscroll.js"></script>
 <script type='text/javascript'>
 var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
 var getgood = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index/ajaxgood';
@@ -312,9 +312,7 @@ var sendurl = '{$uniurl}';
 var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
 $(function(){
-    $('#container2').coverscroll({items:'.item',minfactor:15}).on('mouseleave',function(){
-
-    });
+    $('#container2').coverscroll({items:'.item',minfactor:15});
 
 
 

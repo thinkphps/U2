@@ -96,7 +96,39 @@
         // add scroll event
         if(!opt.scrollactive){return true;}
         el.unbind('wheel');
-        el.on('wheel', function(evt){
+        el.on('mouseleave',function(){
+
+            if(gopt.items){
+                var imgs = $(this).find(gopt.items);
+            }else{
+                var imgs = $(this).find('img');
+            }
+            for(i=0;i<imgs.length;i++){
+                var citem = $(imgs.get(i));
+                citem.removeClass(opt.selectedclass);
+                var css = {
+                    'width':150,
+                    'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)'
+                };
+                if(gopt.msie){
+                    isScrolling = true;
+                    citem.animate(css, 500, function(){isScrolling=false});
+                }else{
+                    citem.css(css);
+                }
+            }
+
+            // take care of z-index
+            setTimeout(function(){
+                var zi = 100;
+                imgs.each(function(ind){
+
+                    zi = zi + ind;
+                    $(this).css('z-index',zi);
+                });
+            },100);
+          })
+          .on('wheel', function(evt){
             if(!isScrolling){
                 var orgEvent = evt.originalEvent, delta, deltaY, deltaY;
 
@@ -431,4 +463,5 @@
       $.error( 'Method ' +  method + ' does not exist on this plugin' );
     }
   };
+
 })(jQuery);
