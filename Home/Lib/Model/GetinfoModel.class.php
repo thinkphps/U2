@@ -71,12 +71,12 @@ class GetinfoModel extends Action{
 	  //取得店铺数据
 	  public function getshopinfo(){
             $shop = M('Shop');
-            $list = $shop->cache(true)->join('inner join u_areas on u_shop.cityid=u_areas.region_id')->field('u_shop.longitude,u_shop.latitude,u_shop.sname,u_shop.saddress,u_shop.tradetime,u_shop.scall,u_shop.sange,u_areas.local_name,u_areas.p_region_id,u_areas.citybn')->select();
+            $list = $shop->cache(true)->join('inner join u_areas on u_shop.cityid=u_areas.region_id')->field('u_shop.id,u_shop.longitude,u_shop.latitude,u_shop.sname,u_shop.saddress,u_shop.tradetime,u_shop.scall,u_shop.sange,u_areas.local_name,u_areas.p_region_id,u_areas.citybn')->select();
 			$area = M('Areas');
             $arr = array();
             foreach($list as $k=>$v){
 		    $aname = $area->cache(true)->field('local_name')->where(array('region_id'=>$v['p_region_id']))->find();
-            $arr[$k] = array($v['sname'],$v['saddress'],$v['longitude'],$v['latitude'],$v['sange'],$v['tradetime'],$v['scall'],$v['local_name'],$aname['local_name']);
+            $arr[$k] = array($v['sname'],$v['saddress'],$v['longitude'],$v['latitude'],$v['sange'],$v['tradetime'],$v['scall'],$v['local_name'],$aname['local_name'],$v['id']);
 			}
 			unset($list);
 			return $arr;

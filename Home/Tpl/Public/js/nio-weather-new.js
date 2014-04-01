@@ -79,6 +79,8 @@ jQuery(function($){
                 city = option.city;
             if(option.subid){
             var subid = option.subid;
+            }else{
+                var subid = 0;
             }
             //调用接口，天气信息
             that.currentOption = option;
@@ -148,14 +150,16 @@ jQuery(function($){
 				 scid.selcid = pv.region_id;
 				}
 			    str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
-			}); 
+			});
 			$('#scid').html(str3);
-			    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2";
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script); 
+                if(option.shopid){
+                    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
+                    // 创建script标签，设置其属性
+                    var script = document.createElement('script');
+                    script.setAttribute('src', url);
+                    // 把script标签加入head，此时调用开始
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
 			}
 			//kimi
             //天气图标

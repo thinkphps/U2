@@ -536,7 +536,10 @@ function jsonpBaiduCity2(data){
 	$('#ddlShop').html('<option value="0">«Î—°‘Ò</option>');
 	var str = '<option value="0">«Î—°‘Ò</option>';	
       $.each(data.clist,function(pin,pv){
-	    str+="<option value='"+pv.longitude+"'>"+pv.sname+"</option>";
+          if(pv.sel == 1){
+           var sel =  "selected='selected'";
+          }
+	    str+="<option value='"+pv.longitude+"' "+sel+">"+pv.sname+"</option>";
 			});
     $('#ddlShop').html(str);
 }

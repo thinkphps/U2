@@ -98,6 +98,7 @@ class IndexnewAction extends Action{
  public function getcity(){
 	  $pid = trim($this->_request('pid'));//ʡid
 	  $baiduid = trim($this->_request('baiduid'));
+      $shopid = trim($this->_request('shopid'));
 	  $scid = trim($this->_request('cid'));
 	  $callback=$_GET['callback'];
 	  $area = M('Areas');
@@ -123,7 +124,12 @@ class IndexnewAction extends Action{
              $where = array('cityid'=>$scid);
 			 break;
 			 }
-      $list = $shop->field('longitude,latitude,sname')->where($where)->select();
+       $list = $shop->field('id,longitude,latitude,sname')->where($where)->select();
+       foreach($list as $k=>$v){
+        if($v['id'] == $shopid){
+         $list[$k]['sel'] = 1;
+        }
+       }
 	  }
 	  $arr['clist'] = $list;
 	  $re = json_encode($arr);
