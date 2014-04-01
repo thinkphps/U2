@@ -343,15 +343,12 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
   position: absolute;
 }
 .mini-city-close{
-  background-position: -33px -57px;
   width: 8px;
   height: 8px;
   right: 10px;
   top: 11px;
-}
-.mini-btn{
-  background: url(../images/mini-btn.png) no-repeat;
-  position: absolute;
+    background: url(../images/mini-btn.png) -33px -57px no-repeat ;
+    position: absolute;
 }
 .mini-city select {
     border: 1px solid #ABADB3;
