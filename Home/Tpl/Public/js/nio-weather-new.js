@@ -258,10 +258,10 @@ jQuery(function($){
             }
         },
         init : function(option){
-            option = option || {}
+
             var city = option.city
-            if(city === remote_ip_info['city'] && this[city]) return this.setText(this[city], option);
-            city = remote_ip_info['city'] = city || remote_ip_info['city'];
+//            if(city === remote_ip_info['city'] && this[city]) return this.setText(this[city], option);
+//            city = remote_ip_info['city'] = city || remote_ip_info['city'];
             for (var i = 0, len = citys.length; i < len; i ++) {
                 if(citys[i].n === city) break;
             }
@@ -271,6 +271,9 @@ jQuery(function($){
                 option.city = 'ÉÏº£';
                 this.ajax(101020100, option);
             }
+
+
+
         }
     };
 
