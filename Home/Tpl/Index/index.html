@@ -496,7 +496,10 @@ var pvalue = $('#le1 option:selected').val();
 function jsonpGetcity(data){
 	var str = '<option value="0">«Î—°‘Ò</option>';	
       $.each(data.clist,function(pin,pv){
-	    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+        if(pv.sel==1){
+          var sel2 = "selected='selected'";
+        }
+	    str+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
 			});
     $('#le2').html(str);
 }
