@@ -58,6 +58,7 @@ class IndexnewAction extends Action{
     public function GetWeatherByCityID()
     {
         $id = trim($this->_request('id'));
+        $subid = trim($this->_request('subid'));//表示首页点击切换的动作
         $callback=$_GET['callback'];
         $Weather = D('Getinfo');
         $returnObj =  $Weather->GetWeatherInfoByID($id);
@@ -67,7 +68,7 @@ class IndexnewAction extends Action{
 		$pro = $Weather->getpca();//省列表
 		$clist = $Weather->getCityList($cbn['region_id'],$cbn['p_region_id']);
 		foreach($pro as $k=>$v){
-        if($v['region_id']==$cbn['p_region_id']){
+        if($v['region_id']==$cbn['p_region_id'] && $subid==1){
         $pro[$k]['sel'] = 1;
 		break;
 		}
@@ -107,6 +108,9 @@ class IndexnewAction extends Action{
 	  }
       if($baiduid!=2){
 	  $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+      if(empty($baiduid) && count($list)==1){
+       $list[0]['sel'] = 1;
+      }
       }else{
              switch($pid){
              case 1 :

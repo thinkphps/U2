@@ -77,12 +77,14 @@ jQuery(function($){
         ajax : function(code, option){
             var that = this,
                 city = option.city;
-
+            if(option.subid){
+            var subid = option.subid;
+            }
             //调用接口，天气信息
             that.currentOption = option;
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code;
+            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subid="+subid;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
 
         },
@@ -115,18 +117,20 @@ jQuery(function($){
             }
  
             //kimi
-			var cname = option.city?option.city:info.cityname;
             $('#nio-city').text(info.cityname);
 			$('#cinpinyin').text(info.cbn);
 			$('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
 			$('#shopid').html(info.tradetime);
-			var str = '<option value="0">请选择</option>';	
+			var str = '<option value="0">请选择</option>';
+            var scid = {};
             $.each(info.plist,function(pin,pv){
-			    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+                if(pv.sel==1){
+                var psel = "selected='selected'";
+                }
+			    str+="<option value='"+pv.region_id+"' "+psel+">"+pv.local_name+"</option>";
 			});
 			$('#le1').html(str);
-			var str2 = '<option value="0">请选择</option>';	
-			var scid = {};
+			var str2 = '<option value="0">请选择</option>';
             $.each(info.plist,function(pin,pv){
 				if(pv.sel==1){
                 var sel = "selected='selected'";
@@ -315,7 +319,7 @@ jQuery(function($){
             }
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             $.pron = prov;
-            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
+            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subid':'1',
                 callback: function(city, temper, info){
                     var avg = getavg(temper.high,temper.low);
                     $.weather.avg = avg;
