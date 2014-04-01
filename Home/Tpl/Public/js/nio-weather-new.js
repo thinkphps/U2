@@ -157,8 +157,6 @@ jQuery(function($){
 			});
 			$('#scid').html(str3);
                 if(option.shopid){
-                    alert(scid.selpid);
-                    alert(scid.selcid);
                     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
                     // 创建script标签，设置其属性
                     var script = document.createElement('script');
