@@ -92,11 +92,12 @@ jQuery(function($){
             }else{
                 var shopid = 0;
             }
+            option.baiduerjiid = option.baiduerjiid ? option.baiduerjiid:-1;//百度地图上的select二级选择值（直辖市）
             //调用接口，天气信息
             that.currentOption = option;
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid+'&shopid='+shopid;
+            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid+'&shopid='+shopid+'&baiduerjiid='+option.baiduerjiid;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
 
         },

@@ -61,6 +61,7 @@ class IndexnewAction extends Action{
         $subindex = trim($this->_request('subindex'));//表示首页点击切换的动作
         $subid = trim($this->_request('subid'));//点击百度里边店铺的标记
         $shopid = trim($this->_request('shopid'));//点击百度地图里的店铺id
+        $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
         $callback=$_GET['callback'];
         $Weather = D('Getinfo');
         $returnObj =  $Weather->GetWeatherInfoByID($id);
@@ -97,6 +98,10 @@ class IndexnewAction extends Action{
                 if($v['region_id']==$aidresult['aid']){
                     $clist[$k]['sel'] = 1;
                 }
+            }else if($subid && $baiduerjiid && $isp){
+                if($v['region_id']==$baiduerjiid){
+                    $clist[$k]['sel'] = 1;
+                }
             }else{
                 if($v['region_id']==$cbn['region_id']){
                     $clist[$k]['sel'] = 1;
@@ -115,6 +120,7 @@ class IndexnewAction extends Action{
         $weatherInfo['clist'] = $clist;
         $weatherInfo['indexcity'] = $cbn;
         $weatherInfo['isp'] = $isp;//表示是直辖市
+        error_log(print_r($weatherInfo,1),3,'1.txt');
         $re = json_encode($weatherInfo);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
@@ -158,6 +164,7 @@ class IndexnewAction extends Action{
             }
         }
         $arr['clist'] = $list;
+        error_log(print_r($arr,1),3,'2.txt');
         $re = json_encode($arr);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
