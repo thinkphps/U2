@@ -78,7 +78,7 @@ jQuery(function($){
             var that = this,
                 city = option.city;
             if(option.subindex){
-            var subindex = option.subindex;
+                var subindex = option.subindex;
             }else{
                 var subindex = 0;
             }
@@ -87,11 +87,16 @@ jQuery(function($){
             }else{
                 var subid = 0;
             }
+            if(option.shopid){
+                var shopid = option.shopid;
+            }else{
+                var shopid = 0;
+            }
             //调用接口，天气信息
             that.currentOption = option;
             var JSONP=document.createElement("script");
             JSONP.type="text/javascript";
-            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid;
+            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid+'&shopid='+shopid;
             document.getElementsByTagName("head")[0].appendChild(JSONP);
 
         },
@@ -121,51 +126,66 @@ jQuery(function($){
                 else if(avg >= 1) arrIndex = 5
                 else arrIndex = 6
             }
- 
+
             //kimi
             $('#nio-city').text(info.cityname);
-			$('#cinpinyin').text(info.cbn);
-			$('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
-			$('#shopid').html(info.tradetime);
-			var str = '<option value="0">请选择</option>';
+            $('#cinpinyin').text(info.cbn);
+            $('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
+            $('#shopid').html(info.tradetime);
+            var str = '<option value="0">请选择</option>';
             var scid = {};
             $.each(info.plist,function(pin,pv){
                 if(pv.sel==1){
-                var psel = "selected='selected'";
+                    var psel = "selected='selected'";
                 }
-			    str+="<option value='"+pv.region_id+"' "+psel+">"+pv.local_name+"</option>";
-			});
-			$('#le1').html(str);
-			var str2 = '<option value="0">请选择</option>';
-            $.each(info.plist,function(pin,pv){
-				if(pv.baidusel==1){
-                var sel = "selected='selected'";
-				scid.selpid = pv.region_id;
-				}
-			    str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
-			}); 
-			$('#spid').html(str2);
+                str+="<option value='"+pv.region_id+"' "+psel+">"+pv.local_name+"</option>";
+            });
+            $('#le1').html(str);
 
-			var str3 = '<option value="0">请选择</option>';
-			if(info.clist){
-            $.each(info.clist,function(pin,pv){
-			  if(pv.sel==1){
-                 var csel = "selected='selected'";
-				 scid.selcid = pv.region_id;
-				}
-			    str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
-			});
-			$('#scid').html(str3);
-                if(option.shopid){
-                    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
-                    // 创建script标签，设置其属性
-                    var script = document.createElement('script');
-                    script.setAttribute('src', url);
-                    // 把script标签加入head，此时调用开始
-                    document.getElementsByTagName('head')[0].appendChild(script);
+            var str2 = '<option value="0">请选择</option>';
+            $.each(info.plist,function(pin,pv){
+                if(pv.baidusel==1){
+                    var sel = "selected='selected'";
+                    scid.selpid = pv.region_id;
                 }
-			}
-			//kimi
+                str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+            });
+            $('#spid').html(str2);
+
+            var str3 = '<option value="0">请选择</option>';
+            if(info.clist){
+                $.each(info.clist,function(pin,pv){
+                    if(pv.sel==1){
+                        var csel = "selected='selected'";
+                        scid.selcid = pv.region_id;
+                    }
+                    str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
+                });
+                $('#scid').html(str3);
+                if(info.isp){//直辖市
+                    var str4 = '<option value="0">请选择</option>';
+                    var sel2 = "selected='selected'";
+                    str4+="<option value='"+info.indexcity.region_id+"' "+sel2+">"+info.indexcity.local_name+"</option>";
+                    $('#le2').html(str4);
+                }else{
+                    var str4 = '<option value="0">请选择</option>';
+                    $.each(info.clist,function(pin,pv){
+                        if(pv.sel==1){
+                            var sel2 = "selected='selected'";
+                        }
+                        str4+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
+                    });
+                    $('#le2').html(str4);
+                }
+                var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
+                // 创建script标签，设置其属性
+                var script = document.createElement('script');
+                script.setAttribute('src', url);
+                // 把script标签加入head，此时调用开始
+                document.getElementsByTagName('head')[0].appendChild(script);
+                //}
+            }
+            //kimi
             //天气图标
             $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) + 1)});
             $('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) + 1)});
@@ -393,7 +413,7 @@ jQuery(function($){
         return false;
 
     }).on('click', 'a.mini-city-close', function(){
-        location.hide();
-    });
+            location.hide();
+        });
 
 });
