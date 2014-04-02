@@ -178,7 +178,7 @@ jQuery(function($){
                     $('#le2').html(str4);
                 }
                 scid.selpid = scid.selpid?scid.selpid:-1;
-                cid.selcid = cid.selcid?cid.selcid:-1;
+                scid.selcid = scid.selcid?scid.selcid:-1;
                 var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
                 // 创建script标签，设置其属性
                 var script = document.createElement('script');
@@ -349,6 +349,7 @@ jQuery(function($){
             }
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             $.pron = prov;
+            H.map.centerAndZoom(city, 11);
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
                 callback: function(city, temper, info){
                     var avg = getavg(temper.high,temper.low);
