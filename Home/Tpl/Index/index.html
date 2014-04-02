@@ -533,6 +533,25 @@ var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val(
     script.setAttribute('src', url);
     // 把script标签加入head，此时调用开始
     document.getElementsByTagName('head')[0].appendChild(script);
+    var cityname = $('#scid option:selected').text();
+    if(cityname[cityname.length-1]=='市'){
+        var cnm = cityname.replace('市','');
+    }
+    $.weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1',
+        callback: function(city, temper, info){
+            var avg = getavg(temper.high,temper.low);
+            $.weather.avg = avg;
+            avg = avg?avg:0;
+            $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
+            $.weather.sex = $.weather.sex?$.weather.sex:0;
+            $.weather.set = $.weather.set?$.weather.set:0;
+            var JSONP=document.createElement("script");
+            JSONP.type="text/javascript";
+            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+            document.getElementsByTagName("head")[0].appendChild(JSONP);
+            sendcity(city,info.city);
+        }
+    });
 });
 function jsonpBaiduCity2(data){
 	$('#ddlShop').html('<option value="0">请选择</option>');
