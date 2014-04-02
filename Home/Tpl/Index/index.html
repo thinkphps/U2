@@ -222,6 +222,7 @@ $(function(){
 
     window.imgpath = imgpath;
     $.weather.init({
+        'subindex':1,
         imgpath : imgpath,
         city : remote_ip_info.city || null,
         callback: function(city, temper, info){
@@ -536,7 +537,10 @@ var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val(
     var cityname = $('#scid option:selected').text();
     if(cityname[cityname.length-1]=='ÊÐ'){
         var cnm = cityname.replace('ÊÐ','');
+    }else{
+        var cnm = $('#spid option:selected').text();
     }
+
     $.weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1',
         callback: function(city, temper, info){
             var avg = getavg(temper.high,temper.low);

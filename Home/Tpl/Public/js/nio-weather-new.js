@@ -177,6 +177,8 @@ jQuery(function($){
                     });
                     $('#le2').html(str4);
                 }
+                scid.selpid = scid.selpid?scid.selpid:-1;
+                cid.selcid = cid.selcid?cid.selcid:-1;
                 var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
                 // 创建script标签，设置其属性
                 var script = document.createElement('script');
