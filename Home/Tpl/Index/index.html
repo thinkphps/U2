@@ -525,6 +525,7 @@ function jsonpBaiduCity(data){
 }
 
 $('#scid').on('change',function(){
+    H.map.centerAndZoom($("#scid option:selected").text(), 11);
 var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+pid+"&cid="+cid+"&baiduid=2";
     // 创建script标签，设置其属性
