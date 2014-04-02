@@ -120,7 +120,6 @@ class IndexnewAction extends Action{
         $weatherInfo['clist'] = $clist;
         $weatherInfo['indexcity'] = $cbn;
         $weatherInfo['isp'] = $isp;//表示是直辖市
-        error_log(print_r($weatherInfo,1),3,'1.txt');
         $re = json_encode($weatherInfo);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
@@ -164,7 +163,6 @@ class IndexnewAction extends Action{
             }
         }
         $arr['clist'] = $list;
-        error_log(print_r($arr,1),3,'2.txt');
         $re = json_encode($arr);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
