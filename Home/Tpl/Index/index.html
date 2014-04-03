@@ -236,10 +236,8 @@ $(function(){
             }else{
                 $.pron = remote_ip_info.province;
             }
-            var JSONP=document.createElement("script");
-            JSONP.type="text/javascript";
-            JSONP.src=jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
-            document.getElementsByTagName("head")[0].appendChild(JSONP);
+            var jsonpurl = jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
+            jsonpFcuntion(jsonpurl);
         }
     });
 
@@ -254,10 +252,8 @@ $(function(){
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
                 $.weather.avg = avg;
-                var JSONP=document.createElement("script");
-                JSONP.type="text/javascript";
-                JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
-                document.getElementsByTagName("head")[0].appendChild(JSONP);
+                var jsonpurl =jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
+                jsonpFcuntion(jsonpurl);
             }
         })
     })
@@ -271,7 +267,12 @@ function mapBindMarker(data){
 function weatherJsonpCallback(data){
     $.weather.setText(data,$.weather.currentOption);
 }
-
+function jsonpFcuntion(url){
+    var JSONP=document.createElement("script");
+    JSONP.type="text/javascript";
+    JSONP.src=url;
+    document.getElementsByTagName("head")[0].appendChild(JSONP);
+}
 function jsonpCallback(da){
     if(da.ustr){
         $('#upc').html(da.ustr);
@@ -489,11 +490,7 @@ function jsonpCallback4(da){
 $('#le1').on('change',function(){
 var pvalue = $('#le1 option:selected').val();
     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpGetcity&pid="+pvalue;
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
+    jsonpFcuntion(url);
 });
 
 function jsonpGetcity(data){
@@ -510,11 +507,7 @@ function jsonpGetcity(data){
 $('#spid').on('change',function(){
 var pid = $('#spid option:selected').val();
     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity&pid="+pid+"&baiduid=1";
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
+    jsonpFcuntion(url);
 });
 
 function jsonpBaiduCity(data){
@@ -544,10 +537,8 @@ var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val(
             $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
             $.weather.sex = $.weather.sex?$.weather.sex:0;
             $.weather.set = $.weather.set?$.weather.set:0;
-            var JSONP=document.createElement("script");
-            JSONP.type="text/javascript";
-            JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
-            document.getElementsByTagName("head")[0].appendChild(JSONP);
+            var jsonpurl ="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+            jsonpFcuntion(jsonpurl);
             sendcity(city,info.city);
         }
     });

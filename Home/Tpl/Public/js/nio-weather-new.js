@@ -77,29 +77,14 @@ jQuery(function($){
         ajax : function(code, option){
             var that = this,
                 city = option.city;
-            if(option.subindex){
-                var subindex = option.subindex;
-            }else{
-                var subindex = 0;
-            }
-            if(option.subid){
-                var subid = option.subid;
-            }else{
-                var subid = 0;
-            }
-            if(option.shopid){
-                var shopid = option.shopid;
-            }else{
-                var shopid = 0;
-            }
+                var subindex = option.subindex ? option.subindex:0;
+                var subid = option.subid ? option.subid : 0;
+                var shopid = option.shopid ? option.shopid : 0;
             option.baiduerjiid = option.baiduerjiid ? option.baiduerjiid:-1;//百度地图上的select二级选择值（直辖市）
             //调用接口，天气信息
             that.currentOption = option;
-            var JSONP=document.createElement("script");
-            JSONP.type="text/javascript";
-            JSONP.src=baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid+'&shopid='+shopid+'&baiduerjiid='+option.baiduerjiid;
-            document.getElementsByTagName("head")[0].appendChild(JSONP);
-
+            var jsonpurl = baseurl+"index.php/Indexnew/GetWeatherByCityID?callback=weatherJsonpCallback&id="+code+"&subindex="+subindex+"&subid="+subid+'&shopid='+shopid+'&baiduerjiid='+option.baiduerjiid;
+            jsonpFcuntion(jsonpurl);
         },
         setText : function(info, option){
             var time  = this.time();
@@ -180,13 +165,8 @@ jQuery(function($){
                 }
                 scid.selpid = scid.selpid?scid.selpid:-1;
                 scid.selcid = scid.selcid?scid.selcid:-1;
-                var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
-                // 创建script标签，设置其属性
-                var script = document.createElement('script');
-                script.setAttribute('src', url);
-                // 把script标签加入head，此时调用开始
-                document.getElementsByTagName('head')[0].appendChild(script);
-                //}
+                var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
+                jsonpFcuntion(jsonpurl);
             }
             //kimi
             //天气图标
@@ -359,11 +339,9 @@ jQuery(function($){
                     $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
                     $.weather.sex = $.weather.sex?$.weather.sex:0;
                     $.weather.set = $.weather.set?$.weather.set:0;
-                    var JSONP=document.createElement("script");
-                    JSONP.type="text/javascript";
-                    JSONP.src="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
-                    document.getElementsByTagName("head")[0].appendChild(JSONP);
 
+                    var jsonpurl = "http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+                    jsonpFcuntion(jsonpurl);
                     /*$.post($.weather.getgurl,{
                      pro : city,
                      tem : avg,
