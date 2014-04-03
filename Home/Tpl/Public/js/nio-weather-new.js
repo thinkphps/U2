@@ -117,7 +117,9 @@ jQuery(function($){
             $('#nio-city').text(info.cityname);
             $('#cinpinyin').text(info.cbn);
             $('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
-            $('#shopid').html(info.tradetime);
+            if(!option.shopid){
+            $('#shopid').html(info.sname+' '+info.tradetime);
+            }
             var str = '<option value="0">«Î—°‘Ò</option>';
             var scid = {};
             $.each(info.plist,function(pin,pv){
@@ -165,7 +167,7 @@ jQuery(function($){
                 }
                 scid.selpid = scid.selpid?scid.selpid:-1;
                 scid.selcid = scid.selcid?scid.selcid:-1;
-                var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid;
+                var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid+"&baiduerjiid="+info.baiduerjiid;
                 jsonpFcuntion(jsonpurl);
             }
             //kimi

@@ -142,9 +142,6 @@
                 </ul>
             </div>
         </div>
-
-
-
         <div class="mini-kv-slide" data-pos="#net-bot">
             <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
             <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
@@ -192,7 +189,7 @@
         </select>
         <select name="" id="ddlShop" style="width:200px;">
           <option value='0'>请选择</option> 
-        </select>
+        </select>&nbsp;<span id='emptymsg'  style="font-size:10px;color: #999999;"></span>
     </div>
     <div class="light_box_u_map_con" id="allmap">
     </div>
@@ -267,11 +264,23 @@ function mapBindMarker(data){
 function weatherJsonpCallback(data){
     $.weather.setText(data,$.weather.currentOption);
 }
+//jsonp提交函数
 function jsonpFcuntion(url){
     var JSONP=document.createElement("script");
     JSONP.type="text/javascript";
     JSONP.src=url;
     document.getElementsByTagName("head")[0].appendChild(JSONP);
+}
+function tipsfunction(v){
+    //tips
+    clearTimeout(timer);
+    $('#shopid').html(v);
+    for (i = 1; i <=3; i++) {
+        $('#tablink' + i).removeClass('current');
+        $('.preferential_' + i).css('display','none');
+    }
+    $('#tablink2').addClass('current');
+    $('.preferential_2').css('display','block');
 }
 function jsonpCallback(da){
     if(da.ustr){
@@ -545,14 +554,24 @@ var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val(
 });
 function jsonpBaiduCity2(data){
 	$('#ddlShop').html('<option value="0">请选择</option>');
-	var str = '<option value="0">请选择</option>';	
+    if(data.shopid=='undefined'){
+    $('#a_shopifo').html('您附近的优衣库门店');
+    }
+	var str = '<option value="0">请选择</option>';
+    if(data.clist){
+        $('#emptymsg').html('');
       $.each(data.clist,function(pin,pv){
           if(pv.sel == 1){
            var sel =  "selected='selected'";
           }
-	    str+="<option value='"+pv.longitude+"' "+sel+">"+pv.sname+"</option>";
+	    str+="<option value='"+pv.sname+' '+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
 			});
     $('#ddlShop').html(str);
+   }else{
+    if(data.baiduerjiid>0){
+    $('#emptymsg').html('本地区暂无优衣库门店，请选择其他城市的门店');
+    }
+    }
 }
 var tablink_idname = new Array("tablink")
 var tabcontent_idname = new Array("preferential_")
@@ -618,10 +637,7 @@ function stop_autochange() {
 	if (autochangemenu != 0) {
 		start_autochange();
 	}
-
 function jsonpCallbackm(data){
 
 }
 </script>
-
-

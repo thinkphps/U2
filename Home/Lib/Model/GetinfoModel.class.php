@@ -96,7 +96,7 @@ class GetinfoModel extends Action{
     }
     //取得店铺信息
     public function shopinfo($id){
-        $result = M('Shop')->field('tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
+        $result = M('Shop')->field('sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
         return $result;
     }
     //取得门店地区信息

@@ -116,10 +116,12 @@ class IndexnewAction extends Action{
         $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
         $weatherInfo['cbn'] = $cbn['pinying'];
         $weatherInfo['tradetime'] = $shop['tradetime'];
+        $weatherInfo['sname'] = $shop['sname'];
         $weatherInfo['plist'] = $pro;
         $weatherInfo['clist'] = $clist;
         $weatherInfo['indexcity'] = $cbn;
         $weatherInfo['isp'] = $isp;//表示是直辖市
+        $weatherInfo['baiduerjiid'] = $baiduerjiid;
         $re = json_encode($weatherInfo);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
@@ -131,6 +133,7 @@ class IndexnewAction extends Action{
         $baiduid = trim($this->_request('baiduid'));
         $shopid = trim($this->_request('shopid'));//店铺id
         $scid = trim($this->_request('cid'));
+        $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
         $callback=$_GET['callback'];
         $area = M('Areas');
         $Weather = D('Getinfo');
@@ -155,7 +158,7 @@ class IndexnewAction extends Action{
                     $where = array('cityid'=>$scid);
                     break;
             }
-            $list = $shop->field('id,longitude,latitude,sname')->where($where)->select();
+            $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
             foreach($list as $k=>$v){
                 if($v['id'] == $shopid){
                     $list[$k]['sel'] = 1;
@@ -163,6 +166,8 @@ class IndexnewAction extends Action{
             }
         }
         $arr['clist'] = $list;
+        $arr['baiduerjiid'] = $baiduerjiid;
+        $arr['shopid'] = $shopid;
         $re = json_encode($arr);
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
