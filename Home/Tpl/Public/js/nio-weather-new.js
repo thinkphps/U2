@@ -118,7 +118,12 @@ jQuery(function($){
             $('#cinpinyin').text(info.cbn);
             $('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
             if(!option.shopid){
-            $('#shopid').html(info.sname+' '+info.tradetime);
+                if(!info.sname && !info.tradetime){
+                 var tv = '暂时还没有店铺信息';
+                }else{
+                var tv = info.sname+' '+info.tradetime;
+                }
+            $('#shopid').html(tv);
             }
             var str = '<option value="0">请选择</option>';
             var scid = {};
