@@ -5,7 +5,7 @@ return array(
     'DB_HOST'=>'localhost',
     'DB_NAME'=>'uniqlo',
     'DB_USER'=>'root',
-    'DB_PWD'=>'Kay2013yyk-',
+    'DB_PWD'=>'root',
     'DB_PORT'=>'3306',
     /*URL配置*/
     'DB_PREFIX'=>'u_',

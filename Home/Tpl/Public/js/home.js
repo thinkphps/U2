@@ -140,10 +140,10 @@ jQuery(function($){
 
         var cabnet = {                                         // 集中声明变量
             list      : [],                                      // 保存已添加的图片id
-            hoverBox  : $('div.mini-net-hover'),                 // 图片悬浮框
-            net       : $('div.mini-net'),                       // 右侧net框
-            netConfirm: $('div.mini-net-confirm'),               // 删除确认框
-            netSlide  : $('div.mini-net-slide'),                 // 两个图片切换框
+            hoverBox  : $('.mini-net-content'),                 // 图片悬浮框
+            net       : $('.mini-net'),                       // 右侧net框
+            netConfirm: $('.mini-net-confirm'),               // 删除确认框
+            netSlide  : $('.mini-net-slide'),                 // 两个图片切换框
             netIsEmpty: true,                                    // net默认为空
             netChoose : $('a.mini-net-choose'),                  // 挑选衣服按钮
             cab       : $('div.mini-cab'),                       // 左侧的cab框
@@ -224,22 +224,22 @@ jQuery(function($){
             }).show()
         })
 
-        cabnet.hoverBox.on('mouseleave', function(){           // hoverBox鼠标离开后隐藏全部
-
-            cabnet.hoverBox.hide()
-            cabnet.netConfirm.hide()
-            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
-
-        }).on('click', function(){                             // 点击任意位置添加至搭配间
-
-            addCabCallback.call(this)                            // 添加至左侧的callback
-
-        }).on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
-
-            cabnet.netConfirm.show()
-            e.stopPropagation()
-
-        })
+//        cabnet.hoverBox.on('mouseleave', function(){           // hoverBox鼠标离开后隐藏全部
+//
+//            cabnet.hoverBox.hide()
+//            cabnet.netConfirm.hide()
+//            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
+//
+//        }).on('click', function(){                             // 点击任意位置添加至搭配间
+//
+//            addCabCallback.call(this)                            // 添加至左侧的callback
+//
+//        }).on('click', 'a.mini-net-del', function(e){          // 点击删除按钮弹出confirm
+//
+//            cabnet.netConfirm.show()
+//            e.stopPropagation()
+//
+//        })
 
         cabnet.netConfirm.on('click', false)                   // confirm点击任意位置不冒泡
             .on('click', 'a.mini-net-yes', function(e){            // confirm确认删除
@@ -376,6 +376,7 @@ jQuery(function($){
 
         cabnet.kvSlide = $('.mini-kv-slide')                // kv-slide框
         cabnet.kvHover = $('.mini-kv-hover')                // kv-hover框
+        cabnet.kvContent = $('.mini-kv-content'),
         cabnet.kvTimer = 0                                     // kv-hover框延迟
         cabnet.kvIsOpen = false                                // kv-hover状态
         cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hover价格
@@ -419,7 +420,7 @@ jQuery(function($){
             clearTimeout(cabnet.kvTimer)
         })
 
-        cabnet.kvHover.on('mouseleave', function(){            // kvHover自动隐藏
+        cabnet.kvContent.on('mouseleave', function(){            // kvHover自动隐藏
             cabnet.kvHover.hide()
             cabnet.kvIsOpen = false
         }).on('click', 'a.mini-kv-add', function(){            // 点击添加衣柜
@@ -430,13 +431,13 @@ jQuery(function($){
         })
 
 
-        $(document).mousemove(function(e){
-            var div = $(e.target).closest('div')
-            if(cabnet.kvIsOpen && !div.is(cabnet.kvHover)){
-                cabnet.kvHover.hide()
-                cabnet.kvIsOpen = false
-            }
-        })
+//        $(document).mousemove(function(e){
+//            var div = $(e.target).closest('div')
+//            if(cabnet.kvIsOpen && !div.is(cabnet.kvHover)){
+//                cabnet.kvHover.hide()
+//                cabnet.kvIsOpen = false
+//            }
+//        })
 
         /* == cab、net、kv系列回调函数 == */
 
