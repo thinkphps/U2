@@ -1,13 +1,13 @@
 /**
  * Created by jack on 14-4-4.
  */
-var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index';
-var getgood = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/ajaxgood';
-var imgpath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public';
-var goodurl = 'http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood';
+var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
+var getgood = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index/ajaxgood';
+var imgpath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public';
+var goodurl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood';
 var sendurl = '{$uniurl}';
 var provi = '';
-var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
+var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
 $(function(){
 
     var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
@@ -35,7 +35,7 @@ $(function(){
         }
     });
 
-    $.uniqlo.index.week.on('click', 'li', function(){                  // é¦–é¡µå¤©æ°”åˆ‡æ¢
+    $.uniqlo.index.week.on('click', 'li', function(){                  // Ê×Ò³ÌìÆøÇĞ»»
         var that = $(this)
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
@@ -53,7 +53,7 @@ $(function(){
     })
 })
 
-//å°†åº—é“ºä¿¡æ¯æ·»åŠ åˆ°åœ°å›¾ä¸­
+//½«µêÆÌĞÅÏ¢Ìí¼Óµ½µØÍ¼ÖĞ
 function mapBindMarker(data){
     H.initData(data);
 }
@@ -61,7 +61,7 @@ function mapBindMarker(data){
 function weatherJsonpCallback(data){
     $.weather.setText(data,$.weather.currentOption);
 }
-//jsonpæäº¤å‡½æ•°
+//jsonpÌá½»º¯Êı
 function jsonpFcuntion(url){
     var JSONP=document.createElement("script");
     JSONP.type="text/javascript";
@@ -114,7 +114,7 @@ function jsonpCallback2(da){
                 $('#downc').html(da.dstr);
             }
         }else{
-            //å¦‚æœæ˜¯å©´å¹¼å„¿èµ°è¿™é‡Œ
+            //Èç¹ûÊÇÓ¤Ó×¶ù×ßÕâÀï
             if(da.sid==4){
                 if(da.fl==1){
                     $('#upc').html(da.ustr);
@@ -185,7 +185,7 @@ function jsonpCallback3(da){
                 $('#downc').html(da.dstr);
             }
         }else{
-            //å¦‚æœæ˜¯å©´å¹¼å„¿èµ°è¿™é‡Œ
+            //Èç¹ûÊÇÓ¤Ó×¶ù×ßÕâÀï
             if(da.sid==4){
                 if(da.fl==1){
                     $('#upc').html(da.ustr);
@@ -253,11 +253,11 @@ function getavg(high,low){
     return avg;
 }
 function sendcity(pro,city){
-    var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
-    // åˆ›å»ºscriptæ ‡ç­¾ï¼Œè®¾ç½®å…¶å±æ€§
+    var url = "http://uniqlo.bigodata.com.cn/u2/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
+    // ´´½¨script±êÇ©£¬ÉèÖÃÆäÊôĞÔ
     var script = document.createElement('script');
     script.setAttribute('src', url);
-    // æŠŠscriptæ ‡ç­¾åŠ å…¥headï¼Œæ­¤æ—¶è°ƒç”¨å¼€å§‹
+    // °Ñscript±êÇ©¼ÓÈëhead£¬´ËÊ±µ÷ÓÃ¿ªÊ¼
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 
@@ -300,7 +300,7 @@ $('#le1').on('change',function(){
 });
 
 function jsonpGetcity(data){
-    var str = '<option value="0">è¯·é€‰æ‹©</option>';
+    var str = '<option value="0">ÇëÑ¡Ôñ</option>';
     $.each(data.clist,function(pin,pv){
         if(pv.sel==1){
             var sel2 = "selected='selected'";
@@ -310,7 +310,7 @@ function jsonpGetcity(data){
     $('#le2').html(str);
 }
 
-//åœ°å›¾åŸå¸‚åˆ‡æ¢
+//µØÍ¼³ÇÊĞÇĞ»»
 $('#spid').on('change',function(){
     var pid = $('#spid option:selected').val();
     var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity&pid="+pid+"&baiduid=1";
@@ -318,20 +318,20 @@ $('#spid').on('change',function(){
 });
 
 function jsonpBaiduCity(data){
-    var str = '<option value="0">è¯·é€‰æ‹©</option>';
+    var str = '<option value="0">ÇëÑ¡Ôñ</option>';
     $.each(data.clist,function(pin,pv){
         str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
     });
     $('#scid').html(str);
-    $('#ddlShop').html('<option value="0">è¯·é€‰æ‹©</option>');
+    $('#ddlShop').html('<option value="0">ÇëÑ¡Ôñ</option>');
 }
 
 $('#scid').on('change',function(){
     H.map.centerAndZoom($("#scid option:selected").text(), 11);
     var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
     var cityname = $('#scid option:selected').text();
-    if(cityname[cityname.length-1]=='å¸‚'){
-        var cnm = cityname.replace('å¸‚','');
+    if(cityname[cityname.length-1]=='ÊĞ'){
+        var cnm = cityname.replace('ÊĞ','');
     }else{
         var cnm = $('#spid option:selected').text();
     }
@@ -344,18 +344,18 @@ $('#scid').on('change',function(){
             $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
             $.weather.sex = $.weather.sex?$.weather.sex:0;
             $.weather.set = $.weather.set?$.weather.set:0;
-            var jsonpurl ="http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+            var jsonpurl ="http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
             jsonpFcuntion(jsonpurl);
             sendcity(city,info.city);
         }
     });
 });
 function jsonpBaiduCity2(data){
-    $('#ddlShop').html('<option value="0">è¯·é€‰æ‹©</option>');
+    $('#ddlShop').html('<option value="0">ÇëÑ¡Ôñ</option>');
     if(data.shopid=='undefined'){
-        $('#a_shopinfo').html('æ‚¨é™„è¿‘çš„ä¼˜è¡£åº“é—¨åº—');
+        $('#a_shopinfo').html('Äú¸½½üµÄÓÅÒÂ¿âÃÅµê');
     }
-    var str = '<option value="0">è¯·é€‰æ‹©</option>';
+    var str = '<option value="0">ÇëÑ¡Ôñ</option>';
     if(data.clist){
         $('#emptymsg').html('');
         $.each(data.clist,function(pin,pv){
@@ -367,7 +367,7 @@ function jsonpBaiduCity2(data){
         $('#ddlShop').html(str);
     }else{
         if(data.baiduerjiid>0){
-            $('#emptymsg').html('æœ¬åœ°åŒºæš‚æ— ä¼˜è¡£åº“é—¨åº—ï¼Œè¯·é€‰æ‹©å…¶ä»–åŸå¸‚çš„é—¨åº—');
+            $('#emptymsg').html('±¾µØÇøÔİÎŞÓÅÒÂ¿âÃÅµê£¬ÇëÑ¡ÔñÆäËû³ÇÊĞµÄÃÅµê');
         }
     }
 }
