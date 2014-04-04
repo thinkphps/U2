@@ -362,7 +362,7 @@ function jsonpBaiduCity2(data){
             if(pv.sel == 1){
                 var sel =  "selected='selected'";
             }
-            str+="<option value='"+pv.sname+' '+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
+            str+="<option value='"+pv.sname+'<br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
         });
         $('#ddlShop').html(str);
     }else{
