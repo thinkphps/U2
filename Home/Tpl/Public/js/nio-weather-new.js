@@ -10,10 +10,10 @@ jQuery(function($){
     var weather = {
         currentOption : "",
         tips : [
-            '请注意防暑降温，宜穿短袖、背心、连衣裙、短裤中裤、薄型T恤',
-            '午时避免在户外久留，穿连衣裙、短裤中裤、短套装、T恤、长绒棉短袖',
-            '针织衫+牛仔裤/休闲裤，或针织连衣裙是不错的选择',
-            '白天穿长袖衬衫+薄型套装，配牛仔裤，晚上加件针织衫吧',
+            '请注意防暑降温，宜穿短袖、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B1%B3%D0%C4" target="__blank">背心</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B6%CC%BF%E3" target="__blank">短裤</a>中裤、薄型<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>',
+            '午时避免在户外久留，穿<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B6%CC%BF%E3" target="__blank">短裤</a><a href="http://uniqlo.tmall.com/search.htm?keyword=%D6%D0%BF%E3" target="__blank">中裤</a>、短套装、<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>、长绒棉短袖',
+            '<a href="http://uniqlo.tmall.com/search.htm?keyword=%D5%EB%D6%AF%C9%C0" target="__blank">针织衫</a>+<a href="http://uniqlo.tmall.com/search.htm?keyword=%C5%A3%D7%D0%BF%E3" target="__blank">牛仔裤</a>，<a href="http://uniqlo.tmall.com/search.htm?keyword=%B9%A4%D7%B0%BF%E3" target="__blank">工装裤</a>，或<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>是不错的选择',
+            '白天穿长袖<a href="http://uniqlo.tmall.com/search.htm?keyword=%B3%C4%C9%C0" target="__blank">衬衫</a>+薄型套装，配<a href="http://uniqlo.tmall.com/search.htm?keyword=%C5%A3%D7%D0%BF%E3" target="__blank">牛仔裤</a>，晚上加件<a href="http://uniqlo.tmall.com/search.htm?keyword=%D5%EB%D6%AF%C9%C0" target="__blank">针织衫</a>吧',
             '美利奴毛衣、混纺/羊毛/羊绒衫、风衣、连帽茄克赶紧穿起来',
             '羽绒服或羊毛混纺短大衣，内配精纺美利奴毛衣+围巾',
             '宜穿厚羽绒服、摇粒绒外套+羽绒背心，配上围巾和手套'
