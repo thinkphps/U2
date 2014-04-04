@@ -12,8 +12,9 @@ $(function(){
 
     var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
     jsonpFcuntion(jsonpurl);
-
-
+    $('.youyigui_btn').attr('href','http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html');
+    //$('.preferential_1').remove();
+    //$('#tablink1').remove();
     window.imgpath = imgpath;
     $.weather.init({
         'subindex':1,
@@ -59,6 +60,28 @@ function mapBindMarker(data){
 }
 
 function weatherJsonpCallback(data){
+    //kimi判断是否有新店开张
+    if(data.newstorre){
+        $('.preferential_1').remove();
+        $('#tablink1').remove();
+       $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a>'+data.newstorre+'</a></li>');
+       $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onclick=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
+    }else{
+        $('.preferential_1').remove();
+        $('#tablink1').remove();
+    }
+    var lilength = $('#scrollDiv').children().length;
+    slength = 3-lilength+1;
+    counter = 3-lilength;
+    loadtabs[0] = 3-lilength+1;
+    do {
+        easytabs(b, loadtabs[a]);
+        a++;
+        b++;
+    } while (b <= menucount);
+    if (autochangemenu != 0) {
+        start_autochange();
+    }
     $.weather.setText(data,$.weather.currentOption);
 }
 //jsonp提交函数
@@ -371,11 +394,11 @@ function jsonpBaiduCity2(data){
         }
     }
 }
-var tablink_idname = new Array("tablink")
-var tabcontent_idname = new Array("preferential_")
-var tabcount = new Array("3")
-var loadtabs = new Array("1")
-var autochangemenu = 1;
+var tablink_idname = new Array("tablink");
+var tabcontent_idname = new Array("preferential_");
+var tabcount = new Array("3");
+var loadtabs = new Array("1");
+var autochangemenu = 1,counter = 0,slength;
 var changespeed = 1;
 var stoponhover = 0;
 
@@ -393,11 +416,12 @@ function easytabs(menunr, active) {
         $('#'+tablink_idname[menunr] + i).removeClass('current');
         $('.'+tabcontent_idname[menunr] + i).css('display','none');
     }
+    if($('#'+tablink_idname[menunr] + active)){
     $('#'+tablink_idname[menunr] + active).addClass('current');
     $('.'+tabcontent_idname[menunr] + active).css('display','block');
+       }
 }
 
-counter = 0;
 var totaltabs = tabcount[autochangemenu - 1];
 var currenttab = loadtabs[autochangemenu - 1];
 
@@ -407,7 +431,7 @@ function start_autochange() {
     if (counter == changespeed + 1) {
         currenttab++;
         if (currenttab > totaltabs) {
-            currenttab = 1
+            currenttab = slength;
         }
         easytabs(autochangemenu, currenttab);
         restart_autochange();
@@ -427,14 +451,14 @@ function stop_autochange() {
 var menucount = loadtabs.length;
 var a = 0;
 var b = 1;
-do {
+/*do {
     easytabs(b, loadtabs[a]);
     a++;
     b++;
 } while (b <= menucount);
 if (autochangemenu != 0) {
     start_autochange();
-}
+}*/
 function jsonpCallbackm(data){
 
 }
