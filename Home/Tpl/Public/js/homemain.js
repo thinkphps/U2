@@ -74,6 +74,7 @@ function weatherJsonpCallback(data){
     slength = 3-lilength+1;
     counter = 3-lilength;
     loadtabs[0] = 3-lilength+1;
+    if(data.shopid){
     do {
         easytabs(b, loadtabs[a]);
         a++;
@@ -82,6 +83,7 @@ function weatherJsonpCallback(data){
     if (autochangemenu != 0) {
         start_autochange();
     }
+}
     $.weather.setText(data,$.weather.currentOption);
 }
 //jsonpÌá½»º¯Êý
@@ -101,6 +103,7 @@ function tipsfunction(v){
     }
     $('#tablink2').addClass('current');
     $('.preferential_2').css('display','block');
+    clearTimeout(timer);
 }
 function jsonpCallback(da){
     if(da.ustr){
