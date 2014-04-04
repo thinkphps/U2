@@ -221,6 +221,9 @@ var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u1_5/Home/Tpl/Public/';
 $(function(){
 
+    var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
+    jsonpFcuntion(jsonpurl);
+
     window.imgpath = imgpath;
     $.weather.init({
         'subindex':1,
