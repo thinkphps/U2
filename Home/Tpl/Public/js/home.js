@@ -163,7 +163,8 @@ jQuery(function($){
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-
+        var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
+        jsonpFcuntion(jsonpurl);
 
 
         $("#w_sq").on("click",function(){
