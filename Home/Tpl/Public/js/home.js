@@ -15,7 +15,7 @@ jQuery(function($){
         })
     }
 
-    // å›¾ç‰‡åˆ‡æ¢æ’ä»¶
+    // Í¼Æ¬ÇĞ»»²å¼ş
     $.fn.nioSlider = function(options){
         return this.each(function(){
             var that = $(this)
@@ -71,9 +71,9 @@ jQuery(function($){
         })
 
 
-    /* ===================== å†…é¡µä¸šåŠ¡å¼€å§‹ ===================== */
+    /* ===================== ÄÚÒ³ÒµÎñ¿ªÊ¼ ===================== */
 
-    var uniqlo = {                                           // uniqloå…¨å±€å¯¹è±¡
+    var uniqlo = {                                           // uniqloÈ«¾Ö¶ÔÏó
         sliding : false,
         cabContainer : $('.mini-cab-container'),
         netContainer : $('.mini-net-container'),
@@ -131,37 +131,37 @@ jQuery(function($){
     // index slider
     uniqlo.indexSlider()
 
-    // å¯¼å‡ºå…¨å±€å¯¹è±¡ä¾›å¤–éƒ¨ä½¿ç”¨if need
+    // µ¼³öÈ«¾Ö¶ÔÏó¹©Íâ²¿Ê¹ÓÃif need
     $.uniqlo = uniqlo
 
-    /* ============ cabnetäº¤äº’æ•ˆæœ ============= */
+    /* ============ cabnet½»»¥Ğ§¹û ============= */
 
     !(function($){
 
-        var cabnet = {                                         // é›†ä¸­å£°æ˜å˜é‡
-            list      : [],                                      // ä¿å­˜å·²æ·»åŠ çš„å›¾ç‰‡id
-            hoverBox  : $('div.mini-net-hover'),                 // å›¾ç‰‡æ‚¬æµ®æ¡†
-            net       : $('div.mini-net'),                       // å³ä¾§netæ¡†
-            netConfirm: $('div.mini-net-confirm'),               // åˆ é™¤ç¡®è®¤æ¡†
-            netSlide  : $('div.mini-net-slide'),                 // ä¸¤ä¸ªå›¾ç‰‡åˆ‡æ¢æ¡†
-            netIsEmpty: true,                                    // neté»˜è®¤ä¸ºç©º
-            netChoose : $('a.mini-net-choose'),                  // æŒ‘é€‰è¡£æœæŒ‰é’®
-            cab       : $('div.mini-cab'),                       // å·¦ä¾§çš„cabæ¡†
-            cabSlide  : $('div.mini-cab-slide'),                 // cab-slideæ¡†
-            cabTips   : $('div.mini-cab-tips'),                  // cabæç¤ºæ¡†
-            cabBuy    : $('a.mini-cab-buy'),                     // cabè´­ä¹°æŒ‰é’®
-            cabClear  : $('a.mini-cab-clear'),                   // cabæ¸…ç©ºæŒ‰é’®
-            cabPrev   : $('a.mini-cab-prev'),                    // cab-prevæŒ‰é’®
-            cabNext   : $('a.mini-cab-next'),                    // cab-nextæŒ‰é’®
-            cabChoose : $('form.mini-cab-choose'),               // cab-chooseæ¡†
-            buyIsShow : false,                                   // cab-chooseé»˜è®¤éšè—
-            cabEmpty  : $('a.mini-cab-empty'),                   // cab-emptyæ¡†
-            netLike   : $('a.mini-net-like'),                    // net-likeæŒ‰é’®
-            netHad    : $('a.mini-net-had')                     // net-hadæŒ‰é’®
+        var cabnet = {                                         // ¼¯ÖĞÉùÃ÷±äÁ¿
+            list      : [],                                      // ±£´æÒÑÌí¼ÓµÄÍ¼Æ¬id
+            hoverBox  : $('.mini-net-content'),                 // Í¼Æ¬Ğü¸¡¿ò
+            net       : $('.mini-net'),                       // ÓÒ²ànet¿ò
+            netConfirm: $('.mini-net-confirm'),               // É¾³ıÈ·ÈÏ¿ò
+            netSlide  : $('.mini-net-slide'),                 // Á½¸öÍ¼Æ¬ÇĞ»»¿ò
+            netIsEmpty: true,                                    // netÄ¬ÈÏÎª¿Õ
+            netChoose : $('a.mini-net-choose'),                  // ÌôÑ¡ÒÂ·ş°´Å¥
+            cab       : $('div.mini-cab'),                       // ×ó²àµÄcab¿ò
+            cabSlide  : $('div.mini-cab-slide'),                 // cab-slide¿ò
+            cabTips   : $('div.mini-cab-tips'),                  // cabÌáÊ¾¿ò
+            cabBuy    : $('a.mini-cab-buy'),                     // cab¹ºÂò°´Å¥
+            cabClear  : $('a.mini-cab-clear'),                   // cabÇå¿Õ°´Å¥
+            cabPrev   : $('a.mini-cab-prev'),                    // cab-prev°´Å¥
+            cabNext   : $('a.mini-cab-next'),                    // cab-next°´Å¥
+            cabChoose : $('form.mini-cab-choose'),               // cab-choose¿ò
+            buyIsShow : false,                                   // cab-chooseÄ¬ÈÏÒş²Ø
+            cabEmpty  : $('a.mini-cab-empty'),                   // cab-empty¿ò
+            netLike   : $('a.mini-net-like'),                    // net-like°´Å¥
+            netHad    : $('a.mini-net-had')                     // net-had°´Å¥
 
 
         }
-        cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlideæç¤ºæ¡†
+        cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlideÌáÊ¾¿ò
 
 
 
@@ -178,19 +178,19 @@ jQuery(function($){
             $("#w_sq").show();
         });
 
-        /* == netäº¤äº’ == */
+        /* == net½»»¥ == */
 
-        cabnet.net.on('add', function(e, id){                  // æ³¨å†ŒnetSlideçš„è¢«æ·»åŠ è‡ªå®šä¹‰äº‹ä»¶
+        cabnet.net.on('add', function(e, id){                  // ×¢²ánetSlideµÄ±»Ìí¼Ó×Ô¶¨ÒåÊÂ¼ş
             if(cabnet.netIsEmpty){
-                cabnet.netEmpty.addClass('mini-net-scale')         // éšè—netä¸ºç©ºæç¤ºæ¡†
+                cabnet.netEmpty.addClass('mini-net-scale')         // Òş²ØnetÎª¿ÕÌáÊ¾¿ò
             }
-            cabnet.list.push(id)                                 // ä¿å­˜å›¾ç‰‡id
+            cabnet.list.push(id)                                 // ±£´æÍ¼Æ¬id
             cabnet.netIsEmpty = false
 
-            uniqlo.netSlider()                                   // è¿è¡Œnet slider
+            uniqlo.netSlider()                                   // ÔËĞĞnet slider
         })
 
-        cabnet.net.on('del', function(e, id){                  // æ³¨å†ŒnetSlideçš„è¢«åˆ é™¤è‡ªå®šä¹‰äº‹ä»¶
+        cabnet.net.on('del', function(e, id){                  // ×¢²ánetSlideµÄ±»É¾³ı×Ô¶¨ÒåÊÂ¼ş
             var arr = cabnet.list
             for(var i = arr.length; i --;){
                 if(arr[i] === id){
@@ -203,10 +203,10 @@ jQuery(function($){
                 cabnet.netIsEmpty = true
             }
 
-            uniqlo.netSlider()                                   // è¿è¡Œnet slider
+            uniqlo.netSlider()                                   // ÔËĞĞnet slider
         })
 
-        cabnet.netSlide.on('mouseover', 'img', function(e){    // netSlideå›¾ç‰‡æ‚¬æµ®æ•ˆæœ
+        cabnet.netSlide.on('mouseover', 'img', function(e){    // netSlideÍ¼Æ¬Ğü¸¡Ğ§¹û
 
             if(uniqlo.sliding) return
 
@@ -216,40 +216,40 @@ jQuery(function($){
             var top = pos === '#cab-top' ? 56 : 322
             var restSlide = thisSlide.siblings('div.mini-net-slide')
 
-            netHoverCallback.call(this, pos, restSlide)          // å›¾ç‰‡æ‚¬æµ®çš„callbacké‡Œå¤„ç†ç»†èŠ‚
+            netHoverCallback.call(this, pos, restSlide)          // Í¼Æ¬Ğü¸¡µÄcallbackÀï´¦ÀíÏ¸½Ú
 
-            cabnet.hoverBox.css({                                // æ˜¾ç¤ºå›¾ç‰‡æ‚¬æµ®æ¡†
+            cabnet.hoverBox.css({                                // ÏÔÊ¾Í¼Æ¬Ğü¸¡¿ò
                 left: position.left + 26,
                 top: position.top + top
             }).show()
         })
 
-        cabnet.hoverBox.on('mouseleave', function(){           // hoverBoxé¼ æ ‡ç¦»å¼€åéšè—å…¨éƒ¨
+//        cabnet.hoverBox.on('mouseleave', function(){           // hoverBoxÊó±êÀë¿ªºóÒş²ØÈ«²¿
+//
+//            cabnet.hoverBox.hide()
+//            cabnet.netConfirm.hide()
+//            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
+//
+//        }).on('click', function(){                             // µã»÷ÈÎÒâÎ»ÖÃÌí¼ÓÖÁ´îÅä¼ä
+//
+//            addCabCallback.call(this)                            // Ìí¼ÓÖÁ×ó²àµÄcallback
+//
+//        }).on('click', 'a.mini-net-del', function(e){          // µã»÷É¾³ı°´Å¥µ¯³öconfirm
+//
+//            cabnet.netConfirm.show()
+//            e.stopPropagation()
+//
+//        })
 
-            cabnet.hoverBox.hide()
-            cabnet.netConfirm.hide()
-            cabnet.netLike.add(cabnet.netHad).removeClass('mini-net-checked')
-
-        }).on('click', function(){                             // ç‚¹å‡»ä»»æ„ä½ç½®æ·»åŠ è‡³æ­é…é—´
-
-            addCabCallback.call(this)                            // æ·»åŠ è‡³å·¦ä¾§çš„callback
-
-        }).on('click', 'a.mini-net-del', function(e){          // ç‚¹å‡»åˆ é™¤æŒ‰é’®å¼¹å‡ºconfirm
-
-            cabnet.netConfirm.show()
-            e.stopPropagation()
-
-        })
-
-        cabnet.netConfirm.on('click', false)                   // confirmç‚¹å‡»ä»»æ„ä½ç½®ä¸å†’æ³¡
-            .on('click', 'a.mini-net-yes', function(e){            // confirmç¡®è®¤åˆ é™¤
+        cabnet.netConfirm.on('click', false)                   // confirmµã»÷ÈÎÒâÎ»ÖÃ²»Ã°Åİ
+            .on('click', 'a.mini-net-yes', function(e){            // confirmÈ·ÈÏÉ¾³ı
                 //kimi
                 delgo(cabnet.hoverBox.data('id'))
                 //kimi
-                delNetCallback.call(this)                            // netSlideè¢«åˆ é™¤çš„å›è°ƒ
+                delNetCallback.call(this)                            // netSlide±»É¾³ıµÄ»Øµ÷
                 e.stopPropagation()
 
-            }).on('click', 'a.mini-net-no', function(e){           // confirmå–æ¶ˆåˆ é™¤
+            }).on('click', 'a.mini-net-no', function(e){           // confirmÈ¡ÏûÉ¾³ı
 
                 cabnet.netConfirm.hide()
                 e.stopPropagation()
@@ -258,7 +258,7 @@ jQuery(function($){
 
         cabnet.netLike.add(cabnet.netHad).on('click', function(e){
 
-            $(this).toggleClass('mini-net-checked')              // 'å–œæ¬¢'ä¸'å·²ä¹°å…¥'çš„ç±»ååˆ‡æ¢
+            $(this).toggleClass('mini-net-checked')              // 'Ï²»¶'Óë'ÒÑÂòÈë'µÄÀàÃûÇĞ»»
             e.stopPropagation()
 
         })
@@ -267,17 +267,17 @@ jQuery(function($){
             uniqlo.scrollTo(742)
         })
 
-        /* == cabäº¤äº’ == */
+        /* == cab½»»¥ == */
 
-        cabnet.cab.ajax = cabnet.cab.sex = cabnet.cab.isEmpty = true // cabé»˜è®¤ä¸ºç©ºï¼Œé»˜è®¤è¯»å–åå°
-        cabnet.cab.pos = null                                  // è®°å½•cabä¸­æ·»åŠ çš„ä¸Šè¡£/ä¸‹è¡£
-        cabnet.cab.on('add', function(e, pos, id){             // æ³¨å†ŒcabSlideçš„è¢«æ·»åŠ è‡ªå®šä¹‰äº‹ä»¶
+        cabnet.cab.ajax = cabnet.cab.sex = cabnet.cab.isEmpty = true // cabÄ¬ÈÏÎª¿Õ£¬Ä¬ÈÏ¶ÁÈ¡ºóÌ¨
+        cabnet.cab.pos = null                                  // ¼ÇÂ¼cabÖĞÌí¼ÓµÄÉÏÒÂ/ÏÂÒÂ
+        cabnet.cab.on('add', function(e, pos, id){             // ×¢²ácabSlideµÄ±»Ìí¼Ó×Ô¶¨ÒåÊÂ¼ş
             var tag = cabnet.hoverBox.data('tag')
             var src = cabnet.hoverBox.data('src')
 
             cabnet.cabChoose.trigger('hidden')
 
-            if(cabnet.cab.isEmpty){                              // ç¬¬ä¸€æ¬¡ç‚¹å‡»netä¸Šè¡£/ä¸‹è¡£å›¾ç‰‡
+            if(cabnet.cab.isEmpty){                              // µÚÒ»´Îµã»÷netÉÏÒÂ/ÏÂÒÂÍ¼Æ¬
                 cabnet.cab.isEmpty = false
 
                 cabnet.cabTips.show()
@@ -285,12 +285,12 @@ jQuery(function($){
                 cabnet.cabBuy.addClass('show')
                 cabnet.cabClear.show()
 
-                cabnet.cab.pos = pos                               // è®°å½•pos
-                cabAjaxCallback(tag, id, src, pos)                 // ç¬¬ä¸€æ¬¡è¯»å–åå°ajax
+                cabnet.cab.pos = pos                               // ¼ÇÂ¼pos
+                cabAjaxCallback(tag, id, src, pos)                 // µÚÒ»´Î¶ÁÈ¡ºóÌ¨ajax
 
-            } else {                                             // ç¬¬äºŒæ¬¡ç‚¹å‡»netä¸Šè¡£/ä¸‹è¡£å›¾ç‰‡
+            } else {                                             // µÚ¶ş´Îµã»÷netÉÏÒÂ/ÏÂÒÂÍ¼Æ¬
 
-                if(cabnet.cab.pos == pos && cabnet.cab.ajax){      // å¦‚æœç‚¹å‡»åŒæ ·çš„ä¸Šè¡£/ä¸‹è¡£
+                if(cabnet.cab.pos == pos && cabnet.cab.ajax){      // Èç¹ûµã»÷Í¬ÑùµÄÉÏÒÂ/ÏÂÒÂ
 
                     cabAjaxCallback(tag, id, src, pos)
 
@@ -304,13 +304,13 @@ jQuery(function($){
 
                 }
             }
-        }).on('click', function(){                             // ç‚¹å‡»æ•´ä¸ªcabæ¡†å…³é—­tips
+        }).on('click', function(){                             // µã»÷Õû¸öcab¿ò¹Ø±Õtips
 
             cabnet.cabTips.hide()
 
         })
 
-        cabnet.cabBuy.on('click', function(){                  // ç‚¹å‡»è´­ä¹°å¼¹å‡ºform
+        cabnet.cabBuy.on('click', function(){                  // µã»÷¹ºÂòµ¯³öform
 
             if(!cabnet.buyIsShow){
 
@@ -320,7 +320,7 @@ jQuery(function($){
 
                 var url = cabnet.cabChoose.find('input:checked').val()
 
-                if(url == 'undefined') return alert('æ‚¨è¿˜æ²¡æœ‰é€‰æ‹©è¿™ç±»è¡£æœ')
+                if(url == 'undefined') return alert('Äú»¹Ã»ÓĞÑ¡ÔñÕâÀàÒÂ·ş')
                 window.open(url)
 
             }
@@ -340,7 +340,7 @@ jQuery(function($){
 
             cabnet.cabChoose.hide()
 
-            cabnet.cabBuy.text('æˆ‘è¦è´­ä¹°')
+            cabnet.cabBuy.text('ÎÒÒª¹ºÂò')
 
             cabnet.buyIsShow = false
 
@@ -348,7 +348,7 @@ jQuery(function($){
 
             cabnet.cabChoose.show().find('input').first().trigger('click')
 
-            cabnet.cabBuy.text('å‰å¾€ä¼˜è¡£åº“æ——èˆ°åº—')
+            cabnet.cabBuy.text('Ç°ÍùÓÅÒÂ¿âÆì½¢µê')
 
             cabnet.buyIsShow = true
 
@@ -360,8 +360,8 @@ jQuery(function($){
 
         })
 
-        cabnet.cabClear.on('click', function(){                // æ¸…ç©ºcab
-            cabnet.cab.ajax = cabnet.cab.isEmpty = true          // é‡ç½®cabé»˜è®¤çŠ¶æ€
+        cabnet.cabClear.on('click', function(){                // Çå¿Õcab
+            cabnet.cab.ajax = cabnet.cab.isEmpty = true          // ÖØÖÃcabÄ¬ÈÏ×´Ì¬
             cabnet.cabSlide.find('ul').html('')
             cabnet.cabTips.hide()
             cabnet.cabBuy.removeClass('show')
@@ -372,17 +372,18 @@ jQuery(function($){
             cabnet.cabEmpty.show()
         })
 
-        /* == å†…é¡µkväº¤äº’ == */
+        /* == ÄÚÒ³kv½»»¥ == */
 
-        cabnet.kvSlide = $('.mini-kv-slide')                // kv-slideæ¡†
-        cabnet.kvHover = $('.mini-kv-hover')                // kv-hoveræ¡†
-        cabnet.kvTimer = 0                                     // kv-hoveræ¡†å»¶è¿Ÿ
-        cabnet.kvIsOpen = false                                // kv-hoverçŠ¶æ€
-        cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hoverä»·æ ¼
-        cabnet.kvHover.rest = cabnet.kvHover.find('span')      // kv-hoverä½™é‡
-        cabnet.kvHover.title = cabnet.kvHover.find('a.ft14')   // kv-hoveräº§å“å
+        cabnet.kvSlide = $('.mini-kv-slide')                // kv-slide¿ò
+        cabnet.kvHover = $('.mini-kv-hover')                // kv-hover¿ò
+        cabnet.kvContent = $('.mini-kv-content'),
+        cabnet.kvTimer = 0                                     // kv-hover¿òÑÓ³Ù
+        cabnet.kvIsOpen = false                                // kv-hover×´Ì¬
+        cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hover¼Û¸ñ
+        cabnet.kvHover.rest = cabnet.kvHover.find('span')      // kv-hoverÓàÁ¿
+        cabnet.kvHover.title = cabnet.kvHover.find('a.ft14')   // kv-hover²úÆ·Ãû
 
-        cabnet.kvSlide.on('mousemove', 'img', function(e){     // kvSlideå›¾ç‰‡æ‚¬æµ®
+        cabnet.kvSlide.on('mousemove', 'img', function(e){     // kvSlideÍ¼Æ¬Ğü¸¡
 
             var isIndexPage = 'index';
 
@@ -395,19 +396,19 @@ jQuery(function($){
             var top = 160
             if(pos){
                 top = pos == '#net-top' ? 53 : 250
-                addBtn.text('æ”¶å…¥è¡£æŸœ')
+                addBtn.text('ÊÕÈëÒÂ¹ñ')
             } else {
-                addBtn.text('æŸ¥çœ‹è¯¦æƒ…')
+                addBtn.text('²é¿´ÏêÇé')
             }
             if(this.getAttribute('fg') == 116){
-                addBtn.text('æŸ¥çœ‹è¯¦æƒ…')
+                addBtn.text('²é¿´ÏêÇé')
             }
 
-            kvHoverCallback.call(this, pos, isIndexPage)         // å›¾ç‰‡æ‚¬æµ®çš„callbacké‡Œå¤„ç†ç»†èŠ‚
+            kvHoverCallback.call(this, pos, isIndexPage)         // Í¼Æ¬Ğü¸¡µÄcallbackÀï´¦ÀíÏ¸½Ú
 
             cabnet.kvTimer = setTimeout(function(){
 
-                cabnet.kvHover.css({                               // æ˜¾ç¤ºå›¾ç‰‡æ‚¬æµ®æ¡†
+                cabnet.kvHover.css({                               // ÏÔÊ¾Í¼Æ¬Ğü¸¡¿ò
                     left: position.left + 55,
                     top: position.top + top
                 }).show()
@@ -419,10 +420,10 @@ jQuery(function($){
             clearTimeout(cabnet.kvTimer)
         })
 
-        cabnet.kvHover.on('mouseleave', function(){            // kvHoverè‡ªåŠ¨éšè—
+        cabnet.kvContent.on('mouseleave', function(){            // kvHover×Ô¶¯Òş²Ø
             cabnet.kvHover.hide()
             cabnet.kvIsOpen = false
-        }).on('click', 'a.mini-kv-add', function(){            // ç‚¹å‡»æ·»åŠ è¡£æŸœ
+        }).on('click', 'a.mini-kv-add', function(){            // µã»÷Ìí¼ÓÒÂ¹ñ
             var id = cabnet.kvHover.data('id')
 
             var target = this.getAttribute('target')
@@ -430,20 +431,20 @@ jQuery(function($){
         })
 
 
-        $(document).mousemove(function(e){
-            var div = $(e.target).closest('div')
-            if(cabnet.kvIsOpen && !div.is(cabnet.kvHover)){
-                cabnet.kvHover.hide()
-                cabnet.kvIsOpen = false
-            }
-        })
+//        $(document).mousemove(function(e){
+//            var div = $(e.target).closest('div')
+//            if(cabnet.kvIsOpen && !div.is(cabnet.kvHover)){
+//                cabnet.kvHover.hide()
+//                cabnet.kvIsOpen = false
+//            }
+//        })
 
-        /* == cabã€netã€kvç³»åˆ—å›è°ƒå‡½æ•° == */
+        /* == cab¡¢net¡¢kvÏµÁĞ»Øµ÷º¯Êı == */
 
-        function addCabCallback(){                             // æ·»åŠ è‡³å·¦ä¾§çš„callback
+        function addCabCallback(){                             // Ìí¼ÓÖÁ×ó²àµÄcallback
 
             var id = cabnet.hoverBox.data('id')
-            var pos = cabnet.hoverBox.data('pos')                // æ·»åŠ å¯¹åº”cabçš„å›¾ç‰‡
+            var pos = cabnet.hoverBox.data('pos')                // Ìí¼Ó¶ÔÓ¦cabµÄÍ¼Æ¬
             var url = ' url="' + cabnet.hoverBox.data('url') + '"'
             var src = ' src="' + cabnet.hoverBox.data('src') + '"'
             var ids = ' id="' + id + '"'
@@ -452,49 +453,49 @@ jQuery(function($){
             if(cabnet.cab.isEmpty){
                 cabnet.cab.sex = sex
             } else if(cabnet.cab.sex !== sex && cabnet.cab.pos !== pos){
-                return alert('è¿™ä»¶ä¸æ‚¨æ­é…é—´ä¸­çš„è¡£ç‰©æ€§åˆ«ä¸ç¬¦å“¦')
+                return alert('Õâ¼şÓëÄú´îÅä¼äÖĞµÄÒÂÎïĞÔ±ğ²»·ûÅ¶')
             }
 
             $(pos).find('ul').html('<li><img ' + ids + src + url + ' /></li>')
 
-            cabnet.cab.trigger('add', [pos, id])                 // è§¦å‘cabçš„è¢«æ·»åŠ è‡ªå®šä¹‰äº‹ä»¶
+            cabnet.cab.trigger('add', [pos, id])                 // ´¥·¢cabµÄ±»Ìí¼Ó×Ô¶¨ÒåÊÂ¼ş
         }
 
-        function netHoverCallback(pos, rest){                  // å›¾ç‰‡æ‚¬æµ®çš„callback
+        function netHoverCallback(pos, rest){                  // Í¼Æ¬Ğü¸¡µÄcallback
 
             var url = this.getAttribute('url')
             var tag = this.getAttribute('tag')
             cabnet.hoverBox
-                .find('h3').text(tag + 'é£æ ¼')
-                .end().find('span').text(this.getAttribute('place') + 'è£…')
+                .find('h3').text(tag + '·ç¸ñ')
+                .end().find('span').text(this.getAttribute('place') + '×°')
                 .end().find('img').attr('src', this.src)
                 .end().find('a.mini-net-detail').attr('href', url)
                 .end().find('strong').text(this.getAttribute('price'))
 
             cabnet.hoverBox.data({
-                'pos': pos,                                        // ä¿å­˜thisSlideæ˜ å°„åˆ°cabçš„id
-                'rest': rest,                                      // ä¿å­˜restSlide
-                'id' : this.id,                                    // ä¿å­˜å›¾ç‰‡id
-                'src' : this.src,                                  // ä¿å­˜å›¾ç‰‡src
+                'pos': pos,                                        // ±£´æthisSlideÓ³Éäµ½cabµÄid
+                'rest': rest,                                      // ±£´ærestSlide
+                'id' : this.id,                                    // ±£´æÍ¼Æ¬id
+                'src' : this.src,                                  // ±£´æÍ¼Æ¬src
                 'tag' : tag,
                 'sex' : this.getAttribute('sex'),
-                'url' : url                                        // ä¿å­˜å›¾ç‰‡url
+                'url' : url                                        // ±£´æÍ¼Æ¬url
             })
         }
 
-        function cabAjaxCallback(tag, id, src, pos){           // è¿™é‡Œçš„ajaxCallbackåªæ˜¯æµ‹è¯•ç”¨
-            var ul = cabnet.hoverBox.data('rest').find('ul').html() // å¾…åˆ é™¤
-            $(pos).siblings('.mini-cab-slide').find('ul').html(ul)  // å¾…åˆ é™¤
+        function cabAjaxCallback(tag, id, src, pos){           // ÕâÀïµÄajaxCallbackÖ»ÊÇ²âÊÔÓÃ
+            var ul = cabnet.hoverBox.data('rest').find('ul').html() // ´ıÉ¾³ı
+            $(pos).siblings('.mini-cab-slide').find('ul').html(ul)  // ´ıÉ¾³ı
 
-            console.log(tag)                                     // å›¾ç‰‡æ ‡ç­¾
-            console.log(id)                                      // å›¾ç‰‡id
-            console.log(src)                                     // å›¾ç‰‡src
+            console.log(tag)                                     // Í¼Æ¬±êÇ©
+            console.log(id)                                      // Í¼Æ¬id
+            console.log(src)                                     // Í¼Æ¬src
 
-            // !!è¯»å–æ•°æ®åæ‰§è¡Œslideråˆ‡æ¢ï¼Œå¿…è¦
+            // !!¶ÁÈ¡Êı¾İºóÖ´ĞĞsliderÇĞ»»£¬±ØÒª
             uniqlo.cabSlider()
         }
 
-        function kvHoverCallback(pos, isIndexPage){            // å‚æ•°posä¿å­˜äº†ä¸Šè¡£/ä¸‹è¡£ç±»å‹
+        function kvHoverCallback(pos, isIndexPage){            // ²ÎÊıpos±£´æÁËÉÏÒÂ/ÏÂÒÂÀàĞÍ
 
             var url = this.getAttribute('url')
             var price = this.getAttribute('price')
@@ -503,7 +504,7 @@ jQuery(function($){
             cabnet.kvHover.rest.text(this.getAttribute('rest'))
             cabnet.kvHover.title.text(this.getAttribute('alt')).attr('href', url)
 
-            cabnet.kvHover.data({                                // ä¿å­˜å›¾ç‰‡srcä¸idç­‰ä¿¡æ¯
+            cabnet.kvHover.data({                                // ±£´æÍ¼Æ¬srcÓëidµÈĞÅÏ¢
                 'src' : this.getAttribute('src'),
                 'tag' : this.getAttribute('tag'),
                 'place' : this.getAttribute('place'),
@@ -535,8 +536,8 @@ jQuery(function($){
             var price = ' price="' + cabnet.kvHover.data('price') + '"'
             var ids = ' id="' + id + '"'
             var img = '<img' + src + sex + tag + url + place + price + ids + ' />'
-            $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlideæ·»åŠ å›¾ç‰‡
-            cabnet.net.trigger('add', id)                         // è§¦å‘netSlideçš„è¢«æ·»åŠ è‡ªå®šä¹‰äº‹ä»¶
+            $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlideÌí¼ÓÍ¼Æ¬
+            cabnet.net.trigger('add', id)                         // ´¥·¢netSlideµÄ±»Ìí¼Ó×Ô¶¨ÒåÊÂ¼ş
         }
 
         function delNetCallback(){
@@ -544,7 +545,7 @@ jQuery(function($){
             cabnet.hoverBox.fadeOut()
             cabnet.netSlide.find('#' + id).parent('li').fadeOut('normal', function(){
                 $(this).remove()
-                cabnet.net.trigger('del', id)                       // è§¦å‘netSlideçš„è¢«åˆ é™¤è‡ªå®šä¹‰äº‹ä»¶
+                cabnet.net.trigger('del', id)                       // ´¥·¢netSlideµÄ±»É¾³ı×Ô¶¨ÒåÊÂ¼ş
             })
         }
     }($))
@@ -553,7 +554,7 @@ jQuery(function($){
 
     !(function($){
 
-        var index = {                                                // é¦–é¡µå˜é‡
+        var index = {                                                // Ê×Ò³±äÁ¿
             box: $('#div_main'),
             bin : $('#div_index-bin'),
             btn : $('a.index-btn'),
@@ -593,11 +594,11 @@ jQuery(function($){
             }
         }
 
-//        index.bin.prepend('<p class="index-final-tip">æ³¨ï¼šè¡£ç‰©å®é™…åº“å­˜åŠä»·æ ¼è¯·å‚ç…§ä¼˜è¡£åº“å®˜æ–¹ç½‘ç«™</p>')
+//        index.bin.prepend('<p class="index-final-tip">×¢£ºÒÂÎïÊµ¼Ê¿â´æ¼°¼Û¸ñÇë²ÎÕÕÓÅÒÂ¿â¹Ù·½ÍøÕ¾</p>')
         index.genderLi = index.gender.find('li')
         index.all = index.genderLi.eq(0)
 
-        index.bin.on('binOpen', function(){                       // ä¸‹æ‹‰æ¡†å±•å¼€æ—¶ä¸€åˆ‡å½’ä½
+        index.bin.on('binOpen', function(){                       // ÏÂÀ­¿òÕ¹¿ªÊ±Ò»ÇĞ¹éÎ»
             index.togClass(index.p0, 'select')
 
             index.togClass(index.all, 'select')
@@ -615,7 +616,7 @@ jQuery(function($){
             index.babyMask.hide()
 
         })
-        index.bin.on('binClose', function(){                      // ä¸‹æ‹‰æ¡†æ”¶ç¼©
+        index.bin.on('binClose', function(){                      // ÏÂÀ­¿òÊÕËõ
 
             index.btn.css({
                 'background-position': '0 -18px'
@@ -623,9 +624,9 @@ jQuery(function($){
 
         })
 
-        index.suitSlide.on('suitOpen', function(){                // æ˜¾ç¤ºå¥—è£…
+        index.suitSlide.on('suitOpen', function(){                // ÏÔÊ¾Ì××°
             //kimi
-            $.weather.set = 1;//æ˜¯å¦é€‰ä¸­å¥—è£…æ ‡è®°
+            $.weather.set = 1;//ÊÇ·ñÑ¡ÖĞÌ××°±ê¼Ç
             //kimi
             index.suitSlide.show().prev().hide()
             index.suitIsOpen = true
@@ -639,7 +640,7 @@ jQuery(function($){
             getgoods($.weather.occasion,$.weather.sex,$.weather.set)
         })
         //kimi
-        index.place.on('click', 'li', function(){                 // é¦–é¡µåœºåˆåˆ‡æ¢
+        index.place.on('click', 'li', function(){                 // Ê×Ò³³¡ºÏÇĞ»»
             if($(this).attr('id') != 0 && ($.weather.sex||0) == 0){
                 index.gender.children().removeClass('select')
                 $('.mini-gender-women').parent().addClass('select');
@@ -653,9 +654,9 @@ jQuery(function($){
             var cid = $(this).attr('id');
             $.weather.set = 0;
             if(cid==0){
-                $.weather.occasion = 0;//åœºåˆ
+                $.weather.occasion = 0;//³¡ºÏ
             }else{
-                $.weather.occasion = cid;//åœºåˆ
+                $.weather.occasion = cid;//³¡ºÏ
             }
             var that = $(this)
             index.togClass(that, 'select')
@@ -710,52 +711,52 @@ jQuery(function($){
 
             placeArr: {
                 'All': {
-                    'å•†åŠ¡': 1, 'æ—…æ¸¸': 2, 'è¿åŠ¨': 3, 'å±…å®¶': 4
+                    'ÉÌÎñ': 1, 'ÂÃÓÎ': 2, 'ÔË¶¯': 3, '¾Ó¼Ò': 4
                 },
                 'WOMEN': {
-                    'å•†åŠ¡': 1, 'æ—…æ¸¸': 2, 'è¿åŠ¨': 3, 'å±…å®¶': 4, 'é€›è¡—': 5, 'çº¦ä¼š': 6
+                    'ÉÌÎñ': 1, 'ÂÃÓÎ': 2, 'ÔË¶¯': 3, '¾Ó¼Ò': 4, '¹ä½Ö': 5, 'Ô¼»á': 6
                 },
                 'MEN': {
-                    'å•†åŠ¡': 1, 'æ—…æ¸¸': 2, 'è¿åŠ¨': 3, 'å±…å®¶': 4, 'é€›è¡—': 5, 'çº¦ä¼š': 6
+                    'ÉÌÎñ': 1, 'ÂÃÓÎ': 2, 'ÔË¶¯': 3, '¾Ó¼Ò': 4, '¹ä½Ö': 5, 'Ô¼»á': 6
                 },
                 'KIDS BABY': {
-                    'ä¸Šå­¦': 1, 'æ—…æ¸¸': 2, 'è¿åŠ¨': 3, 'å±…å®¶': 4, 'é€›è¡—': 5, 'ç©ä¹': 6
+                    'ÉÏÑ§': 1, 'ÂÃÓÎ': 2, 'ÔË¶¯': 3, '¾Ó¼Ò': 4, '¹ä½Ö': 5, 'ÍæÀÖ': 6
                 }
             },
             styleArr:{
                 'All': {
-                    'ä¼‘é—²' : 6, 'å¤å¤' : 7, 'è‹±ä¼¦' : 8, 'å­¦é™¢' : 9
+                    'ĞİÏĞ' : 6, '¸´¹Å' : 7, 'Ó¢Â×' : 8, 'Ñ§Ôº' : 9
                 },
                 'WOMEN': {
-                    'ä¼‘é—²' : 6, 'å¯çˆ±' : 1, 'æ·‘å¥³' : 2, 'æ£®å¥³' : 3, 'é…·': 4, 'æˆç†Ÿ' : 5, 'å¤å¤' : 7, 'è‹±ä¼¦' : 8, 'å­¦é™¢' : 9, 'ä¸­æ€§' : 10
+                    'ĞİÏĞ' : 6, '¿É°®' : 1, 'ÊçÅ®' : 2, 'É­Å®' : 3, '¿á': 4, '³ÉÊì' : 5, '¸´¹Å' : 7, 'Ó¢Â×' : 8, 'Ñ§Ôº' : 9, 'ÖĞĞÔ' : 10
                 },
                 'MEN': {
-                    'ä¼‘é—²' : 6, 'æ½®' : 11, 'æ–¯æ–‡' : 12, 'è‡ªç„¶' : 13, 'é…·' : 14, 'æˆç†Ÿ' : 15, 'å¤å¤' : 17, 'è‹±ä¼¦' : 18, 'å­¦é™¢' : 19, 'ä¸­æ€§' : 20
+                    'ĞİÏĞ' : 6, '³±' : 11, 'Ë¹ÎÄ' : 12, '×ÔÈ»' : 13, '¿á' : 14, '³ÉÊì' : 15, '¸´¹Å' : 17, 'Ó¢Â×' : 18, 'Ñ§Ôº' : 19, 'ÖĞĞÔ' : 20
                 },
                 'KIDS BABY': {
-                    'ä¼‘é—²' : 6, 'å¯çˆ±' : 21, 'æ·‘å¥³' : 22, 'æ½®' : 23, 'é…·' : 24, 'å¤å¤' : 26, 'è‹±ä¼¦' : 27, 'å­¦é™¢' : 28
+                    'ĞİÏĞ' : 6, '¿É°®' : 21, 'ÊçÅ®' : 22, '³±' : 23, '¿á' : 24, '¸´¹Å' : 26, 'Ó¢Â×' : 27, 'Ñ§Ôº' : 28
                 }
             }
         }
 
-        cate.designMore.on('click', function(){                   // æ›´å¤šæ¬¾å¼åˆ‡æ¢
+        cate.designMore.on('click', function(){                   // ¸ü¶à¿îÊ½ÇĞ»»
             $(this).toggleClass('mini-design-less')
                 .parent().prev().toggleClass('mini-design-auto')
         })
 
-        cate.designAll.on('click', function(){                    // æ‰€æœ‰æ¬¾å¼
+        cate.designAll.on('click', function(){                    // ËùÓĞ¿îÊ½
             cate.design.find('.mini-design-checked').removeClass('mini-design-checked')
             cate.designAll.addClass('mini-design-checked')
             getRandPro()
         })
 
-        cate.design.on('click', 'li a', function(){               // å…¶ä»–ä»»ä½•æ¬¾å¼
+        cate.design.on('click', 'li a', function(){               // ÆäËûÈÎºÎ¿îÊ½
             cate.designAll.removeClass('mini-design-checked')
             $(this).toggleClass('mini-design-checked')
             getRandPro()
         })
 
-        cate.ps.on('click', 'li', function(){                     // ç©¿è¡£åœºåˆå’Œç©¿è¡£é£æ ¼
+        cate.ps.on('click', 'li', function(){                     // ´©ÒÂ³¡ºÏºÍ´©ÒÂ·ç¸ñ
             if(index.suitIsOpen) {
                 index.suit.removeClass('select')
 
@@ -770,17 +771,17 @@ jQuery(function($){
             }
             getRandPro()
 
-        }).on('click', 'a.mini-cate-more', function(e){           // ä¸‹æ‹‰ä¸‰è§’æ˜¾ç¤ºæ›´å¤š
+        }).on('click', 'a.mini-cate-more', function(e){           // ÏÂÀ­Èı½ÇÏÔÊ¾¸ü¶à
 
             $(this).hide().closest('ul').css('height', 'auto').find('a.mini-cate-less').show()
             e.stopPropagation()
 
-        }).on('click', 'a.mini-cate-less', function(e){           // æ”¶èµ·ä¸‰è§’
+        }).on('click', 'a.mini-cate-less', function(e){           // ÊÕÆğÈı½Ç
 
             cate.ps.trigger('cateUlHide', this)
             e.stopPropagation()
 
-        }).on('click', 'a.mini-p-0', function(){                  // åœºåˆå…¨éƒ¨æŒ‰é’®
+        }).on('click', 'a.mini-p-0', function(){                  // ³¡ºÏÈ«²¿°´Å¥
             if(index.suitIsOpen) {
                 index.suit.removeClass('select')
 
@@ -791,7 +792,7 @@ jQuery(function($){
             cate.place.find('li.mini-cate-checked').removeClass('mini-cate-checked')
             getRandPro()
 
-        }).on('click', 'a.mini-s-0', function(){                  // é£æ ¼å…¨éƒ¨æŒ‰é’®
+        }).on('click', 'a.mini-s-0', function(){                  // ·ç¸ñÈ«²¿°´Å¥
             if(index.suitIsOpen) {
                 index.suit.removeClass('select')
 
@@ -802,13 +803,13 @@ jQuery(function($){
             cate.style.find('li.mini-cate-checked').removeClass('mini-cate-checked')
             getRandPro()
 
-        }).on('cateUlHide', function(e, ele){                     // æ”¶èµ·designçš„UL
+        }).on('cateUlHide', function(e, ele){                     // ÊÕÆğdesignµÄUL
 
             $(ele).hide().closest('ul').css('height', 77).find('a.mini-cate-more').show()
 
         })
 
-        index.gender.on('click', 'a', function(){                  // å†…é¡µæ€§åˆ«åˆ‡æ¢
+        index.gender.on('click', 'a', function(){                  // ÄÚÒ³ĞÔ±ğÇĞ»»
             //kimi
             var sid = $(this).attr('id');
             if(sid==0){
@@ -820,7 +821,7 @@ jQuery(function($){
                 }
 
             }else{
-                $.weather.sex = sid;//æ€§åˆ«
+                $.weather.sex = sid;//ĞÔ±ğ
             }
             //kimi
             var that = $(this)
@@ -831,7 +832,7 @@ jQuery(function($){
             cate.designAll.trigger('click')
 //            var kids = that.parents('div.index-bar').find('li.ch_shangxue')
 
-            if(that.data('page')){                                   // é¦–é¡µçš„kids
+            if(that.data('page')){                                   // Ê×Ò³µÄkids
                 $("#__15").show();
                 $("#3_9").hide();
 //                kids.show().prev().hide()
@@ -909,7 +910,7 @@ jQuery(function($){
             }
         })
 
-        index.netEmpty = index.bin.find('a.mini-net-empty')       // æœç´¢çµæœä¸ºç©ºçº¢æ¡†
+        index.netEmpty = index.bin.find('a.mini-net-empty')       // ËÑË÷?¹ûÎª¿Õºì¿ò
         index.netEmpty.on('click', resetGender)
 
         function resetGender(){

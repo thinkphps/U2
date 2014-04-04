@@ -45,8 +45,16 @@ button,label{cursor:pointer; }
 .city{ float:left; margin:1px 0 0 0;}
 .city a.change_city{ display:block; width:72px; height:22px; line-height:21px; background:#FF0000; color:#FFF; text-align:center;}
 .city .near_un{ display:block; height:20px; line-height:20px; margin:5px 0 0 0;}
-.city .near_un i{ display:block; float:left; width:20px; height:20px; background:url(../images/city_near_icon.png) 0 0 no-repeat; margin:0 8px 0 0;}
-.city .near_un a{ float:left; color:#666;}
+/*.city .near_un i{ display:block; float:left; width:20px; height:20px; background:url(../images/city_near_icon.png) 0 0 no-repeat; margin:0 8px 0 0;}*/
+/*.city .near_un a{ float:left; color:#666;}*/
+/*.city .near_un a:hover{ color:#F00;}*/
+/*.city{ float:left; margin:1px 0 0 0;}*/
+/*.city a.change_city{  width:72px; height:22px; line-height:21px; background:#FF0000; color:#FFF; text-align:center;}*/
+/*.city .near_un{  height:20px; line-height:20px; margin:5px 0 0 0;}*/
+.city .near_un i{  float:left; width:20px; height:20px; margin:0 8px 0 0;cursor:pointer;}
+.city .near_un i.city_wz{ background:url(../images/city_near_icon.png) 0 0 no-repeat;}
+.city .near_un i.city_wz2{ background:url(../images/city_near_icon.png) 0 -20px no-repeat;}
+.city .near_un a{ float:left; color:#666; margin:0 8px 0 0;}
 .city .near_un a:hover{ color:#F00;}
 
 /*头部-优惠*/
@@ -262,7 +270,7 @@ button,label{cursor:pointer; }
     position: absolute;
 }
 .mini-kv-hover,.mini-kv-add{
-    background: url(../images/mini-kv-hover.png) no-repeat;
+    /*background: url(../images/mini-kv-hover.png) no-repeat;*/
 }
 .mini-kv-hover{
     width: 186px;
@@ -270,29 +278,47 @@ button,label{cursor:pointer; }
     padding: 25px 15px;
     top: 0;
 }
+.mini-kv-content{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 186px;
+    height: 166px;
+}
+.alpha{filter:alpha(opacity=70);opacity: 0.8;
+    top: -25px;
+    left: -20px;
+    position: relative;
+}  /*设置图片透明*/
 .mini-kv-hover strong{
     font-size: 30px;
 }
 .mini-kv-hover small{
-    color: #ffa800;
+    color: #000000;
+}
+.mini-kv-hover span{
+    color: red;
+    font: bold;
 }
 a.mini-kv-add{
-    background-position: 0 -216px;
+
     width: 74px;
     height: 26px;
-    top: 154px;
-    left: 68px;
+    top: 134px;
+    left: 58px;
     display: block;
     color: #e70012;
     line-height: 25px;
+    background-color:#ffa800 ;
+    color: #fff;
+    font-weight: bold;
 }
 .mini-kv-hover a.ft14{
     display: block;
     margin-top: 15px;
     height: 40px;
-    color: #fff;
+    color: #000;
     line-height: 20px;
-    font-weight: bold;
     overflow: hidden;
 }
 .mini-place-mask{
@@ -309,6 +335,9 @@ a.mini-kv-add{
 .index-bar .mini-place-mask{
     width: 308px;
     left: 347px;
+}
+.ft16{
+    color: red;
 }
 
 /*== 地图弹窗 ==*/

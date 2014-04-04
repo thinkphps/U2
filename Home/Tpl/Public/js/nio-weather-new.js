@@ -121,7 +121,7 @@ jQuery(function($){
                 if(!info.sname && !info.tradetime){
                  var tv = '暂时还没有店铺信息';
                 }else{
-                var tv = info.sname+' '+info.tradetime;
+                var tv = info.sname+'<br>'+info.tradetime;
                 }
             $('#shopid').html(tv);
             }
