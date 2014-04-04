@@ -7,7 +7,7 @@ table{border-collapse:collapse; border-spacing:0; }
 ol, ul{list-style:none outside; }
 h1, h2, h3, h4, h5, h6{font-size:100%; }
 fieldset, img{border:0 none; vertical-align:middle; }
-img {background:url(/images/loading.gif) no-repeat center center; }
+/*img {background:url(../images/loading.gif) no-repeat center center; }*/
 a{color:#333; text-decoration:none; }
 a:hover{color:#900; text-decoration:none; }
 em{font-style:normal; }
@@ -45,15 +45,9 @@ button,label{cursor:pointer; }
 .city{ float:left; margin:1px 0 0 0;}
 .city a.change_city{ display:block; width:72px; height:22px; line-height:21px; background:#FF0000; color:#FFF; text-align:center;}
 .city .near_un{ display:block; height:20px; line-height:20px; margin:5px 0 0 0;}
-/*.city .near_un i{ display:block; float:left; width:20px; height:20px; background:url(../images/city_near_icon.png) 0 0 no-repeat; margin:0 8px 0 0;}*/
-/*.city .near_un a{ float:left; color:#666;}*/
-/*.city .near_un a:hover{ color:#F00;}*/
-/*.city{ float:left; margin:1px 0 0 0;}*/
-/*.city a.change_city{  width:72px; height:22px; line-height:21px; background:#FF0000; color:#FFF; text-align:center;}*/
-/*.city .near_un{  height:20px; line-height:20px; margin:5px 0 0 0;}*/
 .city .near_un i{  float:left; width:20px; height:20px; margin:0 8px 0 0;cursor:pointer;}
 .city .near_un i.city_wz{ background:url(../images/city_near_icon.png) 0 0 no-repeat;}
-.city .near_un i.city_wz2{ background:url(../images/city_near_icon.png) 0 -20px no-repeat;}
+.city .near_un i.city_wz2{ display: none; background:url(../images/city_near_icon.png) 0 -20px no-repeat;}
 .city .near_un a{ float:left; color:#666; margin:0 8px 0 0;}
 .city .near_un a:hover{ color:#F00;}
 
