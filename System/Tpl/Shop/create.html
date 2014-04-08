@@ -1,47 +1,138 @@
 <include file="Public:header"/>
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="shop.html">门店管理</a></li>
-        <li class="active"><strong>新建门店</strong></li>
-    </ol>
-    <form class="form-horizontal" role="form" action="{:U('Shop/add')}" method='post'>
-        <div class="form-group">
-            <label for="inputName" class="col-lg-2 control-label">门店名称</label>
-            <div class="col-lg-3">
-                <input type="text" class="form-control" id="inputName" placeholder="门店名称" name='sname' value='{$shop.sname}'>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddr" class="col-lg-2 control-label">门店地址</label>
-            <div class="col-lg-5">
-                <input type="text" class="form-control" id="inputAddr" placeholder="门店地址" name='address' value='{$shop.saddress}'>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputTime" class="col-lg-2 control-label">营业时间</label>
-            <div class="col-lg-2">
-                <input type="datetime" class="form-control" id="inputTime" placeholder="10:00 - 22:00" name='stime' value='{$shop.tradetime}'>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputTel" class="col-lg-2 control-label">店铺电话</label>
-            <div class="col-lg-2">
-                <input type="tel" class="form-control" id="inputTel" placeholder="010-88888888" name='call' value='{$shop.scall}'>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputInof" class="col-lg-2 control-label">商品范围</label>
-            <div class="col-lg-4">
-                <input type="text" class="form-control" id="inputInof" placeholder="服装" name='range' value='{$shop.sange}'>
-            </div>
-            <input type='hidden' name='id' value='{$shop.id}'>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-success">提交</button>
-            </div>
-        </div>
-    </form>
+  <ol class="breadcrumb">
+    <li><a href="{:U('Index/index')}">首页</a></li>
+    <li><a href="{:U('Shop/index')}">门店管理</a></li>
+    <li class="active"><strong>新建门店</strong></li>
+  </ol>
+  <form class="form-horizontal" role="form" action="{:U('Shop/add')}" method='post'>
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label">门店名称</label>
+      <div class="col-lg-3">
+        <input type="text" class="form-control" id="inputName" placeholder="门店名称" name='sname' value='{$shop.sname}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddr" class="col-lg-2 control-label">门店地区</label>
+      <div class="col-lg-5">
+	  <if condition="$shop['id'] neq ''">
+        <select name='pid' id='pname'>
+         <option value='0'>请选择</option>
+         <volist id='vo' name='result'>
+         <option value="{$vo.region_id}" <if condition="$vo['region_id'] eq $shop['pid']"> selected="selected"</if> >{$vo.local_name}</option>  
+         </volist>
+        </select>
+       <select name='cid' id='cname' onchange=\"getarea();\">
+         <option value='0'>请选择</option>
+         <volist id='cvo' name='city'>
+         <option value="{$cvo.region_id}" <if condition="$cvo['region_id'] eq $shop['cityid']"> selected="selected"</if> >{$cvo.local_name}</option>  
+         </volist>
+       </select>
+       <select name='aid'>
+         <option value='0'>请选择</option>
+         <volist id='avo' name='area'>
+         <option value="{$avo.region_id}" <if condition="$avo['region_id'] eq $shop['aid']"> selected="selected"</if> >{$avo.local_name}</option>  
+         </volist>
+       </select>
+	   <else/>
+       <select name='pid' id='pname'>
+          <option value='0'>选择省</option>
+		  <volist id='vo' name='plist'>
+          <option value='{$vo.region_id}'>{$vo.local_name}</option>
+		  </volist>
+	   </select>
+	   </if>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddr" class="col-lg-2 control-label">门店地址</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" id="inputAddr" placeholder="门店地址" name='address' value='{$shop.saddress}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTime" class="col-lg-2 control-label">经度</label>
+      <div class="col-lg-2">
+        <input type="datetime" class="form-control" placeholder="经度" name='longitude' value='{$shop.longitude}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTime" class="col-lg-2 control-label">纬度</label>
+      <div class="col-lg-2">
+        <input type="datetime" class="form-control" placeholder="纬度" name='latitude' value='{$shop.latitude}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTime" class="col-lg-2 control-label">是否显示</label>
+      <div class="col-lg-2">
+        <input type="datetime" class="form-control" placeholder="是否显示" name='showtag' value='{$shop.showtag}'><span id='showid'></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTime" class="col-lg-2 control-label">营业时间</label>
+      <div class="col-lg-2">
+        <input type="datetime" class="form-control" id="inputTime" placeholder="10:00 - 22:00" name='stime' value='{$shop.tradetime}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputTel" class="col-lg-2 control-label">店铺电话</label>
+      <div class="col-lg-2">
+        <input type="tel" class="form-control" id="inputTel" placeholder="010-88888888" name='call' value='{$shop.scall}'>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputInof" class="col-lg-2 control-label">商品范围</label>
+      <div class="col-lg-4">
+        <input type="text" class="form-control" id="inputInof" placeholder="服装" name='range' value='{$shop.sange}'>
+      </div>
+      <input type='hidden' name='id' value='{$shop.id}'>
+    </div>
+    <div class="form-group">
+      <label for="inputTel" class="col-lg-2 control-label">附加信息</label>
+      <div class="col-lg-2">
+        <textarea class="form-control" id="inputTel" placeholder="附加信息" name='message'>{$shop.message}</textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <button type="submit" class="btn btn-success">提交</button>
+      </div>
+    </div>
+  </form>
 </div>
 <include file="Public:footer"/>
+<script>
+var cityurl = "{:U('Shop/getcity')}",areaurl = "{:U('Shop/getarea')}";
+var H = Object();
+$(function(){
+ H.pfunction = function(v,flag){
+      if(flag==1){
+      $.post(cityurl,{pid:v},function(data,status){
+	  if(data.code==1){
+	   $('#pname').nextAll().remove();
+       $('#pname').after(data.data);
+	  }else{
+      alert(data.msg);
+	  }
+	  },'JSON');
+	  }
+	}
+$('#pname').change(function(){
+	H.pfunction($('#pname option:selected').val(),1);
+});
+
+});
+function getarea(){
+      var id = $('#cname option:selected').val();
+      $.post(areaurl,{cid:id},function(data,status){
+	  if(data.code==1){
+	   $('#cname').nextAll().remove();
+       $('#cname').after(data.data);
+	   $('#showid').text('当前最大值:'+data.showtag);
+	  }else{
+      alert(data.msg);
+	  }
+	  },'JSON');
+}
+
+</script>
