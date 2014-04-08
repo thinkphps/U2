@@ -1,0 +1,85 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>套装管理</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="{:U('Suits/index')}" method='post'>
+        <div class="form-group">
+            <label>类别</label>
+            <select name='pid' id='pname'>
+                <option value='0'>选择类别</option>
+                <volist id='vo' name='resultGender'>
+                    <option value="{$vo.ID}" <if condition="$vo['ID'] eq $suitGenderID">selected='selected'</if> >{$vo.description}</option>
+                </volist>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>风格</label>
+            <if condition="$suitGenderID neq ''">
+                <select name='stylevalue' id='sname'>
+                    <option value='0'>选择风格</option>
+                    <volist id='svo' name='stylelist'>
+                        <option value="{$svo.ID}" <if condition="$svo['ID'] eq $suitStyleID">selected='selected'</if> >{$svo.description}</option>
+                    </volist>
+                </select>
+            <else/>
+            <select name='stylevalue' id='sname'>
+                <option value='0'>选择风格</option>
+            </select>
+            </if>
+        </div>
+        <button type="submit" class="btn btn-success">搜索</button>
+        <a href="{:U('Suits/add')}" class="btn btn-success pull-right">新增</a>
+    </form>
+    <table class="table table-striped table-hover text-center table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>后台ID</th>
+            <th>缩略图</th>
+            <th>风格</th>
+            <th>类别</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id='vo' name='list'>
+            <tr>
+                <td>{$vo.suitID}</td>
+                <td><img src="{$vo.suitImageUrl}" width="100px" height="100px"></td>
+                <td>{$vo.style}</td>
+                <td>{$vo.sex}</td>
+                <td><a href="{:U('Suits/add',array('id'=>$vo['suitID']))}" class="btn btn-primary">编辑</a> <a href="{:U('Suits/delsuit',array('id'=>$vo['suitID']))}" class="btn btn-danger">删除</a></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            {$page}
+        </ul>
+    </div>
+</div>
+<include file="Public:footer"/>
+<script>
+    var cityurl = "{:U('Suits/getStyle')}";
+    var H = Object();
+    $(function(){
+        H.pfunction = function(v,flag){
+            if(flag==1){
+                $.post(cityurl,{pid:v},function(data,status){
+                    if(data.code==1){
+                        $('#sname').html(data.da);
+                    }else{
+                        alert(data.msg);
+                    }
+                },'JSON');
+            }
+        }
+        $('#pname').change(function(){
+            H.pfunction($('#pname option:selected').val(),1);
+        });
+    });
+
+
+</script>

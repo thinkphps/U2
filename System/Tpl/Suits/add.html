@@ -1,0 +1,127 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li><a href="{:U('Suits/index')}">套装管理</a></li>
+        <li class="active"><strong>新增</strong></li>
+    </ol>
+    <form class="form-horizontal" role="form" action="{:U('Suits/doadd')}" method='post'>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">类别</label>
+            <div class="col-lg-3">
+                <select name='pid' id='pname'>
+                    <option value='0'>选择类别</option>
+                    <volist id='vo' name='resultGender'>
+                        <option value="{$vo.ID}" <if condition="$vo['ID'] eq $result['suitGenderID']">selected='selected'</if> >{$vo.description}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">风格</label>
+            <div class="col-lg-5">
+                <if condition="$result['suitID']">
+                    <select name='stylevalue' id='sname'>
+                        <option value='0'>选择风格</option>
+                        <volist id='svo' name='style'>
+                            <option value="{$svo.ID}" <if condition="$svo['ID'] eq $result['suitStyleID']">selected='selected'</if> >{$svo.description}</option>
+                        </volist>
+                    </select>
+                <else/>
+                <select name='stylevalue' id='sname'>
+                    <option value='0'>选择风格</option>
+                </select>
+                </if>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">缩略图地址 </label>
+            <div class="col-lg-5">
+                <input type="text" class="form-control" id="suitImageUrlid" placeholder="缩略图地址" name='suitImageUrl' value='{$result.suitImageUrl}'>
+            </div><a class="btn btn-primary" href="javascript:;" id="review">预览</a> &nbsp;&nbsp;<img src='{$result.suitImageUrl}' width="100px;" height="100px" id='viewshow'>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label"></label>
+            <div class="col-lg-2">
+                <a class="btn btn-primary" href="javascript:;" id="addpic">新增</a>
+                <a class="btn btn-danger" href="javascript:;" id="delpic">删除</a>
+            </div>
+        </div>
+        <if condition="$result['suitID'] neq ''">
+          <volist id='nvo' name='num_iid' key='key'>
+                 <if condition='$key eq 1'>
+                     <div class="form-group picdiv" id='adddiv'>
+                         <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
+                         <div class="col-lg-2">
+                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>
+                         </div>
+                     </div>
+                 <else/>
+                     <div class="form-group picdiv">
+                         <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
+                         <div class="col-lg-2">
+                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>
+                         </div>
+                     </div>
+               </if>
+          </volist>
+        <else/>
+        <div class="form-group picdiv" id='adddiv'>
+            <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
+            <div class="col-lg-2">
+                <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value=''>
+            </div>
+        </div>
+        </if>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <input type='hidden' name='id' value="{$result.suitID}">
+                <button type="submit" class="btn btn-success">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public:footer"/>
+<script>
+    var cityurl = "{:U('Suits/getStyle')}",areaurl = "{:U('Shop/getarea')}";
+    var H = Object();
+    $(function(){
+        //新增
+        $('#addpic').on('click',function(){
+            var piclength = $('.picdiv').length;
+            if(piclength <= 40 ){
+           $('.picdiv:eq('+(piclength-1)+')').after('<div class="form-group picdiv" ><label for="inputTime" class="col-lg-2 control-label">商品ID</label><div class="col-lg-2"><input type="text" class="form-control" placeholder="商品ID" name="num_iid[]"></div></div>');
+           }else{
+              alert('新增不能超过50个');
+            }
+        });
+        //减去
+        $('#delpic').on('click',function(){
+           var piclength = $('.picdiv').length,picLengthValue = piclength-1;
+            if(picLengthValue>1){
+              $('.picdiv:eq('+(picLengthValue)+')').remove();
+            }else{
+              alert('只有一个不能删除');
+            }
+        });
+        H.pfunction = function(v,flag){
+            if(flag==1){
+                $.post(cityurl,{pid:v},function(data,status){
+                    if(data.code==1){
+                      $('#sname').html(data.da);
+                    }else{
+                        alert(data.msg);
+                    }
+                },'JSON');
+            }
+        }
+        $('#pname').change(function(){
+            H.pfunction($('#pname option:selected').val(),1);
+        });
+        $('#review').on('click',function(){
+          $('#viewshow').attr('src',$('#suitImageUrlid').val());
+        });
+    });
+
+
+</script>
