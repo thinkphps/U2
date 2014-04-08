@@ -1,4 +1,5 @@
 <link href="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/css/dressing_room.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/U2/Home/Tpl/Public/js/Coverflow/load/skin_classic_black.css"/>
 <style>
     .itemTitle{
         padding-top:30px;
@@ -213,7 +214,7 @@
     </div>
 
 
-    <div  id="container2"  style="position: relative">
+    <div  id="container2"  style="position: relative;display: none;">
         <div class="item"><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/1.png" /></div>
         <div class="item"><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/2.png" /><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/2.png" /></div>
         <div class="item"><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/3.png" /></div>
@@ -223,6 +224,78 @@
         <div class="item"><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/7.png" /></div>
         <div class="item"><img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/8.png" /></div>
     </div>
+
+    <div id="myDiv">sdfsdfsdfsd</div>
+    <!-- coverflow data -->
+    <ul id="coverflowData" style="display: none;">
+
+        <!-- category  -->
+        <ul data-cat="+ Category one">
+            <ul>
+                <li data-type="link" data-url="http://www.google.com" data-target="_blank"></li>
+                <li data-thumbnail-path="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/1.png"></li>
+                <li data-thumbnail-text="">
+                    <p class="largeLabel">CUSTOM PRESS THUMBNAIL ACTION</p>
+                    <p class="smallLabel">When a thumbnail is pressed the coverflow can open a browser window or the lightbox.</p>
+                </li>
+                <li data-info="">
+                    <p class="mediaDescriptionHeader">CUSTOM PRESS THUMBNAIL ACTION.</p>
+                    <p class="mediaDescriptionText">When a thumbnail is pressed the coverflow can open a browser window or the lightbox.</p>
+                </li>
+            </ul>
+
+            <ul>
+                <li data-type="media" data-url="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/2.png"></li>
+                <li data-thumbnail-path="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/2.png"></li>
+                <li data-thumbnail-text="">
+                    <p class="largeLabel">RESPONSIVE LAYOUT</p>
+                    <p class="smallLabel">The coverflow has responsive layout.</p>
+                </li>
+                <li data-info="">
+                    <p class="mediaDescriptionHeader">RESPONSIVE LAYOUT.</p>
+                    <p class="mediaDescriptionText">The coverflow has responsive layout, basically it has an adaptable layout which makes it the perfect candidate for any type of project.</p>
+                </li>
+            </ul>
+
+            <ul>
+                <li data-type="media" data-width="640" data-height="420" data-url="http://vimeo.com/83759300"></li>
+                <li data-thumbnail-path="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/3.png"></li>
+                <li data-thumbnail-text="">
+                    <p class="largeLabel">2D FALLBACK FOR OLDER BROWSERS LIKE IE7/8</p>
+                    <p class="smallLabel">On a older browser that does not have 3D support the coverflow will display in a 2D format.</p>
+                </li>
+                <li data-info="">
+                    <p class="mediaDescriptionHeader">2D FALLBACK FOR OLDER BROWSERS LIKE IE7/8.</p>
+                    <p class="mediaDescriptionText">On a older browser that does not have 3D support the coverflow will display in a 2D format..</p>
+                </li>
+            </ul>
+
+            <ul>
+                <li data-type="link" data-url="http://www.google.com" data-target="_blank"></li>
+                <li data-thumbnail-path="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/4.png"></li>
+                <li data-thumbnail-text="">
+                    <p class="largeLabel">GREAT PERFORMANCE ON MOBILE DEVICES</p>
+                    <p class="smallLabel">This coverflow is using the GPU (hardware acceleration).</p>
+                </li>
+            </ul>
+
+            <ul>
+                <li data-type="media" data-width="640" data-height="420" data-url="http://www.youtube.com/watch?v=89rnIwCURC8"></li>
+                <li data-thumbnail-path="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/yf/5.png"></li>
+                <li data-thumbnail-text="">
+                    <p class="largeLabel">VIMEO AND YOUTUBE SUPPORT</p>
+                    <p class="smallLabel">The coverflow lightbox can load and play videos from youtube or vimeo easily.</p>
+                </li>
+                <li data-info="">
+                    <p class="mediaDescriptionHeader">VIMEO AND YOUTUBE SUPPORT.</p>
+                    <p class="mediaDescriptionText">All you have to do is to include the link from YouTube or Vimeo video that you want to display and the lightbox will display and play your video. The size (width and height) of each video can be set easily.</p>
+                </li>
+            </ul>
+
+        </ul>
+        <!-- end  -->
+
+        </ul>
 
 
 
@@ -297,416 +370,149 @@
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/nio-weather-new.js"></script>
-<!--<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/location.js"></script>-->
+
+<!--<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/LinkageSelect/location.js"></script>-->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
 <script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/Map/H.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/home.js"></script>
 <script type="text/javascript" charset="utf-8" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/CoverScroll/jquery.coverscroll.js"></script>
-<script type='text/javascript'>
-var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
-var getgood = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index/ajaxgood';
-var imgpath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public';
-var goodurl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood';
-var sendurl = '{$uniurl}';
-var provi = '';
-var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-$(function(){
-    $('#container2').coverscroll({items:'.item',minfactor:15});
+
+<script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/Coverflow/java/FWDSimple3DCoverflow.js"></script>
+<script type="text/javascript"  src="http://localhost/U2/Home/Tpl/Public/js/homemain.js"></script>
+<script type="text/javascript">
+    var coverflow;
+
+        FWDUtils.onReady(function(){
+            var coverflow = new FWDSimple3DCoverflow({
+                //required settings
+                coverflowHolderDivId:"myDiv",
+                coverflowDataListDivId:"coverflowData",
+                displayType:"fluidwidth",
+                autoScale:"no",
+                coverflowWidth:940,
+                coverflowHeight:538,
+                skinPath:"http://localhost/U2/Home/Tpl/Public/js/Coverflow/load/skin_black",
+
+                //main settings
+                backgroundColor:"#000000",
+                backgroundImagePath:"",
+                backgroundRepeat:"repeat-x",
+                showDisplay2DAlways:"no",
+                coverflowStartPosition:"center",
+                coverflowTopology:"dualsided",
+                coverflowXRotation:0,
+                coverflowYRotation:0,
+                numberOfThumbnailsToDisplayLeftAndRight:"all",
+                showContextMenu:"no",
+
+                //thumbnail settings
+                thumbnailWidth:400,
+                thumbnailHeight:266,
+                thumbnailXOffset3D:86,
+                thumbnailXSpace3D:78,
+                thumbnailZOffset3D:200,
+                thumbnailZSpace3D:93,
+                thumbnailYAngle3D:2,
+                thumbnailXOffset2D:20,
+                thumbnailXSpace2D:30,
+                thumbnailHoverOffset:100,
+                thumbnailBorderSize:0,
+                thumbnailBackgroundColor:"#FFFFFF",
+                thumbnailBorderColor1:"#FFFFFF",
+                thumbnailBorderColor2:"#FFFFFF",
+                transparentImages:"no",
+                thumbnailsAlignment:"center",
+                maxNumberOfThumbnailsOnMobile:13,
+                showThumbnailsGradient:"no",
+                thumbnailGradientDirection:"left",
+                thumbnailGradientColor1:"rgba(0, 0, 0, 0)",
+                thumbnailGradientColor2:"rgba(0, 0, 0, 1)",
+                showText:"yes",
+                textOffset:10,
+                showThumbnailBoxShadow:"yes",
+                thumbnailBoxShadowCss:"0px 2px 2px #111111",
+                showTooltip:"no",
+                dynamicTooltip:"yes",
+                showReflection:"yes",
+                reflectionHeight:60,
+                reflectionDistance:0,
+                reflectionOpacity:.4,
+
+                //controls settings
+                slideshowDelay:5000,
+                autoplay:"no",
+                disableNextAndPrevButtonsOnMobile:"no",
+                controlsMaxWidth:700,
+                slideshowTimerColor:"#FFFFFF",
+                controlsPosition:"bottom",
+                controlsOffset:15,
+                showPrevButton:"yes",
+                showNextButton:"yes",
+                showSlideshowButton:"yes",
+                showScrollbar:"yes",
+                disableScrollbarOnMobile:"yes",
+                enableMouseWheelScroll:"yes",
+                scrollbarHandlerWidth:200,
+                scrollbarTextColorNormal:"#000000",
+                scrollbarTextColorSelected:"#FFFFFF",
+                addKeyboardSupport:"yes",
+
+                //categories settings
+                showCategoriesMenu:"yes",
+                startAtCategory:1,
+                categoriesMenuMaxWidth:700,
+                categoriesMenuOffset:25,
+                categoryColorNormal:"#999999",
+                categoryColorSelected:"#FFFFFF",
+
+                //lightbox settings
+                addLightBoxKeyboardSupport:"yes",
+                showLightBoxNextAndPrevButtons:"yes",
+                showLightBoxZoomButton:"yes",
+                showLightBoxInfoButton:"yes",
+                showLighBoxSlideShowButton:"yes",
+                showLightBoxInfoWindowByDefault:"no",
+                slideShowAutoPlay:"no",
+                lightBoxVideoAutoPlay:"no",
+                lightBoxBackgroundColor:"#000000",
+                lightBoxInfoWindowBackgroundColor:"#FFFFFF",
+                lightBoxItemBorderColor1:"#fcfdfd",
+                lightBoxItemBorderColor2:"#e4FFe4",
+                lightBoxItemBackgroundColor:"#333333",
+                lightBoxMainBackgroundOpacity:.8,
+                lightBoxInfoWindowBackgroundOpacity:.9,
+                lightBoxBorderSize:0,
+                lightBoxBorderRadius:0,
+                lightBoxSlideShowDelay:4
+            });
+        });
 
 
+    function gotoNextCategory()
+    {
+        coverflow.switchCategory(coverflow.getCurrentCategoryId() + 1);
+    }
 
+    function gotoNextThumb()
+    {
+        coverflow.gotoThumb(coverflow.getCurrentThumbId() + 1);
+    }
 
-    window.imgpath = imgpath;
-    $.weather.init({
-        imgpath : imgpath,
-        city : remote_ip_info.city || null,
-        callback: function(city, temper, info){
-            var avg = getavg(temper.high,temper.low);
-            $.weather.avg = avg;
-            $.weather.getgurl = goodurl;
-            var cookcity;
-            cookcity = provi;
-            if(cookcity){
-                $.pron = provi;
-            }else{
-                $.pron = remote_ip_info.province;
-            }
-            var JSONP=document.createElement("script");
-            JSONP.type="text/javascript";
-            JSONP.src=jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
-            document.getElementsByTagName("head")[0].appendChild(JSONP);
+    function gotoPrevThumb()
+    {
+        coverflow.gotoThumb(coverflow.getCurrentThumbId() - 1);
+    }
+
+    function startStopSlideshow()
+    {
+        if (coverflow.isSlideshowPlaying())
+        {
+            coverflow.stopSlideshow();
         }
-    });
-
-    $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
-        var that = $(this)
-        $.uniqlo.index.togClass(that, 'w_select')
-        $.weather.init({
-            index : that.index() + 1,
-            imgpath : window.imgpath,
-            callback: function(city, temper, info){
-                var avg = getavg(temper.high,temper.low);
-                $.weather.avg = avg;
-                var JSONP=document.createElement("script");
-                JSONP.type="text/javascript";
-                JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
-                document.getElementsByTagName("head")[0].appendChild(JSONP);
-            }
-        })
-    })
-})
-
-//将店铺信息添加到地图中
-function mapBindMarker(data){
-    H.initData(data);
-}
-
-function weatherJsonpCallback(data){
-    $.weather.setText(data,$.weather.currentOption);
-}
-
-function jsonpCallback(da){
-
-
-
-    if(da.ustr){
-        $('#upc').html(da.ustr);
-    }else{
-        $('#upc').html('');
-    }
-    if(da.dstr){
-        $('#downc').html(da.dstr);
-    }else{
-        $('#downc').html('');
-    }
-    $.uniqlo.kvSlider();
-    if(!da.ustr && !da.dstr){
-        $('#tishi').show();
-    }else{
-        $('#tishi').hide();
-    }
-
-//    $("#div_index-bin").hide();
-}
-function getgoods(cid,sid,tid){
-    var JSONP=document.createElement("script");
-    JSONP.type="text/javascript";
-    JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
-    document.getElementsByTagName("head")[0].appendChild(JSONP);
-}
-
-function jsonpCallback2(da){
-    if(da.flag1=='p'){
-        if($.weather.set==1){
-            if(da.ustr){
-                $('#upc').html(da.ustr);
-            }
-            if(da.dstr){
-                $('#downc').html(da.dstr);
-            }
-        }else{
-            //如果是婴幼儿走这里
-            if(da.sid==4){
-                if(da.fl==1){
-                    $('#upc').html(da.ustr);
-                    $('#downc').html(da.dstr);
-                }else{
-                    $('#taoz').html(da.ustr);
-                }
-            }else{
-                $('#upc').html(da.ustr);
-                $('#downc').html(da.dstr);
-            }
-        }
-    }
-    if(da.flag=='t'){
-        $('#taoz').html(da.tstr);
-    }else{
-        if($.weather.set==1){
-            $('#taoz').html('');
-        }
-    }
-    if(da.fl==1){
-        if(da.sid==4){
-            $('.index-single').removeClass('none');
-            $('.index-suit').addClass('none');
-            $('.index-suit').css('display','none');
-            $('.index-single').css('display','block');
-        }
-        $('#tishi').css('display','none');
-        $('#qtm').removeClass('none');
-    }else{
-        if($.weather.set==1){
-            $('.index-single').addClass('none');
-            $('.index-suit').removeClass('none');
-            $('.index-suit').css('display','block');
-            $('.index-single').css('display','none');
-        }else{
-            if(da.sid==4){
-                $('.index-single').addClass('none');
-                $('.index-suit').removeClass('none');
-                $('.index-suit').css('display','block');
-                $('.index-single').css('display','none');
-            }else{
-                $('.index-single').removeClass('none');
-                $('.index-suit').addClass('none');
-                $('.index-suit').css('display','none');
-                $('.index-single').css('display','block');
-            }
-        }
-        $('#tishi').css('display','none');
-        $('#qtm').addClass('none');
-    }
-    $.uniqlo.kvSlider();
-    if($.weather.set==1){
-        if(!da.ustr && !da.dstr && !da.tstr){
-            $('#tishi').css('display','block');
-        }else if(da.tstr){
-            $('#tishi').css('display','none');
+        else
+        {
+            coverflow.startSlideshow();
         }
     }
-}
-function jsonpCallback3(da){
-    if(da.flag1=='p'){
-        if($.weather.set==1){
-            if(da.ustr){
-                $('#upc').html(da.ustr);
-            }
-            if(da.dstr){
-                $('#downc').html(da.dstr);
-            }
-        }else{
-            //如果是婴幼儿走这里
-            if(da.sid==4){
-                if(da.fl==1){
-                    $('#upc').html(da.ustr);
-                    $('#downc').html(da.dstr);
-                }else{
-                    $('#taoz').html(da.ustr);
-                }
-            }else{
-                $('#upc').html(da.ustr);
-                $('#downc').html(da.dstr);
-            }
-        }
-    }
-    if(da.flag=='t'){
-        $('#taoz').html(da.tstr);
-    }else{
-        if($.weather.set==1){
-            $('#taoz').html('');
-        }
-    }
-    if(da.fl==1){
-        if(da.sid==4){
-            $('.index-single').removeClass('none');
-            $('.index-suit').addClass('none');
-            $('.index-suit').css('display','none');
-            $('.index-single').css('display','block');
-        }
-        $('#tishi').css('display','none');
-        $('#qtm').removeClass('none');
-    }else{
-        if($.weather.set==1){
-            $('.index-single').addClass('none');
-            $('.index-suit').removeClass('none');
-            $('.index-suit').css('display','block');
-            $('.index-single').css('display','none');
-        }else{
-            if(da.sid==4){
-                $('.index-single').addClass('none');
-                $('.index-suit').removeClass('none');
-                $('.index-suit').css('display','block');
-                $('.index-single').css('display','none');
-            }else{
-                $('.index-single').removeClass('none');
-                $('.index-suit').addClass('none');
-                $('.index-suit').css('display','none');
-                $('.index-single').css('display','block');
-            }
-        }
-        $('#tishi').css('display','none');
-        $('#qtm').addClass('none');
-    }
-    $.uniqlo.kvSlider();
-    if($.weather.set==1){
-        if(!da.ustr && !da.dstr && !da.tstr){
-            $('#tishi').css('display','block');
-        }else if((!da.ustr || !da.dstr) && !da.tstr){
-            $('#tishi').css('display','block');
-        }else if(da.tstr){
-            $('#tishi').css('display','none');
-        }
-    }
-}
-function getavg(high,low){
-    var avg = Math.ceil((parseInt(low)+parseInt(high))/2);
-    return avg;
-}
-function sendcity(pro,city){
-    var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-function jsonpCallback4(da){
-    if(da.flag1=='p'){
-        if($.weather.set==1){
-            if(da.ustr){
-                $('#upc').html(da.ustr);
-            }
-            if(da.dstr){
-                $('#downc').html(da.dstr);
-            }
-        }else{
-            $('#upc').html(da.ustr);
-            $('#downc').html(da.dstr);
-        }
-    }
-    if(da.flag=='t'){
-        $('#taoz').html(da.tstr);
-    }
-    if($.weather.set==1){
-        if(!da.ustr && !da.dstr && !da.tstr){
-            $('#tishi').css('display','block');
-        }else if(da.tstr){
-            $('#tishi').css('display','none');
-        }
-    }else{
-        if(!da.ustr && !da.dstr){
-            $('#tishi').css('display','block');
-        }else{
-            $('#tishi').css('display','none');
-        }
-    }
-    $.uniqlo.kvSlider();
-}
-$('#le1').on('change',function(){
-    var pvalue = $('#le1 option:selected').val();
-    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpGetcity&pid="+pvalue;
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
-});
-
-function jsonpGetcity(data){
-    var str = '<option value="0">请选择</option>';
-    $.each(data.clist,function(pin,pv){
-        str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
-    });
-    $('#le2').html(str);
-}
-//地图城市切换
-$('#spid').on('change',function(){
-    var pid = $('#spid option:selected').val();
-    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity&pid="+pid+"&baiduid=1";
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
-});
-
-function jsonpBaiduCity(data){
-    var str = '<option value="0">请选择</option>';
-    $.each(data.clist,function(pin,pv){
-        str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
-    });
-    $('#scid').html(str);
-    $('#ddlShop').html('<option value="0">请选择</option>');
-}
-
-$('#scid').on('change',function(){
-    var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
-    var url = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+pid+"&cid="+cid+"&baiduid=2";
-    // 创建script标签，设置其属性
-    var script = document.createElement('script');
-    script.setAttribute('src', url);
-    // 把script标签加入head，此时调用开始
-    document.getElementsByTagName('head')[0].appendChild(script);
-});
-function jsonpBaiduCity2(data){
-    $('#ddlShop').html('<option value="0">请选择</option>');
-    var str = '<option value="0">请选择</option>';
-    $.each(data.clist,function(pin,pv){
-        str+="<option value='"+pv.longitude+"'>"+pv.sname+"</option>";
-    });
-    $('#ddlShop').html(str);
-}
-var tablink_idname = new Array("tablink")
-var tabcontent_idname = new Array("preferential_")
-var tabcount = new Array("3")
-var loadtabs = new Array("1")
-var autochangemenu = 1;
-var changespeed = 1;
-var stoponhover = 0;
-
-function easytabs(menunr, active) {
-    if (menunr == autochangemenu) {
-        currenttab = active;
-    }
-    if ((menunr == autochangemenu) && (stoponhover == 1)) {
-        stop_autochange()
-    } else if ((menunr == autochangemenu) && (stoponhover == 0)) {
-        counter = 0;
-    }
-    menunr = menunr - 1;
-    for (i = 1; i <= tabcount[menunr]; i++) {
-        $('#'+tablink_idname[menunr] + i).removeClass('current');
-        $('.'+tabcontent_idname[menunr] + i).css('display','none');
-    }
-    $('#'+tablink_idname[menunr] + active).addClass('current');
-    $('.'+tabcontent_idname[menunr] + active).css('display','block');
-}
-
-counter = 0;
-var totaltabs = tabcount[autochangemenu - 1];
-var currenttab = loadtabs[autochangemenu - 1];
-
-function start_autochange() {
-    counter = counter + 1;
-    timer = setTimeout("start_autochange()", 3000);
-    if (counter == changespeed + 1) {
-        currenttab++;
-        if (currenttab > totaltabs) {
-            currenttab = 1
-        }
-        easytabs(autochangemenu, currenttab);
-        restart_autochange();
-    }
-}
-
-function restart_autochange() {
-    clearTimeout(timer);
-    counter = 0;
-    start_autochange();
-}
-function stop_autochange() {
-    clearTimeout(timer);
-    counter = 0;
-}
-
-var menucount = loadtabs.length;
-var a = 0;
-var b = 1;
-do {
-    easytabs(b, loadtabs[a]);
-    a++;
-    b++;
-} while (b <= menucount);
-if (autochangemenu != 0) {
-    start_autochange();
-}
-
-function jsonpCallbackm(data){
-
-}
 </script>
-
 
