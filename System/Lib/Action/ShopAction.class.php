@@ -154,7 +154,10 @@ class ShopAction extends Action{
 	$result = $area->field('*')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
 	$city = $area->field('*')->where(array('region_id'=>$shops['cityid']))->select();
 	$area = $area->field('*')->where(array('region_id'=>$shops['aid']))->select();
+	   //取出所属城市显示标记的最大值
+	$logmax = M('Shop')->field('showtag')->where(array('cityid'=>$shops['cityid']))->order('showtag desc')->limit('0,1')->find();
 	$this->assign('result',$result);
+	$this->assign('logmax',$logmax);
     $this->assign('city',$city);
 	$this->assign('area',$area);
 	$this->assign('shop',$shops);	
