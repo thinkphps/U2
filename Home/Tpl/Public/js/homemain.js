@@ -441,7 +441,7 @@ function start_autochange() {
             currenttab = slength;
         }
         easytabs(autochangemenu, currenttab);
-        restart_autochange();
+        //restart_autochange();
     }
 }
 
