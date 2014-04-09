@@ -176,6 +176,7 @@ class IndexnewAction extends Action{
     }
     //新版获取套图推荐
     public function getSuits(){
+
         $callback=$_GET['callback'];
         $tem = trim($this->_request('tem'));
         $Weather = D('Getinfo');
