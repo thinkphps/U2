@@ -76,7 +76,7 @@ class IndexAction extends Action {
             $cresult = $collection->field('id')->where(array('num_iid'=>$numid,'uid'=>$u_id))->find();
             if(empty($cresult)){
                 if(session("uniq_user_id")){
-                    $collection->add(array('num_iid'=>$num_iid,'uid'=>$u_id,'cratetime'=>$time));
+                    $collection->add(array('num_iid'=>$numid,'uid'=>$u_id,'cratetime'=>$time));
                 }
             }
         }

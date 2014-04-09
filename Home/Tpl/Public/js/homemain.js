@@ -508,7 +508,7 @@ function getSuits(){
 function callbackSuits(list){
 
     var strHtml = "";
-    for(var i = 0 ;i< list.length;i++){
+    for(var i = 0 ;i< 7;i++){
         strHtml += getCoverScrollItem(list[i]);
     }
     $('#suits-container').html(strHtml);

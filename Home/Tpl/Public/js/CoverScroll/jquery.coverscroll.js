@@ -182,18 +182,17 @@
               else{allimglen = allimglen + citem.width() * 0.75}
           }
           var mleft =  (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:15;
+          mleft += 4;
+//          if((el.width()- allimglen)/2 > mleft){
+//              mleft = Math.round((el.width()- allimglen)/2);
+//          }
 
-          if((el.width()- allimglen)/2 > mleft){
-              mleft = Math.round((el.width()- allimglen)/2);
-          }
-          console.log(mleft);
           imglefts.push(mleft)
           for(i=0;i<imgs.length-1;i++){
               var citem = $(imgs.get(i));
               mleft = Math.round(mleft + citem.width() * 0.75);
-              mleft-= 9;
+              mleft += 8;
               imglefts.push(mleft);
-              console.log(mleft);
           }
 
           return imglefts;
