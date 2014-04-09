@@ -115,7 +115,7 @@ jQuery(function($){
             //kimi
             $('#nio-city').text(info.cityname);
             $('#cinpinyin').text(info.cbn);
-            $('#nio-tip').html(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
+            $('#nio-tip').html(this.tips[arrIndex]);
             if(!option.shopid){
                 if(!info.sname && !info.tradetime){
                  var tv = '暂时还没有店铺信息';
@@ -124,6 +124,7 @@ jQuery(function($){
                 }
             $('#shopid').html(tv);
             }
+            $.weather.shopid = option.shopid;
             var str = '<option value="0">请选择</option>';
             var scid = {};
             $.each(info.plist,function(pin,pv){
