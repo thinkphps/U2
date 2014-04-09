@@ -1,0 +1,214 @@
+<link href="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/css/dressing_room.css" rel="stylesheet" type="text/css" />
+<div class="dr_header_con " id="div_header">
+    <!--头部-->
+    <div class="dr_header">
+        <!--头部-logo-->
+        <div class="dr_logo"><a href="#">优衣库虚拟试衣间</a></div>
+
+        <!--头部-城市-->
+        <div class="dr_city">
+            <div class="city_name">
+                <h2 id="nio-city">上海</h2>
+                <span id='cinpinyin'>shanghai</span>
+            </div>
+            <div class="city">
+                <a href="#" class="change_city">切换城市</a>
+                <form class="mini-city linkageselect pa none">
+                    <a href="javascript:;" class="mini-city-close"></a>
+                    <label>省份<select class="level_1" id='le1'></select></label>
+                    <label>城市<select class="level_2" id='le2'></select></label>
+                    <input type="submit" value="切换" />
+                </form>
+                <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#" id="a_shopinfo">您附近的优衣库门店</a>
+                    <i class="city_wz2 none" id="a_shopinfo2"></i></div>
+            </div>
+        </div>
+
+        <!--头部-优惠-->
+        <div class="preferential">
+            <ul class="preferential_side_bar">
+                <li class="current" id="tablink1" onclick="easytabs('1', '1');" onfocus="easytabs('1', '1');" onclick="return false;"></li>
+                <li id="tablink2" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');" onclick="return false;"></li>
+                <li id="tablink3" onmouseover="easytabs('1', '3');" onfocus="easytabs('1', '3');" onclick="return false;"></li>
+            </ul>
+            <ul class="preferential_con" id='scrollDiv'>
+                <li class="preferential_1" style="display:none;">
+                    <i></i>
+                    <a>1优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                </li>
+                <li class="preferential_2" style="display:block;">
+                    <i></i>
+                    <a id='shopid'>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                </li>
+                <li class="preferential_3">
+                    <i></i>
+                    <p id='nio-tip'>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!--天气-->
+    <div class="weather">
+
+        <ul id="ulweek">
+            <li class="w_select" id="li_day0">
+                <i title="晴天" id="title_day0"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day0">20</p>
+                    <p class="w_t_2" id="l_day0">/15</p>
+                    <p class="w_t_week" id="week_day0">星期一</p>
+                    <p class="w_t_name" id="name_day0">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day1">
+                <i title="晴天" id="title_day1"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day1">20</p>
+                    <p class="w_t_2" id="l_day1">/15</p>
+                    <p class="w_t_week" id="week_day1">星期一</p>
+                    <p class="w_t_name" id="name_day1">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day2">
+                <i title="晴天" id="title_day2"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day2">20</p>
+                    <p class="w_t_2" id="l_day2">/15</p>
+                    <p class="w_t_week" id="week_day2">星期一</p>
+                    <p class="w_t_name" id="name_day2">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day3">
+                <i title="晴天" id="title_day3"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day3">20</p>
+                    <p class="w_t_2" id="l_day3">/15</p>
+                    <p class="w_t_week" id="week_day3">星期一</p>
+                    <p class="w_t_name" id="name_day3">晴转小雨</p>
+                </div>
+            </li>
+            <li id="li_day4">
+                <i title="晴天" id="title_day4"></i>
+                <div class="w_temperature">
+                    <p class="w_t_1" id="h_day4">20</p>
+                    <p class="w_t_2" id="l_day4">/15</p>
+                    <p class="w_t_week" id="week_day4">星期一</p>
+                    <p class="w_t_name" id="name_day4">晴转小雨</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="w_sq" id="w_sq"><a href="javascript:;"></a></div>
+        <div class="w_zk" id="w_zk" style="display:none;"><a href="javascript:;"></a></div>
+
+    </div>
+</div>
+
+
+<!--分类-->
+<div class="dr_main_con" id="div_main">
+    <div class="dr_main_con_sub_nav">
+        <ul class="rw_sub_nav" id="ulgender">
+            <li class="rw_all select"><a href="javascript:;" id="0"></a></li>
+            <li class="rw_nvzhuang"><a href="javascript:;" id="1"></a></li>
+            <li class="rw_nanzhuang"><a href="javascript:;" id="2"></a></li>
+            <li class="rw_tongzhuang"><a href="javascript:;" id="3" data-page="index"></a></li>
+            <li class="rw_yinyouer"><a href="javascript:;" id="4" data-page="index" data-key="baby"></a></li>
+        </ul>
+        <ul class="ch_sub_nav" id="ul_index-bar-place">
+            <li class="ch_all select" id="0"><a href="javascript:;" ></a></li>
+            <li class="ch_shangwu" id="3_9"><a href="javascript:;" ></a></li>
+            <li class="none ch_shangxue" id="__15"><a href="javascript:;" ></a></li>
+            <li class="ch_guangjie " id="4_10_16"><a href="javascript:;" ></a></li>
+            <li class="ch_yundong" id="7_13_19"><a href="javascript:;"></a></li>
+            <li class="ch_jujia" id="8_14_20"><a href="javascript:;" ></a></li>
+        </ul>
+        <div class="mini-place-mask pa" style="display: none;"></div>
+        <ul class="tz_sub_nav" >
+            <li class="tz_sub_nav" id="div_mini-gender"><a href="javascript:;"></a></li>
+        </ul>
+        <a href="http://uniqlo.bigodata.com.cn/u2/mini.php/IndexNew/index.html" class="youyigui_btn" target="_blank" ></a>
+    </div>
+
+    <div class="index-single mini-kv" id="div_index-bin">
+        <div class="mini-kv-slide" data-pos="#net-top">
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.12">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.13">next</a>
+            <div class="mini-kv-container">
+                <ul id="upc">
+
+                </ul>
+            </div>
+        </div>
+        <div class="mini-kv-slide" data-pos="#net-bot">
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
+            <div class="mini-kv-container">
+                <ul id="downc">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="index-suit mini-kv" style="display: none;">
+        <div class="mini-kv-slide" >
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
+            <div class="mini-kv-container">
+                <ul id="taoz" style="left: 0px;">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mini-kv-hover tc pa none">
+        <img src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/mini-kv-hover_meitu_1.png" class="alpha">
+        <div class="mini-kv-content">
+            <p class="ft16">￥ <strong class="ft18">85.00</strong></p>
+            <small>剩余库存 <span>129</span> 件</small>
+            <a class="ft14" href="http://detail.tmall.com/item.htm?id=18942416200" target="_blank">【手机应用专享价】女装 羊毛混纺V领开衫10</a>
+            <a href="javascript:;" class="mini-kv-add pa" target="_blank">收入衣柜</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- 地图弹窗 -->
+<div class="map_light_box none" id="mapdiv">
+    <a href="javascript:;" class="light_box_close" id="closemap"></a>
+    <h3>查找您附近的优衣库UNIQLO门店</h3>
+    <div class="mb15">
+        <select name="" id="spid" class="mr10" style="width:150px;">
+            <option selected="selected" value="44444">上海</option>
+            <option value="55555">北京</option>
+        </select>
+        <select name="" id="scid"  class="mr10" style="width:150px;">
+            <option selected="selected" value="44444">徐汇区</option>
+            <option value="55555">闵行区</option>
+        </select>
+        <select name="" id="ddlShop" style="width:200px;">
+            <option value='0'>请选择</option>
+        </select>&nbsp;<span id='emptymsg'  style="font-size:10px;color: #999999;"></span>
+    </div>
+    <div class="light_box_u_map_con" id="allmap">
+    </div>
+</div>
+
+<script>
+    var baseurl='http://uniqlo.bigodata.com.cn/u2/',timer;
+</script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/jquery.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/citys.js"></script>
+<script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/nio-weather-new.js"></script>
+<!--<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="http://localhost/U3/U2/Home/Tpl/Public/js/LinkageSelect/location.js"></script>-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/Map/H.min.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/home.js"></script>
+<script type="text/javascript" src="http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/js/homemain.js"></script>
