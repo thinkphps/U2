@@ -23,7 +23,7 @@ $(function(){
             numids[i] = $(list[i]).data("numid");
         }
         //jsonpHomeUrl
-        window.open( "http://uniqlo.bigodata.com.cn/u2/mini.php/Index/Index/num/"+ numids.join());
+        window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/Index/num/"+ numids.join());
     });
 
 
