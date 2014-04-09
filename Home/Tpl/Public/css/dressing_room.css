@@ -61,7 +61,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con{ width:321px; height:82px; position:absolute; top:0; overflow:hidden;}
 .preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;} 
 .preferential ul.preferential_con li i{ display:block; float:left; width:58px; height:57px; margin:0 12px 0 0;}
-.preferential ul.preferential_con li a{ cursor:pointer; margin-top:10px; display:block;}
+.preferential ul.preferential_con li a{ cursor:pointer; margin-top:4px; display:block;}
 .preferential ul.preferential_con li p{ margin-top:10px;}
 .preferential ul.preferential_con li p a{ color:#F00; display:inline;}
 
