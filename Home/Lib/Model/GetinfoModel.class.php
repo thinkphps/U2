@@ -139,7 +139,7 @@ class GetinfoModel extends Action{
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
-            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
         }
         return $suitSelect;
     }
