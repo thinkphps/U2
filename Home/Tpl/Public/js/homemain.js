@@ -9,12 +9,14 @@ var sendurl = '{$uniurl}';
 var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
 $(function(){
+    $('#container2').coverscroll({items:'.item',minfactor:15});
+
 
     var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
     jsonpFcuntion(jsonpurl);
     $('.youyigui_btn').attr('href','http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html');
-    $('.preferential_1').remove();
-    $('#tablink1').remove();
+    //$('.preferential_1').remove();
+    //$('#tablink1').remove();
     window.imgpath = imgpath;
     $.weather.init({
         'subindex':1,
@@ -109,6 +111,7 @@ function tipsfunction(v){
 }
 function jsonpCallback(da){
     if(da.ustr){
+        $("#div_index-bin").hide();
         $('#upc').html(da.ustr);
     }else{
         $('#upc').html('');
@@ -457,14 +460,9 @@ function stop_autochange() {
 var menucount = loadtabs.length;
 var a = 0;
 var b = 1;
-/*do {
-    easytabs(b, loadtabs[a]);
-    a++;
-    b++;
-} while (b <= menucount);
-if (autochangemenu != 0) {
-    start_autochange();
-}*/
-function jsonpCallbackm(data){
+
+
+//l4推荐模特图绑定
+function callbackL4Model(list){
 
 }

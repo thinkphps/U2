@@ -238,6 +238,10 @@ jQuery(function($){
                 $("#div_header").addClass("dr_header_bg1")
                 $("#div_main").addClass("dr_main_con_bg1")
             }
+            else if(str == "“ı"){
+                $("#div_header").addClass("dr_header_bg6")
+                $("#div_main").addClass("dr_main_con_bg6")
+            }
             else{
                 $("#div_header").addClass("dr_header_bg2")
                 $("#div_main").addClass("dr_main_con_bg2")
