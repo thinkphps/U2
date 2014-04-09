@@ -171,6 +171,7 @@ jQuery(function($){
                 }
                 scid.selpid = scid.selpid?scid.selpid:-1;
                 scid.selcid = scid.selcid?scid.selcid:-1;
+
                 var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid+"&baiduerjiid="+info.baiduerjiid;
                 jsonpFcuntion(jsonpurl);
             }
@@ -349,51 +350,15 @@ jQuery(function($){
                     $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
                     $.weather.sex = $.weather.sex?$.weather.sex:0;
                     $.weather.set = $.weather.set?$.weather.set:0;
+                    if($.weather.sex == 0 ||($.weather.occasion == 0 && $.weather.sex == undefined)){
+                        getSuits();
+                    }else{
 
-                    var jsonpurl = "http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
-                    jsonpFcuntion(jsonpurl);
-                    /*$.post($.weather.getgurl,{
-                     pro : city,
-                     tem : avg,
-                     cid : $.weather.occasion,
-                     sid : $.weather.sex,
-                     tid : $.weather.set
-                     },function(data,status){
-                     var da = eval("("+data+")");
-                     if(da){
-                     if(da.flag1=='p'){
-                     if($.weather.set==1){
-                     if(da.ustr){
-                     $('#upc').html(da.ustr);
-                     }
-                     if(da.dstr){
-                     $('#downc').html(da.dstr);
-                     }
-                     }else{
-                     $('#upc').html(da.ustr);
-                     $('#downc').html(da.dstr);
-                     }
-                     }
-                     if(da.flag=='t'){
-                     $('#taoz').html(da.tstr);
-                     $.uniqlo.kvSlider();
-                     }
-                     if($.weather.set==1){
-                     if(!da.ustr && !da.dstr && !da.tstr){
-                     $('#tishi').css('display','block');
-                     }else if(da.tstr){
-                     $('#tishi').css('display','none');
-                     }
-                     }else{
-                     if(!da.ustr && !da.dstr){
-                     $('#tishi').css('display','block');
-                     }else{
-                     $('#tishi').css('display','none');
-                     }
-                     }
-
-                     }
-                     });*/
+                        var jsonpurl = "http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+                        jsonpFcuntion(jsonpurl);
+                        $('#suits-container').html('');
+                        $("#suits-container").hide();
+                    }
                     //Íùmimi´«³ÇÊÐ
                     sendcity(city,info.city);
                 }

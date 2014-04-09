@@ -9,11 +9,24 @@ var sendurl = '{$uniurl}';
 var provi = '';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
 $(function(){
-    $('#container2').coverscroll({items:'.item',minfactor:15});
+
 
 
     var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
     jsonpFcuntion(jsonpurl);
+
+    $('#suits-container').on('click','.imgSuits',function(){
+        var similarity = $(this).parent().find(".similarity");
+        var numids = [];
+        var list = similarity.find("a");
+        for(var i = 0;i<list.length;i++){
+            numids[i] = $(list[i]).data("numid");
+        }
+        //jsonpHomeUrl
+        window.open( "http://localhost/U2/mini.php/Index/Index/num/"+ numids.join());
+    });
+
+
     $('.youyigui_btn').attr('href','http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html');
     //$('.preferential_1').remove();
     //$('#tablink1').remove();
@@ -33,8 +46,10 @@ $(function(){
             }else{
                 $.pron = remote_ip_info.province;
             }
-            var jsonpurl = jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
-            jsonpFcuntion(jsonpurl);
+
+            getSuits();
+//            var jsonpurl = jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
+//            jsonpFcuntion(jsonpurl);
         }
     });
 
@@ -49,8 +64,14 @@ $(function(){
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
                 $.weather.avg = avg;
-                var jsonpurl =jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
-                jsonpFcuntion(jsonpurl);
+                if($.weather.sex == 0 || ($.weather.occasion == 0 && $.weather.sex == undefined)){
+                    getSuits();
+                }else{
+                    var jsonpurl =jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
+                    jsonpFcuntion(jsonpurl);
+                    $('#suits-container').html('');
+                    $("#suits-container").hide();
+                }
             }
         })
     })
@@ -111,7 +132,6 @@ function tipsfunction(v){
 }
 function jsonpCallback(da){
     if(da.ustr){
-        $("#div_index-bin").hide();
         $('#upc').html(da.ustr);
     }else{
         $('#upc').html('');
@@ -129,10 +149,17 @@ function jsonpCallback(da){
     }
 }
 function getgoods(cid,sid,tid){
-    var JSONP=document.createElement("script");
-    JSONP.type="text/javascript";
-    JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
-    document.getElementsByTagName("head")[0].appendChild(JSONP);
+    if( sid == 0 || (cid == 0 && sid == undefined)){
+        getSuits();
+    }
+    else{
+        var JSONP=document.createElement("script");
+        JSONP.type="text/javascript";
+        JSONP.src=jsonpHomeUrl +"/getgood?callback=jsonpCallback3&tem="+$.weather.avg+"&cid="+cid+'&sid='+sid+'&tid='+tid+'&pro='+$.pron;
+        document.getElementsByTagName("head")[0].appendChild(JSONP);
+        $('#suits-container').html('');
+        $("#suits-container").hide();
+    }
 }
 
 function jsonpCallback2(da){
@@ -375,8 +402,15 @@ $('#scid').on('change',function(){
             $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
             $.weather.sex = $.weather.sex?$.weather.sex:0;
             $.weather.set = $.weather.set?$.weather.set:0;
-            var jsonpurl ="http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
-            jsonpFcuntion(jsonpurl);
+            if($.weather.sex == 0 || ($.weather.occasion == 0 && $.weather.sex == undefined)){
+                getSuits();
+            }
+            else{
+                var jsonpurl ="http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+                jsonpFcuntion(jsonpurl);
+                $('#suits-container').html('');
+                $("#suits-container").hide();
+            }
             sendcity(city,info.city);
         }
     });
@@ -463,6 +497,38 @@ var b = 1;
 
 
 //l4推荐模特图绑定
-function callbackL4Model(list){
+function getSuits(){
+    $("#div_index-bin").hide();
+    var jsonpurl = baseurl +"index.php/Indexnew/getSuits?callback=callbackSuits&tem="+$.weather.avg;
+    jsonpFcuntion(jsonpurl);
+}
 
+
+function callbackSuits(list){
+
+    var strHtml = "";
+    for(var i = 0 ;i< list.length;i++){
+        strHtml += getCoverScrollItem(list[i]);
+    }
+    $('#suits-container').html(strHtml);
+    $("#suits-container").show();
+    $('#suits-container').coverscroll({items:'.item',minfactor:5});
+
+}
+
+function getCoverScrollItem(item){
+    var strItem = '<div class="item">';
+    strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" />';
+    strItem += '<div class="similarity">';
+    var detail = item.detail;
+    var numids = [];
+    for(var i =0;i<detail.length;i++){
+        numids[i] = detail[i].num_iid;
+        strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
+        strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a>';
+    }
+    strItem +='</div>';
+    strItem += '<div class="itemTitle">'+item.description+'</div>';
+    strItem += '<div class="gotoroom none"><a href="#">去虚拟试衣间试穿</a></div></div>'
+    return strItem;
 }

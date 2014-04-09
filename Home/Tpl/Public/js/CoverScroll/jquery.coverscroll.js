@@ -18,7 +18,9 @@
 	    	'scale':true // scale down steps
 	    },
 	    'bendamount':2, // amount of "bending" of the CoverScroll (values 0.1 to 1 bend down, -0.1 to -1 bend up, 2 is straight no bending, 1.5 sligtly bends down)
-	  	'movecallback':function(item){}, // callback function triggered after click on an item - parameter is the item's jQuery object
+	  	'movecallback':function(item){
+
+        }, // callback function triggered after click on an item - parameter is the item's jQuery object
 	  	'distributionbelowscale':0.95, // how apart are the items when number of items are below "scalethreshold" 
 	    'msie':($('html').is('.ie6, .ie7, .ie8'))
       };
@@ -107,7 +109,7 @@
                 var citem = $(imgs.get(i));
                 citem.removeClass(opt.selectedclass);
                 var css = {
-                    'width':150,
+                    'width':210,
                     'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)'
                 };
                 if(gopt.msie){
@@ -180,15 +182,20 @@
               else{allimglen = allimglen + citem.width() * 0.75}
           }
           var mleft =  (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:15;
+
           if((el.width()- allimglen)/2 > mleft){
               mleft = Math.round((el.width()- allimglen)/2);
           }
+          console.log(mleft);
           imglefts.push(mleft)
           for(i=0;i<imgs.length-1;i++){
               var citem = $(imgs.get(i));
               mleft = Math.round(mleft + citem.width() * 0.75);
+              mleft-= 9;
               imglefts.push(mleft);
+              console.log(mleft);
           }
+
           return imglefts;
       }
 
@@ -215,9 +222,9 @@
               css['top']=minfactor;
           }else{
               if(mindex== imgs.length-1 ){
-                  css['width']=150;
+                  css['width']=210;
               }else{
-                  css['width']=200;
+                  css['width']=210;
               }
           }
         css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
@@ -342,9 +349,9 @@
                 css['top']=minfactor;
             }else {
                 if(i== imgs.length-1 ){
-                    css['width']=150;
+                    css['width']=210;
                 }else{
-                    css['width']=240;
+                    css['width']=210;
                 }
             }
             //dean 如果需要选择两端平铺则改为mindex>0
@@ -392,6 +399,7 @@
       
       
       function selectItem(el, elem, center){
+
       	elem = $(elem);
         var imgs;
         // all items collection

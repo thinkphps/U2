@@ -60,7 +60,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_side_bar li.current{ background:url(../images/preferential_side_bar.png) 0 -8px no-repeat;}
 
 .preferential ul.preferential_con{ width:321px; height:82px; position:absolute; top:0; overflow:hidden;}
-.preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;} 
+.preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;}
 .preferential ul.preferential_con li i{ display:block; float:left; width:58px; height:57px; margin:0 12px 0 0;}
 .preferential ul.preferential_con li a{ cursor:pointer; margin-top:4px; display:block;}
 .preferential ul.preferential_con li p{ margin-top:10px;}
@@ -348,15 +348,15 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 
 /*kimi*/
 .mini-city{
-  background-color: #fff;
-  width: 342px;
-  height: 21px;
-  top: 18px;
-  left: 346px;
-  color: #555;
-  padding: 5px 12px;
-  border: 3px solid #ccc;
-  z-index:100;
+    background-color: #fff;
+    width: 342px;
+    height: 21px;
+    top: 18px;
+    left: 346px;
+    color: #555;
+    padding: 5px 12px;
+    border: 3px solid #ccc;
+    z-index:100;
 }
 .mini-city input {
     background: none repeat scroll 0 0 #FF0000;
@@ -367,13 +367,13 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 }
 
 .pa{
-  position: absolute;
+    position: absolute;
 }
 .mini-city-close{
-  width: 8px;
-  height: 8px;
-  right: 10px;
-  top: 11px;
+    width: 8px;
+    height: 8px;
+    right: 10px;
+    top: 11px;
     background: url(../images/mini-btn.png) -33px -57px no-repeat ;
     position: absolute;
 }
@@ -386,37 +386,43 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 }
 
 /*CoverScroll*/
-#container2{
+#suits-container{
     height:360px;width:950px;
+    position: relative;
 }
-#container2 .item{
-    width: 150px ;
+#suits-container .item{
+    width: 149px ;
     height: 375px;
     background: rgba(255, 255, 255, .3);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000')
 }
-#container2 img{
+.imgSuits{
     /*width:100%;*/
     /*height:100%;*/
     margin-left:10px;
     margin-top:10px;
-    width: 90% ;
+    width: 188px;
     height: 90%;
+    cursor: pointer;
     /*-moz-box-shadow: 0px 5px 5px #777;*/
     /*-webkit-box-shadow: 0px 5px 5px #777;*/
     /*box-shadow: 0px 5px 5px #777;*/
 }
+#suits-container .selectedItem{
+    /*border:2px solid #0071BC;*/
+}
 .itemTitle{
     padding-left: 10px;
     font-weight: bold;
-    font-size: 17;
+    font:17px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
 }
 
 
 .similarity{
     bottom: 40%;
     position: absolute;
-    right: 10%;
+    /*right: 10%;*/
+    left:140;
     font-size: 2.5em;
     *font-size: 1.3em;
     width: 1.5em;
@@ -424,10 +430,21 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     line-height: 1.5em;
     text-align: center;
 }
-.similarity img{ width:48px; height:48px; border-color: #000;border-width:1px;
-    border-style:solid;
+.similarity a img{ width:48px; height:48px; border-color: #000;
+    /*border-width:1px;*/
+    /*border-style:solid;*/
     cursor: pointer;}
 
-#container2 .selectedItem{
-    /*border:2px solid #0071BC;*/
+.gotoroom {
+    background-color: #ff0000;
 }
+.gotoroom a {
+    height: 38px;
+    margin-top: 1px;
+    padding-top: 5px;
+    margin-left: 20;
+    font-size: 20;
+    line-height: 25px;
+    color: #fff;
+}
+

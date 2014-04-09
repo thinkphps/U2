@@ -71,12 +71,15 @@ class IndexAction extends Action {
 	//放到收藏里去
 	$num_iid = $_SESSION['num_iid'];
 	if(!empty($num_iid) && !empty($u_id)){
-	$cresult = $collection->field('id')->where(array('num_iid'=>$num_iid,'uid'=>$u_id))->find();
-	if(empty($cresult)){
-		if(session("uniq_user_id")){
-			$collection->add(array('num_iid'=>$num_iid,'uid'=>$u_id,'cratetime'=>$time));
-		}
-	}
+        $arr = explode(",",$num_iid);
+        foreach($arr as $numid){
+            $cresult = $collection->field('id')->where(array('num_iid'=>$numid,'uid'=>$u_id))->find();
+            if(empty($cresult)){
+                if(session("uniq_user_id")){
+                    $collection->add(array('num_iid'=>$num_iid,'uid'=>$u_id,'cratetime'=>$time));
+                }
+            }
+        }
 	}
 	//取出收场数据
 	$clothes = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'1','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
