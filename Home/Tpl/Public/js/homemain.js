@@ -13,8 +13,8 @@ $(function(){
     var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=mapBindMarker";
     jsonpFcuntion(jsonpurl);
     $('.youyigui_btn').attr('href','http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html');
-    //$('.preferential_1').remove();
-    //$('#tablink1').remove();
+    $('.preferential_1').remove();
+    $('#tablink1').remove();
     window.imgpath = imgpath;
     $.weather.init({
         'subindex':1,
@@ -74,7 +74,7 @@ function weatherJsonpCallback(data){
     slength = 3-lilength+1;
     counter = 3-lilength;
     loadtabs[0] = 3-lilength+1;
-    if(data.shopid){
+    if(data.shopid<=0){
     do {
         easytabs(b, loadtabs[a]);
         a++;
@@ -83,7 +83,15 @@ function weatherJsonpCallback(data){
     if (autochangemenu != 0) {
         start_autochange();
     }
-}
+  }else{
+        clearTimeout(timer);
+        for (i = 1; i <=3; i++) {
+            $('#tablink' + i).removeClass('current');
+            $('.preferential_' + i).css('display','none');
+        }
+        $('#tablink2').addClass('current');
+        $('.preferential_2').css('display','block');
+    }
     $.weather.setText(data,$.weather.currentOption);
 }
 //jsonpÌá½»º¯Êý
@@ -97,13 +105,7 @@ function tipsfunction(v){
     //tips
     clearTimeout(timer);
     $('#shopid').html(v);
-    for (i = 1; i <=3; i++) {
-        $('#tablink' + i).removeClass('current');
-        $('.preferential_' + i).css('display','none');
-    }
-    $('#tablink2').addClass('current');
-    $('.preferential_2').css('display','block');
-    clearTimeout(timer);
+
 }
 function jsonpCallback(da){
     if(da.ustr){
@@ -419,6 +421,7 @@ function easytabs(menunr, active) {
         $('#'+tablink_idname[menunr] + i).removeClass('current');
         $('.'+tabcontent_idname[menunr] + i).css('display','none');
     }
+
     if($('#'+tablink_idname[menunr] + active)){
     $('#'+tablink_idname[menunr] + active).addClass('current');
     $('.'+tabcontent_idname[menunr] + active).css('display','block');

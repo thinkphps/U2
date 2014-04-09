@@ -122,6 +122,7 @@ class IndexnewAction extends Action{
         $weatherInfo['indexcity'] = $cbn;
         $weatherInfo['isp'] = $isp;//表示是直辖市
         $weatherInfo['baiduerjiid'] = $baiduerjiid;
+        $weatherInfo['shopid'] = $shopid;
         $weatherInfo['newstorre'] = C('NEWSRORE');
         $re = json_encode($weatherInfo);
         //$re = iconv('utf8','gbk',$re);
