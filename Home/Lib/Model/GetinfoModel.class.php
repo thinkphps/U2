@@ -4,7 +4,6 @@ class GetinfoModel extends Action{
         $ip = get_client_ip();
 
     }
-
     public function getcity(){
         $url = C('CITYURL1').$ip;
         $data = file_get_contents($url);
@@ -127,5 +126,21 @@ class GetinfoModel extends Action{
             }
         }
         return $pid;
+    }
+
+    public function getKeyValue($key){
+          $result = M('Settings')->cache(true)->field('value')->where(array('key'=>$key))->find();
+          return $result;
+    }
+
+    public function getSutsValue($type){
+        //$suitSelect = M('SuitsSelect')->cache(true)->join('inner join u_suits suits on u_suits_select.suitID=suits.suitID')->field('suits.suitID,suits.suitImageUrl')->where(array('u_suits_select.selected'=>'1','u_suits_select.type'=>$type))->select();
+        $sql = "select suits.`suitID`,suits.`suitImageUrl`,ustyle.`description` from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
+        $suitSelect = M('SuitsSelect')->query($sql);
+        $goodsDetail = M('SuitsGoodsdetail');
+        foreach($suitSelect as $k=>$v){
+            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+        }
+        return $suitSelect;
     }
 }

@@ -174,6 +174,21 @@ class IndexnewAction extends Action{
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
+    //新版获取套图推荐
+    public function getSuits(){
+        $callback=$_GET['callback'];
+        $tem = trim($this->_request('tem'));
+        $Weather = D('Getinfo');
+        $setingtem = $Weather->getKeyValue('temperature');
+        if($tem>=$setingtem['value']){
+         $type = 1;
+        }else{
+         $type = 2;
+        }
+        $suitSelect = $Weather->getSutsValue($type);
+        $re = json_encode($suitSelect);
+        echo $callback."($re)";
+    }
 //ajax取数据
     public function ajaxgood(){
         $type = trim($this->_request('tageid')); //场合id
