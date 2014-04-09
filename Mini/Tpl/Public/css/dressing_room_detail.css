@@ -83,6 +83,7 @@ button,label{cursor:pointer; }
 
 /*我的优衣柜*/
 .my_yyg{ width:auto; height:650px; position:relative;}
+.my_yyg.changjing0{ background:url(../images/my_yyg_bg0.jpg) center 0 no-repeat;}
 .my_yyg.changjing1{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat;}
 .my_yyg.changjing2{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat;}
 .my_yyg.changjing3{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat;}
@@ -496,7 +497,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 
 /*== 选择城市弹窗 ==*/
 .map_light_box{ width:760px;  background:#FFF; position:absolute; top:100px; left:50%; margin-left:-400px; z-index:980; padding:20px;}
-a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
+a.light_box_close{ display:block; background:url(../images/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
 .map_light_box h3{ font-size:20px; color:#999; line-height:60px; font-weight:normal;}
 .light_box_u_map_con{ float:left; background:#555; width:760px; height:405px;}
 
