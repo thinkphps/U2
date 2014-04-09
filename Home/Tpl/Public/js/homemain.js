@@ -58,6 +58,7 @@ $(function(){
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
             'subindex':1,
+            'shopid':$.weather.shopid,
             index : that.index() + 1,
             city:$('#nio-city').text(),
             imgpath : window.imgpath,
@@ -477,7 +478,7 @@ function start_autochange() {
             currenttab = slength;
         }
         easytabs(autochangemenu, currenttab);
-        restart_autochange();
+        //restart_autochange();
     }
 }
 
