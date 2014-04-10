@@ -3,103 +3,153 @@ class OfficialAction extends Action{
 	private $aid;
 	private $nick;
 	public function _initialize(){
-	$this->aid = session('aid');
-	$this->nick = session('nickn');
-    $this->assign('aid',$this->aid);
-    $this->assign('nick',$this->nick);
+        $this->aid = session('aid');
+        $this->nick = session('nickn');
+        $this->assign('aid',$this->aid);
+        $this->assign('nick',$this->nick);
 	}
 	public function index(){
-	if(!empty($this->aid)){
-	$reco = M('Recommend');
-	$products = M('Products');
-	$list1 = $reco->field('*')->where(array('type'=>'1'))->select();
-	$list2 = $reco->field('*')->where(array('type'=>'2'))->select();
-	//取出颜色信息
-	foreach($list1 as $k=>$v){
-	$list1[$k]['color'] = $products->field('cvalue,url')->where(array('num_iid'=>$v['num_iid']))->group('cid')->select();
+        if(!empty($this->aid)){
+            $styles = M('settings_suit_style');
+            $stylelist = $styles->field('*')->select();
+            $msuit = M('suits_select u1');
+
+            $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+                join('inner join u_suits u2 on u1.suitID=u2.suitID')->
+                join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
+                where("u1.`type` = '1'")->select();
+
+            $selsuits2 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+                join('inner join u_suits u2 on u1.suitID=u2.suitID')->
+                join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
+                where("u1.`type` = '2'")->select();
+
+            $mtm = M('settings');
+            $tm = $mtm -> field('value')->where(array('key'=>'temperature'))->select();
+            if(!empty($tm)){
+                $tm = $tm[0]['value'];
+            }else{
+                $tm = '';
+            }
+
+            $this->assign('stylelist',$stylelist);
+            $this->assign('tm',$tm);
+            $this->assign('selsuits1',$selsuits1);
+            $this->assign('selsuits2',$selsuits2);
+            $this->display();
+        }else{
+            $this->display('Login/index');
+        }
 	}
-	foreach($list2 as $k=>$v){
-	$list2[$k]['color'] = $products->field('cvalue,url')->where(array('num_iid'=>$v['num_iid']))->group('cid')->select();
-	}
-	$tm = $list1[0]['tm'] ? $list1[0]['tm'] : $list2[0]['tm'];
-	$this->assign('tm',$tm);
-	$this->assign('list1',$list1);
-	$this->assign('list2',$list2);
-	$this->display();
-	}else{
-    $this->display('Login/index');
-    }		
-	}
-	
-  public function add(){
-  if(!empty($this->aid)){
-	  $num_iid = $this->_post('kuid');
-	  $issue = $this->_post('issue');
-	  $type = $this->_post('type');
-	  $rid = trim($this->_post('rid'));
-	  $tm = trim($this->_post('lttem'));
-	  $tm = intval($tm);
-	  $srcvalue = trim($this->_post('srcvalue'));
-	  $reco = M('Recommend');
-	  $good = M('Goods');
-	  if($rid>0){
-	  $data = array('num_iid'=>$num_iid,
-		            'type'=>$type,
-		            'isud'=>$issue,
-					'tm'=>$tm);
-	  $res = $reco->where(array('id'=>$rid))->save($data);
-	  if(!empty($srcvalue)){
-	  $good->where(array('num_iid'=>$num_iid))->save(array('pic_url'=>$srcvalue));
-	  }
-  }else{
-	  $data = array('num_iid'=>$num_iid,
-		            'type'=>$type,
-		            'isud'=>$issue,
-					'tm'=>$tm);
-	  $res = $reco->add($data);
-  }
-	  $wap['type'] = array(array('eq','1'),array('eq','2'),'or');
-	  $reco->where($wap)->save(array('tm'=>$tm));
-	  $arr = array();
-  if($res){
-	   $arr['flag']=true;
-	   $arr['num_iid'] = $num_iid;
-	   $arr['rid'] = $res;
-	   $arr['stm'] = $tm;
-  }else{
-	   $arr['flag'] =false;
-	   $arr['msg'] = '添加失败';
-  }
-}else{
-	   $arr['flag'] =false;
-	   $arr['msg'] = '你还没有登陆';
-}
-       echo json_encode($arr);
+
+  public function search(){
+      if(!empty($this->aid)){
+          $style = $this->_post('isstyle');
+          $page = $this->_post('page');
+          $act = $this->_post('act');
+          if(!empty($style)){
+              $suits = M('Suits u1');
+
+              $count = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                  ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                  ->where(array('u1.suitStyleID'=>$style))->count();
+
+              if($count=='0'){
+                  echo "";
+                  exit;
+              }
+              $count = intval($count);
+              $page = intval($page);
+              if($act=="per"){
+                  $page = $page - 1;
+              }
+              if($act=="next"){
+                  $page = $page + 1;
+              }
+              if($page<=0){
+                  $page = 1;
+              }
+              $firstRows = ($page -1)*5;
+              if($firstRows>=$count){
+                  echo "1";
+                  exit;
+              }
+              $maxRows = 5;
+              $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                  ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                  ->where(array('u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+
+              if(empty($result)){
+                  echo "";
+                  exit;
+              }
+//              $result = $suits->field('*')->where(array('suitStyleID'=>$style))->order('uptime desc')->limit($p->firstRows.','.$p->maxRows)->select();
+              $imgs = array("1"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
+                  "2"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
+                  "3"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
+                  "4"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
+                  "5"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),"page"=>$page);
+              foreach ( $result as $r => $dataRow ){
+                  $imgs[$r+1]["id"] = $dataRow["suitID"];
+                  $imgs[$r+1]["img"] = $dataRow["suitImageUrl"];
+                  $imgs[$r+1]["styleID"] = $dataRow["suitStyleID"];
+                  $imgs[$r+1]["desp"] = $dataRow["description"];
+              }
+              $stylelist = array($imgs);
+              echo json_encode($stylelist);
+          }else{
+              echo "";
+          }
+      }else{
+        $this->display('Login/index');
+      }
+
+
   }
 
-//获取颜色
-public function getcolor(){
-	if(!empty($this->aid)){
-	$num_iid = trim($this->_post('num_iid'));
-	$type = $this->_post('type');
-	$id = $this->_post('id');
-	$num_iid = !empty($num_iid)?$num_iid:0;
-	$products = M('Products');
-	$product = $products->field('cvalue,url')->where(array('num_iid'=>$num_iid))->group('cid')->select();
-	$str = '';
-	if(!empty($product)){
-	foreach($product as $k=>$v){
-	if(!empty($v)){
-	$str.="<img src='".__ROOT__."/".$v['url']."' title='".$v['cvalue']."' width='50px' height='50px' onclick=\"getcolorUrl($id,$type,'".$v['url']."');\">&nbsp;&nbsp;";
-	}
-	}
-	$returnArr = array('code'=>1,'msg'=>$str);	
-	}else{
-	$returnArr = array('code'=>-1,'msg'=>'没有数据');	
-	}
-	}else{
-	$returnArr = array('code'=>-1,'msg'=>'你还没有登录');	
-	}
-	$this->ajaxReturn($returnArr,'JSON');
-}
+  public function recommend(){
+      if(!empty($this->aid)){
+          $type = $this->_post('type');
+          $recosuits = $this->_post('reco');
+          $recosuits = str_replace("'",'"',$recosuits);
+          $recosuits = json_decode($recosuits);
+
+          $msuit = M('suits_select');
+          $res = $msuit->where(array("type"=>$type))->delete();
+
+          if(!empty($recosuits)){
+              foreach ( $recosuits as $r => $dataRow ){
+                  $sel=0;
+                  if($dataRow->reco=="true"){
+                      $sel=1;
+                  }
+                  $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$type);
+//                      $msuit->create($data);
+                  $res = $msuit->add($data);
+                  if(!$res){
+                      echo 0;
+                      exit;
+                  }
+              }
+              echo 1;
+              exit;
+          }else{
+              echo 1;
+          }
+
+      }else{
+          $this->display('Login/index');
+      }
+  }
+  public function savetmp(){
+      if(!empty($this->aid)){
+          $tmp = $this->_post('tmp');
+          $mtm = M('settings');
+          $mtm->where(array('key'=>'temperature'))->setField('value',$tmp);
+          echo(1);
+      }else{
+          $this->display('Login/index');
+      }
+  }
+
 }
