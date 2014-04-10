@@ -124,17 +124,15 @@ function jsonpFcuntion(url){
     JSONP.src=url;
     document.getElementsByTagName("head")[0].appendChild(JSONP);
 }
-function tipsfunction(v,k){
+function tipsfunction(v){
     //tips
     stop_autochange();
-    if(k){
         for (i = 1; i <=3; i++) {
             $('#tablink' + i).removeClass('current');
             $('.preferential_' + i).css('display','none');
         }
         $('#tablink2').addClass('current');
         $('.preferential_2').css('display','block');
-    }
     $('#shopid').html(v);
 
 }
