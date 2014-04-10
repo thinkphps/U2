@@ -48,6 +48,7 @@ $(function(){
             }
 
             getSuits();
+            $("#div_index-bin").hide();
 //            var jsonpurl = jsonpHomeUrl+"/ajaxgood?callback=jsonpCallback&tem="+avg+"&pro="+$.pron;
 //            jsonpFcuntion(jsonpurl);
         }
@@ -65,8 +66,9 @@ $(function(){
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
                 $.weather.avg = avg;
-                if($.weather.sex == 0 || ($.weather.occasion == 0 || $.weather.occasion == undefined && $.weather.sex == undefined)){
+                if($.weather.sex.toString() == "0" ||($.weather.occasion.toString() == "0" && $.weather.sex == undefined )&& $.weather.set.toString() != "1"){
                     getSuits();
+                    $("#div_index-bin").hide();
                 }else{
                     var jsonpurl =jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
                     jsonpFcuntion(jsonpurl);
@@ -150,8 +152,10 @@ function jsonpCallback(da){
     }
 }
 function getgoods(cid,sid,tid){
-    if( sid == 0 || (cid == 0 && sid == undefined)){
+
+    if(  sid == "0" || ( cid == "0" && sid == undefined) && tid != "1"){
         getSuits();
+        $("#div_index-bin").hide();
     }
     else{
         var JSONP=document.createElement("script");
@@ -312,7 +316,7 @@ function getavg(high,low){
     return avg;
 }
 function sendcity(pro,city){
-    var url = "http://uniqlo.bigodata.com.cn/u2/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
+    var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=jsonpCallbackm&proname="+pro+"&cityname="+city;
     // 创建script标签，设置其属性
     var script = document.createElement('script');
     script.setAttribute('src', url);
@@ -403,8 +407,9 @@ $('#scid').on('change',function(){
             $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
             $.weather.sex = $.weather.sex?$.weather.sex:0;
             $.weather.set = $.weather.set?$.weather.set:0;
-            if($.weather.sex == 0 || ($.weather.occasion == 0 || $.weather.occasion == undefined && $.weather.sex == undefined)){
+            if($.weather.sex.toString() == "0" ||($.weather.occasion.toString() == "0" && $.weather.sex == undefined )&& $.weather.set.toString() != "1"){
                 getSuits();
+                $("#div_index-bin").hide();
             }
             else{
                 var jsonpurl ="http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
@@ -499,13 +504,14 @@ var b = 1;
 
 //l4推荐模特图绑定
 function getSuits(){
-    $("#div_index-bin").hide();
+
     var jsonpurl = baseurl +"index.php/Indexnew/getSuits?callback=callbackSuits&tem="+$.weather.avg;
     jsonpFcuntion(jsonpurl);
 }
 
 
 function callbackSuits(list){
+    $("#div_index-bin,.index-suit").hide();
 
     var strHtml = "";
     var listlength = list.length;
@@ -518,6 +524,7 @@ function callbackSuits(list){
     }
     $('#suits-container').html(strHtml);
     $("#suits-container").show();
+
     $('#suits-container').coverscroll({items:'.item',minfactor:5});
 
 }
@@ -530,11 +537,17 @@ function getCoverScrollItem(item){
     var numids = [];
     for(var i =0;i<detail.length;i++){
         numids[i] = detail[i].num_iid;
+        strItem += '<div class="circle">'
         strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
-        strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a>';
+        strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
     }
     strItem +='</div>';
     strItem += '<div class="itemTitle">'+item.description+'</div>';
-    strItem += '<div class="gotoroom none"><a href="#">去虚拟试衣间试穿</a></div></div>'
+    strItem += '<div class="gotoroom none">';
+    strItem += '<a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/'+ numids.join() +'" target="_blank">去虚拟试衣间试穿</a></div></div>';
     return strItem;
+}
+
+function jsonpCallbackm(data){
+
 }

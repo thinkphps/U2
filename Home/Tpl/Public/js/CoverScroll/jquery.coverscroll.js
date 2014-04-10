@@ -70,26 +70,33 @@
 	        	$(this).bind('click.coverscroll', function(){
 	        		if($(this).hasClass(opt.selectedclass)){return true;}
 	        		selectItem(el, this);
+                    $(this).find(".gotoroom").show();
 	        	});
                 //dean
                 $(this).unbind('mouseover');
-                $(this).bind('mouseover', function(){
+                $(this).on('mouseover', function(){
                     if($(this).hasClass(opt.selectedclass)){return true;}
                     selectItem(el, this);
+
+                    $(this).find(".gotoroom").show();
                 });
 	        });
         }else{
         	imgs.each(function(index){
+
         		$(this).unbind('click.coverscroll');
 	        	$(this).bind('click.coverscroll', function(){
 	        		if($(this).hasClass(opt.selectedclass)){return true;}
 	        		showItems(el, imgs, index);
+                    $(this).find(".gotoroom").show();
 	        	});
                 //dean
                 $(this).unbind('mouseover');
+
                 $(this).bind('mouseover', function(){
                     if($(this).hasClass(opt.selectedclass)){return true;}
                     showItems(el, imgs, index);
+                    $(this).find(".gotoroom").show();
                 });
 
 	        });
@@ -108,6 +115,7 @@
             for(i=0;i<imgs.length;i++){
                 var citem = $(imgs.get(i));
                 citem.removeClass(opt.selectedclass);
+                citem.find(".gotoroom").hide();
                 var css = {
                     'width':210,
                     'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)'
@@ -200,6 +208,7 @@
 
 
       function showItems(el, imgs, mindex,isinit){
+          imgs.find(".gotoroom").hide();
         if(isinit){
             var imglefts = countimglefts(el, imgs);
         }
@@ -219,6 +228,7 @@
           if(isinit){
               css["left"] =  imglefts[mindex];
               css['top']=minfactor;
+              css['width']=210;
           }else{
               if(mindex== imgs.length-1 ){
                   css['width']=210;
@@ -438,6 +448,7 @@
         setTimeout(function(){
         	imgs.removeClass(opt.selectedclass);
         	elem.addClass(opt.selectedclass);
+
         }, 100);
      	
       };
