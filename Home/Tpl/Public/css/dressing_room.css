@@ -436,7 +436,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     /*6张图片*/
     bottom: 81;
     position: absolute;
-    left: 170;
+    left: 70%;
     font-size: 2.5em;
     width: 1.5em;
     line-height: 1.5em;
