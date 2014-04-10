@@ -23,7 +23,7 @@ $(function(){
             numids[i] = $(list[i]).data("numid");
         }
         //jsonpHomeUrl
-        window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/Index/num/"+ numids.join());
+        window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/"+ numids.join());
     });
 
 
@@ -65,7 +65,7 @@ $(function(){
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
                 $.weather.avg = avg;
-                if($.weather.sex == 0 || ($.weather.occasion == 0 && $.weather.sex == undefined)){
+                if($.weather.sex == 0 || ($.weather.occasion == 0 || $.weather.occasion == undefined && $.weather.sex == undefined)){
                     getSuits();
                 }else{
                     var jsonpurl =jsonpHomeUrl +"/getgood?callback=jsonpCallback2&tem="+avg+"&cid="+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set+'&pro='+$.pron;;
@@ -403,7 +403,7 @@ $('#scid').on('change',function(){
             $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
             $.weather.sex = $.weather.sex?$.weather.sex:0;
             $.weather.set = $.weather.set?$.weather.set:0;
-            if($.weather.sex == 0 || ($.weather.occasion == 0 && $.weather.sex == undefined)){
+            if($.weather.sex == 0 || ($.weather.occasion == 0 || $.weather.occasion == undefined && $.weather.sex == undefined)){
                 getSuits();
             }
             else{
@@ -508,7 +508,12 @@ function getSuits(){
 function callbackSuits(list){
 
     var strHtml = "";
-    for(var i = 0 ;i< 7;i++){
+    var listlength = list.length;
+    if(listlength > 7){
+        listlength = 7
+    }
+
+    for(var i = 0 ;i < listlength;i++){
         strHtml += getCoverScrollItem(list[i]);
     }
     $('#suits-container').html(strHtml);
