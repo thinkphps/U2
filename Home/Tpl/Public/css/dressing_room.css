@@ -391,8 +391,8 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     position: relative;
 }
 #suits-container .item{
-    width: 149px ;
-    height: 375px;
+    width: 234px ;
+    height: 388px;
     background: rgba(255, 255, 255, .3);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000')
 }
@@ -401,15 +401,19 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     /*height:100%;*/
     margin-left:10px;
     margin-top:10px;
-    width: 188px;
-    height: 90%;
+    width: 90%;
+    height: 300px;
     cursor: pointer;
     /*-moz-box-shadow: 0px 5px 5px #777;*/
     /*-webkit-box-shadow: 0px 5px 5px #777;*/
     /*box-shadow: 0px 5px 5px #777;*/
+
+
+
 }
 #suits-container .selectedItem{
     /*border:2px solid #0071BC;*/
+    background-color: #ffffff;
 }
 .itemTitle{
     padding-left: 10px;
@@ -419,12 +423,21 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 
 
 .similarity{
-    bottom: 40;
-    position: absolute;
+    /*bottom: 40;*/
+    /*position: absolute;*/
     /*right: 10%;*/
-    left:140;
+    /*left:140;*/
+    /*font-size: 2.5em;*/
+    /**font-size: 1.3em;*/
+    /*width: 1.5em;*/
+    /*line-height: 1.5em;*/
+    /*text-align: center;*/
+
+    /*6张图片*/
+    bottom: 81;
+    position: absolute;
+    left: 170;
     font-size: 2.5em;
-    *font-size: 1.3em;
     width: 1.5em;
     line-height: 1.5em;
     text-align: center;
@@ -439,14 +452,12 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 
 .gotoroom {
     background-color: #ff0000;
+
+    padding: 8 35;
 }
 .gotoroom a {
-    height: 38px;
-    margin-top: 1px;
-    padding-top: 5px;
-    margin-left: 50;
-    font-size: 14;
-    line-height: 25px;
+    height: 45px;
     color: #fff;
+    font:20px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
 }
 

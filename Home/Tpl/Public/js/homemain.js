@@ -522,8 +522,8 @@ function callbackSuits(list){
 
     var strHtml = "";
     var listlength = list.length;
-    if(listlength > 7){
-        listlength = 7
+    if(listlength > 6){
+        listlength = 6
     }
 
     for(var i = 0 ;i < listlength;i++){
@@ -549,7 +549,7 @@ function getCoverScrollItem(item){
         strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
     }
     strItem +='</div>';
-    strItem += '<div class="itemTitle">'+item.description+'</div>';
+    strItem += '<div class="itemTitle">'+item.description+'<br><font style="color: #C0C0C0">'+ item.eglishName+'</font></div>';
     strItem += '<div class="gotoroom none">';
     strItem += '<a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/'+ numids.join() +'" target="_blank">È¥ĞéÄâÊÔÒÂ¼äÊÔ´©</a></div></div>';
     return strItem;

@@ -70,6 +70,8 @@
 	        	$(this).bind('click.coverscroll', function(){
 	        		if($(this).hasClass(opt.selectedclass)){return true;}
 	        		selectItem(el, this);
+//                    $(this).find(".gotoroom").show();
+                    $(this).addClass(opt.selectedclass);
                     $(this).find(".gotoroom").show();
 	        	});
                 //dean
@@ -77,7 +79,14 @@
                 $(this).on('mouseover', function(){
                     if($(this).hasClass(opt.selectedclass)){return true;}
                     selectItem(el, this);
+//                    setTimeout(function(){
+//                        $(this).addClass(opt.selectedclass);
+//                        $(this).find(".gotoroom").show();
+//
+//                    }, 100);
 
+//                    $(this).find(".gotoroom").show();
+                    $(this).addClass(opt.selectedclass);
                     $(this).find(".gotoroom").show();
                 });
 	        });
@@ -88,6 +97,8 @@
 	        	$(this).bind('click.coverscroll', function(){
 	        		if($(this).hasClass(opt.selectedclass)){return true;}
 	        		showItems(el, imgs, index);
+//                    $(this).find(".gotoroom").show();
+                    $(this).addClass(opt.selectedclass);
                     $(this).find(".gotoroom").show();
 	        	});
                 //dean
@@ -96,7 +107,14 @@
                 $(this).bind('mouseover', function(){
                     if($(this).hasClass(opt.selectedclass)){return true;}
                     showItems(el, imgs, index);
+                    $(this).addClass(opt.selectedclass);
                     $(this).find(".gotoroom").show();
+//                    setTimeout(function(){
+//                        $(this).addClass(opt.selectedclass);
+//                        $(this).find(".gotoroom").show();
+//
+//                    }, 100);
+
                 });
 
 	        });
@@ -117,7 +135,7 @@
                 citem.removeClass(opt.selectedclass);
                 citem.find(".gotoroom").hide();
                 var css = {
-                    'width':210,
+                    'width':234,
                     'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)'
                 };
                 if(gopt.msie){
@@ -186,8 +204,8 @@
           var allimglen = 0;
           for(i=0;i<imgs.length;i++){
               var citem = $(imgs.get(i));
-              if(i==imgs.length-1){allimglen = allimglen + citem.width()}
-              else{allimglen = allimglen + citem.width() * 0.75}
+              if(i==imgs.length-1){allimglen = allimglen + 149}
+              else{allimglen = allimglen + 149 * 0.95}
           }
           var mleft =  (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:15;
           mleft += 4;
@@ -198,8 +216,8 @@
           imglefts.push(mleft)
           for(i=0;i<imgs.length-1;i++){
               var citem = $(imgs.get(i));
-              mleft = Math.round(mleft + citem.width() * 0.75);
-              mleft += 8;
+              mleft = Math.round(mleft + 149 * 0.95);
+              mleft -= 3;
               imglefts.push(mleft);
           }
 
@@ -209,9 +227,10 @@
 
       function showItems(el, imgs, mindex,isinit){
           imgs.find(".gotoroom").hide();
-        if(isinit){
+          imgs.removeClass(opt.selectedclass);
+//        if(isinit){
             var imglefts = countimglefts(el, imgs);
-        }
+//        }
         var minscale =  0.6;
         var angle = 45;
         var middle = $(imgs.get(mindex));
@@ -228,13 +247,14 @@
           if(isinit){
               css["left"] =  imglefts[mindex];
               css['top']=minfactor;
-              css['width']=210;
+              css['width']=234;
           }else{
               if(mindex== imgs.length-1 ){
-                  css['width']=210;
+                  css['width']=234;
               }else{
-                  css['width']=210;
+                  css['width']=234;
               }
+              css["left"] =  imglefts[mindex];
           }
         css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
 
@@ -254,7 +274,7 @@
         if(!opt.bendamount){opt.bendamount = 2;}
 
         // handling the title and highlight
-        selectItem(el, middle, true);
+//        selectItem(el, middle, true);
         
         // left to middle items
         var cd = d, sc=0; sf=false;
@@ -296,7 +316,9 @@
                 css["left"] =  imglefts[i];
                 css['top']=minfactor;
             }else{
-                css['width']=240;
+                css['width']=250-(mindex-1-i)*3;
+//                alert(i*5)
+                css["left"] =  imglefts[i]-i*12;
             }
             //dean 如果需要选择两端平铺则改为mindex>0
             if(!isinit && mindex>0 && mindex<=imgs.length-1){
@@ -358,9 +380,12 @@
                 css['top']=minfactor;
             }else {
                 if(i== imgs.length-1 ){
-                    css['width']=210;
+                    css['width']=250;
                 }else{
-                    css['width']=210;
+//                    css['width']=234;
+                    css['width']=290-(i-mindex-1)*3;
+//                alert(i*5)
+                    css["left"] =  imglefts[i]+(imgs.length-i)*3;
                 }
             }
             //dean 如果需要选择两端平铺则改为mindex>0
@@ -405,7 +430,7 @@
         },100);
         // end of showItems()
       };
-      
+
       
       function selectItem(el, elem, center){
 
