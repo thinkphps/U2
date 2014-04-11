@@ -434,7 +434,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     /*text-align: center;*/
 
     /*6张图片*/
-    bottom: 81;
+    bottom: 81px;
     position: absolute;
     left: 70%;
     font-size: 2.5em;
@@ -453,7 +453,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 .gotoroom {
     background-color: #ff0000;
 
-    padding: 8 35;
+    padding: 8px 35px;
 }
 .gotoroom a {
     height: 45px;

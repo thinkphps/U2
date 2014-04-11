@@ -60,7 +60,7 @@
                       <div class="caption">
                           <p class="js-official-id">{$vo.description}</p>
                           <div>
-                              <img src='__ROOT__/{$vo.suitImageUrl}' width='200px' height='250px'>
+                              <img src='{$vo.suitImageUrl}' width='200px' height='250px'>
                           </div>
                           <label class="checkbox-inline">
                               <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco1');"
@@ -87,7 +87,7 @@
                     <div class="caption">
                         <p class="js-official-id">{$vo.description}</p>
                         <div>
-                            <img src='__ROOT__/{$vo.suitImageUrl}' width='200px' height='250px'>
+                            <img src='{$vo.suitImageUrl}' width='200px' height='250px'>
                         </div>
                         <label class="checkbox-inline">
                             <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco2');"
@@ -111,8 +111,8 @@
 
     function ckreco(e,dv){
         var cknum = 0;
-        var maxcknum = 8;
-        var msg = "您最多只能推荐八种套装";
+        var maxcknum = 6;
+        var msg = "您最多只能推荐6种套装";
 
         $("#"+dv).find('input[type=checkbox]').each(function(){
             if($(this).prop("checked")==true){
@@ -195,7 +195,7 @@
             isexit = true;
             if(e.prop("checked")==true){
                 $(this).find('img').each(function(){
-                    $(this).attr("src",'__ROOT__/'+ sutimg);
+                    $(this).attr("src", sutimg);
                 });
                 $(this).find('input[type=checkbox]').each(function(){
                     $(this).val(sutid);
@@ -210,7 +210,7 @@
             var sstdiv = "<div class='col-sm-6' style='width:25%' name='divsst" + styid + "'>"+
                 "<div class='thumbnail'>"+ "<div class='caption'>"+
                 "<p class='js-official-id'>"+ description+ "</p><div>"+
-                "<img src='__ROOT__/" + sutimg + "' width='200px' height='250px'></div>"
+                "<img src='" + sutimg + "' width='200px' height='250px'></div>"
                 +"<label class='checkbox-inline'>"
                 +"<input type='checkbox' name='ckreco' value='" + sutid + "' class='delch'" + ' onclick="ckreco($(this),' + dvn + ');">推荐</label>'
                 +"<label class='checkbox-inline'>"
@@ -279,7 +279,7 @@
                     if(da[0][String(i)]["id"]!=""){
                         var td = $("<td/>");
                         var div = $("<div/>");
-                        div.append($("<img src='__ROOT__/" + da[0][String(i)]["img"] + "' width='200px' height='250px'>"));
+                        div.append($("<img src='" + da[0][String(i)]["img"] + "' width='200px' height='250px'>"));
                         div.append($("<label class='checkbox-inline'><input type='checkbox' value='" + da[0][String(i)]["id"] + "' class='delch' " +
                                 'onclick="selsuit($(this),'+ styleid +','+ suitid +','+ suitimg +','+ suitdesp +');">选择</label>'));
                         td.append(div);

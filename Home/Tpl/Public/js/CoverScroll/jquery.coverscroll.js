@@ -281,7 +281,8 @@
         var showing = true;
         var cleft = Math.round(el.width()/2 - d/2);
 
-        var scale = minscale;
+          var imgwithlist = new Array();
+          var scale = minscale;
         for(i=mindex-1;i>=0;i--){
         	var citem = $(imgs.get(i));
         	cd = cd - minfactor;
@@ -316,9 +317,10 @@
                 css["left"] =  imglefts[i];
                 css['top']=minfactor;
             }else{
-                css['width']=250-(mindex-1-i)*3;
+                css['width']=240
+//                css['width']=250-(mindex-1-i)*3;
 //                alert(i*5)
-                css["left"] =  imglefts[i]-i*12;
+//                css["left"] =  imglefts[i]-i*12;
             }
             //dean 如果需要选择两端平铺则改为mindex>0
             if(!isinit && mindex>0 && mindex<=imgs.length-1){
@@ -326,6 +328,9 @@
                 if (mindex == 1){scale = minscale;}else{scale = scale + (1-minscale)/mindex}
                 if(scale>1){scale = 1;}
                 css["transform"] = 'perspective(1800px) rotateY('+ angle + 'deg) scale(' + scale +')'
+
+                imgwithlist.push(240 * scale);
+
             }else{
                 css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
             }
@@ -338,12 +343,25 @@
         	}
         	
         }
-        
-        //middle to right items
+
+          var mleft = 19;
+          for(i=0;i<=mindex-1;i++){
+              var citem = $(imgs.get(i));
+              if(i==0){
+                  mleft = mleft;
+                  citem.css('left',mleft);
+              }else{
+                  mleft = Math.round(mleft + imgwithlist[mindex-1-i] * 0.70);
+                  citem.css('left',mleft);
+              }
+          }
+
+          //middle to right items
         var cd = d, sc=0; sf = false;
         var cleft = Math.round(el.width()/2 - d/2);
         var showing = true;
         var scale = minscale;
+        imgwithlist = new Array();
         for(i=mindex+1;i<imgs.length;i++){
         	var citem = $(imgs.get(i));
         	cd = cd - minfactor;
@@ -380,12 +398,13 @@
                 css['top']=minfactor;
             }else {
                 if(i== imgs.length-1 ){
-                    css['width']=250;
+                    css['width']=240;
                 }else{
+                    css['width']=240
 //                    css['width']=234;
-                    css['width']=290-(i-mindex-1)*3;
+//                    css['width']=290-(i-mindex-1)*3;
 //                alert(i*5)
-                    css["left"] =  imglefts[i]+(imgs.length-i)*3;
+//                    css["left"] =  imglefts[i]+(imgs.length-i)*3;
                 }
             }
             //dean 如果需要选择两端平铺则改为mindex>0
@@ -394,6 +413,7 @@
                 if (mindex == imgs.length-2){scale = minscale;}else{scale = scale + (1-minscale)/(imgs.length-1-mindex);}
                 if(scale>1){scale = 1;}
                 css["transform"] = 'perspective(1800px) rotateY(-'+ angle + 'deg) scale('+ scale +')'
+                imgwithlist.push(240 * scale);
             }else{
                 css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
             }
@@ -405,7 +425,19 @@
         		citem.css(css);
         	}
         }
-        
+
+          var mleft = imglefts[mindex+1]
+          for(i=mindex+1;i<imgs.length;i++){
+              var citem = $(imgs.get(i));
+              if(i==mindex+1){
+                  citem.css('left',mleft);
+              }else{
+                  mleft = Math.round(mleft + imgwithlist[i-mindex-2] * 0.70);
+                  citem.css('left',mleft);
+              }
+          }
+
+
         // take care of z-index
         setTimeout(function(){
         	var zi = 100;
