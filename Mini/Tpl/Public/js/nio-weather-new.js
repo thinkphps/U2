@@ -76,9 +76,12 @@ jQuery(function($){
         ajax:function(code,option){
             var that = this,
                 city = option.city;
-
+            var subindex = option.subindex ? option.subindex:0;
+            var subid = option.subid ? option.subid : 0;
+            var shopid = option.shopid ? option.shopid : 0;
+            option.baiduerjiid = option.baiduerjiid ? option.baiduerjiid:-1;//百度地图上的select二级选择值（直辖市）
             //调用接口，天气信息
-            $.get(getweatherurl,{id:code},function(data){
+            $.post(getweatherurl,{id:code,subindex:subindex,subid:subid,shopid:shopid,baiduerjiid:option.baiduerjiid},function(data){
                 that.setText(data,option);
             });
 
@@ -104,7 +107,90 @@ jQuery(function($){
             $('#nio-wea').text(weatherinfo.wt);
             $('#nio-low').html(weatherinfo.lt + '&deg;');
             $('#nio-high').html(weatherinfo.ht + '&deg;');
+            /*kimi*/
+            $('#nio-city').text(info.cityname);
+            $('#cinpinyin').text(info.cbn);
+            $('#nio-tip').html(this.tips[arrIndex]);
+            if(!option.shopid){
+                if(!info.sname && !info.tradetime){
+                    var tv = '暂时还没有店铺信息';
+                }else{
+                    var tv = info.sname+'<br>'+info.tradetime;
+                }
+                $('#shopid').html(tv);
+            }
+            $.weather.shopid = option.shopid;
+            var str = '<option value="0">请选择</option>';
+            var scid = {};
+            $.each(info.plist,function(pin,pv){
+                if(pv.sel==1){
+                    var psel = "selected='selected'";
+                }
+                str+="<option value='"+pv.region_id+"' "+psel+">"+pv.local_name+"</option>";
+            });
+            $('#le1').html(str);
 
+            var str2 = '<option value="0">请选择</option>';
+            $.each(info.plist,function(pin,pv){
+                if(pv.baidusel==1){
+                    var sel = "selected='selected'";
+                    scid.selpid = pv.region_id;
+                }
+                str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+            });
+            $('#spid').html(str2);
+
+            var str3 = '<option value="0">请选择</option>';
+            if(info.clist){
+                $.each(info.clist,function(pin,pv){
+                    if(pv.sel==1){
+                        var csel = "selected='selected'";
+                        scid.selcid = pv.region_id;
+                    }
+                    str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
+                });
+                $('#scid').html(str3);
+                if(info.isp){//直辖市
+                    var str4 = '<option value="0">请选择</option>';
+                    var sel2 = "selected='selected'";
+                    str4+="<option value='"+info.indexcity.region_id+"' "+sel2+">"+info.indexcity.local_name+"</option>";
+                    $('#le2').html(str4);
+                }else{
+                    var str4 = '<option value="0">请选择</option>';
+                    $.each(info.clist,function(pin,pv){
+                        if(pv.sel==1){
+                            var sel2 = "selected='selected'";
+                        }
+                        str4+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
+                    });
+                    $('#le2').html(str4);
+                }
+                scid.selpid = scid.selpid?scid.selpid:-1;
+                scid.selcid = scid.selcid?scid.selcid:-1;
+                //var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid+"&baiduerjiid="+info.baiduerjiid;
+                $.post(sendurl+'mini.php/API/getcity',{pid:scid.selpid,cid:scid.selcid,baiduid:2,shopid:option.shopid,baiduerjiid:info.baiduerjiid},function(data,status){
+                 $('#ddlShop').html('<option value="0">请选择</option>');
+                 if(!data.shopid){
+                 $('#a_shopinfo').html('您附近的优衣库门店');
+                 }
+                 var str = '<option value="0">请选择</option>';
+                 if(data.clist){
+                 $('#emptymsg').html('');
+                 $.each(data.clist,function(pin,pv){
+                 if(pv.sel == 1){
+                 var sel =  "selected='selected'";
+                 }
+                 str+="<option value='"+pv.sname+'<br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
+                 });
+                 $('#ddlShop').html(str);
+                 }else{
+                 if(data.baiduerjiid>0){
+                 $('#emptymsg').html('本地区暂无优衣库门店，请选择其他城市的门店');
+                 }
+                 }
+                 });
+            }
+            /*kimi*/
             if(avg >14){
                 if(avg >= 24) arrIndex = 0
                 else if(avg >= 19) arrIndex = 1
@@ -116,21 +202,21 @@ jQuery(function($){
                 else arrIndex = 6
             }
 
-            $('#nio-tip').text(this.tips[arrIndex]).attr('title', this.tips[arrIndex]);
+            $('#nio-tip').text(this.tips[arrIndex]);
 
             $('#nio-day1').text(time[0].day);
             $('#nio-day2').text(time[1].day);
             $('#nio-day3').text(time[2].day);
             $('#nio-day4').text(time[3].day);
             $('#nio-day5').text(time[4].day);
-            $('#nio-day6').text(time[5].day);
+            //$('#nio-day6').text(time[5].day);
 
             $('#nio-tem1').html(info['weather1'].ht+ '&deg;');
             $('#nio-tem2').html(info['weather2'].ht+ '&deg;');
             $('#nio-tem3').html(info['weather3'].ht+ '&deg;');
             $('#nio-tem4').html(info['weather4'].ht+ '&deg;');
             $('#nio-tem5').html(info['weather5'].ht+ '&deg;');
-            $('#nio-tem6').html(info['weather6'].ht+ '&deg;');
+            //$('#nio-tem6').html(info['weather6'].ht+ '&deg;');
 
             this[option.city] = info['cityname'];
             var temper = {low: weatherinfo.lt,
@@ -143,8 +229,8 @@ jQuery(function($){
         init : function(option){
             option = option || {}
             var city = option.city
-            if(city === remote_ip_info['city'] && this[city]) return this.setText(this[city], option);
-            city = remote_ip_info['city'] = city || remote_ip_info['city'];
+            //if(city === remote_ip_info['city'] && this[city]) return this.setText(this[city], option);
+            //city = remote_ip_info['city'] = city || remote_ip_info['city'];
             for (var i = 0, len = citys.length; i < len; i ++) {
                 if(citys[i].n === city) break;
             }
@@ -186,7 +272,7 @@ jQuery(function($){
         sel.bind('.linkageselect .level_3');
     }
     var location = $('.mini-city');
-    $('.mini-change-btn').on('click', function(){
+    $('.change_city').on('click', function(){
         location.toggle();
     });
 
@@ -207,10 +293,9 @@ jQuery(function($){
                 }
             }
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
-            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,
+            H.map.centerAndZoom(city, 11);
+            weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
                 callback: function(city, temper, info){
-                    //根据修改后的城市切换贴图位置
-                    H.locateByCity(remote_ip_info);
                     //kimi
                     var avg = getavg(temper.high,temper.low);
                     $.weather.avg = avg;
@@ -296,6 +381,7 @@ jQuery(function($){
                         }
                     });
                     //往index传城市
+                    restart_autochange();
                     sendcity(city,info.city);
                 }
             });
@@ -307,6 +393,6 @@ jQuery(function($){
         return false;
 
     }).on('click', 'a.mini-city-close', function(){
-        location.hide();
-    });
+            location.hide();
+        });
 });

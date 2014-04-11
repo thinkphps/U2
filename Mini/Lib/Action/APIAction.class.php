@@ -183,20 +183,78 @@ class APIAction extends Action
     //根据城市ID获取天气信息
     public function GetWeatherByCityID()
     {
-        $id = $_GET['id'];
+        $id = $_POST['id'];
+        $subindex = trim($this->_request('subindex'));//表示首页点击切换的动作
+        $subid = trim($this->_request('subid'));//点击百度里边店铺的标记
+        $shopid = trim($this->_request('shopid'));//点击百度地图里的店铺id
+        $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
+
         $Weather = D('Weather');
         $returnObj =  $Weather->GetWeatherInfoByID($id);
+        //取得城市拼音
+        $cbn = $Weather->getarea('',$id);//当前城市对应的城市信息
+        //如果点了百度地图里的店铺
+        if($subid && $shopid){
+            $aidresult = M('Shop')->field('pid,aid')->where(array('id'=>$shopid))->find();
+        }
+        if(in_array($cbn['p_region_id'],array(1,21,42,62))){
+            $isp = 1;
+        }
+        $shop = $Weather->shopinfo($cbn['region_id']);
+        $pro = $Weather->getpca();//省列表
+        $clist = $Weather->getCityList($cbn['region_id'],$cbn['p_region_id']);//城市或者区列表
+
+        foreach($pro as $k=>$v){
+            if($v['region_id']==$cbn['p_region_id'] && $subindex==1){
+                $pro[$k]['sel'] = 1;
+                $pro[$k]['baidusel'] = 1;
+                break;
+            }else if($v['region_id']==$cbn['p_region_id'] && $subid){
+                $pro[$k]['baidusel'] = 1;
+                $pro[$k]['sel'] = 1;
+                break;
+            }
+        }
+
+        foreach($clist as $k=>$v){
+            if($subid && $shopid && $isp){
+                if($v['region_id']==$aidresult['aid']){
+                    $clist[$k]['sel'] = 1;
+                }
+            }else if($subid && $baiduerjiid && $isp){
+                if($v['region_id']==$baiduerjiid){
+                    $clist[$k]['sel'] = 1;
+                }
+            }else{
+                if($v['region_id']==$cbn['region_id']){
+                    $clist[$k]['sel'] = 1;
+                }
+            }
+        }
         $weatherInfo["cityname"] = $returnObj[0]['commoncityname'];
         $weatherInfo["weather1"] = json_decode($returnObj[0]['weather1'],true);
         $weatherInfo["weather2"] = json_decode($returnObj[0]['weather2'],true);
         $weatherInfo["weather3"] = json_decode($returnObj[0]['weather3'],true);
         $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
         $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
-        $weatherInfo["weather6"] = json_decode($returnObj[0]['weather6'],true);
-
+        $weatherInfo['cbn'] = $cbn['pinying'];
+        $weatherInfo['tradetime'] = $shop['tradetime'];
+        $weatherInfo['sname'] = $shop['sname'];
+        $weatherInfo['plist'] = $pro;
+        $weatherInfo['clist'] = $clist;
+        $weatherInfo['indexcity'] = $cbn;
+        $weatherInfo['isp'] = $isp;//表示是直辖市
+        $weatherInfo['baiduerjiid'] = $baiduerjiid;
+        $weatherInfo['shopid'] = $shopid;
+        $weatherInfo['newstorre'] = C('NEWSRORE');
         $this->ajaxReturn($weatherInfo, 'JSON');
     }
-
+    //获取店铺信息
+    public function getshopinfo(){
+        $Weather = D('Weather');
+        $shopinfo = $Weather->getshopinfo();
+        $this->ajaxReturn($shopinfo, 'JSON');
+    }
 /*leon 3.13 新增
 通过uq号，获取色号和图片地址
 */
@@ -223,6 +281,48 @@ class APIAction extends Action
         }
 
         $this->ajaxReturn($returnValue, 'JSONP');
+    }
+
+    public function getcity(){
+        $pid = trim($this->_request('pid'));//省id
+        $baiduid = trim($this->_request('baiduid'));
+        $shopid = trim($this->_request('shopid'));//店铺id
+        $scid = trim($this->_request('cid'));
+        $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
+        $area = M('Areas');
+        $Weather = D('Weather');
+        $shop = M('Shop');
+        if(!empty($baiduid)){
+            $pid = $Weather->getId($baiduid,$pid,$scid);
+        }
+        if($baiduid!=2){
+            $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+            if(empty($baiduid) && count($list)==1){
+                $list[0]['sel'] = 1;
+            }
+        }else{
+            switch($pid){
+                case 1 :
+                case 21 :
+                case 42 :
+                case 62 :
+                    $where = array('aid'=>$scid);
+                    break;
+                default :
+                    $where = array('cityid'=>$scid);
+                    break;
+            }
+            $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
+            foreach($list as $k=>$v){
+                if($v['id'] == $shopid){
+                    $list[$k]['sel'] = 1;
+                }
+            }
+        }
+        $arr['clist'] = $list;
+        $arr['baiduerjiid'] = $baiduerjiid;
+        $arr['shopid'] = $shopid;
+        $this->ajaxReturn($arr, 'JSON');
     }
 
 }

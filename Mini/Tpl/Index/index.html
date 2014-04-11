@@ -6,6 +6,7 @@
     <meta name="keywords" content="优衣库 虚拟试衣间,搭配,服装搭配,男装搭配,女装搭配,童装搭配,看天气,学搭配" />
     <meta name="description" content="优衣库 - 虚拟试衣间 | 一个可以按气温、穿衣场合及风格快速为您推荐搭配组合的智能衣柜" />
     <link href="__TMPL__Public/css/dressing_room_detail.css" rel="stylesheet" type="text/css" />
+    <link href="__TMPL__Public/css/uniqlonew.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -17,36 +18,46 @@
         <!--头部-城市-->
         <div class="dr_city">
             <div class="city_name">
-                <h2>上海</h2>
-                <span>shanghai</span>
+                <h2 id="nio-city">上海</h2>
+                <span id='cinpinyin'>shanghai</span>
             </div>
             <div class="city">
                 <a href="#" class="change_city">切换城市</a>
-                <div class="near_un" style="display:none;"><i class="city_wz"></i><a href="#">您附近的优衣库门店</a></div>
-                <div class="near_un"><a href="#">上海南京西路店</a><i class="city_wz2"></i></div>
+                <form class="mini-city linkageselect pa none">
+                    <a href="javascript:;" class="mini-city-close"></a>
+                    <label>省份<select class="level_1" id='le1'></select></label>
+                    <label>城市<select class="level_2" id='le2'></select></label>
+                    <input type="submit" value="切换" />
+                </form>
+                <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#" id="a_shopinfo">您附近的优衣库门店</a>
+                <i class="city_wz2 none" id="a_shopinfo2"></i></div>
             </div>
         </div>
 
         <!--头部-优惠-->
         <div class="preferential">
             <ul class="preferential_side_bar">
-                <li class="current"></li>
-                <li></li>
-                <li></li>
+                <if condition="$newstore neq ''">
+                    <li class="current" id="tablink1" onclick="easytabs('1', '1');"  onfocus="easytabs('1', '1');" onclick="return false;"></li>
+                </if>
+                <li id="tablink2" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');"  onclick="return false;"></li>
+                <li id="tablink3" onmouseover="easytabs('1', '3');" onfocus="easytabs('1', '3');"  onclick="return false;"></li>
             </ul>
 
-            <ul class="preferential_con">
+            <ul class="preferential_con" id='scrollDiv'>
+                <if condition="$newstore neq ''">
                 <li class="preferential_1">
                     <i></i>
-                    <a>1优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                    <a>{$newstore}</a>
                 </li>
+                </if>
                 <li class="preferential_2">
                     <i></i>
-                    <a>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
+                    <a id='shopid'>2优衣库春节期间制定单品限时特优,惊喜价格等你来发现哦。</a>
                 </li>
                 <li class="preferential_3">
                     <i></i>
-                    <p>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
+                    <p id='nio-tip'>3<a href="#">优衣库</a>春节期间制定单品限时特优,惊喜价格等你来发现哦。</p>
                 </li>
             </ul>
         </div>
@@ -58,25 +69,322 @@
             <a href="javascript:;" class="mini-reg-btn">快速注册</a>
             <a href="javascript:;" class="mini-login-btn">直接登录</a>
             <else />
-            <span>当前登录账号：</span>
-            <strong>{$uniq_user_name}</strong>
+            <div class="login">
+            <p><span>当前登录号：</span><strong>{$uniq_user_name}</strong></p>
+
             <if condition="$is_mobile_active eq 0">
                 <a href="javascript:;" class="mini-activate-btn mr10 js-click" data-id="#activate_account">激活账号</a>
             </if>
-            <a href="javascript:;" class="mini-changepw-btn">修改密码</a>&nbsp;&nbsp;|&nbsp;
+            <a href="javascript:;" class="mini-changepw-btn">修改密码</a>
             <if condition="$user['is_active'] eq 0">
                 <a href="javascript:;" class="mini-logout js-click" data-id="#logout">退出登录</a>
                 <else />
-                <a href="{:U('Index/loginout')}" class="mini-logout">退出登录</a>
+                <a href="{:U('Index/loginout')}" >退出登录</a>
             </if>
         </if>
+        </div>
         <a href="#" class="tmail"><i></i>前往优衣库天猫旗舰店</a>
     </div>
 </div>
 
+<!-- 半透明浮层 -->
+<if condition="$is_allow_register eq 0">
+    <div class="mini-mask pf none"></div>
+    <else />
+    <div class="mini-mask pf"></div>
+</if>
+
+<div class="mini-mask2 pf"></div>
+<!-- 注册1、2 -->
+<form class="mini-register mini-pop pf <if condition="$is_allow_register eq 0">none</if>">
+<a href="javascript:;" class="mini-form-close mini-btn">关闭</a><!-- David -->
+<h3>3秒钟快速注册</h3>
+<div class="mini-control">
+    <label class="mini-label">手机号码</label>
+    <input class="mini-control-text smaller" type="text" id="mobile" name="mobile" placeholder="请填写手机号码，作为用户名使用" />
+    <a href="javascript:;" class="mini-btns tc js-verifying_code" id="getCode" onclick="getFuncCode();" style="padding:6px 14px;">获取验证码</a>
+    <a href="javascript:;" class="mini-btns tc js-verifying_code" id="getNextCode" style="display:none;padding:6px 13px;" onclick="getFuncCode();">再次获取</a>
+    <a href="javascript:;" class="mini-btns tc js-verifying_code" id="getTimeCode" style="display:none;">再次获取(<span id="time_show">180</span>)</a>
+    <!-- <a href="javascript:;" class="mini-btns tc">再次获取(60)</a> -->
+    <!--<span class="verifying_tips true"></span>-->
+    <!-- <input class="mini-control-text" type="text" id="user_name" placeholder="5-25位字符：支持中英文、数字、“-”、“_”"> -->
+</div>
+<div class="mini-control">
+    <label class="mini-label">验证码</label>
+    <input class="mini-control-text verifying_code" id="verifying_code" name="verifying_code" type="text" placeholder="请查收手机短信，填写短信中的验证码">
+    <!--<span class="verifying_tips false"></span>-->
+    <!-- <input class="mini-control-text" type="password" id="password" placeholder="6-16位字符，区分大小写"> -->
+</div>
+<div class="mini-control clearfix">
+    <span class="fl mr10" style="color:#bbb;">若长时间未收到验证码，可选择稍后验证</span>
+    <label class="nomargin"><input class="js-checked fl" type="checkbox" id="js-checked" name="js-checked">稍后验证</label>
+</div>
+
+<div class="mini-control">
+    <label class="mini-label">设置密码</label>
+    <input class="mini-control-text" id="password" name="password" type="password" placeholder="6-16个字符，区分大小写">
+</div>
+<div class="mini-control">
+    <label class="mini-label">确认密码</label>
+    <input class="mini-control-text" type="password" id="re_password" placeholder="请再次输入密码">
+</div>
+<div class="mini-control">
+    <label class="mini-label">淘宝账号</label>
+    <label><input name="mini-rel" id="checkbox-phone" type="radio" checked="checked" class="fl">关联获取收件人信息</label>
+    <label><input name="mini-rel" type="radio" id="checkbox-none" class="fl" value="3" />不做关联</label>
+</div>
+<div class="mini-control" id="reg-phone">
+    <label class="mini-label">淘宝登录名</label>
+    <input class="mini-control-text" type="text" id="taobao_name" placeholder="关联淘宝登录名，优惠券等你拿">
+</div>
+<!--
+<div class="mini-control" id="reg-taobao">
+  <label class="mini-label">淘宝登录名</label>
+  <input class="mini-control-text" type="text" id="taobao_name" placeholder="关联淘宝帐号及收件人信息，优惠券送到手">
+</div>-->
+<div class="mini-control">
+    <p class="mini-control-tips fr mr25" id="msg_error"></p>
+    <label class="nomargin"><input id="t_agree" checked="checked" class="fl" type="checkbox" value="1">已阅读 <a class="mini-clause-btn" href="javascript:;">隐私条款</a></label>
+</div>
+<div class="mini-control tr">
+    <input type="button" onclick="return do_register();" value="注册并登录" class="mini-reg-submit mr25" />
+    <a href="javascript:;" class="mini-reg-login fl">直接登录</a>
+</div>
+</form>
+
+<!-- 注册提交成功！ -->
+<div class="mini-reg-succ mini-pop pf none">
+    <h3>注册提交成功！</h3>
+    <p>请发送短信“优衣库 虚拟试衣间”至号码10690183668，激活帐号。激活帐号后，可享用优衣库不定期发放的优惠券。</p>
+    <button class="mini-reg-check">查看激活状态</button>
+</div>
 
 
+<!-- 激活1 -->
+<form class="mini-activate mini-pop pf smaller tl none" id="activate_account">
+    <h3>您注册的手机号为：</h3>
+    <p>
+        <span class="mr5">{$user['mobile']}</span>
+        <input type="hidden" id="userMobileCode" name="userMobileCode" value="{$user['mobile']}" />
+        <a href="javascript:;" class="mini-btns js-verifying_code" id="getCode2" onclick="getFuncCode2()" style="padding:6px 12px;">获取验证码</a>
+        <a href="javascript:;" class="mini-btns tc js-verifying_code" id="getNextCode2" style="display:none;padding: 6px 23px;" onclick="getFuncCode2()">再次获取</a>
+        <a href="javascript:;" class="mini-btns tc js-verifying_code" id="getTimeCode2" style="display:none;">再次获取(<span id="time_show2">180</span>)</a>
+    </p>
+    <!-- 激活2 -->
+    <!-- <p><span class="mr25">15777777777</span><a href="javascript:;" class="mini-btns">再次获取(<span>60</span>)</a></p> -->
+    <div class="mini-control">
+        <label class="mini-label" style="width:50px;">验证码</label>
+        <input class="mini-control-text smaller" id="verCode" name="verCode" type="text" style="width:138px;">
+    </div>
+    <!-- <input type="submit" value="注册并登录" class="mini-reg-submit mr25" /> -->
+    <div class="mt20" style="margin-left:50px;">
+        <a href="javascript:;" onclick="activate_succ()" class="mini-btns js-click" data-id="#activate_succ">立即激活</a>
+    </div>
+</form>
 
+<!-- 激活成功 -->
+<div class="mini-activate-succ mini-pop pf smaller none">
+    <h3>恭喜您，激活成功！</h3>
+    <button>确定</button>
+</div>
+
+<!-- 激活失败  -->
+<div class="mini-activate-fail mini-pop pf smaller none">
+    <h4 class="title"><img src="__TMPL__Public/images/mini/mini-tips_smaller.png" alt="">验证码输入错误<br>请核对您收到的验证码</h4>
+    <!-- <p>关联手机号与激活手机号不相符，请重新发送。<br>请发送短信“优衣库 虚拟试衣间”至号码15000326906，激活帐号。</p> -->
+    <button>确定</button>
+</div>
+
+<!-- 退出登录 -->
+<div class="mini-logout-confirm mini-pop pf none" id="logout">
+    <h3>您确定要离开优衣库虚拟试衣间吗？</h3>
+    <p>您的帐号尚未激活，直接退出将丢失所有衣柜中保存的衣物<br>请点击“激活账号”验证您手机号码，享有优衣库虚拟试衣间保存功能</p>
+    <p class="mt20">
+        <a href="{:U('IndexNew/loginout')}" class="mini-btns mini-btns_gray">退出登录</a>&nbsp;&nbsp;&nbsp;
+        <a href="javascript:;" class="mini-btns js-click" data-id="#activate_account">激活账号</a>
+    </p>
+</div>
+
+<!-- 激活超时，请点击刷新 -->
+<div class="mini-activate-timeout mini-pop pf none">
+    <h3>激活超时，请点击刷新</h3>
+    <button onclick="return do_refresh_relate();">刷新激活状态</button>
+</div>
+
+<!-- 抱歉，未能成功激活 -->
+<div class="mini-activate-fail2 mini-pop pf none">
+    <h3>抱歉，未能成功激活。</h3>
+    <p>关联手机号与激活手机号不相符，请重新发送。<br>请发送短信“优衣库 虚拟试衣间”至号码10690183668，激活帐号。</p>
+    <button>刷新激活状态</button>
+</div>
+
+<!-- 恭喜你，帐号激活成功 -->
+<div class="mini-activate-succ2 mini-pop pf none">
+    <h3>恭喜你，帐号激活成功！</h3>
+    <button id="mini-activate-succ">马上进入优衣库</button>
+</div>
+
+<!-- 关联手机成功，请马上激活帐号 -->
+<div class="mini-relate-notice mini-pop pf none">
+    <h3>关联手机成功，请马上激活帐号</h3>
+    <p>发送“优衣库 虚拟试衣间”至以下号码，激活帐号。<br>立即享用优衣库不定期发放的线上优惠券。<br>
+      <span style="color:#00a1e9;">移动用户：15000327770 <br>
+      联通、电信用户：10690183668</span>
+    </p>
+    <input type="hidden" id="relateMobile" name="relateMobile" value="{$mobile}" />
+    <button id="relateButton" name="relateButton" onclick="return do_relate();">刷新激活状态</button>
+</div>
+<!-- 隐私权保护声明 -->
+<div class="mini-clause mini-pop pf none">
+    <h3>隐私声明</h3>
+    <div>
+        <p>优衣库 虚拟试衣间（【uniqlo.bigodata.com.cn】，以下称“本网站”）隐私保护声明系本网站保护用户个人隐私的承诺。鉴于网络的特性，本网站将无可避免地与您产生直接或间接的互动关系，故特此说明本网站对用户个人信息所采取的收集、使用和保护政策，请您务必仔细阅读：</p>
+        <b>一、非个人化信息</b>
+        <p>我们将通过您的IP地址来收集非个人化的信息，例如您的浏览器性质、操作系统种类、给您提供接入服务的ISP的域名等，以优化在您计算机屏幕上显示的页面。通过收集上述信息，我们亦进行客流量统计。</p>
+        <p>这些无关个人身份的信息能帮助我们辨别虚拟试衣间最受欢迎的地区并确定我们推广活动的有效性。此外，我们也可能将这些信息披露给我们的广告客户，使他们知道点击他们广告的人数。</p>
+        <b>二、个人资料</b>
+        <p>当您在虚拟试衣间进行用户注册登记、网上购物等活动时，在您的同意及确认下，本网站将通过注册表格、订单等形式要求您提供一些个人资料。这些个人资料包括：</p>
+        <p>1、个人识别资料：如姓名、性别、年龄、出生日期、电话、手机号码、通信地址、电子邮件地址等。</p>
+        <p>2、个人背景： 职业、教育程度、收入状况、婚姻、家庭状况。</p>
+        <p>请了解，在未经您同意及确认之前，本网站不会将您为参加本网站之特定活动所提供的资料利用于其它目的。唯有按下列第六条规定的应政府及法律要求披露时不在此限。虚拟试衣间收集这类关于个人身份的信息主要是为了其注册成员能够更容易和更满意地使用虚拟试衣间的网页。我们的目标是向所有的互联网用户提供愉快、有益、有趣的上网经历。而这些个人信息有助于我们实现这一目标。</p>
+        <p>所有的注册成员和访问者应该知道，当他们在其他网上公开场合披露其个人身份信息，该等信息可能会被他人收集并用来向他们发送未经邀约的电子邮件。</p>
+        <b>三、信息安全</b>
+        <p>1、本网站将对您所提供的资料进行严格的管理及保护，本网站将使用相应的技术，防止您的个人资料丢失、被盗用或遭篡改。</p>
+        <p>2、本网站在必要时委托专业技术人员代为对该类资料进行电脑处理，以符合专业分工之要求。如本网站将电脑处理之通知送达予您，而您未在通知规定的时间内主动明示反对，本网站将推定您已同意。惟在其后您仍然有权如下述第四条第1款第（4）条之规定，请求停止电脑处理。</p>
+        <b>四、用户权利</b>
+        <p>1、您对于自己的个人资料享有以下权利：</p>
+        <p>（1）随时查询及请求阅览；</p>
+        <p>（2）随时请求补充或更正；</p>
+        <p>（3）随时请求删除；</p>
+        <p>（4）请求停止电脑处理及利用。</p>
+        <p>2、虚拟试衣间为其用户提供的网上游戏项目，为了参加抽签，我们通常要求申请者在联系方法(通讯地址和电话)之外，还要根据其个人兴趣填写表格。此类信息被虚拟试衣间用来累积其用户的数据。如果用户不想提供所要求的信息和参加比赛，这完全是用户的决定。</p>
+        <p>3、用户是唯一对自己的密码及其他帐户信息负有保密责任的人。当你在线时，请小心负责。</p>
+        <p>4、针对以上权利，本网站为您提供相关服务，您可以发送电子邮件至：【<a href="mailto:u@BIGOData.com.cn">u@BIGOData.com.cn</a>】</p>
+        <b>五、限制利用原则</b>
+        <p>本网站惟在符合下列条件之一，方对收集之个人资料进行必要范围以外之利用：</p>
+        <p>1、已取得您的书面同意；</p>
+        <p>2、为免除您在生命、身体或财产方面之急迫危险；</p>
+        <p>3、为防止他人权益之重大危害；</p>
+        <p>4、为增进公共利益，且无害于您的重大利益。</p>
+        <b>六、个人资料之披露</b>
+        <p>当政府机关依照法定程序要求本网站披露个人资料时，本网站将根据执法单位之要求或为公共安全之目的提供个人资料。在此情况下之任何披露，本网站均得免责。</p>
+        <b>七、未成年人隐私权的保护</b>
+        <p>1、本网站将建立和维持一合理的程序，以保护未成年人个人资料的保密性及安全性。本网站郑重声明：任何16岁以下的未成年人参加网上活动应事先得到家长或其法定监护人（以下统称为"监护人"）的可经查证的同意。</p>
+        <p>2、监护人应承担保护未成年人在网络环境下的隐私权的首要责任。</p>
+        <p>3、本网站收集未成年人的个人资料，仅为回覆未成人特定要求的目的，一旦回复完毕即从记录中删除，而不会保留这些资料做进一步的利用。</p>
+        <p>4、未经监护人之同意，本网站将不会使用未成年人之个人资料，亦不会向任何第三方披露或传送可识别该未成年人的个人资料。本网站如收集监护人或未成年人的姓名或其它网络通讯资料之目的仅是为获得监护人同意，则在经过一段合理时间仍未获得同意时，将主动从记录中删除此类资料。</p>
+        <p>5、若经未成人之监护人同意，本网站可对未成年人之个人资料进行收集，本网站将向监护人提供：</p>
+        <p>（1）审视自其子女或被监护人收集之资料的机会；</p>
+        <p>（2）拒绝其子女或被监护人的个人资料被进一步的收集或利用的机会；</p>
+        <p>（3）变更或删除其子女或被监护人个人资料的方式。</p>
+        <p>6、监护人有权拒绝本网站与其子女或被监护人做进一步的联络。</p>
+        <p>7、本网站收集未成年人的个人资料，这些资料只是单纯作为保护未成年人参与网络活动时的安全，而非作为其它目的之利用。本网站保证不会要求未成年人提供额外的个人资料，以作为允许其参与网上活动的条件。</p>
+        <b>八、Cookies</b>
+        <p>1、Cookies是指一种技术，当使用者访问设有Cookies装置的本网站时，本网站之服务器会自动发送Cookies至阁下浏览器内，并储存到您的电脑硬盘内，此Cookies便负责记录日后您到访本网站的种种活动、个人资料、浏览习惯、消费习惯甚至信用记录。</p>
+        <p>2、运用Cookies技术，本网站能够为您提供更加周到的个性化服务。本网站将会运用Cookies追访您的购物喜好，从而向您提供感兴趣的信息资料或储存密码，以便您造访本网站时不必每次重复输入密码。</p>
+        <b>九、免责</b>
+        <p>除上述第六条之规定属免责外，下列情况时本网站亦毋需承担任何责任：</p>
+        <p>1、由于您将用户密码告知他人或与他人共享注册帐户，由此导致的任何个人资料泄露。</p>
+        <p>2、任何由于计算机问题、黑客政击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营之不可抗力而造成的个人资料泄露、丢失、被盗用或被窜改等。</p>
+        <p>链接</p>
+        <p>3、虚拟试衣间的网页上有与其他网站网页的链接，包括旗帜广告和网页上的其他广告。虚拟试衣间对其他任何网站的内容、隐私政策或运营，或经营这些网站的公司的行为概不负责。在向这些与虚拟试衣间链接的网站提供个人信息之前，请查阅它们的隐私政策。</p>
+        <p>4、由于与本网站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果。</p>
+        <p>本网站之保护隐私声明的修改及更新权均属于优衣库虚拟试衣间<br>联络方式为：【<a href="mailto:u@BIGOData.com.cn">u@BIGOData.com.cn</a>】</p>
+    </div>
+    <p class="tc"><button>关闭</button></p>
+</div>
+
+<!-- 登录 -->
+<form class="mini-login mini-pop pf none">
+    <a href="javascript:;" class="mini-form-close mini-btn" >关闭</a> <!-- David -->
+    <h3>登录</h3>
+    <div class="mini-control">
+        <label class="mini-label">用户名</label>
+        <input type="text" class="mini-control-text" id="d_user_name" placeholder="手机号码/淘宝登录名" />
+    </div>
+    <div class="mini-control">
+        <label class="mini-label">密码</label>
+        <input type="password" class="mini-control-text" id="d_password" placeholder="请输入密码" />
+    </div>
+    <div class="mini-control tr">
+        <a href="javascript:;" class="mini-login-fetch">忘记密码</a>
+        <label class="nomargin"><input checked="checked" class="fl" type="checkbox" id="remember_login">记住账号</label>
+    </div>
+    <div class="mini-control tr">
+        <p class="mini-control-tips" id="login_error_msg"></p>
+    </div>
+    <div class="mini-control tr">
+        <input type="button" value="登录" onclick="return do_login();" class="mini-login-submit" />
+        <a href="javascript:;" class="mini-login-reg fl">3秒快速注册</a>
+    </div>
+</form>
+
+<!-- 找回密码 -->
+<form class="mini-fetch mini-pop pf none">
+    <a href="javascript:;" class="mini-form-close mini-btn" >关闭</a> <!-- David -->
+    <h3>找回密码</h3>
+    <div class="mini-control">
+        <label class="mini-label">手机号码</label>
+        <input type="text" class="mini-control-text" placeholder="请填写您注册用的手机号码" id="f_mobile" name="f_mobile" />
+    </div>
+    <!-- <div class="mini-control">
+      <label class="mini-label">淘宝登录名</label>
+      <input type="text" class="mini-control-text" placeholder="请填写您关联的淘宝登录名" id="f_user_name" name="f_user_name" />
+    </div> -->
+    <div class="mini-control">
+        <label class="mini-label">验证码</label>
+        <input type="text" maxlength="5" class="mini-control-text" placeholder="请填写图片中的字符，不区分大小写" id="verify" />
+    </div>
+    <div class="mini-control">
+        <label class="mini-label"></label>
+        <img id="verifyImg" src="__APP__/Login/verify/" class="fl" alt="">
+        <a href="javascript:;" class="mini-code-refresh fl" onclick="fleshVerify()" >看不清，换张图片？</a>
+    </div>
+    <div class="mini-control tr">
+        <p class="mini-control-tips" id="f_error_msg"></p>
+    </div>
+    <div class="mini-control tr">
+        <input type="button" onclick="return do_find_pwd();" value="提交" class="mini-fetch-submit" />
+        <a href="javascript:;" class="mini-fetch-back fl">返回</a>
+    </div>
+
+    <div class="mini-fetch-succ mini-pop tc pa none">
+        <p>密码将发送至您的手机请注意查收</p>
+        <button type="button">确定</button>
+    </div>
+</form>
+
+<!-- 修改密码 -->
+<form class="mini-change-password pa none">
+    <a href="javascript:;" class="mini-change-close mini-btn"></a>
+    <span class="mini-btn"></span>
+    <h3>修改密码</h3>
+    <div class="mini-control">
+        <label>
+            请输入旧密码
+            <input type="password" id="c_old_password" placeholder="6-16位字符，区分大小写">
+        </label>
+    </div>
+    <div class="mini-control">
+        <label>
+            请输入新密码
+            <input type="password" id="c_new_password" placeholder="6-16位字符，区分大小写">
+        </label>
+    </div>
+    <div class="mini-control">
+        <label>
+            请确认新密码
+            <input type="password" id="c_reg_new_password" placeholder="请再次输入密码">
+        </label>
+    </div>
+    <p class="mini-control-tips" id="pwd_error_msg"></p>
+    <input type="button" onclick="return change_pwd();" value="提交" class="mini-change-submit" />
+
+    <div class="mini-change-succ tc pa none">
+        <p>密码修改成功</p>
+        <button type="button">确定</button>
+    </div>
+</form>
 
 <!--我的优衣柜-->
 <div class="my_yyg changjing1">
@@ -362,51 +670,23 @@
 
 
 <!--选择城市弹窗-->
-<div class="map_light_box none">
-    <a href="" class="light_box_close"></a>
+<div class="map_light_box none" id="mapdiv">
+    <a href="javascript:;" class="light_box_close" id="closemap"></a>
     <h3>离您最近的优衣库UNIQLO门店</h3>
-    <div class="xuanze">
-        <dl class="select_city">
-            <dt>徐汇区</dt>
-            <dd>
-                <ul>
-                    <li><a href="#">城市1</a></li>
-                    <li><a href="#">城市2</a></li>
-                    <li><a href="#">城市3</a></li>
-                    <li><a href="#">城市4</a></li>
-                    <li><a href="#">城市5</a></li>
-                    <li><a href="#">城市6</a></li>
-                </ul>
-            </dd>
-        </dl>
-
-        <dl class="select_city">
-            <dt>日月光中心店</dt>
-            <dd>
-                <ul>
-                    <li><a href="#">日月光中心店1</a></li>
-                    <li><a href="#">日月光中心店2</a></li>
-                    <li><a href="#">日月光中心店3</a></li>
-                    <li><a href="#">日月光中心店4</a></li>
-                    <li><a href="#">日月光中心店5</a></li>
-                    <li><a href="#">日月光中心店6</a></li>
-                    <li><a href="#">日月光中心店1</a></li>
-                    <li><a href="#">日月光中心店2</a></li>
-                    <li><a href="#">日月光中心店3</a></li>
-                    <li><a href="#">日月光中心店4</a></li>
-                    <li><a href="#">日月光中心店5</a></li>
-                    <li><a href="#">日月光中心店6</a></li>
-                    <li><a href="#">日月光中心店1</a></li>
-                    <li><a href="#">日月光中心店2</a></li>
-                    <li><a href="#">日月光中心店3</a></li>
-                    <li><a href="#">日月光中心店4</a></li>
-                    <li><a href="#">日月光中心店5</a></li>
-                    <li><a href="#">日月光中心店6</a></li>
-                </ul>
-            </dd>
-        </dl>
+    <div class="mb15">
+        <select name="" id="spid" class="mr10" style="width:150px;">
+            <option selected="selected" value="44444">上海</option>
+            <option value="55555">北京</option>
+        </select>
+        <select name="" id="scid"  class="mr10" style="width:150px;">
+            <option selected="selected" value="44444">徐汇区</option>
+            <option value="55555">闵行区</option>
+        </select>
+        <select name="" id="ddlShop" style="width:200px;">
+            <option value='0'>请选择</option>
+        </select>&nbsp;<span id='emptymsg'  style="font-size:10px;color: #999999;"></span>
     </div>
-    <div class="light_box_u_map_con"></div>
+    <div class="light_box_u_map_con" id="allmap"></div>
 </div>
 <script type='text/javascript'>
     //性别对应的标记
@@ -426,8 +706,7 @@
     var goodurl = '{:U('Index/getgood')}';
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
-    var provi = '{$provi}';
-    var sendurl = '{$uniurl}';
+    var provi = '{$provi}',sendurl = '{$uniurl}';
     var addpropurl = '{:U('Lea/addlea')}';
     var registerurl = '{:U('Login/register')}';
     var findpwdurl = '{:U('Login/forget_pwd')}';
@@ -442,17 +721,555 @@
     var relateurl = '{:U('Login/relate')}';
     var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
     var tmplPath = '{:__TMPL__Public}';
-    var getweatherurl = '{:U('API/GetWeatherByCityID')}';
+    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}";
 </script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
+
+<!--<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>-->
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/dressing_room_detail.js"></script>
 </body>
 </html>
+<script>
+    $(function(){
+        $('#le1').on('change',function(){
+            var pvalue = $('#le1 option:selected').val();
+            $.post(getCityUrl,{pid:pvalue},function(data,status){
+                var str = '<option value="0">请选择</option>';
+                $.each(data.clist,function(pin,pv){
+                    if(pv.sel==1){
+                        var sel2 = "selected='selected'";
+                    }
+                    str+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
+                });
+                $('#le2').html(str);
+            });
+        });
+
+        //地图城市切换
+        $('#spid').on('change',function(){
+            var pid = $('#spid option:selected').val();
+            var url = sendurl+"mini.php/API/getcity";
+            $.post(url,{pid:pid,baiduid:1},function(data,status){
+                var str = '<option value="0">请选择</option>';
+                $.each(data.clist,function(pin,pv){
+                    str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+                });
+                $('#scid').html(str);
+                $('#ddlShop').html('<option value="0">请选择</option>');
+            });
+        });
+    });
+    $('#scid').on('change',function(){
+        H.map.centerAndZoom($("#scid option:selected").text(), 11);
+        var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
+        var cityname = $('#scid option:selected').text();
+        if(cityname[cityname.length-1]=='市'){
+            var cnm = cityname.replace('市','');
+        }else{
+            var cnm = $('#spid option:selected').text();
+        }
+
+        $.weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
+            callback: function(city, temper, info){
+                var avg = getavg(temper.high,temper.low);
+                $.weather.avg = avg;
+                avg = avg?avg:0;
+                $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
+                $.weather.sex = $.weather.sex?$.weather.sex:0;
+                $.weather.set = $.weather.set?$.weather.set:0;
+                    /*var jsonpurl ="http://uniqlo.bigodata.com.cn/u2/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+                    jsonpFcuntion(jsonpurl);*/
+
+                sendcity(city,info.city);
+            }
+        });
+    });
+    function tipsfunction(v){
+        //tips
+        stop_autochange();
+            for (i = 1; i <=3; i++) {
+                $('#tablink' + i).removeClass('current');
+                $('.preferential_' + i).css('display','none');
+            }
+            $('#tablink2').addClass('current');
+            $('.preferential_2').css('display','block');
+        $('#shopid').html(v);
+
+    }
+    var tablink_idname = new Array("tablink"),lilength = $('#scrollDiv').children().length;
+    var tabcontent_idname = new Array("preferential_");
+    var tabcount = new Array("3");
+    var loadtabs = new Array('1');
+    loadtabs[0] = 3-lilength+1;
+    var autochangemenu = 1,counter = 3-lilength,slength=3-lilength+ 1,timer;
+    var changespeed = 1;
+    var stoponhover = 0;
+
+    function easytabs(menunr, active) {
+        if (menunr == autochangemenu) {
+            currenttab = active;
+        }
+        if ((menunr == autochangemenu) && (stoponhover == 1)) {
+            stop_autochange()
+        } else if ((menunr == autochangemenu) && (stoponhover == 0)) {
+            counter = 0;
+        }
+        menunr = menunr - 1;
+        for (i = 1; i <= tabcount[menunr]; i++) {
+            $('#'+tablink_idname[menunr] + i).removeClass('current');
+            $('.'+tabcontent_idname[menunr] + i).css('display','none');
+        }
+
+        if($('#'+tablink_idname[menunr] + active)){
+            $('#'+tablink_idname[menunr] + active).addClass('current');
+            $('.'+tabcontent_idname[menunr] + active).css('display','block');
+        }
+    }
+
+    var totaltabs = tabcount[autochangemenu - 1];
+    var currenttab = loadtabs[autochangemenu - 1];
+
+    function start_autochange() {
+        counter = counter + 1;
+        timer = setTimeout("start_autochange()", 3000);
+        if (counter == changespeed + 1) {
+            currenttab++;
+            if (currenttab > totaltabs) {
+                currenttab = slength;
+            }
+            easytabs(autochangemenu, currenttab);
+            restart_autochange();
+        }
+    }
+
+    function restart_autochange() {
+        clearTimeout(timer);
+        counter = 0;
+        start_autochange();
+    }
+    function stop_autochange() {
+        clearTimeout(timer);
+        counter = 0;
+    }
+
+    var menucount = loadtabs.length;
+    var a = 0;
+    var b = 1;
+    do {
+        easytabs(b, loadtabs[a]);
+        a++;
+        b++;
+    } while (b <= menucount);
+    if (autochangemenu != 0) {
+        start_autochange();
+    }
+
+    //注册
+    function do_register(){
+        var taobao_name	= $('#taobao_name').val();
+        var password	= $('#password').val();
+        var re_password = $('#re_password').val();
+        var mobile		= $('#mobile').val();
+        var c_phone = $('#checkbox-phone').val();
+        var c_none = $('#checkbox-none').val();
+        var verifying_code = $('#verifying_code').val();
+        var isChecked = 1;
+        if(!mobile){
+            $('#msg_error').html('请填写手机号码');
+            return false;
+        }else{
+            var mobile_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+            if(!mobile_reg.test(mobile)){
+                $('#msg_error').html('手机号码格式错误');
+                return false;
+            }
+        }
+        if(!password){
+            $('#msg_error').html('请输入密码');
+            return false;
+        }else{
+            if(password.length < 6 || password.length > 16){
+                $('#msg_error').html('密码格式错误');
+                return false;
+            }
+        }
+        if(!re_password){
+            $('#msg_error').html('请再次输入密码');
+            return false;
+        }else{
+            if(password.length < 6 || password.length > 16){
+                $('#msg_error').html('密码格式错误');
+                return false;
+            }
+        }
+        if(password != re_password){
+            $('#msg_error').html('您两次输入的密码不一致');
+            return false;
+        }
+        if($('#checkbox-phone').prop('checked')){
+            if(!taobao_name){
+                $('#msg_error').html('请填写淘宝登录名');
+                return false;
+            }else{
+                if(taobao_name.length < 5 || taobao_name.length > 25){
+                    $('#msg_error').html('淘宝登录名格式错误');
+                    return false;
+                }
+            }
+        }else{
+            taobao_name = '';
+        }
+        if($('#js-checked').prop('checked')==false){
+            if(!verifying_code){
+                $('#msg_error').html('请填写验证码');
+                return false;
+            }
+        }
+        if($('#t_agree').prop('checked')==false){
+            $('#msg_error').html('请勾选“已阅读隐私条款”');
+            return false;
+        }
+        if($('#js-checked').prop('checked')){
+            isChecked = 0;
+        }
+        $.post(ckeckmobileurl,{mobile:mobile},function(data){
+            if(data['code'] < 0){
+                $('#msg_error').html(data['msg']);
+                return false;
+            }else{
+                if($('#checkbox-phone').prop('checked')){
+                    $.post(ckeckuserurl,{user_name:taobao_name},function(data){
+                        if(data['code'] < 0){
+                            $('#msg_error').html(data['msg']);
+                            return false;
+                        }else{
+                            $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
+                                if(data['code'] > 0){
+                                    $('.mini-reg-submit').addClass('disabled');
+                                    $('.mini-reg-submit').attr('disabled','disabled');
+                                    //$('.mini-register').hide();
+                                    //$('.mini-activate-notice').show();
+                                    window.location.reload();
+                                }else{
+                                    $('#msg_error').html(data['msg']);
+                                    return false;
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    $.post(registerurl,{taobao_name:taobao_name,password:password,mobile:mobile,verifying_code:verifying_code,isChecked:isChecked,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
+                        if(data['code'] > 0){
+                            $('.mini-reg-submit').addClass('disabled');
+                            $('.mini-reg-submit').attr('disabled','disabled');
+                            //$('.mini-register').hide();
+                            //$('.mini-activate-notice').show();
+                            window.location.reload();
+                        }else{
+                            $('#msg_error').html(data['msg']);
+                            return false;
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+    function getFuncCode(){
+        var mobile		= $('#mobile').val();
+        if(!mobile){
+            $('#msg_error').html('请填写手机号码');
+            return false;
+        }else{
+            var mobile_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+            if(!mobile_reg.test(mobile)){
+                $('#msg_error').html('手机号码格式错误');
+                return false;
+            }else{
+                $.post(ckeckmobileurl,{mobile:mobile},function(data){
+                    if(data['code'] < 0){
+                        $('#msg_error').html(data['msg']);
+                        return false;
+                    }else{
+                        $.post(activephone,{mobile:mobile},function(data){
+                            if(data['code'] < 0){
+                                $('#msg_error').html(data['msg']);
+                                clearInterval($.uniqlo.activePhone);
+                                return false;
+                            }else{
+                                $('#getTimeCode').css('display','inline');
+                                $('#getCode').css('display','none');
+                                $('#getNextCode').css('display','none');
+                                var i=0;
+                                $.uniqlo.activePhone = setInterval( function(){
+                                    i++;
+                                    if( 180 - i > 0 ){
+                                        $('#time_show').html(180-i);
+                                    }else{
+                                        $('#time_show').html(180);
+                                    }
+                                    if( i > 179 ){
+                                        $('#getTimeCode').css('display','none');
+                                        $('#getNextCode').css('display','inline-block');
+                                        clearInterval($.uniqlo.activePhone);
+                                    }
+                                }, 1000);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    }
+
+
+    function getFuncCode2(){
+        var mobile		= $('#userMobileCode').val();
+        $.post(activephone,{mobile:mobile},function(data){
+            if(data['code'] < 0){
+                clearInterval($.uniqlo.activePhone2);
+                return false;
+            }else{
+                $('#getTimeCode2').css('display','inline');
+                $('#getCode2').css('display','none');
+                $('#getNextCode2').css('display','none');
+                var i=0;
+                $.uniqlo.activePhone2 = setInterval( function(){
+                    i++;
+                    if( 180 - i > 0 ){
+                        $('#time_show2').html(180-i);
+                    }else{
+                        $('#time_show2').html(180);
+                    }
+                    if( i > 179 ){
+                        $('#getTimeCode2').css('display','none');
+                        $('#getNextCode2').css('display','inline-block');
+                        clearInterval($.uniqlo.activePhone2);
+                    }
+                }, 1000);
+            }
+        });
+    }
+    function do_login(){
+        var user_name	= $('#d_user_name').val();
+        var password	= $('#d_password').val();
+        if(!user_name || !password){
+            $('#login_error_msg').html('请输入正确的用户名或密码');
+            return false;
+        }
+        var is_remember_login = 0;
+        if($('#remember_login').prop('checked')){
+            is_remember_login = 1;
+        }
+        $.post(loginurl,{user_name:user_name,password:password,is_remember_login:is_remember_login,nologiidu:getCookie('nologiidu'),nologiidd:getCookie('nologiidd')},function(data){
+            if(data['code'] > 0){
+                //删除没有登录时添加的三件衣服
+                addCookie('nologiidu','',-1);
+                addCookie('nologiidd','',-1);
+                window.location.reload()
+            }else{
+                $('#login_error_msg').html(data['msg']);
+                return false;
+            }
+        });
+    }
+
+    function do_find_pwd(){
+        // var user_name	= $('#f_user_name').val();
+        var mobile	= $('#f_mobile').val();
+        var verify	= $('#verify').val();
+        // if(!user_name){
+        // 	$('#f_error_msg').html('请输入正确的淘宝登录名或手机号码');
+        // 	return false;
+        // }
+        if(!mobile){
+            $('#f_error_msg').html('请输入正确的手机号码');
+            return false;
+        }
+        /*
+         if(!verify){
+         $('#f_error_msg').html('请填写验证码');
+         return false;
+         }
+         */
+        $.post(findpwdurl,{mobile:mobile,verify:verify},function(data){
+            if(data['code'] > 0){
+                $('.mini-fetch-submit').addClass('disabled');
+                $('.mini-fetch-submit').attr('disabled','disabled');
+                $('.mini-fetch-succ').show();
+            }else{
+                $('#f_error_msg').html(data['msg']);
+                return false;
+            }
+        });
+    }
+
+    function change_pwd(){
+        var old_password = $('#c_old_password').val();
+        var new_password = $('#c_new_password').val();
+        var reg_new_password = $('#c_reg_new_password').val();
+        if(old_password.length < 6 || old_password.length > 16){
+            $('#pwd_error_msg').html('请输入正确的旧密码');
+            return false;
+        }
+        if(!new_password){
+            $('#pwd_error_msg').html('请填写新密码');
+            return false;
+        }else{
+            if(new_password.length < 6 || new_password.length > 16){
+                $('#pwd_error_msg').html('密码格式错误');
+                return false;
+            }else{
+                if(old_password == new_password){
+                    $('#pwd_error_msg').html('新密码不能与旧密码相同');
+                    return false;
+                }
+            }
+        }
+
+        if(!reg_new_password){
+            $('#pwd_error_msg').html('请再次输入密码');
+            return false;
+        }else{
+            if(new_password != reg_new_password){
+                $('#pwd_error_msg').html('您两次输入的密码不一致');
+                return false;
+            }
+        }
+        $.post(changepwdurl,{old_password:old_password,new_password:new_password},function(data){
+            if(data['code'] > 0){
+                //$('.mini-change-password').hide();
+                $('.mini-change-succ').show();
+                $('#pwd_error_msg').html('');
+            }else{
+                $('#pwd_error_msg').html(data['msg']);
+                return false;
+            }
+        });
+    }
+
+    function do_active(){
+        var a_user_name = $('#a_user_name').val();
+        var a_mobile = $('#a_mobile').val();
+        if(!a_mobile){
+            $('#active_mobile_msg').html('请填写手机号码');
+            return false;
+        }else{
+            var mobile_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+            if(!mobile_reg.test(a_mobile)){
+                $('#active_mobile_msg').html('手机号码格式错误');
+                return false;
+            }
+        }
+
+        if($('#activeAgree').prop('checked')==false){
+            $('#active_mobile_msg').html('请勾选“已阅读隐私条款”');
+            return false;
+        }
+        $.post(activeurl,{user_name:a_user_name,mobile:a_mobile},function(data){
+            if(data['code'] > 0){
+                $('.mini-relate').hide();
+                $('.mini-relate-notice').show();
+                $('#relateMobile').val(a_mobile);
+            }else{
+                $('#active_mobile_msg').html(data['msg']);
+                return false;
+            }
+        });
+    }
+
+    function do_relate(){
+        var relateMobile = $('#relateMobile').val();
+        if(relateMobile){
+            $.post(relateurl,{mobile:relateMobile},function(data){
+                if(data['code'] > 0){
+                    $('.mini-activate-notice').hide();
+                    $('.mini-relate-notice').hide();
+                    $('.mini-activate-succ').show();
+                }else{
+                    $('.mini-activate-notice').hide();
+                    $('.mini-relate-notice').hide();
+                    $('.mini-activate').show();
+                    var i=0;
+                    $.uniqlo.timerFind1 = setInterval( function(){
+                        // 查询数据库 成功？  clearInterval(find)
+                        $.post(relateurl,{mobile:relateMobile},function(data){
+                            if(data['code'] > 0){
+                                $('.mini-activate').hide();
+                                $('.mini-activate-succ').show();
+                                clearInterval($.uniqlo.timerFind1);
+                            }else{
+                                i++;
+                                if( i > 10 ){
+                                    $('.mini-activate').hide();
+                                    $('.mini-activate-timeout').show();
+                                    clearInterval($.uniqlo.timerFind1);
+                                }
+                            }
+                        });
+                    }, 3000);
+                    return false;
+                }
+            });
+        }
+    }
+
+    function do_refresh_relate(){
+        var relateMobile = $('#relateMobile').val();
+        if(relateMobile){
+            $('.mini-activate-timeout').hide();
+            $('.mini-activate').show();
+            var i=0;
+            $.uniqlo.timerFind2 = setInterval( function(){
+                // 查询数据库 成功？  clearInterval(find)
+                $.post(relateurl,{mobile:relateMobile},function(data){
+                    if(data['code'] > 0){
+                        $('.mini-activate').hide();
+                        $('.mini-activate-succ').show();
+                        clearInterval($.uniqlo.timerFind2);
+                    }else{
+                        i++;
+                        if( i > 10 ){
+                            $('.mini-activate').hide();
+                            $('.mini-activate-timeout').show();
+                            clearInterval($.uniqlo.timerFind2);
+                        }
+                    }
+                });
+            }, 3000);
+        }
+    }
+
+    function fleshVerify(){
+        //重载验证码
+        var time = new Date().getTime();
+        document.getElementById('verifyImg').src= '__APP__/Login/verify/'+time;
+    }
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('.js-checked').change(function(){
+            if ($('.js-checked:checked').length == 1) {
+                $('.verifying_code').attr('disabled',true)
+            }else{
+                $('.verifying_code').attr('disabled',false)
+            };
+        });
+        $('.js-click').click(function(e){
+            e.preventDefault;
+            var idname = $(this).attr('data-id');
+            $(idname).show().siblings('.mini-pop').hide();
+            $('.mini-mask').show()
+        });
+    })
+</script>

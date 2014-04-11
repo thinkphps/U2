@@ -3,6 +3,11 @@
  */
 
 $(function(){
+    var jsonpurl = sendurl +"mini.php/API/getshopinfo";
+    //获取店铺信息
+    $.post(jsonpurl,{},function(data,status){
+        H.initData(data);
+    },'json');
     $(".select_city").each(function(){
         var s=$(this);
         var z=parseInt(s.css("z-index"));
@@ -37,6 +42,7 @@ $(function(){
     })
     window.imgpath = imgpath;
     $.weather.init({
+        'subindex':1,
         imgpath : imgpath,
         city : cityn || null,
         callback: function(city, temper, info){

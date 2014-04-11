@@ -61,8 +61,8 @@ class IndexAction extends Action {
 	$time = date('Y-m-d H:i:s');
 	$love = M('Love');
 	$buy = M('Buy');
+    $NewArea = D('NewArea');
 	if(empty($result)){
-	//$res = $user->add(array('token'=>$token,'nick'=>$nick,'createtime'=>$time));
 	$u_id = 0;
 	}else{
 	$u_id = $result['id'];
@@ -81,66 +81,7 @@ class IndexAction extends Action {
             }
         }
 	}
-	//取出收场数据
-	$clothes = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'1','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
-   foreach($clothes as $k=>$v){
-    switch($v['type']){
-		case '1' :
-		$sexname = '女装';
-		break;
-        case '2' :
-		$sexname = '男装';
-		break;
-		case '3' :
-		$sexname = '童装';
-		break;
-    }
-	$clothes[$k]['csex'] = $sexname;
-   	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name,u_goodtag.ccateid')->where(array('u_goodtag.good_id'=>$v['gid'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>2))->find();
-	$clothes[$k]['tagname1'] = $gtag['name'];
-	$clothes[$k]['fg'] = $gtag['ccateid'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['gid'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
-	$clothes[$k]['tagname2'] = $gtag2['name'];
-	$islove = $love->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
-	if(!empty($islove)){
-     $clothes[$k]['love'] = 1;
-	}
-	$isbuy = $buy->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
-	if(!empty($isbuy)){
-     $clothes[$k]['buy'] = 1;
-	}
-   }
-	$pants = $goods->join('u_collection on u_goods.num_iid=u_collection.num_iid')->field('u_goods.id as gid,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_collection.id')->where(array('u_collection.uid'=>$u_id,'u_goods.isud'=>'2','u_collection.is_delete'=>'0'))->order('u_collection.id desc')->select();
-   foreach($pants as $k=>$v){
-   	switch($v['type']){
-		case 1 :
-		$sexname = '女装';
-		break;
-        case 2 :
-		$sexname = '男装';
-		break;
-		case 3 :
-		$sexname = '童装';
-		break;
-    }
-	$pants[$k]['csex'] = $sexname;
-   	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name,u_goodtag.ccateid')->where(array('u_goodtag.good_id'=>$v['gid'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>2))->find();
-	$pants[$k]['tagname1'] = $gtag['name'];
-	$pants[$k]['fg'] = $gtag['ccateid'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['gid'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
-	$pants[$k]['tagname2'] = $gtag2['name'];
-	$islove = $love->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
-	if(!empty($islove)){
-     $pants[$k]['love'] = 1;
-	}
-	$isbuy = $buy->field('id')->where(array('num_iid'=>$v['num_iid'],'uid'=>$u_id))->find();
-	if(!empty($isbuy)){
-     $pants[$k]['buy'] = 1;
-	}	
-   }
-   
+
    //取出性别所对应的tagid
    $tag = M('Tag');
    $recomodel = D('Reco');
@@ -151,217 +92,8 @@ class IndexAction extends Action {
    $cclist = $recomodel->getfc('1','3','1');//小孩场合
    $cflist = $recomodel->getfc('2','3','1');//小孩风格
    $bflist = $recomodel->getfc('2','4','1');//baby风格
-		//取得官方推荐数据
-	$windex = D('Windex');
-	$tag = D('Tag');
-    $cbusiness = $tag->gettagid('商务',1);
-	$mcarr[] = array('id'=>$cbusiness,'name'=>'商务','c'=>1);
-    $courism = $tag->gettagid('逛街',1);
-	$mcarr[] = array('id'=>$courism,'name'=>'逛街','c'=>5);
-	$csport = $tag->gettagid('运动',1);
-	$mcarr[] = array('id'=>$csport,'name'=>'运动','c'=>3);
-	$cjujia = $tag->gettagid('居家',1);
-	$mcarr[] = array('id'=>$cjujia,'name'=>'居家','c'=>4);
-    //取得场合id 
-    $fbusiness = $tag->gettagid('休闲',2);
-	$mfarr[] = array('id'=>$fbusiness,'name'=>'休闲','c'=>6);
-    $fourism = $tag->gettagid('酷',2);
-	$mfarr[] = array('id'=>$fourism,'name'=>'酷','c'=>4);
-	$fsport = $tag->gettagid('英伦',2);
-	$mfarr[] = array('id'=>$fsport,'name'=>'英伦','c'=>8);
-	$fjujia = $tag->gettagid('学院',2);
-	$mfarr[] = array('id'=>$fjujia,'name'=>'学院','c'=>9);
 
-    //取出婴幼儿装的分类
-    $babycate = $customcate->cache(true)->field('id,name')->where(array('gtype'=>'4'))->select();
-    //取出自定义分类
-	$ucuslist = array();//上装
-	$dcuslist = array();//下装
-    $custom = $customcate->cache(true)->field('id,name')->where(array('isud'=>'1'))->group('name')->select();
-	foreach($custom as $k=>$v){
-    $idlist = $customcate->cache(true)->field('id')->where(array('name'=>$v['name'],'isud'=>'1'))->select();
-	$idstr = '';
-	foreach($idlist as $k1=>$v1){
-	if($v1){
-     $idstr.=$v1['id'].'_';
-		}
-	}
-	$idstr = rtrim($idstr,'_');
-
-    $ucuslist[] = array('id'=>$idstr,'name'=>$v['name']);
-	}
-
-	//转换自定义分类显示顺序s
-	$k1 = 0;$k2 = 0;$k3 = 0;$k4 = 0;$k5 = 0;$k6 = 0;$k7 = 0;$k8 = 0;$k9 = 0;
-	$k10 = 0;$k11 = 0;$k12 = 0;$k13 = 0;$k14 = 0;$k15 = 0;$k16 = 0;$k17 = 0;
-	$k18 = 0;$k19 = 0;$k20 = 0;$k21 = 0;$k22 = 0;$k23 = 0;
-	foreach($ucuslist as $ku=>$vu){
-	if($vu['name']=='茄克'){
-	$k1 = $ku;	
-	}else if($vu['name']=='羽绒服'){
-	$k2 = $ku;	
-	}else if($vu['name']=='外套'){
-	$k3 = $ku;	
-	}else if($vu['name']=='大衣'){
-	$k4 = $ku;	
-	}else if($vu['name']=='开衫'){
-	$k5 = $ku;	
-	}else if($vu['name']=='连帽开衫'){
-	$k6 = $ku;	
-	}else if($vu['name']=='卫衣'){
-	$k7 = $ku;	
-	}else if($vu['name']=='马甲'){
-	$k8 = $ku;	
-	}else if($vu['name']=='毛衣'){
-	$k9 = $ku;	
-	}else if($vu['name']=='针织衫'){
-	$k10 = $ku;	
-	}else if($vu['name']=='法兰绒衬衫'){
-	$k11 = $ku;	
-	}else if($vu['name']=='衬衫'){
-	$k12 = $ku;	
-	}else if($vu['name']=='UT合作款'){
-	$k13 = $ku;	
-	}else if($vu['name']=='T恤'){
-	$k14 = $ku;	
-	}else if($vu['name']=='背心'){
-	$k15 = $ku;	
-	}else if($vu['name']=='吊带衫'){
-	$k16 = $ku;	
-	}else if($vu['name']=='婴幼儿装'){
-	$k17 = $ku;	
-	}else if($vu['name']=='连体装'){
-	$k18 = $ku;	
-	}else if($vu['name']=='POLO'){
-	$k19 = $ku;	
-	}else if($vu['name']=='连衣裙'){
-	$k20 = $ku;	
-	}else if($vu['name']=='保暖上装'){
-	$k21 = $ku;	
-	}else if($vu['name']=='家居服'){
-	$k22 = $ku;	
-	}else if($vu['name']=='内衣'){
-	$k23 = $ku;	
-	}
-	}
-	/*
-	$middle = $ucuslist[2];
-	$ucuslist[2] = $ucuslist[$k3];
-	$ucuslist[$k3] = $middle;
-
-	$middle = $ucuslist[0];
-	$ucuslist[0] = $ucuslist[$k1];
-	$ucuslist[$k1] = $middle;
-    
-	$middle = $ucuslist[1];
-	$ucuslist[1] = $ucuslist[$k2];
-	$ucuslist[$k2] = $middle;
-
-	$middle = $ucuslist[3];
-	$ucuslist[3] = $ucuslist[$k4];
-	$ucuslist[$k4] = $middle;
-	
-	$middle = $ucuslist[4];
-	$ucuslist[4] = $ucuslist[$k5];
-	$ucuslist[$k5] = $middle;
-	
-	$ucuslist[5] = $ucuslist[19];
-	*/
-	$newucuslist = array();//上装
-	$newucuslist[0] = $ucuslist[16];
-	$newucuslist[1] = $ucuslist[14];
-	$newucuslist[2] = $ucuslist[7];
-	$newucuslist[3] = $ucuslist[8];
-	$newucuslist[4] = $ucuslist[11];
-	$newucuslist[5] = $ucuslist[19];
-	$newucuslist[6] = $ucuslist[5];
-	//$newucuslist[7] = $ucuslist[22];
-	$newucuslist[8] = $ucuslist[12];
-	$newucuslist[9] = $ucuslist[21];
-	$newucuslist[10] = $ucuslist[13];
-	$newucuslist[11] = $ucuslist[17];
-	$newucuslist[12] = $ucuslist[2];
-	$newucuslist[13] = $ucuslist[1];
-	$newucuslist[14] = $ucuslist[15];
-	$newucuslist[15] = $ucuslist[6];
-	$newucuslist[16] = $ucuslist[9];
-	$newucuslist[17] = $ucuslist[18];
-	$newucuslist[18] = $ucuslist[0];
-	$newucuslist[19] = $ucuslist[20];
-	$newucuslist[20] = $ucuslist[3];
-	$newucuslist[21] = $ucuslist[10];
-	$newucuslist[22] = $ucuslist[4];
-    
-	//转换自定义分类显示顺序e
-    $dcustom = $customcate->cache(true)->field('id,name')->where(array('isud'=>'2'))->group('name')->select();
-	foreach($dcustom as $k=>$v){
-    $didlist = $customcate->cache(true)->field('id')->where(array('name'=>$v['name'],'isud'=>'2'))->select();
-	$didstr = '';
-	foreach($didlist as $k1=>$v1){
-	if($v1){
-     $didstr.=$v1['id'].'_';
-		}
-	}
-	$didstr = rtrim($didstr,'_');
-    $dcuslist[] = array('id'=>$didstr,'name'=>$v['name']);
-	}
-	foreach($dcuslist as $ku=>$vu){
-	/*if($vu['name']=='婴幼儿装'){
-		$dcuslist[$ku] = array();
-	}*/
-	if($vu['name']=='保暖下装'){
-	$k1 = $ku;	
-	}else if($vu['name']=='紧身裤'){
-	$k2 = $ku;	
-	}else if($vu['name']=='长裤'){
-	$k3 = $ku;	
-	}else if($vu['name']=='牛仔裤'){
-	$k4 = $ku;	
-	}
-	}
-	/*
-	$middle = $dcuslist[2];
-	$dcuslist[2] = $dcuslist[$k3];
-	$dcuslist[$k3] = $middle;
-
-	$middle = $dcuslist[0];
-	$dcuslist[0] = $dcuslist[$k1];
-	$dcuslist[$k1] = $middle;
-    
-	$middle = $dcuslist[1];
-	$dcuslist[1] = $dcuslist[$k2];
-	$dcuslist[$k2] = $middle;
-	
-
-	$middle = $dcuslist[3];
-	$dcuslist[3] = $dcuslist[$k4];
-	$dcuslist[$k4] = $middle;
-	*/
-	$newdcuslist = array();//下装
-	$newdcuslist[0] = $dcuslist[7];
-	$newdcuslist[1] = $dcuslist[13];
-	$newdcuslist[2] = $dcuslist[4];
-	$newdcuslist[3] = $dcuslist[10];
-	$newdcuslist[4] = $dcuslist[14];
-	$newdcuslist[5] = $dcuslist[9];
-	$newdcuslist[6] = $dcuslist[11];
-	$newdcuslist[7] = $dcuslist[12];
-	$newdcuslist[8] = $dcuslist[1];
-	$newdcuslist[9] = $dcuslist[0];
-	$newdcuslist[10] = $dcuslist[2];
-	$newdcuslist[11] = $dcuslist[8];
-	$newdcuslist[12] = $dcuslist[3];
-	$newdcuslist[13] = $dcuslist[6];
-	$newdcuslist[14] = $dcuslist[5];
-	
-	
     $this->assign('nick',$nick);
-	$this->assign('token',$token);
-	$this->assign('clothes',$clothes);
-	$this->assign('pants',$pants);
-	
-	/*$this->assign('reulist',$reulist);
-	$this->assign('redlist',$redlist);*/
 	//性别所对应的tag
     $this->assign('wclist',json_encode($wclist));//女性场合
 	$this->assign('wflist',json_encode($wflist));//女性分割
@@ -373,19 +105,7 @@ class IndexAction extends Action {
 	$this->assign('mcarr',json_encode($mcarr));
 	$this->assign('mfarr',json_encode($mfarr));
 
-	//默认场合,风格id
-	$this->assign('cbusiness',$cbusiness);
-	$this->assign('courism',$courism);
-	$this->assign('csport',$csport);
-	$this->assign('cjujia',$cjujia);
-	
-	$this->assign('fbusiness',$fbusiness);
-	$this->assign('fourism',$fourism);
-	$this->assign('fsport',$fsport);
-	$this->assign('fjujia',$fjujia);
-	//自定义分类
-	$this->assign('ucuslist',$newucuslist);
-	$this->assign('dcuslist',$newdcuslist);
+    $this->assign('newstore',C('NEWSRORE'));
 	$this->assign('cityn',cookie('cityn'));
 	$this->assign('provi',cookie('pro'));
 	$this->assign('uniurl',C('UNIQLOURL'));
@@ -436,7 +156,6 @@ class IndexAction extends Action {
 	cookie('uniq_user_name',null);
 	cookie('uniq_user_id',null);
 	session_destroy();
-	//$this->success('退出成功',U('Index/index'));
 	$this->redirect('Index/index');
   }
 

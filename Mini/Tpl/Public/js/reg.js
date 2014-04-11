@@ -72,8 +72,8 @@ jQuery(function($) {
     left = offset.left;
     top = offset.top;
     return Register.changePW.css({
-      'left': left + 61,
-      'top': top + 67
+      'left': left + 72,
+      'top': top - 5
     }).show();
   });
   Register.changePW.on('click', 'a.mini-change-close', function() {
