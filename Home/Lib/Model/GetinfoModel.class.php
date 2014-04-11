@@ -143,4 +143,14 @@ class GetinfoModel extends Action{
         }
         return $suitSelect;
     }
+
+    //取得home有条件使得数据
+    public function getConSuitsList($where){
+       $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->select();
+        $goodsDetail = M('SuitsGoodsdetail');
+       foreach($result as $k=>$v){
+           $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+       }
+        return $result;
+    }
 }

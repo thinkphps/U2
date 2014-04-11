@@ -190,6 +190,36 @@ class IndexnewAction extends Action{
         $re = json_encode($suitSelect);
         echo $callback."($re)";
     }
+  //获取有条件传入时的套图
+    public function getConSuits(){
+        $callback=$_GET['callback'];
+        $tem = trim($this->_request('tem'));
+        $sid = trim($this->_request('sid'));//性别
+        $fid = trim($this->_request('fid'));//风格
+        $sid = $sid?$sid:0;
+        $fid = $fid?$fid:0;
+        $Weather = D('Getinfo');
+        if($fid!=0){
+           $where['u_suits.suitStyleID'] = $fid;
+        }
+        if($sid!=0){
+          $where['u_suits.suitGenderID'] = $sid;
+        }
+        if($sid==0 && $fid==0){
+         //风格，类别都没有选走这里
+            $setingtem = $Weather->getKeyValue('temperature');
+            if($tem>=$setingtem['value']){
+                $type = 1;
+            }else{
+                $type = 2;
+            }
+            $list = $Weather->getSutsValue($type);
+        }else{
+            $list = $Weather->getConSuitsList($where);
+        }
+        $re = json_encode($list);
+        echo $callback."($re)";
+    }
 //ajax取数据
     public function ajaxgood(){
         $type = trim($this->_request('tageid')); //场合id
