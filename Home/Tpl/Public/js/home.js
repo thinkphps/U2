@@ -430,6 +430,15 @@ jQuery(function($){
             if(target) return
         })
 
+        function hideKvhover(){
+
+            cabnet.kvHover.hide()
+            cabnet.kvIsOpen = false
+        }
+
+        $("#ulweek,.dr_main_con_sub_nav,.mini-kv-slide,.dr_header").on("mouseenter",hideKvhover);
+
+
 
 //        $(document).mousemove(function(e){
 //            var div = $(e.target).closest('div')

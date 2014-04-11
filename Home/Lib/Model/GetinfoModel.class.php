@@ -18,7 +18,7 @@ class GetinfoModel extends Action{
         }
         return $arr;
     }
-    //È¡ÌìÆø
+    //È¡ï¿½ï¿½ï¿½ï¿½
     public function getweather($city='',$city_bn=''){
         $weather = M('Weather');
         if(!empty($city)){
@@ -42,7 +42,7 @@ class GetinfoModel extends Action{
         }
         return $cbn;
     }
-    //È¡µÃÊ¡
+    //È¡ï¿½ï¿½Ê¡
     public function getpca(){
         $area = M('Areas');
         $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -66,7 +66,7 @@ class GetinfoModel extends Action{
         $clist = M('Areas')->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
         return $clist;
     }
-    //È¡µÃµêÆÌÊý¾Ý
+    //È¡ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public function getshopinfo(){
         $shop = M('Shop');
         $list = $shop->cache(true)->join('inner join u_areas on u_shop.cityid=u_areas.region_id')->field('u_shop.id,u_shop.longitude,u_shop.latitude,u_shop.sname,u_shop.saddress,u_shop.tradetime,u_shop.scall,u_shop.sange,u_areas.local_name,u_areas.p_region_id,u_areas.citybn')->select();
@@ -80,7 +80,7 @@ class GetinfoModel extends Action{
         return $arr;
     }
 
-    //¸ù¾Ý³ÇÊÐID»ñÈ¡ÌìÆøÐÅÏ¢
+    //ï¿½ï¿½Ý³ï¿½ï¿½ï¿½IDï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     public function GetWeatherInfoByID($id)
     {
         $weathers = M('weather w');
@@ -93,12 +93,12 @@ class GetinfoModel extends Action{
         return $weatherInfo;
 
     }
-    //È¡µÃµêÆÌÐÅÏ¢
+    //È¡ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     public function shopinfo($id){
         $result = M('Shop')->field('sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
         return $result;
     }
-    //È¡µÃÃÅµêµØÇøÐÅÏ¢
+    //È¡ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     public function getShopArea($p='',$c=''){
         $area = M('Areas');
         $plist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -135,7 +135,7 @@ class GetinfoModel extends Action{
 
     public function getSutsValue($type){
         //$suitSelect = M('SuitsSelect')->cache(true)->join('inner join u_suits suits on u_suits_select.suitID=suits.suitID')->field('suits.suitID,suits.suitImageUrl')->where(array('u_suits_select.selected'=>'1','u_suits_select.type'=>$type))->select();
-        $sql = "select suits.`suitID`,suits.`suitImageUrl`,ustyle.`description` from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
+        $sql = "select suits.`suitID`,suits.`suitImageUrl`,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){

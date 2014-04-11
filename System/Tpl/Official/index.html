@@ -1,300 +1,310 @@
 <include file="Public:header"/>
 <div class="container official">
-  <ol class="breadcrumb">
-    <li><a href="{:U('Index/index')}">首页</a></li>
-    <li class="active"><strong>官方推送</strong></li>
-  </ol>
-  <p class="well-sm">
-    <span class="pull-left">方案一：当天气温≤</span>
-    <span class="col-lg-1" style="margin-top:-6px;">
-      <input type="text" class="form-control" <if condition="$tm neq 0">value="{$tm}"<else/>value="25"</if> id='lttem'/>
-    </span>℃时，用户看到以下推荐商品
-  </p>
-  <div class="row text-center">
-  	<if condition="$list1 neq ''">
-  	<volist id='vo' name='list1' key='key2'>
-     <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">{$vo.num_iid}</p>
-          <p><input type="text" class="form-control hide" id='spid1{$key2}' value='{$vo.num_iid}' onchange="getcolor({$key2},1,{$vo.num_iid});"></p>
-          <span id='img1{$key2}' style='display:none;'></span>
-          <span id='rid1{$key2}' style='display:none;'>{$vo.id}</span>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <if condition="$key ELT 4">
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key2},1,1);">保存</button>
-          <else/>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key2},1,2);">保存</button>
-          </if>
-          
-        <div id='c{$vo.num_iid}'>
-        <if condition="$vo['color'] neq ''">
-        <volist id="cvo" name="vo['color']" key='k2'>
-        <if condition="$cvo.cvalue neq ''">
-        <img src='__ROOT__/{$cvo.url}' title='{$cvo.cvalue}' width='50px' height='50px' onclick="getcolorUrl({$key2},1,'{$cvo.url}');">&nbsp;&nbsp;
-        </if>
-        </volist>
-        </if>
-        </div>
-        </div>
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>官方推送</strong></li>
+    </ol>
 
+    <p class="well-sm">
+        <span class="pull-left">平均气温</span>
+        <span class="col-lg-1" style="margin-top:-6px;">
+            <input type="text" class="form-control" <if condition="$tm neq ''">value="{$tm}"<else/>value="15"</if> id='lttem'/>
+        </span>℃
+        <button style="margin-top:-6px;" class="btn btn-success" onclick="savetmp();">保存气温</button>
+    </p>
+
+    <div id="divedit" style="display: none">
+       <div class="form-group">
+           <label>按风格检索</label>
+           <select name='isstyle'>
+               <option value=''>请选择</option>
+               <volist id='volstyle' name='stylelist'>
+                   <option value="{$volstyle.ID}">{$volstyle.description}</option>
+               </volist>
+           </select>
+           <button class="btn btn-success" id="btnsearch" onclick="searchsuit(1,'');">搜索</button>
+       </div>
+
+      <table id="tbsuits" class="table table-striped table-hover text-center table-responsive table-condensed">
+          <thead>
+          <th style="width: 20%"/>
+          <th style="width: 20%"/>
+          <th style="width: 20%"/>
+          <th style="width: 20%"/>
+          <th style="width: 20%"/>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+      <div class="text-right">
+          <a href="#" id="hfprepage" title="0" onclick="searchsuit($(this).attr('title'),'per');">上一页</a>
+          <a href="#" id="hfnextpage" title="0" onclick="searchsuit($(this).attr('title'),'next');" >下一页</a>
       </div>
-    </div> 		
-   </volist>
-   <else/>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid10'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(0,1,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid11'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(1,1,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid12'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(2,1,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid13'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(3,1,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid14'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(4,1,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid15'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(5,1,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid16'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(6,1,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid17'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(7,1,2);">保存</button>
-        </div>
-      </div>
-    </div>
-   </if>
+
   </div>
-  <p class="well-sm">方案二：当天气温＞<span id='twotm'><if condition="$tm neq 0">{$tm}<else/>25</if></span>℃时，用户看到以下推荐商品</p>
-  <div class="row text-center">
-  	<if condition="$list2 neq ''">
-  	<volist id='vo2' name='list2' key='key3'>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">{$vo2.num_iid}</p>
-          <p><input type="text" class="form-control hide" id='spid2{$key3}' value='{$vo2.num_iid}' onchange="getcolor({$key3},2,{$vo2.num_iid});"></p>
-          <span id='img2{$key3}' style='display:none;'></span>
-          <span id='rid2{$key3}' style='display:none;'>{$vo2.id}</span>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <if condition="$key3 ELT 4">
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key3},2,1);">保存</button>
-          <else/>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco({$key3},2,2);">保存</button>
-          </if>
-        </div>
-        <div id='c{$vo2.num_iid}'>
-        <if condition="$vo2['color'] neq ''">
-        <volist id="cvo2" name="vo2['color']">
-        <if condition="$cvo2.cvalue neq ''">	
-        <img src='__ROOT__/{$cvo2.url}' title='{$cvo2.cvalue}' width='50px' height='50px' onclick="getcolorUrl({$key3},2,'{$cvo2.url}');">&nbsp;&nbsp;
-        </if>
+
+  <div id="divreview">
+
+
+    <div id="divreview1">
+    <p class="well-sm">
+      方案一：当天气温≤边界气温时，用户看到以下推荐套装
+      <button type="button" id="btnrecomend1" class="btn btn-info" onclick="reco(1);">保存推荐</button>
+      <button type="button" id="btnchange1" class="btn btn-info" onclick="showedit(1);">替换推荐</button>
+      <button type="button" id="btncancel1" class="btn btn-warning" style="display: none" onclick="canceledit(1);">取消替换</button>
+    </p>
+    <div class="row text-center" style="height:100%" id="divreco1">
+          <volist id='vo' name='selsuits1'>
+              <div class="col-sm-6 " style="width: 25%" name="divsst{$vo.suitStyleID}">
+                  <div class="thumbnail">
+                      <div class="caption">
+                          <p class="js-official-id">{$vo.description}</p>
+                          <div>
+                              <img src='__ROOT__/{$vo.suitImageUrl}' width='200px' height='250px'>
+                          </div>
+                          <label class="checkbox-inline">
+                              <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco1');"
+                              <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
+                          <label class="checkbox-inline">
+                              <input type="checkbox" class="delch" onclick="$(this).parent().parent().parent().parent().remove();">删除</label>
+                      </div>
+                  </div>
+              </div>
+          </volist>
+    </div>
+    </div>
+    <div id="divreview2">
+    <p class="well-sm">
+      方案二：当天气温＞边界气温时，用户看到以下推荐套装
+      <button type="button" id="btnrecomend2" class="btn btn-info" onclick="reco(2);">保存推荐</button>
+      <button type="button" id="btnchange2" class="btn btn-info" onclick="showedit(2);">替换推荐</button>
+      <button type="button" id="btncancel2" class="btn btn-warning" style="display: none" onclick="canceledit(2);">取消替换</button>
+    </p>
+    <div class="row text-center" style="height:100%" id="divreco2">
+        <volist id='vo' name='selsuits2'>
+            <div class="col-sm-6" style="width: 25%" name="divsst{$vo.suitStyleID}">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p class="js-official-id">{$vo.description}</p>
+                        <div>
+                            <img src='__ROOT__/{$vo.suitImageUrl}' width='200px' height='250px'>
+                        </div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco2');"
+                            <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="delch" onclick="$(this).parent().parent().parent().parent().remove();">删除</label>
+                    </div>
+                </div>
+            </div>
         </volist>
-        </if>
-        </div>
-      </div>
-    </div>  		
-   </volist>
-   <else/>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid20'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(0,2,1);">保存</button>
-        </div>
-      </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid21'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(1,2,1);">保存</button>
-        </div>
-      </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid22'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(2,2,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid23'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(3,2,1);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid24'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(4,2,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid25'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(5,2,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid26'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(6,2,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <div class="caption">
-          <p>商品数字ID：</p>
-          <p class="js-official-id">18632267046</p>
-          <p><input type="text" class="form-control hide" id='spid27'></p>
-          <button type="button" class="btn btn-info js-official-alter">替换</button>
-          <button type="button" class="btn btn-success js-official-save hide" onclick="reco(7,2,2);">保存</button>
-        </div>
-      </div>
-    </div>
-    </if>
   </div>
 </div>
 <include file="Public:footer"/>
 <script type='text/javascript'>
-var url = "{:U('Official/add')}",colorurl = "{:U('Official/getcolor')}",indexurl = "{:U('Official/index')}";
-	/*
-    type:1为方案一2为方案2
-	issue:1为上装2为下装
-	*/
-function reco(id,type,issue){
-var kuid = $('#spid'+type+id).val(),lttem = $('#lttem').val(),rid = $('#rid'+type+id).text(),srcvalue = $('#img'+type+id).text();
+    var indexurl = "{:U('Official/index')}";
+    var savetmpurl = "{:U('Official/savetmp')}";
+    var searchurl = "{:U('Official/search')}";
+    var recourl = "{:U('Official/recommend')}";
 
-  $.post(url,{kuid:kuid,type:type,rid:rid,issue:issue,lttem:lttem,srcvalue:srcvalue},function(data,status){
-	  var da = eval("("+data+")");
-	  if(da.flag){
-	  $('#spid'+type+id).val(da.num_iid);
-	  $('#lttem').val(da.stm);
-	  if(da.rid){
-      $('#rid'+type+id).text(da.rid);
-       }
-      $('#twotm').text(lttem);
-      window.location.href = indexurl;
-	  }else{
-       //alert(da.msg);
-	  }
-	  });
-}
-//获取颜色
-function getcolor(id,type,iid){
- var num_iid = $('#spid'+type+id).val();
- if(num_iid>0){
- $.post(colorurl,{num_iid:num_iid,type:type,id:id},function(data,status){
-    if(data['code']==1){
- 	$('#c'+iid).html(data['msg']);
-    }else if(data['code']==-1){
-    alert(data['msg']);	
-    }	
- });	
- }
-}
-function getcolorUrl(id,type,src){
-	$('#img'+type+id).text(src);
-}
+    function ckreco(e,dv){
+        var cknum = 0;
+        var maxcknum = 8;
+        var msg = "您最多只能推荐八种套装";
+
+        $("#"+dv).find('input[type=checkbox]').each(function(){
+            if($(this).prop("checked")==true){
+                cknum = cknum + 1;
+            }
+            if(cknum>maxcknum){
+                e.attr("checked",false);
+                alert(msg);
+                return;
+            }
+        });
+    }
+
+    function showedit(idx){
+        if(idx == 1){
+            $('#btncancel1').show();
+            $('#btnchange1').hide();
+            $('#btnchange2').attr("disabled",true);
+        }
+        if(idx == 2){
+            $('#btncancel2').show();
+            $('#btnchange2').hide();
+//               $('#btnchange2').text('保存套装');
+//            $('#btnchange2').attr('class','btn btn-success');
+            $('#btnchange1').attr("disabled",true);
+
+            var divrew =  $('#divreview1').clone();
+            $('#divreview1').remove();
+            $('#divreview').append(divrew);
+        }
+        $('#divedit').show();
+        $("#tbsuits tbody").find("tr").each(function(){
+            $(this).find("input[type='checkbox']").each(function(){
+                $(this).attr("checked",false);
+            });
+        });
+        $('#btnsearch').focus();
+    }
+
+    function canceledit(idx){
+        if(idx == 1){
+            $('#btncancel1').hide();
+            $('#divedit').hide();
+            $('#btnchange1').show();
+            $('#btnchange2').attr("disabled",false);
+            $('#btnchange1').focus();
+        }
+        if(idx == 2){
+            $('#btncancel2').hide();
+            $('#divedit').hide();
+            $('#btnchange2').show();
+            $('#btnchange1').attr("disabled",false);
+            var divrew =  $('#divreview2').clone();
+            $('#divreview2').remove();
+            $('#divreview').append(divrew);
+            $('#btnchange2').focus();
+        }
+    }
+
+    function selsuit(e,styid,sutid,sutimg,description){
+        if(e.prop("checked")==true){
+            $("#tbsuits tbody").find("tr").each(function(){
+                $(this).find("input[type='checkbox']").each(function(){
+                    if($(this).val()!=sutid){
+                        $(this).attr("checked",false);
+                    }
+                });
+            });
+        }
+
+        var isexit = false;
+        var dv = "";
+        if(!$('#btnchange1').attr("disabled")){
+            dv=dv + "divreco1";
+        }
+        if(!$('#btnchange2').attr("disabled")){
+            dv=dv + "divreco2";
+        }
+        $("#" + dv).find('div[name=divsst'+ styid +']').each(function(){
+            isexit = true;
+            if(e.prop("checked")==true){
+                $(this).find('img').each(function(){
+                    $(this).attr("src",'__ROOT__/'+ sutimg);
+                });
+                $(this).find('input[type=checkbox]').each(function(){
+                    $(this).val(sutid);
+                });
+            }else{
+                $(this).remove();
+            }
+            return;
+        })
+        if(!isexit && e.prop("checked")==true){
+            var dvn = "'" + dv + "'";
+            var sstdiv = "<div class='col-sm-6' style='width:25%' name='divsst" + styid + "'>"+
+                "<div class='thumbnail'>"+ "<div class='caption'>"+
+                "<p class='js-official-id'>"+ description+ "</p><div>"+
+                "<img src='__ROOT__/" + sutimg + "' width='200px' height='250px'></div>"
+                +"<label class='checkbox-inline'>"
+                +"<input type='checkbox' name='ckreco' value='" + sutid + "' class='delch'" + ' onclick="ckreco($(this),' + dvn + ');">推荐</label>'
+                +"<label class='checkbox-inline'>"
+                + "<input type='checkbox' class='delch' onclick='$(this).parent().parent().parent().parent().remove();'>删除</label>"
+                +"</div></div></div>"
+            $("#" + dv).append(sstdiv);
+        }
+    }
+
+    function reco(type){
+        var reco = "";
+        var div = "";
+        if(type==1){
+            div = '#divreco1';
+        }
+        if(type==2){
+            div = '#divreco2';
+        }
+        $(div).find("input[name=ckreco]").each(function(){
+            if(reco==""){
+                reco = "{'sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+            }else{
+                reco = reco + ",{'sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+            }
+        })
+        $.post(recourl,{type:type,reco:"[" + reco + "]"},function(data,status){
+            if(data=="1"){
+                alert("已保存推荐套装。");
+            }else{
+                alert("保存推荐套装失败。");
+            }
+        });
+    }
+
+    function searchsuit(page,act){
+        if(act!="" && page=='0'){
+            return;
+        }
+
+        $.post(searchurl,{
+            isstyle : $('select[name=isstyle]').val(),
+            page:page,
+            act:act
+        },function(data,status){
+            if(data==""){
+                $("#tbsuits tbody").find("tr").each(function(){
+                    $(this).remove();
+                });
+                $('#hfprepage').attr("title","0");
+                $('#hfnextpage').attr("title","0");
+            }else if(data=="1"){
+                return;
+            }
+            else{
+                var da = eval("("+data+")");
+                $("#tbsuits tbody").find("tr").each(function(){
+                    $(this).remove();
+                });
+                var tr = $("<tr/>");
+                for (var i = 1 ; i<= 5;i++){
+                    var styleid = "'" + da[0][String(i)]["styleID"] + "'";
+                    var suitid = "'" + da[0][String(i)]["id"] + "'";
+                    var suitimg = "'" + da[0][String(i)]["img"] + "'";
+                    var suitdesp = "'" + da[0][String(i)]["desp"] + "'";
+
+                    if(da[0][String(i)]["id"]!=""){
+                        var td = $("<td/>");
+                        var div = $("<div/>");
+                        div.append($("<img src='__ROOT__/" + da[0][String(i)]["img"] + "' width='200px' height='250px'>"));
+                        div.append($("<label class='checkbox-inline'><input type='checkbox' value='" + da[0][String(i)]["id"] + "' class='delch' " +
+                                'onclick="selsuit($(this),'+ styleid +','+ suitid +','+ suitimg +','+ suitdesp +');">选择</label>'));
+                        td.append(div);
+                        tr.append(td);
+                    }else{
+                        tr.append($("<td/>"));
+                    }
+                }
+                $("#tbsuits tbody").append(tr);
+
+                $('#hfprepage').attr("title",String(da[0]["page"]));
+                $('#hfnextpage').attr("title",String(da[0]["page"]));
+            }
+        });
+    }
+
+    function savetmp(){
+        $.post(savetmpurl,{
+            tmp : $('#lttem').val()
+        },function(data,status){
+            if(data){
+                alert("平均温度已保存");
+            }
+        });
+    }
+
+
 </script>

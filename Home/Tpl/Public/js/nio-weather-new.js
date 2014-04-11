@@ -251,7 +251,7 @@ jQuery(function($){
             }
         },
         removeBackgroundClass:function(){
-            for(var i = 1;i<=5;i++){
+            for(var i = 1;i<=6;i++){
                 if($("#div_header").hasClass("dr_header_bg"+ i) && $("#div_main").hasClass("dr_main_con_bg"+ i)){
                     $("#div_header").removeClass("dr_header_bg"+ i);
                     $("#div_main").removeClass("dr_main_con_bg"+ i);
@@ -352,7 +352,7 @@ jQuery(function($){
                     $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
                     $.weather.sex = $.weather.sex?$.weather.sex:0;
                     $.weather.set = $.weather.set?$.weather.set:0;
-                    if($.weather.sex == 0 ||($.weather.occasion == 0 && $.weather.sex == undefined)){
+                    if($.weather.sex.toString() == "0" && $.weather.set.toString() != "1" ||($.weather.occasion.toString() == "0" && $.weather.sex == undefined )){
                         getSuits();
                     }else{
 
