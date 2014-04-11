@@ -18,7 +18,7 @@ class GetinfoModel extends Action{
         }
         return $arr;
     }
-    //ȡ����
+
     public function getweather($city='',$city_bn=''){
         $weather = M('Weather');
         if(!empty($city)){
@@ -42,7 +42,7 @@ class GetinfoModel extends Action{
         }
         return $cbn;
     }
-    //ȡ��ʡ
+    //ȡ��ʡ
     public function getpca(){
         $area = M('Areas');
         $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -66,7 +66,7 @@ class GetinfoModel extends Action{
         $clist = M('Areas')->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
         return $clist;
     }
-    //ȡ�õ������
+
     public function getshopinfo(){
         $shop = M('Shop');
         $list = $shop->cache(true)->join('inner join u_areas on u_shop.cityid=u_areas.region_id')->field('u_shop.id,u_shop.longitude,u_shop.latitude,u_shop.sname,u_shop.saddress,u_shop.tradetime,u_shop.scall,u_shop.sange,u_areas.local_name,u_areas.p_region_id,u_areas.citybn')->select();
@@ -80,7 +80,6 @@ class GetinfoModel extends Action{
         return $arr;
     }
 
-    //��ݳ���ID��ȡ������Ϣ
     public function GetWeatherInfoByID($id)
     {
         $weathers = M('weather w');
@@ -93,12 +92,12 @@ class GetinfoModel extends Action{
         return $weatherInfo;
 
     }
-    //ȡ�õ�����Ϣ
+
     public function shopinfo($id){
         $result = M('Shop')->field('sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
         return $result;
     }
-    //ȡ���ŵ������Ϣ
+
     public function getShopArea($p='',$c=''){
         $area = M('Areas');
         $plist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -129,8 +128,8 @@ class GetinfoModel extends Action{
     }
 
     public function getKeyValue($key){
-          $result = M('Settings')->cache(true)->field('value')->where(array('key'=>$key))->find();
-          return $result;
+        $result = M('Settings')->cache(true)->field('value')->where(array('key'=>$key))->find();
+        return $result;
     }
 
     public function getSutsValue($type){
@@ -144,13 +143,12 @@ class GetinfoModel extends Action{
         return $suitSelect;
     }
 
-    //取得home有条件使得数据
     public function getConSuitsList($where){
-       $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->select();
+        $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->select();
         $goodsDetail = M('SuitsGoodsdetail');
-       foreach($result as $k=>$v){
-           $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
-       }
+        foreach($result as $k=>$v){
+            $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+        }
         return $result;
     }
 }
