@@ -735,12 +735,26 @@
              $(this).children('a').addClass('select');
             $.post(styleurl,{sid:sid},function(data,status){
                 if(data){
-                var listlength = data.length,strHtml = "";;
+               if(sid!=4){
+                var listlength = data.sty.length,strHtml = "";;
                 for(var i = 0 ;i < listlength;i++){
-                    strHtml += getGenstyleItem(data[i],i);
+                    strHtml += getGenstyleItem(data.sty[i],i);
                 }
                 $(".detail_sub_nav li").eq(3).nextAll().remove();
                 $(".detail_sub_nav li").eq(3).after(strHtml);
+                if(data.def){
+                    var deflength = data.def.length,str = "";
+                    for(var i = 0 ;i < deflength;i++){
+                        str += "<div class=\"model\"><img src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                    }
+                    $('#sfid').html(str);
+                }else{
+                    $('#sfid').html('');
+                }
+                }else{
+                  //婴幼儿走这里
+                   $(".detail_sub_nav li").eq(3).nextAll().remove();
+                }
               }else{
                     $(".detail_sub_nav li").eq(3).nextAll().remove();
                 }
