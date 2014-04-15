@@ -333,7 +333,7 @@ class APIAction extends Action
         $returnValue = array(
             'code' => -1,
             'msg' => array(
-                'success' => [],
+                'success' => array(),
                 'error' => ''
             )
         );
