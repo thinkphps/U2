@@ -386,6 +386,7 @@ var callBackFunction = {
     }
 };
 
+
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
 var tabcount = new Array("3");
@@ -393,6 +394,9 @@ var loadtabs = new Array("1");
 var autochangemenu = 1,counter = 0,slength;
 var changespeed = 1;
 var stoponhover = 0;
+var menucount = loadtabs.length;
+var a = 0;
+var b = 1;
 
 function easytabs(menunr, active) {
     if (menunr == autochangemenu) {
