@@ -423,50 +423,50 @@
         <!--天气-->
         <div class="weather">
 
-            <ul>
-                <li class="w_select">
-                    <i title="晴天" class="nio-0"></i>
+            <ul id="ulweek">
+                <li class="w_select" id="li_day0">
+                    <i title="晴天" class="nio-0" id="title_day0"></i>
                     <div class="w_temperature">
-                        <p class="w_t_1">20</p>
-                        <p class="w_t_2">/15</p>
-                        <p class="w_t_week">星期一</p>
-                        <p class="w_t_name">晴转小雨</p>
+                        <p class="w_t_1" id="h_day0">20</p>
+                        <p class="w_t_2" id="l_day0">/15</p>
+                        <p class="w_t_week" id="week_day0">星期一</p>
+                        <p class="w_t_name" id="name_day0">晴转小雨</p>
                     </div>
                 </li>
-                <li>
-                    <i title="晴天" class="nio-1"></i>
+                <li id="li_day1">
+                    <i title="晴天" class="nio-1" id="title_day1"></i>
                     <div class="w_temperature">
-                        <p class="w_t_1">20</p>
-                        <p class="w_t_2">/15</p>
-                        <p class="w_t_week">星期二</p>
-                        <p class="w_t_name">晴转小雨</p>
+                        <p class="w_t_1" id="h_day1">20</p>
+                        <p class="w_t_2" id="l_day1">/15</p>
+                        <p class="w_t_week" id="week_day1">星期二</p>
+                        <p class="w_t_name" id="name_day1">晴转小雨</p>
                     </div>
                 </li>
-                <li>
-                    <i title="晴天" class="nio-2"></i>
+                <li id="li_day2">
+                    <i title="晴天" class="nio-2" id="title_day2"></i>
                     <div class="w_temperature">
-                        <p class="w_t_1">20</p>
-                        <p class="w_t_2">/15</p>
-                        <p class="w_t_week">星期三</p>
-                        <p class="w_t_name">晴转小雨</p>
+                        <p class="w_t_1" id="h_day2">20</p>
+                        <p class="w_t_2" id="l_day2">/15</p>
+                        <p class="w_t_week" id="week_day2">星期三</p>
+                        <p class="w_t_name" id="name_day2">晴转小雨</p>
                     </div>
                 </li>
-                <li>
-                    <i title="晴天" class="nio-3"></i>
+                <li id="li_day3">
+                    <i title="晴天" class="nio-3" id="title_day3"></i>
                     <div class="w_temperature">
-                        <p class="w_t_1">20</p>
-                        <p class="w_t_2">/15</p>
-                        <p class="w_t_week">星期四</p>
-                        <p class="w_t_name">晴转小雨</p>
+                        <p class="w_t_1" id="h_day3">20</p>
+                        <p class="w_t_2" id="l_day3">/15</p>
+                        <p class="w_t_week" id="week_day3">星期四</p>
+                        <p class="w_t_name" id="name_day3">晴转小雨</p>
                     </div>
                 </li>
-                <li class="last">
-                    <i title="晴天" class="nio-33"></i>
+                <li class="last" id="li_day4">
+                    <i title="晴天" class="nio-33" id="title_day4"></i>
                     <div class="w_temperature">
-                        <p class="w_t_1">20</p>
-                        <p class="w_t_2">/15</p>
-                        <p class="w_t_week">星期五</p>
-                        <p class="w_t_name">晴转小雨</p>
+                        <p class="w_t_1" id="h_day4">20</p>
+                        <p class="w_t_2" id="l_day4">/15</p>
+                        <p class="w_t_week" id="week_day4">星期五</p>
+                        <p class="w_t_name" id="name_day4">晴转小雨</p>
                     </div>
                 </li>
             </ul>
@@ -475,19 +475,24 @@
         <!--分类-->
         <div class="dr_main_con_sub_nav">
             <ul class="rw_sub_nav">
-                <li class="rw_all"><a href="#"></a></li>
-                <li class="rw_nvzhuang"><a href="#"></a></li>
-                <li class="rw_nanzhuang"><a href="#" class="select"></a></li>
-                <li class="rw_tongzhuang"><a href="#"></a></li>
-                <li class="rw_yinyouer"><a href="#"></a></li>
+                <li class="rw_all cateu2" la=''><a href="javascript:;"></a></li>
+                <li class="rw_nvzhuang cateu2" la='1'><a href="javascript:;" class="select"></a></li>
+                <li class="rw_nanzhuang cateu2" la='2'><a href="javascript:;"></a></li>
+                <li class="rw_tongzhuang cateu2" la='3'><a href="javascript:;"></a></li>
+                <li class="rw_yinyouer cateu2" la='4'><a href="javascript:;"></a></li>
             </ul>
             <ul class="ch_sub_nav">
-                <li class="ch_all"><a href="#"></a></li>
-                <li><a href="#" class="ch_a_1"></a><a href="#" class="ch_a_2 select"></a></li>
-                <li><a href="#" class="ch_b_1"></a><a href="#" class="ch_b_2"></a></li>
-                <li><a href="#" class="ch_c_1"></a><a href="#" class="ch_c_2"></a></li>
-                <li><a href="#" class="ch_d_1"></a><a href="#" class="ch_d_2"></a></li>
-                <li class="last"><a href="#" class="ch_e_1"></a><a href="#" class="ch_e_2"></a></li>
+                <li class="ch_all"><a href="javascript:;" class='cateuchil2'></a></li>
+                <php>
+                for($i=1;$i<=$stylenum;$i++){
+                    if($i==1){
+                    $sel = 'select';
+                    }else{
+                    $sel = '';
+                    }
+                    echo "<li><a href=\"javascript:;\" class=\"ch_".$suit_style_list[($i-1)*2]['pid2']." ".$sel." cateuchil2\"></a><a href=\"javascript:;\" class=\"ch_".$suit_style_list[($i-1)*2+1]['pid2']." cateuchil2\"></a></li>";
+                }
+                </php>
             </ul>
         </div>
 
@@ -497,30 +502,18 @@
             <h3><p>优衣库推荐款式</p><span>RECOMMENDED STYLE</span></h3>
             <div class="left_tj">
                 <ul>
-                    <li><a href="#" class="w_select">全部上装</a></li>
-                    <li><a href="#">羽绒服</a></li>
-                    <li><a href="#">外套</a></li>
-                    <li><a href="#">大衣</a></li>
-                    <li><a href="#">开衫</a></li>
-                    <li><a href="#">长裤</a></li>
-                    <li><a href="#">卫裤</a></li>
-                    <li><a href="#">裙子</a></li>
-                    <li><a href="#">高弹力裤</a></li>
-                    <li><a href="#">外套</a></li>
+                    <li id='alluid'><a href="#" class="w_select">全部上装</a></li>
+                    <volist id='ucvo' name='ucuslist'>
+                    <li laid='{$ucvo.id}'><a href="javascript:;">{$ucvo.name}</a></li>
+                    </volist>
                 </ul>
             </div>
             <div class="right_tj">
                 <ul>
-                    <li><a href="#" class="w_select">全部上装</a></li>
-                    <li><a href="#">羽绒服</a></li>
-                    <li><a href="#">外套</a></li>
-                    <li><a href="#">大衣</a></li>
-                    <li><a href="#">开衫</a></li>
-                    <li><a href="#">长裤</a></li>
-                    <li><a href="#">卫裤</a></li>
-                    <li><a href="#">裙子</a></li>
-                    <li><a href="#">高弹力裤</a></li>
-                    <li><a href="#">外套</a></li>
+                    <li id='alldid'><a href="#" class="w_select">全部上装</a></li>
+                    <volist id='dcvo' name='dcuslist'>
+                        <li laid='{$dcvo.id}'><a href="javascript:;">{$dcvo.name}</a></li>
+                    </volist>
                 </ul>
             </div>
             <div class="zk_btn"><a href="#"></a></div>
@@ -694,7 +687,7 @@
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
     var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
-    var addpropurl = '{:U('Lea/addlea')}',sdataurl = "{:U('Getinfo/styleToData')}";
+    var addpropurl = '{:U('Lea/addlea')}',sdataurl = "{:U('Getinfo/styleToData')}",midstyleurl = "{:U('Getinfo/midsexToStyle')}";
     var registerurl = '{:U('Login/register')}';
     var findpwdurl = '{:U('Login/forget_pwd')}';
     var changepwdurl = '{:U('Login/change_pwd')}';
@@ -761,6 +754,34 @@
             },'json');
         });
 
+        //mini中部类别切换
+        $('.cateu2').on('click',function(){
+            var midsid = $(this).attr('la');
+            $('.cateu2').children('a').removeClass('select');
+            $(this).children('a').addClass('select');
+            $.post(midstyleurl,{sid:midsid},function(data,status){
+             if(data){
+               var midstr = '';
+               for(var i = 1;i<=data.count;i++){
+                   midstr+="<li><a href=\"javascript:;\" class=\"ch_"+data.sty[(i-1)*2].pid2+" cateuchil2\"></a><a href=\"javascript:;\" class=\"ch_"+data.sty[(i-1)*2+1].pid2+" cateuchil2\"></a></li>";
+               }
+               $('li.ch_all').nextAll('li').remove();
+               $('li.ch_all').after(midstr);
+               //上下装
+               var ustr = '',dstr='';
+                 $.each(data.u,function(i,name){
+                     ustr+="<li laid='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                 });
+                 $.each(data.d,function(i,name){
+                     dstr+="<li laid='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                 });
+                 $('#alluid').nextAll('li').remove();
+                 $('#alluid').after(ustr);
+                 $('#alldid').nextAll('li').remove();
+                 $('#alldid').after(dstr);
+             }
+            },'json');
+        });
         $('#le1').on('change',function(){
             var pvalue = $('#le1 option:selected').val();
             $.post(getCityUrl,{pid:pvalue},function(data,status){
@@ -799,7 +820,12 @@
         if(data){
             var listlength = data.length,strHtml = "";;
             for(var i = 0 ;i < listlength;i++){
-                strHtml += "<div class=\"model\"><img src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                if(i<4){
+                var show = "style='display:block;'";
+                }else{
+                var show = "style='display:none;'";
+                }
+                strHtml += "<div class=\"model\" "+show+"><img src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
             }
            $('#sfid').html(strHtml);
         }else{
@@ -808,6 +834,11 @@
         });
     });
 
+    //mini中部类别选择
+    $('.ch_sub_nav').on('click','.cateuchil2',function(){
+        $('.cateuchil2').removeClass('select');
+        $(this).addClass('select');
+    });
     //换一批
     $('#changeid').on('click',function(){
         var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;

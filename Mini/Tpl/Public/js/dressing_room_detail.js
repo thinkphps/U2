@@ -84,7 +84,7 @@ $(function(){
 
     $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
         var that = $(this)
-        $.uniqlo.index.togClass(that, 'mini-checked')
+        $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
             index : that.index() + 1,
             imgpath : window.imgpath,

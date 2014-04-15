@@ -204,19 +204,41 @@ jQuery(function($){
 
             $('#nio-tip').text(this.tips[arrIndex]);
 
-            $('#nio-day1').text(time[0].day);
-            $('#nio-day2').text(time[1].day);
-            $('#nio-day3').text(time[2].day);
-            $('#nio-day4').text(time[3].day);
-            $('#nio-day5').text(time[4].day);
-            //$('#nio-day6').text(time[5].day);
+            //天气图标
+            $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) + 1)});
+            $('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) + 1)});
+            $('#title_day2').attr({'title': info['weather3'].wt, 'class': 'nio-' + (parseInt(info['weather3'].di) + 1)});
+            $('#title_day3').attr({'title': info['weather4'].wt, 'class': 'nio-' + (parseInt(info['weather4'].di) + 1)});
+            $('#title_day4').attr({'title': info['weather5'].wt, 'class': 'nio-' + (parseInt(info['weather5'].di) + 1)});
 
-            $('#nio-tem1').html(info['weather1'].ht+ '&deg;');
-            $('#nio-tem2').html(info['weather2'].ht+ '&deg;');
-            $('#nio-tem3').html(info['weather3'].ht+ '&deg;');
-            $('#nio-tem4').html(info['weather4'].ht+ '&deg;');
-            $('#nio-tem5').html(info['weather5'].ht+ '&deg;');
-            //$('#nio-tem6').html(info['weather6'].ht+ '&deg;');
+            //星期几
+            $('#week_day0').text(time[0].day);
+            $('#week_day1').text(time[1].day);
+            $('#week_day2').text(time[2].day);
+            $('#week_day3').text(time[3].day);
+            $('#week_day4').text(time[4].day);
+
+            //最高温
+            $('#h_day0').html(info['weather1'].ht);
+            $('#h_day1').html(info['weather2'].ht);
+            $('#h_day2').html(info['weather3'].ht);
+            $('#h_day3').html(info['weather4'].ht);
+            $('#h_day4').html(info['weather5'].ht);
+
+            //最低温
+            $('#l_day0').html(info['weather1'].lt);
+            $('#l_day1').html(info['weather2'].lt);
+            $('#l_day2').html(info['weather3'].lt);
+            $('#l_day3').html(info['weather4'].lt);
+            $('#l_day4').html(info['weather5'].lt);
+
+            //文字描述
+            $('#name_day0').html(info['weather1'].wt);
+            $('#name_day1').html(info['weather2'].wt);
+            $('#name_day2').html(info['weather3'].wt);
+            $('#name_day3').html(info['weather4'].wt);
+            $('#name_day4').html(info['weather5'].wt);
+
 
             this[option.city] = info['cityname'];
             var temper = {low: weatherinfo.lt,

@@ -30,7 +30,6 @@ class GetinfoAction extends Action{
                 break;
             }
             if($sid!=4){
-            $recomodel = D('Reco');
             foreach($result as $k=>$v){
             $result[$k]['pid'] = $recomodel->pageToDataStyle($v['ID']);
             }
@@ -71,5 +70,43 @@ class GetinfoAction extends Action{
           S('sf'.$sid.$fid,serialize($result),array('type'=>'file'));
           }
           $this->ajaxReturn($result, 'JSON');
+    }
+
+    //中间点击分类获取所对应得风格和自定义分类
+    public function midsexToStyle(){
+        $sid = trim($this->_request('sid'));
+        $sid = $sid?$sid:0;
+
+        $recomodel = D('Reco');
+        switch($sid){
+            case 3 :
+                $where['u_settings_gender_style.genderID'] = array('exp','IN(3,4)');
+                $result = $this->getGS($where);
+                //取出自定义分类
+                $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
+                $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
+            break;
+            case 4 :
+                $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
+                $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
+            break;
+            default :
+                $where['u_settings_gender_style.genderID'] = $sid;
+                $result = $this->getGS($where);
+                $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
+                $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
+            break;
+        }
+        if($sid!=4){
+            foreach($result as $k=>$v){
+                $result[$k]['pid2'] = $recomodel->pageToDataStyle2($v['ID']);
+            }
+
+        }
+        $arr['sty'] = $result;
+        $arr['count'] = ceil(count($result)/2);
+        $arr['u'] = $ucuslist;
+        $arr['d'] = $dcuslist;
+        $this->ajaxReturn($arr, 'JSON');
     }
 }

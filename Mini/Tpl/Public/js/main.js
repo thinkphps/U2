@@ -764,7 +764,7 @@ jQuery(function($){
       suit: $('div.mini-gender'),
       tips: $('div.mini-gender-tips'),
       place: $('ul.index-bar-place'),
-      week: $('ul.mini-week'),
+      week: $('#ulweek'),
       singleSlide: $('div.index-single'),
       suitSlide: $('div.index-suit'),
       suitIsOpen: false,

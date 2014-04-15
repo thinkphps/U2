@@ -79,9 +79,11 @@ class IndexAction extends Action {
     if(S('dstyle')){
         $suit_style_list = unserialize(S('dstyle'));
     }else{
+        //取得性别所对应的风格
        $suit_style_list =  $suit_style->cache(true)->join('inner join u_settings_gender_style as g on u_settings_suit_style.ID=g.styleID')->field('u_settings_suit_style.ID')->where(array('g.genderID'=>1))->select();
         foreach($suit_style_list as $k=>$v){
             $suit_style_list[$k]['pid'] = $recomodel->pageToDataStyle($v['ID']);
+            $suit_style_list[$k]['pid2'] = $recomodel->pageToDataStyle2($v['ID']);
         }
       S('dstyle',serialize($suit_style_list),array('type'=>'file'));
     }
@@ -89,11 +91,19 @@ class IndexAction extends Action {
     if(S('styledata')){
         $beubeu_suits_list = unserialize(S('styledata'));
     }else{
+        //默认模特图
        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where(array('suitStyleID'=>1,'suitGenderID'=>1))->order('uptime desc')->select();
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
+    //默认女士上下装自定义分类
+    $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
+    $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
+
     $this->assign('beubeu_suits_list',$beubeu_suits_list);
+    $this->assign('stylenum',ceil(count($suit_style_list)/2));
     $this->assign('suit_style_list',$suit_style_list);
+    $this->assign('ucuslist',$ucuslist);
+    $this->assign('dcuslist',$dcuslist);
     //优衣库二期
 
    //取出性别所对应的tagid

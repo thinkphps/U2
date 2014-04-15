@@ -40,10 +40,18 @@ class RecoModel extends Model{
         $arr = array(8,13,9,10,12,5,6,7,11,14);
         return $arr[$key-1];
     }
-
+    public function pageToDataStyle2($key){
+        $arr = array('d_1','d_2','e_1','a_2','c_2','a_1','b_1','c_1','b_2','e_2');
+        return $arr[$key-1];
+    }
     public function getBeubeu($where){
         $beubeu_suits = M('BeubeuSuits');
         $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where($where)->order('uptime desc')->select();
         return $beubeu_suits_list;
+    }
+
+    //取出自定义分类
+    public function getCusData($where){
+     return M('Customcate')->field('id,name')->where($where)->select();
     }
 }
