@@ -3,7 +3,7 @@
  */
 var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-var baseurl='http://localhost/U2/';
+var baseurl='http://uniqlo.bigodata.com.cn/u2/';
 var timer;
 (function($, window, document,undefined) {
 
@@ -386,6 +386,7 @@ var callBackFunction = {
     }
 };
 
+
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
 var tabcount = new Array("3");
@@ -393,6 +394,9 @@ var loadtabs = new Array("1");
 var autochangemenu = 1,counter = 0,slength;
 var changespeed = 1;
 var stoponhover = 0;
+var menucount = loadtabs.length;
+var a = 0;
+var b = 1;
 
 function easytabs(menunr, active) {
     if (menunr == autochangemenu) {
@@ -414,6 +418,7 @@ function easytabs(menunr, active) {
         $('.'+tabcontent_idname[menunr] + active).css('display','block');
     }
 }
+
 
 var totaltabs = tabcount[autochangemenu - 1];
 var currenttab = loadtabs[autochangemenu - 1];
