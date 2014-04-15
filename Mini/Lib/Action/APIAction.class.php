@@ -324,4 +324,72 @@ class APIAction extends Action
         $arr['shopid'] = $shopid;
         $this->ajaxReturn($arr, 'JSON');
     }
+
+
+//dean 同步标签接口
+    public function GetTagsByUqID()
+    {
+        error_log(print_r($_REQUEST,1),3,'1.txt');
+        $returnValue = array(
+            'code' => -1,
+            'msg' => array(
+                'success' => [],
+                'error' => ''
+            )
+        );
+        $app = $_GET['app'];
+        $key = $_GET['key'];
+        $data = $_GET['data'];
+        if (!isset($data) || !isset($key) || !isset($app) ||
+            empty($data) || empty($key) || empty($app)
+        ) {
+            $returnValue['msg']['error'] = '1. 传递参数错误';
+        }else{
+
+            $products = $data["products"];
+            if (!isset($products)|| empty($products)){
+                $returnValue['msg']['error'] = '1. 传递参数错误';
+            }else{
+                $suitSyn = D('SuitsSyn');
+                $returnValue = $suitSyn->GetTagsByUQID($app, $key, $products);
+            }
+        }
+        $this->ajaxReturn($returnValue, 'JSONP');
+    }
+
+    //dean 同步搭配接口
+    public function UpdatebeubeuSuits()
+    {
+        error_log(print_r($_REQUEST,1),3,'1.txt');
+        $returnValue = array(
+            'code' => 1,
+            'msg' => array(
+                'success' => '',
+                'error' => ''
+            )
+        );
+        $app = $_GET['app'];
+        $key = $_GET['key'];
+        $data = $_GET['data'];
+        $batchid = $_GET['batchid'];
+
+        if (!isset($data) || !isset($key) || !isset($app) || !isset($batchid) ||
+            empty($data) || empty($key) || empty($app) || empty($batchid)
+        ) {
+            $returnValue['msg']['error'] = '1. 传递参数错误';
+        } else {
+
+            $suits = $data["suits"];
+
+            if (!isset($suits)|| empty($suits)){
+                $returnValue['msg']['error'] = '1. 传递参数错误';
+            }else{
+                $suitSyn = D('SuitsSyn');
+                $returnValue = $suitSyn->UpdatebeubeuSuits($app, $key, $suits, $batchid);
+            }
+        }
+
+        $this->ajaxReturn($returnValue, 'JSONP');
+
+    }
 }
