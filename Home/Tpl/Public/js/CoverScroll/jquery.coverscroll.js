@@ -13,6 +13,7 @@
 	    'selectedclass':'selectedItem', // class name of the selected item
 	    'scrollactive':true, // scroll functionality switch
 	    'step':{ // compressed items on the side are steps
+            'begin':0,//first shown step
 	    	'limit':4, // how many steps should be shown on each side
 	    	'width':8, // how wide is the visible section of the step in pixels
 	    	'scale':true // scale down steps
@@ -58,7 +59,10 @@
         // getting the index of middle item
 //        var mindex = Math.ceil(imgs.length/2-1);
 //        dean
-        var mindex = imgs.length-1;
+//        var mindex = imgs.length-1;
+        var mbegin =  (opt.step.begin===0||opt.step.begin > 0)?opt.step.begin:0;
+        var mend =  (opt.step.limit > 0)? (mbegin + opt.step.limit-1):0;
+        var mindex = (mend> 0)? mend:imgs.length-1;
 
    		// draww all items on their appropriate places
         showItems(el, imgs, mindex,true);
@@ -202,20 +206,21 @@
       function countimglefts(el, imgs){
           var imglefts= new Array();
           var allimglen = 0;
-          for(i=0;i<imgs.length;i++){
-              var citem = $(imgs.get(i));
-              if(i==imgs.length-1){allimglen = allimglen + 149}
+          var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?opt.step.begin:0;
+          var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
+          var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:19;
+          for(i=mbegin;i<mend;i++){
+//              var citem = $(imgs.get(i));
+              if(i==mend-1){allimglen = allimglen + 149}
               else{allimglen = allimglen + 149 * 0.95}
           }
-          var mleft =  (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:15;
-          mleft += 4;
 //          if((el.width()- allimglen)/2 > mleft){
 //              mleft = Math.round((el.width()- allimglen)/2);
 //          }
 
           imglefts.push(mleft)
-          for(i=0;i<imgs.length-1;i++){
-              var citem = $(imgs.get(i));
+          for(i=mbegin;i<mend-1;i++){
+//              var citem = $(imgs.get(i));
               mleft = Math.round(mleft + 149 * 0.95);
               mleft -= 3;
               imglefts.push(mleft);
@@ -236,6 +241,8 @@
         var middle = $(imgs.get(mindex));
         // take care of the middle item
         var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:15; //dean
+        var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+        var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
         var d = (el.height() > 250)?250:el.height();
        //            dean
         var css = {
@@ -245,16 +252,16 @@
         };
           //            dean
           if(isinit){
-              css["left"] =  imglefts[mindex];
+              css["left"] =  imglefts[mindex-mbegin];
               css['top']=minfactor;
               css['width']=234;
           }else{
-              if(mindex== imgs.length-1 ){
+              if(mindex== mend-1 ){
                   css['width']=234;
               }else{
                   css['width']=234;
               }
-              css["left"] =  imglefts[mindex];
+              css["left"] =  imglefts[mindex-mbegin];
           }
         css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
 
@@ -281,8 +288,8 @@
         var showing = true;
         var cleft = Math.round(el.width()/2 - d/2);
 
-          var imgwithlist = new Array();
-          var scale = minscale;
+        var imgwithlist = new Array();
+        var scale = minscale;
         for(i=mindex-1;i>=0;i--){
         	var citem = $(imgs.get(i));
         	cd = cd - minfactor;
@@ -314,7 +321,15 @@
         	};
             //            dean
             if(isinit){
-                css["left"] =  imglefts[i];
+
+                if(i<mbegin){
+                    css["left"] =  -250;
+                    citem.hide();
+                }else{
+                    css["left"] =  imglefts[i-mbegin];
+                    citem.show();
+                }
+//                css["left"] =  imglefts[i];
                 css['top']=minfactor;
             }else{
                 css['width']=240
@@ -343,18 +358,19 @@
         	}
         	
         }
-
-          var mleft = 19;
-          for(i=0;i<=mindex-1;i++){
-              var citem = $(imgs.get(i));
-              if(i==0){
-                  mleft = mleft;
-                  citem.css('left',mleft);
-              }else{
-                  mleft = Math.round(mleft + imgwithlist[mindex-1-i] * 0.70);
-                  citem.css('left',mleft);
+          if(!isinit){
+              var mleft = 19;
+              for(i=mbegin;i<=mindex-1;i++){
+                  var citem = $(imgs.get(i));
+                  if(i==mbegin){
+                      citem.css('left',mleft);
+                  }else{
+                      mleft = Math.round(mleft + imgwithlist[mindex-1-i] * 0.70);
+                      citem.css('left',mleft);
+                  }
               }
           }
+
 
           //middle to right items
         var cd = d, sc=0; sf = false;
@@ -394,7 +410,14 @@
 
             //            dean
             if(isinit){
-                css["left"] =  imglefts[i];
+                if((i-mbegin)>imglefts.length-1){
+                    css["left"] = el.width();
+                    citem.hide();
+                }else{
+                    css["left"] =  imglefts[i-mbegin];
+                    citem.show();
+                }
+//                css["left"] =  imglefts[i];
                 css['top']=minfactor;
             }else {
                 if(i== imgs.length-1 ){
@@ -425,17 +448,19 @@
         		citem.css(css);
         	}
         }
-
-          var mleft = imglefts[mindex+1]
-          for(i=mindex+1;i<imgs.length;i++){
-              var citem = $(imgs.get(i));
-              if(i==mindex+1){
-                  citem.css('left',mleft);
-              }else{
-                  mleft = Math.round(mleft + imgwithlist[i-mindex-2] * 0.70);
-                  citem.css('left',mleft);
+          if(!isinit){
+              var mleft = imglefts[mindex+1-mbegin]
+              for(i=mindex+1;i<mend;i++){
+                  var citem = $(imgs.get(i));
+                  if(i==mindex+1){
+                      citem.css('left',mleft);
+                  }else{
+                      mleft = Math.round(mleft + imgwithlist[i-mindex-2] * 0.70);
+                      citem.css('left',mleft);
+                  }
               }
           }
+
 
 
         // take care of z-index
@@ -526,7 +551,115 @@
         var el = $(this);
         el.find('.'+gopt.selectedclass+':eq(0)').prev().trigger('click');
       });
-    }
+    },
+      //dean
+      'movenext':function(imgs){
+
+          if(gopt.step.begin + gopt.step.limit == imgs.length){
+              return;
+          }
+          //hide this first
+          var lcitem = $(imgs.get(gopt.step.begin));
+          var css = {
+              'width':234,
+              'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
+              'left': -250
+          };
+          lcitem.css(css);
+
+          //show one more
+          gopt.step.begin = gopt.step.begin +1;
+          var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+          var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
+          var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:15;
+
+          for(i=mbegin;i<mend;i++){
+              var citem = $(imgs.get(i));
+              mleft = (i==mbegin)?mleft: mleft + citem.width() * 0.75;
+
+              if(i==mend-1){
+                  citem.show();
+              }
+              var css = {
+                  'width':234,
+                  'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
+                  'left': mleft
+              };
+
+              if(gopt.msie){
+                  isScrolling = true;
+                  citem.animate(css, 500, function(){isScrolling=false});
+              }else{
+                  citem.css(css);
+              }
+          }
+
+          // take care of z-index
+          setTimeout(function(){
+              var zi = 100;
+              imgs.each(function(ind){
+
+                  zi = zi + ind;
+                  $(this).css('z-index',zi);
+              });
+          },100);
+
+      },
+      //dean
+      'moveprev':function(imgs,w){
+          //show this first
+
+          if(gopt.step.begin== 0){
+              return;
+          }
+
+          var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+          var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit-1):0;
+
+          var hcitem = $(imgs.get(mend));
+          var css = {
+              'width':234,
+              'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
+              'left': w+10
+          };
+          hcitem.css(css);
+          //show one more
+          gopt.step.begin = gopt.step.begin -1;
+          var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+          var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
+          var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:15;
+
+          for(i=mbegin;i<mend;i++){
+              var citem = $(imgs.get(i));
+              mleft = (i==mbegin)?mleft: mleft + citem.width() * 0.75;
+
+              if(i==mbegin){
+                  citem.show();
+              }
+              var css = {
+                  'width':234,
+                  'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
+                  'left': mleft
+              };
+
+              if(gopt.msie){
+                  isScrolling = true;
+                  citem.animate(css, 500, function(){isScrolling=false});
+              }else{
+                  citem.css(css);
+              }
+          }
+
+          // take care of z-index
+          setTimeout(function(){
+              var zi = 100;
+              imgs.each(function(ind){
+
+                  zi = zi + ind;
+                  $(this).css('z-index',zi);
+              });
+          },100);
+      }
   };
   // generic jQuery plugin skeleton
   $.fn.coverscroll = function(method){
@@ -539,4 +672,25 @@
     }
   };
 
+    //dean
+    $.fn.movenext = function(){
+
+        if(gopt.items){
+            var imgs = $(this).find(gopt.items);
+        }else{
+            var imgs = $(this).find('img');
+        }
+        return methods.movenext(imgs)
+    };
+    //dean
+    $.fn.moveprev = function(){
+
+        if(gopt.items){
+            var imgs = $(this).find(gopt.items);
+        }else{
+            var imgs = $(this).find('img');
+        }
+        return methods.moveprev(imgs,$(this).width())
+
+    };
 })(jQuery);
