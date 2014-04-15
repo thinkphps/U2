@@ -13,13 +13,14 @@
                 <span id='cinpinyin'>shanghai</span>
             </div>
             <div class="city">
-                <a href="#" class="change_city">切换城市</a>
-                <form class="mini-city linkageselect pa none">
-                    <a href="javascript:;" class="mini-city-close"></a>
+                <a href="#" class="change_city" id="btn-city-change">切换城市</a>
+                <div class="mini-city linkageselect pa none" id="div-citys">
+
+                    <a href="javascript:;" class="mini-city-close" id="btn-city-close"></a>
                     <label>省份<select class="level_1" id='le1'></select></label>
                     <label>城市<select class="level_2" id='le2'></select></label>
-                    <input type="submit" value="切换" />
-                </form>
+                    <input type="button" value="切换" id="btn-change" />
+                </div>
                 <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#" id="a_shopinfo">您附近的优衣库门店</a>
                     <i class="city_wz2 none" id="a_shopinfo2"></i></div>
             </div>
@@ -113,19 +114,19 @@
 <div class="dr_main_con" id="div_main">
     <div class="dr_main_con_sub_nav">
         <ul class="rw_sub_nav" id="ulgender">
-            <li class="rw_all select"><a href="javascript:;" id="0"></a></li>
-            <li class="rw_nvzhuang"><a href="javascript:;" id="1"></a></li>
-            <li class="rw_nanzhuang"><a href="javascript:;" id="2"></a></li>
-            <li class="rw_tongzhuang"><a href="javascript:;" id="3" data-page="index"></a></li>
-            <li class="rw_yinyouer"><a href="javascript:;" id="4" data-page="index" data-key="baby"></a></li>
+            <li class="rw_all select" data-gender="0"><a href="javascript:;"></a></li>
+            <li class="rw_nvzhuang " data-gender="1"><a href="javascript:;" ></a></li>
+            <li class="rw_nanzhuang" data-gender="2"><a href="javascript:;" ></a></li>
+            <li class="rw_tongzhuang" data-gender="3"><a href="javascript:;" ></a></li>
+            <li class="rw_yinyouer" data-gender="4"><a href="javascript:;" ></a></li>
         </ul>
         <ul class="ch_sub_nav" id="ul_index-bar-place">
-            <li class="ch_all select" id="0"><a href="javascript:;" ></a></li>
-            <li class="ch_shangwu" id="3_9"><a href="javascript:;" ></a></li>
-            <li class="none ch_shangxue" id="__15"><a href="javascript:;" ></a></li>
-            <li class="ch_guangjie " id="4_10_16"><a href="javascript:;" ></a></li>
-            <li class="ch_yundong" id="7_13_19"><a href="javascript:;"></a></li>
-            <li class="ch_jujia" id="8_14_20"><a href="javascript:;" ></a></li>
+            <li  class="ch_all select" data-suitstyle="0"><a href="javascript:;" ></a></li>
+            <li><a href="#" class="ch_a_1" data-suitstyle="6"></a><a href="#" class="ch_a_2" data-suitstyle="4"></a></li>
+            <li><a href="#" class="ch_b_1" data-suitstyle="7"></a><a href="#" class="ch_b_2" data-suitstyle="9"></a></li>
+            <li><a href="#" class="ch_c_1" data-suitstyle="8"></a><a href="#" class="ch_c_2" data-suitstyle="5"></a></li>
+            <li><a href="#" class="ch_d_1" data-suitstyle="1"></a><a href="#" class="ch_d_2" data-suitstyle="2"></a></li>
+            <li><a href="#" class="ch_e_1" data-suitstyle="3"></a><a href="#" class="ch_e_2" data-suitstyle="10"></a></li>
         </ul>
         <div class="mini-place-mask pa" style="display: none;"></div>
         <ul class="tz_sub_nav" >
@@ -134,7 +135,7 @@
         <a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php/IndexNew/index.html" class="youyigui_btn" target="_blank" ></a>
     </div>
 
-    <div class="index-single mini-kv" id="div_index-bin">
+    <div class="index-single mini-kv none" id="div_index-bin">
         <div class="mini-kv-slide" data-pos="#net-top">
             <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.12">prev</a>
             <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.13">next</a>
@@ -155,7 +156,7 @@
         </div>
     </div>
 
-    <div class="index-suit mini-kv" style="display: none;">
+    <div class="index-suit mini-kv none" style="display: none;">
         <div class="mini-kv-slide" >
             <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
             <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
@@ -170,6 +171,13 @@
 
     <div  id="suits-container">
 
+    </div>
+
+    <div class="id_content_banner_nav none" style="background: url(http://im.uniqlo.cn/L1_china/banner_arrow_131118.png) no-repeat scroll center center transparent">
+        <div class="clearfix id_content_banner_nav_inner">
+            <div class="id_content_banner_nav_prev"></div>
+            <div class="id_content_banner_nav_next"></div>
+        </div>
     </div>
 
 
@@ -218,4 +226,130 @@
 <script type="text/javascript" src="http://localhost/U2/Home/Tpl/Public/js/Map/H.min.js"></script>
 <script type="text/javascript"  src="http://localhost/U2/Home/Tpl/Public/js/home.js"></script>
 <script type="text/javascript" charset="utf-8" src="http://localhost/U2/Home/Tpl/Public/js/CoverScroll/jquery.coverscroll.js"></script>
-<script type="text/javascript"  src="http://localhost/U2/Home/Tpl/Public/js/homemain.js"></script>
+<!--<script type="text/javascript"  src="http://localhost/U2/Home/Tpl/Public/js/homemain.js"></script>-->
+<script type="text/javascript"  src="http://localhost/U2/Home/Tpl/Public/js/main.js"></script>
+ <script type="text/javascript">
+//     $(function(){
+//         if(typeof data != 'undefined'){
+//             var sel = new LinkageSelect({data : data});
+//             sel.bind('.linkageselect .level_1');
+//             sel.bind('.linkageselect .level_2');
+//             sel.bind('.linkageselect .level_3');
+//         }
+//         var location = $('.mini-city');
+//         $('.change_city').on('click', function(){
+//             location.toggle();
+//         });
+//
+//         location.submit(function(){
+//             var that = $(this),
+//                     option = that.find('option:checked'),
+//                     province = option.first().text(),
+//                     prov = province,
+//                     city = option.last().text(),
+//                     temp = city.slice(-1);
+//
+//             if(city !== '请选择'){
+//                 if(province !== '台湾省'){
+//                     if( province === '香港' || province === '澳门'){
+//                         city = province;
+//                     } else {
+//                         city = city.slice(0, (temp === '区' ? -2 : -1));
+//                     }
+//                 }
+//                 $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
+//                 $.pron = prov;
+//                 H.map.centerAndZoom(city, 11);
+//                 weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
+//                     callback: function(city, temper, info){
+//                         var avg = getavg(temper.high,temper.low);
+//                         $.weather.avg = avg;
+//                         avg = avg?avg:0;
+//                         $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
+//                         $.weather.sex = $.weather.sex?$.weather.sex:0;
+//                         $.weather.set = $.weather.set?$.weather.set:0;
+//                         if($.weather.sex.toString() == "0" && $.weather.set.toString() != "1" ||($.weather.occasion.toString() == "0" && $.weather.sex == undefined )){
+//                             getSuits();
+//                         }else{
+//
+//                             var jsonpurl = "http://uniqlo.bigodata.com.cn/u1_5/index.php/Index/getgood?callback=jsonpCallback4&tem="+avg+"&pro="+city+'&cid='+$.weather.occasion+'&sid='+$.weather.sex+'&tid='+$.weather.set;
+//                             jsonpFcuntion(jsonpurl);
+//                             $('#suits-container').html('');
+//                             $("#suits-container").hide();
+//                         }
+//                         //往mimi传城市
+//                         sendcity(city,info.city);
+//                     }
+//                 });
+//                 that.hide();
+//                 $.uniqlo.index.togClass($.uniqlo.index.week.find('li').first(), 'mini-checked')
+//
+//             } else alert('请选择城市！');
+//             return false;
+//
+//         }).on('click', 'a.mini-city-close', function(){
+//             location.hide();
+//         });
+//     });
+
+
+
+     var tablink_idname = new Array("tablink");
+     var tabcontent_idname = new Array("preferential_");
+     var tabcount = new Array("3");
+     var loadtabs = new Array("1");
+     var autochangemenu = 1,counter = 0,slength;
+     var changespeed = 1;
+     var stoponhover = 0;
+     var menucount = loadtabs.length;
+     var a = 0;
+     var b = 1;
+
+
+     function easytabs(menunr, active) {
+         if (menunr == autochangemenu) {
+             currenttab = active;
+         }
+         if ((menunr == autochangemenu) && (stoponhover == 1)) {
+             stop_autochange()
+         } else if ((menunr == autochangemenu) && (stoponhover == 0)) {
+             counter = 0;
+         }
+         menunr = menunr - 1;
+         for (i = 1; i <= tabcount[menunr]; i++) {
+             $('#'+tablink_idname[menunr] + i).removeClass('current');
+             $('.'+tabcontent_idname[menunr] + i).css('display','none');
+         }
+
+         if($('#'+tablink_idname[menunr] + active)){
+             $('#'+tablink_idname[menunr] + active).addClass('current');
+             $('.'+tabcontent_idname[menunr] + active).css('display','block');
+         }
+     }
+
+     var totaltabs = tabcount[autochangemenu - 1];
+     var currenttab = loadtabs[autochangemenu - 1];
+
+     function start_autochange() {
+         counter = counter + 1;
+         timer = setTimeout("start_autochange()", 3000);
+         if (counter == changespeed + 1) {
+             currenttab++;
+             if (currenttab > totaltabs) {
+                 currenttab = slength;
+             }
+             easytabs(autochangemenu, currenttab);
+             //restart_autochange();
+         }
+     }
+
+     function restart_autochange() {
+         clearTimeout(timer);
+         counter = 0;
+         start_autochange();
+     }
+     function stop_autochange() {
+         clearTimeout(timer);
+         counter = 0;
+     }
+ </script>

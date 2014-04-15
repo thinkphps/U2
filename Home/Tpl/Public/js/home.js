@@ -107,7 +107,7 @@ jQuery(function($){
                     this.find("img").lazyload();
                 }
             });
-            $('.mini-kv-prev,.mini-kv-next')[($.weather.sex||0) == 0?'hide':'show']()
+//            $('.mini-kv-prev,.mini-kv-next')[($.weather.sex||0) == 0?'hide':'show']()
             return kv;
         },
         indexSlider : function(){
@@ -649,44 +649,44 @@ jQuery(function($){
             getgoods($.weather.occasion,$.weather.sex,$.weather.set)
         })
         //kimi
-        index.place.on('click', 'li', function(){                 // 首页场合切换
-            if($(this).attr('id') != 0 && ($.weather.sex||0) == 0){
-                index.gender.children().removeClass('select')
-                $('.mini-gender-women').parent().addClass('select');
-                $.weather.sex = $('.mini-gender-women').attr('id')
-            }
-            if(index.suitIsOpen) {
-                index.suit.removeClass('select')
-
-                index.suitSlide.trigger('suitClose')
-            }
-            var cid = $(this).attr('id');
-            $.weather.set = 0;
-            if(cid==0){
-                $.weather.occasion = 0;//场合
-            }else{
-                $.weather.occasion = cid;//场合
-            }
-            var that = $(this)
-            index.togClass(that, 'select')
-            that.is('li.ch_jujia') && index.tips.trigger('shown')
-            getgoods(cid,$.weather.sex,$.weather.set)
-
-        })
+//        index.place.on('click', 'li', function(){                 // 首页场合切换
+//            if($(this).attr('id') != 0 && ($.weather.sex||0) == 0){
+//                index.gender.children().removeClass('select')
+//                $('.mini-gender-women').parent().addClass('select');
+//                $.weather.sex = $('.mini-gender-women').attr('id')
+//            }
+//            if(index.suitIsOpen) {
+//                index.suit.removeClass('select')
+//
+//                index.suitSlide.trigger('suitClose')
+//            }
+//            var cid = $(this).attr('id');
+//            $.weather.set = 0;
+//            if(cid==0){
+//                $.weather.occasion = 0;//场合
+//            }else{
+//                $.weather.occasion = cid;//场合
+//            }
+//            var that = $(this)
+//            index.togClass(that, 'select')
+//            that.is('li.ch_jujia') && index.tips.trigger('shown')
+//            getgoods(cid,$.weather.sex,$.weather.set)
+//
+//        })
 
         //kimi
 
-        $('a.index-btn').on('click', function(){
-            if(index.binIsOpen){
-                index.closeBin()
-                $.weather.occasion = 0
-                $.weather.set = 0
-                $.weather.sex = 0
-                getgoods(0,0,0);
-            } else {
-                index.openBin()
-            }
-        })
+//        $('a.index-btn').on('click', function(){
+//            if(index.binIsOpen){
+//                index.closeBin()
+//                $.weather.occasion = 0
+//                $.weather.set = 0
+//                $.weather.sex = 0
+//                getgoods(0,0,0);
+//            } else {
+//                index.openBin()
+//            }
+//        })
 
         index.tips.on('click', function(){
             index.tips.fadeOut()
@@ -818,106 +818,106 @@ jQuery(function($){
 
         })
 
-        index.gender.on('click', 'a', function(){                  // 内页性别切换
-            //kimi
-            var sid = $(this).attr('id');
-            if(sid==0){
-                $.weather.sex = 0;
+//        index.gender.on('click', 'a', function(){                  // 内页性别切换
+//            //kimi
+//            var sid = $(this).attr('id');
+//            if(sid==0){
+//                $.weather.sex = 0;
+//
+//                if(index.suitIsOpen) {
+//                    index.suit.removeClass('select')
+//                    index.suitSlide.trigger('suitClose')
+//                }
+//
+//            }else{
+//                $.weather.sex = sid;//性别
+//            }
+//            //kimi
+//            var that = $(this)
+//            var parent = that.parent()
+//            index.togClass(parent, 'select')
+//
+//            index.gender.trigger('genderChange', [that.text(), that.data('key')])
+//            cate.designAll.trigger('click')
+////            var kids = that.parents('div.index-bar').find('li.ch_shangxue')
+//
+//            if(that.data('page')){                                   // 首页的kids
+//                $("#__15").show();
+//                $("#3_9").hide();
+////                kids.show().prev().hide()
+//            } else {
+//                $("#3_9").show();
+//                $("#__15").hide();
+////                kids.hide().prev().show()
+//            }
+//            //kimi
+//            getgoods($.weather.occasion,sid,$.weather.set);
+//            //kimi
+//        }).on('genderChange', function(e, key, keys){
+//            var place = cate.placeArr[key]
+//            var style = cate.styleArr[key]
+//
+//            if(keys == 'baby'){
+//                index.babyMask.show()
+//            } else {
+//                index.babyMask.hide()
+//            }
+//
+//            setUl(place, 'place', 'p')
+//            setUl(style, 'style', 's')
+//
+//            cate.ps.find('a.mini-cate-less').each(function(){
+//                cate.ps.trigger('cateUlHide', this)
+//            })
+//
+//            // reset index-ps
+//            if(!index.suitIsOpen){
+//                cate.place.add(cate.style).find('li.mini-cate-checked').removeClass('mini-cate-checked')
+//                cate.placeAll.add(cate.styleAll).addClass('mini-cate-checked')
+//
+//                // index.place.find('li').first().trigger('click')
+//            }
+//
+//            var indexP1IsChecked = index.place.find('li.ch_shangwu:visible').is('.select')
+//
+//            if(index.suitIsOpen){
+//                if(indexP1IsChecked){
+//                    var indexP1 = index.place.find('li.ch_shangwu').addClass('select')
+//
+//                    if($('a.mini-gender-kids').parent('li').hasClass('select'))
+//                        $.weather.occasion = indexP1.get(1).id
+//                    else
+//                        $.weather.occasion = indexP1.get(0).id
+//                }
+//            } else {
+//                index.place.find('li').first().trigger('click')
+//            }
+//
+//        })
 
-                if(index.suitIsOpen) {
-                    index.suit.removeClass('select')
-                    index.suitSlide.trigger('suitClose')
-                }
-
-            }else{
-                $.weather.sex = sid;//性别
-            }
-            //kimi
-            var that = $(this)
-            var parent = that.parent()
-            index.togClass(parent, 'select')
-
-            index.gender.trigger('genderChange', [that.text(), that.data('key')])
-            cate.designAll.trigger('click')
-//            var kids = that.parents('div.index-bar').find('li.ch_shangxue')
-
-            if(that.data('page')){                                   // 首页的kids
-                $("#__15").show();
-                $("#3_9").hide();
-//                kids.show().prev().hide()
-            } else {
-                $("#3_9").show();
-                $("#__15").hide();
-//                kids.hide().prev().show()
-            }
-            //kimi
-            getgoods($.weather.occasion,sid,$.weather.set);
-            //kimi
-        }).on('genderChange', function(e, key, keys){
-            var place = cate.placeArr[key]
-            var style = cate.styleArr[key]
-
-            if(keys == 'baby'){
-                index.babyMask.show()
-            } else {
-                index.babyMask.hide()
-            }
-
-            setUl(place, 'place', 'p')
-            setUl(style, 'style', 's')
-
-            cate.ps.find('a.mini-cate-less').each(function(){
-                cate.ps.trigger('cateUlHide', this)
-            })
-
-            // reset index-ps
-            if(!index.suitIsOpen){
-                cate.place.add(cate.style).find('li.mini-cate-checked').removeClass('mini-cate-checked')
-                cate.placeAll.add(cate.styleAll).addClass('mini-cate-checked')
-
-                // index.place.find('li').first().trigger('click')
-            }
-
-            var indexP1IsChecked = index.place.find('li.ch_shangwu:visible').is('.select')
-
-            if(index.suitIsOpen){
-                if(indexP1IsChecked){
-                    var indexP1 = index.place.find('li.ch_shangwu').addClass('select')
-
-                    if($('a.mini-gender-kids').parent('li').hasClass('select'))
-                        $.weather.occasion = indexP1.get(1).id
-                    else
-                        $.weather.occasion = indexP1.get(0).id
-                }
-            } else {
-                index.place.find('li').first().trigger('click')
-            }
-
-        })
-
-        index.suit.on('click', 'a', function(){
-
-            index.tips.trigger('click')
-            index.suit.toggleClass('select')
-
-            if(index.suitIsOpen){
-                index.suitSlide.trigger('suitClose')
-                // resetGender()
-            } else {
-                if(!($.weather.sex||0)){
-                    index.gender.children().removeClass('select')
-                    $('.mini-gender-women').parent().addClass('select');
-                    $.weather.sex = $('.mini-gender-women').attr('id')
-                }
-                // if($.weather.occasion||0){
-                //  $.weather.occasion = index.place.children().removeClass('index-p-checked').first().addClass('index-p-checked').attr('id');
-                // }
-
-                index.suitSlide.trigger('suitOpen')
-                // resetGender()
-                // onSuitOpen()
-            }
-        })
+//        index.suit.on('click', 'a', function(){
+//
+//            index.tips.trigger('click')
+//            index.suit.toggleClass('select')
+//
+//            if(index.suitIsOpen){
+//                index.suitSlide.trigger('suitClose')
+//                // resetGender()
+//            } else {
+//                if(!($.weather.sex||0)){
+//                    index.gender.children().removeClass('select')
+//                    $('.mini-gender-women').parent().addClass('select');
+//                    $.weather.sex = $('.mini-gender-women').attr('id')
+//                }
+//                // if($.weather.occasion||0){
+//                //  $.weather.occasion = index.place.children().removeClass('index-p-checked').first().addClass('index-p-checked').attr('id');
+//                // }
+//
+//                index.suitSlide.trigger('suitOpen')
+//                // resetGender()
+//                // onSuitOpen()
+//            }
+//        })
 
         index.netEmpty = index.bin.find('a.mini-net-empty')       // 搜索?果为空红框
         index.netEmpty.on('click', resetGender)
