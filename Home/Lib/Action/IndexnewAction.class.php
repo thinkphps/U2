@@ -198,6 +198,9 @@ class IndexnewAction extends Action{
         $fid = trim($this->_request('fid'));//·ç¸ñ
         $sid = $sid?$sid:0;
         $fid = $fid?$fid:0;
+        if(S('homesf'.$sid.$fid)){
+        $list = unserialize(S('homesf'.$sid.$fid));
+        }else{
         $Weather = D('Getinfo');
         if($fid!=0){
            $where['u_suits.suitStyleID'] = $fid;
@@ -228,6 +231,8 @@ class IndexnewAction extends Action{
             $list = $Weather->getConSuitsList($where);
             }
         }
+        S('homesf'.$sid.$fid,serialize($list),array('type'=>'file'));
+      }
         $re = json_encode($list);
         echo $callback."($re)";
     }
