@@ -726,6 +726,13 @@
              //$(this).siblings().children('a').removeClass('select');
              $('.big_btn').children('a').removeClass('select');
              $(this).children('a').addClass('select');
+            if(sid==1){
+                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
+            }else if(sid==2){
+               $('.changjing1').css("background","url("+imgpath+"/images/man.jpg) center 0 no-repeat");
+            }else if(sid==3){
+                $('.changjing1').css("background","url("+imgpath+"/images/chil.jpg) center 0 no-repeat");
+            }
             $.post(styleurl,{sid:sid},function(data,status){
                 if(data){
                if(sid!=4){
