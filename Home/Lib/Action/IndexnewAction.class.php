@@ -238,6 +238,7 @@ class IndexnewAction extends Action{
         $tem = trim($this->_request('tem'));//平均温度
         $pro = trim($this->_request('pro'));//省
         $callback=$_GET['callback'];
+
         $goodtag = M('Goodtag');
         if($tem<=-10){
             $tem = -10;
