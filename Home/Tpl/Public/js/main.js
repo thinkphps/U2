@@ -419,6 +419,7 @@ function easytabs(menunr, active) {
     }
 }
 
+
 var totaltabs = tabcount[autochangemenu - 1];
 var currenttab = loadtabs[autochangemenu - 1];
 
