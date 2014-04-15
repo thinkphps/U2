@@ -33,4 +33,17 @@ class RecoModel extends Model{
           }
           return $wclist;
    }
+
+     //优衣库二期
+    //页面风格与数据库风格id对应关系
+    public function pageToDataStyle($key){
+        $arr = array(8,13,9,10,12,5,6,7,11,14);
+        return $arr[$key-1];
+    }
+
+    public function getBeubeu($where){
+        $beubeu_suits = M('BeubeuSuits');
+        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where($where)->order('uptime desc')->select();
+        return $beubeu_suits_list;
+    }
 }

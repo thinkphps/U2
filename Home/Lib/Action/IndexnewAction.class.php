@@ -202,9 +202,16 @@ class IndexnewAction extends Action{
         if($fid!=0){
            $where['u_suits.suitStyleID'] = $fid;
         }
-        if($sid!=0){
-          $where['u_suits.suitGenderID'] = $sid;
+        switch($sid){
+            case 3 :
+                $where['u_suits.suitGenderID'] = array('exp','IN(3,4)');
+            default;
+            case 1 :
+            case 2 :
+               $where['u_suits.suitGenderID'] = $sid;
+            default;
         }
+
         if($sid==0 && $fid==0){
          //风格，类别都没有选走这里
             $setingtem = $Weather->getKeyValue('temperature');
@@ -215,7 +222,11 @@ class IndexnewAction extends Action{
             }
             $list = $Weather->getSutsValue($type);
         }else{
+            if($sid==4){
+             $list = M('BeubeuGoods')->cache(true)->field('pic_url')->where(array('type'=>$sid,'approve_status'=>'onsale','num'=>array('egt',15)))->order('uptime desc')->select();
+            }else{
             $list = $Weather->getConSuitsList($where);
+            }
         }
         $re = json_encode($list);
         echo $callback."($re)";
@@ -227,6 +238,7 @@ class IndexnewAction extends Action{
         $tem = trim($this->_request('tem'));//平均温度
         $pro = trim($this->_request('pro'));//省
         $callback=$_GET['callback'];
+
         $goodtag = M('Goodtag');
         if($tem<=-10){
             $tem = -10;

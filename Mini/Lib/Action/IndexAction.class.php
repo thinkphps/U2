@@ -1,9 +1,6 @@
 <?php
 // 优衣库mini站,author:kimi
 class IndexAction extends Action {
-	public $callback_url;
-	public $appkey;
-	public $client;
 	public $uniq_user_name;
     public function index(){
 	if(cookie('uniq_user_name') && cookie('uniq_user_id')){
@@ -49,19 +46,16 @@ class IndexAction extends Action {
 	}
 	//echo $is_allow_register.$is_phone.$is_active;
 	$this->assign('is_show',$is_show);
-	
-	$time = date('Y-m-d H:i:s');
-	
 	$collection = M('Collection');
 	$goods = M('Goods');
-	$areas = M('Areas');
-	$shop = M('Shop');
 	$goodtag = M('Goodtag');
 	$customcate = M('Customcate');
 	$time = date('Y-m-d H:i:s');
 	$love = M('Love');
 	$buy = M('Buy');
-    $NewArea = D('NewArea');
+    $suit_style = M('SettingsSuitStyle');
+    $beubeu_suits = M('BeubeuSuits');
+    $recomodel = D('Reco');
 	if(empty($result)){
 	$u_id = 0;
 	}else{
@@ -81,10 +75,28 @@ class IndexAction extends Action {
             }
         }
 	}
+    //kimi 优衣库二期
+    if(S('dstyle')){
+        $suit_style_list = unserialize(S('dstyle'));
+    }else{
+       $suit_style_list =  $suit_style->cache(true)->join('inner join u_settings_gender_style as g on u_settings_suit_style.ID=g.styleID')->field('u_settings_suit_style.ID')->where(array('g.genderID'=>1))->select();
+        foreach($suit_style_list as $k=>$v){
+            $suit_style_list[$k]['pid'] = $recomodel->pageToDataStyle($v['ID']);
+        }
+      S('dstyle',serialize($suit_style_list),array('type'=>'file'));
+    }
+
+    if(S('styledata')){
+        $beubeu_suits_list = unserialize(S('styledata'));
+    }else{
+       $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where(array('suitStyleID'=>1,'suitGenderID'=>1))->order('uptime desc')->select();
+      S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
+    }
+    $this->assign('beubeu_suits_list',$beubeu_suits_list);
+    $this->assign('suit_style_list',$suit_style_list);
+    //优衣库二期
 
    //取出性别所对应的tagid
-   $tag = M('Tag');
-   $recomodel = D('Reco');
    $wclist = $recomodel->getfc('1','1','1');//女性场合
    $wflist = $recomodel->getfc('2','1','1');//女性风格
    $mclist = $recomodel->getfc('1','2','1');//男性场合
@@ -120,27 +132,7 @@ class IndexAction extends Action {
 	$this->display();
 	//}
     }
-	
-  public function callback(){
-  	$gettoken = D('Gettoken');
-	$url = U('Index/index');
-    if(empty($_GET['code'])){
-     header('Location: '.$url);
-  	}else{
-		//请求参数
-		$postfields= array(
-				'grant_type'	=> 'authorization_code',
-				'client_id'     => $this->appkey,
-				'client_secret' => $this->secretKey,
-				'code'          => $_GET['code'],
-				'redirect_uri'  => $this->callback_url
-		);
-		$url = 'https://oauth.taobao.com/token';
-		$token = json_decode($gettoken->curltoken($url,$postfields));
-		$_SESSION['token'] = $token->access_token;
-		$this->redirect('Index/index');
-	}
-  }
+
   
   public function loginout(){
 	$user = M('user')->where(array('id'=>session("uniq_user_id")))->find();
@@ -158,24 +150,6 @@ class IndexAction extends Action {
 	session_destroy();
 	$this->redirect('Index/index');
   }
-
-//登录
-public function login(){
-	$this->client = new TopClient;
-	$this->client->format = 'json';
-	$this->client->appkey = $this->appkey;
-	$this->client->secretKey = $this->secretKey;
-    $token = session('token');
-	if(empty($token)){
-    $url = 'https://oauth.taobao.com/authorize?response_type=code'
-				. '&client_id=' . $this->appkey
-				. '&redirect_uri=' . urldecode($this->callback_url);
-	header('Location: '.$url);
-	}else{
-	 $url = U('Index/index');
-     header('Location: '.$url);
-	}
-}
 
 //删除
 public function delg(){
@@ -218,209 +192,6 @@ if($id>0){
 }
 }
 
-//取出大配件图片
-public function getdapeijian(){
-  $id = trim($this->_post('id'));//Collectio表的num_iid
-  $po = trim($this->_post('po'));
-  $po = trim($po,'#');
-  if($id>0){
-  	//if(!empty($_SESSION['token'])){
-  	$collection = M('Collection');
-	$goods = M('Goods');
-	$goodtag = M('Goodtag');
-   	$cgtag = $goodtag->field('u_goodtag.wid,u_goodtag.gtype,u_goodtag.ccateid')->where(array('u_goodtag.num_iid'=>$id))->group('wid')->find();
-   	$tag = $goodtag->field('u_goodtag.gtype,u_goodtag.tag_id,u_goodtag.ftag_id')->where(array('u_goodtag.wid'=>$cgtag['wid'],'u_goodtag.num_iid'=>$id))->select();
-
-	//取出商品所对应的所有天气指数
-	$widarr = $goodtag->field('wid')->where(array('num_iid'=>$id))->group('wid')->select();
-
-    $wstr = '';
-	foreach($widarr as $k=>$v){
-	if($v){
-    $wstr.=$v['wid'].',';
-	}
-	}
-	if($cgtag['wid']!=8){
-    $wstr.='8,';
-	}
-
-	$str='';//场合标签
-	$fstr = '';//风格标签
-	foreach($tag as $k=>$v){
-	if($v){
-	$str.=$v['tag_id'].',';	
-    $fstr.=$v['ftag_id'].',';
-	}
-	}
-	$str = rtrim($str,',');
-	$fstr = rtrim($fstr,',');
-
-	if($po=='cab-top'){
-		//场合
-    $where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goods.num'=>array('egt','15'));
-	//风格
-    $where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
-	//都符合的
-    $where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'2','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
-
-    $where1['u_goodtag.ccateid'] = array('neq',116);
-    $where2['u_goodtag.ccateid'] = array('neq',116);
-	$where3['u_goodtag.ccateid'] = array('neq',116);
-
-	}else if($po=='cab-bot'){
-     //场合
-	$where1 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goods.num'=>array('egt','15'));	
-	//风格
-	$where2 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
-	//全部
-	$where3 = array('u_goodtag.gtype'=>$cgtag['gtype'],'u_goodtag.isud'=>'1','u_goodtag.tag_id'=>array('exp','IN('.$str.')'),'u_goodtag.ftag_id'=>array('exp','IN('.$fstr.')'),'u_goods.num'=>array('egt','15'));
-    
-    $where1['u_goodtag.ccateid'] = array('neq',116);
-    $where2['u_goodtag.ccateid'] = array('neq',116);
-	$where3['u_goodtag.ccateid'] = array('neq',116);
-
-	}
-    if($cgtag['wid']!=8){
-     $wstr = rtrim($wstr,',');
-     $where1['u_goodtag.wid'] = array('exp','IN('.$wstr.')');
-	 $where2['u_goodtag.wid'] = array('exp','IN('.$wstr.')');
-	 $where3['u_goodtag.wid'] = array('exp','IN('.$wstr.')');
-	}
-    //全部
-	$allclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where3)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-    //场合
-	$tclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	//风格
-	$ftclothes = $goodtag->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url')->where($where2)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-   
-	foreach($tclothes as $k=>$v){
-     $allclothes[] = $v;
-	}
-	foreach($ftclothes as $k=>$v){
-     $allclothes[] = $v;
-	}
-	$dstr = '';
-	foreach($allclothes as $k=>$v){
-	$dstr.='<li><img id="'.$v['id'].'" price="'.$v['price'].'"  url="'.$v['detail_url'].'"data-original="'.__ROOT__.'/'.$v['pic_url'].'" alt="'.$v['title'].'" rest="'.$v['num'].'"></li>';	
-	}
-	echo $dstr;
-  //}	
-}
-}
-
-//ajax取数据
-public function ajaxgood(){
-    $type = trim($this->_request('tageid')); //场合id
-    $sex = trim($this->_request('sexid'));//性别id
-	$tem = trim($this->_request('tem'));//平均温度
-	$pro = trim($this->_post('pro'));//省
-	if($tem<=-10){
-	$tem = -10;	
-	}
-	$goodtag = M('Goodtag');
-		//取得官方推荐数据
-    $windex = D('Windex');
-	$recogood = $windex->getrecommend($pro);
-	$reulist = $recogood[0];
-	$redlist = $recogood[1];
-	
-	if(isset($tem)){
-	//取出温度对应的商品数据 
-	$widvalue = $windex->getwindex($tem);
-	$wvalue = $widvalue['str'];
-	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$uclothesx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-	$windex->saomo($uclothesx,$uclothes);
-
-	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$dclothesx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-	$windex->saomo($dclothesx,$dclothes);
-
-	//组织数据
-	foreach($uclothesx as $k=>$v){
-    if(!empty($v)){
-	$reulist[] = $v;//上装
-	}
-	}
-    $uclothesx = array();
-	foreach($uclothes as $k=>$v){
-	if(!empty($v)){
-	$reulist[] = $v;//上装
-	}
-	}
-	$uclothes = array();
-    foreach($dclothesx as $k=>$v){
-	if(!empty($v)){
-	$redlist[] = $v;//下装
-	}
-	}
-    $dclothesx = array();
-    foreach($dclothes as $k=>$v){
-	if(!empty($v)){
-	$redlist[] = $v;//下装
-	}
-	}
-	$dclothes = array();
-	}
-	$ustr = '';
-	if(!empty($reulist)){
-    foreach($reulist as $k=>$v){
-    switch($v['type']){
-		case '1' :
-		$sexname = '女装';
-		break;
-        case '2' :
-		$sexname = '男装';
-		break;
-		case '3' :
-		$sexname = '童装';
-		break;
-    }
-	//风格
-	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>2))->find();
-	$reulist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
-
-      $ustr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-      }
-    $arr['ustr'] = $ustr;
-	$arr['flag'] = true;   
-	}
-	
-	$dstr = '';
-	if(!empty($redlist)){
-	foreach($redlist as $k=>$v){
-    switch($v['type']){
-		case '1' :
-		$sexname = '女装';
-		break;
-        case '2' :
-		$sexname = '男装';
-		break;
-		case '3' :
-		$sexname = '童装';
-		break;
-    }
-		//风格
-	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>2))->find();
-	$reulist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
-
-    $dstr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-	}
-    $arr['dstr'] = $dstr;
-	$arr['flag'] = true;
-    }
-	echo json_encode($arr);
-}
 //点击按钮取数据
 public function getgood(){
 	$tem = trim($this->_request('tem'));//平均温度
