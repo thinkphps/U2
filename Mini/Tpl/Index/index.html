@@ -390,40 +390,27 @@
 <div class="my_yyg changjing1">
     <div class="my_yyg_title">
         <h2>我的优衣柜</h2>
-        <a href="#" class="change_yf">换一批</a>
+        <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
         <p>该风格下的更多商品，请看"瀑布"</p>
     </div>
-    <div class="my_yyg_model">
+    <div class="my_yyg_model" id='sfid'>
+        <volist id='pvo' name='beubeu_suits_list'>
         <div class="model">
-            <img src="__TMPL__Public/images/model.png" width="240" height="550" />
+            <img src="{$pvo.suitImageUrl}" width="240" height="550" />
         </div>
-        <div class="model">
-            <img src="__TMPL__Public/images/model.png" width="240" height="550" />
-        </div>
-        <div class="model">
-            <img src="__TMPL__Public/images/model.png" width="240" height="550" />
-        </div>
-        <div class="model">
-            <img src="__TMPL__Public/images/model.png" width="240" height="550" />
-        </div>
+        </volist>
     </div>
 
     <!--侧边导航-->
     <ul class="detail_sub_nav">
-        <li class="big_btn"><a href="#" class="detail_sub_btn1 select"></a></li>
-        <li class="big_btn"><a href="#" class="detail_sub_btn2"></a></li>
-        <li class="big_btn"><a href="#" class="detail_sub_btn3"></a></li>
-        <li class="big_btn"><a href="#" class="detail_sub_btn4"></a></li>
-        <li><a href="#" class="detail_sub_btn5 select"></a></li>
-        <li><a href="#" class="detail_sub_btn6"></a></li>
-        <li><a href="#" class="detail_sub_btn7"></a></li>
-        <li><a href="#" class="detail_sub_btn8"></a></li>
-        <li><a href="#" class="detail_sub_btn9"></a></li>
-        <li><a href="#" class="detail_sub_btn10"></a></li>
-        <li><a href="#" class="detail_sub_btn11"></a></li>
-        <li><a href="#" class="detail_sub_btn12"></a></li>
-        <li><a href="#" class="detail_sub_btn13"></a></li>
-        <li><a href="#" class="detail_sub_btn14"></a></li>
+        <li class="big_btn" la='1'><a href="javascript:;" class="detail_sub_btn1 select" la='1'></a></li>
+        <li class="big_btn" la='2'><a href="javascript:;" class="detail_sub_btn2" la='2'></a></li>
+        <li class="big_btn" la='3'><a href="javascript:;" class="detail_sub_btn3" la='3'></a></li>
+        <li class="big_btn" la='4'><a href="javascript:;" class="detail_sub_btn4" la='4'></a></li>
+        <volist id='suvo' name='suit_style_list' key='skey'>
+            <li class='small_btn' la='{$suvo.ID}'><a href="javascript:;" class="detail_sub_btn{$suvo.pid} <if condition='$skey eq 1'>select</if>"></a></li>
+        </volist>
+
     </ul>
 
 </div>
@@ -706,8 +693,8 @@
     var goodurl = '{:U('Index/getgood')}';
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
-    var provi = '{$provi}',sendurl = '{$uniurl}';
-    var addpropurl = '{:U('Lea/addlea')}';
+    var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
+    var addpropurl = '{:U('Lea/addlea')}',sdataurl = "{:U('Getinfo/styleToData')}";
     var registerurl = '{:U('Login/register')}';
     var findpwdurl = '{:U('Login/forget_pwd')}';
     var changepwdurl = '{:U('Login/change_pwd')}';
@@ -740,6 +727,40 @@
 </html>
 <script>
     $(function(){
+        //点击左侧
+        $('.big_btn').on('click',function(){
+         var sid = $(this).attr('la');
+             //$(this).siblings().children('a').removeClass('select');
+             $('.big_btn').children('a').removeClass('select');
+             $(this).children('a').addClass('select');
+            $.post(styleurl,{sid:sid},function(data,status){
+                if(data){
+               if(sid!=4){
+                var listlength = data.sty.length,strHtml = "";;
+                for(var i = 0 ;i < listlength;i++){
+                    strHtml += getGenstyleItem(data.sty[i],i);
+                }
+                $(".detail_sub_nav li").eq(3).nextAll().remove();
+                $(".detail_sub_nav li").eq(3).after(strHtml);
+                if(data.def){
+                    var deflength = data.def.length,str = "";
+                    for(var i = 0 ;i < deflength;i++){
+                        str += "<div class=\"model\"><img src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                    }
+                    $('#sfid').html(str);
+                }else{
+                    $('#sfid').html('');
+                }
+                }else{
+                  //婴幼儿走这里
+                   $(".detail_sub_nav li").eq(3).nextAll().remove();
+                }
+              }else{
+                    $(".detail_sub_nav li").eq(3).nextAll().remove();
+                }
+            },'json');
+        });
+
         $('#le1').on('change',function(){
             var pvalue = $('#le1 option:selected').val();
             $.post(getCityUrl,{pid:pvalue},function(data,status){
@@ -768,6 +789,47 @@
             });
         });
     });
+    //风格取数据
+    $('.detail_sub_nav').on('click','.small_btn',function(){
+        $('#changeid').attr('la',1);
+        var sid = $('.big_btn').children('a.select').attr('la'),fid = $(this).attr('la');
+        $('.small_btn').children('a').removeClass('select');
+        $(this).children('a').addClass('select');
+        $.post(sdataurl,{sid:sid,fid:fid},function(data,status){
+        if(data){
+            var listlength = data.length,strHtml = "";;
+            for(var i = 0 ;i < listlength;i++){
+                strHtml += "<div class=\"model\"><img src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+            }
+           $('#sfid').html(strHtml);
+        }else{
+           $('#sfid').html('');
+        }
+        });
+    });
+
+    //换一批
+    $('#changeid').on('click',function(){
+        var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
+           if(page==1){
+               $('#changeid').attr('la',+page+1);
+               startnum = page*4;
+           }else if(page==pagenum){
+               $('#changeid').attr('la',1);
+               startnum = 0;
+           }else{
+               $('#changeid').attr('la',+page+1);
+               startnum = page*4;
+           }
+            if(pagenum!=1){
+            $('.model').css('display','none');
+            for(var i=0;i<4;i++){
+                if($('.model').eq(startnum+i)){
+                $('.model').eq(startnum+i).css('display','block');
+                }
+            }
+          }
+    });
     $('#scid').on('change',function(){
         H.map.centerAndZoom($("#scid option:selected").text(), 11);
         var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
@@ -793,6 +855,17 @@
             }
         });
     });
+
+    function getGenstyleItem(item,i){
+        var strItem = '';
+        if(i==0){
+            var select = "select";
+        }else{
+            var select = "";
+        }
+        strItem += "<li la='"+item.ID+"' class='small_btn'><a href='javascript:;' class='detail_sub_btn"+item.pid+" "+select+"'></a></li>";
+        return strItem;
+    }
     function tipsfunction(v){
         //tips
         stop_autochange();

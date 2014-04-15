@@ -324,5 +324,4 @@ class APIAction extends Action
         $arr['shopid'] = $shopid;
         $this->ajaxReturn($arr, 'JSON');
     }
-
 }
