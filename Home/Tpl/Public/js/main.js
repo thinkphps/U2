@@ -3,7 +3,7 @@
  */
 var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-var baseurl='http://uniqlo.bigodata.com.cn/u2/';
+var baseurl='http://localhost/U2/';
 var timer;
 (function($, window, document,undefined) {
 
@@ -189,11 +189,11 @@ var timer;
             });
 
             $('.id_content_banner_nav_prev').on('click',function(){
-                $('#suits-container').movenext();
+                $('#suits-container').moveprev();
             })
 
             $('.id_content_banner_nav_next').on('click',function(){
-                $('#suits-container').moveprev();
+                $('#suits-container').movenext();
             })
 
 
@@ -399,6 +399,8 @@ var a = 0;
 var b = 1;
 
 function easytabs(menunr, active) {
+//   alert(menunr +  'dff'+ active)
+    console.log(active)
     if (menunr == autochangemenu) {
         currenttab = active;
     }
@@ -431,6 +433,7 @@ function start_autochange() {
         if (currenttab > totaltabs) {
             currenttab = slength;
         }
+        console.log('start_autochange_' + currenttab);
         easytabs(autochangemenu, currenttab);
         //restart_autochange();
     }
