@@ -92,13 +92,18 @@ class IndexAction extends Action {
         $beubeu_suits_list = unserialize(S('styledata'));
     }else{
         //默认模特图
-       $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where(array('suitStyleID'=>1,'suitGenderID'=>1))->order('uptime desc')->select();
+       $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitImageUrl')->where(array('suitStyleID'=>1,'suitGenderID'=>1))->order('uptime desc')->select();
+        $beubeu_detail = M('BeubeuSuitsGoodsdetail');
+       foreach($beubeu_suits_list as $k=>$v){
+           $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
+           $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+       }
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
+        print_r($beubeu_suits_list);
     //默认女士上下装自定义分类
     $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
     $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
-
     $this->assign('beubeu_suits_list',$beubeu_suits_list);
     $this->assign('stylenum',ceil(count($suit_style_list)/2));
     $this->assign('suit_style_list',$suit_style_list);

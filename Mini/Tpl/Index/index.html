@@ -396,7 +396,7 @@
     <div class="my_yyg_model" id='sfid'>
         <volist id='pvo' name='beubeu_suits_list'>
         <div class="model">
-            <img src="{$pvo.suitImageUrl}" width="240" height="550" />
+            <img src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}'/>
         </div>
         </volist>
     </div>
@@ -727,7 +727,7 @@
              $('.big_btn').children('a').removeClass('select');
              $(this).children('a').addClass('select');
             if(sid==1){
-                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
+                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
             }else if(sid==2){
                $('.changjing1').css("background","url("+imgpath+"/images/man.jpg) center 0 no-repeat");
             }else if(sid==3){
