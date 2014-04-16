@@ -309,11 +309,13 @@ var callBackFunction = {
         strItem += '<div class="similarity">';
         var detail = item.detail;
         var numids = [];
-        for(var i =0;i<detail.length;i++){
-            numids[i] = detail[i].num_iid;
-            strItem += '<div class="circle">'
-            strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
-            strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
+        if(detail != null){
+            for(var i =0;i<detail.length;i++){
+                numids[i] = detail[i].num_iid;
+                strItem += '<div class="circle">'
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
+                strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
+            }
         }
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+item.description+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
