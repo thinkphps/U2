@@ -96,7 +96,11 @@ class IndexAction extends Action {
         $beubeu_detail = M('BeubeuSuitsGoodsdetail');
        foreach($beubeu_suits_list as $k=>$v){
            $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
+           if(!empty($detailResult)){
            $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+           }else{
+           $beubeu_suits_list[$k]['detail'] = 0;
+           }
        }
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
@@ -110,26 +114,7 @@ class IndexAction extends Action {
     $this->assign('dcuslist',$dcuslist);
     //优衣库二期
 
-   //取出性别所对应的tagid
-   $wclist = $recomodel->getfc('1','1','1');//女性场合
-   $wflist = $recomodel->getfc('2','1','1');//女性风格
-   $mclist = $recomodel->getfc('1','2','1');//男性场合
-   $mflist = $recomodel->getfc('2','2','1');//男性风格
-   $cclist = $recomodel->getfc('1','3','1');//小孩场合
-   $cflist = $recomodel->getfc('2','3','1');//小孩风格
-   $bflist = $recomodel->getfc('2','4','1');//baby风格
-
     $this->assign('nick',$nick);
-	//性别所对应的tag
-    $this->assign('wclist',json_encode($wclist));//女性场合
-	$this->assign('wflist',json_encode($wflist));//女性分割
-	$this->assign('mclist',json_encode($mclist));//男性场合
-	$this->assign('mflist',json_encode($mflist));//男性风格
-	$this->assign('cclist',json_encode($cclist));//小孩场合
-	$this->assign('cflist',json_encode($cflist));//小孩风格
-	$this->assign('bflist',json_encode($bflist));//baby风格
-	$this->assign('mcarr',json_encode($mcarr));
-	$this->assign('mfarr',json_encode($mfarr));
 
     $this->assign('newstore',C('NEWSRORE'));
 	$this->assign('cityn',cookie('cityn'));

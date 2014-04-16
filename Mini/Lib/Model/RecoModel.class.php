@@ -50,7 +50,11 @@ class RecoModel extends Model{
         $beubeu_detail = M('BeubeuSuitsGoodsdetail');
         foreach($beubeu_suits_list as $k=>$v){
         $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
-        $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+            if(!empty($detailResult)){
+                $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+            }else{
+                $beubeu_suits_list[$k]['detail'] = 0;
+            }
          }
         return $beubeu_suits_list;
     }
