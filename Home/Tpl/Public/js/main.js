@@ -399,8 +399,6 @@ var a = 0;
 var b = 1;
 
 function easytabs(menunr, active) {
-//   alert(menunr +  'dff'+ active)
-    console.log(active)
     if (menunr == autochangemenu) {
         currenttab = active;
     }
@@ -433,7 +431,6 @@ function start_autochange() {
         if (currenttab > totaltabs) {
             currenttab = slength;
         }
-        console.log('start_autochange_' + currenttab);
         easytabs(autochangemenu, currenttab);
         //restart_autochange();
     }
