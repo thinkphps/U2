@@ -43,6 +43,7 @@ public function index(){
 	}
     $list[$k]['ctag'] = $tagtype;
 	}
+    array_splice($list,0,1);
 	$where['good_id'] = $id;
     $wh2['tag_id'] = array('neq','0');
     $wh2['_logic'] = 'OR';
@@ -148,7 +149,6 @@ public function doedit(){
 	if(empty($originalid)){
     $tag = array();
 	$arr = $_POST;
-
 	$tagarr = array();
 
 	$arr['gtype'] = $arr['gtype']?$arr['gtype']:'0';
@@ -156,26 +156,14 @@ public function doedit(){
 	$arr['ccate'] =$arr['ccate']?$arr['ccate']:0;
 	unset($_POST);
 	$taglist = M('Tag')->field('id')->where(array('parent_id'=>0))->order('id asc')->select();
-	//场合
-	$carr = $arr['tag'.$taglist[0]['id']];
-	$carrcount = count($carr);
 	//风格
     $farr = $arr['tag'.$taglist[1]['id']];
 	$farrcount = count($farr);
     
 	//去除前端提交的重复指数
 	$arrwid = array();
-
-	foreach($arr['wid'] as $kw=>$vw){
-	if(!empty($vw)){
-    if(!in_array($vw,$arrwid)){
-    $arrwid[$kw] = $vw;
-	}
-	}
-	}
-
     foreach($arr['wid'] as $k=>$v){
-	if($carrcount==0 && $farrcount==0){//如果只有温度
+	if($farrcount==0){//如果只有温度
 	//判断是否已经有数据了
     $tagresult = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id))->find();
 	if(empty($tagresult)){
@@ -217,86 +205,23 @@ public function doedit(){
 	}else{
 	$tagresult = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id))->find();//判断当前指数是否存在
     if(empty($tagresult)){//如果不存在
-    if($carrcount>=$farrcount){//如果场合打的标签比风格多
-    foreach($carr as $k1=>$v1){
-    $data = array('wid'=>$v,
-			            'good_id'=>$id,
-                        'num_iid'=>$num_iid,
-                        'gtype'=>$arr['gtype'],
-			            'isud'=>$arr['isud'],
-			            'tag_id'=>$v1,//场合
-	                    'ftag_id'=>$farr[$k1]?$farr[$k1]:0,
-			            'ccateid'=>$arr['ccate'],
-                        'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
-                        'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
-    $res = $gtmodel->add($data);
-	}
-	}else{//风格标签比场合多
     foreach($farr as $k1=>$v1){
     $data = array('wid'=>$v,
 			            'good_id'=>$id,
                         'num_iid'=>$num_iid,
                         'gtype'=>$arr['gtype'],
 			            'isud'=>$arr['isud'],
-			            'tag_id'=>$carr[$k1]?$carr[$k1]:0,//场合
+			            'tag_id'=>0,//场合
 	                    'ftag_id'=>$v1,
 			            'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
                         'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
     $gtmodel->add($data);
 	}
-	}
 	}else{//如果存在
-    if($carrcount>=$farrcount){//如果场合打的标签比风格多
-	if(!empty($carr)){
-	foreach($carr as $k1=>$v1){
-	$tagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'tag_id'=>$v1))->find();
-    if(empty($tagre)){
-    $tagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'tag_id'=>0))->find();
-	}
-	if(empty($tagre)){
-    $data = array('wid'=>$v,
-			            'good_id'=>$id,
-                        'num_iid'=>$num_iid,
-                        'gtype'=>$arr['gtype'],
-			            'isud'=>$arr['isud'],
-			            'tag_id'=>$v1,//场合
-			            'ccateid'=>$arr['ccate'],
-                        'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
-                        'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
-    $res = $gtmodel->add($data);    
-	}else{
-     $data = array('wid'=>$v,
-			            'good_id'=>$id,
-                        'num_iid'=>$num_iid,
-                        'gtype'=>$arr['gtype'],
-			            'isud'=>$arr['isud'],
-			            'tag_id'=>$v1,
-			            'ccateid'=>$arr['ccate'],
-                        'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
-                        'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
-     $res2 = $gtmodel->where(array('id'=>$tagre['id']))->save($data);
-	 $res = !empty($tagre['id'])?$tagre['id']:$res;
-	 $gtmodel->where(array('wid'=>$v,'good_id'=>$id))->save(array('ccateid'=>$arr['ccate']));
-	}
-
-	//判断风格是否存在
-	if(!empty($farr[$k1])){
-	$ftagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'ftag_id'=>$farr[$k1]))->find();
-	if(empty($ftagre)){
-     $freeftag = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'ftag_id'=>'0'))->find();
-     $gtmodel->where(array('id'=>$freeftag['id']))->save(array('ftag_id'=>$farr[$k1]));
-	}
-    }
-	}
-	}
-	}else{
     if(!empty($farr)){
     foreach($farr as $k1=>$v1){
 	$tagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'ftag_id'=>$v1))->find();
-    if(empty($tagre)){
-    $tagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'ftag_id'=>0))->find();
-	}
 	if(empty($tagre)){
     $data = array('wid'=>$v,
 			            'good_id'=>$id,
@@ -322,20 +247,10 @@ public function doedit(){
      $res = !empty($tagre['id'])?$tagre['id']:$res;
 	 $gtmodel->where(array('wid'=>$v,'good_id'=>$id))->save(array('ccateid'=>$arr['ccate']));
 	}
-	//判断场合是否存在
-	if(!empty($carr[$k1])){
-	$ctagre = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'tag_id'=>$carr[$k1]))->find();
-	if(empty($ctagre)){
-	 $freetag = $gtmodel->field('id')->where(array('wid'=>$v,'good_id'=>$id,'tag_id'=>'0'))->find();
-     $gtmodel->where(array('id'=>$freetag['id']))->save(array('tag_id'=>$carr[$k1]));
-	}
-    }
 	}
 	}
+
 	}
-	}
-	//删除掉风格跟场合都为0的记录
-    $gtmodel->where(array('good_id'=>$id,'tag_id'=>0,'ftag_id'=>0))->delete();
 	}
 	}
 
@@ -351,25 +266,13 @@ public function doedit(){
 	}
     }
 
-	$glist = $gtmodel->field('id,tag_id,ftag_id')->where(array('good_id'=>$id))->select();
-	if(!empty($carr)){
-    $carr = array_flip($carr);
-    foreach($glist as $k=>$v){
-    if(!array_key_exists($v['tag_id'],$carr)){
-    $gtmodel->where(array('id'=>$v['id']))->save(array('tag_id'=>0));
-	}
-    }
-    }else{
-    foreach($glist as $k=>$v){
-    $gtmodel->where(array('id'=>$v['id']))->save(array('tag_id'=>0));  
-	}
-	}
+	$glist = $gtmodel->field('id,ftag_id')->where(array('good_id'=>$id))->select();
 
 	if(!empty($farr)){
     $farr = array_flip($farr);
     foreach($glist as $k=>$v){
     if(!array_key_exists($v['ftag_id'],$farr)){
-    $gtmodel->where(array('id'=>$v['id']))->save(array('ftag_id'=>0));
+    $gtmodel->where(array('id'=>$v['id']))->delete();
 	}
     }
     }else{
@@ -408,7 +311,7 @@ public function doedit(){
                         'num_iid'=>$num_iid,
                         'gtype'=>$v['gtype'],
 			            'isud'=>$v['isud'],
-			            'tag_id'=>$v['tag_id'],
+			            'tag_id'=>0,
 				        'ftag_id'=>$v['ftag_id'],
 				        'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
@@ -421,7 +324,7 @@ public function doedit(){
                         'num_iid'=>$num_iid,
                         'gtype'=>$v['gtype'],
 			            'isud'=>$v['isud'],
-			            'tag_id'=>$v['tag_id'],
+			            'tag_id'=>0,
 			            'ftag_id'=>$v['ftag_id'],
 			            'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
@@ -437,7 +340,7 @@ public function doedit(){
                         'num_iid'=>$num_iid,
                         'gtype'=>$olist[$k]['gtype'],
 			            'isud'=>$olist[$k]['isud'],
-			            'tag_id'=>$olist[$k]['tag_id'],
+			            'tag_id'=>0,
 				        'ftag_id'=>$olist[$k]['ftag_id'],
 				        'ccateid'=>$olist[$k]['ccateid'],
                         'stm'=>$olist[$k]['stp'],
@@ -455,7 +358,7 @@ public function doedit(){
                         'num_iid'=>$num_iid,
                         'gtype'=>$v['gtype'],
 			            'isud'=>$v['isud'],
-			            'tag_id'=>$v['tag_id'],
+			            'tag_id'=>0,
 			            'ftag_id'=>$v['ftag_id'],
 			            'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
