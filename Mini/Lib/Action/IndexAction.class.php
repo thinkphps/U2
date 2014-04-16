@@ -100,7 +100,6 @@ class IndexAction extends Action {
        }
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
-        print_r($beubeu_suits_list);
     //默认女士上下装自定义分类
     $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
     $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
