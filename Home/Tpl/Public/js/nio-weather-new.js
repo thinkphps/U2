@@ -267,12 +267,15 @@ var weather = {
             $('.preferential_1').remove();
             $('#tablink1').remove();
         }
+        stop_autochange();
         var lilength = $('#scrollDiv').children().length;
         slength = 3-lilength+1;
         counter = 3-lilength;
         loadtabs[0] = 3-lilength+1;
         if(data.shopid<=0){
             do {
+                a = 0;
+                b = 1;
                 easytabs(b, loadtabs[a]);
                 a++;
                 b++;

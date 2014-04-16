@@ -3,7 +3,7 @@
  */
 var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
 var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-var baseurl='http://uniqlo.bigodata.com.cn/u2/';
+var baseurl='http://localhost/U2/';
 var timer;
 (function($, window, document,undefined) {
 
@@ -189,11 +189,11 @@ var timer;
             });
 
             $('.id_content_banner_nav_prev').on('click',function(){
-                $('#suits-container').movenext();
+                $('#suits-container').moveprev();
             })
 
             $('.id_content_banner_nav_next').on('click',function(){
-                $('#suits-container').moveprev();
+                $('#suits-container').movenext();
             })
 
 
@@ -309,11 +309,13 @@ var callBackFunction = {
         strItem += '<div class="similarity">';
         var detail = item.detail;
         var numids = [];
-        for(var i =0;i<detail.length;i++){
-            numids[i] = detail[i].num_iid;
-            strItem += '<div class="circle">'
-            strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
-            strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
+        if(detail != null){
+            for(var i =0;i<detail.length;i++){
+                numids[i] = detail[i].num_iid;
+                strItem += '<div class="circle">'
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
+                strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
+            }
         }
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+item.description+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
