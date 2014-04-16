@@ -478,7 +478,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .syj_btn.select a.syj_btn_expansion:hover{ background:url(../images/syj_btn.png) 0 -224px no-repeat; }
 
 .syj{ width:474px; height:594px; position:relative; top:-256px; border:1px solid #ff0000; left:-444px; background:#FFF; z-index:100;}
-.syj .baiyi_syj{ width:446px; height:525px; margin:14px; background:#0F9;}
+.syj .baiyi_syj{ width:400px; height:533px; padding-left: 45px;}
 .btn_line{ width:474px; height:42px; position:absolute; bottom:0;}
 .btn_line a{ display:block; float:left; height:42px; line-height:42px;}
 .btn_line a.buy_btn{ width:122px; background:#ff0000; color:#FFF; font-size:14px;}
@@ -489,7 +489,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .btn_line a.bc_btn{ width:90px; background:#d1d1d1; color:#FFF; text-align:center;}
 .btn_line a.bc_btn:hover{ background:#bbb;}
 
-.buy_btns{ left:0px; bottom:145px; z-index:980; position:relative;}
+.buy_btns{ left:0px; bottom:125px; z-index:980; position:relative;}
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; width:122px; height:35px; line-height:35px; text-align:center; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
