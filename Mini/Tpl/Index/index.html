@@ -94,7 +94,7 @@
     <div class="mini-mask pf"></div>
 </if>
 
-<div class="mini-mask2 pf"></div>
+<div class="mini-mask2 pf none"></div>
 <!-- 注册1、2 -->
 <form class="mini-register mini-pop pf <if condition="$is_allow_register eq 0">none</if>">
 <a href="javascript:;" class="mini-form-close mini-btn">关闭</a><!-- David -->
@@ -618,21 +618,45 @@
     <a href="#" class="syj_btn_move"></a>
     <a href="#" class="syj_btn_expansion"></a>
     <div class="syj none" >
-        <div class="baiyi_syj"></div>
+        <div class="baiyi_syj" id="beubeu_loadImg"></div>
         <div class="btn_line">
             <a href="#" class="buy_btn"><i></i><p>我要购买</p></a>
             <a href="#" class="sc_btn">收藏整套搭配</a>
             <a href="#" class="bc_btn">保存此搭配</a>
             <div class="mini-cab-share2">
                 <span>将此搭配分享到：</span>
-                <div class="bshare-custom"><div class="bsPromo bsPromo2"></div>
-                    <a title="分享到QQ空间" class="bshare-qzone"></a>
-                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
-                    <a title="分享到人人网" class="bshare-renren"></a>
-                    <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style" onmouseover="funcShare()">
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_renren"></a>
                 </div>
-                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
-                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+                <script type="text/javascript">
+                    var jiathis_config={
+                        url:"http://uniqlo.bigodata.com.cn/u1_5/",
+                        summary:"#我的专属衣柜#尽情试穿自己喜欢的衣服，挑选最心仪的搭配。在虚拟试衣间里，就好像拥有了整个优衣库~小伙伴们，一起来打造专属你的私人衣柜吧！@优衣库官方网络旗舰店 ",
+                        title : " ",
+                        pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
+                        shortUrl:false,
+                        hideMore:false
+                    }
+                    funcShare = function(){
+                        var src = Model.GetDIY(); // 取出当前搭配图片
+                        jiathis_config={
+                            url:"http://uniqlo.bigodata.com.cn/u1_5/",
+                            summary:"#我的专属衣柜#尽情试穿自己喜欢的衣服，挑选最心仪的搭配。在虚拟试衣间里，就好像拥有了整个优衣库~小伙伴们，一起来打造专属你的私人衣柜吧！@优衣库官方网络旗舰店",
+                            title : " ",
+                            pic:src,
+                            shortUrl:false,
+                            hideMore:false
+                        }
+                        // 执行分享操作
+                    }
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
             </div>
         </div>
 
@@ -670,15 +694,6 @@
 </div>
 <script type='text/javascript'>
     //性别对应的标记
-    var wclist = '{$wclist}';
-    var wflist = '{$wflist}';
-    var mclist = '{$mclist}';
-    var mflist = '{$mflist}';
-    var cclist = '{$cclist}';
-    var cflist = '{$cflist}';
-    var bflist = '{$bflist}';
-    var mcarr = '{$mcarr}';//all时候的场合
-    var mfarr = '{$mfarr}';
     var buyurl = '{:U('Index/addlove')}';
     var addda = '{:U('Index/getdapeijian')}';
     var getgood = '{:U('Index/ajaxgood')}';
@@ -704,15 +719,13 @@
     var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}";
 </script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
+<script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
 <script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
-
-<!--<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/LinkageSelect.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/LinkageSelect/location.js"></script>-->
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/dressing_room_detail.js"></script>

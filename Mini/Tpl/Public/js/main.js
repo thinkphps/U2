@@ -174,11 +174,11 @@ jQuery(function($){
 
 //      cabnet.miniMask2.show();
 
-      //3秒后隐藏弹出tips
-      setTimeout(function(){
-          $("div.tsxx1").hide();
-          cabnet.miniMask2.hide();
-      }, 3000)
+//      //3秒后隐藏弹出tips
+//      setTimeout(function(){
+//          $("div.tsxx1").hide();
+//          cabnet.miniMask2.hide();
+//      }, 3000)
 
       cabnet.tsClose.on('click',function(){
           $("div.tsxx1").hide();
@@ -1088,65 +1088,7 @@ jQuery(function($){
 
     })
 
-    mcarr = $.parseJSON(mcarr)
-    mfarr = $.parseJSON(mfarr)
-    wclist = $.parseJSON(wclist)
-    wflist = $.parseJSON(wflist)
-    mclist = $.parseJSON(mclist)
-    mflist = $.parseJSON(mflist)
-    cclist = $.parseJSON(cclist)
-    cflist = $.parseJSON(cflist)
-    bflist = $.parseJSON(bflist)
 
-    $.each([wclist, mclist, cclist], function(index, arr) {
-      for(var i = arr.length; i --;){
-        switch(arr[i].name){
-          case('逛街'): arr[i].c = 5;break;
-          case('旅游'): arr[i].c = 2;break;
-          case('约会'): arr[i].c = 6;break;
-          case('运动'): arr[i].c = 3;break;
-          case('居家'): arr[i].c = 4;break;
-          case('玩乐'): arr[i].c = 6;break;
-        }
-      }
-    })
-    for(var i = mflist.length; i--;){
-      switch(mflist[i].name){
-        case('潮'): mflist[i].c = 11;break;
-        case('斯文'): mflist[i].c = 12;break;
-        case('自然'): mflist[i].c = 13;break;
-        case('酷'): mflist[i].c = 24;break;
-        case('成熟'): mflist[i].c = 15;break;
-        case('休闲'): mflist[i].c = 6;break;
-        case('复古'): mflist[i].c = 17;break;
-        case('英伦'): mflist[i].c = 18;break;
-        case('学院'): mflist[i].c = 19;break;
-        case('中性'): mflist[i].c = 20;break;
-      }
-    }
-    for(var i = cflist.length; i--;){
-      switch(cflist[i].name){
-        case('可爱'): cflist[i].c = 21;break;
-        case('淑女'): cflist[i].c = 22;break;
-        case('潮"'): cflist[i].c = 23;break;
-        case('酷'): cflist[i].c = 24;break;
-        case('休闲'): cflist[i].c = 6;break;
-        case('复古'): cflist[i].c = 26;break;
-        case('英伦'): cflist[i].c = 27;break;
-        case('学院'): cflist[i].c = 28;break;
-      }
-    }
-    for(var i = bflist.length; i--;){
-      switch(bflist[i].name){
-        case('酷'): bflist[i].c = 24;break;
-      }
-    }
-
-    $.uniqlo.all = [mcarr,mfarr]
-    $.uniqlo.women = [wclist,wflist]
-    $.uniqlo.men = [mclist,mflist]
-    $.uniqlo.kids = [cclist,cflist]
-    $.uniqlo.baby = [cclist,bflist]
 
     index.gender.on('click', 'a', function(){                  // 内页性别切换
       //kimi
