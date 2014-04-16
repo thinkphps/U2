@@ -46,7 +46,12 @@ class RecoModel extends Model{
     }
     public function getBeubeu($where){
         $beubeu_suits = M('BeubeuSuits');
-        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitImageUrl')->where($where)->order('uptime desc')->select();
+        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitImageUrl')->where($where)->order('uptime desc')->select();
+        $beubeu_detail = M('BeubeuSuitsGoodsdetail');
+        foreach($beubeu_suits_list as $k=>$v){
+        $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
+        $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+         }
         return $beubeu_suits_list;
     }
 

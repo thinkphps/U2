@@ -832,7 +832,7 @@
                 }else{
                 var show = "style='display:none;'";
                 }
-                strHtml += "<div class=\"model\" "+show+"><img src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                strHtml += "<div class=\"model\" "+show+"><img data-detail='"+data[i].detail+"' src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
             }
            $('#sfid').html(strHtml);
         }else{
