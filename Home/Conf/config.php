@@ -17,6 +17,6 @@ return array(
     'TOKEN_NAME'=>'__hash__',    // 令牌验证的表单隐藏字段名称
     'TOKEN_TYPE'=>'md5',  //令牌哈希验证规则 默认为MD5'TOKEN_RESET'=>true,
     'UNIQLOURL'=>'http://uniqlo.bigodata.com.cn/',
-    'NEWSRORE'=>'',
+    'NEWSRORE'=>'电饭锅电饭锅',
 );
 ?>

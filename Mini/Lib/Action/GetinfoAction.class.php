@@ -130,7 +130,29 @@ where u_suits.suitID = ".$suitid;
                 $result = $suites->query($sql);
                 S('ciditembn'.$suitid,serialize($result),array('type'=>'file'));
             }
+            if(!empty($result)){
             $returnArr = array('code'=>1,'data'=>$result);
+            }else{
+           $returnArr = array('code'=>1,'msg'=>'没有数据');
+            }
+        }else{
+            $returnArr = array('code'=>0,'msg'=>'参数错误');
+        }
+        $this->ajaxReturn($returnArr, 'JSON');
+    }
+
+    //给jack返回num_iid
+    public function getJackNumiid(){
+        $item_bn = trim($this->_post('item_bn'));
+        if(!empty($item_bn)){
+           $goods = M('Goods');
+           $sql = "select num_iid,title,detail_url from u_beubeu_goods where left(item_bn,8)='".$item_bn."'";
+           $result = $goods->query($sql);
+           if(!empty($result[0])){
+            $returnArr = array('code'=>1,'data'=>$result[0]['num_iid']);
+           }else{
+            $returnArr = array('code'=>0,'msg'=>'没有数据');
+           }
         }else{
             $returnArr = array('code'=>0,'msg'=>'参数错误');
         }
