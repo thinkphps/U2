@@ -54,12 +54,11 @@ var timer;
         //l4推荐模特图绑定
         getSuits :function(){
             var gender = $('#ulgender').find('.select').data('gender');
-
+            this.showStyleMask(gender);
             //如果选中的是婴幼儿则灰掉后面的风格选项，然后显示婴幼儿的衣服
             if( gender == 4){
                 $('#ul_index-bar-place').find('.select').removeClass('select');
                 $('.ch_all').addClass('select');
-                $('.mini-place-mask').show();
                 var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=4&tid=0&pro='+$.pron;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
@@ -67,10 +66,42 @@ var timer;
                 $('.id_content_banner_nav').hide();
             }
             else{
-                $('.mini-place-mask').hide();
                 var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
                 var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg +  '&sid='+gender+'&fid='+suitStyle;
                 this.$weather.jsonpFcuntion(jsonpurl);
+            }
+        },
+        showStyleMask : function(gender){
+            if( gender == 4){
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').addClass('baby-style-mask').show();
+//                $('.baby-style-mask').show();
+            }
+            else if(gender == 3){
+
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').addClass('children-style-mask').show();
+//                $('.baby-style-mask').hide();
+//                $('.children-style-mask').show();
+            }
+            else if(gender == 2){
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').addClass('male-style-mask').show();
+//                $('.baby-style-mask').hide();
+//                $('.children-style-mask').hide();
+//                $('.male-style-mask').show();
+            }
+            else{
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').hide();
+//                $('.baby-style-mask').hide();
+//                $('.children-style-mask').hide();
+//                $('.male-style-mask').hide();
             }
         },
 
