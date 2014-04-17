@@ -143,7 +143,7 @@ var timer;
             //µØÍ¼³ÇÊÐÇÐ»»
             $('#spid').on('change',function(){
                 var pid = $('#spid option:selected').val();
-                var url = baseurl+"index.php/Indexnew/getcity?callback=$weather.jsonpBaiduCity&pid="+pid+"&baiduid=1";
+                var url = baseurl+"index.php/Indexnew/getcity?callback=weather.jsonpBaiduCity&pid="+pid+"&baiduid=1";
                 _this.$weather.jsonpFcuntion(url);
             });
 
