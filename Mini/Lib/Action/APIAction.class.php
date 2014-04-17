@@ -251,8 +251,13 @@ class APIAction extends Action
     }
     //获取店铺信息
     public function getshopinfo(){
+      if(S('shopinfo')){
+          $shopinfo = unserialize(S('shopinfo'));
+      }else{
         $Weather = D('Weather');
         $shopinfo = $Weather->getshopinfo();
+        S('shopinfo',serialize($shopinfo),array('type'=>'file'));
+        }
         $this->ajaxReturn($shopinfo, 'JSON');
     }
 /*leon 3.13 新增
