@@ -337,7 +337,7 @@ a.mini-kv-add{
     line-height: 20px;
     overflow: hidden;
 }
-.mini-place-mask{
+.baby-style-mask{
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
@@ -347,9 +347,26 @@ a.mini-kv-add{
     top: 0;
     z-index: 2;
 }
-.index-bar .mini-place-mask{
-    width: 308px;
-    left: 347px;
+.male-style-mask{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 140px;
+    height: 35px;
+    right: 390px;
+    top: 0;
+    z-index: 2;
+}
+
+.children-style-mask{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 140px;
+    height: 35px;
+    right: 320px;
+    top: 35px;
+    z-index: 2;
 }
 .ft16{
     color: red;
@@ -411,7 +428,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 }
 #suits-container .item{
     width: 234px ;
-    /*height: 375px;*/
+    height: 339px;
     background: rgba(255, 255, 255, .3);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000')
 }
@@ -442,18 +459,8 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 
 
 .similarity{
-    /*bottom: 40;*/
-    /*position: absolute;*/
-    /*right: 10%;*/
-    /*left:140;*/
-    /*font-size: 2.5em;*/
-    /**font-size: 1.3em;*/
-    /*width: 1.5em;*/
-    /*line-height: 1.5em;*/
-    /*text-align: center;*/
-
     /*6张图片*/
-    bottom: 81px;
+    bottom: 35px;
     position: absolute;
     left: 70%;
     font-size: 2.5em;
