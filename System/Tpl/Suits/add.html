@@ -38,7 +38,7 @@
             <label for="inputAddr" class="col-lg-2 control-label">缩略图地址 </label>
             <div class="col-lg-5">
                 <input type="text" class="form-control" id="suitImageUrlid" placeholder="缩略图地址" name='suitImageUrl' value='{$result.suitImageUrl}'>
-            </div><a class="btn btn-primary" href="javascript:;" id="review">预览</a> &nbsp;&nbsp;<img src='{$result.suitImageUrl}' width="100px;" height="100px" id='viewshow'>
+            </div><a class="btn btn-primary" href="javascript:;" id="review">预览</a> &nbsp;&nbsp;<img src='{$result.suitImageUrl}' width="200px;" height="200px" id='viewshow'>
         </div>
         <div class="form-group">
             <label for="inputTime" class="col-lg-2 control-label"></label>
@@ -53,14 +53,14 @@
                      <div class="form-group picdiv" id='adddiv'>
                          <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
                          <div class="col-lg-2">
-                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>
+                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control" placeholder="色号ID" name='cid[]' value='{$nvo.cid}'>
                          </div>
                      </div>
                  <else/>
                      <div class="form-group picdiv">
                          <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
                          <div class="col-lg-2">
-                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>
+                             <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control" placeholder="色号ID" name='cid[]' value='{$nvo.cid}'>
                          </div>
                      </div>
                </if>
@@ -69,7 +69,7 @@
         <div class="form-group picdiv" id='adddiv'>
             <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
             <div class="col-lg-2">
-                <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value=''>
+                <input type="text" class="form-control" placeholder="商品ID" name='num_iid[]' value=''>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control" placeholder="色号ID" name='cid[]' value='{$nvo.cid}'>
             </div>
         </div>
         </if>
@@ -90,7 +90,7 @@
         $('#addpic').on('click',function(){
             var piclength = $('.picdiv').length;
             if(piclength <= 40 ){
-           $('.picdiv:eq('+(piclength-1)+')').after('<div class="form-group picdiv" ><label for="inputTime" class="col-lg-2 control-label">商品ID</label><div class="col-lg-2"><input type="text" class="form-control" placeholder="商品ID" name="num_iid[]"></div></div>');
+           $('.picdiv:eq('+(piclength-1)+')').after('<div class="form-group picdiv" ><label for="inputTime" class="col-lg-2 control-label">商品ID</label><div class="col-lg-2"><input type="text" class="form-control" placeholder="商品ID" name="num_iid[]">&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control" placeholder="色号ID" name="cid[]" value="{$nvo.cid}"></div></div>');
            }else{
               alert('新增不能超过50个');
             }
@@ -98,7 +98,7 @@
         //减去
         $('#delpic').on('click',function(){
            var piclength = $('.picdiv').length,picLengthValue = piclength-1;
-            if(picLengthValue>1){
+            if(piclength>1){
               $('.picdiv:eq('+(picLengthValue)+')').remove();
             }else{
               alert('只有一个不能删除');

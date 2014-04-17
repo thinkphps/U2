@@ -106,6 +106,7 @@ class SuitsAction extends Action{
                 exit;
             }
             $num_iid = $this->_post('num_iid');
+            $cid = $this->_post('cid');
             $flag = 0;
             foreach($num_iid as $k=>$v){
                 if(empty($v)){
@@ -132,10 +133,10 @@ class SuitsAction extends Action{
          $detail->where(array('suitID'=>$id))->delete();
              $str = '';
              foreach($num_iid as $k1=>$v1){
-                 $str.="('".$id."','".trim($v1)."'),";
+                 $str.="('".$id."','".trim($v1)."','".$cid[$k1]."'),";
              }
              $str = rtrim($str,',');
-             $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`) values ".$str;
+             $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`,`cid`) values ".$str;
              $detail->query($sql);
              $this->success('提交成功',U('Suits/index'));
              exit;
@@ -150,10 +151,10 @@ class SuitsAction extends Action{
           if($resid){
              $str = '';
              foreach($num_iid as $k1=>$v1){
-             $str.="('".$resid."','".trim($v1)."'),";
+             $str.="('".$resid."','".trim($v1)."','".$cid[$k1]."'),";
              }
              $str = rtrim($str,',');
-             $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`) values ".$str;
+             $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`,`cid`) values ".$str;
               $detail->query($sql);
               $this->success('提交成功',U('Suits/index'));
               exit;

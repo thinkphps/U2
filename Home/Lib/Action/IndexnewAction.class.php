@@ -198,6 +198,7 @@ class IndexnewAction extends Action{
         $fid = trim($this->_request('fid'));//风格
         $sid = $sid?$sid:0;
         $fid = $fid?$fid:0;
+        $where = array();
         if(S('homesf'.$sid.$fid)){
         $list = unserialize(S('homesf'.$sid.$fid));
         }else{
@@ -208,11 +209,11 @@ class IndexnewAction extends Action{
         switch($sid){
             case 3 :
                 $where['u_suits.suitGenderID'] = array('exp','IN(3,4)');
-            default;
+            break;
             case 1 :
             case 2 :
                $where['u_suits.suitGenderID'] = $sid;
-            default;
+            break;
         }
 
         if($sid==0 && $fid==0){
@@ -234,51 +235,6 @@ class IndexnewAction extends Action{
         S('homesf'.$sid.$fid,serialize($list),array('type'=>'file'));
       }
         $re = json_encode($list);
-        echo $callback."($re)";
-    }
-//ajax取数据
-    public function ajaxgood(){
-        $type = trim($this->_request('tageid')); //场合id
-        $sex = trim($this->_request('sexid'));//性别id
-        $tem = trim($this->_request('tem'));//平均温度
-        $pro = trim($this->_request('pro'));//省
-        $callback=$_GET['callback'];
-
-        $goodtag = M('Goodtag');
-        if($tem<=-10){
-            $tem = -10;
-        }
-        //取得推荐
-        $windex = D('Windex');
-        $recomodel = D('Reco');
-        $recogood = $recomodel->getrec($tem);
-        $reulist = $recogood[0];
-        $redlist = $recogood[1];
-        $ustr = '';
-        if(!empty($reulist)){
-            foreach($reulist as $k=>$v){
-                $v['title'] = iconv('utf8','gbk',$v['title']);
-                $ustr.='<li><img fg="'.$v['ccateid'].'" data-original="'.C('UNIQLOURL').$v['pic_url'].'" id="1" place="家居1" tag="淑女1" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-            }
-            $ustr = iconv('gbk','utf8',$ustr);
-            $arr['ustr'] = $ustr;
-            $arr['flag'] = true;
-        }
-
-        $dstr = '';
-        if(!empty($redlist)){
-            foreach($redlist as $k=>$v){
-                $v['title'] = iconv('utf8','gbk',$v['title']);
-                $dstr.='<li><img fg="'.$v['ccateid'].'" data-original="'.C('UNIQLOURL').$v['pic_url'].'" id="10" place="家居2" tag="淑女10" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-            }
-            $dstr = iconv('gbk','utf8',$dstr);
-            $arr['dstr'] = $dstr;
-            $arr['flag'] = true;
-        }
-        $re = json_encode($arr);
-        $re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
 

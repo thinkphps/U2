@@ -42,7 +42,7 @@ class GetinfoModel extends Action{
         }
         return $cbn;
     }
-    //取得省
+    //取锟斤拷省
     public function getpca(){
         $area = M('Areas');
         $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -147,7 +147,7 @@ class GetinfoModel extends Action{
         $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->select();
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($result as $k=>$v){
-            $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+            $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('u_suits_goodsdetail.cid,ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
         }
         return $result;
     }
