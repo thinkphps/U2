@@ -76,7 +76,9 @@ class GetinfoAction extends Action{
     public function midsexToStyle(){
         $sid = trim($this->_request('sid'));
         $sid = $sid?$sid:0;
-
+        if(S('midsid'.$sid)){
+         $arr = unserialize(S('midsid'.$sid));
+        }else{
         $recomodel = D('Reco');
         switch($sid){
             case 3 :
@@ -107,6 +109,31 @@ class GetinfoAction extends Action{
         $arr['count'] = ceil(count($result)/2);
         $arr['u'] = $ucuslist;
         $arr['d'] = $dcuslist;
+        S('midsid'.$sid,serialize($arr),array('type'=>'file'));
+        }
         $this->ajaxReturn($arr, 'JSON');
+    }
+
+
+    //给jack返回款号和色号
+    public function getCidItembn(){
+        $suitid = trim($this->_post('suitid'));
+        if($suitid>0){
+            if(S('ciditembn'.$suitid)){
+                $result = unserialize(S('ciditembn'.$suitid));
+            }else{
+                $suites = M('Suits');
+                $sql = "SELECT concat(left(u_beubeu_goods.item_bn,8) , u_suits_goodsdetail.cid) AS barcode
+ from u_suits INNER JOIN u_suits_goodsdetail on u_suits.suitID = u_suits_goodsdetail.suitID
+INNER JOIN u_beubeu_goods on u_suits_goodsdetail.num_iid = u_beubeu_goods.num_iid
+where u_suits.suitID = ".$suitid;
+                $result = $suites->query($sql);
+                S('ciditembn'.$suitid,serialize($result),array('type'=>'file'));
+            }
+            $returnArr = array('code'=>1,'data'=>$result);
+        }else{
+            $returnArr = array('code'=>0,'msg'=>'参数错误');
+        }
+        $this->ajaxReturn($returnArr, 'JSON');
     }
 }
