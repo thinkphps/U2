@@ -145,7 +145,6 @@ where u_suits.suitID = ".$suitid;
     public function getJackNumiid(){
         $item_bn = trim($this->_post('item_bn'));
         if(!empty($item_bn)){
-
            $goods = M('Goods');
            $sql = "select num_iid,title,detail_url from u_beubeu_goods where left(item_bn,8)='".$item_bn."'";
            $result = $goods->query($sql);
