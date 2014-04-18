@@ -105,8 +105,18 @@ class IndexAction extends Action {
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
     //默认女士上下装自定义分类
-    $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
-    $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
+    if(S('cust1')){
+        $ucuslist = unserialize(S('cust1'));
+    }else{
+        $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
+        S('cust11',serialize($ucuslist),array('type'=>'file'));
+    }
+    if(S('cust12')){
+        $dcuslist = unserialize(S('cust12'));
+    }else{
+        $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
+        S('cust12',serialize($dcuslist),array('type'=>'file'));
+    }
     $this->assign('beubeu_suits_list',$beubeu_suits_list);
     $this->assign('stylenum',ceil(count($suit_style_list)/2));
     $this->assign('suit_style_list',$suit_style_list);
@@ -115,7 +125,6 @@ class IndexAction extends Action {
     //优衣库二期
 
     $this->assign('nick',$nick);
-
     $this->assign('newstore',C('NEWSRORE'));
 	$this->assign('cityn',cookie('cityn'));
 	$this->assign('provi',cookie('pro'));
@@ -127,7 +136,7 @@ class IndexAction extends Action {
 	$this->assign('is_mobile_active',$is_mobile_active);
 	$this->assign('mobile',$mobile);
 	$this->assign('user',$result);
-    $this->assign('babycate',$babycate);
+    $this->assign('basedir',__ROOT__);
 	$this->display();
 	//}
     }
@@ -194,679 +203,98 @@ if($id>0){
 //点击按钮取数据
 public function getgood(){
 	$tem = trim($this->_request('tem'));//平均温度
-	$cid = trim($this->_post('cid'));//场合形如1_2_3全部为0
 	$sid = trim($this->_post('sid'));//性别id形如1,2,3 all为0
-	$tid = trim($this->_post('tid'));//套装id
+	$lid = trim($this->_post('lid'));//收藏id
+    $bid = trim($this->_post('bid'));//购买id
 	$fid = trim($this->_post('fid'));//风格id
 	$zid = trim($this->_post('zid'));//自定义分类
-	$pro = trim($this->_post('pro'));//省
-	$cid2 = $cid;
-	$fid2 = $fid;
+    $kid = trim($this->_post('kid'));//快速搜索标记
+    $page = trim($this->_post('page'));
 	if($tem<=-10){
 	$tem = -10;	
 	}
-	$cid = $cid?$cid:0;
+	$lid = $cid?$lid:0;
 	$sid = $sid?$sid:0;
-	$tid = $tid?$tid:0;
+	$bid = $tid?$bid:0;
     $fid = $fid?$fid:0;
     $zid = $zid?$zid:0;
+    $kid = $kid?$kid:0;
+    $page = $page?$page:1;
 	$goodtag = M('Goodtag');
 	$windex = D('Windex');
+    if(isset($tem)){
 	$widvalue = $windex->getwindex($tem);
-	$wvalue = $widvalue['str'];
-	switch($tid){
-		case 0 : //没有选中套装
-    if($cid==0 && $sid==0 && $fid==0 && $zid==0){//场合，性别，风格,自定义都为0
-		//取得官方推荐数据
-	if(!empty($pro)){
-	$recogood = $windex->getrecommend2($pro);
-	$uclothes = $recogood[0];
-	$dclothes = $recogood[1];
-	}
-	if(isset($tem)){
-	//上装
-	$wherex = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$reulistx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'1','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$reulist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-    $windex->saomo($reulistx,$reulist);
-
-	$where2x = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$redlistx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	$where2 = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	$redlist = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-	$windex->saomo($redlistx,$redlist);
-
-	//组织数据
-	foreach($reulistx as $k=>$v){
-    if(!empty($v)){
-	$uclothes[] = $v;//上装
-	}
-	}
-    $reulistx = array();
-	foreach($reulist as $k=>$v){
-	if(!empty($v)){
-	$uclothes[] = $v;//上装
-	}
-	}
-	$reulist = array();
-    foreach($redlistx as $k=>$v){
-	if(!empty($v)){ 
-	$dclothes[] = $v;//下装
-	}
-	}
-	$redlistx = array();
-    foreach($redlist as $k=>$v){
-	if(!empty($v)){
-	$dclothes[] = $v;//下装
-	}
-	}
-    $redlist = array();
-	}		
- }else{
-	  if(isset($tem)){
-	  $where['u_goodtag.wid'] = array('exp','IN('.$wvalue.')');
-	  }
-	  
-      if($sid && !empty($sid)){
-      $where['u_goodtag.gtype'] = $sid;
-	  }
-	  $cidstr = '';
-	  if($cid && !empty($cid)){
-		 $is_g1 = is_int(strpos($cid,'_'));
-		 if(!$is_g1){
-          $cid = $cid.'_';
-		 }
-		 $cidarr = explode('_',$cid);
-		 foreach($cidarr as $k=>$v){
-		 if($v){
-		 $cidstr.=$v.',';
-		 }
-		 }
-	  $cidstr = rtrim($cidstr,',');
-	  if(!empty($cidstr)){
-	  $wh2['u_goodtag.tag_id'] = array('exp','IN('.$cidstr.')');
+    }
+    if($lid>0){
+     //点击收藏走这里
+     if(S('coll'.session("uniq_user_id"))){
+       $result = S('coll'.session("uniq_user_id"));
+     }else{
+     $collection = M('Collection');
+      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->select();
+    S('coll'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
+    }
+    }else if($bid>0){
+      //点击购买走这里
+    if(S('buy'.session("uniq_user_id"))){
+        $result = S('buy'.session("uniq_user_id"));
+    }else{
+        $buy = M('Buy');
+        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->select();
+        S('buy'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
+    }
+    }else if($kid>0){
+       //快速搜索走这里
+       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where()->select();
+     }else{
+        //普通走这里
+            if(S('good'.$sid.$fid.$zid.$tem.$page)){
+             $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
+            }else{
+            $where = '';
+            if(isset($tem)){
+            $where.="and g.wid in ('".$widvalue['str']."')";
+            }
+            if(!empty($sid)){
+                $where.=" and g.gtype='".$sid."'";
+            }
+            if(!empty($fid)){
+                $where.=" and g.ftag_id='".$fid."'";
+            }
+            if($zid && !empty($zid)){
+                    $is_g = is_int(strpos($zid,'_'));
+                    if(!$is_g){
+                        $zid = $zid.'_';
+                    }
+                    $cstr = '';
+                    $ccid = explode('_',$zid);
+                    $ccid = array_unique($ccid);
+                    foreach($ccid as $k=>$v){
+                        if($v){
+                            $cstr.=$v.',';
+                        }
+                    }
+                    $cstr = rtrim($cstr,',');
+                   $where.="and g.ccateid in ('".$cstr."')";
+                }
+           $start = ($page-1)*10;
+           $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
+            $result = $goodtag->query($sql);
+            if($page==1){
+                $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
+                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="#" class="ysc_btn select"><i></i>已收藏</a><a href="#" class="ygm_btn"><i></i>已购买</a><form action="#" method="get" class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></form></div>';
+                array_unshift($result,array('first'=>1,'ad'=>$ad));
+                array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+            }
+            S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
+           }
       }
-	  }
-
-	  //风格
-      $fidstr = '';
-	  if($fid && !empty($fid)){
-		 $wh2['_logic'] = 'OR';
-		 $is_g2 = is_int(strpos($fid,'_'));
-		 if(!$is_g2){
-          $fid = $fid.'_';
-		 }
-		 $cidarr2 = explode('_',$fid);
-		 foreach($cidarr2 as $k=>$v){
-		 if($v){
-		 $fidstr.=$v.',';
-		 }
-		 }
-	  $fidstr = rtrim($fidstr,',');
-	  if(!empty($fidstr)){
-	  $wh2['u_goodtag.ftag_id'] = array('exp','IN('.$fidstr.')');
-      }
-	  }
-	  if($wh2){
-      $where['_complex'] = $wh2;
-	  }
-	  if($zid && !empty($zid)){
-        $is_g = is_int(strpos($zid,'_'));
-		 if(!$is_g){
-          $zid = $zid.'_';
-		 }
-		  $cstr = '';
-		 $ccid = explode('_',$zid);
-		 foreach($ccid as $k=>$v){
-		 if($v){
-		 $cstr.=$v.',';
-		 }
-		 }
-		 $cstr = rtrim($cstr,',');
-        $where['u_goodtag.ccateid'] = array('exp','IN('.$cstr.')');
-	  }
-
-         $where1 = $where;
-		 //上装
-		 if($sid!=4){//婴幼儿没有上下装
-         $where1['u_goodtag.isud'] = '1';
-         }
-		 $where1['u_goods.approve_status'] = 'onsale';
-		 $where1['u_goods.num'] = array('egt','15');
-	     $uclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-         $where1x = $where;
-		 $where1x['u_goodtag.wid'] = $widvalue['wid'];
-         $where1x['u_goodtag.isud'] = '1';
-		 $where1x['u_goods.approve_status'] = 'onsale';
-		 $where1x['u_goods.num'] = array('egt','15');
-	     $uclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-         $windex->saomo($uclothes,$uclothesy);
-
-		 //下装
-		 if($sid!=4){//婴幼儿没有上下装
-         $where2x = $where;
-		 $where2x['u_goodtag.wid'] = $widvalue['wid'];
-         $where2x['u_goodtag.isud'] = '2';
-		 $where2x['u_goods.approve_status'] = 'onsale';
-		 $where2x['u_goods.num'] = array('egt',15);
-	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2x)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-         $where['u_goodtag.isud'] = '2';
-		 $where['u_goods.approve_status'] = 'onsale';
-		 $where['u_goods.num'] = array('egt',15);
-	     $dclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-         $windex->saomo($dclothes,$dclothesy);
-         }
-
-         //吧当天的指数数据放前边
-         foreach($uclothesy as $kx=>$vx){
-		 if(!empty($vx)){
-         $uclothes[] = $vx;
-		 }
-		 }
-         $uclothesy = array();
-         if(!empty($dclothesy)){
-         foreach($dclothesy as $kx=>$vx){
-	     if(!empty($vx)){
-         $dclothes[] = $vx;
-		 }
-		 }
-		 }
-         $dclothesy = array();
-         if(!empty($cid) && !empty($fid)){
-		 if(!$is_g1 && !$is_g2){
-		 foreach($cidarr2 as $kc=>$vc){
-		 if(!empty($vc)){
-         $cidarr[] = $vc;
-		 }
-		 }
-		 }
-        foreach($uclothes as $kid=>$vid){
-         if($is_g1 && $is_g2){
-		 $cidarr = array();
-		if(!empty($cid2)){
-		$cid_arr = explode('_',$cid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ctagid = $cid_arr[0];
-			break;
-			case 2 :
-			$ctagid = $cid_arr[1];
-			break;
-			case 3 :
-			$ctagid = $cid_arr[2];
-			break;		
-		}
-		}
-	   if(!empty($fid2)){
-		$fid_arr = explode('_',$fid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ftagid= $fid_arr[0];
-			break;
-			case 2 :
-			$ftagid= $fid_arr[1];
-			break;
-			case 3 :
-			$ftagid= $fid_arr[2];
-			break;		
-		}
-		}
-		$cidarr[] = $ctagid?$ctagid:-1;
-        $cidarr[] = $ftagid?$ftagid:-1;
-		}
-
-         $gtlist = $goodtag->field('tag_id,ftag_id')->where(array('good_id'=>$vid['id']))->select();
-         $tagarr = array();
-		 foreach($gtlist as $kv=>$vv){
-         $tagarr[] = $vv['tag_id'];
-		 $tagarr[] = $vv['ftag_id'];
-		 }
-         $gtlist = array();
-		 $j = 0;
-         foreach($cidarr as $kis=>$vis){
-         if(!empty($vis)){
-         if(in_array($vis,$tagarr)){
-         $j = 1;
-		 }else{
-         $j = 0;
-		 break;
-		 }
-		 }
-		 }
-		 if($j==0){
-         unset($uclothes[$kid]);
-		 }
-		 }
-		 //下装
-         foreach($dclothes as $kid=>$vid){
-	     if($is_g1 && $is_g2){
-		 $cidarr = array();
-		if(!empty($cid2)){
-		$cid_arr = explode('_',$cid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ctagid = $cid_arr[0];
-			break;
-			case 2 :
-			$ctagid = $cid_arr[1];
-			break;
-			case 3 :
-			$ctagid = $cid_arr[2];
-			break;		
-		}
-		}
-	   if(!empty($fid2)){
-		$fid_arr = explode('_',$fid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ftagid= $fid_arr[0];
-			break;
-			case 2 :
-			$ftagid= $fid_arr[1];
-			break;
-			case 3 :
-			$ftagid= $fid_arr[2];
-			break;		
-		}
-		}
-		$cidarr[] = $ctagid?$ctagid:-1;
-        $cidarr[] = $ftagid?$ftagid:-1;
-		}
-         $gtlist = $goodtag->field('tag_id,ftag_id')->where(array('good_id'=>$vid['id']))->select();
-         $tagarr = array();
-		 foreach($gtlist as $kv=>$vv){
-         $tagarr[] = $vv['tag_id'];
-		 $tagarr[] = $vv['ftag_id'];
-		 }
-         $gtlist = array();
-		 $j = 0;
-         foreach($cidarr as $kis=>$vis){
-         if(!empty($vis)){
-         if(in_array($vis,$tagarr)){
-         $j = 1;
-		 }else{
-         $j = 0;
-		 break;
-		 }
-		 }
-		 }
-		 if($j==0){
-         unset($dclothes[$kid]);
-		 }
-		 }
-		 }
-		}
-		break;
-		case 1 : //选了套装
-		if($sid==0){//性别为all
-	  if(isset($tem)){
-       $where['u_goodtag.wid'] = array('exp','IN('.$wvalue.')');
-	  }
-	  $where['u_goodtag.isud'] = '4';
-	  $cidstr = '';
-	  if($cid && !empty($cid)){
-		 $is_g1 = is_int(strpos($cid,'_'));
-		 if(!$is_g1){
-          $cid = $cid.'_';
-		 }
-		 $cidarr = explode('_',$cid);
-		 foreach($cidarr as $k=>$v){
-		 if($v){
-		 $cidstr.=$v.',';
-		 }
-		 }
-	  $cidstr = rtrim($cidstr,',');
-	  if(!empty($cidstr)){
-	  $wh2['u_goodtag.tag_id'] = array('exp','IN('.$cidstr.')');
-      }
-	  }
-	  
-	  //风格
-      $fidstr = '';
-	  if($fid && !empty($fid)){
-		 $wh2['_logic'] = 'OR';
-		 $is_g2 = is_int(strpos($fid,'_'));
-		 if(!$is_g2){
-          $fid = $fid.'_';
-		 }
-		 $cidarr2 = explode('_',$fid);
-		 foreach($cidarr2 as $k=>$v){
-		 if($v){
-		 $fidstr.=$v.',';
-		 }
-		 }
-	  $fidstr = rtrim($fidstr,',');
-	  if(!empty($fidstr)){
-	  $wh2['u_goodtag.ftag_id'] = array('exp','IN('.$fidstr.')');
-      }		 
-	  }
-	  if($wh2){
-      $where['_complex'] = $wh2;
-		}
-	  if($zid && !empty($zid)){
-        $is_g = is_int(strpos($zid,'_'));
-		 if(!$is_g){
-          $zid = $zid.'_';
-		 }
-		  $cstr = '';
-		 $ccid = explode('_',$zid);
-		 foreach($ccid as $k=>$v){
-		 if($v){
-		 $cstr.=$v.',';
-		 }
-		 }
-		 $cstr = rtrim($cstr,',');
-        $where['u_goodtag.ccateid'] = array('exp','IN('.$cstr.')');
-	  }
-		 //套装
-		 $where1 = $where;
-		 $where1['u_goodtag.wid'] = $widvalue['wid'];
-		 $where1['u_goods.approve_status'] = 'onsale';
-		 $where1['u_goods.num'] = array('egt','15');
-	     $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-
-		 $where['u_goods.approve_status'] = 'onsale';
-		 $where['u_goods.num'] = array('egt','15');
-	     $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.outer_id desc')->select();
-		 $windex->saomo($tclothes,$tclothesy);
-         foreach($tclothesy as $tk=>$tv){
-		 if(!empty($tv)){
-         $tclothes[] = $tv;
-		 }
-		 }
-		 $tclothesy = array();
-         if(!empty($cid) && !empty($fid)){
-		 if(!$is_g1 && !$is_g2){
-		 foreach($cidarr2 as $kc=>$vc){
-		 if(!empty($vc)){
-         $cidarr[] = $vc;
-		 }
-		 }
-         }
-         foreach($tclothes as $kid=>$vid){
-		 if($is_g1 && $is_g2){
-		 $cidarr = array();
-		if(!empty($cid2)){
-		$cid_arr = explode('_',$cid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ctagid = $cid_arr[0];
-			break;
-			case 2 :
-			$ctagid = $cid_arr[1];
-			break;
-			case 3 :
-			$ctagid = $cid_arr[2];
-			break;		
-		}
-		}
-	   if(!empty($fid2)){
-		$fid_arr = explode('_',$fid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ftagid= $fid_arr[0];
-			break;
-			case 2 :
-			$ftagid= $fid_arr[1];
-			break;
-			case 3 :
-			$ftagid= $fid_arr[2];
-			break;		
-		}
-		}
-		$cidarr[] = $ctagid?$ctagid:-1;
-        $cidarr[] = $ftagid?$ftagid:-1;
-		}
-
-         $gtlist = $goodtag->field('tag_id,ftag_id')->where(array('good_id'=>$vid['id']))->select();
-         $tagarr = array();
-		 foreach($gtlist as $kv=>$vv){
-         $tagarr[] = $vv['tag_id'];
-		 $tagarr[] = $vv['ftag_id'];
-		 }
-         $gtlist = array();
-		 $j = 0;
-         foreach($cidarr as $kis=>$vis){
-         if(!empty($vis)){
-         if(in_array($vis,$tagarr)){
-         $j = 1;
-		 }else{
-         $j = 0;
-		 break;
-		 }
-		 }
-		 }
-		 if($j==0){
-         unset($tclothes[$kid]);
-		 }
-		 }
-		 }
-			
-		}else if($sid>0){//优选性别
-		$ctagid = '';
-        $ftagid = '';
-	  if($cid && !empty($cid)){
-		 $is_g1 = is_int(strpos($cid,'_'));
-		 if(!$is_g1){
-          $cid = $cid.'_';
-		 }
-		 $cidarr = explode('_',$cid);
-		 foreach($cidarr as $k=>$v){
-		 if($v){
-		 $ctagid.=$v.',';
-		 }
-		 }
-	     $ctagid = rtrim($ctagid,',');
-	  }
-
-	   if(!empty($fid)){
-		$is_g2 = is_int(strpos($fid,'_'));
-		 if(!$is_g2){
-          $fid = $fid.'_';
-		 }
-		$fidarr = explode('_',$fid);
-		 foreach($fidarr as $k=>$v){
-		 if($v){
-		 $ftagid.=$v.',';
-		 }
-		 }
-	     $ftagid = rtrim($ftagid,',');
-		}
-
-		//套装
-	    $where = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.gtype'=>$sid,'u_goodtag.isud'=>'4','u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
-	    if(!empty($ctagid)){
-	     $wh2['u_goodtag.tag_id'] = array('exp','IN('.$ctagid.')');
-        }
-		if($ftagid){
-		$wh2['_logic'] = 'OR';
-        $wh2['u_goodtag.ftag_id'] = array('exp','IN('.$ftagid.')');
-		}
-		if($wh2){
-		$where['_complex'] = $wh2;
-		}
-	  if($zid && !empty($zid)){
-        $is_g = is_int(strpos($zid,'_'));
-		 if(!$is_g){
-          $zid = $zid.'_';
-		 }
-		  $cstr = '';
-		 $ccid = explode('_',$zid);
-		 foreach($ccid as $k=>$v){
-		 if($v){
-		 $cstr.=$v.',';
-		 }
-		 }
-		 $cstr = rtrim($cstr,',');
-        $where['u_goodtag.ccateid'] = array('exp','IN('.$cstr.')');
-	  }
-	    $where1 = $where;
-		$where1['u_goodtag.wid'] = $widvalue['wid'];
-	    $tclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where1)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-	    $tclothesy = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.type,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goods.outer_id desc')->select();
-		$windex->saomo($tclothes,$tclothesy);
-        foreach($tclothesy as $tk=>$tv){
-		if(!empty($tv)){
-        $tclothes[] = $tv;
-		}
-		}
-		$tclothesy = array();		
-		if(!empty($cid) && !empty($fid)){
-		 if(!$is_g1 && !$is_g2){
-		 foreach($fidarr as $kc=>$vc){
-		 if(!empty($vc)){
-         $cidarr[] = $vc;
-		 }
-		 }
-		 }
-         foreach($tclothes as $kid=>$vid){
-		 if($is_g1 && $is_g2){
-		$cidarr = array();
-		if(!empty($cid2)){
-		$cid_arr = explode('_',$cid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ctagid = $cid_arr[0];
-			break;
-			case 2 :
-			$ctagid = $cid_arr[1];
-			break;
-			case 3 :
-			$ctagid = $cid_arr[2];
-			break;		
-		}
-		}
-	   if(!empty($fid2)){
-		$fid_arr = explode('_',$fid2);
-		switch($vid['type']){
-			case 1 : //女
-			$ftagid= $fid_arr[0];
-			break;
-			case 2 :
-			$ftagid= $fid_arr[1];
-			break;
-			case 3 :
-			$ftagid= $fid_arr[2];
-			break;		
-		}
-		}
-		$cidarr[] = $ctagid?$ctagid:-1;
-        $cidarr[] = $ftagid?$ftagid:-1;
-		}
-         $gtlist = $goodtag->field('tag_id,ftag_id')->where(array('good_id'=>$vid['id']))->select();
-         $tagarr = array();
-		 foreach($gtlist as $kv=>$vv){
-         $tagarr[] = $vv['tag_id'];
-		 $tagarr[] = $vv['ftag_id'];
-		 }
-         $gtlist = array();
-		 $j = 0;
-         foreach($cidarr as $kis=>$vis){
-         if(!empty($vis)){
-         if(in_array($vis,$tagarr)){
-         $j = 1;
-		 }else{
-         $j = 0;
-		 break;
-		 }
-		 }
-		 }
-		 if($j==0){
-         unset($tclothes[$kid]);
-		 }
-		 }
-		 }	
-		}
-		break;		
-	}
-	//如果没有则显示推荐的8件
-    if($tid==0){
-	if($cid!=0 || $sid!=0){
-	if(empty($uclothes) && empty($dclothes)){
-	$recomodel = D('Reco');
- 	$recogood = $recomodel->getrec($tem);
-	$uclothes = $recogood[0];
-	$dclothes = $recogood[1];
-	$arr['fl'] = 1;
-	}else{
-    $arr['fl'] = 0;
-	}
-	}
-    }
-	//上装
-	$ustr = '';
-	if(!empty($uclothes)){
-    foreach($uclothes as $k=>$v){
-	if($v){
-    switch($v['type']){
-		case '1' :
-		$sexname = '女装';
-		break;
-        case '2' :
-		$sexname = '男装';
-		break;
-		case '3' :
-		$sexname = '童装';
-		break;
-    }
-		//风格
-	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>2))->find();
-	$reulist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_goodtag.gtype'=>$v['type'],'u_tag.parent_id'=>1))->find();
-      $ustr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-	}
-      }	
-	}
-    $arr['ustr'] = $ustr;
-	$arr['flag1'] = 'p';	
-	//下装
-	$dstr = '';
-	if(!empty($dclothes)){
-	foreach($dclothes as $k=>$v){
-	if($v){
-    switch($v['type']){
-		case '1' :
-		$sexname = '女装';
-		break;
-        case '2' :
-		$sexname = '男装';
-		break;
-		case '3' :
-		$sexname = '童装';
-		break;
-    }
-		//风格
-	$gtag = $goodtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>2))->find();
-	$reulist[$k]['tagname1'] = $gtag['name'];
-	//场合
-	$gtag2 = $goodtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id'],'u_tag.parent_id'=>1))->find();
-    $dstr.='<li><img sex="'.$v['type'].'" fg="'.$v['ccateid'].'" data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" csex="'.$sexname.'" tag="'.$gtag['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-	}
-	}
-    }
-    $arr['dstr'] = $dstr;
-	$arr['flag1'] = 'p';
-	//套装
-	$tstr = '';
-	if(!empty($tclothes)){
-	foreach($tclothes as $k=>$v){
-	if($v){
-    $tstr.='<li>
-                <img src="'.__ROOT__.'/'.$v['pic_url'].'" id="0" sex="'.$v['type'].'" place="家居2" tag="淑女10" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'">
-              </li>';
-	}
-	}
-    }
-    $arr['tstr'] = $tstr;
-    if(!empty($tstr)){
-	$arr['flag'] = 't';	
-	}
-
-	echo json_encode($arr);
+    if(!empty($result)){
+        $returnArr = array('code'=>1,'da'=>$result,'page'=>$page,'nextpage'=>$page+1);
+    }else{
+    $returnArr = array('code'=>0,'msg'=>'没有数据');
+     }
+    $this->ajaxReturn($returnArr, 'JSON');
 }
 //收入衣柜
 public function addwar(){
