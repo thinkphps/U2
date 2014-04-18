@@ -282,7 +282,7 @@ public function getgood(){
             $result = $goodtag->query($sql);
             if($page==1){
                 $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="#" class="ysc_btn select"><i></i>已收藏</a><a href="#" class="ygm_btn"><i></i>已购买</a><form action="#" method="get" class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></form></div>';
+                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="#" class="ysc_btn select"><i></i>已收藏</a><a href="#" class="ygm_btn"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></div></div>';
                 array_unshift($result,array('first'=>1,'ad'=>$ad));
                 array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
             }
