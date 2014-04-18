@@ -66,7 +66,7 @@ var timer;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
-                $('.id_content_banner_nav').hide();
+                $('.page_arrow').hide();
             }
             else{
                 var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
@@ -227,11 +227,11 @@ var timer;
                 _this.getSuits();
             });
 
-            $('.id_content_banner_nav_prev').on('click',function(){
+            $('.model_nav_prev').on('click',function(){
                 $('#suits-container').moveprev();
             })
 
-            $('.id_content_banner_nav_next').on('click',function(){
+            $('.model_nav_next').on('click',function(){
                 $('#suits-container').movenext();
             })
 
@@ -317,10 +317,10 @@ var callBackFunction = {
         $('#suits-container').html(strHtml);
         $("#suits-container").show();
         if( list.length > 6 ){
-            $('.id_content_banner_nav').show();
+            $('.page_arrow').show();
         }
         else{
-            $('.id_content_banner_nav').hide();
+            $('.page_arrow').hide();
         }
         $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
