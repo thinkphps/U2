@@ -8,7 +8,7 @@
         ,$divBuys : $('.buy_btns')
         ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
         ,$divSyj : $('.syj')
-        ,modelClothesList : []
+        ,BarcodeList : []
     }
 
     var ModelDress = function(){
@@ -26,6 +26,7 @@
             var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
+            Model.CurrClothesCallback = this.beu_getallclothes;
         },
         getUrlParam :function(name){
             var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -48,6 +49,9 @@
                         pageElement.$btnExpansion.click();
 
                     }
+                }).success(function(){
+                    console.log(1);
+                    console.log(pageElement.modelClothesList);
                 });
             }
         },
@@ -82,12 +86,20 @@
                 obj.hide();
             }
         },
+        addBuyBtns:function(){
+            alert(1);
+//            for(var barcode in  pageElement.BarcodeList ){
+//                console.log(barcode);
+//            }
+        },
         //百衣试衣间回调函数
         beu_getallclothes : function(o){
             var _this = this;
+
             //清空购买列表
-            var $buyUl =   pageElement.$divBuys.find('ul');
+            var $buyUl =  pageElement.$divBuys.find('ul');
             $buyUl.html('');
+            console.log($buyUl.html());
             var barcode = '';
             var strLi = '';
             var title = '';
@@ -98,25 +110,30 @@
 //                if(title.length > 8){
 //                    title = title.substring(0,15) + "...";
 //                }
+                pageElement.BarcodeList.push({'barcode':barcode});
+
                 //使用barcode去数据库中取回商品编号
-//                $.post(getJackNumiidUrl,{'item_bn':barcode},function(data){
+//                $.post(getJackNumiidUrl,{'item_bn':barcode.substring(0,8)},function(data){
+//                    console.log(data);
 //                    var code = data.code;
 //                    if( code == 1){
-//                        console.log(data.data);
-////                        strLi += '<li data-title="'+ o[i].name +'" data-prourl=""><a href="'+ +'" title="'+ title+'"> '+ title+'</a></li>'
-//                        pageElement.modelClothesList.push({'barcode':barcode});
+//                        var clothesInfo = data.data
+                        strLi += '<li data-title="'+ title +'" data-numid=""><a href="javascript:;" title="'+ title+'"> '+ title+'</a></li>'
+//                        pageElement.modelClothesList.push({'barcode':barcode,'num_iid':data.data});
 //                    }
 //                });
-
-
-
             }
             $buyUl.append(strLi);
         },
+        dressByBarcode:function(barcode,gender){
+            Model.DressingByBarcode(barcode,gender);
+            if(pageElement.$divSyj.is(':hidden')){
+                pageElement.$btnExpansion.click();
+            }
+        },
+
         elementEvent : function(){
             var _this = this;
-
-            Model.CurrClothesCallback = _this.beu_getallclothes;
 
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
             $('#sfid').on('click','img',this.callDressingFunction);
@@ -137,9 +154,8 @@
             });
 
             $('.sc_btn').on('click',function(){
-                console.log(pageElement.modelClothesList);
-//                alert(1);
-//                Model.DressingByBarcode('UQ08002008','15474');
+//                console.log(pageElement.modelClothesList);
+
             });
 
 

@@ -150,7 +150,7 @@ where u_suits.suitID = ".$suitid;
            $sql = "select num_iid,title,detail_url from u_beubeu_goods where left(item_bn,8)='".$item_bn."'";
            $result = $goods->query($sql);
            if(!empty($result[0])){
-            $returnArr = array('code'=>1,'data'=>$result[0]['num_iid']);
+            $returnArr = array('code'=>1,'data'=>$result[0]);
            }else{
             $returnArr = array('code'=>0,'msg'=>'没有数据');
            }
