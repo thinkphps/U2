@@ -614,15 +614,15 @@
 
 
 <!--试衣间按钮-->
-<div class="syj_btn select ">
+<div class="syj_btn  ">
     <a href="javascript:;" class="syj_btn_move"></a>
-    <a href="javascript:;" class="syj_btn_expansion"></a>
+    <a href="javascript:;" class=" syj_btn_expansion "></a>
     <div class="syj none" >
         <div class="baiyi_syj" id="beubeu_loadImg"></div>
         <div class="btn_line">
             <a href="javascript:;" class="buy_btn"><i></i><p>我要购买</p></a>
             <a href="javascript:;" class="sc_btn">收藏整套搭配</a>
-            <a href="javascript:;" class="bc_btn">保存此搭配</a>
+            <a href="javascript:;" class="bc_btn none">保存此搭配</a>
             <div class="mini-cab-share2">
                 <span>将此搭配分享到：</span>
                 <!-- JiaThis Button BEGIN -->
@@ -660,12 +660,9 @@
             </div>
         </div>
 
-        <div class="buy_btns">
+        <div class="buy_btns none">
             <ul>
-                <li><a href="#">仅配饰</a></li>
-                <li><a href="#">仅下装</a></li>
-                <li><a href="#">仅上装</a></li>
-                <li><a href="#">整套</a></li>
+
             </ul>
         </div>
     </div>
@@ -716,7 +713,8 @@
     var relateurl = '{:U('Login/relate')}';
     var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
     var tmplPath = '{:__TMPL__Public}';
-    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}";
+    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}",getCidItembnUrl = '{:U('Getinfo/getCidItembn')}';
+    var getJackNumiidUrl = '{:U('Getinfo/getJackNumiid')}';
 </script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI.js"></script>
@@ -729,6 +727,7 @@
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/dressing_room_detail.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/modeldress.js"></script>
 </body>
 </html>
 <script>

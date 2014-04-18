@@ -66,7 +66,7 @@ var timer;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
-                $('.id_content_banner_nav').hide();
+                $('.page_arrow').hide();
             }
             else{
                 var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
@@ -140,6 +140,11 @@ var timer;
                 }
                 //jsonpHomeUrl
                 window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/"+ numids.join());
+
+//                var suitid = $(this).data('suitid');
+//                var gender = $(this).data('gender');
+//                //jsonpHomeUrl
+//                window.open( "http://localhost/U2/mini.php/Index?suitid="+ suitid + "&gender=" + gender);
             });
 
             // Ê×Ò³ÌìÆøÇÐ»»
@@ -222,11 +227,11 @@ var timer;
                 _this.getSuits();
             });
 
-            $('.id_content_banner_nav_prev').on('click',function(){
+            $('.model_nav_prev').on('click',function(){
                 $('#suits-container').moveprev();
             })
 
-            $('.id_content_banner_nav_next').on('click',function(){
+            $('.model_nav_next').on('click',function(){
                 $('#suits-container').movenext();
             })
 
@@ -312,10 +317,10 @@ var callBackFunction = {
         $('#suits-container').html(strHtml);
         $("#suits-container").show();
         if( list.length > 6 ){
-            $('.id_content_banner_nav').show();
+            $('.page_arrow').show();
         }
         else{
-            $('.id_content_banner_nav').hide();
+            $('.page_arrow').hide();
         }
         $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
@@ -339,7 +344,7 @@ var callBackFunction = {
     },
     getCoverScrollItem : function(item){
         var strItem = '<div class="item">';
-        strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" />';
+        strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" data-gender="'+ item.suitGenderID+'"  data-suitid="'+ item.suitID +'" />';
         strItem += '<div class="similarity">';
         var detail = item.detail;
         var numids = [];

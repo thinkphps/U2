@@ -23,8 +23,9 @@
 
                 }, // callback function triggered after click on an item - parameter is the item's jQuery object
                 'distributionbelowscale':0.95, // how apart are the items when number of items are below "scalethreshold"
-                'msie':($('html').is('.ie6, .ie7, .ie8'))
+                'msie':true
             };
+
             gopt = opt;
             var isScrolling = false;
             // Options are extended with user specified options
@@ -149,7 +150,7 @@
                         };
                         if(gopt.msie){
                             isScrolling = true;
-                            citem.animate(css, 500, function(){isScrolling=false});
+                            citem.animate(css, 100, function(){isScrolling=false});
                         }else{
                             citem.css(css);
                         }
@@ -208,6 +209,19 @@
             });
 
             //dean
+            function checkbrowser(){
+
+                var Sys = {};
+                var ua = navigator.userAgent.toLowerCase();
+                var s;
+                (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+                    (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                        (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                            (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                                (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+                return Sys;
+            }
+
             function countimglefts(el, imgs){
                 var imglefts= new Array();
                 var allimglen = 0;
@@ -271,9 +285,9 @@
                 css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
 
 
-                if(opt.msie){
+                if(opt.msie && isinit){
                     isScrolling = true;
-                    middle.animate(css, 500, function(){isScrolling=false});
+                    middle.animate(css, 100, function(){isScrolling=false});
                 }else{
                     middle.css(css);
                 }
@@ -356,9 +370,9 @@
                         css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
                     }
 
-                    if(opt.msie){
+                    if(opt.msie && isinit){
                         isScrolling = true;
-                        citem.animate(css, 500, function(){isScrolling=false});
+                        citem.animate(css, 100, function(){isScrolling=false});
                     }else{
                         citem.css(css);
                     }
@@ -447,9 +461,9 @@
                         css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
                     }
 
-                    if(opt.msie){
+                    if(opt.msie && isinit){
                         isScrolling = true;
-                        citem.animate(css, 500, function(){isScrolling=false});
+                        citem.animate(css, 100, function(){isScrolling=false});
                     }else{
                         citem.css(css);
                     }
@@ -592,12 +606,7 @@
                     'left': mleft
                 };
 
-                if(gopt.msie){
-                    isScrolling = true;
-                    citem.animate(css, 500, function(){isScrolling=false});
-                }else{
-                    citem.css(css);
-                }
+                citem.css(css);
             }
 
             // take care of z-index
@@ -647,12 +656,7 @@
                     'left': mleft
                 };
 
-                if(gopt.msie){
-                    isScrolling = true;
-                    citem.animate(css, 500, function(){isScrolling=false});
-                }else{
-                    citem.css(css);
-                }
+                citem.css(css);
             }
 
             // take care of z-index
