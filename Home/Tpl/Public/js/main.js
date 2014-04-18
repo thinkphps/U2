@@ -130,6 +130,7 @@ var timer;
             var _this = this;
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $('#suits-container').on('click','.imgSuits',function(){
+/*
                 var $similarity = $(this).parent().find(".similarity");
                 var numids = [];
                 var list = $similarity.find("a");
@@ -138,11 +139,12 @@ var timer;
                 }
                 //jsonpHomeUrl
                 window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/"+ numids.join());
+*/
 
-//                var suitid = $(this).data('suitid');
-//                var gender = $(this).data('gender');
-//                //jsonpHomeUrl
-//                window.open( "http://localhost/U2/mini.php/Index?suitid="+ suitid + "&gender=" + gender);
+                var suitid = $(this).data('suitid');
+                var gender = $(this).data('gender');
+                //jsonpHomeUrl
+                window.open( "http://localhost/U2/mini.php/Index?suitid="+ suitid + "&gender=" + gender);
             });
 
             // 首页天气切换
@@ -233,6 +235,10 @@ var timer;
                 $('#suits-container').movenext();
             })
 
+
+            $('.weather').on('mouseenter',function(){
+
+            });
 
         },
         cityOperator : function(){
@@ -350,7 +356,7 @@ var callBackFunction = {
             for(var i =0;i<detail.length;i++){
                 numids[i] = detail[i].num_iid;
                 strItem += '<div class="circle">'
-                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank" title="'+detail[i].title +'">';
                 strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
             }
         }
