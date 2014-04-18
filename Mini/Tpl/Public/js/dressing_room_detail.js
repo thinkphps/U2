@@ -49,36 +49,12 @@ $(function(){
             var avg = getavg(temper.high,temper.low);
             $.weather.avg = avg;
             $.weather.getgurl = goodurl;
-            // var pron,cookcity;
-            //     cookcity = provi;
-            // if(cookcity){
-            // 	pron = provi;
-            // }else{
-            // 	pron = remote_ip_info.province;
-            // }
             $.pron = provi ? provi : remote_ip_info.province;
 
             $.uniqlo.index.gender.find('a').first().click()
-            // $.post(getgood,{tem:avg,pro:pron},function(data,status){
-            // var da = eval("("+data+")");
-            // if(da.ustr){
-            //           $('#upc').html(da.ustr);
-            // }else{
-            //           $('#upc').html('');
-            // }
-            // if(da.dstr){
-            //            $('#downc').html(da.dstr);
-            // }else{
-            //          $('#downc').html('');
-            // }
-            // $.uniqlo.kvSlider();
-            // if(!da.ustr && !da.dstr){
-            // $('#tishi').css('display','block');
-            // }else{
-            //           $('#tishi').css('display','none');
-            // 	}
+            //首次加载获取数据
+            getgoods(avg);
 
-            // });
         }
     });
 
@@ -91,95 +67,8 @@ $(function(){
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
                 $.weather.avg = avg;
-                $.post(goodurl,{
-                    tem : avg,
-                    cid : $.uniqlo.occasion,
-                    sid : $.weather.sex,
-                    tid : $.weather.set,
-                    fid : $.uniqlo.fid,
-                    zid : $.uniqlo.zid
-                },function(data,status){
-                    var da = eval("("+data+")");
-                    if(da){
-                        if(da.flag1=='p'){
-                            if($.weather.set==1){
-                                if(da.ustr){
-                                    $('#upc').html(da.ustr);
-                                }
-                                if(da.dstr){
-                                    $('#downc').html(da.dstr);
-                                }
-                            }else{
-                                //如果是婴幼儿走这里
-                                if($.weather.sex==4){
-                                    if(da.fl==1){
-                                        $('#upc').html(da.ustr);
-                                        $('#downc').html(da.dstr);
-                                    }else{
-                                        $('#taoz').html(da.ustr);
-                                    }
-                                }else{
-                                    $('#upc').html(da.ustr);
-                                    $('#downc').html(da.dstr);
-                                }
-                            }
-                        }
-                        if(da.fl==1){
-                            if($.weather.sex==4){
-                                $('.index-single').removeClass('none');
-                                $('.index-suit').addClass('none');
-                                $('.index-suit').css('display','none');
-                                $('.index-single').css('display','block');
-                            }
-                            $('#tishi').css('display','none');
-                            $('#qtm').removeClass('none');
-                        }else{
-                            if($.weather.set==1){
-                                $('.index-single').addClass('none');
-                                $('.index-suit').removeClass('none');
-                                $('.index-suit').css('display','block');
-                                $('.index-single').css('display','none');
-                            }else{
-                                if($.weather.sex==4){
-                                    $('.index-single').addClass('none');
-                                    $('.index-suit').removeClass('none');
-                                    $('.index-suit').css('display','block');
-                                    $('.index-single').css('display','none');
-                                }else{
-                                    $('.index-single').removeClass('none');
-                                    $('.index-suit').addClass('none');
-                                    $('.index-suit').css('display','none');
-                                    $('.index-single').css('display','block');
-                                }
-                            }
-                            $('#tishi').css('display','none');
-                            $('#qtm').addClass('none');
-                        }
-                        if(da.flag=='t'){
-                            $('#taoz').html(da.tstr);
-                        }else{
-                            if($.weather.set==1){
-                                $('#taoz').html('');
-                            }
-                        }
-                        $.uniqlo.kvSlider();
-                        if($.weather.set==1){
-                            if(!da.ustr && !da.dstr && !da.tstr){
-                                $('#tishi').css('display','block');
-                            }else if(da.tstr){
-                                $('#tishi').css('display','none');
-                            }
-                        }
-                        /*else{
-                         if(!da.ustr && !da.dstr){
-                         $('#tishi').css('display','block');
-                         }else{
-                         $('#tishi').css('display','none');
-                         }
-                         }*/
-
-                    }
-                });
+                $.weather.nextpage = 0;
+                getgoods(avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
             }
         })
     })
@@ -298,97 +187,67 @@ $(function(){
 
 
 })
-function getgoods(zid,fid,cid,sid,tid){
-    $.post(goodurl,{
-        tem : $.weather.avg,
-        zid : zid,
-        fid : fid,
-        cid : cid,
-        sid : sid,
-        pro : $.pron,
-        tid : tid
-    },function(data,status){
-        var da = eval("("+data+")");
-        if(da){
-            if(da.flag1=='p'){
-                if(tid==1){
-                    if(da.ustr){
-                        $('#upc').html(da.ustr);
-                    }
-                    if(da.dstr){
-                        $('#downc').html(da.dstr);
-                    }
-                }else{
-                    //如果是婴幼儿走这里
-                    if(sid==4){
-                        if(da.fl==1){
-                            $('#upc').html(da.ustr);
-                            $('#downc').html(da.dstr);
-                        }else{
-                            $('#taoz').html(da.ustr);
-                        }
-                    }else{
-                        $('#upc').html(da.ustr);
-                        $('#downc').html(da.dstr);
-                    }
-                }
-            }
-            if(da.fl==1){
-                if(sid==4){
-                    $('.index-single').removeClass('none');
-                    $('.index-suit').addClass('none');
-                    $('.index-suit').css('display','none');
-                    $('.index-single').css('display','block');
-                }
-                $('#tishi').css('display','none');
-                $('#qtm').removeClass('none');
-            }else{
-                if(tid==1){
-                    $('.index-single').addClass('none');
-                    $('.index-suit').removeClass('none');
-                    $('.index-suit').css('display','block');
-                    $('.index-single').css('display','none');
-                }else{
-                    if(sid==4){
-                        $('.index-single').addClass('none');
-                        $('.index-suit').removeClass('none');
-                        $('.index-suit').css('display','block');
-                        $('.index-single').css('display','none');
-                    }else{
-                        $('.index-single').removeClass('none');
-                        $('.index-suit').addClass('none');
-                        $('.index-suit').css('display','none');
-                        $('.index-single').css('display','block');
-                    }
-                }
 
-                $('#tishi').css('display','none');
-                $('#qtm').addClass('none');
-            }
-            if(da.flag=='t'){
-                $('#taoz').html(da.tstr);
-            }else{
-                if(tid==1){
-                    $('#taoz').html('');
-                }
-            }
-            $.uniqlo.kvSlider();
-            if(tid==1){
-                if(!da.ustr && !da.dstr && !da.tstr){
-                    $('#tishi').css('display','block');
-                }else if(da.tstr){
-                    $('#tishi').css('display','none');
-                }
-            }
-            /*else{
-             if(!da.ustr && !da.dstr){
-             $('#tishi').css('display','block');
-             }else{
-             $('#tishi').css('display','none');
+function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore){
+    $.post(goodurl,{
+        tem : tem,
+        sid : sid,
+        lid : lid,
+        bid : bid,
+        fid : fid,
+        zid : zid,
+        kid : kid,
+        page : $.weather.nextpage
+    },function(data,status){
+     if(data){
+         if(data.code==1){
+         var str = '';
+         $.each(data.da,function(p,v){
+             if(v.first==1 && p==0){
+                 str+= v.ad;
              }
-             }*/
-        }
-    });
+             if(v.first==1 && p==3){
+                 str+= v.cb;
+             }
+            if(v.type==1){
+             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_orange'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>249.00</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+         }else if(v.type==2){
+                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_blue'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>249.00</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+         }else if(v.type==3){
+                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_pink'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>249.00</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+            }
+         });
+         $.weather.nextpage = data.nextpage;
+             if(!loadmore){
+                 $('#watercontainer').html(str);
+
+                 var opt={
+
+                     getResource:function(index,render){
+                         //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
+
+                         var html = getgoods($.weather.avg,0,0,0,0,0,0,1);
+                         html = $.weather.str;
+                         return $(html);
+
+                     },
+
+                     auto_imgHeight:true,
+                     column_width : 228,
+                     insert_type:2,
+                     cell_selector : '.wrapper_box',
+                     max_column_num:4
+                 }
+
+                 $('#watercontainer').waterfall(opt);
+             }
+            else{
+                 $.weather.str = str;
+             }
+
+       }
+     }
+    },'json');
 }
 function delgo(id){
     if(id>0){
