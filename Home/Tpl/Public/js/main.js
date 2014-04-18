@@ -1,9 +1,7 @@
 /**
  * Created by jack on 14-4-11.
  */
-var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
-var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-var baseurl='http://uniqlo.bigodata.com.cn/u2/';
+
 //var jsonpHomeUrl = 'http://localhost/U2/index.php/Index';
 //var tmplPath = 'http://localhost/U2/Home/Tpl/Public/';
 //var baseurl='http://localhost/U2/';
