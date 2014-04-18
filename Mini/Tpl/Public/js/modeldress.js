@@ -1,15 +1,22 @@
 /**
  * Created by jack on 14-4-8.
  */
-;(function($, window, document,undefined) {
 
-    var pageElement = {
+var pageElement = {
         $btnBuy : $('.buy_btn')
         ,$divBuys : $('.buy_btns')
         ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
         ,$divSyj : $('.syj')
         ,BarcodeList : []
+        ,dressByBarcode:function(barcode,gender){
+            Model.DressingByBarcode(barcode,gender);
+            if(pageElement.$divSyj.is(':hidden')){
+                pageElement.$btnExpansion.click();
+            }
+        }
     }
+
+;(function($, window, document,undefined) {
 
     var ModelDress = function(){
 //        this.ModelClothesList = []
@@ -124,12 +131,6 @@
 //                });
             }
             $buyUl.append(strLi);
-        },
-        dressByBarcode:function(barcode,gender){
-            Model.DressingByBarcode(barcode,gender);
-            if(pageElement.$divSyj.is(':hidden')){
-                pageElement.$btnExpansion.click();
-            }
         },
 
         elementEvent : function(){
