@@ -198,12 +198,12 @@ var _mini = {
         }else{
             var fid = 0;
         }
+        if(gender==4){
+            //婴幼儿
+
+        }else{
            $.post(styleurl,{sid:gender,fid:fid},function(data,status){
                    if(data){
-                       if(gender==4){
-                         //婴幼儿
-
-                       }else{
                        if(data.def){
                        var deflength = data.def.length,str = "";
                        for(var i = 0 ;i < deflength;i++){
@@ -212,7 +212,7 @@ var _mini = {
                            }else{
                                var show = "style='display:none;'";
                            }
-                           str += "<div class=\"model\" "+show+"><img class='imgrd' src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                           str += "<div class=\"model\" "+show+"><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
                        }
                        $('#sfid').html(str);
                        var css = {};
@@ -234,8 +234,8 @@ var _mini = {
                            $('#sfid').html('');
                        }
                    }
-                   }
            },'json');
+    }
     },
     showStyleMask : function(gender){
        if(gender == 4){
