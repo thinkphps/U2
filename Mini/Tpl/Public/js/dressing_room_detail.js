@@ -59,6 +59,9 @@ $(function(){
     });
 
     $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
+        $.uniqlo.lid = 0;
+        $.uniqlo.bid = 0;
+        $.weather.nextpage = 0;
         var that = $(this)
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
@@ -200,7 +203,51 @@ var _mini = {
         }
         if(gender==4){
             //婴幼儿
+            $('#sfid').addClass('none');
+            $('.my_yyg_title').addClass('none');
+            $('.page_arrow').hide();
+            $.post(childurl,{tem:$.weather.avg,sid:gender},function(da,status){
+                if(da.flag1=='p'){
+                 //如果是婴幼儿走这里
+                 if(da.sid==4){
+                 if(da.fl==1){
+                 $('#upc').html(da.ustr);
+                 $('#downc').html(da.dstr);
+                 }else{
+                 $('#taoz').html(da.ustr);
+                 }
+                 }else{
+                 $('#upc').html(da.ustr);
+                 $('#downc').html(da.dstr);
+                 }
+                 }
 
+                 if(da.fl==1){
+                 if(da.sid==4){
+                 $('.index-single').removeClass('none');
+                 $('.index-suit').addClass('none');
+                 $('.index-suit').css('display','none');
+                 $('.index-single').css('display','block');
+                 }
+                 $('#tishi').css('display','none');
+                 $('#qtm').removeClass('none');
+                 }else{
+                 if(da.sid==4){
+                 $('.index-single').addClass('none');
+                 $('.index-suit').removeClass('none');
+                 $('.index-suit').css('display','block');
+                 $('.index-single').css('display','none');
+                 }else{
+                 $('.index-single').removeClass('none');
+                 $('.index-suit').addClass('none');
+                 $('.index-suit').css('display','none');
+                 $('.index-single').css('display','block');
+                 }
+                 $('#tishi').css('display','none');
+                 $('#qtm').addClass('none');
+                 }
+                 $.uniqlo.kvSlider();
+            });
         }else{
            $.post(styleurl,{sid:gender,fid:fid},function(data,status){
                    if(data){
@@ -376,12 +423,13 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore){
                  str+= v.cb;
              }
             if(v.type==1){
-             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href='javascript:;'><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_orange'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+                var color = 'h_orange';
          }else if(v.type==2){
-                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_blue'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
-         }else if(v.type==3){
-                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_pink'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+                var color = 'h_blue';
+         }else if(v.type==3 || v.type==3){
+                var color = 'h_orange';
             }
+             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href='javascript:;'><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='"+color+"'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
          });
          $.weather.nextpage = data.nextpage;
              if(!loadmore){

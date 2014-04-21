@@ -175,7 +175,8 @@ public function delg(){
         $flag = trim($this->_post('flag'));
         $isdel = trim($this->_post('isdel'));
         if($id>0){
-if(!empty(session("uniq_user_id"))){
+          $uid = session("uniq_user_id");
+    if(!empty($uid)){
             if($flag==1){
                 $love = M('Love');
                 $time = date('Y-m-d H:i:s');
