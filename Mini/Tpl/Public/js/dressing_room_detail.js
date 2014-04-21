@@ -59,6 +59,7 @@ $(function(){
     });
 
     $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
+
         $.uniqlo.lid = 0;
         $.uniqlo.bid = 0;
         $.weather.nextpage = 0;
@@ -75,6 +76,16 @@ $(function(){
             }
         })
     })
+
+    //点击天气红色X，取消温度
+    $.uniqlo.index.week.on('click','a',function(){
+
+        $.weather.nextpage = 0;
+        $.weather.avg = 0;
+        getgoods(0,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        $.uniqlo.index.week.find('.w_select').removeClass('w_select');
+        return false;
+    });
 
     /* =============== close popup form =============== David */
     $(function(){

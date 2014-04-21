@@ -565,6 +565,7 @@
 
     <div class="tj_wrapper" id='watercontainer'>
 
+
     </div>
     <div class="product_more"><a href="javascript:;" id='moreid'></a></div>
     <div class="footer">
@@ -692,12 +693,14 @@
 <script type="text/javascript" src="__TMPL__Public/js/modeldress.js"></script>
 </body>
 </html>
-<script>
+<script >
 var css = {};
 css['transform']='rotateY(90deg)';
 $('.imgrd').css(css);
 
+
     $(function(){
+
         setTimeout(function(){
             $('.imgrd').css({
                 '-webkit-transition': 'all 0.5s ease-in-out',
@@ -750,6 +753,9 @@ $('.imgrd').css(css);
             $(this).addClass('select');
             _mini.getGoods();
         });
+
+
+
 
         //点击自定义分类向下按钮
         $('.zk_btn').on('click',function(){
