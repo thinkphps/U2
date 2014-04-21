@@ -1,15 +1,30 @@
 /**
  * Created by jack on 14-4-8.
  */
-;(function($, window, document,undefined) {
 
-    var pageElement = {
+var pageElement = {
         $btnBuy : $('.buy_btn')
         ,$divBuys : $('.buy_btns')
         ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
         ,$divSyj : $('.syj')
         ,BarcodeList : []
+        ,dressByBarcode:function(barcode,gender){
+            Model.DressingByBarcode(barcode,gender);
+            if(pageElement.$divSyj.is(':hidden')){
+                pageElement.$btnExpansion.click();
+            }
+        }
+        ,dressByBarcodeList:function(barcodeList){
+            for(var i = 0;i < barcodeList.length;i++){
+                Model.DressingByBarcode(barcodeList[i].item_bn,barcodeList[i].sex);
+            }
+            if(pageElement.$divSyj.is(':hidden')){
+                pageElement.$btnExpansion.click();
+            }
+        }
     }
+
+;(function($, window, document,undefined) {
 
     var ModelDress = function(){
 //        this.ModelClothesList = []
@@ -75,7 +90,7 @@
             return genderValue;
         },
         callDressingFunction : function(){
-
+            pageElement.dressByBarcodeList($(this).data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){
@@ -125,18 +140,15 @@
             }
             $buyUl.append(strLi);
         },
-        dressByBarcode:function(barcode,gender){
-            Model.DressingByBarcode(barcode,gender);
-            if(pageElement.$divSyj.is(':hidden')){
-                pageElement.$btnExpansion.click();
-            }
-        },
 
         elementEvent : function(){
             var _this = this;
 
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
             $('#sfid').on('click','img',this.callDressingFunction);
+
+
+
 
             pageElement.$btnExpansion.on('click',function(){
                 _this.objShowOrHide(pageElement.$divSyj);

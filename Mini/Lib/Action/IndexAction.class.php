@@ -76,28 +76,33 @@ class IndexAction extends Action {
         }
 	}
     //kimi 优衣库二期
-    if(S('dstyle')){
-        $suit_style_list = unserialize(S('dstyle'));
-    }else{
-        //取得性别所对应的风格
-       $suit_style_list =  $suit_style->cache(true)->join('inner join u_settings_gender_style as g on u_settings_suit_style.ID=g.styleID')->field('u_settings_suit_style.ID')->where(array('g.genderID'=>1))->select();
-        foreach($suit_style_list as $k=>$v){
-            $suit_style_list[$k]['pid'] = $recomodel->pageToDataStyle($v['ID']);
-            $suit_style_list[$k]['pid2'] = $recomodel->pageToDataStyle2($v['ID']);
-        }
-      S('dstyle',serialize($suit_style_list),array('type'=>'file'));
-    }
-
     if(S('styledata')){
         $beubeu_suits_list = unserialize(S('styledata'));
     }else{
         //默认模特图
-       $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitImageUrl')->where(array('suitStyleID'=>1,'suitGenderID'=>1))->order('uptime desc')->select();
+       $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->select();
         $beubeu_detail = M('BeubeuSuitsGoodsdetail');
        foreach($beubeu_suits_list as $k=>$v){
+           switch($v['suitGenderID']){
+               case 1 :
+                $sex = 15474;
+               break;
+               case 2 :
+                $sex = 15478;
+               break;
+               case 3 :
+                $sex = 15583;
+               break;
+               case 4 :
+               $sex = 15581;
+               break;
+           }
            $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
            if(!empty($detailResult)){
-           $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+            foreach($detailResult as $k2=>$v2){
+                $detailResult[$k2]['sex'] = $sex;
+            }
+               $beubeu_suits_list[$k]['detail'] = json_encode($detailResult);
            }else{
            $beubeu_suits_list[$k]['detail'] = 0;
            }
@@ -118,8 +123,6 @@ class IndexAction extends Action {
         S('cust12',serialize($dcuslist),array('type'=>'file'));
     }
     $this->assign('beubeu_suits_list',$beubeu_suits_list);
-    $this->assign('stylenum',ceil(count($suit_style_list)/2));
-    $this->assign('suit_style_list',$suit_style_list);
     $this->assign('ucuslist',$ucuslist);
     $this->assign('dcuslist',$dcuslist);
     //优衣库二期
@@ -167,38 +170,42 @@ public function delg(){
 	}
 }
 //喜欢
-public function addlove(){
-$id = trim($this->_post('id'));//Collectio表的num_iid
-$flag = trim($this->_post('flag'));
-$isdel = trim($this->_post('isdel'));
-if($id>0){
-//if(!empty($_SESSION['token'])){
-	if($flag==1){
-	$love = M('Love');
-	$time = date('Y-m-d H:i:s');
-    if($isdel==1){
-	$cresult = $love->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
-	if(empty($cresult)){
-	$love->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
-	}
-    }else if($isdel==0){
-      $love->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();    
+    public function addlove(){
+        $id = trim($this->_post('id'));//Collectio表的num_iid
+        $flag = trim($this->_post('flag'));
+        $isdel = trim($this->_post('isdel'));
+        if($id>0){
+          $uid = session("uniq_user_id");
+    if(!empty($uid)){
+            if($flag==1){
+                $love = M('Love');
+                $time = date('Y-m-d H:i:s');
+                if($isdel==1){
+                    $cresult = $love->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
+                    if(empty($cresult)){
+                        $love->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
+                    }
+                }else if($isdel==0){
+                    $love->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();
+                }
+            }else if($flag==2){
+                $buy = M('Buy');
+                $time = date('Y-m-d H:i:s');
+                if($isdel==1){
+                    $cresult = $buy->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
+                    if(empty($cresult)){
+                        $buy->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
+                    }
+                }else if($isdel==0){
+                    $buy->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();
+                }
+            }
+        }else{
+          $returnArr = array('code'=>0,'msg'=>'没有登录');
+          $this->ajaxReturn($returnArr, 'JSON');
+        }
+        }
     }
-	}else if($flag==2){
-	$buy = M('Buy');
-	$time = date('Y-m-d H:i:s');
-    if($isdel==1){
-	$cresult = $buy->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
-	if(empty($cresult)){
-	$buy->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
-	}
-    }else if($isdel==0){
-     $buy->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();    
-    }		
-	}
-//}
-}
-}
 
 //点击按钮取数据
 public function getgood(){
@@ -213,15 +220,16 @@ public function getgood(){
 	if($tem<=-10){
 	$tem = -10;	
 	}
-	$lid = $cid?$lid:0;
+	$lid = $lid?$lid:0;
 	$sid = $sid?$sid:0;
-	$bid = $tid?$bid:0;
+	$bid = $bid?$bid:0;
     $fid = $fid?$fid:0;
     $zid = $zid?$zid:0;
     $kid = $kid?$kid:0;
     $page = $page?$page:1;
 	$goodtag = M('Goodtag');
 	$windex = D('Windex');
+    $start = ($page-1)*10;
     if(isset($tem)){
 	$widvalue = $windex->getwindex($tem);
     }
@@ -231,7 +239,10 @@ public function getgood(){
        $result = S('coll'.session("uniq_user_id"));
      }else{
      $collection = M('Collection');
-      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->select();
+      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
+         if($page==1){
+             $result = $this->waterdata($result);
+         }
     S('coll'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
     }
     }else if($bid>0){
@@ -240,7 +251,10 @@ public function getgood(){
         $result = S('buy'.session("uniq_user_id"));
     }else{
         $buy = M('Buy');
-        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->select();
+        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
+        if($page==1){
+            $result = $this->waterdata($result);
+        }
         S('buy'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
     }
     }else if($kid>0){
@@ -277,14 +291,15 @@ public function getgood(){
                     $cstr = rtrim($cstr,',');
                    $where.="and g.ccateid in ('".$cstr."')";
                 }
-           $start = ($page-1)*10;
+                $where.=" and bg.approve_status='onsale' and bg.num>=15";
            $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
             $result = $goodtag->query($sql);
             if($page==1){
-                $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="#" class="ysc_btn select"><i></i>已收藏</a><a href="#" class="ygm_btn"><i></i>已购买</a><form action="#" method="get" class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></form></div>';
+                $result = $this->waterdata($result);
+                /*$ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
+                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></div></div>';
                 array_unshift($result,array('first'=>1,'ad'=>$ad));
-                array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+                array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));*/
             }
             S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
            }
@@ -296,6 +311,13 @@ public function getgood(){
      }
     $this->ajaxReturn($returnArr, 'JSON');
 }
+    public function waterdata($result){
+        $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
+        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></div></div>';
+        array_unshift($result,array('first'=>1,'ad'=>$ad));
+        array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+        return $result;
+    }
 //收入衣柜
 public function addwar(){
 	if(session("uniq_user_name")){
