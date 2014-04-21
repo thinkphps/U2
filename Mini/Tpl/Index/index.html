@@ -411,7 +411,7 @@
         </volist>
     </div>
 <!--放婴幼儿-->
-    <div class="index-suit mini-kv none" style="display: none;">
+    <div class="index-suit mini-kv none" style="display: none;" id='showbaby'>
         <div class="mini-kv-slide" >
             <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
             <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
@@ -422,12 +422,7 @@
             </div>
         </div>
     </div>
-    <div class="page_arrow none">
-        <div class="model_nav_inner">
-            <div class="model_nav_prev"></div>
-            <div class="model_nav_next"></div>
-        </div>
-    </div>
+
     <!--侧边导航-->
     <ul class="detail_sub_nav" id='ulgender'>
         <li class="big_btn" data-gender="1"><a href="javascript:;" class="detail_sub_btn1 select"></a></li>
@@ -656,7 +651,7 @@
     var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';
     var addda = '{:U('Index/getdapeijian')}';
     var imgpath = '__TMPL__Public';
-    var goodurl = '{:U('Index/getgood')}',childurl = "{:U('IndexNew/getgood')}";
+    var goodurl = '{:U('Index/getgood')}';
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
     var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
@@ -731,20 +726,21 @@ $('.imgrd').css(css);
         $('#cateu2').on('click','li',function(){
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
+            $.uniqlo.kid = 0;
             $.weather.nextpage = 0;
+            $.uniqlo.zid = 0;
             var sid = $(this).data('gender');
-            if(sid==4){
-                $.uniqlo.fid = 0;
-            }
+            $.uniqlo.fid = 0;
             $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
             _mini.getGoods();
         });
         //mini中部类别选择
         $('#cstyle2').on('click','li a',function(){
-            $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
+            $.uniqlo.kid = 0;
+            $.weather.nextpage = 0;
             $(this).siblings('a').removeClass('select');
             $(this).parent('li').siblings('li').children('a').removeClass('select');
             $(this).addClass('select');
@@ -782,13 +778,13 @@ $('.imgrd').css(css);
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
+            $.uniqlo.kid = 0;
             var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
             }else{
                $('.zleft').children('a').removeClass('w_select');
             }
-            //$('.upclothes').children('a.w_select').removeClass('w_select');
             if($(this).children('a').hasClass('w_select')){
              $(this).children('a').removeClass('w_select');
                 var i = $.inArray(zid, _mini.left);
@@ -811,13 +807,23 @@ $('.imgrd').css(css);
                 if(rightLen == 0){
                 $.uniqlo.zid = 0
                }else{
-                $.uniqlo.zid = _mini.right.join('_');
+                    //如果右边不为0
+                    var arrleft2 = [];
+                    $('.zleft').each(function(){
+                        arrleft2.push($(this).attr('la'));
+                    });
+                $.uniqlo.zid = arrleft2.join('_')+'_'+_mini.right.join('_');
                 }
             } else {
                 $.uniqlo.zid = ''
                 if(leftLen != 0){
                     if(rightLen==0){
-                    $.uniqlo.zid = _mini.left.join('_')
+                        //表示右边是全部
+                        var arrright = [];
+                        $('.zright').each(function(){
+                            arrright.push($(this).attr('la'));
+                        });
+                    $.uniqlo.zid = _mini.left.join('_')+'_'+arrright.join('_');
                     }else{
                     $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }
@@ -829,6 +835,7 @@ $('.imgrd').css(css);
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
+            $.uniqlo.kid = 0;
             var zid = $(this).attr('la');
 
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
@@ -860,13 +867,23 @@ $('.imgrd').css(css);
                 if(leftLen == 0){
                     $.uniqlo.zid = 0
                 }else{
-                    $.uniqlo.zid = _mini.left.join('_');
+                    //如果左边不为0
+                    var arrright2 = [];
+                    $('.zright').each(function(){
+                        arrright2.push($(this).attr('la'));
+                    });
+                    $.uniqlo.zid = _mini.left.join('_')+'_'+arrright2.join('_');
                 }
             } else {
                 $.uniqlo.zid = ''
                 if(rightLen != 0){
                     if(leftLen==0){
-                        $.uniqlo.zid = _mini.right.join('_')
+                        //表示左边是全部
+                        var allleft = [];
+                        $('.zleft').each(function(){
+                            allleft.push($(this).attr('la'));
+                        });
+                        $.uniqlo.zid = allleft.join('_')+'_'+_mini.right.join('_');
                     }else{
                         $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }

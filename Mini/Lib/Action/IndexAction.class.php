@@ -217,6 +217,7 @@ public function getgood(){
 	$zid = trim($this->_post('zid'));//自定义分类
     $kid = trim($this->_post('kid'));//快速搜索标记
     $page = trim($this->_post('page'));
+    $keyword = trim($this->_post('keyword'));
 	if($tem<=-10){
 	$tem = -10;	
 	}
@@ -235,31 +236,34 @@ public function getgood(){
     }
     if($lid>0){
      //点击收藏走这里
-     if(S('coll'.session("uniq_user_id"))){
-       $result = S('coll'.session("uniq_user_id"));
+     if(S('coll'.session("uniq_user_id").$page)){
+       $result = unserialize(S('coll'.session("uniq_user_id").$page));
      }else{
      $collection = M('Collection');
       $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
          if($page==1){
              $result = $this->waterdata($result);
          }
-    S('coll'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
+    S('coll'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
     }
     }else if($bid>0){
       //点击购买走这里
-    if(S('buy'.session("uniq_user_id"))){
-        $result = S('buy'.session("uniq_user_id"));
+    if(S('buy'.session("uniq_user_id").$page)){
+        $result = unserialize(S('buy'.session("uniq_user_id").$page));
     }else{
         $buy = M('Buy');
         $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
         if($page==1){
             $result = $this->waterdata($result);
         }
-        S('buy'.session("uniq_user_id"),serialize($result),array('type'=>'file'));
+        S('buy'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
     }
     }else if($kid>0){
        //快速搜索走这里
-       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where()->select();
+        if($keyword){
+       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('title'=>array('like','%'.$keyword.'%')))->select();
+      }
+            $result = $this->waterdata($result);
      }else{
         //普通走这里
             if(S('good'.$sid.$fid.$zid.$tem.$page)){
@@ -296,16 +300,14 @@ public function getgood(){
             $result = $goodtag->query($sql);
             if($page==1){
                 $result = $this->waterdata($result);
-                /*$ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-                $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></div></div>';
-                array_unshift($result,array('first'=>1,'ad'=>$ad));
-                array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));*/
             }
             S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
            }
       }
     if(!empty($result)){
-        $returnArr = array('code'=>1,'da'=>$result,'page'=>$page,'nextpage'=>$page+1);
+//error_log(print_r($result,1),3,'2.txt');
+        $arr_count = count($result);
+        $returnArr = array('code'=>1,'da'=>$result,'count'=>$arr_count,'page'=>$page,'nextpage'=>$page+1);
     }else{
     $returnArr = array('code'=>0,'msg'=>'没有数据');
      }
@@ -313,9 +315,15 @@ public function getgood(){
 }
     public function waterdata($result){
         $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off"><a href="#"></a></div></div>';
+        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));
-        array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+        $arr_count = count($result);
+        if($arr_count>=4){
+            array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+        }else{
+            array_splice($result,($arr_count),0,array(array('first'=>1,'cb'=>$str)));
+        }
+
         return $result;
     }
 //收入衣柜
