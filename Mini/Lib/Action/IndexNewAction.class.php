@@ -910,7 +910,6 @@ class IndexNewAction extends Action {
                         $dclothesy = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_beubeu_goods.uptime desc')->select();
                         $windex->saomo($dclothes,$dclothesy);
                     }
-
                     //吧当天的指数数据放前边
                     foreach($uclothesy as $kx=>$vx){
                         if(!empty($vx)){
@@ -941,6 +940,7 @@ class IndexNewAction extends Action {
                             }
                         }
                     }
+
                     $dclothesy = array();
                     $windex->saomo($hdresult,$dclothes);
                     $darr = $dclothes;
@@ -956,6 +956,7 @@ class IndexNewAction extends Action {
                         }
                     }
                     $darr = array();
+
                     if(!empty($cid) && !empty($fid)){
                         if(!$is_g1 && !$is_g2){
                             foreach($cidarr2 as $kc=>$vc){

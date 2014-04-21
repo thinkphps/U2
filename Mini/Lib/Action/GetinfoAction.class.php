@@ -3,10 +3,11 @@ class GetinfoAction extends Action{
         public function sexToStyle(){
             $sid = trim($this->_post('sid'));
             $fid = trim($this->_post('fid'));
+            $tem = trim($this->_post('tem'));
             $sid = $sid?$sid:0;
             $fid = $fid?$fid:0;
-            if(S('sid'.$sid.$fid)){
-             $arr = unserialize(S('sid'.$sid.$fid));
+            if(S('sid'.$tem.$sid.$fid)){
+             $arr = unserialize(S('sid'.$tem.$sid.$fid));
             }else{
                 $recomodel = D('Reco');
                 if(!empty($fid)){
@@ -20,8 +21,26 @@ class GetinfoAction extends Action{
                 break;
                 case 4 :
                   //mini婴幼儿还是从以前商品取数据
-                $defaultResult = M('BeubeuGoods')->cache(true)->field('pic_url')->where(array('type'=>$sid,'approve_status'=>'onsale','num'=>array('egt',15)))->order('uptime desc')->select();
-                  $arr['def'] = $result;
+                 $goodtag = M('Goodtag');
+                 $windex = D('Windex');
+                 $where = '';
+                 if(isset($tem)){
+                        $widvalue = $windex->getwindex($tem);
+                        $where.="and g.wid in ('".$widvalue['str']."')";
+                 }
+                 if(!empty($sid)){
+                        $where.=" and g.gtype='".$sid."'";
+                }
+                $where.=" and bg.approve_status='onsale' and bg.num>=15";
+                    $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc";
+                    $childResult = $goodtag->query($sql);
+                    $defaultResult = '';
+                    foreach($childResult as $k=>$v){
+                        if($v){
+                            //$defaultResult.='<li><img  data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
+                            $defaultResult.='<li><img  data-original="http://uniqlo.bigodata.com.cn/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
+                        }
+                    }
                 break;
                 case 1 :
                 case 2 :
@@ -30,7 +49,7 @@ class GetinfoAction extends Action{
                 break;
             }
             $arr['def'] = $defaultResult;
-            S('sid'.$sid.$fid,serialize($arr),array('type'=>'file'));
+            S('sid'.$tem.$sid.$fid,serialize($arr),array('type'=>'file'));
           }
             $this->ajaxReturn($arr, 'JSON');
         }
