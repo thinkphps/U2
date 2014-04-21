@@ -15,6 +15,8 @@ var pageElement = {
             }
         }
         ,dressByBarcodeList:function(barcodeList){
+            //穿套装的时候先清空模特
+            Model.Empty();
             for(var i = 0;i < barcodeList.length;i++){
                 Model.DressingByBarcode(barcodeList[i].item_bn,barcodeList[i].sex);
             }
@@ -167,6 +169,10 @@ var pageElement = {
 
             $('.sc_btn').on('click',function(){
 //                console.log(pageElement.modelClothesList);
+                var arr   = Model.GetAllClothesCallback();
+                for(var key in arr){
+                    alert(arr[key].barcode);
+                }
 
             });
 

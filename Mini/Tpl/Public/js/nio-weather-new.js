@@ -94,6 +94,8 @@ jQuery(function($){
             var arrIndex;
             var avg = 10;
             var weatherinfo = info['weather' + index];
+            //设置背景图片
+            this.setBackground(weatherinfo.wt);
             if(info['weather' + index].lt != null){
                 avg = Math.ceil( (parseInt(weatherinfo.lt) + parseInt(weatherinfo.ht)) / 2);
             }
@@ -247,6 +249,36 @@ jQuery(function($){
                 option.callback(option.province, temper, info);
             }
 
+        },
+        setBackground : function(str){
+            this.removeBackgroundClass();
+            if(str.indexOf("雪") > 0){
+                $("#main_con").addClass("water5")
+            }
+            else if(str.indexOf("大雨") > 0 || str.indexOf("暴雨") > 0 ||
+                str.indexOf("雷雨") > 0 || str.indexOf("冰雹") > 0 ){
+                $("#main_con").addClass("water4")
+            }
+            else if(str.indexOf("雨") > 0){
+                $("#main_con").addClass("water3")
+            }
+            else if(str == "晴"){
+                $("#main_con").addClass("water1")
+            }
+            else if(str == "阴"){
+                $("#main_con").addClass("water6")
+            }
+            else{
+                $("#main_con").addClass("water2")
+            }
+        },
+        removeBackgroundClass:function(){
+            for(var i = 1;i<=6;i++){
+                if($("#main_con").hasClass("water"+ i)){
+                    $("#main_con").removeClass("water"+ i);
+                    break;
+                }
+            }
         },
         init : function(option){
             option = option || {}
