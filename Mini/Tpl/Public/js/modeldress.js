@@ -92,7 +92,8 @@ var pageElement = {
             return genderValue;
         },
         callDressingFunction : function(){
-            pageElement.dressByBarcodeList($(this).data('detail'));
+            var img = $(this).find('img')
+            pageElement.dressByBarcodeList($(img.get(0)).data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){
@@ -147,7 +148,7 @@ var pageElement = {
             var _this = this;
 
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
-            $('#sfid').on('click','img',this.callDressingFunction);
+            $('#sfid').on('click','.model',this.callDressingFunction);
 
 
 

@@ -386,10 +386,10 @@
     </div>
 </form>
 
-<!--我的优衣柜-->
+<!--我的试衣间-->
 <div class="my_yyg changjing1">
     <div class="my_yyg_title">
-        <h2>我的优衣柜</h2>
+        <h2>我的试衣间</h2>
         <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
         <p>该风格下的更多商品，请看"瀑布"</p>
     </div>
@@ -397,11 +397,15 @@
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
          <if condition="$pk elt 4">
         <div class="model" style='display:block;'>
-            <img class='imgrd' src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}'/>
+            <div style='width: 400px;height: 533px;margin-left: -70px'>
+                <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}'/>
+            </div>
         </div>
         </else>
              <div class="model" style='display:none;'>
-                 <img class='imgrd' src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}' />
+                 <div style='width: 400px;height: 533px;margin-left: -70px'>
+                    <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}' />
+                 </div>
              </div>
        </if>
         </volist>

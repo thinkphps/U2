@@ -100,7 +100,7 @@ button,label{cursor:pointer; }
 
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:960px; margin:0 auto; }
-.model{ float:left; width:240px; height:550px; margin:100px 0 0 0;}
+.model{ float:left; width:240px; height:550px; margin:100px 0 0 0;cursor: pointer;overflow: hidden}
 
 
 /*左侧分类导航*/

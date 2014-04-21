@@ -201,9 +201,9 @@ var _mini = {
         }else{
             var fid = 0;
         }
+        $('#sfid').addClass('none');
         if(gender==4){
             //婴幼儿
-            $('#sfid').addClass('none');
             $('.my_yyg_title').addClass('none');
             $('.page_arrow').hide();
             $.post(childurl,{tem:$.weather.avg,sid:gender},function(da,status){
@@ -259,9 +259,10 @@ var _mini = {
                            }else{
                                var show = "style='display:none;'";
                            }
-                           str += "<div class=\"model\" "+show+"><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                           str += "<div class=\"model\" "+show+"><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
                        }
                        $('#sfid').html(str);
+                       $('#sfid').removeClass('none');
                        var css = {};
                        css['transform']='rotateY(90deg)';
                        $('.imgrd').css(css);
