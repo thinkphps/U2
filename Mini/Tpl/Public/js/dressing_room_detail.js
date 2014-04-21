@@ -286,26 +286,36 @@ var _mini = {
     }
     },
     showStyleMask : function(gender){
+        $('.syj').hide();
+        if(gender != 4){
+            $('.my_yyg_title').show();
+        }
        if(gender == 4){
-           $('#style-mask').removeClass('children-style-mask');
-           $('#style-mask').removeClass('male-style-mask');
-           $('#style-mask').addClass('baby-style-mask').show();
+           for($i=1;$i<11;$i++){
+               $('li[data-suitstyle="' + $i +'"]').hide();
+           }
        }else if(gender == 3){
-
-           $('#style-mask').removeClass('baby-style-mask');
-           $('#style-mask').removeClass('male-style-mask');
-           $('#style-mask').addClass('children-style-mask').show();
+           for($i=1;$i<11;$i++){
+               if($i==9 || $i==5){
+                   $('li[data-suitstyle="' + $i +'"]').hide();
+               }else{
+                   $('li[data-suitstyle="' + $i +'"]').show();
+               }
+           }
        }
        else if(gender == 2){
-           $('#style-mask').removeClass('baby-style-mask');
-           $('#style-mask').removeClass('children-style-mask');
-           $('#style-mask').addClass('male-style-mask').show();
+           for($i=1;$i<11;$i++){
+               if($i==6 || $i==7){
+                   $('li[data-suitstyle="' + $i +'"]').hide();
+               }else{
+                   $('li[data-suitstyle="' + $i +'"]').show();
+               }
+           }
        }
        else{
-           $('#style-mask').removeClass('baby-style-mask');
-           $('#style-mask').removeClass('children-style-mask');
-           $('#style-mask').removeClass('male-style-mask');
-           $('#style-mask').hide();
+           for($i=1;$i<11;$i++){
+               $('li[data-suitstyle="' + $i +'"]').show();
+           }
        }
     },
     getGoods : function(){
