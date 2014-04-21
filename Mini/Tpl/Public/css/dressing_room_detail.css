@@ -49,7 +49,7 @@ button,label{cursor:pointer; }
 /*头部-优惠*/
 .preferential{float:right; width:321px; height:82px; background:url(../images/line1.png) left 0 no-repeat; overflow:hidden; position:relative;}
 
-.preferential ul.preferential_side_bar{ width:10px; position:absolute; top:25px; right:10px; overflow:hidden;}
+.preferential ul.preferential_side_bar{ width:10px; position:absolute; top:25px; right:10px; overflow:hidden;z-index:1000;}
 .preferential ul.preferential_side_bar li{ display:block; width:8px; height:8px; background:url(../images/preferential_side_bar.png) 0 0 no-repeat; cursor:pointer; margin:0 0 4px 0; z-index:10;}
 .preferential ul.preferential_side_bar li.current{ background:url(../images/preferential_side_bar.png) 0 -8px no-repeat;}
 
