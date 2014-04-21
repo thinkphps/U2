@@ -401,7 +401,7 @@
                 <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}'/>
             </div>
         </div>
-        </else>
+        <else/>
              <div class="model" style='display:none;'>
                  <div style='width: 400px;height: 533px;margin-left: -70px'>
                     <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}' />
@@ -720,9 +720,9 @@ $('.imgrd').css(css);
             if(sid==1){
                 $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
             }else if(sid==2){
-                $('.changjing1').css("background","url("+imgpath+"/images/man.jpg) center 0 no-repeat");
+                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
             }else if(sid==3 || sid == 4){
-                $('.changjing1').css("background","url("+imgpath+"/images/chil.jpg) center 0 no-repeat");
+                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
             }
             _mini.getSuits();
         });
