@@ -187,7 +187,173 @@ $(function(){
 
 
 })
+var _mini = {
+    getSuits : function(){
+        var gender = $('#ulgender li').siblings().children('a.select').parent('li').data('gender');
+        this.showStyleMask(gender);
+           //下边取数据
+        if(gender!=4){
+         var fid = $('#ul_index-bar-place li').siblings().children('a.select').parent('li').data('suitstyle');
+              fid = fid ? fid : 0;
+        }else{
+            var fid = 0;
+        }
+           $.post(styleurl,{sid:gender,fid:fid},function(data,status){
+                   if(data){
+                       if(gender==4){
+                         //婴幼儿
 
+                       }else{
+                       if(data.def){
+                       var deflength = data.def.length,str = "";
+                       for(var i = 0 ;i < deflength;i++){
+                           if(i<4){
+                               var show = "style='display:block;'";
+                           }else{
+                               var show = "style='display:none;'";
+                           }
+                           str += "<div class=\"model\" "+show+"><img class='imgrd' src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
+                       }
+                       $('#sfid').html(str);
+                       var css = {};
+                       css['transform']='rotateY(90deg)';
+                       $('.imgrd').css(css);
+                       setTimeout(function(){
+                           $('.imgrd').css({
+                               '-webkit-transition': 'all 0.5s ease-in-out',
+                               '-moz-transition': 'all 0.5s ease-in-out',
+                               '-o-transition': 'all 0.5s ease-in-out',
+                               '-ms-transition': 'all 0.5s ease-in-out',
+                               'transition': 'all 0.5s ease-in-out'
+                           });
+                           var css = {};
+                           css['transform']='matrix(1, 0, 0, 1, 0, 0)';
+                           $('.imgrd').css(css);
+                       },100);
+                       }else{
+                           $('#sfid').html('');
+                       }
+                   }
+                   }
+           },'json');
+    },
+    showStyleMask : function(gender){
+       if(gender == 4){
+           $('#style-mask').removeClass('children-style-mask');
+           $('#style-mask').removeClass('male-style-mask');
+           $('#style-mask').addClass('baby-style-mask').show();
+       }else if(gender == 3){
+
+           $('#style-mask').removeClass('baby-style-mask');
+           $('#style-mask').removeClass('male-style-mask');
+           $('#style-mask').addClass('children-style-mask').show();
+       }
+       else if(gender == 2){
+           $('#style-mask').removeClass('baby-style-mask');
+           $('#style-mask').removeClass('children-style-mask');
+           $('#style-mask').addClass('male-style-mask').show();
+       }
+       else{
+           $('#style-mask').removeClass('baby-style-mask');
+           $('#style-mask').removeClass('children-style-mask');
+           $('#style-mask').removeClass('male-style-mask');
+           $('#style-mask').hide();
+       }
+    },
+    getGoods : function(){
+        var sid = $('#cateu2 li').siblings().children('a.select').parent('li').data('gender');
+        var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
+            fid = fid ? fid : 0;
+        if(!fid){
+        this.showStyleMask2(sid);
+            //取得自定义分类
+            this.getzid(sid);
+         }
+        $.weather.sex = sid;
+        $.weather.nextpage = 0;
+        $.uniqlo.fid = fid;
+        getgoods($.weather.avg,sid,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+
+    },
+    showStyleMask2 : function(gender){
+        if(gender == 4){
+            $('#style-mask2').removeClass('children-style-mask2');
+            $('#style-mask2').removeClass('male-style-mask2');
+            $('#style-mask2').addClass('baby-style-mask2').show();
+        }else if(gender == 3){
+
+            $('#style-mask2').removeClass('baby-style-mask2');
+            $('#style-mask2').removeClass('male-style-mask2');
+            $('#style-mask2').addClass('children-style-mask2').show();
+        }
+        else if(gender == 2){
+            $('#style-mask2').removeClass('baby-style-mask2');
+            $('#style-mask2').removeClass('children-style-mask2');
+            $('#style-mask2').addClass('male-style-mask2').show();
+        }
+        else{
+            $('#style-mask2').removeClass('baby-style-mask2');
+            $('#style-mask2').removeClass('children-style-mask2');
+            $('#style-mask2').removeClass('male-style-mask2');
+            $('#style-mask2').hide();
+        }
+    },
+    getzid : function(sid){
+        $.post(midstyleurl,{sid:sid},function(data,status){
+            if(data){
+                //上下装
+                var ustr = '',dstr='';
+                $.each(data.u,function(i,name){
+                    ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                });
+                $.each(data.d,function(i,name){
+                    dstr+="<li class='doclothes zright' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                });
+                $('#alluid').nextAll('li').remove();
+                $('#alluid').after(ustr);
+                $('#alldid').nextAll('li').remove();
+                $('#alldid').after(dstr);
+            }
+        },'json');
+    },
+    left : [],
+    right : []
+}
+$('#watercontainer').on('click','.btn_xh',function(){      //喜欢
+var num_iid = $(this).data('id');
+    $(this).toggleClass('select');
+    if($(this).hasClass('select')){
+        addbuy(num_iid,1,1)//添加
+    } else {
+        addbuy(num_iid,1,0)//取消
+    }
+});
+$('#watercontainer').on('click','.btn_ym',function(){    //购买
+    var num_iid = $(this).data('id');
+    $(this).toggleClass('select');
+    if($(this).hasClass('select')){
+        addbuy(num_iid,2,1)//添加
+    } else {
+        addbuy(num_iid,2,0)//取消
+    }
+});
+$('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
+    $.weather.nextpage = 0;
+    $(this).addClass('select');
+    $('#buydata').removeClass('select');
+    $.uniqlo.lid = 1;
+    $.uniqlo.bid = 0;
+    getgoods(0,0,1,0,0,0,0,0);
+});
+
+$('#watercontainer').on('click','#buydata',function(){         //右侧已购买
+    $.weather.nextpage = 0;
+    $(this).addClass('select');
+    $('#cldatas').removeClass('select');
+    $.uniqlo.bid = 1;
+    $.uniqlo.lid = 0;
+    getgoods(0,0,0,1,0,0,0,0);
+});
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore){
     $.post(goodurl,{
         tem : tem,
@@ -210,11 +376,11 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore){
                  str+= v.cb;
              }
             if(v.type==1){
-             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_orange'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href='javascript:;'><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_orange'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
          }else if(v.type==2){
-                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_blue'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_blue'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>562</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
          }else if(v.type==3){
-                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='' class='btn_ym select'><i></i>已买</a></dd><dd><a href='#' class='btn_xh'><i></i>喜欢</a></dd></dl><h3 class='h_pink'><a href='#'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
+                str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href=''><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='h_pink'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
             }
          });
          $.weather.nextpage = data.nextpage;
@@ -226,7 +392,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore){
                      getResource:function(index,render){
                          //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
 
-                         var html = getgoods($.weather.avg,0,0,0,0,0,0,1);
+                         var html = getgoods($.weather.avg,0,$.uniqlo.lid,$.uniqlo.bid,0,0,0,1);
                          html = $.weather.str;
                          return $(html);
 
@@ -285,8 +451,12 @@ $(window).on('beforeunload', function(){
 function addbuy(id,flag,isdel){
     if(id>0){
         $.post(buyurl,{id:id,flag:flag,isdel:isdel},function(data,status){
-
-        });
+          if(data){
+              if(data.code==0){
+               alert(data.msg);
+              }
+          }
+        },'json');
     }
 }
 //取出添加到大配件衣服的tag信息
