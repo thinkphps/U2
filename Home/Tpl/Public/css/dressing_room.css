@@ -456,6 +456,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     padding: 5px 0px 5px 10px;
     font-weight: bold;
     font:13px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
+    text-shadow: 1px 1px #ddd;
 }
 
 
