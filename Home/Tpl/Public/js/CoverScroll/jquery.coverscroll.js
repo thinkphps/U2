@@ -26,6 +26,11 @@
                 'msie':true
             };
 
+            var cbrowser = checkbrowser();
+            if(cbrowser.chrome){
+                opt.msie =false;
+            }
+
             gopt = opt;
             var isScrolling = false;
             // Options are extended with user specified options
