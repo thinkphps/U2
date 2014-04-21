@@ -83,8 +83,25 @@ class IndexAction extends Action {
        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->select();
         $beubeu_detail = M('BeubeuSuitsGoodsdetail');
        foreach($beubeu_suits_list as $k=>$v){
+           switch($v['suitGenderID']){
+               case 1 :
+                $sex = 15474;
+               break;
+               case 2 :
+                $sex = 15478;
+               break;
+               case 3 :
+                $sex = 15583;
+               break;
+               case 4 :
+               $sex = 15581;
+               break;
+           }
            $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
            if(!empty($detailResult)){
+            foreach($detailResult as $k2=>$v2){
+                $detailResult[$k2]['sex'] = $sex;
+            }
            $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
            }else{
            $beubeu_suits_list[$k]['detail'] = 0;
