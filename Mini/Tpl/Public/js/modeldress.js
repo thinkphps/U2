@@ -14,6 +14,14 @@ var pageElement = {
                 pageElement.$btnExpansion.click();
             }
         }
+        ,dressByBarcodeList:function(barcodeList){
+            for(var i = 0;i < barcodeList.length;i++){
+                Model.DressingByBarcode(barcodeList[i].item_bn,barcodeList[i].sex);
+            }
+            if(pageElement.$divSyj.is(':hidden')){
+                pageElement.$btnExpansion.click();
+            }
+        }
     }
 
 ;(function($, window, document,undefined) {
@@ -82,7 +90,7 @@ var pageElement = {
             return genderValue;
         },
         callDressingFunction : function(){
-
+            pageElement.dressByBarcodeList($(this).data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){
@@ -138,6 +146,9 @@ var pageElement = {
 
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
             $('#sfid').on('click','img',this.callDressingFunction);
+
+
+
 
             pageElement.$btnExpansion.on('click',function(){
                 _this.objShowOrHide(pageElement.$divSyj);
