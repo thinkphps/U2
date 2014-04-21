@@ -205,10 +205,10 @@ var _mini = {
     getSuits : function(){
         var gender = $('#ulgender li').siblings().children('a.select').parent('li').data('gender');
         this.showStyleMask(gender);
-           //下边取数据
+        //下边取数据
         if(gender!=4){
-         var fid = $('#ul_index-bar-place li').siblings().children('a.select').parent('li').data('suitstyle');
-              fid = fid ? fid : 0;
+            var fid = $('#ul_index-bar-place li').siblings().children('a.select').parent('li').data('suitstyle');
+            fid = fid ? fid : 0;
         }else{
             var fid = 0;
         }
@@ -219,89 +219,89 @@ var _mini = {
             $('.page_arrow').hide();
             $('#showbaby').css('display','block').remove('none');
             $.post(styleurl,{tem:$.weather.avg,sid:gender},function(data,status){
-               if(data.def){
-                   $('#taoz').html(data.def);
-               }
+                if(data.def){
+                    $('#taoz').html(data.def);
+                }
             });
         }else{
-           $.post(styleurl,{sid:gender,fid:fid},function(data,status){
-                   if(data){
-                       if(data.def){
-                       var deflength = data.def.length,str = "";
-                       for(var i = 0 ;i < deflength;i++){
-                           if(i<4){
-                               var show = "style='display:block;'";
-                           }else{
-                               var show = "style='display:none;'";
-                           }
-                           str += "<div class=\"model\" "+show+"><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
-                       }
-                       $('#sfid').html(str);
-                       $('#sfid').removeClass('none');
-                       var css = {};
-                       css['transform']='rotateY(90deg)';
-                       $('.imgrd').css(css);
-                       setTimeout(function(){
-                           $('.imgrd').css({
-                               '-webkit-transition': 'all 0.5s ease-in-out',
-                               '-moz-transition': 'all 0.5s ease-in-out',
-                               '-o-transition': 'all 0.5s ease-in-out',
-                               '-ms-transition': 'all 0.5s ease-in-out',
-                               'transition': 'all 0.5s ease-in-out'
-                           });
-                           var css = {};
-                           css['transform']='matrix(1, 0, 0, 1, 0, 0)';
-                           $('.imgrd').css(css);
-                       },100);
-                       }else{
-                           $('#sfid').html('');
-                       }
-                   }
-           },'json');
-    }
+            $.post(styleurl,{sid:gender,fid:fid},function(data,status){
+                if(data){
+                    if(data.def){
+                        var deflength = data.def.length,str = "";
+                        for(var i = 0 ;i < deflength;i++){
+                            if(i<4){
+                                var show = "style='display:block;'";
+                            }else{
+                                var show = "style='display:none;'";
+                            }
+                            str += "<div class=\"model\" "+show+"><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                        }
+                        $('#sfid').html(str);
+                        $('#sfid').removeClass('none');
+                        var css = {};
+                        css['transform']='rotateY(90deg)';
+                        $('.imgrd').css(css);
+                        setTimeout(function(){
+                            $('.imgrd').css({
+                                '-webkit-transition': 'all 0.5s ease-in-out',
+                                '-moz-transition': 'all 0.5s ease-in-out',
+                                '-o-transition': 'all 0.5s ease-in-out',
+                                '-ms-transition': 'all 0.5s ease-in-out',
+                                'transition': 'all 0.5s ease-in-out'
+                            });
+                            var css = {};
+                            css['transform']='matrix(1, 0, 0, 1, 0, 0)';
+                            $('.imgrd').css(css);
+                        },100);
+                    }else{
+                        $('#sfid').html('');
+                    }
+                }
+            },'json');
+        }
     },
     showStyleMask : function(gender){
         $('.syj').hide();
         if(gender != 4){
             $('.my_yyg_title').show();
         }
-       if(gender == 4){
-           for($i=1;$i<11;$i++){
-               $('li[data-suitstyle="' + $i +'"]').hide();
-           }
-       }else if(gender == 3){
-           for($i=1;$i<11;$i++){
-               if($i==9 || $i==5){
-                   $('li[data-suitstyle="' + $i +'"]').hide();
-               }else{
-                   $('li[data-suitstyle="' + $i +'"]').show();
-               }
-           }
-       }
-       else if(gender == 2){
-           for($i=1;$i<11;$i++){
-               if($i==6 || $i==7){
-                   $('li[data-suitstyle="' + $i +'"]').hide();
-               }else{
-                   $('li[data-suitstyle="' + $i +'"]').show();
-               }
-           }
-       }
-       else{
-           for($i=1;$i<11;$i++){
-               $('li[data-suitstyle="' + $i +'"]').show();
-           }
-       }
+        if(gender == 4){
+            for($i=1;$i<11;$i++){
+                $('li[data-suitstyle="' + $i +'"]').hide();
+            }
+        }else if(gender == 3){
+            for($i=1;$i<11;$i++){
+                if($i==9 || $i==5){
+                    $('li[data-suitstyle="' + $i +'"]').hide();
+                }else{
+                    $('li[data-suitstyle="' + $i +'"]').show();
+                }
+            }
+        }
+        else if(gender == 2){
+            for($i=1;$i<11;$i++){
+                if($i==6 || $i==7){
+                    $('li[data-suitstyle="' + $i +'"]').hide();
+                }else{
+                    $('li[data-suitstyle="' + $i +'"]').show();
+                }
+            }
+        }
+        else{
+            for($i=1;$i<11;$i++){
+                $('li[data-suitstyle="' + $i +'"]').show();
+            }
+        }
     },
     getGoods : function(){
         var sid = $('#cateu2 li').siblings().children('a.select').parent('li').data('gender');
         var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
-            fid = fid ? fid : 0;
+        fid = fid ? fid : 0;
         if(!fid){
-        this.showStyleMask2(sid);
+            this.showStyleMask2(sid);
             //取得自定义分类
             this.getzid(sid);
-         }
+        }
         $.weather.sex = sid;
         $.weather.nextpage = 0;
         $.uniqlo.fid = fid;
@@ -331,6 +331,49 @@ var _mini = {
             $('#style-mask2').hide();
         }
     },
+    getProductInfo : function(data){
+        var strHtml = '';
+        var color = 'h_orange';
+        var pushid = 3;
+        $.each(data.da,function(p,v){
+
+            if(data.count>=4){
+                pushid = 3;
+            }else{
+                pushid = data.count-1;
+            }
+            if(v.first==1 && p==0){
+                strHtml+= v.ad;
+            }
+            if(v.first==1 && p==pushid){
+                strHtml+= v.cb;
+            }
+            if(v.type==1){
+                color = 'h_orange';
+            }else if(v.type==2){
+                color = 'h_blue';
+            }else if(v.type==3 || v.type==3){
+                color = 'h_orange';
+            }
+            if(p != 0 && p != pushid){
+                strHtml += '<div class="wrapper_box"><a href="javascript:;">';
+                strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
+                strHtml += '<dl><dt><a href="javascript:;" name="tryon"><i></i>试穿</a></dt>';
+                strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
+                strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
+                //颜色
+                strHtml += '<div class="product_color none"><h5>请选择颜色</h5><ul></ul></div>';
+                strHtml += '<h3 class="'+color+'"><a href="javascript:;">'+ v.title+'</a></h3>';
+                strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
+                strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
+                strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
+                strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
+                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div>';
+            }
+        });
+        return strHtml;
+    }
+    ,
     getzid : function(sid){
         $.post(midstyleurl,{sid:sid},function(data,status){
             if(data){
@@ -353,7 +396,7 @@ var _mini = {
     right : []
 }
 $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
-var num_iid = $(this).data('id');
+    var num_iid = $(this).data('id');
     $(this).toggleClass('select');
     if($(this).hasClass('select')){
         addbuy(num_iid,1,1)//添加
@@ -398,9 +441,23 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $.uniqlo.lid = 0;
     $.uniqlo.kid = 1;
     if(keyword){
-    getgoods(0,0,0,0,0,0,1,0,keyword);
-     }
+        getgoods(0,0,0,0,0,0,1,0,keyword);
+    }
 });
+
+//鼠标移动到衣服上显示价格、库存等详细信息
+$('#watercontainer').on('mouseenter','.wrapper_box img',function(){
+    $(this).parent().parent().find('.product_inf').show();
+});
+//鼠标移出隐藏价格、库存等详细信息
+$('#watercontainer').on('mouseleave','.wrapper_box',function(){
+    $(this).find('.product_inf').hide();
+});
+//点击试穿按钮，显示颜色
+$('#watercontainer').on('click','a[name=tryon]',function(){
+   $(this).parent().parent().parent().find('.product_color').show();
+});
+
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     $.post(goodurl,{
         tem : tem,
@@ -413,62 +470,40 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
         page : $.weather.nextpage,
         keyword : keyword
     },function(data,status){
-     if(data){
-         if(data.code==1){
-         var str = '';
-         $.each(data.da,function(p,v){
-             if(data.count>=4){
-                 var pushid = 3;
-             }else{
-                 pushid = data.count-1;
-             }
-             if(v.first==1 && p==0){
-                 str+= v.ad;
-             }
-             if(v.first==1 && p==pushid){
-                 str+= v.cb;
-             }
-            if(v.type==1){
-                var color = 'h_orange';
-         }else if(v.type==2){
-                var color = 'h_blue';
-         }else if(v.type==3 || v.type==3){
-                var color = 'h_orange';
+        if(data){
+            console.log(data);
+            if(data.code==1){
+                var strProInfo = _mini.getProductInfo(data);
+                $.weather.nextpage = data.nextpage;
+                if(!loadmore){
+                    $('#watercontainer').html(strProInfo);
+
+                    var opt={
+
+                        getResource:function(index,render){
+                            //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
+
+                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,0,$.uniqlo.zid,$.uniqlo.kid,1);
+                            html = $.weather.str;
+                            return $(html);
+
+                        },
+
+                        auto_imgHeight:true,
+                        column_width : 228,
+                        insert_type:2,
+                        cell_selector : '.wrapper_box',
+                        max_column_num:4
+                    }
+
+                    $('#watercontainer').waterfall(opt);
+                }
+                else{
+                    $.weather.str = strProInfo;
+                }
+
             }
-             if(p != 0 && p != pushid){
-             str+="<div class='wrapper_box'><a href='javascript:;'><img src='http://uniqlo.bigodata.com.cn/"+v.pic_url+"' width='200' alt='' /></a><dl><dt><a href='javascript:;'><i></i>试穿</a></dt><dd><a href='javascript:;' class='btn_ym' data-id='"+ v.num_iid+"'><i></i>已买</a></dd><dd><a href='javascript:;' class='btn_xh' data-id='"+ v.num_iid+"'><i></i>喜欢</a></dd></dl><h3 class='"+color+"'><a href='javascript:;'>"+ v.title+"</a></h3><div class='product_inf'><div class='inf_top'></div><div class='inf_con'><p class='price'><span>￥</span>"+ v.price+"</p><p class='stock'>剩余库存<span>"+ v.num+"</span>件</p><div class='inf_xx'' style='display:none;'><p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p></div></div><div class='inf_bom'><a href='' class='select'></a></div></div></div>";
-         }
-         });
-         $.weather.nextpage = data.nextpage;
-             if(!loadmore){
-                 $('#watercontainer').html(str);
-
-                 var opt={
-
-                     getResource:function(index,render){
-                         //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
-
-                         var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,0,$.uniqlo.zid,$.uniqlo.kid,1);
-                         html = $.weather.str;
-                         return $(html);
-
-                     },
-
-                     auto_imgHeight:true,
-                     column_width : 228,
-                     insert_type:2,
-                     cell_selector : '.wrapper_box',
-                     max_column_num:4
-                 }
-
-                 $('#watercontainer').waterfall(opt);
-             }
-            else{
-                 $.weather.str = str;
-             }
-
-       }
-     }
+        }
     },'json');
 }
 function delgo(id){
@@ -507,11 +542,11 @@ $(window).on('beforeunload', function(){
 function addbuy(id,flag,isdel){
     if(id>0){
         $.post(buyurl,{id:id,flag:flag,isdel:isdel},function(data,status){
-          if(data){
-              if(data.code==0){
-               alert(data.msg);
-              }
-          }
+            if(data){
+                if(data.code==0){
+                    alert(data.msg);
+                }
+            }
         },'json');
     }
 }
