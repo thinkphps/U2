@@ -148,12 +148,7 @@
                             'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
                             'left':imglefts[i-mbegin]
                         };
-                        if(gopt.msie){
-                            isScrolling = true;
-                            citem.animate(css, 100, function(){isScrolling=false});
-                        }else{
-                            citem.css(css);
-                        }
+                        citem.css(css);
                     }
 
                     // take care of z-index
@@ -210,15 +205,20 @@
 
             //dean
             function checkbrowser(){
-
                 var Sys = {};
-                var ua = navigator.userAgent.toLowerCase();
-                var s;
-                (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
-                    (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
-                        (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
-                            (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
-                                (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+                Sys.Opera = window.opera ? true : false;
+                Sys.IE = document.all && !Sys.Opera ? true : false;
+                Sys.IE6 = Sys.IE && typeof(window.XMLHttpRequest) == "undefined" ? true : false;
+                Sys.IE8 = Sys.IE && typeof(document.querySelectorAll) != "undefined" ? true : false;
+                Sys.IE7 = Sys.IE && ! Sys.IE6 && !Sys.IE8 ? true : false;
+                Sys.WebKit = /WebKit/i.test(navigator.userAgent) ? true : false,
+                    Sys.iPhone = /iPhone|iPod/i.test(navigator.userAgent)? true : false;
+                Sys.Chrome = /Chrome/i.test(navigator.userAgent) ? true : false;
+                Sys.Safari = /Safari/i.test(navigator.userAgent) && !Sys.Chrome ? true : false;
+                Sys.Konqueror = navigator.vendor == "KDE" ? true : false;
+                Sys.Konqueror4 = Sys.Konqueror && /native code/.test(document.getElementsByClassName) ? true : false;
+                Sys.Gecko = !Sys.WebKit && navigator.product == "Gecko" ? true : false;
+                Sys.Gecko19 = Sys.Gecko && Array.reduce ? true : false;
                 return Sys;
             }
 
