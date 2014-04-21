@@ -102,7 +102,7 @@ class IndexAction extends Action {
             foreach($detailResult as $k2=>$v2){
                 $detailResult[$k2]['sex'] = $sex;
             }
-           $beubeu_suits_list[$k]['detail'] = serialize($detailResult);
+               $beubeu_suits_list[$k]['detail'] = json_encode($detailResult);
            }else{
            $beubeu_suits_list[$k]['detail'] = 0;
            }
