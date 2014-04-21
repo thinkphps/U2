@@ -394,24 +394,60 @@
         <p>该风格下的更多商品，请看"瀑布"</p>
     </div>
     <div class="my_yyg_model" id='sfid'>
-        <volist id='pvo' name='beubeu_suits_list'>
-        <div class="model">
-            <img src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}'/>
+        <volist id='pvo' name='beubeu_suits_list' key='pk'>
+         <if condition="$pk elt 4">
+        <div class="model" style='display:block;'>
+            <img class='imgrd' src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}'/>
         </div>
+        </else>
+             <div class="model" style='display:none;'>
+                 <img class='imgrd' src="{$pvo.suitImageUrl}" width="240" height="550" data-detail='{$pvo.detail}' />
+             </div>
+       </if>
         </volist>
     </div>
+<!--放婴幼儿-->
+    <div class="index-suit mini-kv none" style="display: none;">
+        <div class="mini-kv-slide" >
+            <a href="javascript:;" class="mini-kv-prev mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.14">prev</a>
+            <a href="javascript:;" class="mini-kv-next mini-btn" data-spm-wangpu-module-id="49-18533179424" data-spm-anchor-id="a1z10.4.w49-18533179424.15">next</a>
+            <div class="mini-kv-container">
+                <ul id="taoz" style="left: 0px;">
 
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page_arrow none">
+        <div class="model_nav_inner">
+            <div class="model_nav_prev"></div>
+            <div class="model_nav_next"></div>
+        </div>
+    </div>
     <!--侧边导航-->
-    <ul class="detail_sub_nav">
-        <li class="big_btn" la='1'><a href="javascript:;" class="detail_sub_btn1 select" la='1'></a></li>
-        <li class="big_btn" la='2'><a href="javascript:;" class="detail_sub_btn2" la='2'></a></li>
-        <li class="big_btn" la='3'><a href="javascript:;" class="detail_sub_btn3" la='3'></a></li>
-        <li class="big_btn" la='4'><a href="javascript:;" class="detail_sub_btn4" la='4'></a></li>
-        <volist id='suvo' name='suit_style_list' key='skey'>
+    <ul class="detail_sub_nav" id='ulgender'>
+        <li class="big_btn" data-gender="1"><a href="javascript:;" class="detail_sub_btn1 select"></a></li>
+        <li class="big_btn" data-gender="2"><a href="javascript:;" class="detail_sub_btn2"></a></li>
+        <li class="big_btn" data-gender="3"><a href="javascript:;" class="detail_sub_btn3"></a></li>
+        <li class="big_btn" data-gender="4"><a href="javascript:;" class="detail_sub_btn4"></a></li>
+    </ul>
+    <ul class="detail_sub_nav ch_sub_nav" id='ul_index-bar-place'>
+        <li data-suitstyle="6"><a href="javascript:;" class="detail_sub_btn5"></a></li>
+        <li data-suitstyle="7"><a href="javascript:;" class="detail_sub_btn6"></a></li>
+        <li data-suitstyle="8"><a href="javascript:;" class="detail_sub_btn7"></a></li>
+        <li data-suitstyle="1"><a href="javascript:;" class="detail_sub_btn8"></a></li>
+        <li data-suitstyle="3"><a href="javascript:;" class="detail_sub_btn9"></a></li>
+        <li data-suitstyle="4"><a href="javascript:;" class="detail_sub_btn10"></a></li>
+        <li data-suitstyle="9"><a href="javascript:;" class="detail_sub_btn11"></a></li>
+        <li data-suitstyle="5"><a href="javascript:;" class="detail_sub_btn12"></a></li>
+        <li data-suitstyle="2"><a href="javascript:;" class="detail_sub_btn13"></a></li>
+        <li data-suitstyle="10"><a href="javascript:;" class="detail_sub_btn14"></a></li>
+        <!--<volist id='suvo' name='suit_style_list' key='skey'>
             <li class='small_btn' la='{$suvo.ID}'><a href="javascript:;" class="detail_sub_btn{$suvo.pid} <if condition='$skey eq 1'>select</if>"></a></li>
-        </volist>
+        </volist>-->
 
     </ul>
+    <div class="pa none" id="style-mask"></div>
 
 </div>
 
@@ -474,26 +510,22 @@
 
         <!--分类-->
         <div class="dr_main_con_sub_nav">
-            <ul class="rw_sub_nav">
-                <li class="rw_all cateu2" la=''><a href="javascript:;"></a></li>
-                <li class="rw_nvzhuang cateu2" la='1'><a href="javascript:;" class="select"></a></li>
-                <li class="rw_nanzhuang cateu2" la='2'><a href="javascript:;"></a></li>
-                <li class="rw_tongzhuang cateu2" la='3'><a href="javascript:;"></a></li>
-                <li class="rw_yinyouer cateu2" la='4'><a href="javascript:;"></a></li>
+            <ul class="rw_sub_nav" id='cateu2'>
+                <li class="rw_all" data-gender="0"><a href="javascript:;" class='select'></a></li>
+                <li class="rw_nvzhuang" data-gender="1"><a href="javascript:;"></a></li>
+                <li class="rw_nanzhuang" data-gender="2"><a href="javascript:;"></a></li>
+                <li class="rw_tongzhuang" data-gender="3"><a href="javascript:;"></a></li>
+                <li class="rw_yinyouer" data-gender="4"><a href="javascript:;"></a></li>
             </ul>
-            <ul class="ch_sub_nav">
-                <li class="ch_all"><a href="javascript:;" class='cateuchil2'></a></li>
-                <php>
-                for($i=1;$i<=$stylenum;$i++){
-                    if($i==1){
-                    $sel = 'select';
-                    }else{
-                    $sel = '';
-                    }
-                    echo "<li><a href=\"javascript:;\" class=\"ch_".$suit_style_list[($i-1)*2]['pid2']." ".$sel." cateuchil2\"></a><a href=\"javascript:;\" class=\"ch_".$suit_style_list[($i-1)*2+1]['pid2']." cateuchil2\"></a></li>";
-                }
-                </php>
+            <ul class="ch_sub_nav" id='cstyle2'>
+                <li class="ch_all"><a href="javascript:;"></a></li>
+                <li><a href="javascript:;" class="ch_a_1" data-suitstyle="6"></a><a href="javascript:;" class="ch_a_2" data-suitstyle="4"></a></li>
+                <li><a href="javascript:;" class="ch_b_1" data-suitstyle="7"></a><a href="javascript:;" class="ch_b_2" data-suitstyle="9"></a></li>
+                <li><a href="javascript:;" class="ch_c_1" data-suitstyle="8"></a><a href="javascript:;" class="ch_c_2" data-suitstyle="5"></a></li>
+                <li><a href="javascript:;" class="ch_d_1" data-suitstyle="1"></a><a href="javascript:;" class="ch_d_2" data-suitstyle="2"></a></li>
+                <li class="last"><a href="javascript:;" class="ch_e_1" data-suitstyle="3"></a><a href="javascript:;" class="ch_e_2" data-suitstyle="10"></a></li>
             </ul>
+            <div class="pa none" id="style-mask2"></div>
         </div>
 
 
@@ -502,17 +534,17 @@
             <h3><p>优衣库推荐款式</p><span>RECOMMENDED STYLE</span></h3>
             <div class="left_tj">
                 <ul>
-                    <li id='alluid'><a href="javascript:;" class="w_select">全部上装</a></li>
+                    <li id='alluid' class='upclothes' la='0'><a href="javascript:;" class="w_select">全部上装</a></li>
                     <volist id='ucvo' name='ucuslist'>
-                    <li laid='{$ucvo.id}'><a href="javascript:;">{$ucvo.name}</a></li>
+                    <li class='upclothes zleft' la='{$ucvo.id}'><a href="javascript:;">{$ucvo.name}</a></li>
                     </volist>
                 </ul>
             </div>
             <div class="right_tj">
                 <ul>
-                    <li id='alldid'><a href="#" class="w_select">全部上装</a></li>
+                    <li id='alldid' class='doclothes' la='0'><a href="javascript:;" class="w_select">全部下装</a></li>
                     <volist id='dcvo' name='dcuslist'>
-                        <li laid='{$dcvo.id}'><a href="javascript:;">{$dcvo.name}</a></li>
+                        <li class='doclothes zright' la='{$dcvo.id}'><a href="javascript:;">{$dcvo.name}</a></li>
                     </volist>
                 </ul>
             </div>
@@ -522,89 +554,10 @@
     </div>
 
 
-    <div class="tj_wrapper">
-        <div class="wrapper_box banner_box">
-            <a href="#"><img src="__TMPL__Public/images/xsyh.jpg" width="228" height="471" alt="" /></a>
-        </div>
-        <div class="wrapper_box">
-            <a href="#"><img src="__TMPL__Public/images/yffff.png" width="200" height="200" alt="" /></a>
-            <dl>
-                <dt><a href="#"><i></i>试穿</a></dt>
-                <dd><a href="#" class="btn_ym select"><i></i>已买</a></dd>
-                <dd><a href="#" class="btn_xh"><i></i>喜欢</a></dd>
-            </dl>
-            <h3 class="h_orange"><a href="#">女装 (UT)Valdrome连衣裙(短袖) 128762 优衣库UNIQLO</a></h3>
-            <div class="product_inf">
-                <div class="inf_top"></div>
-                <div class="inf_con">
-                    <p class="price"><span>￥</span>249.00</p>
-                    <p class="stock">剩余库存<span>562</span>件</p>
-                    <div class="inf_xx" style="display:none;">
-                        <p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p>
-                    </div>
-                </div>
-                <div class="inf_bom"><a href="#" class="select"></a></div>
-            </div>
-        </div>
+    <div class="tj_wrapper" id='watercontainer'>
 
-        <div class="wrapper_box banner_box">
-            <a href="#"><img src="__TMPL__Public/images/xinzuoshangpin.jpg" width="228" height="228" alt="" /></a>
-        </div>
-
-        <div class="wrapper_box wrapper_box_btn_group">
-            <a href="#" class="ysc_btn select"><i></i>已收藏</a>
-            <a href="#" class="ygm_btn"><i></i>已购买</a>
-        </div>
-
-        <div class="wrapper_box wrapper_box_search">
-            <form action="#" method="get">
-                <input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off">
-                <a href="#"></a>
-            </form>
-        </div>
-
-        <div class="wrapper_box">
-            <a href="#"><img src="__TMPL__Public/images/yffff.png" width="200" height="200" alt="" /></a>
-            <dl>
-                <dt><a href="#"><i></i>试穿</a></dt>
-                <dd><a href="#" class="btn_ym select"><i></i>已买</a></dd>
-                <dd><a href="#" class="btn_xh select"><i></i>喜欢</a></dd>
-            </dl>
-            <h3 class="h_blue"><a href="#">女装 (UT)Valdrome连衣裙(短袖) 128762 优衣库UNIQLO</a></h3>
-            <div class="product_inf" style="top:10px;">
-                <div class="inf_top"></div>
-                <div class="inf_con">
-                    <p class="price"><span>￥</span>249.00</p>
-                    <p class="stock">剩余库存<span>562</span>件</p>
-                    <div class="inf_xx">
-                        <p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p>
-                    </div>
-                </div>
-                <div class="inf_bom"><a href="#" class="select"></a></div>
-            </div>
-        </div>
-        <div class="wrapper_box">
-            <a href="#"><img src="__TMPL__Public/images/yffff.png" width="200" height="200" alt="" /></a>
-            <dl>
-                <dt><a href="#"><i></i>试穿</a></dt>
-                <dd><a href="#" class="btn_ym"><i></i>已买</a></dd>
-                <dd><a href="#" class="btn_xh"><i></i>喜欢</a></dd>
-            </dl>
-            <h3 class="h_pink"><a href="#">女装 (UT)Valdrome连衣裙(短袖) 128762 优衣库UNIQLO</a></h3>
-            <div class="product_inf" style="display:none;">
-                <div class="inf_top"></div>
-                <div class="inf_con">
-                    <p class="price"><span>￥</span>249.00</p>
-                    <p class="stock">剩余库存<span>562</span>件</p>
-                    <div class="inf_xx">
-                        <p>附带吸汗速干功能的快干POLO衫。采用兼具透气性与弹性的天竺面料制成，即使在炎热季节亦能常保凉爽舒适的肌肤触感。</p>
-                    </div>
-                </div>
-                <div class="inf_bom"><a href="#" class="select"></a></div>
-            </div>
-        </div>
     </div>
-    <div class="product_more"><a href="#"></a></div>
+    <div class="product_more"><a href="javascript:;" id='moreid'></a></div>
     <div class="footer">
         <p>2014© Uniqlo.BIGOData.com.cn</p>
         <p>沪ICP备13035368号  隐私条款</p>
@@ -614,15 +567,15 @@
 
 
 <!--试衣间按钮-->
-<div class="syj_btn select ">
+<div class="syj_btn  ">
     <a href="javascript:;" class="syj_btn_move"></a>
-    <a href="javascript:;" class="syj_btn_expansion"></a>
+    <a href="javascript:;" class=" syj_btn_expansion "></a>
     <div class="syj none" >
         <div class="baiyi_syj" id="beubeu_loadImg"></div>
         <div class="btn_line">
             <a href="javascript:;" class="buy_btn"><i></i><p>我要购买</p></a>
             <a href="javascript:;" class="sc_btn">收藏整套搭配</a>
-            <a href="javascript:;" class="bc_btn">保存此搭配</a>
+            <a href="javascript:;" class="bc_btn none">保存此搭配</a>
             <div class="mini-cab-share2">
                 <span>将此搭配分享到：</span>
                 <!-- JiaThis Button BEGIN -->
@@ -660,12 +613,9 @@
             </div>
         </div>
 
-        <div class="buy_btns">
+        <div class="buy_btns none">
             <ul>
-                <li><a href="#">仅配饰</a></li>
-                <li><a href="#">仅下装</a></li>
-                <li><a href="#">仅上装</a></li>
-                <li><a href="#">整套</a></li>
+
             </ul>
         </div>
     </div>
@@ -694,15 +644,14 @@
 </div>
 <script type='text/javascript'>
     //性别对应的标记
-    var buyurl = '{:U('Index/addlove')}';
+    var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';
     var addda = '{:U('Index/getdapeijian')}';
-    var getgood = '{:U('Index/ajaxgood')}';
     var imgpath = '__TMPL__Public';
-    var goodurl = '{:U('Index/getgood')}';
+    var goodurl = '{:U('Index/getgood')}',childurl = "{:U('IndexNew/getgood')}";
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
     var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
-    var addpropurl = '{:U('Lea/addlea')}',sdataurl = "{:U('Getinfo/styleToData')}",midstyleurl = "{:U('Getinfo/midsexToStyle')}";
+    var addpropurl = '{:U('Lea/addlea')}',midstyleurl = "{:U('Getinfo/midsexToStyle')}";
     var registerurl = '{:U('Login/register')}';
     var findpwdurl = '{:U('Login/forget_pwd')}';
     var changepwdurl = '{:U('Login/change_pwd')}';
@@ -716,7 +665,8 @@
     var relateurl = '{:U('Login/relate')}';
     var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}';
     var tmplPath = '{:__TMPL__Public}';
-    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}";
+    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}",getCidItembnUrl = '{:U('Getinfo/getCidItembn')}';
+    var getJackNumiidUrl = '{:U('Getinfo/getJackNumiid')}';
 </script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
 <script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI.js"></script>
@@ -728,82 +678,70 @@
 <script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/waterfall.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/dressing_room_detail.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/modeldress.js"></script>
 </body>
 </html>
 <script>
-    $(function(){
+var css = {};
+css['transform']='rotateY(90deg)';
+$('.imgrd').css(css);
 
+    $(function(){
+        setTimeout(function(){
+            $('.imgrd').css({
+                '-webkit-transition': 'all 0.5s ease-in-out',
+                '-moz-transition': 'all 0.5s ease-in-out',
+                '-o-transition': 'all 0.5s ease-in-out',
+                '-ms-transition': 'all 0.5s ease-in-out',
+                'transition': 'all 0.5s ease-in-out'
+            });
+            var css = {};
+            css['transform']='matrix(1, 0, 0, 1, 0, 0)';
+            $('.imgrd').css(css);
+        },100);
 
         //点击左侧
-        $('.big_btn').on('click',function(){
-         var sid = $(this).attr('la');
-             //$(this).siblings().children('a').removeClass('select');
-             $('.big_btn').children('a').removeClass('select');
-             $(this).children('a').addClass('select');
+        $('#ulgender').on('click','li',function(){
+            var sid = $(this).data('gender');
+            $(this).siblings().children('a').removeClass('select');
+            $(this).children('a').addClass('select');
+            $('#ul_index-bar-place li').siblings().children('a').removeClass('select');
             if(sid==1){
                 $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
             }else if(sid==2){
-               $('.changjing1').css("background","url("+imgpath+"/images/man.jpg) center 0 no-repeat");
-            }else if(sid==3){
+                $('.changjing1').css("background","url("+imgpath+"/images/man.jpg) center 0 no-repeat");
+            }else if(sid==3 || sid == 4){
                 $('.changjing1').css("background","url("+imgpath+"/images/chil.jpg) center 0 no-repeat");
             }
-            $.post(styleurl,{sid:sid},function(data,status){
-                if(data){
-               if(sid!=4){
-                var listlength = data.sty.length,strHtml = "";;
-                for(var i = 0 ;i < listlength;i++){
-                    strHtml += getGenstyleItem(data.sty[i],i);
-                }
-                $(".detail_sub_nav li").eq(3).nextAll().remove();
-                $(".detail_sub_nav li").eq(3).after(strHtml);
-                if(data.def){
-                    var deflength = data.def.length,str = "";
-                    for(var i = 0 ;i < deflength;i++){
-                        str += "<div class=\"model\"><img src='"+data.def[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
-                    }
-                    $('#sfid').html(str);
-                }else{
-                    $('#sfid').html('');
-                }
-                }else{
-                  //婴幼儿走这里
-                   $(".detail_sub_nav li").eq(3).nextAll().remove();
-                }
-              }else{
-                    $(".detail_sub_nav li").eq(3).nextAll().remove();
-                }
-            },'json');
+            _mini.getSuits();
         });
 
         //mini中部类别切换
-        $('.cateu2').on('click',function(){
-            var midsid = $(this).attr('la');
-            $('.cateu2').children('a').removeClass('select');
+        $('#cateu2').on('click','li',function(){
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
+            $.weather.nextpage = 0;
+            var sid = $(this).data('gender');
+            if(sid==4){
+                $.uniqlo.fid = 0;
+            }
+            $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
-            $.post(midstyleurl,{sid:midsid},function(data,status){
-             if(data){
-               var midstr = '';
-               for(var i = 1;i<=data.count;i++){
-                   midstr+="<li><a href=\"javascript:;\" class=\"ch_"+data.sty[(i-1)*2].pid2+" cateuchil2\"></a><a href=\"javascript:;\" class=\"ch_"+data.sty[(i-1)*2+1].pid2+" cateuchil2\"></a></li>";
-               }
-               $('li.ch_all').nextAll('li').remove();
-               $('li.ch_all').after(midstr);
-               //上下装
-               var ustr = '',dstr='';
-                 $.each(data.u,function(i,name){
-                     ustr+="<li laid='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                 });
-                 $.each(data.d,function(i,name){
-                     dstr+="<li laid='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                 });
-                 $('#alluid').nextAll('li').remove();
-                 $('#alluid').after(ustr);
-                 $('#alldid').nextAll('li').remove();
-                 $('#alldid').after(dstr);
-             }
-            },'json');
+            _mini.getGoods();
         });
+        //mini中部类别选择
+        $('#cstyle2').on('click','li a',function(){
+            $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
+            $(this).siblings('a').removeClass('select');
+            $(this).parent('li').siblings('li').children('a').removeClass('select');
+            $(this).addClass('select');
+            _mini.getGoods();
+        });
+
         //点击自定义分类向下按钮
         $('.zk_btn').on('click',function(){
             if($('.left_tj').css('height') == '26px'){
@@ -811,14 +749,122 @@
                 $('.left_tj ul').css('height','auto');
                 $('.right_tj').css('height','auto');
                 $('.right_tj ul').css('height','auto');
+                if($('.zk_btn').hasClass('upselect')){
+                    $('.zk_btn').removeClass('upselect');
+                }
+                else{
+                    $('.zk_btn').addClass('upselect');
+                }
             }else{
                 $('.left_tj').css('height','26px');
                 $('.left_tj ul').css('height','26px');
                 $('.right_tj').css('height','26px');
                 $('.right_tj ul').css('height','26px');
+                if($('.zk_btn').hasClass('upselect')){
+                    $('.zk_btn').removeClass('upselect');
+                }
+                else{
+                    $('.zk_btn').addClass('upselect');
+                }
             }
         });
+       //点击自定义分类
+        $('.left_tj').on('click','li.upclothes',function(){
+            $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
+            var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
+            if(zid!=0){
+                $('#alluid').children('a').removeClass('w_select');
+            }else{
+               $('.zleft').children('a').removeClass('w_select');
+            }
+            //$('.upclothes').children('a.w_select').removeClass('w_select');
+            if($(this).children('a').hasClass('w_select')){
+             $(this).children('a').removeClass('w_select');
+                var i = $.inArray(zid, _mini.left);
+                if(i !== -1){
+                    _mini.left.splice(i, 1)
+                }
+            }else{
+               if(zid!=0){
+                  _mini.left.push(zid);
+               }else{
+                   _mini.left.length = 0;
+               }
+             $(this).children('a').addClass('w_select');
+            }
+            var leftLen = _mini.left.length,rightLen = _mini.right.length;
+            if(leftLen==zleftlength || leftLen == 0){
+                $('#alluid').children('a').addClass('w_select');
+                $('.zleft').children('a').removeClass('w_select');
+                _mini.left.length = 0;
+                if(rightLen == 0){
+                $.uniqlo.zid = 0
+               }else{
+                $.uniqlo.zid = _mini.right.join('_');
+                }
+            } else {
+                $.uniqlo.zid = ''
+                if(leftLen != 0){
+                    if(rightLen==0){
+                    $.uniqlo.zid = _mini.left.join('_')
+                    }else{
+                    $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
+                    }
+                }
+            }
+           getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        });
+        $('.right_tj').on('click','li.doclothes',function(){
+            $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
+            var zid = $(this).attr('la');
 
+            var zid = $(this).attr('la'),zrightlength = $('.zright').length;
+            if(zid!=0){
+                $('#alldid').children('a').removeClass('w_select');
+            }else{
+                $('.zright').children('a').removeClass('w_select');
+            }
+
+            if($(this).children('a').hasClass('w_select')){
+                $(this).children('a').removeClass('w_select');
+                var i = $.inArray(zid, _mini.right);
+                if(i !== -1){
+                    _mini.right.splice(i, 1)
+                }
+            }else{
+                if(zid!=0){
+                    _mini.right.push(zid);
+                }else{
+                    _mini.right.length = 0;
+                }
+                $(this).children('a').addClass('w_select');
+            }
+            var leftLen = _mini.left.length,rightLen = _mini.right.length;
+            if(rightLen==zrightlength || rightLen == 0){
+                $('#alldid').children('a').addClass('w_select');
+                $('.zright').children('a').removeClass('w_select');
+                _mini.right.length = 0;
+                if(leftLen == 0){
+                    $.uniqlo.zid = 0
+                }else{
+                    $.uniqlo.zid = _mini.left.join('_');
+                }
+            } else {
+                $.uniqlo.zid = ''
+                if(rightLen != 0){
+                    if(leftLen==0){
+                        $.uniqlo.zid = _mini.right.join('_')
+                    }else{
+                        $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
+                    }
+                }
+            }
+            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        });
         $('#le1').on('change',function(){
             var pvalue = $('#le1 option:selected').val();
             $.post(getCityUrl,{pid:pvalue},function(data,status){
@@ -847,35 +893,13 @@
             });
         });
     });
-    //风格取数据
-    $('.detail_sub_nav').on('click','.small_btn',function(){
-        $('#changeid').attr('la',1);
-        var sid = $('.big_btn').children('a.select').attr('la'),fid = $(this).attr('la');
-        $('.small_btn').children('a').removeClass('select');
+    //左侧风格取数据
+    $('#ul_index-bar-place').on('click','li',function(){
+        $(this).siblings().children('a').removeClass('select');
         $(this).children('a').addClass('select');
-        $.post(sdataurl,{sid:sid,fid:fid},function(data,status){
-        if(data){
-            var listlength = data.length,strHtml = "";;
-            for(var i = 0 ;i < listlength;i++){
-                if(i<4){
-                var show = "style='display:block;'";
-                }else{
-                var show = "style='display:none;'";
-                }
-                strHtml += "<div class=\"model\" "+show+"><img data-detail='"+data[i].detail+"' src='"+data[i].suitImageUrl+"' width=\"240\" height=\"550\" /></div>";
-            }
-           $('#sfid').html(strHtml);
-        }else{
-           $('#sfid').html('');
-        }
-        });
+        _mini.getSuits();
     });
 
-    //mini中部类别选择
-    $('.ch_sub_nav').on('click','.cateuchil2',function(){
-        $('.cateuchil2').removeClass('select');
-        $(this).addClass('select');
-    });
     //换一批
     $('#changeid').on('click',function(){
         var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
@@ -896,8 +920,27 @@
                 $('.model').eq(startnum+i).css('display','block');
                 }
             }
+                var css = {};
+                css['transform']='rotateY(90deg)';
+                $('.imgrd').css(css);
+                setTimeout(function(){
+                    $('.imgrd').css({
+                        '-webkit-transition': 'all 0.5s ease-in-out',
+                        '-moz-transition': 'all 0.5s ease-in-out',
+                        '-o-transition': 'all 0.5s ease-in-out',
+                        '-ms-transition': 'all 0.5s ease-in-out',
+                        'transition': 'all 0.5s ease-in-out'
+                    });
+                    var css = {};
+                    css['transform']='matrix(1, 0, 0, 1, 0, 0)';
+                    $('.imgrd').css(css);
+                },100);
           }
     });
+
+$('#moreid').on('click',function(){
+    //getgoods($.weather.avg);
+});
     $('#scid').on('change',function(){
         H.map.centerAndZoom($("#scid option:selected").text(), 11);
         var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();

@@ -8,13 +8,13 @@ class WindexModel extends Model{
         $result = $windex->field('id')->where(array('stm'=>array('elt',$tem),'etm'=>array('egt',$tem)))->find();
         switch($result['id']){
             case 1 :
-                $tstr = '2,8';
+                $tstr = $result['id'].',2,8';
                 break;
             case 7 :
-                $tstr = '6,8';
+                $tstr =$result['id']. ',6,8';
                 break;
             default :
-                $tstr = ($result['id']-1).','.($result['id']+1).',8';
+                $tstr = $result['id'].','.($result['id']-1).','.($result['id']+1).',8';
                 break;
         }
         $arr['wid'] = $result['id'];

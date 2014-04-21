@@ -1,9 +1,7 @@
 /**
  * Created by jack on 14-4-11.
  */
-var jsonpHomeUrl = 'http://uniqlo.bigodata.com.cn/u2/index.php/Index';
-var tmplPath = 'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/';
-var baseurl='http://uniqlo.bigodata.com.cn/u2/';
+
 //var jsonpHomeUrl = 'http://localhost/U2/index.php/Index';
 //var tmplPath = 'http://localhost/U2/Home/Tpl/Public/';
 //var baseurl='http://localhost/U2/';
@@ -66,7 +64,7 @@ var timer;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
-                $('.id_content_banner_nav').hide();
+                $('.page_arrow').hide();
             }
             else{
                 var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
@@ -132,6 +130,7 @@ var timer;
             var _this = this;
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $('#suits-container').on('click','.imgSuits',function(){
+/*
                 var $similarity = $(this).parent().find(".similarity");
                 var numids = [];
                 var list = $similarity.find("a");
@@ -140,6 +139,12 @@ var timer;
                 }
                 //jsonpHomeUrl
                 window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/"+ numids.join());
+*/
+
+                var suitid = $(this).data('suitid');
+                var gender = $(this).data('gender');
+                //jsonpHomeUrl
+                window.open( "http://localhost/U2/mini.php/Index?suitid="+ suitid + "&gender=" + gender);
             });
 
             // 首页天气切换
@@ -222,14 +227,18 @@ var timer;
                 _this.getSuits();
             });
 
-            $('.id_content_banner_nav_prev').on('click',function(){
+            $('.model_nav_prev').on('click',function(){
                 $('#suits-container').moveprev();
             })
 
-            $('.id_content_banner_nav_next').on('click',function(){
+            $('.model_nav_next').on('click',function(){
                 $('#suits-container').movenext();
             })
 
+
+            $('.weather').on('mouseenter',function(){
+
+            });
 
         },
         cityOperator : function(){
@@ -312,10 +321,10 @@ var callBackFunction = {
         $('#suits-container').html(strHtml);
         $("#suits-container").show();
         if( list.length > 6 ){
-            $('.id_content_banner_nav').show();
+            $('.page_arrow').show();
         }
         else{
-            $('.id_content_banner_nav').hide();
+            $('.page_arrow').hide();
         }
         $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
@@ -339,7 +348,7 @@ var callBackFunction = {
     },
     getCoverScrollItem : function(item){
         var strItem = '<div class="item">';
-        strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" />';
+        strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" data-gender="'+ item.suitGenderID+'"  data-suitid="'+ item.suitID +'" />';
         strItem += '<div class="similarity">';
         var detail = item.detail;
         var numids = [];
@@ -347,7 +356,7 @@ var callBackFunction = {
             for(var i =0;i<detail.length;i++){
                 numids[i] = detail[i].num_iid;
                 strItem += '<div class="circle">'
-                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank">';
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank" title="'+detail[i].title +'">';
                 strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
             }
         }

@@ -134,11 +134,11 @@ class GetinfoModel extends Action{
 
     public function getSutsValue($type){
         //$suitSelect = M('SuitsSelect')->cache(true)->join('inner join u_suits suits on u_suits_select.suitID=suits.suitID')->field('suits.suitID,suits.suitImageUrl')->where(array('u_suits_select.selected'=>'1','u_suits_select.type'=>$type))->select();
-        $sql = "select suits.`suitID`,suits.`suitImageUrl`,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
+        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
-            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
         }
         return $suitSelect;
     }
@@ -147,7 +147,7 @@ class GetinfoModel extends Action{
         $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->select();
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($result as $k=>$v){
-            $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
+            $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID']))->select();
         }
         return $result;
     }
