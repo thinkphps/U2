@@ -642,7 +642,7 @@
     var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';
     var addda = '{:U('Index/getdapeijian')}';
     var imgpath = '__TMPL__Public';
-    var goodurl = '{:U('Index/getgood')}';
+    var goodurl = '{:U('Index/getgood')}',childurl = "{:U('IndexNew/getgood')}";
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
     var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
@@ -715,6 +715,8 @@ $('.imgrd').css(css);
 
         //mini中部类别切换
         $('#cateu2').on('click','li',function(){
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
             $.weather.nextpage = 0;
             var sid = $(this).data('gender');
             if(sid==4){
@@ -727,6 +729,8 @@ $('.imgrd').css(css);
         //mini中部类别选择
         $('#cstyle2').on('click','li a',function(){
             $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
             $(this).siblings('a').removeClass('select');
             $(this).parent('li').siblings('li').children('a').removeClass('select');
             $(this).addClass('select');
@@ -762,6 +766,8 @@ $('.imgrd').css(css);
        //点击自定义分类
         $('.left_tj').on('click','li.upclothes',function(){
             $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
             var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
@@ -807,6 +813,8 @@ $('.imgrd').css(css);
         });
         $('.right_tj').on('click','li.doclothes',function(){
             $.weather.nextpage = 0;
+            $.uniqlo.lid = 0;
+            $.uniqlo.bid = 0;
             var zid = $(this).attr('la');
 
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
