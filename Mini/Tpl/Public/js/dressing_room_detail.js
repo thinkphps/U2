@@ -230,7 +230,7 @@ var _mini = {
                             }else{
                                 var show = "style='display:none;'";
                             }
-                            str += "<div class=\"model\" "+show+"><div style='width: 180px;height: 180px;margin-top: 90px'><img class='imgrd' data-detail='"+data.def[i].detail_url+"' src='"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
+                            str += "<div class=\"model\" "+show+"><div style='width: 180px;height: 180px;margin-top: 150px'><img class='imgrd' data-detail='"+data.def[i].detail_url+"' src='"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
