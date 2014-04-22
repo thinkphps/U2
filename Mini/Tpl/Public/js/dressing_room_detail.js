@@ -3,6 +3,7 @@
  */
 
 $(function(){
+    $(".syj_btn").draggable();
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
@@ -270,12 +271,15 @@ var _mini = {
     },
     showStyleMask : function(gender){
         $('.syj').hide();
+
         if(gender == 4){
             $('.my_yyg_title').hide();
+            $(".syj_btn").hide();
         }else{
             $('.index-suit').addClass("none")
             $('.index-suit').css('display','none');
             $('.my_yyg_title').show();
+            $(".syj_btn").show();
         }
         if(gender == 4){
             for($i=1;$i<11;$i++){
@@ -283,7 +287,7 @@ var _mini = {
             }
         }else if(gender == 3){
             for($i=1;$i<11;$i++){
-                if($i==9 || $i==5){
+                if($i==9 || $i==8 || $i==5){
                     $('li[data-suitstyle="' + $i +'"]').hide();
                 }else{
                     $('li[data-suitstyle="' + $i +'"]').show();
