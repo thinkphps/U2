@@ -179,8 +179,7 @@ ul.ch_sub_nav{top:290px;}
     filter: alpha(opacity=50);
     width: 81px;
     height: 30px;
-    right: 634px;
-    top: 68px;
+    margin: -49px auto;
     z-index: 12;
 }
 ul.detail_sub_nav li a.detail_sub_btn1{ background:url(../images/detail_sub_nav.png) 0 0 no-repeat;}
@@ -650,7 +649,7 @@ a.light_box_close{ display:block; background:url(../images/close2.png) 0 0 no-re
     padding: 100px 0;
 }
 /* 衣服*/
-.mini-kv-slide{ width:926px; height:184px; background:url(../images/dr_main_con_yf_bg.png) 0 0 no-repeat; margin:9px 200px; position:relative;}
+.mini-kv-slide{ width:926px; height:184px; background:url(../images/dr_main_con_yf_bg.png) 0 0 no-repeat; margin:100px auto; position:relative;}
 .mini-kv-container{ width:812px; height:180px; overflow:hidden; position:relative; margin:0 auto;}
 .mini-kv-container ul{ width: 9999em; height:180px; position:relative;}
 .mini-kv-container ul li{ float:left; margin:3px 10px;}
