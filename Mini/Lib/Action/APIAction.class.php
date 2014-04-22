@@ -365,7 +365,7 @@ class APIAction extends Action
     //dean 同步搭配接口
     public function UpdatebeubeuSuits()
     {
-        error_log(print_r($_REQUEST,1),3,'1.txt');
+
         $returnValue = array(
             'code' => 1,
             'msg' => array(
