@@ -391,8 +391,9 @@
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
         <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
-        <p>该风格下的更多商品，请看"瀑布"</p>
+        <a href="#m">更多优衣库推荐款式，请点击查看</a>
     </div>
+    <div class="pa none change-btn-mask" id="btn-mask"></div>
     <div class="my_yyg_model" id='sfid'>
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
          <if condition="$pk elt 4">
@@ -456,6 +457,7 @@
 <div class="main_con" id="main_con">
     <div class="filters">
         <!--天气-->
+        <a name="m" id="m" ></a>
         <div class="weather">
 
             <ul id="ulweek">
@@ -565,6 +567,7 @@
     <div class="product_more"><a href="javascript:;" id='moreid'></a></div>
     <div class="footer">
         <p>2014© Uniqlo.BIGOData.com.cn</p>
+        <p>试衣间technology by 百一搭配</p>
         <p>沪ICP备13035368号  隐私条款</p>
     </div>
 </div>
@@ -930,7 +933,11 @@ $('.imgrd').css(css);
     //左侧风格取数据
     $('#ul_index-bar-place').on('click','li',function(){
         $(this).siblings().children('a').removeClass('select');
-        $(this).children('a').addClass('select');
+        if($(this).children('a').hasClass('select')){
+            $(this).children('a').removeClass('select');
+        }else{
+            $(this).children('a').addClass('select');
+        }
         _mini.getSuits();
     });
 
