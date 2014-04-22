@@ -42,7 +42,7 @@ class GetinfoModel extends Action{
         }
         return $cbn;
     }
-    //ȡ��ʡ
+    //????
     public function getpca(){
         $area = M('Areas');
         $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
@@ -134,7 +134,7 @@ class GetinfoModel extends Action{
 
     public function getSutsValue($type){
         //$suitSelect = M('SuitsSelect')->cache(true)->join('inner join u_suits suits on u_suits_select.suitID=suits.suitID')->field('suits.suitID,suits.suitImageUrl')->where(array('u_suits_select.selected'=>'1','u_suits_select.type'=>$type))->select();
-        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where uss.`type`='".$type."'";
+        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and  uss.`type`='".$type."'";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
