@@ -80,10 +80,9 @@ $(function(){
 
     //点击天气红色X，取消温度
     $.uniqlo.index.week.on('click','a',function(){
-
         $.weather.nextpage = 0;
-        $.weather.avg = 0;
-        getgoods(0,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        $.weather.avg = '';
+        getgoods('',$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
         $.uniqlo.index.week.find('.w_select').removeClass('w_select');
         return false;
     });
