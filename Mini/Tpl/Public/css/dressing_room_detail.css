@@ -565,7 +565,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 
 
 /*我的试衣间*/
-.syj_btn{ width:64px; height:82px; position:fixed; top:50%; margin-top:-32px; right:10px; z-index:101px;}
+.syj_btn{ width:64px; height:82px; position:fixed; top:50%; margin-top:-32px; right:10px; z-index:101;}
 .syj_btn a.syj_btn_move{ display:block; position:absolute; width:32px; height:32px; background:url(../images/syj_btn.png) 0 0 no-repeat; z-index:110; left:50%; margin-left:-16px;}
 .syj_btn a.syj_btn_move:hover{ background:url(../images/syj_btn.png) -32px 0 no-repeat;}
 .syj_btn a.syj_btn_expansion{ display:block; position:absolute; top:16px; width:64px; height:64px; background:url(../images/syj_btn.png) 0 -32px no-repeat; z-index:105;}
