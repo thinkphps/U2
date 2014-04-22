@@ -209,7 +209,9 @@ public function delg(){
 
 //点击按钮取数据
 public function getgood(){
-	$tem = trim($this->_request('tem'));//平均温度
+    if($this->_request('tem')){
+        $tem = trim($this->_request('tem'));//平均温度
+    }
 	$sid = trim($this->_post('sid'));//性别id形如1,2,3 all为0
 	$lid = trim($this->_post('lid'));//收藏id
     $bid = trim($this->_post('bid'));//购买id
@@ -218,7 +220,8 @@ public function getgood(){
     $kid = trim($this->_post('kid'));//快速搜索标记
     $page = trim($this->_post('page'));
     $keyword = trim($this->_post('keyword'));
-	if($tem<=-10){
+
+	if($this->_request('tem')<=-10){
 	$tem = -10;	
 	}
 	$lid = $lid?$lid:0;
@@ -271,7 +274,7 @@ public function getgood(){
             }else{
             $where = '';
             if(isset($tem)){
-            $where.="and g.wid in ('".$widvalue['str']."')";
+            $where.="and g.wid in (".$widvalue['str'].")";
             }
             if(!empty($sid) && $sid!=3){
                 $where.=" and g.gtype='".$sid."'";
@@ -295,7 +298,7 @@ public function getgood(){
                         }
                     }
                     $cstr = rtrim($cstr,',');
-                   $where.="and g.ccateid in ('".$cstr."')";
+                   $where.="and g.ccateid in (".$cstr.")";
                 }
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
                $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
