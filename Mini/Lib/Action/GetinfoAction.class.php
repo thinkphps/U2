@@ -33,14 +33,14 @@ class GetinfoAction extends Action{
                 }
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
                     $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc";
-                    $childResult = $goodtag->query($sql);
-                    $defaultResult = '';
+                    $defaultResult = $goodtag->query($sql);
+                    /*$defaultResult = '';
                     foreach($childResult as $k=>$v){
                         if($v){
                             //$defaultResult.='<li><img  data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
                             $defaultResult.='<li><img  data-original="http://uniqlo.bigodata.com.cn/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url=http://uniqlo.bigodata.com.cn/'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
                         }
-                    }
+                    }*/
                 break;
                 case 1 :
                 case 2 :
