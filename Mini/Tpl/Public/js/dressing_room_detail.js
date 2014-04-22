@@ -421,7 +421,7 @@ var _mini = {
         if(colors != null){
             for(var i = 0; i < colors.length; i++){
                 title =  colors[i].colorid + ' ' + colors[i].colorname;
-                imgurl =   rootPath +  '/' + colors[i].colorcode;
+                imgurl =    '/' +  colors[i].colorcode.substring(0,colors[i].colorcode.lastIndexOf(".")) + ".jpg";
                 colorHtml += '<li title="'+title+'"><a href="javascript:;" data-colorid="'+ colors[i].colorid + '" ';
                 colorHtml += 'style="background:url('+ imgurl +') center no-repeat;background-size:cover;" ';
                 colorHtml += 'data-gender="'+ colors[i].gender+'" ';
@@ -460,6 +460,14 @@ var _mini = {
         }else{
             pageElement.dressByBarcode(barcode,gender);
         }
+    },
+    clothingexisting : function(barcode){
+        var bool = false;
+        var item = cabnet.buybtns.find("ul li a[barcode='"+barcode+"']");
+        if(item.length > 0){
+            bool = true;
+        }
+        return bool;
     }
 }
 
