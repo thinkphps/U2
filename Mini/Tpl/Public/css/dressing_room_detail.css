@@ -545,8 +545,12 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .product_color img{ width:25px; height:25px; margin:0;}
 
 /*优衣库推荐款式-男童女童选择*/
-.product_color .children_gender li { float:left; margin:4px 16px;;}
-.product_color .children_gender li a{ float: left;background: #a0a0a0; padding: 5px 22px;margin: 3px 1px; color: #FFF;}
+.product_color .children_gender li { float:left; margin:4px 5px 4px 5px;}
+.product_color .children_gender li a{ float: left;background: #a0a0a0; width: 96px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFF;}
 .product_color .children_gender li a.select{ background-color: #ff0000;}
 
 /*优衣库推荐款式-更多*/
