@@ -298,8 +298,9 @@ public function getgood(){
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
            $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
             $result = $goodtag->query($sql);
+                $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
-                $result[$k1]['products'] = $this->getColorPic($v1['num_iid']);
+                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
             }
             if($page==1){
                 $result = $this->waterdata($result);
