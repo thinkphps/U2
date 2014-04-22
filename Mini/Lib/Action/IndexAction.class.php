@@ -308,7 +308,7 @@ public function getgood(){
                   $case = '';
                   $ordr = "order by ";
                 }
-               $sql = "select distinct g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." ".$ordr."uptime desc limit ".$start.",50";
+               $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",50";
             $result = $goodtag->query($sql);
                 $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
