@@ -270,8 +270,8 @@ public function getgood(){
              $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
             }else{
             $where = '';
-            if(isset($tem)){
-            $where.="and g.wid in ('".$widvalue['str']."')";
+            if(isset($tem) && !empty($tem)){
+            $where.="and g.wid in (".$widvalue['str'].")";
             }
             if(!empty($sid) && $sid!=3){
                 $where.=" and g.gtype='".$sid."'";
@@ -295,7 +295,7 @@ public function getgood(){
                         }
                     }
                     $cstr = rtrim($cstr,',');
-                   $where.="and g.ccateid in ('".$cstr."')";
+                   $where.="and g.ccateid in (".$cstr.")";
                 }
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
                $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
