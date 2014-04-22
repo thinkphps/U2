@@ -301,7 +301,14 @@ public function getgood(){
                    $where.="and g.ccateid in (".$cstr.")";
                 }
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
-                $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",50";
+                if(isset($tem)){
+                  $case = ",case when g.wid=".$widvalue['wid']." then 0 end wo";
+                  $ordr = "order by wo asc,";
+                }else{
+                  $case = '';
+                  $ordr = "order by ";
+                }
+               $sql = "select distinct g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." ".$ordr."uptime desc limit ".$start.",50";
             $result = $goodtag->query($sql);
                 $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
