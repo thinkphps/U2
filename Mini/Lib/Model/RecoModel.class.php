@@ -45,6 +45,7 @@ class RecoModel extends Model{
         return $arr[$key-1];
     }
     public function getBeubeu($where){
+        $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
         $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->select();
         $beubeu_detail = M('BeubeuSuitsGoodsdetail');

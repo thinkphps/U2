@@ -243,7 +243,7 @@ public function getgood(){
        $result = unserialize(S('coll'.session("uniq_user_id").$page));
      }else{
      $collection = M('Collection');
-      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
+      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.',50')->select();
          if($page==1){
              $result = $this->waterdata($result);
          }
@@ -255,7 +255,7 @@ public function getgood(){
         $result = unserialize(S('buy'.session("uniq_user_id").$page));
     }else{
         $buy = M('Buy');
-        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.',10')->select();
+        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.',50')->select();
         if($page==1){
             $result = $this->waterdata($result);
         }
@@ -301,7 +301,14 @@ public function getgood(){
                    $where.="and g.ccateid in (".$cstr.")";
                 }
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
-               $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
+                if(isset($tem)){
+                  $case = ",case when g.wid=".$widvalue['wid']." then 0 end wo";
+                  $ordr = "order by wo asc,";
+                }else{
+                  $case = '';
+                  $ordr = "order by ";
+                }
+              $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",50";
             $result = $goodtag->query($sql);
                 $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
@@ -323,15 +330,21 @@ public function getgood(){
 }
     public function waterdata($result){
         $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
+        $ad2 = '<div class="wrapper_box banner_box"><a href="javascript:;"><img src="'.__ROOT__."/".APP_PATH.'Tpl/Public/images/xinzuoshangpin.jpg" width="228" height="228" alt="" /></a></div>';
         $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));
+        $arr_count = count($result);
+        if($arr_count>=4){
+            array_splice($result,2,0,array(array('first'=>1,'ad'=>$ad2)));
+        }else{
+            array_splice($result,($arr_count),0,array(array('first'=>1,'ad'=>$ad2)));
+        }
         $arr_count = count($result);
         if($arr_count>=4){
             array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
         }else{
             array_splice($result,($arr_count),0,array(array('first'=>1,'cb'=>$str)));
         }
-
         return $result;
     }
 //取出颜色和图片
