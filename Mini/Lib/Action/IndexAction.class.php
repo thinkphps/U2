@@ -209,7 +209,9 @@ public function delg(){
 
 //点击按钮取数据
 public function getgood(){
-	$tem = trim($this->_request('tem'));//平均温度
+    if($this->_request('tem')){
+        $tem = trim($this->_request('tem'));//平均温度
+    }
 	$sid = trim($this->_post('sid'));//性别id形如1,2,3 all为0
 	$lid = trim($this->_post('lid'));//收藏id
     $bid = trim($this->_post('bid'));//购买id
@@ -218,7 +220,8 @@ public function getgood(){
     $kid = trim($this->_post('kid'));//快速搜索标记
     $page = trim($this->_post('page'));
     $keyword = trim($this->_post('keyword'));
-	if($tem<=-10){
+
+	if($this->_request('tem')<=-10){
 	$tem = -10;	
 	}
 	$lid = $lid?$lid:0;
@@ -270,7 +273,7 @@ public function getgood(){
              $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
             }else{
             $where = '';
-            if(isset($tem) && !empty($tem)){
+            if(isset($tem)){
             $where.="and g.wid in (".$widvalue['str'].")";
             }
             if(!empty($sid) && $sid!=3){
