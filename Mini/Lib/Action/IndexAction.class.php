@@ -276,7 +276,7 @@ public function getgood(){
             if(!empty($sid) && $sid!=3){
                 $where.=" and g.gtype='".$sid."'";
             }else if(!empty($sid) && $sid==3){
-                $where.=" and g.gtype in (3,4)";
+                $where.=" and g.gtype in ('3','4')";
             }
             if(!empty($fid)){
                 $where.=" and g.ftag_id='".$fid."'";
