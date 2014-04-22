@@ -402,10 +402,10 @@ var _mini = {
             }else{
                 pushid = data.count-1;
             }
-            if(data.count>=3){
+            if(data.count>=4){
                 pushid2 = 2;
             }else{
-                pushid2 = data.count-1;
+                pushid2 = data.count-2;
             }
             if(v.first==1 && p==0){
                 strHtml+= v.ad;
@@ -628,7 +628,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                         getResource:function(index,render){
                             //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
 
-                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,0,$.uniqlo.zid,$.uniqlo.kid,1);
+                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1);
                             html = $.weather.str;
                             return $(html);
 

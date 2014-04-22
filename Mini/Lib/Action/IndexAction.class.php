@@ -308,7 +308,7 @@ public function getgood(){
                   $case = '';
                   $ordr = "order by ";
                 }
-               $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",50";
+              $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",50";
             $result = $goodtag->query($sql);
                 $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
@@ -334,11 +334,12 @@ public function getgood(){
         $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));
         $arr_count = count($result);
-        if($arr_count>=3){
+        if($arr_count>=4){
             array_splice($result,2,0,array(array('first'=>1,'ad'=>$ad2)));
         }else{
             array_splice($result,($arr_count),0,array(array('first'=>1,'ad'=>$ad2)));
         }
+        $arr_count = count($result);
         if($arr_count>=4){
             array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
         }else{
