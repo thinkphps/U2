@@ -21,29 +21,21 @@ public function index(){
 	$goodmodel = M('Goods');
 	$customcate = M('Customcate');
 	$windex = M('Windex')->field('*')->order('id desc')->select();;
-	$tag = M('Tag');
     $gtmodel = M('Goodtag');
 	$result = $goodmodel->field('*')->where(array('id'=>$id))->find();
 
 	$goodtaglist = M('Goodtag')->field('*')->where(array('good_id'=>$result['id']))->select();
-	$list = $tag->field('id,name,parent_id,type')->where(array('parent_id'=>0))->order('id asc')->select();
+    $adminModel = D('Admin');
+    $list = $adminModel->getSexStyle($goodtaglist[0]['gtype']);
 	foreach($list as $k=>$v){
-	$tagtype = $tag->field('id,name,parent_id,type')->group('type')->where(array('parent_id'=>$v['id']))->select();
-	foreach($tagtype as $k3=>$v3){
-	 $type2 = $tag->field('id,name,parent_id,type')->where(array('parent_id'=>$v['id'],'type'=>$v3['type']))->select();
-	 foreach($type2 as $k4=>$v4){
        foreach($goodtaglist as $k5=>$v5){
-          if($v4['id']==$v5['tag_id'] || $v4['id']==$v5['ftag_id']){
-           $type2[$k4]['sel'] = 1;
+          if($v['ID']==$v5['ftag_id']){
+              $list[$k]['sel'] = 1;
 		   break;
 		  }
 	   }
-	 }
-	 $tagtype[$k3]['type2'] = $type2;
 	}
-    $list[$k]['ctag'] = $tagtype;
-	}
-    array_splice($list,0,1);
+
 	$where['good_id'] = $id;
     $wh2['tag_id'] = array('neq','0');
     $wh2['_logic'] = 'OR';
@@ -150,14 +142,16 @@ public function doedit(){
     $tag = array();
 	$arr = $_POST;
 	$tagarr = array();
-
 	$arr['gtype'] = $arr['gtype']?$arr['gtype']:'0';
+    if(empty($arr['gtype'])){
+     $this->error('没打性别标签',U('Productsedit/index'));
+        exit;
+    }
 	$arr['isud'] = $arr['isud']?$arr['isud']:'0';
 	$arr['ccate'] =$arr['ccate']?$arr['ccate']:0;
 	unset($_POST);
-	$taglist = M('Tag')->field('id')->where(array('parent_id'=>0))->order('id asc')->select();
 	//风格
-    $farr = $arr['tag'.$taglist[1]['id']];
+    $farr = $arr['tag2'];
 	$farrcount = count($farr);
     
 	//去除前端提交的重复指数
@@ -595,5 +589,20 @@ public function ajaxcate(){
 	  $arr['msg'] = '参数错误';
 	 }
 	 echo json_encode($arr);
+}
+public function sexStyle(){
+    if(!empty($this->aid)){
+     $sid = trim($this->_post('sid'));
+     if($sid>0){
+         $adminModel = D('Admin');
+         $list = $adminModel->getSexStyle($sid);
+         $returnArr = array('code'=>1,'data'=>$list);
+     }else{
+         $returnArr = array('code'=>0,'msg'=>'参数错误');
+     }
+    }else{
+        $returnArr = array('code'=>0,'msg'=>'没有登录');
+    }
+    $this->ajaxReturn($returnArr, 'JSON');
 }
 }

@@ -26,7 +26,7 @@ class GetinfoAction extends Action{
                  $where = '';
                  if(isset($tem)){
                         $widvalue = $windex->getwindex($tem);
-                        $where.="and g.wid in ('".$widvalue['str']."')";
+                        $where.="and g.wid in (".$widvalue['str'].")";
                  }
                  if(!empty($sid)){
                         $where.=" and g.gtype='".$sid."'";

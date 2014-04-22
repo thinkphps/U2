@@ -18,8 +18,9 @@
             <option value="">请选择</option>
             <option value="1" <if condition="$gtaglist[0]['gtype'] eq '1'">selected='selected'</if>>WOMEN</option>
             <option value="2" <if condition="$gtaglist[0]['gtype'] eq '2'">selected='selected'</if>>MEN</option>
-            <option value="3" <if condition="$gtaglist[0]['gtype'] eq '3'">selected='selected'</if>>KIDS</option>
-            <option value="4" <if condition="$gtaglist[0]['gtype'] eq '4'">selected='selected'</if>>BABY</option>
+            <option value="3" <if condition="$gtaglist[0]['gtype'] eq '3'">selected='selected'</if>>女童</option>
+            <option value="4" <if condition="$gtaglist[0]['gtype'] eq '4'">selected='selected'</if>>童装</option>
+            <option value="5" <if condition="$gtaglist[0]['gtype'] eq '5'">selected='selected'</if>>婴幼儿</option>
           </select>
         </div>
         <label class="pull-left control-label">部位：</label>
@@ -276,37 +277,28 @@
       </div>
     </div>
 	<!--新添加的指数-->
-<volist id='lvo' name='list'>
     <div class="form-group">
-      <label class="col-lg-1 control-label">{$lvo.name}：</label>
+      <label class="col-lg-1 control-label">穿衣风格：</label>
       <div class="col-lg-10">
         <!--<label class="checkbox-inline">
           <input type="checkbox" class="allselect" value="option1"> 全选
         </label>-->
-		<volist id='tvo' name="lvo['ctag']">
-		<if condition="$gtaglist[0]['gtype'] egt '0'">
-		<div class="clearfix tsex{$tvo.type}" <if condition="$gtaglist[0]['gtype'] neq $tvo['type']">style="display:none;"</if>>
-		<if condition="$tvo['type'] eq 1"><label class="checkbox-inline nopdl tags-1">WOMEN</label><elseif condition="$tvo['type'] eq 2"/><label class="checkbox-inline nopdl tags-2">MEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 3"/><label class="checkbox-inline nopdl tags-3">KIDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 4"/><label class="checkbox-inline nopdl tags-3">BABY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></if>
-		<volist id='cvo' name="tvo['type2']">
+
+		<div class="clearfix">
+        <if condition="$gtaglist eq ''">
+		<label class="checkbox-inline nopdl tags-1"></label>
+        <else/>
+            <label class="checkbox-inline nopdl tags-1"><if condition="$gtaglist[0]['gtype'] eq 1">WOMEN<elseif condition="$gtaglist[0]['gtype'] eq 2"/>MAN<elseif condition="$gtaglist[0]['gtype'] eq 3"/>女童<elseif condition="$gtaglist[0]['gtype'] eq 4"/>童装<else/>婴幼儿</if></label>
+        </if>
+		<volist id='cvo' name="list">
         <label class="checkbox-inline">
-          <input type="checkbox" value="{$cvo.id}" class='delch' name="tag{$lvo.id}[]" <if condition="$cvo['sel'] eq 1"> checked='checked'</if>> {$cvo.name}
+          <input type="checkbox" value="{$cvo.ID}" class='delch' name="tag2[]" <if condition="$cvo['sel'] eq 1"> checked='checked'</if>> {$cvo.description}
         </label>
 		 </volist>
 		 </div>
-		 <else/>
-		<div class="clearfix tsex{$tvo.type}">
-		<if condition="$tvo['type'] eq 1"><label class="checkbox-inline nopdl tags-1">WOMEN</label><elseif condition="$tvo['type'] eq 2"/><label class="checkbox-inline nopdl tags-2">MEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 3"/><label class="checkbox-inline nopdl tags-3">KIDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><elseif condition="$tvo['type'] eq 4"/><label class="checkbox-inline nopdl tags-3">BABY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></if>
-		<volist id='cvo' name="tvo['type2']">
-        <label class="checkbox-inline">
-          <input type="checkbox" value="{$cvo.id}" class='delch' name="tag{$lvo.id}[]" <if condition="$cvo['sel'] eq 1"> checked='checked'</if>> {$cvo.name}
-        </label>
-		 </volist>
-		 </div>
-		 </if>
-		</volist>
       </div>
     </div>
-   </volist>
+
       <div class="form-group">
       <label class="col-lg-1 control-label">选择自定义分类：</label>
       <div class="col-lg-10" id='zidy'>
@@ -415,12 +407,15 @@
 </div>
 <include file="Public:footer"/>
 <script type='text/javascript'>
-var ur = '{:U('Productsedit/ajaxt')}';
+var ur = '{:U('Productsedit/ajaxt')}',sexurl = "{:U('Productsedit/sexStyle')}";
 var ur2 = '{:U('Productsedit/ajaxcate')}';
 var ur3 = '{:U('Productsedit/ajaxt2')}';
 $(function(){	
  $('#isudid').change(function(){
 	 var gtypevalue = $('#gtypeid option:selected').val();
+     if(gtypevalue==3 || gtypevalue==4){
+         gtypevalue = 3;
+     }
 	 if(gtypevalue<=0){
        alert('请选择性别');
 	  }else{
@@ -441,14 +436,26 @@ $(function(){
 	 });
 
 $('#gtypeid').change(function(){
-	$('.delch').removeAttr("checked");
-	var gtypevalue = $('#gtypeid option:selected').val();
-	if(gtypevalue>0){
-		$('.clearfix').css('display','none');
-        $('.tsex'+gtypevalue).css('display','block');
-	}else{
-        $('.clearfix').css('display','block');
-		}
+    var gtypevalue = $('#gtypeid option:selected').val(),gtypetext = $('#gtypeid option:selected').text();
+    $('.clearfix').children('.checkbox-inline').eq(0).html(gtypetext);
+    if(gtypevalue){
+        $.post(sexurl,{sid:gtypevalue},function(data,status){
+           if(data){
+               if(data.code==1){
+                   var length = data.data.length,str='';
+                   for(var i=0;i<length;i++){
+                       str += '<label class="checkbox-inline">';
+                       str += '<input type="checkbox" name="tag2[]" class="delch" value="'+data.data[i].ID+'">'+data.data[i].description;
+                       str += '</label>';
+                   }
+                   $('.clearfix').children('.checkbox-inline').eq(0).nextAll().remove();
+                   $('.clearfix').children('.checkbox-inline').eq(0).after(str);
+               }else{
+                alert(data.msg);
+               }
+           }
+        },'json');
+    }
 	});
 //点击添加显示指数
 $('#clickaddstm').click(function(){
