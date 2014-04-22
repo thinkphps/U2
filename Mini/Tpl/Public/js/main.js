@@ -102,7 +102,7 @@ jQuery(function($){
         prev: '.mini-kv-prev',
         next: '.mini-kv-next',
         width: 200,
-        min : 5,
+        min : 4,
         callback: function(){
           this.find("img").lazyload();
         }

@@ -221,13 +221,21 @@ var _mini = {
             $.post(styleurl,{tem:$.weather.avg,sid:gender},function(data,status){
                 if(data.def){
                     $('#taoz').html(data.def);
+                    $('.index-suit').removeClass("none")
+                    $('.index-suit').css('display','block');
                 }
+                $.uniqlo.kvSlider();
             });
         }else{
             $.post(styleurl,{sid:gender,fid:fid},function(data,status){
                 if(data){
                     if(data.def){
                         var deflength = data.def.length,str = "";
+                        if(deflength && deflength>4){
+                            $('#btn-mask').addClass('none')
+                        }else{
+                            $('#btn-mask').removeClass('none');
+                        }
                         for(var i = 0 ;i < deflength;i++){
                             if(i<4){
                                 var show = "style='display:block;'";
@@ -262,7 +270,11 @@ var _mini = {
     },
     showStyleMask : function(gender){
         $('.syj').hide();
-        if(gender != 4){
+        if(gender == 4){
+            $('.my_yyg_title').hide();
+        }else{
+            $('.index-suit').addClass("none")
+            $('.index-suit').css('display','none');
             $('.my_yyg_title').show();
         }
         if(gender == 4){
@@ -500,7 +512,6 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                 else{
                     $.weather.str = strProInfo;
                 }
-
             }else{
                 $.weather.str = '';
             }
