@@ -298,6 +298,9 @@ public function getgood(){
                 $where.=" and bg.approve_status='onsale' and bg.num>=15";
            $sql = "select distinct g.good_id,case when g.wid=".$widvalue['wid']." then 0 end wo, bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." order by wo asc,uptime desc limit ".$start.",10";
             $result = $goodtag->query($sql);
+            foreach($result as $k1=>$v1){
+                $result[$k1]['products'] = $this->getColorPic($v1['num_iid']);
+            }
             if($page==1){
                 $result = $this->waterdata($result);
             }
@@ -305,7 +308,6 @@ public function getgood(){
            }
       }
     if(!empty($result)){
-//error_log(print_r($result,1),3,'2.txt');
         $arr_count = count($result);
         $returnArr = array('code'=>1,'da'=>$result,'count'=>$arr_count,'page'=>$page,'nextpage'=>$page+1);
     }else{
@@ -326,6 +328,12 @@ public function getgood(){
 
         return $result;
     }
+//取出颜色和图片
+public function getColorPic($numiid){
+    $sql = "SELECT if( length( cid ) =1, concat( 0, cid ) , cid ) FROM `u_products` where `num_iid`='".$numiid."'";
+    $list = M('Products')->query($sql);
+    return $list;
+}
 //收入衣柜
 public function addwar(){
 	if(session("uniq_user_name")){

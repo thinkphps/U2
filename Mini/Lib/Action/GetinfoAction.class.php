@@ -38,7 +38,7 @@ class GetinfoAction extends Action{
                     foreach($childResult as $k=>$v){
                         if($v){
                             //$defaultResult.='<li><img  data-original="'.__ROOT__.'/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
-                            $defaultResult.='<li><img  data-original="http://uniqlo.bigodata.com.cn/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
+                            $defaultResult.='<li><img  data-original="http://uniqlo.bigodata.com.cn/'.$v['pic_url'].'" id="'.$v['num_iid'].'" place="'.$gtag2['name'].'" url=http://uniqlo.bigodata.com.cn/'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'"></li>';
                         }
                     }
                 break;
