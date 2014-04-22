@@ -215,16 +215,44 @@ var _mini = {
         $('#sfid').addClass('none');
         if(gender==4){
             //婴幼儿
-            $('.my_yyg_title').addClass('none');
-            $('.page_arrow').hide();
-            $('#showbaby').css('display','block').remove('none');
             $.post(styleurl,{tem:$.weather.avg,sid:gender},function(data,status){
-                if(data.def){
-                    $('#taoz').html(data.def);
-                    $('.index-suit').removeClass("none")
-                    $('.index-suit').css('display','block');
+                if(data){
+                    if(data.def){
+                        var deflength = data.def.length,str = "";
+                        if(deflength && deflength>4){
+                            $('#btn-mask').addClass('none')
+                        }else{
+                            $('#btn-mask').removeClass('none');
+                        }
+                        for(var i = 0 ;i < deflength;i++){
+                            if(i<4){
+                                var show = "style='display:block;'";
+                            }else{
+                                var show = "style='display:none;'";
+                            }
+                            str += "<div class=\"model\" "+show+"><div style='width: 180px;height: 180px;margin-top: 90px'><img class='imgrd' data-detail='"+data.def[i].detail_url+"' src='"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
+                        }
+                        $('#sfid').html(str);
+                        $('#sfid').removeClass('none');
+                        var css = {};
+                        css['transform']='rotateY(90deg)';
+                        $('.imgrd').css(css);
+                        setTimeout(function(){
+                            $('.imgrd').css({
+                                '-webkit-transition': 'all 0.5s ease-in-out',
+                                '-moz-transition': 'all 0.5s ease-in-out',
+                                '-o-transition': 'all 0.5s ease-in-out',
+                                '-ms-transition': 'all 0.5s ease-in-out',
+                                'transition': 'all 0.5s ease-in-out'
+                            });
+                            var css = {};
+                            css['transform']='matrix(1, 0, 0, 1, 0, 0)';
+                            $('.imgrd').css(css);
+                        },100);
+                    }else{
+                        $('#sfid').html('');
+                    }
                 }
-                $.uniqlo.kvSlider();
             });
         }else{
             $.post(styleurl,{sid:gender,fid:fid},function(data,status){
@@ -272,12 +300,9 @@ var _mini = {
         $('.syj').hide();
 
         if(gender == 4){
-            $('.my_yyg_title').hide();
             $(".syj_btn").hide();
         }else{
-            $('.index-suit').addClass("none")
-            $('.index-suit').css('display','none');
-            $('.my_yyg_title').show();
+
             $(".syj_btn").show();
         }
         if(gender == 4){
