@@ -320,6 +320,26 @@ var _mini = {
         getgoods($.weather.avg,sid,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
 
     },
+    getzid : function(sid){
+        $.post(midstyleurl,{sid:sid},function(data,status){
+            if(data){
+                //上下装
+                var ustr = '',dstr='';
+                $.each(data.u,function(i,name){
+                    ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                });
+                $.each(data.d,function(i,name){
+                    dstr+="<li class='doclothes zright' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
+                });
+                $('#alluid').nextAll('li').remove();
+                $('#alluid').after(ustr);
+                $('#alldid').nextAll('li').remove();
+                $('#alldid').after(dstr);
+            }
+        },'json');
+    },
+    left : [],
+    right : [],
     showStyleMask2 : function(gender){
         if(gender == 4){
             $('#style-mask2').removeClass('children-style-mask2');
@@ -344,6 +364,7 @@ var _mini = {
         }
     },
     getProductInfo : function(data){
+        var _this = this;
         var strHtml = '';
         var color = 'h_orange';
         var pushid = 3;
@@ -361,20 +382,25 @@ var _mini = {
                 strHtml+= v.cb;
             }
             if(v.type==1){
-                color = 'h_orange';
+                color = 'h_pink';
             }else if(v.type==2){
                 color = 'h_blue';
-            }else if(v.type==3 || v.type==3){
+            }else if(v.type == 3 || v.type==4 || v.type == 5){
                 color = 'h_orange';
             }
             if(p != 0 && p != pushid){
                 strHtml += '<div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
-                strHtml += '<dl><dt><a href="javascript:;" name="tryon"><i></i>试穿</a></dt>';
+                strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
+                strHtml +=  'data-gendertype="'+ v.type +'"><i></i>试穿</a></dt>';
                 strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
                 strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
-                strHtml += '<div class="product_color none"><h5>请选择颜色</h5><ul></ul></div>';
+                strHtml += '<div class="product_color none"><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl>';
+                strHtml += '<ul class="children_gender none">';
+                strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
+                strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
+                strHtml += '</ul></div>';
                 strHtml += '<h3 class="'+color+'"><a href="javascript:;">'+ v.title+'</a></h3>';
                 strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
@@ -384,29 +410,107 @@ var _mini = {
             }
         });
         return strHtml;
-    }
-    ,
-    getzid : function(sid){
-        $.post(midstyleurl,{sid:sid},function(data,status){
-            if(data){
-                //上下装
-                var ustr = '',dstr='';
-                $.each(data.u,function(i,name){
-                    ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                });
-                $.each(data.d,function(i,name){
-                    dstr+="<li class='doclothes zright' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                });
-                $('#alluid').nextAll('li').remove();
-                $('#alluid').after(ustr);
-                $('#alldid').nextAll('li').remove();
-                $('#alldid').after(dstr);
-            }
-        },'json');
     },
-    left : [],
-    right : []
+    getColorsHtml : function(colors){
+        var colorHtml = '';
+        var title = '';
+        var imgurl = '';
+        if(colors != null){
+            for(var i = 0; i < colors.length; i++){
+                title =  colors[i].colorid + ' ' + colors[i].colorname;
+                imgurl =   rootPath +  '/' + colors[i].colorcode;
+                colorHtml += '<li title="'+title+'"><a href="javascript:;" data-colorid="'+ colors[i].colorid + '" ';
+                colorHtml += 'style="background:url('+ imgurl +') center no-repeat;background-size:cover;" ';
+                colorHtml += 'data-gender="'+ colors[i].gender+'" ';
+                colorHtml += 'data-uqcode="'+ colors[i].uq +'" ';
+                colorHtml += 'data-colorid="' + colors[i].colorid + '" ';
+                colorHtml += '</a><span>'+ title +'</span>';
+                colorHtml += '<i>已选中</i></li>';
+            }
+        }
+        return colorHtml;
+    },
+    dressing :function(barcode,gender,sex,$wrapper_box){
+        //如果性别为3：童装,则显示性别选择div
+        if(sex == 3 ){
+//            cabnet.btnboy.attr("barcode",barcode);
+//            cabnet.btngril.attr("barcode",barcode);
+//            var ischecked = cabnet.net.find("img[uq='"+ barcode.substring(0,8) +"']").attr("ischecked");
+//            if((barcode + "15581") == ischecked && Clothingexisting(barcode)){
+//                cabnet.btnboy.css({"background":"#e70012"});
+//            }
+//            else if((barcode + "15583") == ischecked && Clothingexisting(barcode)){
+//                cabnet.btngril.css({"background":"#e70012"});
+//            }
+//            else{
+//                cabnet.btnboy.removeAttr("style");
+//                cabnet.btngril.removeAttr("style");
+//            }
+//            var $colorimg = $()
+            $wrapper_box.find('.sale-colors').hide();
+            var $children_gender = $wrapper_box.find('.children_gender');
+            $children_gender.show()
+            $children_gender.find('li a').each(function(){
+                $(this).data('barcode',barcode);
+            })
+
+        }else{
+            pageElement.dressByBarcode(barcode,gender);
+        }
+    }
 }
+
+
+//鼠标移动到衣服上显示价格、库存等详细信息
+$('#watercontainer').on('mouseenter','.wrapper_box img',function(){
+    $(this).parent().parent().find('.product_inf').show();
+});
+//鼠标移出隐藏价格、库存等详细信息
+$('#watercontainer').on('mouseleave','.wrapper_box',function(){
+    $(this).find('.product_inf').hide();
+    $(this).find('.product_color').hide();
+    var $tryon =  $(this).find('.tryon');
+    if($tryon.hasClass('select')){
+        $tryon.removeClass('select');
+    }
+});
+
+//点击试穿按钮，显示颜色
+$('#watercontainer').on('click','.tryon',function(){
+    var $this = $(this);
+    var $wrapper_box = $this.parent().parent().parent();
+    var $colorImg = $wrapper_box.find('.color-img');
+    $colorImg.html('').append(_mini.getColorsHtml(eval($this.data('colors'))));
+    $this.addClass('select');
+    $wrapper_box.find('.product_color').show();
+});
+
+
+//点击色块将衣服添加到模特身上
+$('#watercontainer').on("click",".color-img li",function(){
+    var $colorImg = $(this).parent();
+    var $proInfo = $(this).find('a');
+    var $wrapper_box =  $colorImg.parent().parent().parent();
+    $colorImg.find("li").removeClass("pro-selected");
+    var barcode = $proInfo.data("uqcode") + $proInfo.data('colorid');
+    var gender = $proInfo.data("gender");
+    var sex = $wrapper_box.find('.tryon').data('gendertype');
+    _mini.dressing(barcode,gender,sex,$wrapper_box);
+    $(this).addClass('pro-selected');
+});
+
+//点击男童、女童穿衣上身
+$('#watercontainer').on("click",".children_gender li",function(){
+    var $children_gender = $(this).find('a');
+    var $sale_colors = $(this).parent().parent();
+    $(this).parent().find('li a').removeClass('select');
+    $children_gender.addClass('select');
+    var barcode = $children_gender.data("barcode");
+    var gender = $children_gender.data("gender");
+    pageElement.dressByBarcode(barcode,gender);
+});
+
+
 $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
     var num_iid = $(this).data('id');
     $(this).toggleClass('select');
@@ -455,19 +559,6 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
     }
-});
-
-//鼠标移动到衣服上显示价格、库存等详细信息
-$('#watercontainer').on('mouseenter','.wrapper_box img',function(){
-    $(this).parent().parent().find('.product_inf').show();
-});
-//鼠标移出隐藏价格、库存等详细信息
-$('#watercontainer').on('mouseleave','.wrapper_box',function(){
-    $(this).find('.product_inf').hide();
-});
-//点击试穿按钮，显示颜色
-$('#watercontainer').on('click','a[name=tryon]',function(){
-   $(this).parent().parent().parent().find('.product_color').show();
 });
 
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
