@@ -370,15 +370,22 @@ var _mini = {
         var _this = this;
         var strHtml = '';
         var color = 'h_orange';
-        var pushid = 3;
+        var pushid = 3,pushid2 = 2;
         $.each(data.da,function(p,v){
-
             if(data.count>=4){
                 pushid = 3;
             }else{
                 pushid = data.count-1;
             }
+            if(data.count>=3){
+                pushid2 = 2;
+            }else{
+                pushid2 = data.count-1;
+            }
             if(v.first==1 && p==0){
+                strHtml+= v.ad;
+            }
+            if(v.first==1 && p==pushid2){
                 strHtml+= v.ad;
             }
             if(v.first==1 && p==pushid){
@@ -391,7 +398,7 @@ var _mini = {
             }else if(v.type == 3 || v.type==4 || v.type == 5){
                 color = 'h_orange';
             }
-            if(p != 0 && p != pushid){
+            if(p != 0 && p != pushid && p != pushid2){
                 strHtml += '<div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
