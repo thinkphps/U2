@@ -53,7 +53,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_side_bar li{ display:block; width:8px; height:8px; background:url(../images/preferential_side_bar.png) 0 0 no-repeat; cursor:pointer; margin:0 0 4px 0; z-index:10;}
 .preferential ul.preferential_side_bar li.current{ background:url(../images/preferential_side_bar.png) 0 -8px no-repeat;}
 
-.preferential ul.preferential_con{ width:321px; height:82px; position:absolute; top:0; overflow:hidden;}
+.preferential ul.preferential_con{ width:321px; height:82px; line-height:18px;position:absolute; top:0; overflow:hidden;}
 .preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;}
 .preferential ul.preferential_con li i{ display:block; float:left; width:58px; height:57px; margin:0 12px 0 0;}
 .preferential ul.preferential_con li a{ cursor:pointer; margin-top:4px; display:block;}
