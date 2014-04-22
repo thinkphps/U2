@@ -330,7 +330,7 @@ public function getgood(){
     }
 //取出颜色和图片
 public function getColorPic($numiid){
-    $sql = "SELECT if( length( cid ) =1, concat( 0, cid ) , cid ) FROM `u_products` where `num_iid`='".$numiid."'";
+    $sql = "SELECT if( length( cid ) =1, concat( 0, cid ) , cid ) as cid,url FROM `u_products` where `num_iid`='".$numiid."'";
     $list = M('Products')->query($sql);
     return $list;
 }
