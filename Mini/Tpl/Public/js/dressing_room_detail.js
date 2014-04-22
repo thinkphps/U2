@@ -471,7 +471,6 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
         keyword : keyword
     },function(data,status){
         if(data){
-            console.log(data);
             if(data.code==1){
                 var strProInfo = _mini.getProductInfo(data);
                 $.weather.nextpage = data.nextpage;
@@ -502,6 +501,8 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                     $.weather.str = strProInfo;
                 }
 
+            }else{
+                $.weather.str = '';
             }
         }
     },'json');
