@@ -245,6 +245,10 @@ public function getgood(){
      }else{
      $collection = M('Collection');
       $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+         $productSyn = D('ProductSyn');
+         foreach($result as $k1=>$v1){
+             $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+         }
          if($page==1){
              $result = $this->waterdata($result);
          }
@@ -257,6 +261,10 @@ public function getgood(){
     }else{
         $buy = M('Buy');
         $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+        $productSyn = D('ProductSyn');
+        foreach($result as $k1=>$v1){
+            $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+        }
         if($page==1){
             $result = $this->waterdata($result);
         }
@@ -311,7 +319,7 @@ public function getgood(){
                 }
                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
             $result = $goodtag->query($sql);
-                $productSyn = D('ProductSyn');
+            $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
             }
@@ -341,6 +349,8 @@ public function getgood(){
         $arr_count = count($result);
         if($arr_count>=4){
             array_splice($result,2,0,array(array('first'=>1,'ad'=>$ad2)));
+        }else if($arr_count == 3){
+            array_splice($result,($arr_count-1),0,array(array('first'=>1,'ad'=>$ad2)));
         }else{
             array_splice($result,($arr_count),0,array(array('first'=>1,'ad'=>$ad2)));
         }
