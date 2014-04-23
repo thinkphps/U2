@@ -718,6 +718,7 @@ $('.imgrd').css(css);
 
         //点击左侧
         $('#ulgender').on('click','li',function(){
+            $('#changeid').attr('la',1);
             var sid = $(this).data('gender');
             $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
@@ -936,6 +937,7 @@ $('.imgrd').css(css);
     });
     //左侧风格取数据
     $('#ul_index-bar-place').on('click','li',function(){
+        $('#changeid').attr('la',1);
         $(this).siblings().children('a').removeClass('select');
         if($(this).children('a').hasClass('select')){
             $(this).children('a').removeClass('select');
