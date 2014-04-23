@@ -108,7 +108,7 @@ ul.detail_sub_nav{ display:block; width:70px; position:absolute; left:0; top:5px
 ul.detail_sub_nav li{ background:url(../images/detail_sub_nav_bg.png) 0 0 repeat;}
 ul.detail_sub_nav li a{ display:block; width:70px; height:34px; margin:0 0 1px 0; }
 ul.detail_sub_nav li.big_btn a{ height:70px;}
-ul.ch_sub_nav{top:290px;}
+ul.ch_sub_nav{top:220px;}
 .baby-style-mask{
     background: #000;
     opacity: 0.5;
