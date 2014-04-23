@@ -143,34 +143,46 @@ ul.ch_sub_nav{top:290px;}
 
 
 .baby-style-mask2{
+    position: relative;
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 530px;
+    width: 531px;
     height: 70px;
-    right: 315px;
-    top: 121px;
+    left: 419px;
     z-index: 2;
 }
 .male-style-mask2{
+    position: relative;
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
     width: 213px;
     height: 35px;
-    right: 634px;
-    top: 121px;
+    left: 418px;
     z-index: 2;
 }
 
 .children-style-mask2{
+    position: relative;
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
     width: 213px;
     height: 35px;
-    right: 529px;
-    top: 155px;
+    left: 525px;
+    top: 35px;
+    z-index: 2;
+}
+.style-children_mask{
+    position: relative;
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 107px;
+    height: 35px;
+    left: 631px;
+    top: -35px;
     z-index: 2;
 }
 .change-btn-mask{
