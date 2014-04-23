@@ -233,7 +233,8 @@ public function getgood(){
     $page = $page?$page:1;
 	$goodtag = M('Goodtag');
 	$windex = D('Windex');
-    $start = ($page-1)*10;
+    $page_num = 50;
+    $start = ($page-1)*$page_num;
     if(isset($tem)){
 	$widvalue = $windex->getwindex($tem);
     }
@@ -243,7 +244,7 @@ public function getgood(){
        $result = unserialize(S('coll'.session("uniq_user_id").$page));
      }else{
      $collection = M('Collection');
-      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.',50')->select();
+      $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
          if($page==1){
              $result = $this->waterdata($result);
          }
@@ -255,7 +256,7 @@ public function getgood(){
         $result = unserialize(S('buy'.session("uniq_user_id").$page));
     }else{
         $buy = M('Buy');
-        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.',50')->select();
+        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
         if($page==1){
             $result = $this->waterdata($result);
         }
@@ -308,7 +309,7 @@ public function getgood(){
                   $case = '';
                   $ordr = "order by ";
                 }
-              $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",50";
+               $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
             $result = $goodtag->query($sql);
                 $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
