@@ -447,7 +447,7 @@ var _mini = {
                 color = 'h_orange';
             }
             if(p != 0 && p != pushid && p != pushid2){
-                strHtml += '<div class="wrapper_box"><a href="javascript:;">';
+                strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'"><i></i>试穿</a></dt>';
@@ -464,7 +464,7 @@ var _mini = {
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
                 strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
-                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div>';
+                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
             }
         });
         return strHtml;
@@ -556,7 +556,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                         auto_imgHeight:true,
                         column_width : 228,
                         insert_type:2,
-                        cell_selector : '.wrapper_box',
+                        cell_selector : '.productinfo',
                         max_column_num:4
                     }
 
