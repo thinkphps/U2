@@ -32,6 +32,8 @@ var pageElement = {
         $('#watercontainer .select').removeClass('select');
 
         $('#watercontainer .product_color').hide();
+
+        $('#watercontainer .product_gender a').removeData('select_barcode');
     },
     clearSelected :function(){
         var barcodeList = this.BarcodeList;
@@ -48,6 +50,7 @@ var pageElement = {
                 if($(this).find('.pro-selected').length == 0){
                     $(this).hide();
                     $(this).parent().find('.tryon').removeClass('select');
+                    $(this).parent().find('.product_gender a').removeData('select_barcode');
                 }
             }
         });
@@ -134,7 +137,6 @@ var pageElement = {
             }
         },
         addBuyBtns:function(){
-            alert(1);
 //            for(var barcode in  pageElement.BarcodeList ){
 //                console.log(barcode);
 //            }
@@ -185,36 +187,26 @@ var pageElement = {
             }
         }
         ,
-        dressing :function(barcode,gender,sex,$wrapper_box){
+        dressing :function(barcode,gender,sex,$wrapper_box,$colorLi){
             //如果性别为3：童装,则显示性别选择div
             if(sex == 3 ){
-//            cabnet.btnboy.attr("barcode",barcode);
-//            cabnet.btngril.attr("barcode",barcode);
-//            var ischecked = cabnet.net.find("img[uq='"+ barcode.substring(0,8) +"']").attr("ischecked");
-//            if((barcode + "15581") == ischecked && Clothingexisting(barcode)){
-//                cabnet.btnboy.css({"background":"#e70012"});
-//            }
-//            else if((barcode + "15583") == ischecked && Clothingexisting(barcode)){
-//                cabnet.btngril.css({"background":"#e70012"});
-//            }
-//            else{
-//                cabnet.btnboy.removeAttr("style");
-//                cabnet.btngril.removeAttr("style");
-//            }
-//            var $colorimg = $()
-                $wrapper_box.find('.sale-colors').hide();
-                $wrapper_box.find('h5').html('请选择性别');
-                var $children_gender = $wrapper_box.find('.children_gender');
-                $children_gender.show()
-                $children_gender.find('li a').each(function(){
-                    if($(this).data('select_barcode') != barcode){
-                        $(this).removeClass('select');
+                $wrapper_box.find('.product_color').hide();
+                var $product_gender = $wrapper_box.find('.product_gender');
+                $product_gender.show();
+                $product_gender.find('li a').each(function(){
+                    $(this).removeClass('select');
+                    if($(this).data('select_barcode') == barcode){
+                        $(this).addClass('select');
                     }
                     $(this).data('barcode',barcode);
                 })
 
             }else{
                 pageElement.dressByBarcode(barcode,gender);
+//                $colorLi.data('barcode',barcode);
+//                $(this).data('prevBarcode',$colorImg.find('pro-selected').data('barcode'));
+                $colorLi.parent().find("li").removeClass("pro-selected");
+                $colorLi.addClass('pro-selected');
             }
         },
         clothingexisting : function(barcode){
@@ -233,7 +225,7 @@ var pageElement = {
                 for(var i = 0; i < colors.length; i++){
                     title =  colors[i].colorid + ' ' + colors[i].colorname;
                     imgurl =    '/' +  colors[i].colorcode.substring(0,colors[i].colorcode.lastIndexOf(".")) + ".jpg";
-                    colorHtml += '<li title="'+title+'"><a href="javascript:;" data-colorid="'+ colors[i].colorid + '" ';
+                    colorHtml += '<li data-barcode="'+ colors[i].uq + colors[i].colorid +'" title="'+title+'"><a href="javascript:;" data-colorid="'+ colors[i].colorid + '" ';
                     colorHtml += 'style="background:url('+ imgurl +') center no-repeat;background-size:cover;" ';
                     colorHtml += 'data-gender="'+ colors[i].gender+'" ';
                     colorHtml += 'data-uqcode="'+ colors[i].uq +'" ';
@@ -286,32 +278,15 @@ var pageElement = {
                 var $this = $(this);
                 $(this).find('.product_inf').hide();
                 var $color_img = $this.find('.color-img');
-                var $children_gender = $this.find('.children_gender');
                 var $tryon =  $(this).find('.tryon');
                 pageElement.IsHide = 0;
                 $tryon.data('selected',0);
-                $children_gender.hide();
-                var selectBarcode = $children_gender.find('a').data('select_barcode');
+//                var selectBarcode = $children_gender.find('a').data('select_barcode');
                 if( $color_img.find('.pro-selected').length == 0){
                     $this.find('.product_color').hide();
                     if($tryon.hasClass('select')){
                         $tryon.removeClass('select');
                     }
-                }
-                else{
-                    if($tryon.data('gendertype') == pageElement.ChildrenType){
-                        if($children_gender.find('.select').length == 0
-                            && (selectBarcode == undefined || selectBarcode == '')){
-                            $this.find('.product_color').hide();
-                            if($tryon.hasClass('select')){
-                                $tryon.removeClass('select');
-                            }
-                        }
-                        else{
-                            $color_img.parent().show();
-                        }
-                    }
-
                 }
             });
 
@@ -321,9 +296,6 @@ var pageElement = {
                 var $this = $(this);
                 var $wrapper_box = $this.parent().parent().parent();
                 var $colorImg = $wrapper_box.find('.color-img');
-                $colorImg.parent().show();
-                $wrapper_box.find('.children_gender').hide();
-                $wrapper_box.find('h5').html('请选择颜色');
                 $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
                 $this.data('selected',1);
                 $this.addClass('select');
@@ -338,25 +310,34 @@ var pageElement = {
                 var barcode = $proInfo.data("uqcode") + $proInfo.data('colorid');
                 var gender = $proInfo.data("gender");
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
-                _this.dressing(barcode,gender,sex,$wrapper_box);
-                $(this).data('barcode',barcode);
-                $colorImg.find("li").removeClass("pro-selected");
-                $(this).addClass('pro-selected');
-
+                _this.dressing(barcode,gender,sex,$wrapper_box,$(this));
             });
 
             //点击男童、女童穿衣上身
-            $('#watercontainer').on("click",".children_gender li",function(){
-                var $children_gender = $(this).find('a');
-                var $sale_colors = $(this).parent().parent();
-                $(this).parent().find('li a').removeClass('select').data('select_barcode','');
-                $children_gender.addClass('select');
-                var barcode = $children_gender.data("barcode");
-                var gender = $children_gender.data("gender");
+            $('#watercontainer').on("click",".product_gender li",function(){
+                var $wrapper_box = $(this).parent().parent().parent();
+                var $a_gender = $(this).find('a');
+                $(this).parent().find('li a').removeClass('select').removeData('select_barcode');
+                $a_gender.addClass('select');
+                var barcode = $a_gender.data("barcode");
+                var gender = $a_gender.data("gender");
                 pageElement.dressByBarcode(barcode,gender);
-                $children_gender.data('select_barcode',barcode);
+                $a_gender.data('select_barcode',barcode);
+                $wrapper_box.find('.color-img li').each(function(){
+                    if($(this).data('barcode') == barcode){
+                        $wrapper_box.find(".color-img li").removeClass("pro-selected");
+                        $(this).addClass('pro-selected');
+                        return;
+                    }
+                });
             });
-
+            //行性格选择层中移出时隐藏该层
+            $('#watercontainer').on("mouseleave",".product_gender",function(){
+                var $this = $(this);
+                var $product_color = $this.parent().find('.product_color');
+                $this.hide();
+                $product_color.show();
+            });
         }
     }
 
