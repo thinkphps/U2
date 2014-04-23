@@ -431,12 +431,12 @@ var _mini = {
                 strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
                 strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
-                strHtml += '<div class="product_color none"><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl>';
-                strHtml += '<ul class="children_gender none">';
+                strHtml += '<div class="product_color none"><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
+                strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
-                strHtml += '<h3 class="'+color+'"><a href="javascript:;">'+ v.title+'</a></h3>';
+                strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
                 strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
