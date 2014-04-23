@@ -330,9 +330,13 @@ public function getgood(){
     $this->ajaxReturn($returnArr, 'JSON');
 }
     public function waterdata($result){
-        $ad = "<div class='wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-        $ad2 = '<div class="wrapper_box banner_box"><a href="javascript:;"><img src="'.__ROOT__."/".APP_PATH.'Tpl/Public/images/xinzuoshangpin.jpg" width="228" height="228" alt="" /></a></div>';
-        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+        $ad = "<div class='productinfo wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
+        $ad2 = '<div class="productinfo wrapper_box banner_box"><a href="javascript:;"><img src="'.__ROOT__."/".APP_PATH.'Tpl/Public/images/xinzuoshangpin.jpg" width="228" height="228" alt="" /></a></div>';
+
+
+        $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+
+//        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));
         $arr_count = count($result);
         if($arr_count>=4){
