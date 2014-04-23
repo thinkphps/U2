@@ -189,7 +189,7 @@ var pageElement = {
         ,
         dressing :function(barcode,gender,sex,$wrapper_box,$colorLi){
             //如果性别为3：童装,则显示性别选择div
-            if(sex == 3 ){
+            if(sex == pageElement.ChildrenType ){
                 $wrapper_box.find('.product_color').hide();
                 var $product_gender = $wrapper_box.find('.product_gender');
                 $product_gender.show();

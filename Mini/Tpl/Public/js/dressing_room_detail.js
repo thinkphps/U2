@@ -68,6 +68,7 @@ $(function(){
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
             index : that.index() + 1,
+            city:$('#nio-city').text(),
             imgpath : window.imgpath,
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
