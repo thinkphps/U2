@@ -283,7 +283,7 @@ public function doedit(){
     $goodarr['isdoubt'] = '1';
 	}
     $goodarr['istag'] = '2';
-	$goodarr['gender'] = $arr['gender'];
+	//$goodarr['gender'] = $arr['gender'];
 	$goods->where(array('id'=>$id))->save($goodarr);
 
     $this->success('编辑成功',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'],'keyword'=>$keyword,'istag'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt)));
