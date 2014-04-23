@@ -273,6 +273,7 @@ var _mini = {
                             $('.imgrd').css(css);
                         },100);
                     }else{
+                        $('#btn-mask').removeClass('none');
                         $('#sfid').html('');
                     }
                 }
@@ -313,6 +314,7 @@ var _mini = {
                             $('.imgrd').css(css);
                         },100);
                     }else{
+                        $('#btn-mask').removeClass('none');
                         $('#sfid').html('');
                     }
                 }
