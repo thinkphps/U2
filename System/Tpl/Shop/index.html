@@ -18,6 +18,7 @@
         <th>后台ID</th>
         <th>门店名称</th>
         <th>门店地址</th>
+        <th>营业时间</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -27,6 +28,7 @@
         <td>{$vo.id}</td>
         <td>{$vo.sname}</td>
         <td>{$vo.saddress}</td>
+        <td>{$vo.tradetime}</td>
         <td><a href="{:U('Shop/shopedit',array('id'=>$vo['id']))}" class="btn btn-primary">编辑</a> <a href="{:U('Shop/del',array('id'=>$vo['id']))}" class="btn btn-danger">删除</a></td>
       </tr>
      </volist>
