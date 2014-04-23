@@ -15,12 +15,12 @@ class ShopAction extends Action{
 	import("@.ORG.Pageyu");
 	if(empty($keyword)){
 	$count = $shop->count();
-	$p = new Page($count,8);
+	$p = new Page($count,20);
 	$shops = $shop->field('*')->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
 	}else{
 	$where = array('sname'=>array('like','%'.$keyword.'%'));
 	$count = $shop->where($where)->count();
-	$p = new Page($count,8);
+	$p = new Page($count,20);
 	$shops = $shop->field('*')->where($where)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();		
 	}
 	$page = $p->showPage();
