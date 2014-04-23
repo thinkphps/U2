@@ -369,6 +369,15 @@ a.mini-kv-add{
     top: 35px;
     z-index: 2;
 }
+.style-children_mask{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 71px;
+    height: 35px;
+    right: 320px;
+    z-index: 2;
+}
 .ft16{
     color: red;
 }

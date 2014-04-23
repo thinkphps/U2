@@ -77,13 +77,14 @@ var timer;
                 $('#style-mask').removeClass('children-style-mask');
                 $('#style-mask').removeClass('male-style-mask');
                 $('#style-mask').addClass('baby-style-mask').show();
-//                $('.baby-style-mask').show();
+                $('.style-children_mask').hide();
             }
             else if(gender == 3){
 
                 $('#style-mask').removeClass('baby-style-mask');
                 $('#style-mask').removeClass('male-style-mask');
                 $('#style-mask').addClass('children-style-mask').show();
+                $('.style-children_mask').show();
 //                $('.baby-style-mask').hide();
 //                $('.children-style-mask').show();
             }
@@ -91,18 +92,14 @@ var timer;
                 $('#style-mask').removeClass('baby-style-mask');
                 $('#style-mask').removeClass('children-style-mask');
                 $('#style-mask').addClass('male-style-mask').show();
-//                $('.baby-style-mask').hide();
-//                $('.children-style-mask').hide();
-//                $('.male-style-mask').show();
+                $('.style-children_mask').hide();
             }
             else{
                 $('#style-mask').removeClass('baby-style-mask');
                 $('#style-mask').removeClass('children-style-mask');
                 $('#style-mask').removeClass('male-style-mask');
                 $('#style-mask').hide();
-//                $('.baby-style-mask').hide();
-//                $('.children-style-mask').hide();
-//                $('.male-style-mask').hide();
+                $('.style-children_mask').hide();
             }
         },
 

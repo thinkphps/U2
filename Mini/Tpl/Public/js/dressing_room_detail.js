@@ -374,22 +374,25 @@ var _mini = {
             $('#style-mask2').removeClass('children-style-mask2');
             $('#style-mask2').removeClass('male-style-mask2');
             $('#style-mask2').addClass('baby-style-mask2').show();
+            $('.style-children_mask').hide();
         }else if(gender == 3){
-
             $('#style-mask2').removeClass('baby-style-mask2');
             $('#style-mask2').removeClass('male-style-mask2');
             $('#style-mask2').addClass('children-style-mask2').show();
+            $('.style-children_mask').show();
         }
         else if(gender == 2){
             $('#style-mask2').removeClass('baby-style-mask2');
             $('#style-mask2').removeClass('children-style-mask2');
             $('#style-mask2').addClass('male-style-mask2').show();
+            $('.style-children_mask').hide();
         }
         else{
             $('#style-mask2').removeClass('baby-style-mask2');
             $('#style-mask2').removeClass('children-style-mask2');
             $('#style-mask2').removeClass('male-style-mask2');
             $('#style-mask2').hide();
+            $('.style-children_mask').hide();
         }
     },
     getProductInfo : function(data){
