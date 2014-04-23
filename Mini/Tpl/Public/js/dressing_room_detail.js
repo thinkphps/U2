@@ -3,7 +3,29 @@
  */
 
 $(function(){
-    $(".syj_btn").draggable();
+    $(".syj_btn").draggable({
+        start:function(event, ui ){
+            $(".syj_btn_expansion").addClass('ondrag');
+        },
+        drag:function(event, ui){
+            var mleft =  $("#beubeu_loadImg").width();
+            if(ui.position.left<mleft){
+                $(".syj").css('margin-left',mleft+'px');
+            }else{
+                $(".syj").css('margin-left','');
+            }
+        },
+        stop: function( event, ui ) {
+            if(ui.position.left<0){
+                $(".syj_btn").animate({'left':'10px'}, 400);
+            }
+            if(ui.position.left>$(window).width()-$(".syj_btn").width()){
+                var mleft = $(window).width()-$(".syj_btn").width() - 10;
+                $(".syj_btn").animate({'left':mleft + 'px'}, 400);
+            }
+        }
+    });
+
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
