@@ -3,7 +3,29 @@
  */
 
 $(function(){
-    $(".syj_btn").draggable();
+    $(".syj_btn").draggable({
+        start:function(event, ui ){
+            $(".syj_btn_expansion").addClass('ondrag');
+        },
+        drag:function(event, ui){
+            var mleft =  $("#beubeu_loadImg").width();
+            if(ui.position.left<mleft){
+                $(".syj").css('margin-left',mleft+'px');
+            }else{
+                $(".syj").css('margin-left','');
+            }
+        },
+        stop: function( event, ui ) {
+            if(ui.position.left<0){
+                $(".syj_btn").animate({'left':'10px'}, 400);
+            }
+            if(ui.position.left>$(window).width()-$(".syj_btn").width()){
+                var mleft = $(window).width()-$(".syj_btn").width() - 10;
+                $(".syj_btn").animate({'left':mleft + 'px'}, 400);
+            }
+        }
+    });
+
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
@@ -68,6 +90,7 @@ $(function(){
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
             index : that.index() + 1,
+            city:$('#nio-city').text(),
             imgpath : window.imgpath,
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);
@@ -424,7 +447,7 @@ var _mini = {
                 color = 'h_orange';
             }
             if(p != 0 && p != pushid && p != pushid2){
-                strHtml += '<div class="wrapper_box"><a href="javascript:;">';
+                strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'"><i></i>试穿</a></dt>';
@@ -441,7 +464,7 @@ var _mini = {
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
                 strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
-                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div>';
+                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
             }
         });
         return strHtml;
@@ -533,7 +556,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                         auto_imgHeight:true,
                         column_width : 228,
                         insert_type:2,
-                        cell_selector : '.wrapper_box',
+                        cell_selector : '.productinfo',
                         max_column_num:4
                     }
 

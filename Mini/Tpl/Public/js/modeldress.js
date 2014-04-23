@@ -189,7 +189,7 @@ var pageElement = {
         ,
         dressing :function(barcode,gender,sex,$wrapper_box,$colorLi){
             //如果性别为3：童装,则显示性别选择div
-            if(sex == 3 ){
+            if(sex == pageElement.ChildrenType ){
                 $wrapper_box.find('.product_color').hide();
                 var $product_gender = $wrapper_box.find('.product_gender');
                 $product_gender.show();
@@ -243,13 +243,18 @@ var pageElement = {
             $('#sfid').on('click','.model',_this.callDressingFunction);
 
             pageElement.$btnExpansion.on('click',function(){
-                _this.objShowOrHide(pageElement.$divSyj);
-                var $parentDiv = $(this).parent();
-                if($parentDiv.hasClass('select')){
-                    $parentDiv.removeClass('select');
-                }
-                else{
-                    $parentDiv.addClass('select');
+                if($(this).hasClass('ondrag')){
+                    $(this).removeClass('ondrag');
+                    return;
+                }else{
+                    _this.objShowOrHide(pageElement.$divSyj);
+                    var $parentDiv = $(this).parent();
+                    if($parentDiv.hasClass('select')){
+                        $parentDiv.removeClass('select');
+                    }
+                    else{
+                        $parentDiv.addClass('select');
+                    }
                 }
             });
 
