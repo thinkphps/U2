@@ -375,8 +375,8 @@ jQuery(function($){
         /* == 内页kv交互 == */
 
         cabnet.kvSlide = $('.mini-kv-slide')                // kv-slide框
-        cabnet.kvHover = $('.mini-kv-hover')                // kv-hover框
-        cabnet.kvContent = $('.mini-kv-content'),
+        cabnet.kvHover = $('.product_inf')                // kv-hover框
+        cabnet.kvContent = $('.inf_con'),
         cabnet.kvTimer = 0                                     // kv-hover框延迟
         cabnet.kvIsOpen = false                                // kv-hover状态
         cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hover价格
@@ -393,16 +393,16 @@ jQuery(function($){
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var addBtn = cabnet.kvHover.find('a.mini-kv-add')
-            var top = 160
-            if(pos){
-                top = pos == '#net-top' ? 53 : 250
-                addBtn.text('收入衣柜')
-            } else {
-                addBtn.text('查看详情')
-            }
-            if(this.getAttribute('fg') == 116){
-                addBtn.text('查看详情')
-            }
+            var top = 186
+//            if(pos){
+//                top = pos == '#net-top' ? 53 : 250
+////                addBtn.text('收入衣柜')
+//            } else {
+////                addBtn.text('查看详情')
+//            }
+//            if(this.getAttribute('fg') == 116){
+////                addBtn.text('查看详情')
+//            }
 
             kvHoverCallback.call(this, pos, isIndexPage)         // 图片悬浮的callback里处理细节
 
@@ -410,7 +410,7 @@ jQuery(function($){
 
                 cabnet.kvHover.css({                               // 显示图片悬浮框
                     left: position.left + 55,
-                    top: position.top + top
+                    top: top
                 }).show()
                 cabnet.kvIsOpen = true
 
@@ -509,9 +509,21 @@ jQuery(function($){
             var url = this.getAttribute('url')
             var price = this.getAttribute('price')
 
-            cabnet.kvHover.price.text(price)
-            cabnet.kvHover.rest.text(this.getAttribute('rest'))
-            cabnet.kvHover.title.text(this.getAttribute('alt')).attr('href', url)
+//            cabnet.kvHover.price.text(price)
+//            cabnet.kvHover.rest.text(this.getAttribute('rest'))
+//            cabnet.kvHover.title.text(this.getAttribute('alt')).attr('href', url)
+
+            //价格
+            $('.price').html('<span>￥</span>' + price);
+
+            //标题
+            $('.inf_xx p').text(this.getAttribute('alt'));
+            //查看详细
+            $('.inf_con a').attr('href',url);
+            //剩余库存
+            $('.stock span').text(this.getAttribute('rest'));
+
+
 
             cabnet.kvHover.data({                                // 保存图片src与id等信息
                 'src' : this.getAttribute('src'),
@@ -524,15 +536,15 @@ jQuery(function($){
                 'pos' : pos
             })
 
-            var btn = cabnet.kvHover.find('a.mini-kv-add')
-
-            if(!pos || this.getAttribute('fg') == 116){
-                btn.attr({'href': url, 'target': '_blank'})
-            } else if(isIndexPage){
-                btn.attr('href', this.getAttribute('miniUrl'))
-            } else {
-                btn.attr({'href': 'javascript:;', 'target': null})
-            }
+//            var btn = cabnet.kvHover.find('a.mini-kv-add')
+//
+//            if(!pos || this.getAttribute('fg') == 116){
+//                btn.attr({'href': url, 'target': '_blank'})
+//            } else if(isIndexPage){
+//                btn.attr('href', this.getAttribute('miniUrl'))
+//            } else {
+//                btn.attr({'href': 'javascript:;', 'target': null})
+//            }
         }
 
         function addNetCallback(id){

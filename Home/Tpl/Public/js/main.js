@@ -234,7 +234,9 @@ var timer;
 
 
             $('.weather').on('mouseenter',function(){
-
+                $("#div_main").show();
+                $("#w_zk").hide();
+                $("#w_sq").show();
             });
 
         },

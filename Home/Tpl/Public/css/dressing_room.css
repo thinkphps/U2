@@ -275,6 +275,24 @@ button,label{cursor:pointer; }
     padding: 100px 0;
 }
 
+
+/*婴儿装-内容弹出*/
+.product_inf{ position:absolute; top:5px; left:-10px; width:206px; height:auto; overflow:hidden; text-align:center; color:#666; z-index:1000;}
+.product_inf .inf_top{ width:206px; height:6px; background:url(../images/product_inf_bg.png) 0 0 no-repeat;}
+
+.product_inf .inf_con{ width:176px; height:auto; background:url(../images/product_inf_bg.png) 0 -6px repeat-y; padding:4px 15px; overflow:hidden;}
+.product_inf .inf_con p.price{ font-size:26px; color:#ff0000;}
+.product_inf .inf_con p.price span{ font-size:12px;}
+.product_inf .inf_con p.stock{}
+.product_inf .inf_con p.stock span{ color:#ff0000; margin:0 5px;}
+.product_inf .inf_con a{ display:block; text-align:center; color:#FFF; background:#F00; width:140px; height:30px; line-height:30px; margin:0 auto;}
+.product_inf .inf_con a:hover{ background:#900;}
+
+.inf_xx{ width:176px; background:url(../images/line3.png) 0 top repeat-x; margin:6px 0 8px 0; padding-top:8px;  text-align:center; line-height:20px;}
+
+.product_inf .inf_bom{ width:206px; height:20px; background:url(../images/product_inf_bg2.png) 0 -280px no-repeat; }
+
+
 .none{
     display: none;
 }
