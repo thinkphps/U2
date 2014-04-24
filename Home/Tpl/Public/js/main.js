@@ -291,17 +291,12 @@ var callBackFunction = {
     callbackSuits : function(list){
         $("#div_index-bin,.index-suit").hide();
         if(list == null){
-//            var jsonpurl = baseurl +"index.php/Indexnew/getSuits?callback=callBackFunction.callbackSuits&tem="+weather.avg;
-//            weather.jsonpFcuntion(jsonpurl);
             $("#suits-container").hide();
             return;
         }
 
         var strHtml = "";
         var listlength = list.length;
-//        if(listlength > 6){
-//            listlength = 6
-//        }
 
         for(var i = 0 ;i < listlength;i++){
             strHtml += this.getCoverScrollItem(list[i]);
@@ -349,10 +344,38 @@ var callBackFunction = {
             }
         }
         strItem +='</div>';
-        strItem += '<div class="itemTitle">'+item.description+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
+        strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
         strItem += '<a href="'+ baseurl + '"mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID + '" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
+    },
+    getStyleByDescription : function(description){
+        var strHtml = '';
+        if(description == '可爱'){
+            strHtml = '<div class="modelStyle1" ></div>';
+
+        }else if(description == '居家'){
+            strHtml = '<div class="modelStyle2" ></div>';
+        }else if(description == '淑女'){
+            strHtml = '<div class="modelStyle3" ></div>';
+        }else if(description == '通勤'){
+            strHtml = '<div class="modelStyle4" ></div>';
+        }else if(description == '成熟'){
+            strHtml = '<div class="modelStyle5" ></div>';
+        }else if(description == '商务'){
+            strHtml = '<div class="modelStyle6" ></div>';
+        }else if(description == '休闲'){
+            strHtml = '<div class="modelStyle7" ></div>';
+        }else if(description == '简约'){
+            strHtml = '<div class="modelStyle8" ></div>';
+        }else if(description == '英伦'){
+            strHtml = '<div class="modelStyle9" ></div>';
+        }else if(description == '运动'){
+            strHtml = '<div class="modelStyle10" ></div>';
+        }else{
+            strHtml = '<div class="modelStyle1" ></div>';
+        }
+        return strHtml;
     },
     getavg :function(high,low){
         var avg = Math.ceil((parseInt(low)+parseInt(high))/2);

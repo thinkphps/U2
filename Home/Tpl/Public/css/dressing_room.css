@@ -254,6 +254,10 @@ button,label{cursor:pointer; }
 .dr_main_con_sub_nav ul.ch_sub_nav li a.ch_e_2.select { background:#fff url(../images/dr_main_con_sub_nav.png) -700px -105px no-repeat;}
 
 
+
+
+
+
 .youyigui_btn{ display:block; position:absolute; top:0; right:-25px; width:205px; height:70px; background:url(../images/youyigui_btn.png) 0 0 no-repeat;;}
 
 
@@ -480,11 +484,27 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     background-color: #ffffff;
 }
 .itemTitle{
-    padding: 5px 0px 5px 10px;
     font-weight: bold;
     font:13px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
     text-shadow: 1px 1px #ddd;
 }
+
+.itemTitle div {width: 70px;
+    position: static;
+    top: 66px;
+    height: 29px;}
+/*首页模特图风格*/
+.modelStyle1{ background:url(../images/dr_main_con_sub_nav.png) -420px 0 no-repeat;}
+.modelStyle2{ background:url(../images/dr_main_con_sub_nav.png) -420px -35px no-repeat;}
+.modelStyle3{ background:url(../images/dr_main_con_sub_nav.png) -490px 0 no-repeat;}
+.modelStyle4{ background:url(../images/dr_main_con_sub_nav.png) -490px -35px no-repeat;}
+.modelStyle5{ background:url(../images/dr_main_con_sub_nav.png) -560px 0 no-repeat;}
+.modelStyle6{ background:url(../images/dr_main_con_sub_nav.png) -560px -35px no-repeat;}
+.modelStyle7{ background:url(../images/dr_main_con_sub_nav.png) -630px 0 no-repeat;}
+.modelStyle8{ background:url(../images/dr_main_con_sub_nav.png) -630px -35px no-repeat;}
+.modelStyle9{ background:url(../images/dr_main_con_sub_nav.png) -700px 0 no-repeat;}
+.modelStyle10{ background:url(../images/dr_main_con_sub_nav.png) -700px -35px no-repeat;}
+
 
 
 .similarity{
@@ -528,6 +548,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     left:-100px;
     top:66px;
     height: 370px;
+    z-index: 1;
 }
 
 .model_nav_inner{
@@ -540,16 +561,14 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 .model_nav_prev{
     float: left;
     width: 95px;
-    height: 80px;
+    height: 400px;
     cursor: pointer;
-    margin: 158px 0 0 0;
 }
 
 .model_nav_next{
     float: right;
     width: 95px;
-    height: 80px;
+    height: 400px;
     cursor: pointer;
-    margin: 158px 0 0 0;
 }
 
