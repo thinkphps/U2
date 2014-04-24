@@ -257,6 +257,8 @@ a,a:hover{
 
 
 .mini-cab-bin{
+    position: absolute;
+    left:  69px;
     background: url(../images/mini/mini-cab-bin.jpg) no-repeat;
     width: 234px;
     height: 425px;
