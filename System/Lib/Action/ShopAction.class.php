@@ -10,22 +10,45 @@ class ShopAction extends Action{
 	}
 	public function index(){
 	if(!empty($this->aid)){
-    $keyword = trim($this->_post('keyword'));
+     $area = M('Areas');
+    $keyword = trim($this->_request('keyword'));
+    $pid = $this->_request('pid');
+    $cid = $this->_request('cid');
+    $aid = $this->_request('aid');
 	$shop = M('Shop');
+    $pagestr = '';
 	import("@.ORG.Pageyu");
-	if(empty($keyword)){
-	$count = $shop->count();
-	$p = new Page($count,20);
-	$shops = $shop->field('*')->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
-	}else{
-	$where = array('sname'=>array('like','%'.$keyword.'%'));
-	$count = $shop->where($where)->count();
-	$p = new Page($count,20);
-	$shops = $shop->field('*')->where($where)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();		
+    $where = array();
+    if(!empty($pid)){
+    $where['pid'] = $pid;
+    $clist = $area->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+    $pagestr.= '/pid/'.$pid;
+    }
+    if(!empty($cid)){
+    $where['cityid'] = $cid;
+    $alist = $area->field('region_id,local_name')->where(array('p_region_id'=>$cid))->select();
+    $pagestr.= '/cid/'.$cid;
+    }
+    if(!empty($aid)){
+    $where['aid'] = $aid;
+    $pagestr.= '/aid/'.$aid;
+    }
+	if(!empty($keyword)){
+    $where['sname'] = array('like','%'.$keyword.'%');
 	}
+	$count = $shop->where($where)->count();
+	$p = new Page($count,20,$pagestr);
+	$shops = $shop->field('*')->where($where)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
 	$page = $p->showPage();
+    $plist = $area->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
 	$this->assign('shop',$shops);
 	$this->assign('page',$page);
+    $this->assign('plist',$plist);
+    $this->assign('clist',$clist);
+    $this->assign('alist',$alist);
+    $this->assign('pid',$pid);
+    $this->assign('cid',$cid);
+    $this->assign('aid',$aid);
 	$this->display();	
     }else{
     $this->display('Login/index');
@@ -195,7 +218,7 @@ class ShopAction extends Action{
 	  $area = M('Areas');
       $list = $area->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
 	  if(!empty($list)){
- 	   $str = "<select name='cid' id='cname' onchange=\"getarea();\"><option value='0'>请选择</option>"; 
+ 	   $str = "<select name='cid' id='cname'><option value='0'>请选择</option>";
        foreach($list as $k=>$v){
 		$str.="<option value='".$v['region_id']."'>".$v['local_name']."</option>";   
        }

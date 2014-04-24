@@ -28,9 +28,15 @@ class IndexnewAction extends Action{
     //获取店铺信息
     public function getshopinfo(){
         $callback=$_GET['callback'];
+        if(S('shopinfohome')){
+            $shopinfo = unserialize(S('shopinfo'));
+            $re = json_encode($shopinfo);
+        }else{
         $getcity = D('Getinfo');
         $shopinfo = $getcity->getshopinfo();
+        S('shopinfohome',serialize($shopinfo),array('type'=>'file'));
         $re = json_encode($shopinfo);
+        }
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
