@@ -95,7 +95,7 @@ where u_suits.suitID = ".$suitid;
             if(!empty($result)){
             $returnArr = array('code'=>1,'data'=>$result);
             }else{
-           $returnArr = array('code'=>1,'msg'=>'没有数据');
+           $returnArr = array('code'=>0,'msg'=>'没有数据');
             }
         }else{
             $returnArr = array('code'=>0,'msg'=>'参数错误');
