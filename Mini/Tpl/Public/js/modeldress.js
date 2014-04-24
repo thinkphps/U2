@@ -233,18 +233,13 @@ var pageElement = {
             $('#sfid').on('click','.model',_this.callDressingFunction);
 
             pageElement.$btnExpansion.on('click',function(){
-                if($(this).hasClass('ondrag')){
-                    $(this).removeClass('ondrag');
-                    return;
-                }else{
-                    _this.objShowOrHide(pageElement.$divSyj);
-                    var $parentDiv = $(this).parent();
-                    if($parentDiv.hasClass('select')){
-                        $parentDiv.removeClass('select');
-                    }
-                    else{
-                        $parentDiv.addClass('select');
-                    }
+                _this.objShowOrHide(pageElement.$divSyj);
+                var $parentDiv = $(this).parent();
+                if($parentDiv.hasClass('select')){
+                    $parentDiv.removeClass('select');
+                }
+                else{
+                    $parentDiv.addClass('select');
                 }
             });
 
