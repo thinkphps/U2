@@ -43,62 +43,51 @@
 
   </div>
 
-  <div id="divreview">
-
-
-    <div id="divreview1">
-    <p class="well-sm">
-      方案一：当天气温≤边界气温时，用户看到以下推荐套装
-      <button type="button" id="btnrecomend1" class="btn btn-info" onclick="reco(1);">保存推荐</button>
-      <button type="button" id="btnchange1" class="btn btn-info" onclick="showedit(1);">替换推荐</button>
-      <button type="button" id="btncancel1" class="btn btn-warning" style="display: none" onclick="canceledit(1);">取消替换</button>
-    </p>
+    <ul id="tab" class="nav nav-tabs">
+        <li name="tbcase1" class="active" onclick="changetab(1);"><a href="#home" data-toggle="tab">方案一：当天气温≤边界气温时，用户看到以下推荐套装</a></li>
+        <li name="tbcase2"  onclick="changetab(2);"><a href="#news" data-toggle="tab">方案二：当天气温＞边界气温时，用户看到以下推荐套装</a></li>
+        <button type="button" id="btnrecomend" class="btn btn-info" onclick="reco();">保存推荐</button>
+        <button type="button" id="btnchange" class="btn btn-info" onclick="showedit();">替换推荐</button>
+        <button type="button" id="btncancel" class="btn btn-warning" style="display: none" onclick="canceledit();">取消替换</button>
+    </ul>
+    <div id="divreview">
     <div class="row text-center" style="height:100%" id="divreco1">
           <volist id='vo' name='selsuits1'>
-              <div class="col-sm-6 " style="width: 25%" name="divsst{$vo.suitStyleID}">
+              <div class="col-sm-6 " style="width: 20%" name="divsst{$vo.suitStyleID}">
                   <div class="thumbnail">
                       <div class="caption">
                           <p class="js-official-id">{$vo.description}</p>
                           <div>
-                              <img src='{$vo.suitImageUrl}' width='200px' height='250px'>
+                              <img src='{$vo.suitImageUrl}' width='160px' height='200px'>
                           </div>
                           <label class="checkbox-inline">
                               <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco1');"
                               <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
                           <label class="checkbox-inline">
-                              <input type="checkbox" class="delch" onclick="$(this).parent().parent().parent().parent().remove();">删除</label>
+                              <input type="checkbox" class="delch" onclick="clickoff($(this));">删除</label>
                       </div>
                   </div>
               </div>
           </volist>
     </div>
-    </div>
-    <div id="divreview2">
-    <p class="well-sm">
-      方案二：当天气温＞边界气温时，用户看到以下推荐套装
-      <button type="button" id="btnrecomend2" class="btn btn-info" onclick="reco(2);">保存推荐</button>
-      <button type="button" id="btnchange2" class="btn btn-info" onclick="showedit(2);">替换推荐</button>
-      <button type="button" id="btncancel2" class="btn btn-warning" style="display: none" onclick="canceledit(2);">取消替换</button>
-    </p>
     <div class="row text-center" style="height:100%" id="divreco2">
         <volist id='vo' name='selsuits2'>
-            <div class="col-sm-6" style="width: 25%" name="divsst{$vo.suitStyleID}">
+            <div class="col-sm-6" style="width: 20%" name="divsst{$vo.suitStyleID}">
                 <div class="thumbnail">
                     <div class="caption">
                         <p class="js-official-id">{$vo.description}</p>
                         <div>
-                            <img src='{$vo.suitImageUrl}' width='200px' height='250px'>
+                            <img src='{$vo.suitImageUrl}' width='160px' height='200px'>
                         </div>
                         <label class="checkbox-inline">
                             <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco2');"
                             <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="delch" onclick="$(this).parent().parent().parent().parent().remove();">删除</label>
+                            <input type="checkbox" class="delch" onclick="clickoff($(this));">删除</label>
                     </div>
                 </div>
             </div>
         </volist>
-    </div>
     </div>
   </div>
 </div>
@@ -108,7 +97,8 @@
     var savetmpurl = "{:U('Official/savetmp')}";
     var searchurl = "{:U('Official/search')}";
     var recourl = "{:U('Official/recommend')}";
-
+    $('#divreco1').show();
+    $('#divreco2').hide();
     function ckreco(e,dv){
         var cknum = 0;
         var maxcknum = 6;
@@ -126,50 +116,37 @@
         });
     }
 
-    function showedit(idx){
-        if(idx == 1){
-            $('#btncancel1').show();
-            $('#btnchange1').hide();
-            $('#btnchange2').attr("disabled",true);
+    function showedit(){
+        var type = 0
+        if($('li[name=tbcase1]').hasClass('active')){
+            type =1;
         }
-        if(idx == 2){
-            $('#btncancel2').show();
-            $('#btnchange2').hide();
-//               $('#btnchange2').text('保存套装');
-//            $('#btnchange2').attr('class','btn btn-success');
-            $('#btnchange1').attr("disabled",true);
-
-            var divrew =  $('#divreview1').clone();
-            $('#divreview1').remove();
-            $('#divreview').append(divrew);
+        if($('li[name=tbcase2]').hasClass('active')){
+            type =2;
         }
+        $('#btncancel').show();
+        $('#btnchange').hide();
         $('#divedit').show();
         $("#tbsuits tbody").find("tr").each(function(){
             $(this).find("input[type='checkbox']").each(function(){
                 $(this).attr("checked",false);
             });
         });
-        $('#btnsearch').focus();
+        $('select[name=isstyle]').focus();
     }
 
-    function canceledit(idx){
-        if(idx == 1){
-            $('#btncancel1').hide();
-            $('#divedit').hide();
-            $('#btnchange1').show();
-            $('#btnchange2').attr("disabled",false);
-            $('#btnchange1').focus();
+    function canceledit(){
+        var type = 0
+        if($('li[name=tbcase1]').hasClass('active')){
+            type =1;
         }
-        if(idx == 2){
-            $('#btncancel2').hide();
-            $('#divedit').hide();
-            $('#btnchange2').show();
-            $('#btnchange1').attr("disabled",false);
-            var divrew =  $('#divreview2').clone();
-            $('#divreview2').remove();
-            $('#divreview').append(divrew);
-            $('#btnchange2').focus();
+        if($('li[name=tbcase2]').hasClass('active')){
+            type =2;
         }
+        $('#btncancel').hide();
+        $('#divedit').hide();
+        $('#btnchange').show();
+        $('#btnchange').focus();
     }
 
     function selsuit(e,styid,sutid,sutimg,description){
@@ -185,10 +162,19 @@
 
         var isexit = false;
         var dv = "";
-        if(!$('#btnchange1').attr("disabled")){
+
+        var type = 0
+        if($('li[name=tbcase1]').hasClass('active')){
+            type =1;
+        }
+        if($('li[name=tbcase2]').hasClass('active')){
+            type =2;
+        }
+
+        if(type==1){
             dv=dv + "divreco1";
         }
-        if(!$('#btnchange2').attr("disabled")){
+        if(type==2){
             dv=dv + "divreco2";
         }
         $("#" + dv).find('div[name=divsst'+ styid +']').each(function(){
@@ -207,36 +193,39 @@
         })
         if(!isexit && e.prop("checked")==true){
             var dvn = "'" + dv + "'";
-            var sstdiv = "<div class='col-sm-6' style='width:25%' name='divsst" + styid + "'>"+
+            var sstdiv = "<div class='col-sm-6' style='width:20%' name='divsst" + styid + "'>"+
                 "<div class='thumbnail'>"+ "<div class='caption'>"+
                 "<p class='js-official-id'>"+ description+ "</p><div>"+
-                "<img src='" + sutimg + "' width='200px' height='250px'></div>"
+                "<img src='" + sutimg + "' width='160px' height='200px'></div>"
                 +"<label class='checkbox-inline'>"
                 +"<input type='checkbox' name='ckreco' value='" + sutid + "' class='delch'" + ' onclick="ckreco($(this),' + dvn + ');">推荐</label>'
                 +"<label class='checkbox-inline'>"
-                + "<input type='checkbox' class='delch' onclick='$(this).parent().parent().parent().parent().remove();'>删除</label>"
+                + "<input type='checkbox' class='delch' onclick='clickoff($(this));'>删除</label>"
                 +"</div></div></div>"
             $("#" + dv).append(sstdiv);
         }
     }
 
-    function reco(type){
+    function reco(){
         var reco = "";
-        var div = "";
-        if(type==1){
-            div = '#divreco1';
-        }
-        if(type==2){
-            div = '#divreco2';
-        }
-        $(div).find("input[name=ckreco]").each(function(){
+
+        $('#divreco1').find("input[name=ckreco]").each(function(){
             if(reco==""){
-                reco = "{'sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+                reco = "{'type':'1','sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
             }else{
-                reco = reco + ",{'sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+                reco = reco + ",{'type':'1','sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
             }
         })
-        $.post(recourl,{type:type,reco:"[" + reco + "]"},function(data,status){
+
+        $('#divreco2').find("input[name=ckreco]").each(function(){
+            if(reco==""){
+                reco = "'type':'2',{'sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+            }else{
+                reco = reco + ",{'type':'2','sid':'"+ $(this).val() +"','reco':'"+ $(this).prop("checked") + "'}"
+            }
+        })
+
+        $.post(recourl,{reco:"[" + reco + "]"},function(data,status){
             if(data=="1"){
                 alert("已保存推荐套装。");
             }else{
@@ -270,7 +259,7 @@
                     $(this).remove();
                 });
                 var tr = $("<tr/>");
-                for (var i = 1 ; i<= 5;i++){
+                for (var i = 1 ; i<= 4;i++){
                     var styleid = "'" + da[0][String(i)]["styleID"] + "'";
                     var suitid = "'" + da[0][String(i)]["id"] + "'";
                     var suitimg = "'" + da[0][String(i)]["img"] + "'";
@@ -279,7 +268,7 @@
                     if(da[0][String(i)]["id"]!=""){
                         var td = $("<td/>");
                         var div = $("<div/>");
-                        div.append($("<img src='" + da[0][String(i)]["img"] + "' width='200px' height='250px'>"));
+                        div.append($("<img src='" + da[0][String(i)]["img"] + "' width='270px' height='375px'>"));
                         div.append($("<label class='checkbox-inline'><input type='checkbox' value='" + da[0][String(i)]["id"] + "' class='delch' " +
                                 'onclick="selsuit($(this),'+ styleid +','+ suitid +','+ suitimg +','+ suitdesp +');">选择</label>'));
                         td.append(div);
@@ -306,5 +295,32 @@
         });
     }
 
+    function changetab(idx){
+        if(idx==1){
+            $('#divreco1').show();$('#divreco2').hide();
+        }
+        if(idx==2){
+            $('#divreco2').show();$('#divreco1').hide();
+        }
+        $("#tbsuits tbody").find("tr").each(function(){
+            $(this).find("input[type='checkbox']").each(function(){
+                $(this).attr("checked",false);
+            });
+        });
+    }
+    function clickoff(e){
+
+        e.parent().parent().find("input[name=ckreco]").each(function(){
+            var sid = $(this).val()
+            $("#tbsuits tbody").find("tr").each(function(){
+                $(this).find("input[type='checkbox']").each(function(){
+                    if($(this).val()==sid){
+                        $(this).attr("checked",false);
+                    }
+                });
+            });
+        });
+        e.parent().parent().parent().parent().remove();
+    }
 
 </script>
