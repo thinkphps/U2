@@ -69,12 +69,12 @@ class OfficialAction extends Action{
               if($page<=0){
                   $page = 1;
               }
-              $firstRows = ($page -1)*5;
+              $firstRows = ($page -1)*4;
               if($firstRows>=$count){
                   echo "1";
                   exit;
               }
-              $maxRows = 5;
+              $maxRows = 4;
               $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                   ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
                   ->where(array('u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
@@ -87,8 +87,7 @@ class OfficialAction extends Action{
               $imgs = array("1"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
                   "2"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
                   "3"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
-                  "4"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
-                  "5"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),"page"=>$page);
+                  "4"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),"page"=>$page);
               foreach ( $result as $r => $dataRow ){
                   $imgs[$r+1]["id"] = $dataRow["suitID"];
                   $imgs[$r+1]["img"] = $dataRow["suitImageUrl"];
@@ -109,22 +108,20 @@ class OfficialAction extends Action{
 
   public function recommend(){
       if(!empty($this->aid)){
-          $type = $this->_post('type');
           $recosuits = $this->_post('reco');
           $recosuits = str_replace("'",'"',$recosuits);
           $recosuits = json_decode($recosuits);
 
+          $msuit = M();
+          $res = $msuit->query('truncate table u_suits_select');
           $msuit = M('suits_select');
-          $res = $msuit->where(array("type"=>$type))->delete();
-
           if(!empty($recosuits)){
               foreach ( $recosuits as $r => $dataRow ){
                   $sel=0;
                   if($dataRow->reco=="true"){
                       $sel=1;
                   }
-                  $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$type);
-//                      $msuit->create($data);
+                  $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$dataRow->type);
                   $res = $msuit->add($data);
                   if(!$res){
                       echo 0;

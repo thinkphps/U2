@@ -4,9 +4,6 @@
 
 $(function(){
     $(".syj_btn").draggable({
-        start:function(event, ui ){
-            $(".syj_btn_expansion").addClass('ondrag');
-        },
         drag:function(event, ui){
             var mleft =  $("#beubeu_loadImg").width();
             if(ui.position.left<mleft){
