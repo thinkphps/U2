@@ -6,6 +6,7 @@ var pageElement = {
     BarcodeList : []
     ,IsHide : 0
     ,ChildrenType : 3
+    ,Ischanged : 0
     ,$btnBuy : $('.buy_btn')
     ,$divBuys : $('.buy_btns')
     ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
@@ -150,28 +151,16 @@ var pageElement = {
             var barcode = '';
             var strLi = '';
             var title = '';
+            pageElement.Ischanged = 1;
             pageElement.BarcodeList = [];
             if(o.length > 0){
                 for(var i in o){
                     barcode = o[i].barcode;
                     title = o[i].name;
                     pageElement.BarcodeList.push(barcode);
-//                if(title.length > 8){
-//                    title = title.substring(0,15) + "...";
-//                }
-                    //使用barcode去数据库中取回商品编号
-//                $.post(getJackNumiidUrl,{'item_bn':barcode.substring(0,8)},function(data){
-//                    console.log(data);
-//                    var code = data.code;
-//                    if( code == 1){
-//                        var clothesInfo = data.data
-                    strLi += '<li data-title="'+ title +'" data-numid=""><a href="javascript:;" title="'+ title+'"> '+ title+'</a></li>'
-//                        pageElement.modelClothesList.push({'barcode':barcode,'num_iid':data.data});
-//                    }
-//                });
+                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
                 }
                 $buyUl.append(strLi);
-
                 pageElement.clearSelected();
 
             }else{
@@ -201,19 +190,9 @@ var pageElement = {
 
             }else{
                 pageElement.dressByBarcode(barcode,gender);
-//                $colorLi.data('barcode',barcode);
-//                $(this).data('prevBarcode',$colorImg.find('pro-selected').data('barcode'));
                 $colorLi.parent().find("li").removeClass("pro-selected");
                 $colorLi.addClass('pro-selected');
             }
-        },
-        clothingexisting : function(barcode){
-            var bool = false;
-            var item = cabnet.buybtns.find("ul li a[barcode='"+barcode+"']");
-            if(item.length > 0){
-                bool = true;
-            }
-            return bool;
         },
         getColorsHtml : function(colors){
             var colorHtml = '';
@@ -233,6 +212,19 @@ var pageElement = {
                 }
             }
             return colorHtml;
+        },
+        setBuyInfo : function(){
+            pageElement.$divBuys.find('a').each(function(){
+                var $this = $(this);
+                //使用barcode去数据库中取回商品编号
+                $.post(getJackNumiidUrl,{'item_bn':$this.data('barcode').substring(0,8)},function(data){
+                    if( data.code == 1){
+                        var clothesInfo = data.data
+                        $this.attr('href',clothesInfo.detail_url);
+                    }
+                });
+            });
+            pageElement.Ischanged = 0;
         },
         elementEvent : function(){
             var _this = this;
@@ -257,6 +249,9 @@ var pageElement = {
             });
 
             pageElement.$btnBuy.on('click',function(){
+                if(pageElement.Ischanged == 1){
+                    _this.setBuyInfo();
+                }
                 _this.objShowOrHide(pageElement.$divBuys);
             });
 
@@ -264,13 +259,12 @@ var pageElement = {
                 pageElement.$divBuys.hide();
             });
 
-            $('.sc_btn').on('click',function(){
-//                console.log(pageElement.modelClothesList);
-                var arr   = Model.GetAllClothesCallback();
-                for(var key in arr){
-                    alert(arr[key].barcode);
-                }
-            });
+//            $('.sc_btn').on('click',function(){
+//                var arr   = Model.GetAllClothesCallback();
+//                for(var key in arr){
+//
+//                }
+//            });
 
             //鼠标移动到衣服上显示价格、库存等详细信息
             $('#watercontainer').on('mouseenter','.wrapper_box img',function(){
