@@ -92,15 +92,13 @@ var pageElement = {
                     var code = data.code;
                     if( code == 1){
                         var barcodeList = data.data;
+                        if( barcodeList != null){
                         for(var i = 0;i<barcodeList.length;i++){
                             Model.DressingByBarcode(barcodeList[i].barcode,gender);
                         }
                         pageElement.$btnExpansion.click();
-
+                        }
                     }
-                }).success(function(){
-                    console.log(1);
-                    console.log(pageElement.modelClothesList);
                 });
             }
         },

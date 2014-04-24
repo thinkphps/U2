@@ -43,7 +43,7 @@ var timer;
 
         },
         sendcity :function(pro,city){
-            var url = "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Sendcity/sendpro?callback=callBackFunction.jsonpCallbackm&proname="+pro+"&cityname="+city;
+            var url = baseurl + "mini.php/Sendcity/sendpro?callback=callBackFunction.jsonpCallbackm&proname="+pro+"&cityname="+city;
             // 创建script标签，设置其属性
             var script = document.createElement('script');
             script.setAttribute('src', url);
@@ -127,21 +127,10 @@ var timer;
             var _this = this;
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $('#suits-container').on('click','.imgSuits',function(){
-/*
-                var $similarity = $(this).parent().find(".similarity");
-                var numids = [];
-                var list = $similarity.find("a");
-                for(var i = 0;i<list.length;i++){
-                    numids[i] = $(list[i]).data("numid");
-                }
-                //jsonpHomeUrl
-                window.open( "http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/"+ numids.join());
-*/
-
                 var suitid = $(this).data('suitid');
                 var gender = $(this).data('gender');
                 //jsonpHomeUrl
-                window.open( "http://localhost/U2/mini.php/Index?suitid="+ suitid + "&gender=" + gender);
+                window.open( baseurl + 'mini.php/Index?suitid='+ suitid + '&gender=' + gender);
             });
 
             // 首页天气切换
@@ -362,7 +351,7 @@ var callBackFunction = {
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+item.description+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
-        strItem += '<a href="http://uniqlo.bigodata.com.cn/u1_5/mini.php/Index/index/num/'+ numids.join() +'" target="_blank">去虚拟试衣间试穿</a></div></div>';
+        strItem += '<a href="'+ baseurl + '"mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID + '" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
     },
     getavg :function(high,low){
