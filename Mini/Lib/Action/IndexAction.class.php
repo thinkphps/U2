@@ -238,6 +238,7 @@ public function getgood(){
     if(isset($tem)){
 	$widvalue = $windex->getwindex($tem);
     }
+    $productSyn = D('ProductSyn');
     if($lid>0){
      //点击收藏走这里
      if(S('coll'.session("uniq_user_id").$page)){
@@ -245,7 +246,6 @@ public function getgood(){
      }else{
      $collection = M('Collection');
       $result = $collection->join('inner join u_beubeu_goods bg on bg.num_iid=u_collection.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_collection.id desc')->where(array('u_collection.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
-         $productSyn = D('ProductSyn');
          foreach($result as $k1=>$v1){
              $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
          }
@@ -261,7 +261,6 @@ public function getgood(){
     }else{
         $buy = M('Buy');
         $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
-        $productSyn = D('ProductSyn');
         foreach($result as $k1=>$v1){
             $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
         }
@@ -273,9 +272,14 @@ public function getgood(){
     }else if($kid>0){
        //快速搜索走这里
         if($keyword){
-       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('title'=>array('like','%'.$keyword.'%')))->select();
+       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('approve_status'=>'onsale','num'=>array('egt','15'),'title'=>array('like','%'.$keyword.'%')))->order('uptime desc')->limit($start.','.$page_num)->select();
       }
+        foreach($result as $k1=>$v1){
+            $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+        }
+        if($page==1){
             $result = $this->waterdata($result);
+        }
      }else{
         //普通走这里
             if(S('good'.$sid.$fid.$zid.$tem.$page)){
@@ -319,7 +323,6 @@ public function getgood(){
                 }
                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
             $result = $goodtag->query($sql);
-            $productSyn = D('ProductSyn');
             foreach($result as $k1=>$v1){
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
             }
