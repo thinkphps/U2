@@ -9,6 +9,32 @@
       <label class="sr-only" for="exampleInputEmail2">请输入关键字</label>
       <input type="text" class="form-control" id="exampleInputEmail2" placeholder="请输入关键字" name='keyword'>
     </div>
+    <div class="form-group">
+        <label>省</label>
+        <select name='pid' id='pname'>
+            <option value='0'>请选择</option>
+            <volist id='vo' name='plist'>
+               <option value='{$vo.region_id}' <if condition="$vo['region_id'] eq $pid">selected='selected'</if>>{$vo.local_name}</option>
+            </volist>
+        </select>
+        <if condition="$cid neq ''">
+            <select id="cname" name="cid">
+                <option value="0">请选择</option>
+                 <volist id='cvo' name='clist'>
+                <option value="{$cvo.region_id}" <if condition="$cvo['region_id'] eq $cid">selected='selected'</if>>{$cvo.local_name}</option>
+                </volist>
+            </select>
+        </if>
+        <if condition="$aid neq ''">
+            <select  name="aid">
+                <option value="0">请选择</option>
+                <volist id='avo' name='alist'>
+                    <option value="{$avo.region_id}" <if condition="$avo['region_id'] eq $aid">selected='selected'</if>>{$cvo.local_name}</option>
+                </volist>
+            </select>
+        </if>
+
+    </div>
     <button type="submit" class="btn btn-success">搜索</button>
     <a href="{:U('Shop/create')}" class="btn btn-success pull-right">新建门店</a>
   </form>
@@ -41,3 +67,37 @@
   </div>
 </div>
 <include file="Public:footer"/>
+<script>
+    var cityurl = "{:U('Shop/getcity')}",areaurl = "{:U('Shop/getarea')}";
+    var H = Object();
+    $(function(){
+        H.pfunction = function(v,flag){
+            if(flag==1){
+                $.post(cityurl,{pid:v},function(data,status){
+                    if(data.code==1){
+                        $('#pname').nextAll().remove();
+                        $('#pname').after(data.data);
+                    }else{
+                        alert(data.msg);
+                    }
+                },'JSON');
+            }
+        }
+        $('#pname').change(function(){
+            H.pfunction($('#pname option:selected').val(),1);
+        });
+       $('.form-inline').on('change','#cname',function(){
+           var id = $('#cname option:selected').val();
+           $.post(areaurl,{cid:id},function(data,status){
+               if(data.code==1){
+                   $('#cname').nextAll().remove();
+                   $('#cname').after(data.data);
+               }else{
+                   alert(data.msg);
+               }
+           },'JSON');
+       });
+    });
+
+
+</script>
