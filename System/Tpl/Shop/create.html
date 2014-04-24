@@ -120,19 +120,18 @@ $(function(){
 $('#pname').change(function(){
 	H.pfunction($('#pname option:selected').val(),1);
 });
-
+    $('.form-horizontal').on('change','#cname',function(){
+        var id = $('#cname option:selected').val();
+        $.post(areaurl,{cid:id},function(data,status){
+            if(data.code==1){
+                $('#cname').nextAll().remove();
+                $('#cname').after(data.data);
+                $('#showid').text('当前最大值:'+data.showtag);
+            }else{
+                alert(data.msg);
+            }
+        },'JSON');
+    });
 });
-function getarea(){
-      var id = $('#cname option:selected').val();
-      $.post(areaurl,{cid:id},function(data,status){
-	  if(data.code==1){
-	   $('#cname').nextAll().remove();
-       $('#cname').after(data.data);
-	   $('#showid').text('当前最大值:'+data.showtag);
-	  }else{
-      alert(data.msg);
-	  }
-	  },'JSON');
-}
 
 </script>
