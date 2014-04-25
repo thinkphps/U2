@@ -391,7 +391,7 @@
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
         <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
-        <a href="#m">更多优衣库推荐款式，请点击查看</a>
+        <a href="#m">若想获取其他试穿，请点击更多商品</a>
         <div class="none change-btn-mask" id="btn-mask"></div>
     </div>
 
@@ -400,13 +400,13 @@
          <if condition="$pk elt 4">
         <div class="model" style='display:block;'>
             <div style='width: 400px;height: 533px;margin-left: -70px'>
-                <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}'/>
+                <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}'  title="点击可试穿哦！"/>
             </div>
         </div>
         <else/>
              <div class="model" style='display:none;'>
                  <div style='width: 400px;height: 533px;margin-left: -70px'>
-                    <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}' />
+                    <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.detail}'   title="点击可试穿哦！"/>
                  </div>
              </div>
        </if>
@@ -470,7 +470,7 @@
                         <p class="w_t_week" id="week_day0">星期一</p>
                         <p class="w_t_name" id="name_day0">晴转小雨</p>
                     </div>
-                    <a href="javascript:;"></a>
+                    <a href="javascript:;" title="点击可取消温度哦！"></a>
                 </li>
                 <li id="li_day1">
                     <i title="晴天" class="nio-1" id="title_day1"></i>
@@ -522,7 +522,7 @@
                 <li class="rw_nvzhuang" data-gender="1"><a href="javascript:;"></a></li>
                 <li class="rw_nanzhuang" data-gender="2"><a href="javascript:;"></a></li>
                 <li class="rw_tongzhuang" data-gender="3"><a href="javascript:;"></a></li>
-                <li class="rw_yinyouer" data-gender="4"><a href="javascript:;"></a></li>
+                <li class="rw_yinyouer" data-gender="5"><a href="javascript:;"></a></li>
             </ul>
             <ul class="ch_sub_nav" id='cstyle2'>
                 <li class="ch_all"><a href="javascript:;" data-suitstyle="all"></a></li>
@@ -539,7 +539,7 @@
 
         <!--优衣库推荐款式-->
         <div class="yyk_tj">
-            <h3><p>优衣库推荐款式</p><span>RECOMMENDED STYLE</span></h3>
+            <h3><p>更多商品</p><span></span></h3>
             <div class="left_tj">
                 <ul>
                     <li id='alluid' class='upclothes' la='0'><a href="javascript:;" class="w_select">全部上装</a></li>
@@ -582,6 +582,18 @@
     <a href="javascript:;" class=" syj_btn_expansion "></a>
     <div class="syj none" >
         <div class="baiyi_syj" id="beubeu_loadImg"></div>
+        <div class="mini-cab none">
+            <div method="" class="mini-cab-bin pr">
+                <div class="mini-cab-slide pr" id="cab-top">
+
+                </div>
+                <div class="mini-cab-slide pr" id="cab-bot">
+
+                </div>
+            </div>
+        </div>
+
+
         <div class="btn_line">
             <a href="javascript:;" class="buy_btn"><i></i><p>我要购买</p></a>
             <a href="javascript:;" class="sc_btn none">收藏整套搭配</a>
@@ -623,15 +635,15 @@
                 <!-- JiaThis Button END -->
             </div>
         </div>
-
         <div class="buy_btns none">
             <ul>
 
             </ul>
         </div>
     </div>
-</div>
 
+
+</div>
 
 
 <!--选择城市弹窗-->
@@ -653,6 +665,7 @@
     </div>
     <div class="light_box_u_map_con" id="allmap"></div>
 </div>
+
 <script type='text/javascript'>
     //性别对应的标记
     var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';

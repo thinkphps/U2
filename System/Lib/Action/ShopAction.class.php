@@ -78,7 +78,7 @@ class ShopAction extends Action{
 	$this->error('地址不能为空',U('Shop/create'));
 		exit;
 	}
-	$stime = trim($this->_post('stime'));
+	$stime = trim($_POST['stime']);
 	if(empty($stime)){
 	$this->error('营业时间不能为空',U('Shop/create'));
 		exit;

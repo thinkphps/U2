@@ -210,7 +210,7 @@ class IndexnewAction extends Action{
         }else{
         $Weather = D('Getinfo');
         if($fid!=0){
-           $where['u_suits.suitStyleID'] = $fid;
+           $where['u_suits.suitStyleID'] = intval($fid);
         }
         switch($sid){
             case 3 :
@@ -218,7 +218,7 @@ class IndexnewAction extends Action{
             break;
             case 1 :
             case 2 :
-               $where['u_suits.suitGenderID'] = $sid;
+               $where['u_suits.suitGenderID'] = intval($sid);
             break;
         }
 
