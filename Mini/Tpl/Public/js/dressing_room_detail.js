@@ -488,7 +488,7 @@ var _mini = {
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
-                strHtml +=  'data-gendertype="'+ v.type +'"><i></i>试穿</a></dt>';
+                strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>试穿</a></dt>';
                 strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
                 strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色

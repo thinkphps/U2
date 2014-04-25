@@ -460,6 +460,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 }
 #suits-container .item{
     width: 234px ;
+    height: 339px;
     background: rgba(255, 255, 255, .3);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000')
 }
