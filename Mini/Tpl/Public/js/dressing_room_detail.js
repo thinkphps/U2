@@ -384,10 +384,6 @@ var _mini = {
         var sid = $('#cateu2 li').siblings().children('a.select').parent('li').data('gender');
         var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
         fid = fid ? fid : 0;
-        if(!fid){
-            //取得自定义分类
-            this.getzid(sid);
-        }
         this.showStyleMask2(sid);
         $.weather.sex = sid;
         $.weather.nextpage = 0;

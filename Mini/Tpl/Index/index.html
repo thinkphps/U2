@@ -769,6 +769,7 @@ $('.imgrd').css(css);
             $.uniqlo.fid = 0;
             $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
+            _mini.getzid($(this).data('gender'));
             _mini.getGoods();
         });
         //mini中部类别选择
