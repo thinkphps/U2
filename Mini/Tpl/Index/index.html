@@ -839,30 +839,25 @@ $('.imgrd').css(css);
              $(this).children('a').addClass('w_select');
             }
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(leftLen==zleftlength || leftLen == 0){
+            if(leftLen==zleftlength || leftLen == 0){   //如果左边全选
                 $('#alluid').children('a').addClass('w_select');
                 $('.zleft').children('a').removeClass('w_select');
                 _mini.left.length = 0;
                 if(rightLen == 0){
                 $.uniqlo.zid = 0
                }else{
-                    //如果右边不为0
                     var arrleft2 = [];
                     $('.zleft').each(function(){
                         arrleft2.push($(this).attr('la'));
                     });
-                $.uniqlo.zid = arrleft2.join('_')+'_'+_mini.right.join('_');
+                    $.uniqlo.zid = _mini.right.join('_')+'_'+arrleft2.join('_');
                 }
-            } else {
-                $.uniqlo.zid = ''
+            }else{
+                $.uniqlo.zid = '';
+                $('#alldid').children('a').removeClass('w_select');
                 if(leftLen != 0){
                     if(rightLen==0){
-                        //表示右边是全部
-                        var arrright = [];
-                        $('.zright').each(function(){
-                            arrright.push($(this).attr('la'));
-                        });
-                    $.uniqlo.zid = _mini.left.join('_')+'_'+arrright.join('_');
+                        $.uniqlo.zid = _mini.left.join('_');
                     }else{
                     $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }
@@ -876,7 +871,6 @@ $('.imgrd').css(css);
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             var zid = $(this).attr('la');
-
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
             if(zid!=0){
                 $('#alldid').children('a').removeClass('w_select');
@@ -902,11 +896,9 @@ $('.imgrd').css(css);
             if(rightLen==zrightlength || rightLen == 0){
                 $('#alldid').children('a').addClass('w_select');
                 $('.zright').children('a').removeClass('w_select');
-                _mini.right.length = 0;
                 if(leftLen == 0){
                     $.uniqlo.zid = 0
                 }else{
-                    //如果左边不为0
                     var arrright2 = [];
                     $('.zright').each(function(){
                         arrright2.push($(this).attr('la'));
@@ -914,15 +906,11 @@ $('.imgrd').css(css);
                     $.uniqlo.zid = _mini.left.join('_')+'_'+arrright2.join('_');
                 }
             } else {
-                $.uniqlo.zid = ''
+                $.uniqlo.zid = '';
+                $('#alluid').children('a').removeClass('w_select');
                 if(rightLen != 0){
                     if(leftLen==0){
-                        //表示左边是全部
-                        var allleft = [];
-                        $('.zleft').each(function(){
-                            allleft.push($(this).attr('la'));
-                        });
-                        $.uniqlo.zid = allleft.join('_')+'_'+_mini.right.join('_');
+                        $.uniqlo.zid = _mini.right.join('_');
                     }else{
                         $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }
