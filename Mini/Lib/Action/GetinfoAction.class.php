@@ -66,11 +66,15 @@ class GetinfoAction extends Action{
          $arr = unserialize(S('midsid'.$sid));
         }else{
         $recomodel = D('Reco');
-        $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
-        $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
-
-        $arr['u'] = $ucuslist;
-        $arr['d'] = $dcuslist;
+        if($sid!=4){
+            $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
+            $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
+            $arr['u'] = $ucuslist;
+            $arr['d'] = $dcuslist;
+        }else{
+            $babylist  = $recomodel->getCusData(array('gtype'=>'5','isud'=>'6'));//上装
+            $arr['b'] = $babylist;
+        }
         S('midsid'.$sid,serialize($arr),array('type'=>'file'));
         }
         $this->ajaxReturn($arr, 'JSON');
