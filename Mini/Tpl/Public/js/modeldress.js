@@ -147,7 +147,6 @@ var pageElement = {
             //清空购买列表
             var $buyUl =  pageElement.$divBuys.find('ul');
             $buyUl.html('');
-            console.log($buyUl.html());
             var barcode = '';
             var strLi = '';
             var title = '';
@@ -196,21 +195,20 @@ var pageElement = {
                 var imgUrl = 'http://uniqlo.bigodata.com.cn' + $colorLi.find('a').data('imgurl');
                 //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
                 //如果是上装则将图片显示到上部
+                var title = $wrapper_box.find('h3 a').text();
+                var purl = $wrapper_box.find('h3 a').attr('href');
                 if(isud == 1){
                     $('#tops_bottoms').show();
-                    $('#tops_bottoms img').attr('src',imgUrl);
+                    $('#tops_bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
 
                 }else if(isud == 2){   //如果是下装，则将图片显示到下部
                     $('#bottoms').show();
-                    $('#bottoms img').attr('src',imgUrl).show();
+                    $('#bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
                 }
                 else{
                     $('#single').show();
-                    $('#single img').attr('src',imgUrl);
+                    $('#single img').attr('src',imgUrl).data({'prourl':purl,'title':title});
                 }
-
-                //我要购买列表设置
-
 
                 $colorLi.parent().find("li").removeClass("pro-selected");
                 $colorLi.addClass('pro-selected');
@@ -276,8 +274,23 @@ var pageElement = {
             });
 
             pageElement.$btnBuy.on('click',function(){
-                if(pageElement.Ischanged == 1){
-                    _this.setBuyInfo();
+                //如果当前选中的是婴儿，则将现在搭配间的衣服增加到购买列表
+                if($('#beubeu_loadImg').is(':hidden')){
+                    var $buyUl =  pageElement.$divBuys.find('ul');
+                    $buyUl.html('');
+                    var strLi = '';
+                    if($('#single').is(':hidden')){
+//                        strLi += '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
+
+                    }else{
+                        var $myImg =  $('#single img');
+                        strLi = '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
+                    }
+                    $buyUl.append(strLi);
+                }else{
+                    if(pageElement.Ischanged == 1){
+                        _this.setBuyInfo();
+                    }
                 }
                 _this.objShowOrHide(pageElement.$divBuys);
             });
@@ -356,7 +369,7 @@ var pageElement = {
                     }
                 });
             });
-            //行性格选择层中移出时隐藏该层
+            //性格选择层中移出时隐藏该层
             $('#watercontainer').on("mouseleave",".product_gender",function(){
                 var $this = $(this);
                 var $product_color = $this.parent().find('.product_color');
