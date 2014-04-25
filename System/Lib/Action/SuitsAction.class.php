@@ -70,7 +70,8 @@ class SuitsAction extends Action{
              $resultGender = $gender->field('*')->select();
              if(!empty($suitID)){
               $result = M('Suits')->field('*')->where(array('suitID'=>$suitID))->find();
-              $style = M('SettingsSuitStyle')->field('*')->select();
+              //$style = M('SettingsSuitStyle')->field('*')->select();
+              $style = M('SettingsGenderStyle')->join("inner join u_settings_suit_style sss on u_settings_gender_style.styleID=sss.ID")->field('sss.ID,sss.description')->where(array('u_settings_gender_style.genderID'=>$result['suitGenderID']))->select();
               $num_iid = M('SuitsGoodsdetail')->field('*')->where(array('suitID'=>$suitID))->select();
 
               $this->assign('result',$result);
