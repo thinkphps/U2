@@ -280,19 +280,13 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .main_con.water6 li a.w_select{ background:#636875; color:#FFF;}
 
 
-
-
-
-
-
-
 .filters{ width:950px; margin:0 auto;}
 
 /*天气*/
-.weather{ width:950px; height:80px; background:url(../images/weather_bg.png) 0 0 no-repeat; position:relative; overflow:hidden;}
+.weather{ width:950px; height:80px; background:url(../images/weather_bg.png) 0 0 no-repeat; position:relative;}
 
-.weather ul { display:block; float:left; height:80px; overflow:hidden;}
-.weather ul li{ float:left; height:50px; width:150px; background:url(../images/line2.png) right 0 no-repeat; color:#3c3c3c; overflow:hidden; padding:15px 20px; position:relative; cursor:pointer; opacity:0.9;}
+.weather ul { display:block; float:left; height:80px;}
+.weather ul li{ float:left; height:50px; width:150px; background:url(../images/line2.png) right 0 no-repeat; color:#3c3c3c;  padding:15px 20px; position:relative; cursor:pointer; opacity:0.9;}
 .weather ul li i{ display:block; float:left; width:50px; height:50px; margin:0 10px 0 0;}
 
 .weather ul li i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat;}
@@ -366,6 +360,10 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .weather ul li.w_select i.nio-33{ background:url(../images/weather_icon.png) -150px -400px no-repeat;}
 
 .weather ul li.w_select a{ display:block; width:40px; height:40px; background:url(../images/w_select_close.png) 0 0 no-repeat; position:absolute; bottom:0;right:0;}
+/*关闭天气按钮*/
+.close_w_ts{ display:block; width:257px; height:200px; background:url(../images/close_w_ts.png) 0 0 no-repeat; position:relative; top:-165px; left:45px; z-index:301;}
+
+
 
 
 .weather ul li p.w_t_1{ position:absolute; left:80px; top:12px; line-height:38px; font-size:38px;}
@@ -382,6 +380,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .weather ul li.w_select p.w_t_2{ color:#FFF;}
 .weather ul li.w_select p.w_t_week{ color:#FFF;}
 .weather ul li.w_select p.w_t_name{ color:#FFF;}
+
 
 
 /*分类*/

@@ -13,6 +13,15 @@ $(function(){
             }
         },
         stop: function( event, ui ) {
+            if(ui.position.top<0){
+                $(".syj_btn").animate({'top':'50px'}, 400);
+            }
+
+            if(ui.position.top>$(window).height()-$(".syj_btn").height()){
+                var mtop = $(window).height()-$(".syj_btn").height();
+                $(".syj_btn").animate({'top':mtop + 'px'}, 400);
+            }
+
             if(ui.position.left<0){
                 $(".syj_btn").animate({'left':'10px'}, 400);
             }
@@ -106,6 +115,14 @@ $(function(){
         $.uniqlo.index.week.find('.w_select').removeClass('w_select');
         return false;
     });
+
+    $.uniqlo.index.week.find('a').hover(function(){
+       $(this).next().show();
+    },function(){
+       $(this).next().hide()
+    });
+
+
 
     /* =============== close popup form =============== David */
     $(function(){
@@ -368,10 +385,10 @@ var _mini = {
         var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
         fid = fid ? fid : 0;
         if(!fid){
-            this.showStyleMask2(sid);
             //取得自定义分类
             this.getzid(sid);
         }
+        this.showStyleMask2(sid);
         $.weather.sex = sid;
         $.weather.nextpage = 0;
         $.uniqlo.fid = fid;
@@ -399,6 +416,7 @@ var _mini = {
     left : [],
     right : [],
     showStyleMask2 : function(gender){
+
         if(gender == 4){
             $('#style-mask2').removeClass('children-style-mask2');
             $('#style-mask2').removeClass('male-style-mask2');
