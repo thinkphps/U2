@@ -396,6 +396,9 @@ var _mini = {
             if(data){
                 //上下装
                 if(sid!=4){
+                $('.right_tj').css('display','block');
+                $('.zk_btn').css('display','block');
+                $('#alluid').children('a').text('全部上装');
                 var ustr = '',dstr='';
                 $.each(data.u,function(i,name){
                     ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
@@ -408,9 +411,9 @@ var _mini = {
                 $('#alldid').nextAll('li').remove();
                 $('#alldid').after(dstr);
               }else{
-                 var bstr = '<ul><li id="alldid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
-                    $('.right_tj').remove();
-                    $('.zk_btn').remove();
+                 var bstr = '<ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
+                    $('.right_tj').css('display','none');
+                    $('.zk_btn').css('display','none');
                     $.each(data.b,function(i,bname){
                         bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
                     });
