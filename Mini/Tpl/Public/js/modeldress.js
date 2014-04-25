@@ -175,6 +175,8 @@ var pageElement = {
         }
         ,
         dressing :function(barcode,gender,sex,$wrapper_box,$colorLi){
+            $('#beubeu_loadImg').show();
+            $('#baby_fitting_room').hide();
             //如果性别为3：童装,则显示性别选择div
             if(sex == pageElement.ChildrenType ){
                 $wrapper_box.find('.product_color').hide();
@@ -188,11 +190,19 @@ var pageElement = {
                     $(this).data('barcode',barcode);
                 })
 
-            }else{
+            }else if(sex == 5){
+                $('#beubeu_loadImg').hide();
+                $('#baby_fitting_room').show();
+
+
+
+            }
+            else{
                 pageElement.dressByBarcode(barcode,gender);
                 $colorLi.parent().find("li").removeClass("pro-selected");
                 $colorLi.addClass('pro-selected');
             }
+
         },
         getColorsHtml : function(colors){
             var colorHtml = '';
