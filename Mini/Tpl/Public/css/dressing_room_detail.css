@@ -101,8 +101,12 @@ button,label{cursor:pointer; }
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:960px; margin:0 auto; }
 .model{ float:left; width:240px; height:550px; margin:100px 0 0 0;cursor: pointer;overflow: hidden}
-
-
+.model_try2 { width: 128px;height: 89px;background: url(../images/model_try2.png) 0 0 no-repeat;
+    margin-left: 150px;margin-top: 50px;position: absolute;z-index: 100;}
+.model_try2_man { width: 128px;height: 89px;background: url(../images/model_try2.png) 0 0 no-repeat;
+    margin-left: 150px;margin-top: 30px;position: absolute;z-index: 100;}
+.model_try2_child { width: 128px;height: 89px;background: url(../images/model_try2.png) 0 0 no-repeat;
+    margin-left: 165px;margin-top: 80px;position: absolute;z-index: 100;}
 /*左侧分类导航*/
 ul.detail_sub_nav{ display:block; width:70px; position:absolute; left:0; top:5px;}
 ul.detail_sub_nav li{ background:url(../images/detail_sub_nav_bg.png) 0 0 repeat;}
