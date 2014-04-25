@@ -395,6 +395,7 @@ var _mini = {
         $.post(midstyleurl,{sid:sid},function(data,status){
             if(data){
                 //上下装
+                if(sid!=4){
                 var ustr = '',dstr='';
                 $.each(data.u,function(i,name){
                     ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
@@ -406,6 +407,16 @@ var _mini = {
                 $('#alluid').after(ustr);
                 $('#alldid').nextAll('li').remove();
                 $('#alldid').after(dstr);
+              }else{
+                 var bstr = '<ul><li id="alldid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
+                    $('.right_tj').remove();
+                    $('.zk_btn').remove();
+                    $.each(data.b,function(i,bname){
+                        bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
+                    });
+                    bstr+='</ul>';
+                    $('.left_tj').html(bstr);
+                }
             }
         },'json');
     },
@@ -591,6 +602,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                 }
             }else{
                 $.weather.str = '';
+                $('.product_more').html('');
             }
         }
     },'json');
