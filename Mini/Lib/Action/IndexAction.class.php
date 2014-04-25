@@ -289,10 +289,17 @@ public function getgood(){
             if(isset($tem)){
             $where.="and g.wid in (".$widvalue['str'].")";
             }
-            if(!empty($sid) && $sid!=3){
+            switch($sid){
+                case 1 :
+                case 2 :
                 $where.=" and g.gtype='".$sid."'";
-            }else if(!empty($sid) && $sid==3){
-                $where.=" and g.gtype in ('3','4')";
+                break;
+                case 3 :
+                    $where.=" and g.gtype in ('3','4')";
+                break;
+                case 4 :
+                    $where.=" and g.gtype='5'";
+                break;
             }
             if(!empty($fid)){
                 $where.=" and g.ftag_id='".$fid."'";
