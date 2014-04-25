@@ -408,7 +408,7 @@ var _mini = {
                 $('#alldid').nextAll('li').remove();
                 $('#alldid').after(dstr);
               }else{
-                 var bstr = '<ul><li id="alldid" class="doclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
+                 var bstr = '<ul><li id="alldid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
                     $('.right_tj').remove();
                     $('.zk_btn').remove();
                     $.each(data.b,function(i,bname){
