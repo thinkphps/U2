@@ -591,6 +591,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                 }
             }else{
                 $.weather.str = '';
+                $('.product_more').html('');
             }
         }
     },'json');
