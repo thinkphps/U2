@@ -108,7 +108,7 @@ public function index(){
 	$this->assign('cate1',$cate1);
 	$this->assign('cate2',$cate2);
 	$this->assign('isdoubt',$isdoubt);
-	$this->assign('p',$_GET['p']);
+	$this->assign('p',$_REQUEST['p']);
 	$this->assign('str',$str);
     $this->display();
 	}else{
@@ -144,7 +144,11 @@ public function doedit(){
 	$tagarr = array();
 	$arr['gtype'] = $arr['gtype']?$arr['gtype']:'0';
     if(empty($arr['gtype'])){
-     $this->error('没打性别标签',U('Productsedit/index'));
+     $this->error('没打性别标签',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'])));
+        exit;
+    }
+    if(count($arr['tag2'])<=0){
+    $this->error('风格标签没有打',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'])));
         exit;
     }
 	$arr['isud'] = $arr['isud']?$arr['isud']:'0';
