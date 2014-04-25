@@ -5,7 +5,7 @@
 var pageElement = {
     BarcodeList : []
     ,IsHide : 0
-    ,ChildrenType : 3
+    ,ChildrenType : 4
     ,Ischanged : 0
     ,$btnBuy : $('.buy_btn')
     ,$divBuys : $('.buy_btns')
