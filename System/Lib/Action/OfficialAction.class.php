@@ -117,9 +117,9 @@ class OfficialAction extends Action{
           $msuit = M('suits_select');
           if(!empty($recosuits)){
               foreach ( $recosuits as $r => $dataRow ){
-                  $sel=0;
+                  $sel='0';
                   if($dataRow->reco=="true"){
-                      $sel=1;
+                      $sel='1';
                   }
                   $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$dataRow->type);
                   $res = $msuit->add($data);

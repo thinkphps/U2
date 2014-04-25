@@ -287,11 +287,19 @@ var _mini = {
                         }
                         for(var i = 0 ;i < deflength;i++){
                             if(i<4){
-                                var show = "style='display:block;'";
+                                var show = "style='display:block;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
                             }else{
-                                var show = "style='display:none;'";
+                                var show = "style='display:none;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
                             }
-                            str += "<div class=\"model\" "+show+"><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                            if(gender==1){
+                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                            }
+                            if(gender==2){
+                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                            }
+                            if(gender==3){
+                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                            }
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
@@ -1223,6 +1231,27 @@ function fleshVerify(){
     document.getElementById('verifyImg').src= '__APP__/Login/verify/'+time;
 }
 
+function modeltip(e,act,gender){
+    if(act==1){
+        if(gender == 2){
+            e.find('.model_try2_man').each(function(){ $(this).removeClass('none');});
+        }else if(gender==3){
+            e.find('.model_try2_child').each(function(){ $(this).removeClass('none');});
+        }else{
+            e.find('.model_try2').each(function(){ $(this).removeClass('none');});
+        }
+
+    }else{
+        if(gender == 2){
+            e.find('.model_try2_man').each(function(){ $(this).addClass('none');});
+        }else if(gender==3){
+            e.find('.model_try2_child').each(function(){ $(this).addClass('none');});
+        }else{
+            e.find('.model_try2').each(function(){ $(this).addClass('none');});
+        }
+    }
+
+}
 
 $(function(){
     $('.js-checked').change(function(){
