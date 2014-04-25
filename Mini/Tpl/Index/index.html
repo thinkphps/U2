@@ -592,11 +592,14 @@
     <div class="syj none" >
         <div class="baiyi_syj" id="beubeu_loadImg"></div>
         <div class="baby_fitting_room none" id="baby_fitting_room">
-            <div class="tops_bottoms" id="cab-top">
+            <div class="tops_bottoms none" id="tops_bottoms">
                 <img src="#"/>
             </div>
-            <div class="bottoms" id="cab-bot">
+            <div class="bottoms none" id="bottoms">
                 <img src="#"/>
+            </div>
+            <div class="single none" id="single">
+                <img src="http://uniqlo.bigodata.com.cn/Upload/products/2014/2014-03/2014-03-10/45440227330.jpg"/>
             </div>
         </div>
 
@@ -771,6 +774,7 @@ $('.imgrd').css(css);
             $(this).children('a').addClass('select');
             _mini.getzid($(this).data('gender'));
             _mini.getGoods();
+            $('#cstyle2 .select').removeClass('select');
         });
         //mini中部类别选择
         $('#cstyle2').on('click','li a',function(){

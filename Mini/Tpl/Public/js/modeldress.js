@@ -174,7 +174,7 @@ var pageElement = {
             }
         }
         ,
-        dressing :function(barcode,gender,sex,$wrapper_box,$colorLi){
+        dressing :function(barcode,gender,sex,isud,$wrapper_box,$colorLi){
             $('#beubeu_loadImg').show();
             $('#baby_fitting_room').hide();
             //如果性别为3：童装,则显示性别选择div
@@ -193,9 +193,30 @@ var pageElement = {
             }else if(sex == 5){
                 $('#beubeu_loadImg').hide();
                 $('#baby_fitting_room').show();
+                var imgUrl = 'http://uniqlo.bigodata.com.cn' + $colorLi.find('a').data('imgurl');
+                //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
+                //如果是上装则将图片显示到上部
+                if(isud == 1){
+                    $('#tops_bottoms').show();
+                    $('#tops_bottoms img').attr('src',imgUrl);
+
+                }else if(isud == 2){   //如果是下装，则将图片显示到下部
+                    $('#bottoms').show();
+                    $('#bottoms img').attr('src',imgUrl).show();
+                }
+                else{
+                    $('#single').show();
+                    $('#single img').attr('src',imgUrl);
+                }
+
+                //我要购买列表设置
 
 
-
+                $colorLi.parent().find("li").removeClass("pro-selected");
+                $colorLi.addClass('pro-selected');
+                if(pageElement.$divSyj.is(':hidden')){
+                    pageElement.$btnExpansion.click();
+                }
             }
             else{
                 pageElement.dressByBarcode(barcode,gender);
@@ -217,6 +238,7 @@ var pageElement = {
                     colorHtml += 'data-gender="'+ colors[i].gender+'" ';
                     colorHtml += 'data-uqcode="'+ colors[i].uq +'" ';
                     colorHtml += 'data-colorid="' + colors[i].colorid + '" ';
+                    colorHtml += 'data-imgurl="'+ imgurl +'" ';
                     colorHtml += '</a><span>'+ title +'</span>';
                     colorHtml += '<i>已选中</i></li>';
                 }
@@ -309,10 +331,11 @@ var pageElement = {
                 var $colorImg = $(this).parent();
                 var $proInfo = $(this).find('a');
                 var $wrapper_box =  $colorImg.parent().parent().parent();
-                var barcode = $proInfo.data("uqcode") + $proInfo.data('colorid');
-                var gender = $proInfo.data("gender");
+                var barcode = $proInfo.data('uqcode') + $proInfo.data('colorid');
+                var gender = $proInfo.data('gender');
+                var isud = $proInfo.data('isud');
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
-                _this.dressing(barcode,gender,sex,$wrapper_box,$(this));
+                _this.dressing(barcode,gender,sex,isud,$wrapper_box,$(this));
             });
 
             //点击男童、女童穿衣上身
