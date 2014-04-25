@@ -391,7 +391,7 @@
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
         <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
-        <a href="#m">若想获取其他试穿，请点击更多商品</a>
+        <a href="#m">想获取其他试穿，请点击更多商品</a>
         <div class="none change-btn-mask" id="btn-mask"></div>
     </div>
 
@@ -531,7 +531,7 @@
                 <li class="rw_nvzhuang" data-gender="1"><a href="javascript:;"></a></li>
                 <li class="rw_nanzhuang" data-gender="2"><a href="javascript:;"></a></li>
                 <li class="rw_tongzhuang" data-gender="3"><a href="javascript:;"></a></li>
-                <li class="rw_yinyouer" data-gender="5"><a href="javascript:;"></a></li>
+                <li class="rw_yinyouer" data-gender="4"><a href="javascript:;"></a></li>
             </ul>
             <ul class="ch_sub_nav" id='cstyle2'>
                 <li class="ch_all"><a href="javascript:;" data-suitstyle="all"></a></li>
@@ -760,6 +760,7 @@ $('.imgrd').css(css);
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
+            $.uniqlo.fid = 0;
             $.weather.nextpage = 0;
             $.uniqlo.zid = 0;
             _mini.left.length = 0
@@ -768,6 +769,7 @@ $('.imgrd').css(css);
             $.uniqlo.fid = 0;
             $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
+            _mini.getzid($(this).data('gender'));
             _mini.getGoods();
         });
         //mini中部类别选择
@@ -838,30 +840,25 @@ $('.imgrd').css(css);
              $(this).children('a').addClass('w_select');
             }
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(leftLen==zleftlength || leftLen == 0){
+            if(leftLen==zleftlength || leftLen == 0){   //如果左边全选
                 $('#alluid').children('a').addClass('w_select');
                 $('.zleft').children('a').removeClass('w_select');
                 _mini.left.length = 0;
                 if(rightLen == 0){
                 $.uniqlo.zid = 0
                }else{
-                    //如果右边不为0
                     var arrleft2 = [];
                     $('.zleft').each(function(){
                         arrleft2.push($(this).attr('la'));
                     });
-                $.uniqlo.zid = arrleft2.join('_')+'_'+_mini.right.join('_');
+                    $.uniqlo.zid = _mini.right.join('_')+'_'+arrleft2.join('_');
                 }
-            } else {
-                $.uniqlo.zid = ''
+            }else{
+                $.uniqlo.zid = '';
+                $('#alldid').children('a').removeClass('w_select');
                 if(leftLen != 0){
                     if(rightLen==0){
-                        //表示右边是全部
-                        var arrright = [];
-                        $('.zright').each(function(){
-                            arrright.push($(this).attr('la'));
-                        });
-                    $.uniqlo.zid = _mini.left.join('_')+'_'+arrright.join('_');
+                        $.uniqlo.zid = _mini.left.join('_');
                     }else{
                     $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }
@@ -875,7 +872,6 @@ $('.imgrd').css(css);
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             var zid = $(this).attr('la');
-
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
             if(zid!=0){
                 $('#alldid').children('a').removeClass('w_select');
@@ -901,11 +897,9 @@ $('.imgrd').css(css);
             if(rightLen==zrightlength || rightLen == 0){
                 $('#alldid').children('a').addClass('w_select');
                 $('.zright').children('a').removeClass('w_select');
-                _mini.right.length = 0;
                 if(leftLen == 0){
                     $.uniqlo.zid = 0
                 }else{
-                    //如果左边不为0
                     var arrright2 = [];
                     $('.zright').each(function(){
                         arrright2.push($(this).attr('la'));
@@ -913,15 +907,11 @@ $('.imgrd').css(css);
                     $.uniqlo.zid = _mini.left.join('_')+'_'+arrright2.join('_');
                 }
             } else {
-                $.uniqlo.zid = ''
+                $.uniqlo.zid = '';
+                $('#alluid').children('a').removeClass('w_select');
                 if(rightLen != 0){
                     if(leftLen==0){
-                        //表示左边是全部
-                        var allleft = [];
-                        $('.zleft').each(function(){
-                            allleft.push($(this).attr('la'));
-                        });
-                        $.uniqlo.zid = allleft.join('_')+'_'+_mini.right.join('_');
+                        $.uniqlo.zid = _mini.right.join('_');
                     }else{
                         $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
                     }

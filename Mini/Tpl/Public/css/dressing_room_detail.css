@@ -455,7 +455,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 /*优衣库推荐款式*/
 .yyk_tj{ width:950px; height:auto; position:relative; margin-bottom:30px; overflow:hidden;}
 .yyk_tj h3{ display:block; width:950px; height:58px; padding:12px 0 0 0; background:url(../images/dr_main_con_sub_nav_bg2.png) 0 0 repeat; text-align:center;}
-.yyk_tj h3 p{ font-size:18px; font-weight:bold;}
+.yyk_tj h3 p{ font-size:18px; font-weight:bold;margin-top:12px;}
 .yyk_tj h3 span{ font-size:9px; font-weight:normal;}
 
 .left_tj{ float:left; background:url(../images/dr_main_con_sub_nav_bg3.png) 0 0 repeat; width:466px; height:26px; padding:4px;}
