@@ -302,12 +302,11 @@ var pageElement = {
                 pageElement.$divBuys.hide();
             });
 
-//            $('.sc_btn').on('click',function(){
-//                var arr   = Model.GetAllClothesCallback();
-//                for(var key in arr){
-//
-//                }
-//            });
+            $('.bc_btn').on('click',function(){
+//                alert(1);
+                get_baiyi_dp(560);
+
+            });
 
             //鼠标移动到衣服上显示价格、库存等详细信息
             $('#watercontainer').on('mouseenter','.wrapper_box img',function(){

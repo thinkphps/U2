@@ -227,31 +227,7 @@
                 return Sys;
             }
 
-            function countimglefts(el, imgs){
-                var imglefts= new Array();
-                var allimglen = 0;
-                var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
-                var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
-                var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
-                for(i=mbegin;i<mend;i++){
-//              var citem = $(imgs.get(i));
-                    if(i==mend-1){allimglen = allimglen + 149}
-                    else{allimglen = allimglen + 149 * 0.94}
-                }
-//          if((el.width()- allimglen)/2 > mleft){
-//              mleft = Math.round((el.width()- allimglen)/2);
-//          }
 
-                imglefts.push(mleft)
-                for(i=mbegin;i<mend-1;i++){
-//              var citem = $(imgs.get(i));
-                    mleft = Math.round(mleft + 149 * 0.94);
-                    mleft -= 3;
-                    imglefts.push(mleft);
-                }
-
-                return imglefts;
-            }
 
 
             function showItems(el, imgs, mindex,isinit){
@@ -578,8 +554,9 @@
             });
         },
         //dean
-        'movenext':function(imgs){
+        'movenext':function(imgs,el,insertid){
 
+            var w=el.width();
             if(gopt.step.begin + gopt.step.limit == imgs.length){
                 return;
             }
@@ -597,7 +574,64 @@
             var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
             var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
             var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
+            if(insertid){
+                for(i=insertid;i<imgs.length;i++){
+                    var citem = $(imgs.get(i));
+                    citem.css({
+                        'position':'absolute',
+                        '-webkit-transition': 'all 0.5s ease-in-out',
+                        '-moz-transition': 'all 0.5s ease-in-out',
+                        '-o-transition': 'all 0.5s ease-in-out',
+                        '-ms-transition': 'all 0.5s ease-in-out',
+                        'transition': 'all 0.5s ease-in-out',
+                        'left': w+10,
+                        'top':mleft
+                    });
 
+
+
+                    // add click events
+                    if(imgs.length <= gopt.scalethreshold && gopt.staticbelowthreshold){
+                        citem.unbind('click.coverscroll');
+                        citem.bind('click.coverscroll', function(){
+                            if(citem.hasClass(gopt.selectedclass)){return true;}
+                            selectItem(el, citem);
+//                    $(this).find(".gotoroom").show();
+                            citem.addClass(gopt.selectedclass);
+                            citem.find(".gotoroom").show();
+                        });
+                        //dean
+                        citem.unbind('mouseover');
+                        citem.on('mouseover', function(){
+                            if(citem.hasClass(gopt.selectedclass)){return true;}
+                            selectItem(el, citem);
+                            citem.addClass(gopt.selectedclass);
+                            citem.find(".gotoroom").show();
+                        });
+
+
+                    }else{
+                        citem.unbind('click.coverscroll');
+                        citem.bind('click.coverscroll', function(){
+                            if(citem.hasClass(gopt.selectedclass)){return true;}
+                            showItems(el, imgs, i,gopt);
+//                    $(this).find(".gotoroom").show();
+                            citem.addClass(gopt.selectedclass);
+                            citem.find(".gotoroom").show();
+                        });
+                        //dean
+                        citem.unbind('mouseover');
+
+                        citem.bind('mouseover', function(){
+                            if(citem.hasClass(gopt.selectedclass)){return true;}
+                            showItems(el, imgs, i,gopt);
+                            citem.addClass(gopt.selectedclass);
+                            citem.find(".gotoroom").show();
+
+                        });
+                    }
+                }
+            }
             for(i=mbegin;i<mend;i++){
                 var citem = $(imgs.get(i));
                 mleft = (i==mbegin)?mleft: Math.round(mleft + 149 * 0.94)-3;
@@ -626,9 +660,9 @@
 
         },
         //dean
-        'moveprev':function(imgs,w){
+        'moveprev':function(imgs,el){
             //show this first
-
+            var w=el.width();
             if(gopt.step.begin== 0){
                 return;
             }
@@ -675,6 +709,308 @@
             },100);
         }
     };
+
+    function showItems(el, imgs, mindex,opt,isinit){
+        imgs.find(".gotoroom").hide();
+        imgs.removeClass(opt.selectedclass);
+//        if(isinit){
+        var imglefts = countimglefts(el, imgs);
+//        }
+        var minscale =  0.6;
+        var angle = 45;
+        var middle = $(imgs.get(mindex));
+        // take care of the middle item
+        var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:5; //dean
+        var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+        var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
+        var d = (el.height() > 250)?250:el.height();
+        //            dean
+        var css = {
+//        	'width':d,
+//        	'height':d,
+//        	'left':Math.round(el.width()/2 - d/2)
+        };
+        //            dean
+        if(isinit){
+            css["left"] =  imglefts[mindex-mbegin];
+            css['top']=minfactor;
+            css['width']=234;
+        }else{
+            if(mindex== mend-1 ){
+                css['width']=234;
+            }else{
+                css['width']=234;
+            }
+            css["left"] =  imglefts[mindex-mbegin];
+        }
+        css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
+
+
+        if(opt.msie && isinit){
+            isScrolling = true;
+            middle.animate(css, 100, function(){isScrolling=false});
+        }else{
+            middle.css(css);
+        }
+        middle.fadeIn(80);
+        // getting the params
+        var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:5;
+        var distrib = opt.distribution?opt.distribution:2;
+
+        var titleclass = opt.titleclass?opt.titleclass:'itemTitle';
+        if(!opt.bendamount){opt.bendamount = 2;}
+
+        // handling the title and highlight
+//        selectItem(el, middle, true);
+
+        // left to middle items
+        var cd = d, sc=0; sf=false;
+        var showing = true;
+        var cleft = Math.round(el.width()/2 - d/2);
+
+        var imgwithlist = new Array();
+        var scale = minscale;
+        for(i=mindex-1;i>=0;i--){
+            var citem = $(imgs.get(i));
+            cd = cd - minfactor;
+            if(!sf){
+                cleft = Math.round(cleft - cd/distrib + minfactor); // diff
+            }else{
+                cd = opt.step.scale?cd:cd + minfactor;
+                cleft = Math.round(cleft - opt.step.width);
+                sc++;
+            }
+            //            dean
+//        	if(cleft >= 0 && showing && sc <= opt.step.limit){
+//        		citem.show();
+//        	}else if(!sf){
+//        		cleft = Math.round(cleft + (cd/distrib) - minfactor - opt.step.width);
+//        		sf = true; sc++;
+//        		citem.show();
+//        	}else{
+//        		citem.hide();
+//        		showing = false;
+//        	}
+            var css = {
+                //            dean
+//        		'width':cd,
+//        		'height':cd,
+//	        	'top':Math.round(el.height()/opt.bendamount - cd/opt.bendamount),
+//	        	'left':cleft,
+//                'top':minfactor
+            };
+            //            dean
+            if(isinit){
+
+                if(i<mbegin){
+                    css["left"] =  -250;
+//                            citem.hide();
+                }else{
+                    css["left"] =  imglefts[i-mbegin];
+//                            citem.show();
+                }
+//                css["left"] =  imglefts[i];
+                css['top']=minfactor;
+            }else{
+                css['width']=240
+
+//                css['width']=250-(mindex-1-i)*3;
+//                alert(i*5)
+//                css["left"] =  imglefts[i]-i*12;
+            }
+            //dean 如果需要选择两端平铺则改为mindex>0
+            if(!isinit && mindex>0 && mindex<=imgs.length-1){
+//                 if (i == 0){scale = 1;}else{scale = scale + (1-minscale)/mindex}
+                if (mindex == 1){scale = minscale;}else{scale = scale + (1-minscale)/(mindex-mbegin)}
+                if(scale>1){scale = 1;}
+                css["transform"] = 'perspective(1800px) rotateY('+ angle + 'deg) scale(' + scale +')'
+
+                imgwithlist.push(240 * scale);
+
+            }else{
+                css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
+            }
+
+            if(opt.msie && isinit){
+                isScrolling = true;
+                citem.animate(css, 100, function(){isScrolling=false});
+            }else{
+                citem.css(css);
+            }
+
+        }
+        if(!isinit){
+            var mleft = minfactor;
+            for(i=mbegin;i<=mindex-1;i++){
+                var citem = $(imgs.get(i));
+                if(i==mbegin){
+                    citem.css('left',mleft);
+                }else{
+                    mleft = Math.round(mleft + imgwithlist[mindex-1-i] * 0.70);
+                    citem.css('left',mleft);
+                }
+            }
+        }
+
+
+        //middle to right items
+        var cd = d, sc=0; sf = false;
+        var cleft = Math.round(el.width()/2 - d/2);
+        var showing = true;
+        var scale = minscale;
+        imgwithlist = new Array();
+        for(i=mindex+1;i<imgs.length;i++){
+            var citem = $(imgs.get(i));
+            cd = cd - minfactor;
+            if(!sf){
+                cleft = Math.round(cleft + cd/distrib); // diff
+            }else{
+                cd = opt.step.scale?cd:cd + minfactor;
+                cleft = Math.round(cleft + opt.step.width + (opt.step.scale?minfactor:0));
+                sc++;
+            }
+            //            dean
+//        	if((cleft + cd) < el.width() && showing && sc <= opt.step.limit){ // diff
+//        		citem.show();
+//        	}else if(!sf){
+//        		sf = true; sc++;
+//        		cleft = Math.round((cleft - cd/distrib) + opt.step.width + minfactor);
+//        		citem.show();
+//        	}else{
+//        		citem.hide();
+//        		showing = false;
+//        	}
+            var css = {
+                //            dean
+//        		'width':cd,
+//        		'height':cd,
+//	        	'top':Math.round(el.height()/opt.bendamount - cd/opt.bendamount),
+//              'left':cleft,
+//                'top':minfactor
+            };
+
+            //            dean
+            if(isinit){
+                if((i-mbegin)>imglefts.length-1){
+                    css["left"] = el.width();
+//                            citem.hide();
+                }else{
+                    css["left"] =  imglefts[i-mbegin];
+//                            citem.show();
+                }
+//                css["left"] =  imglefts[i];
+                css['top']=minfactor;
+            }else {
+                if(i== imgs.length-1 ){
+                    css['width']=240;
+                }else{
+                    css['width']=240
+//                    css['width']=234;
+//                    css['width']=290-(i-mindex-1)*3;
+//                alert(i*5)
+//                    css["left"] =  imglefts[i]+(imgs.length-i)*3;
+                }
+            }
+            //dean 如果需要选择两端平铺则改为mindex>0
+            if(!isinit && mindex>=0 && mindex<imgs.length-1){
+//                if (i == imgs.length-1){scale = 1;}else{scale = scale + (1-minscale)/(imgs.length-1-mindex);}
+                if (mindex == mend-2){scale = minscale;}else{scale = scale + (1-minscale)/(mend-1-mindex);}
+                if(scale>1){scale = 1;}
+                css["transform"] = 'perspective(1800px) rotateY(-'+ angle + 'deg) scale('+ scale +')'
+                imgwithlist.push(240 * scale);
+            }else{
+                css["transform"] =  'matrix(1, 0, 0, 1, 0, 0) scale(1)'
+            }
+
+            if(opt.msie && isinit){
+                isScrolling = true;
+                citem.animate(css, 100, function(){isScrolling=false});
+            }else{
+                citem.css(css);
+            }
+        }
+        if(!isinit){
+            var mleft = imglefts[mindex+1-mbegin]
+            for(i=mindex+1;i<mend;i++){
+                var citem = $(imgs.get(i));
+                if(i==mindex+1){
+                    citem.css('left',mleft);
+                }else{
+                    mleft = Math.round(mleft + imgwithlist[i-mindex-2] * 0.70);
+                    citem.css('left',mleft);
+                }
+            }
+        }
+
+
+
+        // take care of z-index
+        setTimeout(function(){
+            var zi = 100;
+            imgs.each(function(ind){
+//            dean
+//	        	if(ind<=mindex){
+//	        		zi = zi + ind;
+//	        	}else{
+//	        		zi = zi - ind;
+//	        	}
+                if(mindex>0){zi = zi + ind;}else{zi = zi - ind;}
+                $(this).css('z-index',zi);
+            });
+//            dean
+            if(mindex>0){
+                imgs.each(function(ind){
+                    if(ind==mindex){
+                        $(this).css('z-index',zi+1);
+                    }
+                });
+            }
+        },100);
+        // end of showItems()
+    };
+    function selectItem(el, elem, center){
+
+        elem = $(elem);
+        var imgs;
+        // all items collection
+        if(opt.items){
+            imgs = el.find(gopt.items);
+        }else{
+            imgs = el.find('img');
+        }
+        // selecting the item
+        setTimeout(function(){
+            imgs.removeClass(gopt.selectedclass);
+            elem.addClass(gopt.selectedclass);
+
+        }, 100);
+
+    };
+    function countimglefts(el, imgs){
+        var imglefts= new Array();
+        var allimglen = 0;
+        var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
+        var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
+        var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
+        for(i=mbegin;i<mend;i++){
+//              var citem = $(imgs.get(i));
+            if(i==mend-1){allimglen = allimglen + 149}
+            else{allimglen = allimglen + 149 * 0.94}
+        }
+//          if((el.width()- allimglen)/2 > mleft){
+//              mleft = Math.round((el.width()- allimglen)/2);
+//          }
+
+        imglefts.push(mleft)
+        for(i=mbegin;i<mend-1;i++){
+//              var citem = $(imgs.get(i));
+            mleft = Math.round(mleft + 149 * 0.94);
+            mleft -= 3;
+            imglefts.push(mleft);
+        }
+
+        return imglefts;
+    };
     // generic jQuery plugin skeleton
     $.fn.coverscroll = function(method){
         if (methods[method]){
@@ -687,14 +1023,14 @@
     };
 
     //dean
-    $.fn.movenext = function(){
+    $.fn.movenext = function(insertid){
 
         if(gopt.items){
             var imgs = $(this).find(gopt.items);
         }else{
             var imgs = $(this).find('img');
         }
-        return methods.movenext(imgs)
+        return methods.movenext(imgs,$(this),insertid)
     };
     //dean
     $.fn.moveprev = function(){
@@ -704,7 +1040,7 @@
         }else{
             var imgs = $(this).find('img');
         }
-        return methods.moveprev(imgs,$(this).width())
+        return methods.moveprev(imgs,$(this))
 
     };
 })(jQuery);
