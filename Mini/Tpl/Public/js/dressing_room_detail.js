@@ -400,6 +400,8 @@ var _mini = {
                 if(sid!=4){
                 $('.right_tj').css('display','block');
                 $('.zk_btn').css('display','block');
+                $('.left_tj').css('width','466px');
+                $('.left_tj ul').css('width','466px');
                 $('#alluid').children('a').text('全部上装');
                 var ustr = '',dstr='';
                 $.each(data.u,function(i,name){
@@ -421,6 +423,8 @@ var _mini = {
                     });
                     bstr+='</ul>';
                     $('.left_tj').html(bstr);
+                    $('.left_tj').css('width','650px');
+                    $('.left_tj ul').css('width','650px');
                 }
             }
         },'json');
