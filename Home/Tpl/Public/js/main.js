@@ -215,11 +215,30 @@ var timer;
             });
 
             $('.home_arrow_left').on('click',function(){
+                if( callBackFunction.CurrentPageSize > 6 ){
+                    callBackFunction.CurrentPageSize -= 1;
+                }
                 $('#suits-container').moveprev();
             })
 
             $('.home_arrow_right').on('click',function(){
-                $('#suits-container').movenext();
+
+                //如果当前记录<总记录数，则向下翻一条记录
+                if(callBackFunction.CurrentPageSize < callBackFunction.PageCount){
+
+                    //如果当前当前记录==已加载记录数，则ajax去后台取下一页数据
+                    if(callBackFunction.CurrentPageSize ==callBackFunction.CurrentLoadSize){
+                        var gender = $('#ulgender').find('.select').data('gender');
+                        var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
+                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.pageNextSuits&tem='
+                            + _this.$weather.avg +  '&sid='+gender+'&fid='+suitStyle + '&page=' + callBackFunction.PageIndex;
+                        _this.$weather.jsonpFcuntion(jsonpurl);
+                    }else{
+                        callBackFunction.CurrentPageSize += 1;
+                        $('#suits-container').movenext();
+                    }
+                }
+
             })
 
 
@@ -288,6 +307,11 @@ var timer;
 
 
 var callBackFunction = {
+    PageSize : 10,//每页数量
+    PageIndex : 1,//当前页
+    CurrentPageSize : 6,//显示数量
+    PageCount : 30,//总数量
+    CurrentLoadSize : 10,//当前已加载数量
     setPageButtonDisplay : function(isHide){
         if(isHide){
             $('.home_arrow_left,.home_arrow_right').hide();
@@ -297,33 +321,61 @@ var callBackFunction = {
         }
     },
     callbackSuits : function(list){
+        this.PageIndex = list.page;
         $("#div_index-bin,.index-suit").hide();
-        if(list == null){
+        this.CurrentPageSize = 6;
+        this.CurrentLoadSize = 10;
+        if(list.da == null){
             this.setPageButtonDisplay(true);
             $("#suits-container").hide();
             return;
         }
-
         var strHtml = "";
-        var listlength = list.length;
+        var listlength = list.da.length;
+        if( listlength > 6 ){
+            if( listlength < this.PageSize ){
+                for(var i = 0 ;i < listlength;i++){
+                    strHtml += this.getCoverScrollItem(list.da[i]);
+                }
+            }
+            else{
+                for(var i = 0 ;i < this.PageSize;i++){
+                    strHtml += this.getCoverScrollItem(list.da[i]);
+                }
+                this.PageCount = parseInt(list.count);
+            }
 
-        for(var i = 0 ;i < listlength;i++){
-            strHtml += this.getCoverScrollItem(list[i]);
-        }
-        $('#suits-container').html(strHtml);
-        $("#suits-container").show();
-        if( list.length > 6 ){
            this.setPageButtonDisplay(false);
         }
         else{
+            for(var i = 0 ;i < listlength;i++){
+                strHtml += this.getCoverScrollItem(list.da[i]);
+            }
             this.setPageButtonDisplay(true);
         }
+
+        $('#suits-container').html(strHtml);
         $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
             'limit':6, // how many steps should be shown on each side
             'width':8, // how wide is the visible section of the step in pixels
             'scale':true // scale down steps
         }});
+        $("#suits-container").show();
+    },
+    //翻页获取L4模特图
+    pageNextSuits : function(list){
+//        if( code == )
+
+        var listlength = list.da.length;
+        this.CurrentLoadSize += listlength;
+        var strHtml = '';
+        for(var i = 0 ;i < listlength;i++){
+            strHtml += this.getCoverScrollItem(list.da[i]);
+        }
+        $("#suits-container").append(strHtml);
+        $('#suits-container').movenext(this.CurrentPageSize);
+        this.CurrentPageSize += 1;
     },
     jsonpGetcity : function(data){
         var str = '<option value="0">请选择</option>';
