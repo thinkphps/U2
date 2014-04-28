@@ -456,7 +456,7 @@ var _mini = {
         var _this = this;
         var strHtml = '';
         var color = 'h_orange';
-        var pushid = 3,pushid2 = 2;
+        var pushid = 3,pushid2 = 2,loveCss='',buyCss='';
         $.each(data.da,function(p,v){
             if(data.count>=4){
                 pushid = 3;
@@ -485,12 +485,18 @@ var _mini = {
                 color = 'h_orange';
             }
             if(p != 0 && p != pushid && p != pushid2){
+                if(v.loveid != null){
+                    loveCss = ' select';
+                }
+                if(v.buyid != null){
+                    buyCss = ' select';
+                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>试穿</a></dt>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
+                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
+                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
                 strHtml += '<div class="product_color none"><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
                 strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';
