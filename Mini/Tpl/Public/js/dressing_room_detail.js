@@ -560,6 +560,7 @@ $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
     $.uniqlo.kid = 0;
     getgoods(0,0,0,1,0,0,0,0);
 });
+
 $('#watercontainer').on('click','#keybutton',function(){          //右侧keyword
     $.weather.nextpage = 0;
     var keyword = $('#keywordid').val();
@@ -573,7 +574,15 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     }
 });
 
-function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
+
+document.onkeydown = function(e){
+    var ev = document.all ? window.event : e;
+    if(ev.keyCode==13) {
+        $('#keybutton').click();
+    }
+}
+
+    function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     $.post(goodurl,{
         tem : tem,
         sid : sid,
@@ -1272,27 +1281,6 @@ function fleshVerify(){
     document.getElementById('verifyImg').src= '__APP__/Login/verify/'+time;
 }
 
-function modeltip(e,act,gender){
-    if(act==1){
-        if(gender == 2){
-            e.find('.model_try2_man').each(function(){ $(this).removeClass('none');});
-        }else if(gender==3){
-            e.find('.model_try2_child').each(function(){ $(this).removeClass('none');});
-        }else{
-            e.find('.model_try2').each(function(){ $(this).removeClass('none');});
-        }
-
-    }else{
-        if(gender == 2){
-            e.find('.model_try2_man').each(function(){ $(this).addClass('none');});
-        }else if(gender==3){
-            e.find('.model_try2_child').each(function(){ $(this).addClass('none');});
-        }else{
-            e.find('.model_try2').each(function(){ $(this).addClass('none');});
-        }
-    }
-
-}
 
 $(function(){
     $('.js-checked').change(function(){
