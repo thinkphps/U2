@@ -234,7 +234,13 @@ class IndexnewAction extends Action{
             }else{
                 $type = 2;
             }
-            $list = $Weather->getSutsValue($type);
+            $listResult = $Weather->getSutsValue($type);
+            if(!empty($listResult)){
+                $list = array('code'=>1,'da'=>$listResult);
+            }else{
+                $list = array('code'=>0);
+            }
+
         }else{
             if($sid==4){
              $list = M('BeubeuGoods')->cache(true)->field('pic_url')->where(array('type'=>$sid,'approve_status'=>'onsale','num'=>array('egt',15)))->order('uptime desc')->select();
@@ -242,7 +248,7 @@ class IndexnewAction extends Action{
             $page_arr = array($start,$page_num,$page);
             $listResult = $Weather->getConSuitsList($where,$page_arr);
             if($listResult['code']==1){
-                $list = array('code'=>0,'page'=>$page+1,'da'=>$listResult['da']);
+                $list = array('code'=>1,'page'=>$page+1,'count'=>$listResult['count'],'da'=>$listResult['da']);
             }else if($listResult['code']==0){
                $list = array('code'=>0,'page'=>$page+1);
             }

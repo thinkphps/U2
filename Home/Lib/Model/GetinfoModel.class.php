@@ -154,7 +154,7 @@ class GetinfoModel extends Action{
         foreach($result as $k=>$v){
             $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID'],'ug.approve_status'=>'onsale','ug.num'=>array('egt','15')))->select();
         }
-            $resultArr = array('code'=>1,'da'=>$result);
+            $resultArr = array('code'=>1,'count'=>$count,'da'=>$result);
        }
         return $resultArr;
     }
