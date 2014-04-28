@@ -48,7 +48,7 @@ class RecoModel extends Model{
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
         $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->select();
-        $beubeu_detail = M('BeubeuSuitsGoodsdetail');
+        /*$beubeu_detail = M('BeubeuSuitsGoodsdetail');
         foreach($beubeu_suits_list as $k=>$v){
             switch($v['suitGenderID']){
                 case 1 :
@@ -73,7 +73,7 @@ class RecoModel extends Model{
             }else{
                 $beubeu_suits_list[$k]['detail'] = 0;
             }
-         }
+         }*/
         return $beubeu_suits_list;
     }
 
