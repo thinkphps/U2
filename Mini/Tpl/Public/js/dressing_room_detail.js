@@ -92,6 +92,8 @@ $(function(){
         $.uniqlo.lid = 0;
         $.uniqlo.bid = 0;
         $.weather.nextpage = 0;
+        $.uniqlo.kid = 0;
+        $.weather.str = '';
         var that = $(this)
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
