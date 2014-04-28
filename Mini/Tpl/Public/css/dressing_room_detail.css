@@ -7,7 +7,7 @@ table{border-collapse:collapse; border-spacing:0; }
 ol, ul{list-style:none outside; }
 h1, h2, h3, h4, h5, h6{font-size:100%; }
 fieldset, img{border:0 none; vertical-align:middle; }
-img {background:url(/images/loading.gif) no-repeat center center; }
+/*img {background:url(/images/loading.gif) no-repeat center center; }*/
 a{color:#333; text-decoration:none; }
 a:hover{color:#ff0000; text-decoration:none; }
 em{font-style:normal; }
