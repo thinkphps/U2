@@ -401,7 +401,7 @@
         <div class="model" style='display:block;' onmouseover="modeltip($(this),1);" onmouseout="modeltip($(this),0);">
             <div class="model_try2 none"></div>
             <div style='width: 400px;height: 533px;margin-left: -70px'>
-                <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.suitID}'  />
+                <img class='imgrd' src="{$pvo.suitImageUrl}" width="400" height="533" data-detail='{$pvo.suitID}_{$pvo.sex}'  />
             </div>
 
         </div>
@@ -826,6 +826,7 @@ $('.imgrd').css(css);
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
+            $.weather.str = '';
             var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
@@ -878,6 +879,7 @@ $('.imgrd').css(css);
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
+            $.weather.str = '';
             var zid = $(this).attr('la');
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
             if(zid!=0){
