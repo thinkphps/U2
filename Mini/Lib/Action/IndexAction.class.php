@@ -282,7 +282,13 @@ public function getgood(){
     }else if($kid>0){
        //快速搜索走这里
         if($keyword){
-       $result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.isud,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('approve_status'=>'onsale','num'=>array('egt','15'),'title'=>array('like','%'.$keyword.'%')))->order('uptime desc')->limit($start.','.$page_num)->select();
+       //$result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.isud,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('approve_status'=>'onsale','num'=>array('egt','15'),'title'=>array('like','%'.$keyword.'%'),'istag'=>'2'))->order('uptime desc')->limit($start.','.$page_num)->select();
+            if(!empty($uid)){
+                $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=g.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=g.num_iid";
+                $fieldlb = ",lo.id as loveid,bu.id as buyid";
+            }
+       $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and g.approve_status='onsale' and g.num>=15 and title like '%{$keyword}%' order by g.uptime desc limit {$start},{$page_num}";
+       $result = M('BeubeuGoods')->query($sql);
       }
         if(!empty($result)){
         foreach($result as $k1=>$v1){
