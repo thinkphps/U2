@@ -771,6 +771,7 @@ $('.imgrd').css(css);
             var sid = $(this).data('gender');
             $.uniqlo.fid = 0;
             $(this).siblings().children('a').removeClass('select');
+            $('#cstyle2 li').siblings().children('a.select').removeClass('select');
             $(this).children('a').addClass('select');
             _mini.getzid($(this).data('gender'));
             _mini.getGoods();
