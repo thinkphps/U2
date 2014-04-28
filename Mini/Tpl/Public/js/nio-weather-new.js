@@ -227,11 +227,11 @@ jQuery(function($){
             $('#h_day4').html(info['weather5'].ht);
 
             //最低温
-            $('#l_day0').html(info['weather1'].lt);
-            $('#l_day1').html(info['weather2'].lt);
-            $('#l_day2').html(info['weather3'].lt);
-            $('#l_day3').html(info['weather4'].lt);
-            $('#l_day4').html(info['weather5'].lt);
+            $('#l_day0').html(info['weather1'].lt+'℃');
+            $('#l_day1').html(info['weather2'].lt+'℃');
+            $('#l_day2').html(info['weather3'].lt+'℃');
+            $('#l_day3').html(info['weather4'].lt+'℃');
+            $('#l_day4').html(info['weather5'].lt+'℃');
 
             //文字描述
             $('#name_day0').html(info['weather1'].wt);
