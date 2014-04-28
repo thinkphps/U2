@@ -313,7 +313,7 @@ public function getgood(){
                     $where.=" and g.gtype='5'";
                 break;
             }
-            if(!empty($fid)){
+            if(!empty($fid) && $fid!='all'){
                 $where.=" and g.ftag_id='".$fid."'";
             }
             if($zid && !empty($zid)){
