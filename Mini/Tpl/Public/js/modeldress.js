@@ -85,21 +85,19 @@ var pageElement = {
             var suitid = this.getUrlParam('suitid');
             if( suitid != -1){
                 var gender = _this.getGenderValue(this.getUrlParam('gender'));
-                get_baiyi_dp(suitid,gender);
-                pageElement.$btnExpansion.click();
 
-//                $.post(getCidItembnUrl,{suitid:suitid},function(data){
-//                    var code = data.code;
-//                    if( code == 1){
-//                        var barcodeList = data.data;
-//                        if( barcodeList != null){
-//                        for(var i = 0;i<barcodeList.length;i++){
-//                            Model.DressingByBarcode(barcodeList[i].barcode,gender);
-//                        }
-//                        pageElement.$btnExpansion.click();
-//                        }
-//                    }
-//                });
+                $.post(getCidItembnUrl,{suitid:suitid},function(data){
+                    var code = data.code;
+                    if( code == 1){
+                        var barcodeList = data.data;
+                        if( barcodeList != null){
+                        for(var i = 0;i<barcodeList.length;i++){
+                            Model.DressingByBarcode(barcodeList[i].barcode,gender);
+                        }
+                        pageElement.$btnExpansion.click();
+                        }
+                    }
+                });
             }
         },
         getGenderValue : function(gender){
