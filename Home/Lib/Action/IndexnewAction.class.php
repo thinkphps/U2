@@ -29,7 +29,7 @@ class IndexnewAction extends Action{
     public function getshopinfo(){
         $callback=$_GET['callback'];
         if(S('shopinfohome')){
-            $shopinfo = unserialize(S('shopinfo'));
+            $shopinfo = unserialize(S('shopinfohome'));
             $re = json_encode($shopinfo);
         }else{
         $getcity = D('Getinfo');

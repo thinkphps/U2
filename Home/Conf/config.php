@@ -10,7 +10,7 @@ return array(
     /*URL配置*/
     'DB_PREFIX'=>'u_',
     'URL_MODEL'=>1,
-	'DATA_CACHE_TIME'=>1,
+    'DATA_CACHE_TIME'=>600,
 	'DATA_CACHE_SUBDIR'=>false,
 	'DATA_PATH_LEVEL'=>3,
     'TOKEN_ON'=>true,  // 是否开启令牌验证
