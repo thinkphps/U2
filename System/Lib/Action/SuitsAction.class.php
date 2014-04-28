@@ -143,6 +143,8 @@ class SuitsAction extends Action{
              exit;
          }else{
               //添加
+           $find = $suits->field('suitID')->where(array('suitImageUrl'=>$suitImageUrl))->find();
+           if(empty($find)){
            $data = array('suitStyleID'=>$suitStyleID,
                           'suitGenderID'=>$suitGenderID,
                          'suitImageUrl'=>$suitImageUrl,
@@ -162,6 +164,9 @@ class SuitsAction extends Action{
           }else{
               $this->error('新增失败',U('Suits/add'));
           }
+         }else{
+           $this->error('图片已被使用',U('Suits/add'));
+         }
          }
         }else{
             $this->display('Login/index');
