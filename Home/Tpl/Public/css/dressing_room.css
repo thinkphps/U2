@@ -536,39 +536,10 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     font:20px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
 }
 
-.id_content_banner_nav_wrap{
-    position:relative;
-    height: 470px;
-}
+/*切换按钮*/
+.dr_main_con a.home_arrow_left{ display:block; background:url(../images/home_arrow.png) 0 0 no-repeat; width:29px; height:51px; position:absolute; top:245px; left:-60px; z-index:50; cursor:pointer;}
+.dr_main_con a.home_arrow_left:hover{ background:url(../images/home_arrow.png) 0 -51px no-repeat;}
 
-.page_arrow{
-    background: url(http://im.uniqlo.cn/L1_china/banner_arrow_131118.png) no-repeat center center;
-    width: 1150px;
-    position:absolute;
-    left:-100px;
-    top:66px;
-    height: 370px;
-    z-index: 1;
-}
-
-.model_nav_inner{
-    max-width: 1150px;
-    min-width: 950px;
-    margin: 0 auto;
-    overflow: visible;
-}
-
-.model_nav_prev{
-    float: left;
-    width: 95px;
-    height: 400px;
-    cursor: pointer;
-}
-
-.model_nav_next{
-    float: right;
-    width: 95px;
-    height: 400px;
-    cursor: pointer;
-}
+.dr_main_con a.home_arrow_right{ display:block; background:url(../images/home_arrow.png) -29px 0 no-repeat; width:29px; height:51px; position:absolute; top:245px; right:-60px; z-index:50; cursor:pointer;}
+.dr_main_con a.home_arrow_right:hover{ background:url(../images/home_arrow.png) -29px -51px no-repeat;}
 

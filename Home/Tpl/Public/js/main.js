@@ -42,6 +42,7 @@ var timer;
             });
 
         },
+
         sendcity :function(pro,city){
             var url = baseurl + "mini.php/Sendcity/sendpro?callback=callBackFunction.jsonpCallbackm&proname="+pro+"&cityname="+city;
             // 创建script标签，设置其属性
@@ -64,7 +65,7 @@ var timer;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
-                $('.page_arrow').hide();
+                callBackFunction.setPageButtonDisplay(true);
             }
             else{
                 var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
@@ -213,11 +214,11 @@ var timer;
                 _this.getSuits();
             });
 
-            $('.model_nav_prev').on('click',function(){
+            $('.home_arrow_left').on('click',function(){
                 $('#suits-container').moveprev();
             })
 
-            $('.model_nav_next').on('click',function(){
+            $('.home_arrow_right').on('click',function(){
                 $('#suits-container').movenext();
             })
 
@@ -287,10 +288,18 @@ var timer;
 
 
 var callBackFunction = {
-
+    setPageButtonDisplay : function(isHide){
+        if(isHide){
+            $('.home_arrow_left,.home_arrow_right').hide();
+        }
+        else{
+            $('.home_arrow_left,.home_arrow_right').show();
+        }
+    },
     callbackSuits : function(list){
         $("#div_index-bin,.index-suit").hide();
         if(list == null){
+            this.setPageButtonDisplay(true);
             $("#suits-container").hide();
             return;
         }
@@ -304,10 +313,10 @@ var callBackFunction = {
         $('#suits-container').html(strHtml);
         $("#suits-container").show();
         if( list.length > 6 ){
-            $('.page_arrow').show();
+           this.setPageButtonDisplay(false);
         }
         else{
-            $('.page_arrow').hide();
+            this.setPageButtonDisplay(true);
         }
         $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
