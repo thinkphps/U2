@@ -296,9 +296,9 @@ public function getgood(){
         }
      }else{
         //普通走这里
-            if(S('good'.$sid.$fid.$zid.$tem.$page)){
+            /*if(S('good'.$sid.$fid.$zid.$tem.$page)){
              $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
-            }else{
+            }else{*/
             $where = '';
             if(isset($tem)){
             $where.="and g.wid in (".$widvalue['str'].")";
@@ -358,8 +358,8 @@ public function getgood(){
             if($page==1){
                 $result = $this->waterdata($result,$lid,$bid);
             }
-            S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
-           }
+            /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
+           }*/
       }
     if(!empty($result)){
         $arr_count = count($result);
