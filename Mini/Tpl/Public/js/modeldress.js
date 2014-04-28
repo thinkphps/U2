@@ -17,12 +17,8 @@ var pageElement = {
             pageElement.$btnExpansion.click();
         }
     }
-    ,dressByBarcodeList:function(barcodeList){
-        //穿套装的时候先清空模特
-        Model.Empty();
-        for(var i = 0;i < barcodeList.length;i++){
-            Model.DressingByBarcode(barcodeList[i].item_bn,barcodeList[i].sex);
-        }
+    ,dressByBarcodeList:function(suitInfo){
+        get_baiyi_dp(suitInfo[0],suitInfo[1]);
         if(pageElement.$divSyj.is(':hidden')){
             pageElement.$btnExpansion.click();
         }
@@ -123,8 +119,8 @@ var pageElement = {
             return genderValue;
         },
         callDressingFunction : function(){
-            var img = $(this).find('img')
-            pageElement.dressByBarcodeList($(img.get(0)).data('detail'));
+            var $img = $(this).find('img')
+            pageElement.dressByBarcodeList($img.data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){
