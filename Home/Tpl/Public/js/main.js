@@ -369,6 +369,7 @@ var callBackFunction = {
 
         var listlength = list.da.length;
         this.CurrentLoadSize += listlength;
+        this.PageIndex = list.page;
         var strHtml = '';
         for(var i = 0 ;i < listlength;i++){
             strHtml += this.getCoverScrollItem(list.da[i]);
