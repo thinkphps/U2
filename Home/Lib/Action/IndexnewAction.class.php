@@ -202,11 +202,15 @@ class IndexnewAction extends Action{
         $tem = trim($this->_request('tem'));
         $sid = trim($this->_request('sid'));//性别
         $fid = trim($this->_request('fid'));//风格
+        $page = trim($this->_request('page'));
         $sid = $sid?$sid:0;
         $fid = $fid?$fid:0;
+        $page = $page?$page:1;
+        $page_num = 10;
+        $start = ($page-1)*$page_num;
         $where = array();
-        if(S('homesf'.$sid.$fid)){
-        $list = unserialize(S('homesf'.$sid.$fid));
+        if(S('homesf'.$sid.$fid.$page)){
+        $list = unserialize(S('homesf'.$sid.$fid.$page));
         }else{
         $Weather = D('Getinfo');
         if($fid!=0){
@@ -235,10 +239,16 @@ class IndexnewAction extends Action{
             if($sid==4){
              $list = M('BeubeuGoods')->cache(true)->field('pic_url')->where(array('type'=>$sid,'approve_status'=>'onsale','num'=>array('egt',15)))->order('uptime desc')->select();
             }else{
-            $list = $Weather->getConSuitsList($where);
+            $page_arr = array($start,$page_num,$page);
+            $listResult = $Weather->getConSuitsList($where,$page_arr);
+            if($listResult['code']==1){
+                $list = array('code'=>0,'page'=>$page+1,'da'=>$listResult['da']);
+            }else if($listResult['code']==0){
+               $list = array('code'=>0,'page'=>$page+1);
+            }
             }
         }
-        S('homesf'.$sid.$fid,serialize($list),array('type'=>'file'));
+        S('homesf'.$sid.$fid.$page,serialize($list),array('type'=>'file'));
       }
         $re = json_encode($list);
         echo $callback."($re)";

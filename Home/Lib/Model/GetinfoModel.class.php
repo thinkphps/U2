@@ -143,12 +143,19 @@ class GetinfoModel extends Action{
         return $suitSelect;
     }
 
-    public function getConSuitsList($where){
-        $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->order('u_suits.suitID desc')->select();
+    public function getConSuitsList($where,$page_arr){
+        $count =  M('Suits')->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->count();
+        $pages = ceil($count/$page_arr[1]);
+        if($page_arr[2]>$pages){
+            $resultArr = array('code'=>0,'没有数据');
+        }else{
+        $result = M('Suits')->cache(true)->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,g.description')->where($where)->limit($page_arr[0].','.$page_arr[1])->order('u_suits.suitID desc')->select();
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($result as $k=>$v){
             $result[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID'],'ug.approve_status'=>'onsale','ug.num'=>array('egt','15')))->select();
         }
-        return $result;
+            $resultArr = array('code'=>1,'da'=>$result);
+       }
+        return $resultArr;
     }
 }
