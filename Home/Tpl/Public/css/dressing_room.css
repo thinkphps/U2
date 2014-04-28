@@ -207,7 +207,7 @@ button,label{cursor:pointer; }
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_yinyouer a:hover { background:url(../images/dr_main_con_sub_nav.png) -280px -70px no-repeat;}
 
-.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) 0 -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nvzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -70px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nanzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -140px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
