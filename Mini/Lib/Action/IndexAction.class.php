@@ -256,7 +256,7 @@ public function getgood(){
              $result = array();
          }
          if($page==1){
-             $result = $this->waterdata($result,$lid,$bid);
+             $result = $this->waterdata($result,$lid,$bid,$keyword);
          }
     S('coll'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
     }
@@ -275,7 +275,7 @@ public function getgood(){
             $result = array();
         }
         if($page==1){
-            $result = $this->waterdata($result,$lid,$bid);
+            $result = $this->waterdata($result,$lid,$bid,$keyword);
         }
         S('buy'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
     }
@@ -298,7 +298,7 @@ public function getgood(){
             $result = array();
         }
         if($page==1){
-            $result = $this->waterdata($result,$lid,$bid);
+            $result = $this->waterdata($result,$lid,$bid,$keyword);
         }
      }else{
         //普通走这里
@@ -362,7 +362,7 @@ public function getgood(){
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid);
+                $result = $this->waterdata($result,$lid,$bid,$keyword);
             }
             /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
            }*/
@@ -375,23 +375,23 @@ public function getgood(){
      }
     $this->ajaxReturn($returnArr, 'JSON');
 }
-    public function waterdata($result,$lid,$bid){
+    public function waterdata($result,$lid,$bid,$keyword){
         $ad = "<div class='productinfo wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='http://img02.taobaocdn.com/imgextra/i2/196993935/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div>";
         $ad2 = '<div class="productinfo wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.7.cTVbad&scid=906738330&scname=za%2FXsM%2FeyrHM2NPFWzQvMjXG8F0%3D&checkedRange=true&queryType=cat" target="__blank"><img src="http://img03.taobaocdn.com/imgextra/i3/196993935/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div>';
 
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         }
         else{
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
         }
 
 //        $str = '<div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>已收藏</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a><div class="wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
