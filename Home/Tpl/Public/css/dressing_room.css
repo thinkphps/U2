@@ -461,6 +461,7 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 #suits-container .item{
     width: 234px ;
     height: 339px;
+    *height:380px;
     background: rgba(255, 255, 255, .3);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000')
 }
@@ -471,28 +472,17 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     margin-top:10px;
     width: 90%;
     height: 300px;
+
     cursor: pointer;
-    /*-moz-box-shadow: 0px 5px 5px #777;*/
-    /*-webkit-box-shadow: 0px 5px 5px #777;*/
-    /*box-shadow: 0px 5px 5px #777;*/
-
-
-
 }
 #suits-container .selectedItem{
     /*border:2px solid #0071BC;*/
     background-color: #ffffff;
 }
-.itemTitle{
-    font-weight: bold;
-    font:13px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;
-    text-shadow: 1px 1px #ddd;
-}
+.itemTitle{font-weight: bold;font:13px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif;text-shadow: 1px 1px #ddd;}
 
-.itemTitle div {width: 70px;
-    position: static;
-    top: 66px;
-    height: 29px;}
+.itemTitle div {width: 70px;position: static;top: 66px;height: 29px;}
+
 /*首页模特图风格*/
 .modelStyle1{ background:url(../images/dr_main_con_sub_nav.png) -420px 0 no-repeat;}
 .modelStyle2{ background:url(../images/dr_main_con_sub_nav.png) -420px -35px no-repeat;}
@@ -505,11 +495,10 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
 .modelStyle9{ background:url(../images/dr_main_con_sub_nav.png) -700px 0 no-repeat;}
 .modelStyle10{ background:url(../images/dr_main_con_sub_nav.png) -700px -35px no-repeat;}
 
-
-
 .similarity{
     /*6张图片*/
     bottom: 35px;
+    *bottom:75px;
     position: absolute;
     left: 70%;
     font-size: 2.5em;
@@ -525,11 +514,8 @@ a.light_box_close{  background:url(../images/close2.png) 0 0 no-repeat; width:41
     /*border-style:solid;*/
     cursor: pointer;}
 
-.gotoroom {
-    background-color: #ff0000;
+.gotoroom {background-color: #ff0000;padding: 5px 35px;}
 
-    padding: 5px 35px;
-}
 .gotoroom a {
     height: 45px;
     color: #fff;
