@@ -281,7 +281,10 @@ var pageElement = {
                     var strLi = '';
                     if($('#single').is(':hidden')){
 //                        strLi += '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
-
+                        var $topImg = $('#tops_bottoms img');
+                        strLi = '<li data-title="'+ $topImg.data('title') +'" ><a target="_blank" href="'+ $topImg.data('prourl') +'" title="'+  $topImg.data('title')+'"> '+  $topImg.data('title')+'</a></li>'
+                        var $bottomsImg = $('#bottoms img');
+                        strLi = '<li data-title="'+ $bottomsImg.data('title') +'" ><a target="_blank" href="'+ $bottomsImg.data('prourl') +'" title="'+  $bottomsImg.data('title')+'"> '+  $bottomsImg.data('title')+'</a></li>'
                     }else{
                         var $myImg =  $('#single img');
                         strLi = '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
