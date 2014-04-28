@@ -17,12 +17,8 @@ var pageElement = {
             pageElement.$btnExpansion.click();
         }
     }
-    ,dressByBarcodeList:function(barcodeList){
-        //穿套装的时候先清空模特
-        Model.Empty();
-        for(var i = 0;i < barcodeList.length;i++){
-            Model.DressingByBarcode(barcodeList[i].item_bn,barcodeList[i].sex);
-        }
+    ,dressByBarcodeList:function(suitInfo){
+        get_baiyi_dp(suitInfo[0],suitInfo[1]);
         if(pageElement.$divSyj.is(':hidden')){
             pageElement.$btnExpansion.click();
         }
@@ -77,6 +73,7 @@ var pageElement = {
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
             Model.CurrClothesCallback = this.beu_getallclothes;
+            $('.beubeu_btns').css('left','25px');
         },
         getUrlParam :function(name){
             var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -123,8 +120,8 @@ var pageElement = {
             return genderValue;
         },
         callDressingFunction : function(){
-            var img = $(this).find('img')
-            pageElement.dressByBarcodeList($(img.get(0)).data('detail'));
+            var $img = $(this).find('img')
+            pageElement.dressByBarcodeList($img.data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){
@@ -273,6 +270,7 @@ var pageElement = {
                 }
             });
 
+
             pageElement.$btnBuy.on('click',function(){
                 //如果当前选中的是婴儿，则将现在搭配间的衣服增加到购买列表
                 if($('#beubeu_loadImg').is(':hidden')){
@@ -302,10 +300,13 @@ var pageElement = {
                 pageElement.$divBuys.hide();
             });
 
-            $('.bc_btn').on('click',function(){
-//                alert(1);
-                get_baiyi_dp(560);
-
+            //点击衣服调用试穿按钮功能
+            $('#watercontainer').on('click','.product_inf',function(){
+               $(this).parent().find('.tryon').click();
+            });
+            //点击衣服调用试穿按钮功能
+            $('#watercontainer').on('click','.product_img',function(){
+                $(this).parent().parent().find('.tryon').click();
             });
 
             //鼠标移动到衣服上显示价格、库存等详细信息

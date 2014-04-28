@@ -200,11 +200,11 @@ var weather = {
         $('#h_day4').html(info['weather5'].ht);
 
         //×îµÍÎÂ
-        $('#l_day0').html(info['weather1'].lt);
-        $('#l_day1').html(info['weather2'].lt);
-        $('#l_day2').html(info['weather3'].lt);
-        $('#l_day3').html(info['weather4'].lt);
-        $('#l_day4').html(info['weather5'].lt);
+        $('#l_day0').html(info['weather1'].lt+'¡æ');
+        $('#l_day1').html(info['weather2'].lt+'¡æ');
+        $('#l_day2').html(info['weather3'].lt+'¡æ');
+        $('#l_day3').html(info['weather4'].lt+'¡æ');
+        $('#l_day4').html(info['weather5'].lt+'¡æ');
 
         //ÎÄ×ÖÃèÊö
         $('#name_day0').html(info['weather1'].wt);

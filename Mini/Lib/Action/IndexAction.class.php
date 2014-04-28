@@ -81,7 +81,7 @@ class IndexAction extends Action {
     }else{
         //默认模特图
        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->select();
-        $beubeu_detail = M('BeubeuSuitsGoodsdetail');
+        //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
        foreach($beubeu_suits_list as $k=>$v){
            switch($v['suitGenderID']){
                case 1 :
@@ -97,7 +97,8 @@ class IndexAction extends Action {
                $sex = 15581;
                break;
            }
-           $detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
+           $beubeu_suits_list[$k]['sex'] = $sex;
+           /*$detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
            if(!empty($detailResult)){
             foreach($detailResult as $k2=>$v2){
                 $detailResult[$k2]['sex'] = $sex;
@@ -105,7 +106,7 @@ class IndexAction extends Action {
                $beubeu_suits_list[$k]['detail'] = json_encode($detailResult);
            }else{
            $beubeu_suits_list[$k]['detail'] = 0;
-           }
+           }*/
        }
       S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
     }
@@ -295,9 +296,9 @@ public function getgood(){
         }
      }else{
         //普通走这里
-            if(S('good'.$sid.$fid.$zid.$tem.$page)){
+            /*if(S('good'.$sid.$fid.$zid.$tem.$page)){
              $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
-            }else{
+            }else{*/
             $where = '';
             if(isset($tem)){
             $where.="and g.wid in (".$widvalue['str'].")";
@@ -357,8 +358,8 @@ public function getgood(){
             if($page==1){
                 $result = $this->waterdata($result,$lid,$bid);
             }
-            S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
-           }
+            /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
+           }*/
       }
     if(!empty($result)){
         $arr_count = count($result);
@@ -369,8 +370,8 @@ public function getgood(){
     $this->ajaxReturn($returnArr, 'JSON');
 }
     public function waterdata($result,$lid,$bid){
-        $ad = "<div class='productinfo wrapper_box banner_box'><a href='javascript:;'><img src='".__ROOT__."/".APP_PATH."Tpl/Public/images/xsyh.jpg' width='228' height='471' alt='' /></a></div>";
-        $ad2 = '<div class="productinfo wrapper_box banner_box"><a href="javascript:;"><img src="'.__ROOT__."/".APP_PATH.'Tpl/Public/images/xinzuoshangpin.jpg" width="228" height="228" alt="" /></a></div>';
+        $ad = "<div class='productinfo wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='http://img02.taobaocdn.com/imgextra/i2/196993935/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div>";
+        $ad2 = '<div class="productinfo wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.7.cTVbad&scid=906738330&scname=za%2FXsM%2FeyrHM2NPFWzQvMjXG8F0%3D&checkedRange=true&queryType=cat" target="__blank"><img src="http://img03.taobaocdn.com/imgextra/i3/196993935/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';

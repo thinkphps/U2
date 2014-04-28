@@ -92,6 +92,8 @@ $(function(){
         $.uniqlo.lid = 0;
         $.uniqlo.bid = 0;
         $.weather.nextpage = 0;
+        $.uniqlo.kid = 0;
+        $.weather.str = '';
         var that = $(this)
         $.uniqlo.index.togClass(that, 'w_select')
         $.weather.init({
@@ -309,13 +311,13 @@ var _mini = {
                                 var show = "style='display:none;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
                             }
                             if(gender==1){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
                             }
                             if(gender==2){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
                             }
                             if(gender==3){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='"+data.def[i].detail+"' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
+                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+"' width=\"400\" height=\"533\" /></div></div>";
                             }
                         }
                         $('#sfid').html(str);
@@ -398,6 +400,8 @@ var _mini = {
                 if(sid!=4){
                 $('.right_tj').css('display','block');
                 $('.zk_btn').css('display','block');
+                $('.left_tj').css('width','466px');
+                $('.left_tj ul').css('width','466px');
                 $('#alluid').children('a').text('全部上装');
                 var ustr = '',dstr='';
                 $.each(data.u,function(i,name){
@@ -419,6 +423,8 @@ var _mini = {
                     });
                     bstr+='</ul>';
                     $('.left_tj').html(bstr);
+                    $('.left_tj').css('width','650px');
+                    $('.left_tj ul').css('width','650px');
                 }
             }
         },'json');
@@ -456,7 +462,7 @@ var _mini = {
         var _this = this;
         var strHtml = '';
         var color = 'h_orange';
-        var pushid = 3,pushid2 = 2;
+        var pushid = 3,pushid2 = 2,loveCss='',buyCss='';
         $.each(data.da,function(p,v){
             if(data.count>=4){
                 pushid = 3;
@@ -485,12 +491,18 @@ var _mini = {
                 color = 'h_orange';
             }
             if(p != 0 && p != pushid && p != pushid2){
+                if(v.loveid != null && v.loveid != undefined){
+                    loveCss = ' select';
+                }
+                if(v.buyid != null && v.buyid != undefined){
+                    buyCss = ' select';
+                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>试穿</a></dt>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
+                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
+                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
                 strHtml += '<div class="product_color none"><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
                 strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';

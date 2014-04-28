@@ -61,6 +61,7 @@ var timer;
             if( gender == 4){
                 $('#ul_index-bar-place').find('.select').removeClass('select');
                 $('.ch_all').addClass('select');
+                $('.ch_all a').addClass('select');
                 var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=4&tid=0&pro='+$.pron;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
@@ -203,6 +204,7 @@ var timer;
 //                alert($(this).data('gender'));
                 $('#ulgender').find('.select').removeClass('select');
                 $this.addClass('select');
+                $this.find('a').addClass('select');
                 _this.getSuits();
 //               $('#ulgender').find('.select').data('gender');
             });
@@ -369,6 +371,7 @@ var callBackFunction = {
 
         var listlength = list.da.length;
         this.CurrentLoadSize += listlength;
+        this.PageIndex = list.page;
         var strHtml = '';
         for(var i = 0 ;i < listlength;i++){
             strHtml += this.getCoverScrollItem(list.da[i]);

@@ -68,7 +68,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con li p a{ color:#F00; display:inline;}
 
 .preferential ul.preferential_con li.preferential_1{border-top:3px solid #fc7574;}
-.preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) 0 0 no-repeat;}
+.preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) -174px 0 no-repeat;}
 
 .preferential ul.preferential_con li.preferential_2{border-top:3px solid #2f5172;}
 .preferential ul.preferential_con li.preferential_2 i{ background:url(../images/preferential_icon.png) -58px 0 no-repeat;}
@@ -207,7 +207,7 @@ button,label{cursor:pointer; }
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_yinyouer a:hover { background:url(../images/dr_main_con_sub_nav.png) -280px -70px no-repeat;}
 
-.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) 0 -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nvzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -70px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nanzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -140px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}

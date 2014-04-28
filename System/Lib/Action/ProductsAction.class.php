@@ -18,7 +18,7 @@ class ProductsAction extends Action{
 	$cate2 = $this->_request('cate2');
 	$isdoubt = $this->_request('isdoubt');
     //20140425
-    $fname = trim($this->_post('fname'));
+    //$fname = trim($this->_post('fname'));
     //20140425
 	$pagestr = '';
 	import("@.ORG.Pageyu");
@@ -49,11 +49,11 @@ class ProductsAction extends Action{
 	$p = new Page($count,20,$pagestr);
 	$goods = $goodmodel->field('*')->where($map)->order('id desc')->limit($p->firstRows.','.$p->maxRows)->select();
         //20140425
-        if($fname == 10){
+        /*if($fname == 10){
             $count = $goodmodel->join('inner join u_goodtag g on g.good_id=u_goods.id')->where(array('g.ftag_id'=>0))->count('distinct g.good_id');
             $p = new Page($count,20,'/fname/'.$fname);
             $goods = $goodmodel->join('inner join u_goodtag g on g.good_id=u_goods.id')->field('u_goods.*')->where(array('g.ftag_id'=>0))->group('g.good_id')->limit($p->firstRows.','.$p->maxRows)->order('u_goods.id desc')->select();
-        }
+        }*/
         //20140425
 	$page = $p->showPage();
 	//取得分类

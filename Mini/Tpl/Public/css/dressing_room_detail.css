@@ -61,7 +61,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con li p a{ color:#F00; display:inline;}
 
 .preferential ul.preferential_con li.preferential_1{border-top:3px solid #fc7574;}
-.preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) 0 0 no-repeat;}
+.preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) -174px 0 no-repeat;}
 
 .preferential ul.preferential_con li.preferential_2{border-top:3px solid #ff0000;}
 .preferential ul.preferential_con li.preferential_2 i{ background:url(../images/preferential_icon.png) -58px 0 no-repeat;}
@@ -403,7 +403,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a:hover { background:url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_yinyouer a:hover { background:url(../images/dr_main_con_sub_nav.png) -280px -70px no-repeat;}
 
-.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav ul.rw_sub_nav li.rw_all a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -350px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nvzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -70px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_nanzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -140px -70px no-repeat;}
 .dr_main_con_sub_nav ul.rw_sub_nav li.rw_tongzhuang a.select{ background:#fff url(../images/dr_main_con_sub_nav.png) -210px -70px no-repeat;}
@@ -538,7 +538,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 
 
 /*优衣库推荐款式-内容弹出*/
-.product_inf{ position:absolute; top:75px; left:11px; width:206px; height:auto; overflow:hidden; text-align:center;  color:#666;}
+.product_inf{ position:absolute; top:15px; left:11px; width:206px; height:auto; overflow:hidden; text-align:center;color:#666; cursor:pointer;}
 .product_inf .inf_top{ width:206px; height:6px; background:url(../images/product_inf_bg.png) 0 0 no-repeat;}
 
 .product_inf .inf_con{ width:176px; height:auto; background:url(../images/product_inf_bg.png) 0 -6px repeat-y; padding:8px 15px; overflow:hidden;}
@@ -591,8 +591,9 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .syj_btn.select a.syj_btn_expansion{ background:url(../images/syj_btn.png) 0 -160px no-repeat;}
 .syj_btn.select a.syj_btn_expansion:hover{ background:url(../images/syj_btn.png) 0 -224px no-repeat; }
 
-.syj{ width:380px; height:540px; position:relative; top:-200px; border:1px solid #ff0000; left:-350px; background:#FFF; z-index:100;}
-.syj .baiyi_syj{ width:400px; height:520px;position: relative;top:-30px}
+.syj{ width:320px; height:540px; position:relative; top:-200px; border:1px solid #ff0000; left:-290px; background:#FFF; z-index:100;}
+.syj .baiyi_syj{ width:400px; height:520px;position: relative;top:-30px;margin-left: -33px;}
+.syj .baiyi_syj .beubeu_copy2{left:70px;}
 .btn_line{ width:474px; height:42px; position:absolute; bottom:0;}
 .btn_line a{  float:left; height:42px; line-height:42px;}
 .btn_line a.buy_btn{ width:122px; background:#ff0000; color:#FFF; font-size:14px;}
