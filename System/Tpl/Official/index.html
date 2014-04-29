@@ -14,7 +14,7 @@
     </p>
 
     <div id="divedit" style="display: none">
-       <div class="form-group">
+       <div class="form-inline form-group">
            <label>按风格检索</label>
            <select name='isstyle'>
                <option value=''>请选择</option>
@@ -22,9 +22,11 @@
                    <option value="{$volstyle.ID}">{$volstyle.description}</option>
                </volist>
            </select>
+           <label style="display: none">推送日期</label>
+           <input type="text" style="width: 120px;display: none" name="daterange" id="daterange"
+                  class="form-control" />
            <button class="btn btn-success" id="btnsearch" onclick="searchsuit(1,'');">搜索</button>
        </div>
-
       <table id="tbsuits" class="table table-striped table-hover text-center table-responsive table-condensed">
           <thead>
           <th style="width: 20%"/>
@@ -42,13 +44,24 @@
       </div>
 
   </div>
-
+    <table>
+        <tbody>
+        <tr>
+            <td><h5>. 您可以为一下两种方案选择推荐套装，每种方案最多可选择10套套装。每种方案下同一风格的套装只能选择一套。</h5></td>
+        </tr>
+        <tr>
+            <td><h5>. 点击【编辑推荐】按钮可以按照风格检索套装，您可以使用套装下的【选择】将套装加入或移出推荐列表。</h5></td>
+        </tr>
+        <tr>
+            <td><h5>. 您可以在推荐列表【删除】或选择【推荐】套装，点击【保存推荐】使更新结果生效，推荐的套装将在首页中被显示。</h5></td>
+        </tr>
+        </tbody>
+    </table>
     <ul id="tab" class="nav nav-tabs">
         <li name="tbcase1" class="active" onclick="changetab(1);"><a href="#home" data-toggle="tab">方案一：当天气温＞边界气温时，用户看到以下推荐套装</a></li>
         <li name="tbcase2"  onclick="changetab(2);"><a href="#news" data-toggle="tab">方案二：当天气温≤边界气温时，用户看到以下推荐套装</a></li>
-        <button type="button" id="btnrecomend" class="btn btn-info" onclick="reco();">保存推荐</button>
-        <button type="button" id="btnchange" class="btn btn-info" onclick="showedit();">替换推荐</button>
-        <button type="button" id="btncancel" class="btn btn-warning" style="display: none" onclick="canceledit();">取消替换</button>
+        <button type="button" id="btnrecomend" class="btn btn-success" style="display: none" onclick="reco();">保存推荐</button>
+        <button type="button" id="btnchange" class="btn btn-info" onclick="showedit();">编辑推荐</button>
     </ul>
     <div id="divreview">
     <div class="row text-center" style="height:100%" id="divreco1">
@@ -61,10 +74,10 @@
                               <img src='{$vo.suitImageUrl}' width='160px' height='200px'>
                           </div>
                           <label class="checkbox-inline">
-                              <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco1');"
+                              <input type="checkbox" disabled="disabled" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco1');"
                               <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
                           <label class="checkbox-inline">
-                              <input type="checkbox" class="delch" onclick="clickoff($(this));">删除</label>
+                              <input type="checkbox" disabled="disabled" name='ckdel' class="delch" onclick="clickoff($(this));">删除</label>
                       </div>
                   </div>
               </div>
@@ -80,10 +93,10 @@
                             <img src='{$vo.suitImageUrl}' width='160px' height='200px'>
                         </div>
                         <label class="checkbox-inline">
-                            <input type="checkbox" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco2');"
+                            <input type="checkbox" disabled="disabled" value="{$vo.suitID}" class="delch" name="ckreco" onclick="ckreco($(this),'divreco2');"
                             <if condition="$vo.selected eq 1">checked=true<else/></if>>推荐</label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="delch" onclick="clickoff($(this));">删除</label>
+                            <input type="checkbox" disabled="disabled" name='ckdel' class="delch" onclick="clickoff($(this));">删除</label>
                     </div>
                 </div>
             </div>
@@ -92,6 +105,9 @@
   </div>
 </div>
 <include file="Public:footer"/>
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
+<script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
 <script type='text/javascript'>
     var indexurl = "{:U('Official/index')}";
     var savetmpurl = "{:U('Official/savetmp')}";
@@ -104,6 +120,11 @@
         var maxcknum = 6;
         var msg = "您最多只能推荐6种套装";
 
+        if(!e.val()){
+            e.attr("checked",false);
+            return false;
+        }
+
         $("#"+dv).find('input[type=checkbox]').each(function(){
             if($(this).prop("checked")==true){
                 cknum = cknum + 1;
@@ -111,7 +132,7 @@
             if(cknum>maxcknum){
                 e.attr("checked",false);
                 alert(msg);
-                return;
+                return false;
             }
         });
     }
@@ -124,9 +145,17 @@
         if($('li[name=tbcase2]').hasClass('active')){
             type =2;
         }
-        $('#btncancel').show();
+        $('#btnrecomend').show();
         $('#btnchange').hide();
         $('#divedit').show();
+
+        $("#divreco1").find("input[type=checkbox]").each(function(){
+            $(this).removeAttr('disabled');
+        });
+        $("#divreco2").find("input[type=checkbox]").each(function(){
+            $(this).removeAttr('disabled');
+        });
+
         $("#tbsuits tbody").find("tr").each(function(){
             $(this).find("input[type='checkbox']").each(function(){
                 $(this).attr("checked",false);
@@ -170,7 +199,6 @@
         if($('li[name=tbcase2]').hasClass('active')){
             type =2;
         }
-
         if(type==1){
             dv=dv + "divreco1";
         }
@@ -186,8 +214,18 @@
                 $(this).find('input[type=checkbox]').each(function(){
                     $(this).val(sutid);
                 });
+                $(this).find('input[name=ckdel]').each(function(){
+                    $(this).attr("checked",false);
+                });
+
             }else{
-                $(this).remove();
+                $(this).find('img').each(function(){
+                    $(this).attr('src','__TMPL__Public/images/nosetting.jpg');
+                });
+                $(this).find('input[type=checkbox]').each(function(){
+                    $(this).val('');
+                    $(this).attr("checked",false);
+                });
             }
             return;
         })
@@ -200,7 +238,7 @@
                 +"<label class='checkbox-inline'>"
                 +"<input type='checkbox' name='ckreco' value='" + sutid + "' class='delch'" + ' onclick="ckreco($(this),' + dvn + ');">推荐</label>'
                 +"<label class='checkbox-inline'>"
-                + "<input type='checkbox' class='delch' onclick='clickoff($(this));'>删除</label>"
+                + "<input type='checkbox' name='ckdel' class='delch' onclick='clickoff($(this));'>删除</label>"
                 +"</div></div></div>"
             $("#" + dv).append(sstdiv);
         }
@@ -231,6 +269,18 @@
             }else{
                 alert("保存推荐套装失败。");
             }
+            $('#btnrecomend').hide();
+            $('#divedit').hide();
+            $('#btnchange').show();
+
+            $("#divreco1").find("input[type=checkbox]").each(function(){
+                $(this).attr('disabled',true);
+            });
+            $("#divreco2").find("input[type=checkbox]").each(function(){
+                $(this).attr('disabled',true);
+            });
+
+            $('#btnchange').focus();
         });
     }
 
@@ -319,8 +369,35 @@
                     }
                 });
             });
+
+            $(this).val('');
         });
-        e.parent().parent().parent().parent().remove();
+        e.val('');
+        e.parent().parent().find("img").each(function(){
+            $(this).attr('src','__TMPL__Public/images/nosetting.jpg');
+        });
     }
 
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#daterange').daterangepicker(
+                {
+                    startDate: new Date(),
+                    format: 'YYYY/MM/DD',
+                    singleDatePicker : true,
+                    locale:{
+                        applyLabel: '选择',
+                        cancelLabel: '取消',
+                        fromLabel: '开始',
+                        toLabel: '截止',
+                        weekLabel: '周',
+                        customRangeLabel: 'Custom Range',
+                        daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                        monthNames: moment()._lang._monthsShort.slice(),
+                        firstDay: 0
+                    }
+                }
+        );
+    });
 </script>

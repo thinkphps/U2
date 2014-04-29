@@ -14,16 +14,51 @@ class OfficialAction extends Action{
             $stylelist = $styles->field('*')->select();
             $msuit = M('suits_select u1');
 
-            $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+            $result = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
                 where("u1.`type` = '1'")->select();
 
-            $selsuits2 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+
+            $selsuits1 = array();
+            foreach ( $stylelist as $r => $styleRow ){
+                $tmpimg = array("description"=>$styleRow["description"],"suitImageUrl"=>"__TMPL__Public/images/nosetting.jpg",
+                    "suitID"=>"","suitStyleID"=>$styleRow['ID'],"selected"=>"");
+                foreach ( $result as $r => $suitRow ){
+                   if($styleRow['ID']== $suitRow['suitStyleID']) {
+                       $tmpimg['description'] = $suitRow['description'];
+                       $tmpimg['suitImageUrl'] = $suitRow['suitImageUrl'];
+                       $tmpimg['suitID'] = $suitRow['suitID'];
+                       $tmpimg['suitStyleID'] = $suitRow['suitStyleID'];
+                       $tmpimg['selected'] = $suitRow['selected'];
+                       break;
+                   }
+                }
+                array_push($selsuits1,$tmpimg);
+            }
+
+            $result = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
                 where("u1.`type` = '2'")->select();
 
+            $selsuits2 = array();
+            foreach ( $stylelist as $r => $styleRow ){
+                $tmpimg = array("description"=>$styleRow["description"],"suitImageUrl"=>"__TMPL__Public/images/nosetting.jpg",
+                    "suitID"=>"","suitStyleID"=>$styleRow['ID'],"selected"=>"");
+                foreach ( $result as $r => $suitRow ){
+                    if($styleRow['ID']== $suitRow['suitStyleID']) {
+                        $tmpimg['description'] = $suitRow['description'];
+                        $tmpimg['suitImageUrl'] = $suitRow['suitImageUrl'];
+                        $tmpimg['suitID'] = $suitRow['suitID'];
+                        $tmpimg['suitStyleID'] = $suitRow['suitStyleID'];
+                        $tmpimg['selected'] = $suitRow['selected'];
+                        break;
+                    }
+                }
+                array_push($selsuits2,$tmpimg);
+
+            }
             $mtm = M('settings');
             $tm = $mtm -> field('value')->where(array('key'=>'temperature'))->select();
             if(!empty($tm)){
@@ -31,11 +66,12 @@ class OfficialAction extends Action{
             }else{
                 $tm = '';
             }
-
+//            $daterange = "2013-04-03";
             $this->assign('stylelist',$stylelist);
             $this->assign('tm',$tm);
             $this->assign('selsuits1',$selsuits1);
             $this->assign('selsuits2',$selsuits2);
+//            $this->assign('daterange',$daterange);
             $this->display();
         }else{
             $this->display('Login/index');
@@ -117,15 +153,17 @@ class OfficialAction extends Action{
           $msuit = M('suits_select');
           if(!empty($recosuits)){
               foreach ( $recosuits as $r => $dataRow ){
-                  $sel='0';
-                  if($dataRow->reco=="true"){
-                      $sel='1';
-                  }
-                  $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$dataRow->type);
-                  $res = $msuit->add($data);
-                  if(!$res){
-                      echo 0;
-                      exit;
+                  if(!empty($dataRow->sid)){
+                      $sel='0';
+                      if($dataRow->reco=="true"){
+                          $sel='1';
+                      }
+                      $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$dataRow->type);
+                      $res = $msuit->add($data);
+                      if(!$res){
+                          echo 0;
+                          exit;
+                      }
                   }
               }
               echo 1;
@@ -148,5 +186,4 @@ class OfficialAction extends Action{
           $this->display('Login/index');
       }
   }
-
 }
