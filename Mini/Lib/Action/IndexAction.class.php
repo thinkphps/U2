@@ -241,44 +241,46 @@ public function getgood(){
     }
     $productSyn = D('ProductSyn');
     $uid = session("uniq_user_id");
-    if($lid>0){
-     //点击收藏走这里
-     if(S('coll'.session("uniq_user_id").$page)){
-       $result = unserialize(S('coll'.session("uniq_user_id").$page));
-     }else{
-     $love = M('Love');
-      $result = $love->join('inner join u_beubeu_goods bg on bg.num_iid=u_love.num_iid')->field('u_love.id as loveid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_love.id desc')->where(array('u_love.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
-         if(!empty($result)){
-         foreach($result as $k1=>$v1){
-             $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
-         }
-         }else{
-             $result = array();
-         }
-         if($page==1){
-             $result = $this->waterdata($result,$lid,$bid,$keyword);
-         }
-    S('coll'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
-    }
-    }else if($bid>0){
-      //点击购买走这里
-    if(S('buy'.session("uniq_user_id").$page)){
-        $result = unserialize(S('buy'.session("uniq_user_id").$page));
-    }else{
-        $buy = M('Buy');
-        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('u_buy.id as buyid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
-        if(!empty($result)){
-        foreach($result as $k1=>$v1){
-            $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
-        }
+    $love = M('Love');
+    $buy = M('Buy');
+    if($lid==1 && $bid==1){
+      $sql = "select bg.id as loveid,bg.id as buyid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+from u_beubeu_goods bg inner join (select lo.num_iid from u_love lo where lo.uid={$uid} union select bu.num_iid from u_buy as bu where bu.uid={$uid}) as lb on lb.num_iid=bg.num_iid";
+      $result = M('BeubeuGoods')->query($sql);
+      if(!empty($result)){
+            foreach($result as $k1=>$v1){
+                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+            }
         }else{
             $result = array();
         }
         if($page==1){
             $result = $this->waterdata($result,$lid,$bid,$keyword);
         }
-        S('buy'.session("uniq_user_id").$page,serialize($result),array('type'=>'file'));
-    }
+    }else if($lid==1 && $bid!=1){
+        $result = $love->join('inner join u_beubeu_goods bg on bg.num_iid=u_love.num_iid')->field('u_love.id as loveid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_love.id desc')->where(array('u_love.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+        if(!empty($result)){
+            foreach($result as $k1=>$v1){
+                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+            }
+        }else{
+            $result = array();
+        }
+        if($page==1){
+            $result = $this->waterdata($result,$lid,$bid,$keyword);
+        }
+    }else if($bid==1 && $lid!=1){
+        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('u_buy.id as buyid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+        if(!empty($result)){
+            foreach($result as $k1=>$v1){
+                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+            }
+        }else{
+            $result = array();
+        }
+        if($page==1){
+            $result = $this->waterdata($result,$lid,$bid,$keyword);
+        }
     }else if($kid>0){
        //快速搜索走这里
         if($keyword){

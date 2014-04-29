@@ -22,6 +22,8 @@
                    <option value="{$volstyle.ID}">{$volstyle.description}</option>
                </volist>
            </select>
+           <label>包含商品(ID)</label>
+           <input type="text" style="width: 120px;" id="iptnumiid" class="form-control" />
            <label style="display: none">推送日期</label>
            <input type="text" style="width: 120px;display: none" name="daterange" id="daterange"
                   class="form-control" />
@@ -105,6 +107,11 @@
   </div>
 </div>
 <include file="Public:footer"/>
+<style>
+    .circle {
+        display:block;cursor:pointer; width:50px; height:50px; border-radius:25px; background-color:#FFF;
+    }
+</style>
 <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
 <script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
@@ -291,6 +298,7 @@
 
         $.post(searchurl,{
             isstyle : $('select[name=isstyle]').val(),
+            numiid : $('#iptnumiid').val(),
             page:page,
             act:act
         },function(data,status){
@@ -317,7 +325,17 @@
 
                     if(da[0][String(i)]["id"]!=""){
                         var td = $("<td/>");
-                        var div = $("<div/>");
+                        var div = $("<div style='position: relative'/>");
+                        var goodsinfo = da[0][String(i)]["goods"];
+                        if(goodsinfo){
+                            var divgoods  = $("<div style='position: absolute;left: 70%;bottom:35px'/>");
+                            for (var k = 0 ; k<= goodsinfo.length-1;k++){
+                                divgoods.append($('<div class="circle"><a data-numid="' + goodsinfo[k]['num_iid'] +
+                                        '" href="' + goodsinfo[k]['detail_url'] + '" target="_blank" title="' + goodsinfo[k]['title'] +
+                                        '"><img style="width: 100%;height: 100%" src=/"' + goodsinfo[k]['pic_url'] + '"></a></div>'))
+                            }
+                            div.append(divgoods);
+                        }
                         div.append($("<img src='" + da[0][String(i)]["img"] + "' width='270px' height='375px'>"));
                         div.append($("<label class='checkbox-inline'><input type='checkbox' value='" + da[0][String(i)]["id"] + "' class='delch' " +
                                 'onclick="selsuit($(this),'+ styleid +','+ suitid +','+ suitimg +','+ suitdesp +');">选择</label>'));

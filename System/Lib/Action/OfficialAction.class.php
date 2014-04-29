@@ -81,14 +81,30 @@ class OfficialAction extends Action{
   public function search(){
       if(!empty($this->aid)){
           $style = $this->_post('isstyle');
+          $numiid = $this->_post('numiid');
           $page = $this->_post('page');
           $act = $this->_post('act');
-          if(!empty($style)){
+          if(!empty($style) || !empty($numiid)){
               $suits = M('Suits u1');
+              $goodsdetail = M('suits_goodsdetail u3');
+              if(empty($numiid)){
+                  $count = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                      ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                      ->where(array('u1.suitStyleID'=>$style))->count();
+              }else{
+                  if(!empty($style)){
+                      $count = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
+                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style))->count();
+                  }else{
+                      $count = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
+                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                          ->where(array('u3.num_iid'=>$numiid))->count();
+                  }
+              }
 
-              $count = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
-                  ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                  ->where(array('u1.suitStyleID'=>$style))->count();
 
               if($count=='0'){
                   echo "";
@@ -111,24 +127,48 @@ class OfficialAction extends Action{
                   exit;
               }
               $maxRows = 4;
-              $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
-                  ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                  ->where(array('u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+              if(empty($numiid)){
+                  $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                      ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                      ->where(array('u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+              }else{
+                  if(!empty($style)){
+                      $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
+                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+                  }else{
+                      $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
+                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
+                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
+                          ->where(array('u3.num_iid'=>$numiid))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();;
+                  }
+              }
 
               if(empty($result)){
                   echo "";
                   exit;
               }
 //              $result = $suits->field('*')->where(array('suitStyleID'=>$style))->order('uptime desc')->limit($p->firstRows.','.$p->maxRows)->select();
-              $imgs = array("1"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
-                  "2"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
-                  "3"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),
-                  "4"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>""),"page"=>$page);
+              $imgs = array("1"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>"","goods"=>""),
+                  "2"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>"","goods"=>""),
+                  "3"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>"","goods"=>""),
+                  "4"=>array("id"=>"","img"=>"","styleID"=>"","desp"=>"","goods"=>""),"page"=>$page);
+
+              $suitgoods = M('suits_goodsdetail u1');
+
               foreach ( $result as $r => $dataRow ){
                   $imgs[$r+1]["id"] = $dataRow["suitID"];
                   $imgs[$r+1]["img"] = $dataRow["suitImageUrl"];
                   $imgs[$r+1]["styleID"] = $dataRow["suitStyleID"];
                   $imgs[$r+1]["desp"] = $dataRow["description"];
+
+                  $result = $suitgoods->field('u1.num_iid,u2.title,u2.detail_url,u2.pic_url')
+                      ->join("inner join u_goods u2 on u1.num_iid=u2.num_iid")
+                      ->where(array('u1.suitID'=>$dataRow["suitID"]))->select();
+                  if(!empty($result)){
+                      $imgs[$r+1]["goods"] = $result;
+                  }
               }
               $stylelist = array($imgs);
               echo json_encode($stylelist);
@@ -138,8 +178,6 @@ class OfficialAction extends Action{
       }else{
         $this->display('Login/index');
       }
-
-
   }
 
   public function recommend(){
