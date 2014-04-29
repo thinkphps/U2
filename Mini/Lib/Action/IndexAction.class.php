@@ -265,7 +265,16 @@ where bg.num_iid = li.num_iid limit ".$start.",".$page_num;;
             $result = $this->waterdata($result,$lid,$bid,$keyword);
         }
     }else if($lid==1 && $bid!=1){
-        $result = $love->join('inner join u_beubeu_goods bg on bg.num_iid=u_love.num_iid')->field('u_love.id as loveid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_love.id desc')->where(array('u_love.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+        $sql = "
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+      from u_beubeu_goods bg ,
+(SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
+)bl group by bl.num_iid)li
+where bg.num_iid = li.num_iid and li.loveid is not null limit ".$start.",".$page_num;;
+        $result = M('BeubeuGoods')->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
@@ -277,7 +286,16 @@ where bg.num_iid = li.num_iid limit ".$start.",".$page_num;;
             $result = $this->waterdata($result,$lid,$bid,$keyword);
         }
     }else if($bid==1 && $lid!=1){
-        $result = $buy->join('inner join u_beubeu_goods bg on bg.num_iid=u_buy.num_iid')->field('u_buy.id as buyid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url')->order('u_buy.id desc')->where(array('u_buy.uid'=>session("uniq_user_id")))->limit($start.','.$page_num)->select();
+        $sql = "
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+      from u_beubeu_goods bg ,
+(SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
+)bl group by bl.num_iid)li
+where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_num;;
+        $result = M('BeubeuGoods')->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
