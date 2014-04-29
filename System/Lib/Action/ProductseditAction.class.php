@@ -287,7 +287,24 @@ public function doedit(){
     $goodarr['isdoubt'] = '1';
 	}
     $goodarr['istag'] = '2';
-	//$goodarr['gender'] = $arr['gender'];
+    switch($arr['gtype']){
+        case 1 :
+            $gender = 'female';
+        break;
+        case 2 :
+            $gender = 'male';
+            break;
+        case 3 :
+            $gender = 'girl';
+            break;
+        case 4 :
+            $gender = 'boy';
+            break;
+        case 5 :
+            $gender = 'error';
+            break;
+    }
+	$goodarr['gender'] = $gender;
 	$goods->where(array('id'=>$id))->save($goodarr);
 
     $this->success('编辑成功',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'],'keyword'=>$keyword,'istag'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt)));

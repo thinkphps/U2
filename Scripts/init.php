@@ -21,7 +21,7 @@ function mysqlfetch($sql){
 	}
 	return $arr;
 }
-public function createdir($filename,$dir='',$path='',$img=''){
+public function createdir($filename,$dir='',$path='',$img='',$flag = 1){
 	  $timenow = time();
 	  $year = date('Y',$timenow);
  	  $date = date('Y-m',$timenow);
@@ -51,7 +51,11 @@ public function createdir($filename,$dir='',$path='',$img=''){
 
 	  $extension = pathinfo($img, PATHINFO_EXTENSION);
 	  $save_image = $dir1.'/'.$filename.'.'.$extension;
+      if($flag==1){
 	  $path.='/'.$filename.'.png';
+      }else if($flag==2){
+      $path.='/'.$filename.'.jpg';
+      }
 	  $arr[] = $save_image;
 	  $arr[] = $path;
 	  return $arr;
