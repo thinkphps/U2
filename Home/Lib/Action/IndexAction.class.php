@@ -212,7 +212,7 @@ public function getgood(){
 		 $windex->saomo($dclothes,$dclothesx);
 		 	 
 		}else if($sid!=0 && $cid=='0'){
-		 if($sid==4){
+		 if($sid==5){
 		 $where = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
 		 }else{
 		 $where = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'1','u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
@@ -222,7 +222,7 @@ public function getgood(){
 	     $uclothesx = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($wherex)->group('u_goodtag.good_id')->order('u_goodtag.wid asc,u_goods.uptime desc')->select();
 		 $windex->saomo($uclothes,$uclothesx);
 		 //下装
-		 if($sid!=4){
+		 if($sid!=5){
 		 $where2 = array('u_goodtag.wid'=>$widvalue['wid'],'u_goodtag.isud'=>'2','u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
 	     $dclothes = $goodtag->cache(true)->join('INNER JOIN u_goods on u_goods.id=u_goodtag.good_id')->field('u_goods.id,u_goods.num_iid,u_goods.title,u_goods.num,u_goods.price,u_goods.pic_url,u_goods.detail_url,u_goodtag.ccateid')->where($where2)->group('u_goodtag.good_id')->order('u_goods.uptime desc')->select();
 		 $where2x = array('u_goodtag.wid'=>array('exp','IN('.$wvalue.')'),'u_goodtag.isud'=>'2','u_goodtag.gtype'=>$sid,'u_goods.approve_status'=>'onsale','u_goods.num'=>array('egt','15'));
@@ -345,14 +345,12 @@ public function getgood(){
 	$ustr = '';
 	if(!empty($uclothes)){
     foreach($uclothes as $k=>$v){
-	  $v['title'] = iconv('utf8','gbk',$v['title']);
-      $ustr.='<li><img fg="'.$v['ccateid'].'" data-original="'.C('UNIQLOURL').$v['pic_url'].'" id="1" place="家居1" tag="淑女1" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'">
-              </li>';
-      }	
+	  //echo $v['title'] = iconv('utf8','gbk',$v['title']);
+      $ustr.='<li><img fg="'.$v['ccateid'].'" data-original="'.C('UNIQLOURL').$v['pic_url'].'" id="1" place="" tag="" url="'.$v['detail_url'].'" rest="'.$v['num'].'" price="'.$v['price'].'" alt="'.$v['title'].'" miniUrl="'.C('UNIQLOURL').'mini.php/Index/index/num/'.$v['num_iid'].'"></li>';
+      }
 	}
-	$ustr = iconv('gbk','utf8',$ustr);
     $arr['ustr'] = $ustr;
-	$arr['flag1'] = 'p';	
+	$arr['flag1'] = 'p';
 	//下装
     if(!empty($dclothesx)){
     foreach($dclothesx as $k=>$v){
@@ -398,7 +396,7 @@ public function getgood(){
 	}
 	$arr['sid'] = $sid;
 	$re = json_encode($arr);
-    $re = iconv('utf8','gbk',$re);
+    //$re = iconv('utf8','gbk',$re);
 	echo $callback."($re)"; 
 }
     //get weatherinfo
