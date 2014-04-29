@@ -62,7 +62,7 @@ var timer;
                 $('#ul_index-bar-place').find('.select').removeClass('select');
                 $('.ch_all').addClass('select');
                 $('.ch_all a').addClass('select');
-                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=4&tid=0&pro='+$.pron;
+                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=5&tid=0&pro='+$.pron;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
@@ -154,7 +154,9 @@ var timer;
                         _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                         _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
 
-                        _this.getSuits()
+                        _this.getSuits();
+                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg;
+                        this.$weather.jsonpFcuntion(jsonpurl);
                         //Íùmimi´«³ÇÊÐ
                         _this.sendcity(city,info.city);
                     }
