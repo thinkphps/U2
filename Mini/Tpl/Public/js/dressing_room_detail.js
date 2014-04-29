@@ -551,7 +551,7 @@ $('#watercontainer').on('click','.btn_ym',function(){    //购买
 $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
     var $this = $(this);
     var lid = 0,bid = 0;
-    if( $('#buydata').hasClass('select')){
+    if( $.uniqlo.bid == 1){
         bid = 1;
     }
 
@@ -574,7 +574,7 @@ $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
 
     var $this = $(this);
     var lid = 0,bid = 0;
-    if( $('#cldatas').hasClass('select')){
+    if( $.uniqlo.lid  == 1){
         lid = 1;
     }
 
@@ -605,7 +605,6 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
         getgoods(0,0,0,0,0,0,1,0,keyword);
     }
 });
-
 
 document.onkeydown = function(e){
     var ev = document.all ? window.event : e;
