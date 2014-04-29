@@ -878,14 +878,16 @@ $('.imgrd').css(css);
            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
         });
         $('.right_tj').on('click','li.doclothes',function(){
+
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             $.weather.str = '';
-            var zid = $(this).attr('la');
+//            var zid = $(this).attr('la');
             var zid = $(this).attr('la'),zrightlength = $('.zright').length;
             if(zid!=0){
+
                 $('#alldid').children('a').removeClass('w_select');
             }else{
                 $('.zright').children('a').removeClass('w_select');
@@ -1057,6 +1059,8 @@ $('#moreid').on('click',function(){
         $('#shopid').html(v);
 
     }
+
+
     var tablink_idname = new Array("tablink"),lilength = $('#scrollDiv').children().length;
     var tabcontent_idname = new Array("preferential_");
     var tabcount = new Array("3");
@@ -1124,5 +1128,28 @@ $('#moreid').on('click',function(){
     if (autochangemenu != 0) {
         start_autochange();
     }
+
+
+function modeltip(e,act,gender){
+    if(act==1){
+        if(gender == 2){
+            e.find('.model_try2_man').each(function(){ $(this).removeClass('none');});
+        }else if(gender==3){
+            e.find('.model_try2_child').each(function(){ $(this).removeClass('none');});
+        }else{
+            e.find('.model_try2').each(function(){ $(this).removeClass('none');});
+        }
+
+    }else{
+        if(gender == 2){
+            e.find('.model_try2_man').each(function(){ $(this).addClass('none');});
+        }else if(gender==3){
+            e.find('.model_try2_child').each(function(){ $(this).addClass('none');});
+        }else{
+            e.find('.model_try2').each(function(){ $(this).addClass('none');});
+        }
+    }
+
+}
 
 </script>
