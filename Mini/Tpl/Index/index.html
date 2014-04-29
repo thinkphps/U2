@@ -850,31 +850,21 @@ $('.imgrd').css(css);
                }
              $(this).children('a').addClass('w_select');
             }
+
+            var rightallsel = $('#alldid').children('a').hasClass('w_select');
+
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(leftLen==zleftlength || leftLen == 0){   //如果左边全选
+            if(leftLen==zleftlength || (leftLen == 0 && rightallsel==false && rightLen==0)){   //如果左边全选
+                if($('#alluid').children('a').hasClass('w_select')){
+                    return;
+                }
                 $('#alluid').children('a').addClass('w_select');
                 $('.zleft').children('a').removeClass('w_select');
                 _mini.left.length = 0;
-                if(rightLen == 0){
-                $.uniqlo.zid = 0
-               }else{
-                    var arrleft2 = [];
-                    $('.zleft').each(function(){
-                        arrleft2.push($(this).attr('la'));
-                    });
-                    $.uniqlo.zid = _mini.right.join('_')+'_'+arrleft2.join('_');
-                }
             }else{
-                $.uniqlo.zid = '';
-                $('#alldid').children('a').removeClass('w_select');
-                if(leftLen != 0){
-                    if(rightLen==0){
-                        $.uniqlo.zid = _mini.left.join('_');
-                    }else{
-                    $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
-                    }
-                }
+
             }
+           setzid(leftLen,rightLen);
            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
         });
         $('.right_tj').on('click','li.doclothes',function(){
@@ -907,32 +897,62 @@ $('.imgrd').css(css);
                 }
                 $(this).children('a').addClass('w_select');
             }
+            var leftallsel = $('#alluid').children('a').hasClass('w_select');
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(rightLen==zrightlength || rightLen == 0){
+            if(rightLen==zrightlength || (rightLen == 0 && leftallsel == false && leftLen==0)){
+
+                if($('#alldid').children('a').hasClass('w_select')){
+                    return;
+                }
                 $('#alldid').children('a').addClass('w_select');
                 $('.zright').children('a').removeClass('w_select');
-                if(leftLen == 0){
-                    $.uniqlo.zid = 0
-                }else{
-                    var arrright2 = [];
-                    $('.zright').each(function(){
-                        arrright2.push($(this).attr('la'));
-                    });
-                    $.uniqlo.zid = _mini.left.join('_')+'_'+arrright2.join('_');
-                }
             } else {
-                $.uniqlo.zid = '';
-                $('#alluid').children('a').removeClass('w_select');
-                if(rightLen != 0){
-                    if(leftLen==0){
-                        $.uniqlo.zid = _mini.right.join('_');
+            }
+
+            setzid(leftLen,rightLen);
+            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        });
+
+        function setzid(leftLen,rightLen){
+            $.uniqlo.zid = ''
+            //both select all
+            if($('#alldid').children('a').hasClass('w_select') && $('#alluid').children('a').hasClass('w_select')){
+                $.uniqlo.zid = 0
+            }else{
+                //left select all
+                if(leftLen == 0 && $('#alluid').children('a').hasClass('w_select')){
+                    var arrleft2 = [];
+                    $('.zleft').each(function(){
+                        arrleft2.push($(this).attr('la'));
+                    });
+                    $.uniqlo.zid = arrleft2.join('_');
+                }else{
+                    $.uniqlo.zid = _mini.left.join('_');
+                }
+                //right select all
+                if(rightLen == 0 && $('#alldid').children('a').hasClass('w_select')){
+                    var arright2 = [];
+                    $('.zright').each(function(){
+                        arright2.push($(this).attr('la'));
+                    });
+                    if($.uniqlo.zid){
+                        $.uniqlo.zid = $.uniqlo.zid  + '_'+arright2.join('_');
                     }else{
-                        $.uniqlo.zid  = _mini.left.join('_')+'_'+_mini.right.join('_');
+                        $.uniqlo.zid = arright2.join('_');
+                    }
+                }else{
+                    if(rightLen>0){
+                        if($.uniqlo.zid){
+                            $.uniqlo.zid = $.uniqlo.zid  + '_'+ _mini.right.join('_');
+                        }else{
+                            $.uniqlo.zid = _mini.right.join('_');
+                        }
                     }
                 }
             }
-            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-        });
+
+        }
+
         $('#le1').on('change',function(){
             var pvalue = $('#le1 option:selected').val();
             $.post(getCityUrl,{pid:pvalue},function(data,status){
