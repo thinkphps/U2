@@ -438,7 +438,9 @@ var _mini = {
         $('.ch_all a').addClass('select');
         $('.left_tj .w_select,.right_tj .w_select').removeClass('w_select');
         $('#alluid a,#alldid a').addClass('w_select');
-        $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2,male-style-mask2').hide();
+        $('#style-mask2').removeClass('baby-style-mask2').hide();
+        $('#style-mask2').removeClass('children-style-mask2').hide();
+        $('#style-mask2').removeClass('male-style-mask2').hide();
         $('.style-children_mask').hide();
     },
     left : [],
@@ -451,15 +453,21 @@ var _mini = {
             $('#style-mask2').addClass('baby-style-mask2').show();
             $('.style-children_mask').hide();
         }else if(gender == 3){
-            $('#style-mask2').removeClass('baby-style-mask2,male-style-mask2').addClass('children-style-mask2').show();
+            $('#style-mask2').removeClass('baby-style-mask2');
+            $('#style-mask2').removeClass('male-style-mask2');
+            $('#style-mask2').addClass('children-style-mask2').show();
             $('.style-children_mask').show();
         }
         else if(gender == 2){
-            $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2').addClass('male-style-mask2').show();
+            $('#style-mask2').removeClass('baby-style-mask2');
+            $('#style-mask2').removeClass('children-style-mask2');
+            $('#style-mask2').addClass('male-style-mask2').show();
             $('.style-children_mask').hide();
         }
         else{
-            $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2,male-style-mask2').hide();
+            $('#style-mask2').removeClass('baby-style-mask2').hide();
+            $('#style-mask2').removeClass('children-style-mask2').hide();
+            $('#style-mask2').removeClass('male-style-mask2').hide();
             $('.style-children_mask').hide();
         }
     },
@@ -603,7 +611,9 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $.uniqlo.kid = 1;
     if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
+        _mini.initialization();
     }
+
 });
 
 document.onkeydown = function(e){
