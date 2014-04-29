@@ -856,9 +856,6 @@ $('.imgrd').css(css);
 
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
             if(leftLen==zleftlength || (leftLen == 0 && rightallsel==false && rightLen==0)){   //如果左边全选
-                if($('#alluid').children('a').hasClass('w_select')){
-                    return;
-                }
                 $('#alluid').children('a').addClass('w_select');
                 $('.zleft').children('a').removeClass('w_select');
                 _mini.left.length = 0;
@@ -901,10 +898,6 @@ $('.imgrd').css(css);
             var leftallsel = $('#alluid').children('a').hasClass('w_select');
             var leftLen = _mini.left.length,rightLen = _mini.right.length;
             if(rightLen==zrightlength || (rightLen == 0 && leftallsel == false && leftLen==0)){
-
-                if($('#alldid').children('a').hasClass('w_select')){
-                    return;
-                }
                 $('#alldid').children('a').addClass('w_select');
                 $('.zright').children('a').removeClass('w_select');
             } else {
