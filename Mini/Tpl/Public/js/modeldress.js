@@ -11,6 +11,7 @@ var pageElement = {
     ,$divBuys : $('.buy_btns')
     ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
     ,$divSyj : $('.syj')
+    ,$watercontainer : $('#watercontainer')
     ,dressByBarcode:function(barcode,gender){
         Model.DressingByBarcode(barcode,gender);
         if(pageElement.$divSyj.is(':hidden')){
@@ -186,32 +187,6 @@ var pageElement = {
                     $(this).data('barcode',barcode);
                 })
 
-            }else if(sex == 5){
-                $('#beubeu_loadImg').hide();
-                $('#baby_fitting_room').show();
-                var imgUrl = 'http://uniqlo.bigodata.com.cn' + $colorLi.find('a').data('imgurl');
-                //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
-                //如果是上装则将图片显示到上部
-                var title = $wrapper_box.find('h3 a').text();
-                var purl = $wrapper_box.find('h3 a').attr('href');
-                if(isud == 1){
-                    $('#tops_bottoms').show();
-                    $('#tops_bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
-
-                }else if(isud == 2){   //如果是下装，则将图片显示到下部
-                    $('#bottoms').show();
-                    $('#bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
-                }
-                else{
-                    $('#single').show();
-                    $('#single img').attr('src',imgUrl).data({'prourl':purl,'title':title});
-                }
-
-                $colorLi.parent().find("li").removeClass("pro-selected");
-                $colorLi.addClass('pro-selected');
-                if(pageElement.$divSyj.is(':hidden')){
-                    pageElement.$btnExpansion.click();
-                }
             }
             else{
                 pageElement.dressByBarcode(barcode,gender);
@@ -280,9 +255,9 @@ var pageElement = {
                     if($('#single').is(':hidden')){
 //                        strLi += '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
                         var $topImg = $('#tops_bottoms img');
-                        strLi = '<li data-title="'+ $topImg.data('title') +'" ><a target="_blank" href="'+ $topImg.data('prourl') +'" title="'+  $topImg.data('title')+'"> '+  $topImg.data('title')+'</a></li>'
+                        strLi += '<li data-title="'+ $topImg.data('title') +'" ><a target="_blank" href="'+ $topImg.data('prourl') +'" title="'+  $topImg.data('title')+'"> '+  $topImg.data('title')+'</a></li>'
                         var $bottomsImg = $('#bottoms img');
-                        strLi = '<li data-title="'+ $bottomsImg.data('title') +'" ><a target="_blank" href="'+ $bottomsImg.data('prourl') +'" title="'+  $bottomsImg.data('title')+'"> '+  $bottomsImg.data('title')+'</a></li>'
+                        strLi += '<li data-title="'+ $bottomsImg.data('title') +'" ><a target="_blank" href="'+ $bottomsImg.data('prourl') +'" title="'+  $bottomsImg.data('title')+'"> '+  $bottomsImg.data('title')+'</a></li>'
                     }else{
                         var $myImg =  $('#single img');
                         strLi = '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
@@ -301,31 +276,57 @@ var pageElement = {
             });
 
             //点击衣服调用试穿按钮功能
-            $('#watercontainer').on('click','.product_inf',function(){
+            pageElement.$watercontainer.on('click','.product_inf',function(){
                $(this).parent().find('.tryon').click();
             });
             //点击衣服调用试穿按钮功能
-            $('#watercontainer').on('click','.product_img',function(){
+            pageElement.$watercontainer.on('click','.product_img',function(){
                 $(this).parent().parent().find('.tryon').click();
             });
 
             //鼠标移动到衣服上显示价格、库存等详细信息
-            $('#watercontainer').on('mouseenter','.wrapper_box img',function(){
+            pageElement.$watercontainer.on('mouseenter','.wrapper_box img',function(){
                 $(this).parent().parent().find('.product_inf').show();
             });
             //鼠标移出隐藏价格、库存等详细信息
-            $('#watercontainer').on('mouseleave','.wrapper_box',function(){
+            pageElement.$watercontainer.on('mouseleave','.wrapper_box',function(){
                 var $this = $(this);
                 $(this).find('.product_inf').hide();
                 var $color_img = $this.find('.color-img');
                 var $tryon =  $(this).find('.tryon');
-                pageElement.IsHide = 0;
-                $tryon.data('selected',0);
-//                var selectBarcode = $children_gender.find('a').data('select_barcode');
-                if( $color_img.find('.pro-selected').length == 0){
-                    $this.find('.product_color').hide();
-                    if($tryon.hasClass('select')){
-                        $tryon.removeClass('select');
+                var gender = $tryon.data('gendertype');
+                if(gender == 5){
+                    var isud = $tryon.data('isud');
+                    if(isud == 1){
+                        if(!$('#tops_bottoms').is(':hidden')){
+                            if($tryon.data('imgurl') != $('#tops_bottoms img').attr('src')){
+                                $tryon.removeClass('select');
+                            }
+                        }
+                    }else if(isud == 2){   //如果是下装，则将图片显示到下部
+                        if(!$('#bottoms').is(':hidden')){
+                            if($tryon.data('imgurl') != $('#bottoms img').attr('src')){
+                                $tryon.removeClass('select');
+                            }
+                        }
+                    }
+                    else{
+                        if(!$('#single').is(':hidden')){
+                            if($tryon.data('imgurl') != $('#single img').attr('src')){
+                                $tryon.removeClass('select');
+                            }
+                        }
+                    }
+
+                }else{
+                    pageElement.IsHide = 0;
+                    $tryon.data('selected',0);
+    //                var selectBarcode = $children_gender.find('a').data('select_barcode');
+                    if( $color_img.find('.pro-selected').length == 0){
+                        $this.find('.product_color').hide();
+                        if($tryon.hasClass('select')){
+                            $tryon.removeClass('select');
+                        }
                     }
                 }
             });
@@ -335,11 +336,63 @@ var pageElement = {
                 pageElement.IsHide = 1;
                 var $this = $(this);
                 var $wrapper_box = $this.parent().parent().parent();
-                var $colorImg = $wrapper_box.find('.color-img');
-                $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
+                var gender = $this.data('gendertype');
                 $this.data('selected',1);
                 $this.addClass('select');
-                $wrapper_box.find('.product_color').show();
+                if( gender == 5){
+                    var isud = $this.data('isud');
+                    $('#beubeu_loadImg').hide();
+                    $('#baby_fitting_room').show();
+                    var imgUrl = $wrapper_box.find('.product_img').attr('src');
+                    //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
+                    //如果是上装则将图片显示到上部
+                    var title = $wrapper_box.find('h3 a').text();
+                    var purl = $wrapper_box.find('h3 a').attr('href');
+                    $this.data('imgurl',imgUrl);
+                    if(isud == 1){
+                        $('#tops_bottoms').show();
+                        $('#single').hide();
+                        if($('#bottoms img').attr('src').length > 2 ){
+                            $('#bottoms').show();
+                        }
+                        $('#tops_bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                        $('#single img').attr('src','#').removeData('prourl').removeData('title');;
+                    }else if(isud == 2){   //如果是下装，则将图片显示到下部
+                        $('#bottoms').show();
+                        $('#single').hide();
+                        if($('#tops_bottoms img').attr('src').length > 2 ){
+                            $('#bottoms').show();
+                        }
+                        $('#bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                        $('#single img').attr('src','#').removeData('prourl').removeData('title');;
+                    }
+                    else{
+                        $('#tops_bottoms,#bottoms').hide();
+                        $('#tops_bottoms img,#bottoms img').attr('src','#').removeData('prourl').removeData('title');
+                        $('#single').show();
+
+                        $('#single img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                    }
+
+                    pageElement.$watercontainer.find('.tryon').each(function(){
+                        if($(this).hasClass('select')){
+                            if($(this).data('imgurl') != $('#tops_bottoms img').attr('src') && $(this).data('imgurl') != $('#bottoms img').attr('src')
+                            &&  $(this).data('imgurl') != $('#single img').attr('src')){
+                                $(this).removeClass('select');
+                            }
+                        }
+                    });
+
+                    if(pageElement.$divSyj.is(':hidden')){
+                        pageElement.$btnExpansion.click();
+                    }
+                }
+                else{
+
+                    var $colorImg = $wrapper_box.find('.color-img');
+                    $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
+                    $wrapper_box.find('.product_color').show();
+                }
             });
 
             //点击色块将衣服添加到模特身上

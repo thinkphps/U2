@@ -209,9 +209,9 @@ class IndexnewAction extends Action{
         $page_num = 10;
         $start = ($page-1)*$page_num;
         $where = array();
-        if(S('homesf'.$sid.$fid.$page)){
+        /*if(S('homesf'.$sid.$fid.$page)){
         $list = unserialize(S('homesf'.$sid.$fid.$page));
-        }else{
+        }else{*/
         $Weather = D('Getinfo');
         if($fid!=0){
            $where['u_suits.suitStyleID'] = intval($fid);
@@ -229,11 +229,12 @@ class IndexnewAction extends Action{
         if($sid==0 && $fid==0){
          //风格，类别都没有选走这里
             $setingtem = $Weather->getKeyValue('temperature');
-            if($tem>=$setingtem['value']){
+            if($tem>$setingtem['value']){
                 $type = 1;
             }else{
                 $type = 2;
             }
+
             $listResult = $Weather->getSutsValue($type);
             if(!empty($listResult)){
                 $list = array('code'=>1,'da'=>$listResult);
@@ -254,8 +255,8 @@ class IndexnewAction extends Action{
             }
             }
         }
-        S('homesf'.$sid.$fid.$page,serialize($list),array('type'=>'file'));
-      }
+        /*S('homesf'.$sid.$fid.$page,serialize($list),array('type'=>'file'));
+      }*/
         $re = json_encode($list);
         echo $callback."($re)";
     }

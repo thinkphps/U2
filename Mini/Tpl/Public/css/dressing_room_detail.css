@@ -60,7 +60,7 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con li p{ margin-top:4px;}
 .preferential ul.preferential_con li p a{ color:#F00; display:inline;}
 
-.preferential ul.preferential_con li.preferential_1{border-top:3px solid #fc7574;}
+.preferential ul.preferential_con li.preferential_1{border-top:3px solid #28ACA7;}
 .preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) -174px 0 no-repeat;}
 
 .preferential ul.preferential_con li.preferential_2{border-top:3px solid #ff0000;}
@@ -161,9 +161,9 @@ ul.ch_sub_nav{top:220px;}
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 213px;
+    width: 211px;
     height: 35px;
-    left: 418px;
+    left: 420px;
     z-index: 2;
 }
 

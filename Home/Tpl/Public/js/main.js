@@ -62,7 +62,7 @@ var timer;
                 $('#ul_index-bar-place').find('.select').removeClass('select');
                 $('.ch_all').addClass('select');
                 $('.ch_all a').addClass('select');
-                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=4&tid=0&pro='+$.pron;
+                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=5&tid=0&pro='+$.pron;
                 this.$weather.jsonpFcuntion(url);
                 $('#suits-container').html('');
                 $("#suits-container").hide();
@@ -154,7 +154,9 @@ var timer;
                         _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                         _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
 
-                        _this.getSuits()
+                        _this.getSuits();
+                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
+                        _this.$weather.jsonpFcuntion(jsonpurl);
                         //往mimi传城市
                         _this.sendcity(city,info.city);
                     }
@@ -206,7 +208,8 @@ var timer;
                 $this.addClass('select');
                 $this.find('a').addClass('select');
                 _this.getSuits();
-//               $('#ulgender').find('.select').data('gender');
+                $('#ul_index-bar-place .select').removeClass('select');
+                $('.ch_all a').addClass('select');
             });
 
             $('#ul_index-bar-place').on('click','li a',function(){
@@ -278,14 +281,16 @@ var timer;
                     _this.$weather.init({'city' : city, 'province': province,imgpath : window.imgpath,'subindex':'1',
                         callback: function(city, temper, info){
                             var avg = callBackFunction.getavg(temper.high,temper.low);
-                            $.weather.avg = avg;
+                            _this.$weather.avg = avg;
                             avg = avg?avg:0;
                             _this.$weather.occasion = _this.$weather.occasion?_this.$weather.occasion:0;
                             _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                             _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
                             _this.getSuits();
+                            var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
+                            _this.$weather.jsonpFcuntion(jsonpurl);
                             //往mimi传城市
-                            sendcity(city,info.city);
+                            _this.sendcity(city,info.city);
                         }
                     });
                     _this.hideCityDiv();
@@ -398,6 +403,7 @@ var callBackFunction = {
         strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" data-gender="'+ item.suitGenderID+'"  data-suitid="'+ item.suitID +'" />';
         strItem += '<div class="similarity">';
         var detail = item.detail;
+
         var numids = [];
         if(detail != null){
             for(var i =0;i<detail.length;i++){
@@ -410,7 +416,8 @@ var callBackFunction = {
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
-        strItem += '<a href="'+ baseurl + '"mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID + '" target="_blank">去虚拟试衣间试穿</a></div></div>';
+        var url = baseurl + 'mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID ;
+        strItem += '<a href="'+ url + '" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
