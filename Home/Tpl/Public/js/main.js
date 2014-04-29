@@ -210,6 +210,7 @@ var timer;
                 _this.getSuits();
                 $('#ul_index-bar-place .select').removeClass('select');
                 $('.ch_all a').addClass('select');
+                $('.product_inf').hide();
             });
 
             $('#ul_index-bar-place').on('click','li a',function(){
