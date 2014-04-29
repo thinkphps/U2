@@ -286,6 +286,8 @@ var timer;
                             _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                             _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
                             _this.getSuits();
+                            var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg;
+                            this.$weather.jsonpFcuntion(jsonpurl);
                             //Íùmimi´«³ÇÊÐ
                             sendcity(city,info.city);
                         }
