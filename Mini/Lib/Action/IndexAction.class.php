@@ -245,7 +245,7 @@ public function getgood(){
     $buy = M('Buy');
     if($lid==1 && $bid==1){
       $sql = "select bg.id as loveid,bg.id as buyid,bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
-from u_beubeu_goods bg inner join (select lo.num_iid from u_love lo where lo.uid={$uid} union select bu.num_iid from u_buy as bu where bu.uid={$uid}) as lb on lb.num_iid=bg.num_iid";
+from u_beubeu_goods bg inner join (select lo.num_iid from u_love lo where lo.uid={$uid} union select bu.num_iid from u_buy as bu where bu.uid={$uid}) as lb on lb.num_iid=bg.num_iid where 1 limit ".$start.",".$page_num;;
       $result = M('BeubeuGoods')->query($sql);
       if(!empty($result)){
             foreach($result as $k1=>$v1){
