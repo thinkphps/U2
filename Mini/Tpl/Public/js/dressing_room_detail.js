@@ -429,6 +429,18 @@ var _mini = {
             }
         },'json');
     },
+    initialization : function(){
+        $('#ulweek .w_select').removeClass('w_select');
+        $('#li_day0').addClass('w_select');
+        $('#cateu2 .select').removeClass('select')
+        $('.rw_all a').addClass('select');
+        $('#cstyle2 .select').removeClass('select');
+        $('.ch_all a').addClass('select');
+        $('.left_tj .w_select,.right_tj .w_select').removeClass('w_select');
+        $('#alluid a,#alldid a').addClass('w_select');
+        $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2,male-style-mask2').hide();
+        $('.style-children_mask').hide();
+    },
     left : [],
     right : [],
     showStyleMask2 : function(gender){
@@ -439,22 +451,15 @@ var _mini = {
             $('#style-mask2').addClass('baby-style-mask2').show();
             $('.style-children_mask').hide();
         }else if(gender == 3){
-            $('#style-mask2').removeClass('baby-style-mask2');
-            $('#style-mask2').removeClass('male-style-mask2');
-            $('#style-mask2').addClass('children-style-mask2').show();
+            $('#style-mask2').removeClass('baby-style-mask2,male-style-mask2').addClass('children-style-mask2').show();
             $('.style-children_mask').show();
         }
         else if(gender == 2){
-            $('#style-mask2').removeClass('baby-style-mask2');
-            $('#style-mask2').removeClass('children-style-mask2');
-            $('#style-mask2').addClass('male-style-mask2').show();
+            $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2').addClass('male-style-mask2').show();
             $('.style-children_mask').hide();
         }
         else{
-            $('#style-mask2').removeClass('baby-style-mask2');
-            $('#style-mask2').removeClass('children-style-mask2');
-            $('#style-mask2').removeClass('male-style-mask2');
-            $('#style-mask2').hide();
+            $('#style-mask2').removeClass('baby-style-mask2,children-style-mask2,male-style-mask2').hide();
             $('.style-children_mask').hide();
         }
     },
@@ -464,6 +469,8 @@ var _mini = {
         var color = 'h_orange';
         var pushid = 3,pushid2 = 2,loveCss='',buyCss='';
         $.each(data.da,function(p,v){
+            loveCss='';
+            buyCss='';
             if(data.count>=4){
                 pushid = 3;
             }else{
@@ -542,23 +549,48 @@ $('#watercontainer').on('click','.btn_ym',function(){    //购买
     }
 });
 $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
+    var $this = $(this);
+    var lid = 0,bid = 0;
+    if( $('#buydata').hasClass('select')){
+        bid = 1;
+    }
+
+    if($this.hasClass('select')){
+        $this.removeClass('select');
+        lid = 0;
+    }else{
+        $this.addClass('select');
+        lid = 1;
+    }
+    _mini.initialization();
     $.weather.nextpage = 0;
-    $(this).addClass('select');
-    $('#buydata').removeClass('select');
-    $.uniqlo.lid = 1;
-    $.uniqlo.bid = 0;
-    $.uniqlo.kid = 0
-    getgoods(0,0,1,0,0,0,0,0);
+    $.uniqlo.bid = bid;
+    $.uniqlo.lid = lid;
+    $.uniqlo.kid = 0;
+    getgoods(0,0,lid,bid,0,0,0,0);
 });
 
 $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
+
+    var $this = $(this);
+    var lid = 0,bid = 0;
+    if( $('#cldatas').hasClass('select')){
+        lid = 1;
+    }
+
+    if($this.hasClass('select')){
+        $this.removeClass('select');
+        bid = 0;
+    }else{
+        $this.addClass('select');
+        bid = 1;
+    }
+    _mini.initialization();
     $.weather.nextpage = 0;
-    $(this).addClass('select');
-    $('#cldatas').removeClass('select');
-    $.uniqlo.bid = 1;
-    $.uniqlo.lid = 0;
+    $.uniqlo.bid = bid;
+    $.uniqlo.lid = lid;
     $.uniqlo.kid = 0;
-    getgoods(0,0,0,1,0,0,0,0);
+    getgoods(0,0,lid,bid,0,0,0,0);
 });
 
 $('#watercontainer').on('click','#keybutton',function(){          //右侧keyword
@@ -584,13 +616,13 @@ document.onkeydown = function(e){
 
     function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     $.post(goodurl,{
-        tem : tem,
-        sid : sid,
-        lid : lid,
-        bid : bid,
-        fid : fid,
-        zid : zid,
-        kid : kid,
+        tem : tem,//温度
+        sid : sid,//性别id形如1,2,3 all为0
+        lid : lid,//收藏id
+        bid : bid,//购买id
+        fid : fid,//风格id
+        zid : zid,//自定义分类
+        kid : kid,//快速搜索标记
         page : $.weather.nextpage,
         keyword : keyword
     },function(data,status){
