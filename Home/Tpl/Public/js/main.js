@@ -155,8 +155,8 @@ var timer;
                         _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
 
                         _this.getSuits();
-                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg;
-                        this.$weather.jsonpFcuntion(jsonpurl);
+                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
+                        _this.$weather.jsonpFcuntion(jsonpurl);
                         //往mimi传城市
                         _this.sendcity(city,info.city);
                     }
@@ -280,16 +280,16 @@ var timer;
                     _this.$weather.init({'city' : city, 'province': province,imgpath : window.imgpath,'subindex':'1',
                         callback: function(city, temper, info){
                             var avg = callBackFunction.getavg(temper.high,temper.low);
-                            $.weather.avg = avg;
+                            _this.$weather.avg = avg;
                             avg = avg?avg:0;
                             _this.$weather.occasion = _this.$weather.occasion?_this.$weather.occasion:0;
                             _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                             _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
                             _this.getSuits();
-                            var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg;
-                            this.$weather.jsonpFcuntion(jsonpurl);
+                            var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
+                            _this.$weather.jsonpFcuntion(jsonpurl);
                             //往mimi传城市
-                            sendcity(city,info.city);
+                            _this.sendcity(city,info.city);
                         }
                     });
                     _this.hideCityDiv();
