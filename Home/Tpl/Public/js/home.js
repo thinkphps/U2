@@ -393,10 +393,10 @@ jQuery(function($){
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var addBtn = cabnet.kvHover.find('a.mini-kv-add')
-            var top = 176
-            if(pos){
-                top = pos == '#net-top' ? 83 : 280
-            }
+            var top = 186;
+//            if(pos){
+//                top = pos == '#net-top' ? 83 : 280
+//            }
 
             kvHoverCallback.call(this, pos, isIndexPage)         // Í¼Æ¬Ðü¸¡µÄcallbackÀï´¦ÀíÏ¸½Ú
 
@@ -404,7 +404,7 @@ jQuery(function($){
 
                 cabnet.kvHover.css({                               // ÏÔÊ¾Í¼Æ¬Ðü¸¡¿ò
                     left: position.left + 55,
-                    top: position.top + top
+                    top:  top
                 }).show()
                 cabnet.kvIsOpen = true
 
