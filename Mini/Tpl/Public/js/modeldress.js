@@ -13,12 +13,16 @@ var pageElement = {
     ,$divSyj : $('.syj')
     ,$watercontainer : $('#watercontainer')
     ,dressByBarcode:function(barcode,gender){
+        $('#beubeu_loadImg').show();
+        $('#baby_fitting_room').hide();
         Model.DressingByBarcode(barcode,gender);
         if(pageElement.$divSyj.is(':hidden')){
             pageElement.$btnExpansion.click();
         }
     }
     ,dressByBarcodeList:function(suitInfo){
+        $('#beubeu_loadImg').show();
+        $('#baby_fitting_room').hide();
         get_baiyi_dp(suitInfo[0],suitInfo[1]);
         if(pageElement.$divSyj.is(':hidden')){
             pageElement.$btnExpansion.click();
@@ -59,7 +63,6 @@ var pageElement = {
 (function($, window, document,undefined) {
 
     var ModelDress = function(){
-//        this.ModelClothesList = []
     }
 
     ModelDress.prototype = {
