@@ -393,16 +393,10 @@ jQuery(function($){
             var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var addBtn = cabnet.kvHover.find('a.mini-kv-add')
-            var top = 186
-//            if(pos){
-//                top = pos == '#net-top' ? 53 : 250
-////                addBtn.text('收入衣柜')
-//            } else {
-////                addBtn.text('查看详情')
-//            }
-//            if(this.getAttribute('fg') == 116){
-////                addBtn.text('查看详情')
-//            }
+            var top = 176
+            if(pos){
+                top = pos == '#net-top' ? 83 : 280
+            }
 
             kvHoverCallback.call(this, pos, isIndexPage)         // 图片悬浮的callback里处理细节
 
@@ -410,7 +404,7 @@ jQuery(function($){
 
                 cabnet.kvHover.css({                               // 显示图片悬浮框
                     left: position.left + 55,
-                    top: top
+                    top: position.top + top
                 }).show()
                 cabnet.kvIsOpen = true
 
