@@ -92,7 +92,7 @@ class GetinfoAction extends Action{
                 $sql = "SELECT concat(left(u_beubeu_goods.item_bn,8) , u_suits_goodsdetail.cid) AS barcode
  from u_suits INNER JOIN u_suits_goodsdetail on u_suits.suitID = u_suits_goodsdetail.suitID
 INNER JOIN u_beubeu_goods on u_suits_goodsdetail.num_iid = u_beubeu_goods.num_iid
-where u_suits.suitID = ".$suitid;
+where u_suits.approve_status=0 and u_suits.suitID = ".$suitid;
                 $result = $suites->query($sql);
                 S('ciditembn'.$suitid,serialize($result),array('type'=>'file'));
             }
