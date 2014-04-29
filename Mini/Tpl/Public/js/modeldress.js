@@ -63,7 +63,6 @@ var pageElement = {
 (function($, window, document,undefined) {
 
     var ModelDress = function(){
-//        this.ModelClothesList = []
     }
 
     ModelDress.prototype = {
