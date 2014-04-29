@@ -57,6 +57,7 @@ class OfficialAction extends Action{
                     }
                 }
                 array_push($selsuits2,$tmpimg);
+
             }
             $mtm = M('settings');
             $tm = $mtm -> field('value')->where(array('key'=>'temperature'))->select();
