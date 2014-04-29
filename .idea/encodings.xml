@@ -4,6 +4,7 @@
     <file url="file://$USER_HOME$/Desktop/index.html" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Lib/Action/IndexAction.class.php" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Lib/Action/IndexnewAction.class.php" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Home/Lib/Model/GetinfoModel.class.php" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index.html" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Tpl/Index/indexCoverScroll.html" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Home/Tpl/Index/index_v2.10.0228_u1_5_地图显示和热区延迟两秒.html" charset="GB2312" />
