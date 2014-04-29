@@ -27,7 +27,7 @@ function upsuitsappove($db,$suits){
         $tempCurrentTime = time();
         $currentDateTime = date('Y-m-d H:i:s', $tempCurrentTime);
         foreach($suits as $i=>$suit){
-            $sql = "select count(0) as apcount from `u_suits_goodsdetail` udg inner join `u_goods` ugs on ugs.`num_iid` = udg.`num_iid` where ugs.approve_status = 'onsale' and udg.suitID=".$suit['suitID'];
+            $sql = "select count(0) as apcount from `u_suits_goodsdetail` udg inner join `u_beubeu_goods` ugs on ugs.`num_iid` = udg.`num_iid` where ugs.approve_status = 'onsale' and ugs.num>=15 and udg.suitID=".$suit['suitID'];
             $result = $db->mysqlfetch($sql);
             //exist onsale goods
             if(!empty($result)){
@@ -39,6 +39,10 @@ function upsuitsappove($db,$suits){
                     $sql = "update `u_suits` set `approve_status`=1 , `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
                     $db->mysqlquery($sql);
                 }
+            }else{
+                $sql = "update `u_suits` set `approve_status`=1 , `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
+                $db->mysqlquery($sql);
+
             }
         }
     }
@@ -50,7 +54,7 @@ function upbeubeusuitsappove($db,$suits){
         $tempCurrentTime = time();
         $currentDateTime = date('Y-m-d H:i:s', $tempCurrentTime);
         foreach($suits as $i=>$suit){
-            $sql = "select count(0) as apcount from `u_beubeu_suits_goodsdetail` udg inner join `u_goods` ugs on left(ugs.`item_bn`,8) = left(udg.`item_bn`,8) where ugs.approve_status = 'onsale' and udg.suitID=".$suit['suitID'];
+            $sql = "select count(0) as apcount from `u_beubeu_suits_goodsdetail` udg inner join `u_beubeu_goods` ugs on left(ugs.`item_bn`,8) = left(udg.`item_bn`,8) where ugs.approve_status = 'onsale' and ugs.num>=15 and udg.suitID=".$suit['suitID'];
             $result = $db->mysqlfetch($sql);
             //exist onsale goods
             if(!empty($result)){
@@ -62,6 +66,9 @@ function upbeubeusuitsappove($db,$suits){
                     $sql = "update `u_beubeu_suits` set `approve_status`=1 , `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
                     $db->mysqlquery($sql);
                 }
+            }else{
+                $sql = "update `u_beubeu_suits` set `approve_status`=1 , `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
+                $db->mysqlquery($sql);
             }
         }
     }
