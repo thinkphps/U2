@@ -208,7 +208,8 @@ var timer;
                 $this.addClass('select');
                 $this.find('a').addClass('select');
                 _this.getSuits();
-//               $('#ulgender').find('.select').data('gender');
+                $('#ul_index-bar-place .select').removeClass('select');
+                $('.ch_all a').addClass('select');
             });
 
             $('#ul_index-bar-place').on('click','li a',function(){
