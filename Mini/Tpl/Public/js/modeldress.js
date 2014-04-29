@@ -64,9 +64,13 @@ var pageElement = {
 
     ModelDress.prototype = {
         init : function(){
-            this.showbaiyiModel();
-            this.elementEvent();
-            this.addClothesBySuitID();
+            var _this = this;
+            _this.showbaiyiModel();
+            _this.elementEvent();
+            setTimeout(function(){
+                _this.addClothesBySuitID();
+            },1000);
+
         },
         showbaiyiModel : function(){
             /***新的百衣搭配间****/
@@ -90,12 +94,14 @@ var pageElement = {
                 $.post(getCidItembnUrl,{suitid:suitid},function(data){
                     var code = data.code;
                     if( code == 1){
+                        pageElement.$btnExpansion.click();
                         var barcodeList = data.data;
                         if( barcodeList != null){
                         for(var i = 0;i<barcodeList.length;i++){
-                            Model.DressingByBarcode(barcodeList[i].barcode,gender);
+
+                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
+
                         }
-                        pageElement.$btnExpansion.click();
                         }
                     }
                 });
