@@ -128,7 +128,7 @@ class GetinfoModel extends Action{
     }
 
     public function getKeyValue($key){
-        $result = M('Settings')->cache(true)->field('value')->where(array('key'=>$key))->find();
+        $result = M('Settings')->field('value')->where(array('key'=>$key))->find();
         return $result;
     }
 
@@ -138,7 +138,7 @@ class GetinfoModel extends Action{
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
-            $suitSelect[$k]['detail'] = $goodsDetail->cache(true)->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID'],'ug.approve_status'=>'onsale','ug.num'=>array('egt','15')))->select();
+            $suitSelect[$k]['detail'] = $goodsDetail->join('inner join u_beubeu_goods ug on u_suits_goodsdetail.num_iid=ug.num_iid')->field('ug.num_iid,ug.pic_url,ug.detail_url,ug.title')->where(array('u_suits_goodsdetail.suitID'=>$v['suitID'],'ug.approve_status'=>'onsale','ug.num'=>array('egt','15')))->select();
         }
         return $suitSelect;
     }
