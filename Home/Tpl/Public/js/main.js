@@ -400,6 +400,7 @@ var callBackFunction = {
         strItem += '<img class="imgSuits" src="'+ item.suitImageUrl +'" data-gender="'+ item.suitGenderID+'"  data-suitid="'+ item.suitID +'" />';
         strItem += '<div class="similarity">';
         var detail = item.detail;
+
         var numids = [];
         if(detail != null){
             for(var i =0;i<detail.length;i++){
@@ -412,7 +413,8 @@ var callBackFunction = {
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
-        strItem += '<a href="'+ baseurl + '"mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID + '" target="_blank">È¥ĞéÄâÊÔÒÂ¼äÊÔ´©</a></div></div>';
+        var url = baseurl + 'mini.php/Index?suitid='+ item.suitID + '&gender=' + item.suitGenderID ;
+        strItem += '<a href="'+ url + '" target="_blank">È¥ĞéÄâÊÔÒÂ¼äÊÔ´©</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
