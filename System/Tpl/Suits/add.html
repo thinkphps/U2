@@ -83,7 +83,7 @@
 </div>
 <include file="Public:footer"/>
 <script>
-    var cityurl = "{:U('Suits/getStyle')}",areaurl = "{:U('Shop/getarea')}";
+    var cityurl = "{:U('Suits/getStyle')}",areaurl = "{:U('Shop/getarea')}",picurl = "{:U('Suits/getPic')}",id = +"{$result.suitID}";
     var H = Object();
     $(function(){
         //新增
@@ -120,6 +120,13 @@
         });
         $('#review').on('click',function(){
           $('#viewshow').attr('src',$('#suitImageUrlid').val());
+        });
+
+        //判断图片是否被使用
+        $('#suitImageUrlid').on('blur',function(){
+            $.post(picurl,{pic:$('#suitImageUrlid').val()},function(data,status){
+              alert(data.msg);
+            });
         });
     });
 

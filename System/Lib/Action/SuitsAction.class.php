@@ -209,4 +209,18 @@ public function delsuit(){
         $this->display('Login/index');
     }
 }
+    public function getPic(){
+        if(!empty($this->aid)){
+        $picpath = trim($this->_post('pic'));
+        $find = M('Suits')->field('suitID')->where(array('suitImageUrl'=>$picpath))->select();
+        if(!empty($find)){
+            $returnArr = array('code'=>0,'msg'=>'图片已被使用');
+        }else{
+            $returnArr = array('code'=>1,'msg'=>'图片可以使用');
+        }
+        }else{
+                $returnArr = array('code'=>0,'msg'=>'没有登录');
+            }
+       $this->ajaxReturn($returnArr,'json');
+    }
 }
