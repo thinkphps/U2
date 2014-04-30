@@ -15,9 +15,10 @@ class SuitsAction extends Action{
                $where = array();
                $suitGenderID = trim($this->_post('pid'));
                $suitStyleID = trim($this->_post('stylevalue'));
+               $batchDate = trim($this->_post('batchDate'));
                $pagestr = '';
                if(!empty($suitGenderID)){
-                $where['suitGenderID'] = $suitGenderID;
+                   $where['suitGenderID'] = $suitGenderID;
                    $pagestr.="/pid/".$suitGenderID;
                    $stylelist = M('SettingsGenderStyle')->join("inner join u_settings_suit_style sss on u_settings_gender_style.styleID=sss.ID")->field('sss.ID,sss.description')->where(array('u_settings_gender_style.genderID'=>$suitGenderID))->select();
                }
@@ -25,10 +26,14 @@ class SuitsAction extends Action{
                 $where['suitStyleID'] = $suitStyleID;
                 $pagestr.="/stylevalue/".$suitStyleID;
                }
+               if(!empty($batchDate)){
+                   $where['batchDate'] = $batchDate;
+                   $pagestr.="/batchDate/".$batchDate;
+               }
                $gender = M('SettingsSuitGender');
                $resultGender = $gender->field('*')->select();
                import("@.ORG.Pageyu");
-               $count = $sutis->count();
+               $count = $sutis->where($where)->count();
                $p = new Page($count,20,$pagestr);
                $list = $sutis->field('*')->where($where)->order('suitID desc')->limit($p->firstRows.','.$p->maxRows)->select();
 
@@ -58,6 +63,7 @@ class SuitsAction extends Action{
                $this->assign('stylelist',$stylelist);
                $this->assign('suitGenderID',$suitGenderID);
                $this->assign('suitStyleID',$suitStyleID);
+               $this->assign('batchDate',$batchDate);
               $this->display();
            }else{
                $this->display('Login/index');
