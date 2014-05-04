@@ -632,7 +632,11 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $('#cldatas').removeClass('select');
     $.uniqlo.bid = 0;
     $.uniqlo.lid = 0;
+    $.weather.sex = 0;
+    $.uniqlo.fid = 0;
+    $.uniqlo.zid = 0;
     $.uniqlo.kid = 1;
+    $.uniqlo.minikeyword = keyword;
     if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
         _mini.initialization();
@@ -671,7 +675,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
                         getResource:function(index,render){
                             //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
 
-                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1);
+                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1,$.uniqlo.minikeyword);
                             html = $.weather.str;
                             return $(html);
 

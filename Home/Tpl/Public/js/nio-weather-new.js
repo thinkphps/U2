@@ -262,7 +262,7 @@ var weather = {
             $('.preferential_1').remove();
             $('#tablink1').remove();
             $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a>'+data.newstorre+'</a></li>');
-            $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onclick=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
+            $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
         }else{
             $('.preferential_1').remove();
             $('#tablink1').remove();

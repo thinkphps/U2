@@ -213,14 +213,14 @@ public function getgood(){
     if($this->_request('tem')){
         $tem = trim($this->_request('tem'));//平均温度
     }
-	$sid = trim($this->_post('sid'));//性别id形如1,2,3 all为0
-	$lid = trim($this->_post('lid'));//收藏id
-    $bid = trim($this->_post('bid'));//购买id
-	$fid = trim($this->_post('fid'));//风格id
-	$zid = trim($this->_post('zid'));//自定义分类
-    $kid = trim($this->_post('kid'));//快速搜索标记
-    $page = trim($this->_post('page'));
-    $keyword = trim($this->_post('keyword'));
+	$sid = trim($this->_request('sid'));//性别id形如1,2,3 all为0
+	$lid = trim($this->_request('lid'));//收藏id
+    $bid = trim($this->_request('bid'));//购买id
+	$fid = trim($this->_request('fid'));//风格id
+	$zid = trim($this->_request('zid'));//自定义分类
+    $kid = trim($this->_request('kid'));//快速搜索标记
+    $page = trim($this->_request('page'));
+    $keyword = trim($this->_request('keyword'));
 
 	if($this->_request('tem')<=-10){
 	$tem = -10;	
@@ -309,12 +309,18 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
     }else if($kid>0){
        //快速搜索走这里
         if($keyword){
-       //$result = M('BeubeuGoods')->field('u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.isud,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url')->where(array('approve_status'=>'onsale','num'=>array('egt','15'),'title'=>array('like','%'.$keyword.'%'),'istag'=>'2'))->order('uptime desc')->limit($start.','.$page_num)->select();
             if(!empty($uid)){
                 $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=g.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=g.num_iid";
                 $fieldlb = ",lo.id as loveid,bu.id as buyid";
             }
-       $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and g.approve_status='onsale' and g.num>=15 and title like '%{$keyword}%' order by g.uptime desc limit {$start},{$page_num}";
+       $isair = is_int(strpos($keyword,' '));
+       if($isair){
+        $keywordArr = explode(' ',$keyword);
+        $newkeyword = implode('%',$keywordArr);
+       }else{
+         $newkeyword =  $keyword;
+       }
+       $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and g.approve_status='onsale' and g.num>=15 and title like '%{$newkeyword}%' order by g.uptime desc limit {$start},{$page_num}";
        $result = M('BeubeuGoods')->query($sql);
       }
         if(!empty($result)){
@@ -399,46 +405,35 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
            }*/
       }
     if(!empty($result)){
-        $arr_count = count($result);
-        $returnArr = array('code'=>1,'da'=>$result,'count'=>$arr_count,'page'=>$page,'nextpage'=>$page+1);
+        $arr['tem'] = $tem;
+        $arr['sid'] = $sid;
+        $arr['lid'] = $lid;
+        $arr['bid'] = $bid;
+        $arr['fid'] = $fid;
+        $arr['zid'] = $zid;
+        $arr['kid'] = $kid;
+        $arr['keyword'] = $keyword;
+        $returnArr = array('code'=>1,'da'=>$result,'parm'=>$arr);
     }else{
-    $returnArr = array('code'=>0,'msg'=>'没有数据');
+       $returnArr = array('code'=>0,'msg'=>'没有数据');
      }
     $this->ajaxReturn($returnArr, 'JSON');
 }
     public function waterdata($result,$lid,$bid,$keyword){
-        $ad = "<div class='productinfo wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='http://img02.taobaocdn.com/imgextra/i2/196993935/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div>";
-        $ad2 = '<div class="productinfo wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.7.cTVbad&scid=906738330&scname=za%2FXsM%2FeyrHM2NPFWzQvMjXG8F0%3D&checkedRange=true&queryType=cat" target="__blank"><img src="http://img03.taobaocdn.com/imgextra/i3/196993935/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div>';
-
-        if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
-        }
-        else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
-
-        }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
-        }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
-        }
-        else{
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div>';
-        }
-
-        array_unshift($result,array('first'=>1,'ad'=>$ad));
+        array_unshift($result,array('first'=>1,'ad'=>-1));
         $arr_count = count($result);
         if($arr_count>=4){
-            array_splice($result,2,0,array(array('first'=>1,'ad'=>$ad2)));
+            array_splice($result,2,0,array(array('first'=>1,'ad'=>-2)));
         }else if($arr_count == 3){
-            array_splice($result,($arr_count-1),0,array(array('first'=>1,'ad'=>$ad2)));
+            array_splice($result,($arr_count-1),0,array(array('first'=>1,'ad'=>-2)));
         }else{
-            array_splice($result,($arr_count),0,array(array('first'=>1,'ad'=>$ad2)));
+            array_splice($result,($arr_count),0,array(array('first'=>1,'ad'=>-2)));
         }
         $arr_count = count($result);
         if($arr_count>=4){
-            array_splice($result,3,0,array(array('first'=>1,'cb'=>$str)));
+            array_splice($result,3,0,array(array('first'=>1,'cb'=>-3)));
         }else{
-            array_splice($result,($arr_count),0,array(array('first'=>1,'cb'=>$str)));
+            array_splice($result,($arr_count),0,array(array('first'=>1,'cb'=>-3)));
         }
         return $result;
     }
