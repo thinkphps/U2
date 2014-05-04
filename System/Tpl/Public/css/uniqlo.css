@@ -63,3 +63,7 @@ table.text-center th{
 .official .row{
 	height: 360px;
 }
+/*0430kimi*/
+.numcid{width:350px;}
+.numleft{width:40%;float:left;}
+.numright{width:40%;float:right;}

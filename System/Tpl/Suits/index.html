@@ -6,6 +6,10 @@
     </ol>
     <form class="form-inline form-group" role="form" action="{:U('Suits/index')}" method='post'>
         <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">批次</label>
+            <input type="text" class="form-control"  placeholder="批次" name='batchDate' value='{$batchDate}'>
+        </div>
+        <div class="form-group">
             <label>类别</label>
             <select name='pid' id='pname'>
                 <option value='0'>选择类别</option>
@@ -36,6 +40,7 @@
         <thead>
         <tr>
             <th>后台ID</th>
+            <th>批次</th>
             <th>缩略图</th>
             <th>风格</th>
             <th>类别</th>
@@ -46,6 +51,7 @@
         <volist id='vo' name='list'>
             <tr>
                 <td>{$vo.suitID}</td>
+                <td>{$vo.batchDate}</td>
                 <td><img src="{$vo.suitImageUrl}" width="135px" height="188px"></td>
                 <td>{$vo.style}</td>
                 <td>{$vo.sex}</td>

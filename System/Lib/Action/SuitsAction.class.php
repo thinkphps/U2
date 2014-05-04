@@ -15,9 +15,10 @@ class SuitsAction extends Action{
                $where = array();
                $suitGenderID = trim($this->_post('pid'));
                $suitStyleID = trim($this->_post('stylevalue'));
+               $batchDate = trim($this->_post('batchDate'));
                $pagestr = '';
                if(!empty($suitGenderID)){
-                $where['suitGenderID'] = $suitGenderID;
+                   $where['suitGenderID'] = $suitGenderID;
                    $pagestr.="/pid/".$suitGenderID;
                    $stylelist = M('SettingsGenderStyle')->join("inner join u_settings_suit_style sss on u_settings_gender_style.styleID=sss.ID")->field('sss.ID,sss.description')->where(array('u_settings_gender_style.genderID'=>$suitGenderID))->select();
                }
@@ -25,10 +26,14 @@ class SuitsAction extends Action{
                 $where['suitStyleID'] = $suitStyleID;
                 $pagestr.="/stylevalue/".$suitStyleID;
                }
+               if(!empty($batchDate)){
+                   $where['batchDate'] = $batchDate;
+                   $pagestr.="/batchDate/".$batchDate;
+               }
                $gender = M('SettingsSuitGender');
                $resultGender = $gender->field('*')->select();
                import("@.ORG.Pageyu");
-               $count = $sutis->count();
+               $count = $sutis->where($where)->count();
                $p = new Page($count,20,$pagestr);
                $list = $sutis->field('*')->where($where)->order('suitID desc')->limit($p->firstRows.','.$p->maxRows)->select();
 
@@ -58,6 +63,7 @@ class SuitsAction extends Action{
                $this->assign('stylelist',$stylelist);
                $this->assign('suitGenderID',$suitGenderID);
                $this->assign('suitStyleID',$suitStyleID);
+               $this->assign('batchDate',$batchDate);
               $this->display();
            }else{
                $this->display('Login/index');
@@ -106,6 +112,7 @@ class SuitsAction extends Action{
                 $this->error('图片不能为空',U('Suits/add'));
                 exit;
             }
+            $batchDate = trim($this->_post('batchDate'));
             $num_iid = $this->_post('num_iid');
             $cid = $this->_post('cid');
             $flag = 0;
@@ -129,6 +136,7 @@ class SuitsAction extends Action{
              $data = array('suitStyleID'=>$suitStyleID,
                  'suitGenderID'=>$suitGenderID,
                  'suitImageUrl'=>$suitImageUrl,
+                 'batchDate'=>$batchDate,
                  'uptime'=>$time);
          $suits->where(array('suitID'=>$id))->save($data);
          $detail->where(array('suitID'=>$id))->delete();
@@ -148,6 +156,7 @@ class SuitsAction extends Action{
            $data = array('suitStyleID'=>$suitStyleID,
                           'suitGenderID'=>$suitGenderID,
                          'suitImageUrl'=>$suitImageUrl,
+                         'batchDate'=>$batchDate,
                          'createtime'=>$time,
                         'uptime'=>$time);
           $resid = $suits->add($data);
@@ -222,5 +231,28 @@ public function delsuit(){
                 $returnArr = array('code'=>0,'msg'=>'没有登录');
             }
        $this->ajaxReturn($returnArr,'json');
+    }
+    public function numiidStyle(){
+        if(!empty($this->aid)){
+          $num_iid = trim($this->_post('num_iid'));
+          if(!empty($num_iid)){
+            $list = M('Goodtag')->join('inner join u_settings_suit_style us on us.ID=u_goodtag.ftag_id')->field('us.description')->where(array('u_goodtag.num_iid'=>$num_iid))->group('u_goodtag.ftag_id')->select();
+            //$sql = "select from ()";
+          if(!empty($list)){
+            foreach($list as $k=>$v){
+              $arr[] = $v['description'];
+            }
+              $fstr = implode('_',$arr);
+              $returnArr = array('code'=>1,'str'=>$fstr);
+          }else{
+              $returnArr = array('code'=>0,'msg'=>'此商品没有打标签');
+          }
+          }else{
+            $returnArr = array('code'=>0,'msg'=>'参数错误');
+          }
+        }else{
+            $returnArr = array('code'=>0,'msg'=>'没有登录');
+        }
+        $this->ajaxReturn($returnArr,'json');
     }
 }
