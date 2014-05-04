@@ -475,39 +475,26 @@ var _mini = {
         var _this = this;
         var strHtml = '';
         var color = 'h_orange';
-        var pushid = 3,pushid2 = 2,loveCss='',buyCss='';
+        var loveCss='',buyCss='';
         $.each(data.da,function(p,v){
-            if(v.first==1 && p==0){
+            if(v.first==1){
                 strHtml+= v.ad;
-            }
-            if(v.first==1 && p==pushid2){
+            }else if(v.first==2){
                 strHtml+= v.ad;
-            }
-            if(v.first==1 && p==pushid){
+            }else  if(v.first==3){
                 strHtml+= v.cb;
             }
             else{
-            loveCss='';
-            buyCss='';
-            if(data.count>=4){
-                pushid = 3;
-            }else{
-                pushid = data.count-1;
-            }
-            if(data.count>=4){
-                pushid2 = 2;
-            }else{
-                pushid2 = data.count-2;
-            }
+                loveCss='';
+                buyCss='';
+                if(v.type==1){
+                    color = 'h_pink';
+                }else if(v.type==2){
+                    color = 'h_blue';
+                }else if(v.type == 3 || v.type==4 || v.type == 5){
+                    color = 'h_orange';
+                }
 
-            if(v.type==1){
-                color = 'h_pink';
-            }else if(v.type==2){
-                color = 'h_blue';
-            }else if(v.type == 3 || v.type==4 || v.type == 5){
-                color = 'h_orange';
-            }
-            if(p != 0 && p != pushid && p != pushid2){
                 if(v.loveid != null && v.loveid != undefined){
                     loveCss = ' select';
                 }
@@ -540,7 +527,6 @@ var _mini = {
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
                 strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
                 strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
-            }
             }
         });
         return strHtml;
@@ -593,10 +579,6 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
             lid = 1;
         }
         _mini.initialization();
-        $.weather.nextpage = 0;
-        $.uniqlo.bid = bid;
-        $.uniqlo.lid = lid;
-        $.uniqlo.kid = 0;
         getgoods(0,0,lid,bid,0,0,0,0);
 
     }
@@ -638,7 +620,11 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $('#cldatas').removeClass('select');
     $.uniqlo.bid = 0;
     $.uniqlo.lid = 0;
+    $.weather.sex = 0;
+    $.uniqlo.fid = 0;
+    $.uniqlo.zid = 0;
     $.uniqlo.kid = 1;
+    $.uniqlo.minikeyword = keyword;
     if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
         _mini.initialization();
@@ -653,13 +639,14 @@ document.onkeydown = function(e){
     }
 }
 
+
 $('#watercontainer').waterfall({
     itemCls: 'productinfo',
 //    prefix: 'productinfo',
     fitWidth: true,
     colWidth: 228,
     gutterWidth: 10,
-    gutterHeight: 10,
+    gutterHeight: 0,
     align: 'center',
     minCol: 1,
     maxCol: 4,
@@ -680,10 +667,9 @@ $('#watercontainer').waterfall({
     checkImagesLoaded: true,
     dataType: 'json',
     params: {
-
     },
 
-    loadingMsg: 'Loading...',
+//    loadingMsg: 'Loading...',
 
     state: {
         isDuringAjax: false,
@@ -698,16 +684,23 @@ $('#watercontainer').waterfall({
         renderData: function (data, dataType) {
             var tpl,
                 template;
-            !data.length && $('.product_more').hide();
-
-            if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+            if(data.code == 1){
+                if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
 //                tpl = $('#waterfall-tpl').html();
 //                template = Handlebars.compile(tpl);
 
 //                return template(data);
-                return _mini.getProductInfo(data);
-            } else { // html format
-                return data;
+                    return _mini.getProductInfo(data);
+                } else { // html format
+                    return data;
+                }
+            }
+            else{
+                $('.product_more').hide();
+
+                $('#watercontainer').waterfall('option', {bufferPixel: 10000,
+                    maxPage: -1});
+                return "";
             }
         }
     },
@@ -715,6 +708,7 @@ $('#watercontainer').waterfall({
     debug: false
 });
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
+    if(keyword == undefined){ keyword = ""}
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg
@@ -724,62 +718,13 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
             fid : fid,//,$.uniqlo.fid,//风格id
             zid : zid,//$.uniqlo.zid,//自定义分类
             kid : kid,//$.uniqlo.kid,//快速搜索标记
-            keyword : keyword,
-            isNewData : _mini.isNewData
+            keyword : keyword
         },
         state:{curPage:1},
+        bufferPixel: -50,
         maxPage: 99999999
     });
 
-
-
-//    $.post(goodurl,{
-//        tem : tem,//温度
-//        sid : sid,//性别id形如1,2,3 all为0
-//        lid : lid,//收藏id
-//        bid : bid,//购买id
-//        fid : fid,//风格id
-//        zid : zid,//自定义分类
-//        kid : kid,//快速搜索标记
-//        page : $.weather.nextpage,
-//        keyword : keyword
-//    },function(data,status){
-//        if(data){
-//            if(data.code==1){
-//                var strProInfo = _mini.getProductInfo(data);
-//                $.weather.nextpage = data.nextpage;
-//                if(!loadmore){
-//                    $('#watercontainer').html(strProInfo);
-//
-//                    var opt={
-//
-//                        getResource:function(index,render){
-//                            //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
-//
-//                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1);
-//                            html = $.weather.str;
-//                            return $(html);
-//
-//                        },
-//
-//                        auto_imgHeight:true,
-//                        column_width : 228,
-//                        insert_type:2,
-//                        cell_selector : '.productinfo',
-//                        max_column_num:4
-//                    }
-//
-//                    $('#watercontainer').waterfall(opt);
-//                }
-//                else{
-//                    $.weather.str = strProInfo;
-//                }
-//            }else{
-//                $.weather.str = '';
-//                $('.product_more').html('');
-//            }
-//        }
-//    },'json');
 }
 function delgo(id){
     if(id>0){

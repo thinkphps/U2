@@ -28,6 +28,20 @@ var pageElement = {
             pageElement.$btnExpansion.click();
         }
     },
+    currentColRelayout : function($proInfo,changeType){
+
+        var leftPx = $proInfo.position().left
+            ,topPx = $proInfo.position().top
+            ,addHeight = $proInfo.find('.product_color').outerHeight();
+        console.log(addHeight)
+        pageElement.$watercontainer.children('.productinfo').each(function(){
+            var thisposition =  $(this).position();
+            if(thisposition.left == leftPx && thisposition.top > topPx){
+                $(this).css('top',thisposition.top + addHeight * changeType);
+            }
+
+        });
+    },
     clearAllSelected : function(){
         $('#watercontainer .pro-selected').removeClass('pro-selected');
 
@@ -36,6 +50,7 @@ var pageElement = {
         $('#watercontainer .product_color').hide();
 
         $('#watercontainer .product_gender a').removeData('select_barcode');
+        $('#watercontainer').waterfall('reLayout');
     },
     clearSelected :function(){
         var barcodeList = this.BarcodeList;
@@ -43,7 +58,6 @@ var pageElement = {
         $('.pro-selected').each(function(){
             if($.inArray($(this).data('barcode'),barcodeList) < 0){
                 $(this).removeClass('pro-selected');
-//                if($(this.data))
             }
         });
 
@@ -51,7 +65,11 @@ var pageElement = {
             if(!$(this).is(':hidden')){
                 if($(this).find('.pro-selected').length == 0){
                     $(this).hide();
-                    $(this).parent().find('.tryon').removeClass('select');
+                    var $tryon = $(this).parent().find('.tryon');
+                    if($tryon.hasClass('select')){
+                        $tryon.removeClass('select');
+                        pageElement.currentColRelayout($($(this).parent().parent()[0]),-1);
+                    }
                     $(this).parent().find('.product_gender a').removeData('select_barcode');
                 }
             }
@@ -100,11 +118,9 @@ var pageElement = {
                         pageElement.$btnExpansion.click();
                         var barcodeList = data.data;
                         if( barcodeList != null){
-                        for(var i = 0;i<barcodeList.length;i++){
-
+                            for(var i = 0;i<barcodeList.length;i++){
                                 Model.DressingByBarcode(barcodeList[i].barcode,gender);
-
-                        }
+                            }
                         }
                     }
                 });
@@ -237,6 +253,7 @@ var pageElement = {
             });
             pageElement.Ischanged = 0;
         },
+
         elementEvent : function(){
             var _this = this;
 
@@ -286,7 +303,7 @@ var pageElement = {
 
             //点击衣服调用试穿按钮功能
             pageElement.$watercontainer.on('click','.product_inf',function(){
-               $(this).parent().find('.tryon').click();
+                $(this).parent().find('.tryon').click();
             });
             //点击衣服调用试穿按钮功能
             pageElement.$watercontainer.on('click','.product_img',function(){
@@ -328,15 +345,19 @@ var pageElement = {
                     }
 
                 }else{
+
                     pageElement.IsHide = 0;
                     $tryon.data('selected',0);
-    //                var selectBarcode = $children_gender.find('a').data('select_barcode');
+                    //                var selectBarcode = $children_gender.find('a').data('select_barcode');
                     if( $color_img.find('.pro-selected').length == 0){
                         $this.find('.product_color').hide();
                         if($tryon.hasClass('select')){
                             $tryon.removeClass('select');
+                            pageElement.currentColRelayout($($this.parent()[0]),-1);
                         }
                     }
+//                    $('#watercontainer').waterfall('reLayout');
+
                 }
             });
 
@@ -386,7 +407,7 @@ var pageElement = {
                     pageElement.$watercontainer.find('.tryon').each(function(){
                         if($(this).hasClass('select')){
                             if($(this).data('imgurl') != $('#tops_bottoms img').attr('src') && $(this).data('imgurl') != $('#bottoms img').attr('src')
-                            &&  $(this).data('imgurl') != $('#single img').attr('src')){
+                                &&  $(this).data('imgurl') != $('#single img').attr('src')){
                                 $(this).removeClass('select');
                             }
                         }
@@ -401,6 +422,9 @@ var pageElement = {
                     var $colorImg = $wrapper_box.find('.color-img');
                     $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
                     $wrapper_box.find('.product_color').show();
+//                    $('#watercontainer').waterfall('reLayout');
+                    pageElement.currentColRelayout($($wrapper_box.parent()[0]),1);
+
                 }
             });
 

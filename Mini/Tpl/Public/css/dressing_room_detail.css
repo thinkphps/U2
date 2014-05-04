@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+﻿﻿@charset "utf-8";
 /*- Html Tags Reset -*/
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, figure {padding:0; margin:0; }
 body{ font:12px/1.5 Tahoma,"微软雅黑",Arial,Helvetica,simsun,sans-serif; background-color:#eee; }
@@ -530,8 +530,8 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .wrapper_box_btn_group a.ygm_btn.select i{background:url(../images/wrapper_box_main_btn2.png) -36px -36px no-repeat;}
 
 
-
-.wrapper_box_search{ width:228px; height:50px;}
+.right_search{width:228px;height: 105px;}
+.wrapper_box_search{ width:228px;height: 45px;}
 .wrapper_box_search input{ float:left; width:160px; height:36px; line-height:36px; font-size:14px; border:none; background:#fff; margin:5px; padding-left:10px;}
 .wrapper_box_search a{ display:block; float:right; width:36px; height:36px; background:url(../images/wrapper_box_main_btn2.png) 0 -164px no-repeat; margin:7px 7px 7px 0;}
 .wrapper_box_search a:hover{ background:url(../images/wrapper_box_main_btn2.png) -36px -164px no-repeat;}
