@@ -42,7 +42,7 @@
         <div class="form-group">
             <label for="inputTime" class="col-lg-2 control-label">批次</label>
             <div class="col-lg-2">
-                <input type="text" class="form-control" placeholder="批次" name='batchDate' value="{$result['batchDate']}">(形如:2014-01-23)
+                <input type="text" class="form-control" id='pciid' placeholder="批次" name='batchDate' value="{$result['batchDate']}">(形如:2014-01-23)
             </div>
         </div>
         <div class="form-group">
@@ -88,6 +88,38 @@
     </form>
 </div>
 <include file="Public:footer"/>
+<!--<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/jquery.ui.datepicker.css" />
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/jquery.ui.theme.css" />
+<script type="text/javascript" src="__TMPL__Public/js/jquery.ui.core.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/jquery.ui.datepicker.js"></script>-->
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
+<script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
+        <script type="text/javascript">
+            $(window).ready(function(){
+                $('#pciid').daterangepicker(
+                        {
+                            startDate: new Date(),
+                            format: 'YYYY-MM-DD',
+                             : true,
+                            locale:{
+                                applyLabel: '选择',
+                                cancelLabel: '取消',
+                                fromLabel: '开始',
+                                toLabel: '截止',
+                                weekLabel: '周',
+                                customRangeLabel: 'Custom Range',
+                                daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                                monthNames: moment()._lang._monthsShort.slice(),
+                                firstDay: 0
+                            }
+                        }
+
+
+                );
+            });
+
+        </script>
 <script>
     var cityurl = "{:U('Suits/getStyle')}",areaurl = "{:U('Shop/getarea')}",picurl = "{:U('Suits/getPic')}",id = +"{$result.suitID}",numurl = "{:U('Suits/numiidStyle')}";
     var H = Object();
@@ -141,8 +173,12 @@
             var numiidvalue = $(this).val();
                 that = $(this);
             $.post(numurl,{num_iid:numiidvalue},function(data,status){
+             if(data.code==1){
              that.parent('.numcid').nextAll('.numsty').remove();
              that.parent('.numcid').after('<div class="numsty">'+data.str+'</div>');
+            }else{
+                 that.parent('.numcid').after('<div class="numsty">'+data.msg+'</div>');
+             }
             },'json');
         });
     });
