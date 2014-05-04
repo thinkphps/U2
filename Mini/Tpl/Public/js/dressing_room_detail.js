@@ -406,6 +406,19 @@ var _mini = {
                     $('.left_tj').css('width','466px');
                     $('.left_tj ul').css('width','466px');
                     $('#alluid').children('a').text('全部上装');
+                    $('#alluid').children('a').addClass('w_select');
+                    $('#alldid').children('a').addClass('w_select');
+                    if($('.zk_btn').hasClass('upselect')){
+                        $('.left_tj').css('height','auto');
+                        $('.left_tj ul').css('height','auto');
+                        $('.right_tj').css('height','auto');
+                        $('.right_tj ul').css('height','auto');
+                    }else{
+                        $('.left_tj').css('height','26px');
+                        $('.left_tj ul').css('height','26px');
+                        $('.right_tj').css('height','26px');
+                        $('.right_tj ul').css('height','26px');
+                    }
                     var ustr = '',dstr='';
                     $.each(data.u,function(i,name){
                         ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
