@@ -477,6 +477,16 @@ var _mini = {
         var color = 'h_orange';
         var pushid = 3,pushid2 = 2,loveCss='',buyCss='';
         $.each(data.da,function(p,v){
+            if(v.first==1 && p==0){
+                strHtml+= v.ad;
+            }
+            if(v.first==1 && p==pushid2){
+                strHtml+= v.ad;
+            }
+            if(v.first==1 && p==pushid){
+                strHtml+= v.cb;
+            }
+            else{
             loveCss='';
             buyCss='';
             if(data.count>=4){
@@ -489,15 +499,7 @@ var _mini = {
             }else{
                 pushid2 = data.count-2;
             }
-            if(v.first==1 && p==0){
-                strHtml+= v.ad;
-            }
-            if(v.first==1 && p==pushid2){
-                strHtml+= v.ad;
-            }
-            if(v.first==1 && p==pushid){
-                strHtml+= v.cb;
-            }
+
             if(v.type==1){
                 color = 'h_pink';
             }else if(v.type==2){
@@ -538,6 +540,7 @@ var _mini = {
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
                 strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
                 strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
+            }
             }
         });
         return strHtml;
@@ -599,6 +602,9 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
     }
 });
 
+
+
+
 $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
 
     //如果没有登录则弹出注册框
@@ -632,11 +638,7 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $('#cldatas').removeClass('select');
     $.uniqlo.bid = 0;
     $.uniqlo.lid = 0;
-    $.weather.sex = 0;
-    $.uniqlo.fid = 0;
-    $.uniqlo.zid = 0;
     $.uniqlo.kid = 1;
-    $.uniqlo.minikeyword = keyword;
     if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
         _mini.initialization();
@@ -651,54 +653,133 @@ document.onkeydown = function(e){
     }
 }
 
-function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
-    $.post(goodurl,{
-        tem : tem,//温度
-        sid : sid,//性别id形如1,2,3 all为0
-        lid : lid,//收藏id
-        bid : bid,//购买id
-        fid : fid,//风格id
-        zid : zid,//自定义分类
-        kid : kid,//快速搜索标记
-        page : $.weather.nextpage,
-        keyword : keyword
-    },function(data,status){
-        if(data){
-            if(data.code==1){
-                var strProInfo = _mini.getProductInfo(data);
-                $.weather.nextpage = data.nextpage;
-                if(!loadmore){
-                    $('#watercontainer').html(strProInfo);
+$('#watercontainer').waterfall({
+    itemCls: 'productinfo',
+//    prefix: 'productinfo',
+    fitWidth: true,
+    colWidth: 228,
+    gutterWidth: 10,
+    gutterHeight: 10,
+    align: 'center',
+    minCol: 1,
+    maxCol: 4,
+    maxPage: -1,
+    path: function(page){
+        return goodurl +'?page='+ page;
+    },
+    bufferPixel: -50,
+    containerStyle: {
+        position: 'relative'
+    },
+    resizable: true,
+    isFadeIn: false,
+    isAnimated: false,
+    animationOptions: {
+    },
+    isAutoPrefill: true,
+    checkImagesLoaded: true,
+    dataType: 'json',
+    params: {
 
-                    var opt={
+    },
 
-                        getResource:function(index,render){
-                            //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
+    loadingMsg: 'Loading...',
 
-                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1,$.uniqlo.minikeyword);
-                            html = $.weather.str;
-                            return $(html);
+    state: {
+        isDuringAjax: false,
+        isProcessingData: false,
+        isResizing: false,
+        curPage: 1
+    },
 
-                        },
+    // callbacks
+    callbacks: {
 
-                        auto_imgHeight:true,
-                        column_width : 228,
-                        insert_type:2,
-                        cell_selector : '.productinfo',
-                        max_column_num:4
-                    }
+        renderData: function (data, dataType) {
+            var tpl,
+                template;
+            !data.length && $('.product_more').hide();
 
-                    $('#watercontainer').waterfall(opt);
-                }
-                else{
-                    $.weather.str = strProInfo;
-                }
-            }else{
-                $.weather.str = '';
-                $('.product_more').html('');
+            if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+//                tpl = $('#waterfall-tpl').html();
+//                template = Handlebars.compile(tpl);
+
+//                return template(data);
+                return _mini.getProductInfo(data);
+            } else { // html format
+                return data;
             }
         }
-    },'json');
+    },
+
+    debug: false
+});
+function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
+    $('#watercontainer').waterfall('removeItems', $('.productinfo'));
+    $('#watercontainer').waterfall('option', {
+        params:{ tem : tem,//温度    $.weather.avg
+            sid : sid ,//性别id形如1,2,3 all为0 $.weather.sex
+            lid : lid,//收藏id  $.uniqlo.lid,
+            bid : bid,//$.uniqlo.bid,//购买id
+            fid : fid,//,$.uniqlo.fid,//风格id
+            zid : zid,//$.uniqlo.zid,//自定义分类
+            kid : kid,//$.uniqlo.kid,//快速搜索标记
+            keyword : keyword,
+            isNewData : _mini.isNewData
+        },
+        state:{curPage:1},
+        maxPage: 99999999
+    });
+
+
+
+//    $.post(goodurl,{
+//        tem : tem,//温度
+//        sid : sid,//性别id形如1,2,3 all为0
+//        lid : lid,//收藏id
+//        bid : bid,//购买id
+//        fid : fid,//风格id
+//        zid : zid,//自定义分类
+//        kid : kid,//快速搜索标记
+//        page : $.weather.nextpage,
+//        keyword : keyword
+//    },function(data,status){
+//        if(data){
+//            if(data.code==1){
+//                var strProInfo = _mini.getProductInfo(data);
+//                $.weather.nextpage = data.nextpage;
+//                if(!loadmore){
+//                    $('#watercontainer').html(strProInfo);
+//
+//                    var opt={
+//
+//                        getResource:function(index,render){
+//                            //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
+//
+//                            var html = getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,1);
+//                            html = $.weather.str;
+//                            return $(html);
+//
+//                        },
+//
+//                        auto_imgHeight:true,
+//                        column_width : 228,
+//                        insert_type:2,
+//                        cell_selector : '.productinfo',
+//                        max_column_num:4
+//                    }
+//
+//                    $('#watercontainer').waterfall(opt);
+//                }
+//                else{
+//                    $.weather.str = strProInfo;
+//                }
+//            }else{
+//                $.weather.str = '';
+//                $('.product_more').html('');
+//            }
+//        }
+//    },'json');
 }
 function delgo(id){
     if(id>0){
