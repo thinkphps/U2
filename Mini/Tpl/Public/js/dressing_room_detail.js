@@ -114,7 +114,6 @@ $(function(){
         $.weather.nextpage = 0;
         $.weather.avg = '';
         getgoods('',$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-        _mini.currentParams =  $.weather.sex + '00' + $.uniqlo.fid + $.uniqlo.zid + '00';
         $.uniqlo.index.week.find('.w_select').removeClass('w_select');
         return false;
     });
@@ -242,7 +241,7 @@ $(function(){
 
 })
 var _mini = {
-    currentParams : '',
+    timestamp : '',
     getSuits : function(){
         var gender = $('#ulgender li').siblings().children('a.select').parent('li').data('gender');
         this.showStyleMask(gender);
@@ -393,7 +392,7 @@ var _mini = {
         $.weather.nextpage = 0;
         $.uniqlo.fid = fid;
         getgoods($.weather.avg,sid,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-        _mini.currentParams = $.weather.avg + sid + '00' + $.uniqlo.fid + $.uniqlo.zid + '00';
+
 
     },
     getzid : function(sid){
@@ -598,7 +597,7 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
         $.uniqlo.bid = bid;
         $.uniqlo.lid = lid;
         getgoods(0,0,lid,bid,0,0,0,0);
-        _mini.currentParams = '00'+ bid + lid +'0010'+ keyword;
+
     }
 });
 
@@ -626,7 +625,7 @@ $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
         $.uniqlo.bid = bid;
         $.uniqlo.lid = lid;
         getgoods(0,0,lid,bid,0,0,0,0);
-        _mini.currentParams = '00'+ bid + lid +'0010'+ keyword;
+
     }
 });
 
@@ -645,7 +644,6 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     if(keyword){
 
         getgoods(0,0,0,0,0,0,1,0,keyword);
-        _mini.currentParams = '00000010'+ keyword;
         _mini.initialization();
     }
 
@@ -673,13 +671,13 @@ $('#watercontainer').waterfall({
     path: function(page){
         return goodurl +'?page='+ page;
     },
-    bufferPixel: -50,
+    bufferPixel: -200,
     containerStyle: {
         position: 'relative'
     },
     resizable: true,
     isFadeIn: false,
-    isAnimated: false,
+    isAnimated: true,
     animationOptions: {
     },
     isAutoPrefill: true,
@@ -708,14 +706,20 @@ $('#watercontainer').waterfall({
 //                tpl = $('#waterfall-tpl').html();
 //                template = Handlebars.compile(tpl);
                     //如果当前返回的参数和之前的参数不一致则将当前页面中的数据清空
-                    var strParams = data.parm.tem + data.parm.sid + data.parm.lid + data.parm.bid
-                        + data.parm.fid+ data.parm.zid+ data.parm.kid+ data.parm.keyword;
+
 //                    if(_mini.currentParams != strParams){
 //                        $('#watercontainer').waterfall('removeItems', $('.productinfo'));
 //                    }
+                    if(data.timestamp == _mini.timestamp){
+                        return _mini.getProductInfo(data);
+                    }
+                    else
+                    {
+                        return "";
+                    }
 
 //                return template(data);
-                    return _mini.getProductInfo(data);
+
                 } else { // html format
                     return data;
                 }
@@ -732,8 +736,11 @@ $('#watercontainer').waterfall({
 
     debug: false
 });
+
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
+    _mini.timestamp = new Date().getTime();
+    $('#waterfall-loading').remove();
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg
@@ -743,7 +750,8 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
             fid : fid,//,$.uniqlo.fid,//风格id
             zid : zid,//$.uniqlo.zid,//自定义分类
             kid : kid,//$.uniqlo.kid,//快速搜索标记
-            keyword : keyword
+            keyword : keyword,
+            timestamp : _mini.timestamp
         },
         state:{curPage:1},
         bufferPixel: -50,

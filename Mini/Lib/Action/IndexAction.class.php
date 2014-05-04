@@ -221,6 +221,7 @@ class IndexAction extends Action {
         $kid = trim($this->_request('kid'));//快速搜索标记
         $page = trim($this->_request('page'));
         $keyword = trim($this->_request('keyword'));
+        $timestamp = trim($this->_request('timestamp'));
 
         if($this->_request('tem')<=-10){
             $tem = -10;
@@ -405,15 +406,15 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
            }*/
         }
         if(!empty($result)){
-            $arr['tem'] = $tem;
-            $arr['sid'] = $sid;
-            $arr['lid'] = $lid;
-            $arr['bid'] = $bid;
-            $arr['fid'] = $fid;
-            $arr['zid'] = $zid;
-            $arr['kid'] = $kid;
-            $arr['keyword'] = $keyword;
-            $returnArr = array('code'=>1,'da'=>$result,'parm'=>$arr);
+//            $arr['tem'] = $tem;
+//            $arr['sid'] = $sid;
+//            $arr['lid'] = $lid;
+//            $arr['bid'] = $bid;
+//            $arr['fid'] = $fid;
+//            $arr['zid'] = $zid;
+//            $arr['kid'] = $kid;
+//            $arr['keyword'] = $keyword;
+            $returnArr = array('code'=>1,'da'=>$result,'timestamp'=>$timestamp);
         }else{
             $returnArr = array('code'=>0,'msg'=>'没有数据');
         }
