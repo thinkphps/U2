@@ -90,7 +90,7 @@ var pageElement = {
             _this.elementEvent();
             setTimeout(function(){
                 _this.addClothesBySuitID();
-            },1000);
+            },200);
 
         },
         showbaiyiModel : function(){
@@ -116,11 +116,14 @@ var pageElement = {
                     var code = data.code;
                     if( code == 1){
                         pageElement.$btnExpansion.click();
+                        var barcodes = [];
                         var barcodeList = data.data;
                         if( barcodeList != null){
                             for(var i = 0;i<barcodeList.length;i++){
-                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
+                                barcodes[i] = barcodeList[i].barcode;
+//                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
                             }
+                            get_uq_dp(barcodes.join(),gender);
                         }
                     }
                 });
