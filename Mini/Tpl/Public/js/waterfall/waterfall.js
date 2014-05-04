@@ -68,7 +68,7 @@
                         $loading.fadeOut();
                         //console.log('loading finished');
                     } else {
-                        //console.log('loading isBeyondMaxPage');
+//                        console.log('loading isBeyondMaxPage');
                         $loading.remove();
                     }
                 },

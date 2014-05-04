@@ -592,8 +592,9 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
             lid = 1;
         }
         _mini.initialization();
+        $.uniqlo.bid = bid;
+        $.uniqlo.lid = lid;
         getgoods(0,0,lid,bid,0,0,0,0);
-
     }
 });
 
@@ -618,10 +619,8 @@ $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
             bid = 1;
         }
         _mini.initialization();
-        $.weather.nextpage = 0;
         $.uniqlo.bid = bid;
         $.uniqlo.lid = lid;
-        $.uniqlo.kid = 0;
         getgoods(0,0,lid,bid,0,0,0,0);
     }
 });
