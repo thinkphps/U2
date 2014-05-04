@@ -207,10 +207,11 @@ var timer;
                 $('#ulgender').find('.select').removeClass('select');
                 $this.addClass('select');
                 $this.find('a').addClass('select');
-                _this.getSuits();
                 $('#ul_index-bar-place .select').removeClass('select');
                 $('.ch_all a').addClass('select');
                 $('.product_inf').hide();
+                _this.getSuits();
+
             });
 
             $('#ul_index-bar-place').on('click','li a',function(){
