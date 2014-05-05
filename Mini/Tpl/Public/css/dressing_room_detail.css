@@ -470,7 +470,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .right_tj ul li a{ display:block; width:90px; height:26px; line-height:26px; background:url(../images/dr_main_con_sub_nav_bg4.png) 0 0 repeat; text-align:center; color:#999;}
 .right_tj ul li a:hover{ background:#999; color:#FFF;}
 
-.zk_btn a{ display:block; width:20px; height:20px; background:url(../images/zk_btn.png) 0 0 no-repeat; position:absolute; left:50%; margin-left:-10px; top:77px; z-index:15;}
+.zk_btn a{ display:block; width:20px; height:20px; background:url(../images/zk_btn.png) 0 0 no-repeat; position:absolute; left:50%; margin-left:-10px; top:77px; z-index:9;}
 .zk_btn a:hover{ background:url(../images/zk_btn.png) 0 -20px no-repeat; }
 
 .zk_btn.upselect a{display:block; width:20px; height:20px; background:url(../images/zk_btn.png) -20px 0 no-repeat; position:absolute; left:50%; margin-left:-10px; top:77px; z-index:15;}

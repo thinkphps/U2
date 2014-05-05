@@ -27,7 +27,12 @@ class SuitsAction extends Action{
                 $pagestr.="/stylevalue/".$suitStyleID;
                }
                if(!empty($batchDate)){
-                   $where['batchDate'] = $batchDate;
+                   $map['suitID'] = $batchDate;
+                   $map['batchDate']  = $batchDate;
+                   $map['suitImageUrl']  = array('like','%'.$batchDate.'%');
+                   $map['_logic'] = 'or';
+                   $where['_complex'] = $map;
+                   //$where['batchDate'] = $batchDate;
                    $pagestr.="/batchDate/".$batchDate;
                }
                $gender = M('SettingsSuitGender');

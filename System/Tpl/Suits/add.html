@@ -173,6 +173,7 @@
              that.parent('.numcid').nextAll('.numsty').remove();
              that.parent('.numcid').after('<div class="numsty">'+data.str+'</div>');
             }else{
+                 that.parent('.numcid').nextAll('.numsty').remove();
                  that.parent('.numcid').after('<div class="numsty">'+data.msg+'</div>');
              }
             },'json');
