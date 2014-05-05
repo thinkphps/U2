@@ -248,7 +248,7 @@ class IndexnewAction extends Action{
             }else{
             $page_arr = array($start,$page_num,$page);
             $where['u_suits.approve_status'] = 0;
-            $where['u_suits.beubeuSuitID'] = array('exp','NOT NULL');
+            $where['u_suits.beubeuSuitID'] = array('exp','IS NOT NULL');
             $listResult = $Weather->getConSuitsList($where,$page_arr);
             if($listResult['code']==1){
                 $list = array('code'=>1,'page'=>$page+1,'count'=>$listResult['count'],'da'=>$listResult['da']);
