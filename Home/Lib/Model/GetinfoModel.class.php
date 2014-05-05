@@ -146,6 +146,7 @@ class GetinfoModel extends Action{
     public function getConSuitsList($where,$page_arr){
         $count =  M('Suits')->join('left join u_settings_suit_style as g on u_suits.suitStyleID=g.ID')->field('u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,u_suits.beubeuSuitID,g.description')->where($where)->count();
         $pages = ceil($count/$page_arr[1]);
+
         if($page_arr[2]>$pages){
             $resultArr = array('code'=>0,'没有数据');
         }else{
