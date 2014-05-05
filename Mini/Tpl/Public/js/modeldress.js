@@ -29,17 +29,17 @@ var pageElement = {
         }
     },
     currentColRelayout : function($proInfo,changeType){
-
         var leftPx = $proInfo.position().left
             ,topPx = $proInfo.position().top
             ,addHeight = $proInfo.find('.product_color').outerHeight();
-        pageElement.$watercontainer.children('.productinfo').each(function(){
+            pageElement.$watercontainer.children('.productinfo').each(function(){
             var thisposition =  $(this).position();
             if(thisposition.left == leftPx && thisposition.top > topPx){
                 $(this).css('top',thisposition.top + addHeight * changeType);
             }
-
         });
+
+        $('#watercontainer').height($('#watercontainer').height() + addHeight * changeType);
     },
     clearAllSelected : function(){
         $('#watercontainer .pro-selected').removeClass('pro-selected');
@@ -89,7 +89,7 @@ var pageElement = {
             _this.elementEvent();
             setTimeout(function(){
                 _this.addClothesBySuitID();
-            },200);
+            },1000);
 
         },
         showbaiyiModel : function(){
@@ -110,22 +110,24 @@ var pageElement = {
             var suitid = this.getUrlParam('suitid');
             if( suitid != -1){
                 var gender = _this.getGenderValue(this.getUrlParam('gender'));
-
-                $.post(getCidItembnUrl,{suitid:suitid},function(data){
-                    var code = data.code;
-                    if( code == 1){
-                        pageElement.$btnExpansion.click();
-                        var barcodes = [];
-                        var barcodeList = data.data;
-                        if( barcodeList != null){
-                            for(var i = 0;i<barcodeList.length;i++){
-                                barcodes[i] = barcodeList[i].barcode;
-//                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
-                            }
-                            get_uq_dp(barcodes.join(),gender);
-                        }
-                    }
-                });
+                console.log(gender);
+                get_baiyi_dp(suitid,gender);
+                pageElement.$btnExpansion.click();
+//                $.post(getCidItembnUrl,{suitid:suitid},function(data){
+//                    var code = data.code;
+//                    if( code == 1){
+//                        pageElement.$btnExpansion.click();
+//                        var barcodes = [];
+//                        var barcodeList = data.data;
+//                        if( barcodeList != null){
+//                            for(var i = 0;i<barcodeList.length;i++){
+//                                barcodes[i] = barcodeList[i].barcode;
+////                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
+//                            }
+//                            get_baiyi_dp(barcodes.join(),gender);
+//                        }
+//                    }
+//                });
             }
         },
         getGenderValue : function(gender){
@@ -219,6 +221,7 @@ var pageElement = {
                 pageElement.dressByBarcode(barcode,gender);
                 $colorLi.parent().find("li").removeClass("pro-selected");
                 $colorLi.addClass('pro-selected');
+
             }
 
         },

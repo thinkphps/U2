@@ -250,7 +250,7 @@
                 this.colHeightArray[i] = 0;
             }
         },
-        
+
         /*
          * layout
          */
@@ -365,7 +365,7 @@
          */
         prepend: function($content, callback) {
             this.$element.prepend($content);  
-            this.reLayout(callback); 
+            this.reLayout(callback);
         },
         
         /*
@@ -496,9 +496,9 @@
                     self.options.callbacks.loadingFinished(self.$loading, self.options.state.isBeyondMaxPage);
                 });
             }
-            //如果是最后一页，则将高度增加200
             if(content == ''){
-                this.$element.height(Math.max.apply({}, this.colHeightArray)+200);
+                this.$element.height(Math.max.apply({}, this.colHeightArray) + 100);
+//                self.height(self.height() + 200);
             }
             
         },
