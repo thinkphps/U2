@@ -705,6 +705,7 @@ $('#watercontainer').waterfall({
 //                template = Handlebars.compile(tpl);
                     //如果当前返回的参数和之前的参数不一致则将当前页面中的数据清空
                     if(data.timestamp == _mini.timestamp){
+                        $('#watercontainer').waterfall('reLayout');
                         return _mini.getProductInfo(data);
                     }
                     else
