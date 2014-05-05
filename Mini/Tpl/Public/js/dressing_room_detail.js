@@ -526,7 +526,6 @@ var _mini = {
                 else{
                     strHtml += '试穿';
                 }
-
                 strHtml += '</a></dt>';
                 strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
                 strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
