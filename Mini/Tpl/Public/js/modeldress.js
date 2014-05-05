@@ -33,7 +33,6 @@ var pageElement = {
         var leftPx = $proInfo.position().left
             ,topPx = $proInfo.position().top
             ,addHeight = $proInfo.find('.product_color').outerHeight();
-        console.log(addHeight)
         pageElement.$watercontainer.children('.productinfo').each(function(){
             var thisposition =  $(this).position();
             if(thisposition.left == leftPx && thisposition.top > topPx){
