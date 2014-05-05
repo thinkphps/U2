@@ -135,6 +135,14 @@ var timer;
                 window.open(  'http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ suitid + '&gender=' + gender);
             });
 
+            $('#suits-container').on('click','.dressurl',function(){
+                var dressurl = $(this).data('dressurl');
+                var gender = $(this).data('gender');
+                //jsonpHomeUrl
+                window.open( dressurl );
+            });
+
+
             // Ê×Ò³ÌìÆøÇĞ»»
             $('#ulweek').on('click', 'li', function(){
                 var $that = $(this)
@@ -420,7 +428,7 @@ var callBackFunction = {
         strItem += '<div class="gotoroom none">';
 
         var url ='http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
-        strItem += '<a href="'+ url + '" target="_blank">È¥ĞéÄâÊÔÒÂ¼äÊÔ´©</a></div></div>';
+        strItem += '<a href="#" data-dressurl="'+ url + '" class="dressurl" target="_blank">È¥ĞéÄâÊÔÒÂ¼äÊÔ´©</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
