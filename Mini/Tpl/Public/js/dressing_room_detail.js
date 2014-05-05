@@ -671,7 +671,7 @@ $('#watercontainer').waterfall({
     path: function(page){
         return goodurl +'?page='+ page;
     },
-    bufferPixel: -200,
+    bufferPixel: -300,
     containerStyle: {
         position: 'relative'
     },
@@ -697,7 +697,6 @@ $('#watercontainer').waterfall({
 
     // callbacks
     callbacks: {
-
         renderData: function (data, dataType) {
             var tpl,
                 template;
@@ -706,10 +705,6 @@ $('#watercontainer').waterfall({
 //                tpl = $('#waterfall-tpl').html();
 //                template = Handlebars.compile(tpl);
                     //如果当前返回的参数和之前的参数不一致则将当前页面中的数据清空
-
-//                    if(_mini.currentParams != strParams){
-//                        $('#watercontainer').waterfall('removeItems', $('.productinfo'));
-//                    }
                     if(data.timestamp == _mini.timestamp){
                         return _mini.getProductInfo(data);
                     }

@@ -54,7 +54,7 @@
                  * @param {Object} loading $('#waterfall-loading')
                  */
                 loadingStart: function($loading) {
-//                    $loading.show();
+                    $loading.show();
                     //console.log('loading', 'start');
                 },
                 
@@ -487,7 +487,6 @@
                 content = $.trim(options.callbacks.renderData(data, options.dataType)),
                 $content = $(content),
                 checkImagesLoaded = options.checkImagesLoaded;
-            
             if ( !checkImagesLoaded ) { 
                self.append($content, callback);
                self.options.callbacks.loadingFinished(self.$loading, self.options.state.isBeyondMaxPage);
@@ -497,7 +496,10 @@
                     self.options.callbacks.loadingFinished(self.$loading, self.options.state.isBeyondMaxPage);
                 });
             }
-            
+            //如果是最后一页，则将高度增加200
+            if(content == ''){
+                this.$element.height(Math.max.apply({}, this.colHeightArray)+200);
+            }
             
         },
         
