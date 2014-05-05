@@ -715,6 +715,7 @@ $('#watercontainer').waterfall({
                     }
                     else
                     {
+                        $('#waterfall-loading').remove();
                         return "";
                     }
 
@@ -726,7 +727,7 @@ $('#watercontainer').waterfall({
             }
             else{
                 $('.product_more').hide();
-
+                $('#waterfall-loading').remove();
                 $('#watercontainer').waterfall('option', {bufferPixel: 10000,
                     maxPage: -1});
                 return "";
