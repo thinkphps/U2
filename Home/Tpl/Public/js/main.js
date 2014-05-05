@@ -132,7 +132,7 @@ var timer;
                 var suitid = $(this).data('suitid');
                 var gender = $(this).data('gender');
                 //jsonpHomeUrl
-                window.open(  'http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/' +baseurl + 'mini.php/Index?kid=11727_51912_151244_195188&suitid='+ suitid + '&gender=' + gender);
+                window.open(  'http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ suitid + '&gender=' + gender);
             });
 
             //  ◊“≥ÃÏ∆¯«–ªª
@@ -419,8 +419,7 @@ var callBackFunction = {
         strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
 
-        var url = 'http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/'
-            + baseurl + 'mini.php/Index?kid=11727_51912_151244_195188&suitid='+ item.suitID + '&gender=' + item.suitGenderID ;
+        var url ='http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ item.suitID + '&gender=' + item.suitGenderID ;
         strItem += '<a href="'+ url + '" target="_blank">»•–Èƒ‚ ‘“¬º‰ ‘¥©</a></div></div>';
         return strItem;
     },
