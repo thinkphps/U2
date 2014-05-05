@@ -114,13 +114,13 @@ class IndexAction extends Action {
         if(S('cust1')){
             $ucuslist = unserialize(S('cust1'));
         }else{
-            $ucuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'1'));//上装
+            $ucuslist  = $recomodel->getCateList('1');//上装
             S('cust11',serialize($ucuslist),array('type'=>'file'));
         }
         if(S('cust12')){
             $dcuslist = unserialize(S('cust12'));
         }else{
-            $dcuslist  = $recomodel->getCusData(array('gtype'=>'1','isud'=>'2'));//下装
+            $dcuslist  = $recomodel->getCateList('2');//下装
             S('cust12',serialize($dcuslist),array('type'=>'file'));
         }
         $this->assign('beubeu_suits_list',$beubeu_suits_list);

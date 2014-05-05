@@ -88,10 +88,6 @@
     </form>
 </div>
 <include file="Public:footer"/>
-<!--<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/jquery.ui.datepicker.css" />
-<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/jquery.ui.theme.css" />
-<script type="text/javascript" src="__TMPL__Public/js/jquery.ui.core.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/jquery.ui.datepicker.js"></script>-->
 <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
 <script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
@@ -101,7 +97,7 @@
                         {
                             startDate: new Date(),
                             format: 'YYYY-MM-DD',
-                             : true,
+                            singleDatePicker : true,
                             locale:{
                                 applyLabel: '选择',
                                 cancelLabel: '取消',
