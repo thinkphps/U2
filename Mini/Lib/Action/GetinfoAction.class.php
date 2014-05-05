@@ -66,14 +66,19 @@ class GetinfoAction extends Action{
          $arr = unserialize(S('midsid'.$sid));
         }else{
         $recomodel = D('Reco');
-        if($sid!=4){
+        if($sid!=4 && $sid!=0){
             $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
             $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
-        }else{
+        }else if($sid==4){
             $babylist  = $recomodel->getCusData(array('gtype'=>'5','isud'=>'6'));//上装
             $arr['b'] = $babylist;
+        }else if($sid==0){
+            $ucuslist = $recomodel->getCateList('1');
+            $dcuslist = $recomodel->getCateList('2');
+            $arr['u'] = $ucuslist;
+            $arr['d'] = $dcuslist;
         }
         S('midsid'.$sid,serialize($arr),array('type'=>'file'));
         }
