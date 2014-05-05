@@ -5,7 +5,7 @@
 $(function(){
     $(".syj_btn").draggable({
         drag:function(event, ui){
-            var mleft =  $("#beubeu_loadImg").width();
+            var mleft =  $(".syj").width()+2;
             if(ui.position.left<mleft){
                 $(".syj").css('margin-left',mleft+'px');
             }else{
