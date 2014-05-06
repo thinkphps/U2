@@ -4,11 +4,15 @@ class GetinfoAction extends Action{
             $sid = trim($this->_post('sid'));
             $fid = trim($this->_post('fid'));
             $tem = trim($this->_post('tem'));
+            $page = trim($this->_request('page'));
             $sid = $sid?$sid:0;
             $fid = $fid?$fid:0;
-            if(S('sid'.$tem.$sid.$fid)){
+            $page = $page?$page:1;
+            $page_num = 4;
+            $start = ($page-1)*$page_num;
+            /*if(S('sid'.$tem.$sid.$fid)){
              $arr = unserialize(S('sid'.$tem.$sid.$fid));
-            }else{
+            }else{*/
                 $recomodel = D('Reco');
                 if(!empty($fid)){
                     $defaultwhere['suitStyleID'] = $fid;
@@ -17,7 +21,7 @@ class GetinfoAction extends Action{
                 case 3 :
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
-                $defaultResult = $recomodel->getBeubeu($defaultwhere);
+                $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
                 case 4 :
                   //mini婴幼儿还是从以前商品取数据
@@ -45,12 +49,15 @@ class GetinfoAction extends Action{
                 case 1 :
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
-                $defaultResult = $recomodel->getBeubeu($defaultwhere);
+                $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
             }
-            $arr['def'] = $defaultResult;
-            S('sid'.$tem.$sid.$fid,serialize($arr),array('type'=>'file'));
-          }
+            $arr['def'] = $defaultResult['result'];
+            $arr['page'] = $defaultResult['page'];
+            $arr['prepage'] = $page;
+            $arr['count'] = $defaultResult['count'];
+          //S('sid'.$tem.$sid.$fid,serialize($arr),array('type'=>'file'));
+          //}
             $this->ajaxReturn($arr, 'JSON');
         }
     public function getGS($where){

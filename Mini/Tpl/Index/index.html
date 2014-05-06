@@ -390,7 +390,7 @@
 <div class="my_yyg changjing1">
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
-        <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
+        <a href="javascript:;" class="change_yf" id='changeid' la='2'>换一批</a>
         <a href="#m">想获取其他试穿，请点击更多商品</a>
         <div class="none change-btn-mask" id="btn-mask"></div>
     </div>
@@ -746,7 +746,6 @@ $('.imgrd').css(css);
 
         //点击左侧
         $('#ulgender').on('click','li',function(){
-            $('#changeid').attr('la',1);
             var sid = $(this).data('gender');
             $(this).siblings().children('a').removeClass('select');
             $(this).children('a').addClass('select');
@@ -983,7 +982,6 @@ $('.imgrd').css(css);
     });
     //左侧风格取数据
     $('#ul_index-bar-place').on('click','li',function(){
-        $('#changeid').attr('la',1);
         $(this).siblings().children('a').removeClass('select');
         if($(this).children('a').hasClass('select')){
             $(this).children('a').removeClass('select');
@@ -995,7 +993,8 @@ $('.imgrd').css(css);
 
     //换一批
     $('#changeid').on('click',function(){
-        var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
+        _mini.getSuits();
+        /*var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
            if(page==1){
                $('#changeid').attr('la',+page+1);
                startnum = page*4;
@@ -1028,7 +1027,7 @@ $('.imgrd').css(css);
                     css['transform']='matrix(1, 0, 0, 1, 0, 0)';
                     $('.imgrd').css(css);
                 },100);
-          }
+          }*/
     });
 
 $('#moreid').on('click',function(){

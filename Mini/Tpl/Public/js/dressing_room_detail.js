@@ -243,7 +243,7 @@ $(function(){
 var _mini = {
     timestamp : '',
     getSuits : function(){
-        var gender = $('#ulgender li').siblings().children('a.select').parent('li').data('gender');
+        var gender = $('#ulgender li').siblings().children('a.select').parent('li').data('gender'),page = $('#changeid').attr('la');
         this.showStyleMask(gender);
         //下边取数据
         if(gender!=4){
@@ -296,11 +296,14 @@ var _mini = {
                 }
             });
         }else{
-            $.post(styleurl,{sid:gender,fid:fid},function(data,status){
+            $.post(styleurl,{sid:gender,fid:fid,page:page},function(data,status){
                 if(data){
+                    if(data.prepage!=1){
+                    $('#changeid').attr('la',data.page);
+                     }
                     if(data.def){
                         var deflength = data.def.length,str = "";
-                        if(deflength && deflength>4){
+                        if(data['count'] && data['count']>4){
                             $('#btn-mask').addClass('none')
                         }else{
                             $('#btn-mask').removeClass('none');

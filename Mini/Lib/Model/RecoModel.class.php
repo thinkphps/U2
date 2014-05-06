@@ -44,10 +44,15 @@ class RecoModel extends Model{
         $arr = array('d_1','d_2','e_1','a_2','c_2','a_1','b_1','c_1','b_2','e_2');
         return $arr[$key-1];
     }
-    public function getBeubeu($where){
+    public function getBeubeu($where,$page,$page_num,$start){
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
-        $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->select();
+        $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
+        $num = ceil($count/$page_num);
+        if($page>$num){
+           $page = 1;
+        }
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->limit($start.','.$page_num)->select();
         //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
         foreach($beubeu_suits_list as $k=>$v){
             switch($v['suitGenderID']){
@@ -75,7 +80,10 @@ class RecoModel extends Model{
                 $beubeu_suits_list[$k]['detail'] = 0;
             }*/
          }
-        return $beubeu_suits_list;
+        $arr['page'] = $page+1;
+        $arr['result'] = $beubeu_suits_list;
+        $arr['count'] = $count;
+        return $arr;
     }
 
     //取出自定义分类
