@@ -110,7 +110,6 @@ var pageElement = {
             var suitid = this.getUrlParam('suitid');
             if( suitid != -1){
                 var gender = _this.getGenderValue(this.getUrlParam('gender'));
-                console.log(gender);
                 get_baiyi_dp(suitid,gender);
                 pageElement.$btnExpansion.click();
 //                $.post(getCidItembnUrl,{suitid:suitid},function(data){

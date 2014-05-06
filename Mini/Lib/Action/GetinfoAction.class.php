@@ -72,7 +72,7 @@ class GetinfoAction extends Action{
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
         }else if($sid==4){
-            $babylist  = $recomodel->getCusData(array('gtype'=>'5','isud'=>'6'));//上装
+            $babylist  = $recomodel->getCusData(array('gtype'=>'5'));//上装
             $arr['b'] = $babylist;
         }else if($sid==0){
             $ucuslist = $recomodel->getCateList('1');
