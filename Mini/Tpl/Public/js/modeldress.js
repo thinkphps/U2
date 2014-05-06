@@ -11,6 +11,7 @@ var pageElement = {
     ,$divBuys : $('.buy_btns')
     ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
     ,$divSyj : $('.syj')
+    ,$ulgender : $('#ulgender')
     ,$watercontainer : $('#watercontainer')
     ,dressByBarcode:function(barcode,gender){
         $('#beubeu_loadImg').show();
@@ -85,20 +86,23 @@ var pageElement = {
     ModelDress.prototype = {
         init : function(){
             var _this = this;
-            _this.showbaiyiModel();
             _this.elementEvent();
-            setTimeout(function(){
-                _this.addClothesBySuitID();
-            },1000);
+            _this.showbaiyiModel(_this.addClothesBySuitID);
+//            setTimeout(function(){
+//                _this.addClothesBySuitID();
+//            },1500);
 
         },
-        showbaiyiModel : function(){
+        showbaiyiModel : function(callback){
             /***新的百衣搭配间****/
             var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
             Model.CurrClothesCallback = this.beu_getallclothes;
             $('.beubeu_btns').css('left','25px');
+            if ( callback ) {
+                callback.call(this);
+            }
         },
         getUrlParam :function(name){
             var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -107,26 +111,27 @@ var pageElement = {
         },
         addClothesBySuitID : function(){
             var _this = this;
-            var suitid = this.getUrlParam('suitid');
+            var suitid = _this.getUrlParam('suitid');
             if( suitid != -1){
-                var gender = _this.getGenderValue(this.getUrlParam('gender'));
+                var sex = _this.getUrlParam('gender');
+                var gender = _this.getGenderValue(sex);
                 get_baiyi_dp(suitid,gender);
+                //根据首页迁移过来的性别显示背景
+                pageElement.$ulgender.find('a').removeClass('select');
+                if(sex==1){
+                    pageElement.$ulgender.find('a:eq(0)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
+                }else if(sex==2){
+                    pageElement.$ulgender.find('a:eq(1)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
+                }else if(sex==3 || sex == 4){
+                    pageElement.$ulgender.find('a:eq(2)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
+                }
+                _mini.getSuits();
+
+
                 pageElement.$btnExpansion.click();
-//                $.post(getCidItembnUrl,{suitid:suitid},function(data){
-//                    var code = data.code;
-//                    if( code == 1){
-//                        pageElement.$btnExpansion.click();
-//                        var barcodes = [];
-//                        var barcodeList = data.data;
-//                        if( barcodeList != null){
-//                            for(var i = 0;i<barcodeList.length;i++){
-//                                barcodes[i] = barcodeList[i].barcode;
-////                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
-//                            }
-//                            get_baiyi_dp(barcodes.join(),gender);
-//                        }
-//                    }
-//                });
             }
         },
         getGenderValue : function(gender){
