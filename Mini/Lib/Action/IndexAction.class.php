@@ -235,7 +235,7 @@ class IndexAction extends Action {
         $page = $page?$page:1;
         $goodtag = M('Goodtag');
         $windex = D('Windex');
-        $page_num = 50;
+        $page_num = 25;
         $start = ($page-1)*$page_num;
         if(isset($tem)){
             $widvalue = $windex->getwindex($tem);
