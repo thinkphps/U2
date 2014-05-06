@@ -298,9 +298,9 @@ var _mini = {
         }else{
             $.post(styleurl,{sid:gender,fid:fid,page:page},function(data,status){
                 if(data){
-                    if(data.prepage!=1){
+                    //if(data.prepage==1 && page==1){
                     $('#changeid').attr('la',data.page);
-                     }
+                     //}
                     if(data.def){
                         var deflength = data.def.length,str = "";
                         if(data['count'] && data['count']>4){

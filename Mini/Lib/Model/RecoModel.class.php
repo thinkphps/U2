@@ -51,6 +51,7 @@ class RecoModel extends Model{
         $num = ceil($count/$page_num);
         if($page>$num){
            $page = 1;
+           $start = 0;
         }
         $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->limit($start.','.$page_num)->select();
         //$beubeu_detail = M('BeubeuSuitsGoodsdetail');

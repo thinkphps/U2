@@ -52,10 +52,10 @@ class GetinfoAction extends Action{
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
             }
-            $arr['def'] = $defaultResult['result'];
             $arr['page'] = $defaultResult['page'];
             $arr['prepage'] = $page;
             $arr['count'] = $defaultResult['count'];
+            $arr['def'] = $defaultResult['result'];
           //S('sid'.$tem.$sid.$fid,serialize($arr),array('type'=>'file'));
           //}
             $this->ajaxReturn($arr, 'JSON');
