@@ -604,6 +604,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .btn_line a.bc_btn{  width:105px; background:#d1d1d1; color:#FFF; text-align:center;
     cursor: default;}
 .buy_btns{ left:0px; bottom:42px; z-index:999; position: absolute;}
+.buy_btns .buyurl {cursor: pointer; line-height: 15px;background:#fff;color:#666;padding: 5px 5px 5px 5px;}
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 

@@ -184,7 +184,10 @@ var pageElement = {
                     barcode = o[i].barcode;
                     title = o[i].name;
                     pageElement.BarcodeList.push(barcode);
-                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
+//                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
+                    strLi += '<li data-title="'+ title +'" ><div class="buyurl">';
+                    strLi += '<span title="'+title+'" data-barcode="'+barcode+'">'+title+'</span>'
+                    strLi +='</div></li>'
                 }
                 $buyUl.append(strLi);
                 pageElement.clearSelected();
@@ -246,13 +249,13 @@ var pageElement = {
             return colorHtml;
         },
         setBuyInfo : function(){
-            pageElement.$divBuys.find('a').each(function(){
+            pageElement.$divBuys.find('span').each(function(){
                 var $this = $(this);
                 //使用barcode去数据库中取回商品编号
                 $.post(getJackNumiidUrl,{'item_bn':$this.data('barcode').substring(0,8)},function(data){
                     if( data.code == 1){
                         var clothesInfo = data.data
-                        $this.attr('href',clothesInfo.detail_url);
+                        $this.data('buy_url',clothesInfo.detail_url);
                     }
                 });
             });
@@ -276,7 +279,6 @@ var pageElement = {
                 }
             });
 
-
             pageElement.$btnBuy.on('click',function(){
                 //如果当前选中的是婴儿，则将现在搭配间的衣服增加到购买列表
                 if($('#beubeu_loadImg').is(':hidden')){
@@ -284,14 +286,19 @@ var pageElement = {
                     $buyUl.html('');
                     var strLi = '';
                     if($('#single').is(':hidden')){
-//                        strLi += '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
                         var $topImg = $('#tops_bottoms img');
-                        strLi += '<li data-title="'+ $topImg.data('title') +'" ><a target="_blank" href="'+ $topImg.data('prourl') +'" title="'+  $topImg.data('title')+'"> '+  $topImg.data('title')+'</a></li>'
+                        strLi += '<li data-title="'+ $topImg.data('title') +'" ><div class="buyurl">';
+                        strLi += '<span title="'+title+'" data-buy_url="'+$topImg.data('prourl')+'">'+ $topImg.data('title')+'</span>'
+                        strLi +='</div></li>'
                         var $bottomsImg = $('#bottoms img');
-                        strLi += '<li data-title="'+ $bottomsImg.data('title') +'" ><a target="_blank" href="'+ $bottomsImg.data('prourl') +'" title="'+  $bottomsImg.data('title')+'"> '+  $bottomsImg.data('title')+'</a></li>'
+                        strLi += '<li data-title="'+ $bottomsImg.data('title') +'" ><div class="buyurl">';
+                        strLi += '<span title="'+title+'" data-buy_url="'+$bottomsImg.data('prourl')+'">'+ $bottomsImg.data('title')+'</span>'
+                        strLi +='</div></li>'
                     }else{
                         var $myImg =  $('#single img');
-                        strLi = '<li data-title="'+ $myImg.data('title') +'" ><a target="_blank" href="'+ $myImg.data('prourl') +'" title="'+  $myImg.data('title')+'"> '+  $myImg.data('title')+'</a></li>'
+                        strLi += '<li data-title="'+ $myImg.data('title') +'" ><div class="buyurl">';
+                        strLi += '<span title="'+title+'" data-buy_url="'+$myImg.data('prourl')+'">'+ $myImg.data('title')+'</span>'
+                        strLi +='</div></li>'
                     }
                     $buyUl.append(strLi);
                 }else{
@@ -300,6 +307,14 @@ var pageElement = {
                     }
                 }
                 _this.objShowOrHide(pageElement.$divBuys);
+            });
+
+            pageElement.$divSyj.on('mouseenter','.buyurl',function(){
+                $(this).css({'background':'#999','color':'#fff'});
+            }).on('mouseleave','.buy_btns .buyurl',function(){
+                $(this).css({'background':'#fff','color':'#666'});
+            }).on('click','.buy_btns span',function(){
+                window.open( $(this).data('buy_url') );
             });
 
             pageElement.$divSyj.on('mouseleave',function(){
