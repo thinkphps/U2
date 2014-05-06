@@ -11,6 +11,7 @@ var pageElement = {
     ,$divBuys : $('.buy_btns')
     ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
     ,$divSyj : $('.syj')
+    ,$ulgender : $('#ulgender')
     ,$watercontainer : $('#watercontainer')
     ,dressByBarcode:function(barcode,gender){
         $('#beubeu_loadImg').show();
@@ -32,7 +33,7 @@ var pageElement = {
         var leftPx = $proInfo.position().left
             ,topPx = $proInfo.position().top
             ,addHeight = $proInfo.find('.product_color').outerHeight();
-            pageElement.$watercontainer.children('.productinfo').each(function(){
+        pageElement.$watercontainer.children('.productinfo').each(function(){
             var thisposition =  $(this).position();
             if(thisposition.left == leftPx && thisposition.top > topPx){
                 $(this).css('top',thisposition.top + addHeight * changeType);
@@ -85,20 +86,23 @@ var pageElement = {
     ModelDress.prototype = {
         init : function(){
             var _this = this;
-            _this.showbaiyiModel();
             _this.elementEvent();
-            setTimeout(function(){
-                _this.addClothesBySuitID();
-            },1000);
+            _this.showbaiyiModel(_this.addClothesBySuitID);
+//            setTimeout(function(){
+//                _this.addClothesBySuitID();
+//            },1500);
 
         },
-        showbaiyiModel : function(){
+        showbaiyiModel : function(callback){
             /***新的百衣搭配间****/
             var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
             Model.CurrClothesCallback = this.beu_getallclothes;
             $('.beubeu_btns').css('left','25px');
+            if ( callback ) {
+                callback.call(this);
+            }
         },
         getUrlParam :function(name){
             var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -107,27 +111,25 @@ var pageElement = {
         },
         addClothesBySuitID : function(){
             var _this = this;
-            var suitid = this.getUrlParam('suitid');
+            var suitid = _this.getUrlParam('suitid');
             if( suitid != -1){
-                var gender = _this.getGenderValue(this.getUrlParam('gender'));
-                console.log(gender);
+                var sex = _this.getUrlParam('gender');
+                var gender = _this.getGenderValue(sex);
                 get_baiyi_dp(suitid,gender);
+                //根据首页迁移过来的性别显示背景
+                pageElement.$ulgender.find('a').removeClass('select');
+                if(sex==1){
+                    pageElement.$ulgender.find('a:eq(0)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
+                }else if(sex==2){
+                    pageElement.$ulgender.find('a:eq(1)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
+                }else if(sex==3 || sex == 4){
+                    pageElement.$ulgender.find('a:eq(2)').addClass('select');
+                    $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
+                }
+                _mini.getSuits();
                 pageElement.$btnExpansion.click();
-//                $.post(getCidItembnUrl,{suitid:suitid},function(data){
-//                    var code = data.code;
-//                    if( code == 1){
-//                        pageElement.$btnExpansion.click();
-//                        var barcodes = [];
-//                        var barcodeList = data.data;
-//                        if( barcodeList != null){
-//                            for(var i = 0;i<barcodeList.length;i++){
-//                                barcodes[i] = barcodeList[i].barcode;
-////                                Model.DressingByBarcode(barcodeList[i].barcode,gender);
-//                            }
-//                            get_baiyi_dp(barcodes.join(),gender);
-//                        }
-//                    }
-//                });
             }
         },
         getGenderValue : function(gender){
@@ -241,7 +243,7 @@ var pageElement = {
                     colorHtml += 'data-gender="'+ colors[i].gender+'" ';
                     colorHtml += 'data-uqcode="'+ colors[i].uq +'" ';
                     colorHtml += 'data-colorid="' + colors[i].colorid + '" ';
-                    colorHtml += 'data-imgurl="'+ imgurl +'" ';
+                    colorHtml += 'data-imgurl="'+ imgurl +'"> ';
                     colorHtml += '</a><span>'+ title +'</span>';
                     colorHtml += '<i>已选中</i></li>';
                 }
@@ -363,88 +365,84 @@ var pageElement = {
                             }
                         }
                     }
-
                 }else{
-
                     pageElement.IsHide = 0;
-                    $tryon.data('selected',0);
-                    //                var selectBarcode = $children_gender.find('a').data('select_barcode');
                     if( $color_img.find('.pro-selected').length == 0){
                         $this.find('.product_color').hide();
                         if($tryon.hasClass('select')){
                             $tryon.removeClass('select');
+                            $tryon.data('selected',0);
                             pageElement.currentColRelayout($($this.parent()[0]),-1);
                         }
                     }
-//                    $('#watercontainer').waterfall('reLayout');
-
                 }
             });
 
             //点击试穿按钮，显示颜色
             $('#watercontainer').on('click','.tryon',function(){
-                pageElement.IsHide = 1;
                 var $this = $(this);
-                var $wrapper_box = $this.parent().parent().parent();
-                var gender = $this.data('gendertype');
-                $this.data('selected',1);
-                $this.addClass('select');
-                if( gender == 5){
-                    var isud = $this.data('isud');
-                    $('#beubeu_loadImg').hide();
-                    $('#baby_fitting_room').show();
-                    var imgUrl = $wrapper_box.find('.product_img').attr('src');
-                    //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
-                    //如果是上装则将图片显示到上部
-                    var title = $wrapper_box.find('h3 a').text();
-                    var purl = $wrapper_box.find('h3 a').attr('href');
-                    $this.data('imgurl',imgUrl);
-                    if(isud == 1){
-                        $('#tops_bottoms').show();
-                        $('#single').hide();
-                        if($('#bottoms img').attr('src').length > 2 ){
+                if(!$this.hasClass('select')){
+                    pageElement.IsHide = 1;
+                    var $wrapper_box = $this.parent().parent().parent();
+                    var gender = $this.data('gendertype');
+                    $this.addClass('select');
+                    if( gender == 5){
+                        var isud = $this.data('isud');
+                        $('#beubeu_loadImg').hide();
+                        $('#baby_fitting_room').show();
+                        var imgUrl = $wrapper_box.find('.product_img').attr('src');
+                        //isud：1为上装2为下装3为配饰4为套装5为内衣6为婴幼儿
+                        //如果是上装则将图片显示到上部
+                        var title = $wrapper_box.find('h3 a').text();
+                        var purl = $wrapper_box.find('h3 a').attr('href');
+                        $this.data('imgurl',imgUrl);
+                        if(isud == 1){
+                            $('#tops_bottoms').show();
+                            $('#single').hide();
+                            if($('#bottoms img').attr('src').length > 2 ){
+                                $('#bottoms').show();
+                            }
+                            $('#tops_bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                            $('#single img').attr('src','#').removeData('prourl').removeData('title');;
+                        }else if(isud == 2){   //如果是下装，则将图片显示到下部
                             $('#bottoms').show();
+                            $('#single').hide();
+                            if($('#tops_bottoms img').attr('src').length > 2 ){
+                                $('#bottoms').show();
+                            }
+                            $('#bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                            $('#single img').attr('src','#').removeData('prourl').removeData('title');;
                         }
-                        $('#tops_bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
-                        $('#single img').attr('src','#').removeData('prourl').removeData('title');;
-                    }else if(isud == 2){   //如果是下装，则将图片显示到下部
-                        $('#bottoms').show();
-                        $('#single').hide();
-                        if($('#tops_bottoms img').attr('src').length > 2 ){
-                            $('#bottoms').show();
+                        else{
+                            $('#tops_bottoms,#bottoms').hide();
+                            $('#tops_bottoms img,#bottoms img').attr('src','#').removeData('prourl').removeData('title');
+                            $('#single').show();
+
+                            $('#single img').attr('src',imgUrl).data({'prourl':purl,'title':title});
                         }
-                        $('#bottoms img').attr('src',imgUrl).data({'prourl':purl,'title':title});
-                        $('#single img').attr('src','#').removeData('prourl').removeData('title');;
+
+                        pageElement.$watercontainer.find('.tryon').each(function(){
+                            if($(this).hasClass('select')){
+                                if($(this).data('imgurl') != $('#tops_bottoms img').attr('src') && $(this).data('imgurl') != $('#bottoms img').attr('src')
+                                    &&  $(this).data('imgurl') != $('#single img').attr('src')){
+                                    $(this).removeClass('select');
+                                }
+                            }
+                        });
+
+                        if(pageElement.$divSyj.is(':hidden')){
+                            pageElement.$btnExpansion.click();
+                        }
                     }
                     else{
-                        $('#tops_bottoms,#bottoms').hide();
-                        $('#tops_bottoms img,#bottoms img').attr('src','#').removeData('prourl').removeData('title');
-                        $('#single').show();
 
-                        $('#single img').attr('src',imgUrl).data({'prourl':purl,'title':title});
+                        var $colorImg = $wrapper_box.find('.color-img');
+                        $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
+                        $wrapper_box.find('.product_color').show();
+                        pageElement.currentColRelayout($($wrapper_box.parent()[0]),1);
+
                     }
-
-                    pageElement.$watercontainer.find('.tryon').each(function(){
-                        if($(this).hasClass('select')){
-                            if($(this).data('imgurl') != $('#tops_bottoms img').attr('src') && $(this).data('imgurl') != $('#bottoms img').attr('src')
-                                &&  $(this).data('imgurl') != $('#single img').attr('src')){
-                                $(this).removeClass('select');
-                            }
-                        }
-                    });
-
-                    if(pageElement.$divSyj.is(':hidden')){
-                        pageElement.$btnExpansion.click();
-                    }
-                }
-                else{
-
-                    var $colorImg = $wrapper_box.find('.color-img');
-                    $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
-                    $wrapper_box.find('.product_color').show();
-//                    $('#watercontainer').waterfall('reLayout');
-                    pageElement.currentColRelayout($($wrapper_box.parent()[0]),1);
-
+//                $this.data('selected',1);
                 }
             });
 

@@ -127,6 +127,12 @@ var timer;
         },
         controlsEvent : function(){
             var _this = this;
+
+            //点击let's go按钮跳转到天猫首页
+            $('.youyigui_btn').on('click',function(){
+                window.open('http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188');
+            });
+
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $('#suits-container').on('click','.imgSuits',function(){
                 var suitid = $(this).data('suitid');
@@ -428,7 +434,7 @@ var callBackFunction = {
         strItem += '<div class="gotoroom none">';
 
         var url ='http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
-        strItem += '<a href="#" data-dressurl="'+ url + '" class="dressurl" target="_blank">去虚拟试衣间试穿</a></div></div>';
+        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
