@@ -372,7 +372,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                     }
                 }
                 $cstr = rtrim($cstr,',');
-                $where.="and g.ccateid in (".$cstr.")";
+                $where.=" and g.ccateid in (".$cstr.")";
             }
             $where.=" and bg.approve_status='onsale' and bg.num>=15";
             if(isset($tem)){

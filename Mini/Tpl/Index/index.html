@@ -763,6 +763,7 @@ $('.imgrd').css(css);
 
         //mini中部类别切换
         $('#cateu2').on('click','li',function(){
+            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
@@ -781,9 +782,11 @@ $('.imgrd').css(css);
             _mini.getGoods();
             $('#cstyle2 .select').removeClass('select');
             $('.ch_all a').addClass('select');
+            $(window).scrollTop(tmpscrolltop);
         });
         //mini中部类别选择
         $('#cstyle2').on('click','li a',function(){
+            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
@@ -793,6 +796,7 @@ $('.imgrd').css(css);
             $(this).parent('li').siblings('li').children('a').removeClass('select');
             $(this).addClass('select');
             _mini.getGoods();
+            $(window).scrollTop(tmpscrolltop);
         });
 
 
@@ -826,6 +830,7 @@ $('.imgrd').css(css);
         });
        //点击自定义分类
         $('.left_tj').on('click','li.upclothes',function(){
+            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
@@ -864,9 +869,10 @@ $('.imgrd').css(css);
             }
            setzid(leftLen,rightLen);
            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+            $(window).scrollTop(tmpscrolltop);
         });
         $('.right_tj').on('click','li.doclothes',function(){
-
+            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
@@ -904,6 +910,7 @@ $('.imgrd').css(css);
             }
             setzid(leftLen,rightLen);
             getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+            $(window).scrollTop(tmpscrolltop);
         });
 
         function setzid(leftLen,rightLen){
