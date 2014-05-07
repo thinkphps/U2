@@ -80,7 +80,7 @@ class IndexAction extends Action {
             $beubeu_suits_list = unserialize(S('styledata'));
         }else{
             //默认模特图
-            $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->select();
+            $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->limit('0,4')->select();
             //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
             foreach($beubeu_suits_list as $k=>$v){
                 switch($v['suitGenderID']){
@@ -235,7 +235,7 @@ class IndexAction extends Action {
         $page = $page?$page:1;
         $goodtag = M('Goodtag');
         $windex = D('Windex');
-        $page_num = 50;
+        $page_num = 25;
         $start = ($page-1)*$page_num;
         if(isset($tem)){
             $widvalue = $windex->getwindex($tem);
@@ -274,7 +274,7 @@ select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg
 	union all
 	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
 )bl group by bl.num_iid)li
-where bg.num_iid = li.num_iid and li.loveid is not null limit ".$start.",".$page_num;;
+where bg.num_iid = li.num_iid and li.loveid is not null limit ".$start.",".$page_num;
             $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -295,7 +295,7 @@ select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg
 	union all
 	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
 )bl group by bl.num_iid)li
-where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_num;;
+where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_num;
             $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -421,8 +421,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
         $this->ajaxReturn($returnArr, 'JSON');
     }
     public function waterdata($result,$lid,$bid,$keyword){
-        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='http://img02.taobaocdn.com/imgextra/i2/196993935/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
-        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.9.S2qciI&scid=910190162&scname=xa7XsM%2FeyrHM2NPFWzUvMcbwXQ%3D%3D&checkedRange=true&queryType=cat" target="__blank"><img src="http://img03.taobaocdn.com/imgextra/i3/196993935/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
+        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
+        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.9.S2qciI&scid=910190162&scname=xa7XsM%2FeyrHM2NPFWzUvMcbwXQ%3D%3D&checkedRange=true&queryType=cat" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';

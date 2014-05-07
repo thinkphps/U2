@@ -13,7 +13,7 @@
 <div class="header">
     <div class="header_top">
         <!--头部-logo-->
-        <h1><a href="#">优衣库虚拟试衣间</a></h1>
+        <h1><a href="{:U('Index/index')}">优衣库虚拟试衣间</a></h1>
 
         <!--头部-城市-->
         <div class="dr_city">
@@ -390,7 +390,7 @@
 <div class="my_yyg changjing1">
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
-        <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
+        <a href="javascript:;" class="change_yf" id='changeid' la='2'>换一批</a>
         <a href="#m">想获取其他试穿，请点击更多商品</a>
         <div class="none change-btn-mask" id="btn-mask"></div>
     </div>
@@ -995,7 +995,8 @@ $('.imgrd').css(css);
 
     //换一批
     $('#changeid').on('click',function(){
-        var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
+        _mini.getSuits();
+        /*var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
            if(page==1){
                $('#changeid').attr('la',+page+1);
                startnum = page*4;
@@ -1028,7 +1029,7 @@ $('.imgrd').css(css);
                     css['transform']='matrix(1, 0, 0, 1, 0, 0)';
                     $('.imgrd').css(css);
                 },100);
-          }
+          }*/
     });
 
 $('#moreid').on('click',function(){
