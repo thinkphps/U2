@@ -1402,11 +1402,11 @@ function do_refresh_relate(){
     }
 }
 
-function fleshVerify(){
+/*function fleshVerify(){
     //重载验证码
     var time = new Date().getTime();
     document.getElementById('verifyImg').src= '__APP__/Login/verify/'+time;
-}
+}*/
 
 
 $(function(){
