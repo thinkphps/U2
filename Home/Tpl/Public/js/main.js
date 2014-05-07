@@ -130,7 +130,8 @@ var timer;
 
             //点击let's go按钮跳转到天猫首页
             $('.youyigui_btn,.dr_logo').on('click',function(){
-                window.open('http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188');
+
+                window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
             });
 
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
@@ -138,7 +139,7 @@ var timer;
                 var suitid = $(this).data('suitid');
                 var gender = $(this).data('gender');
                 //jsonpHomeUrl
-                window.open(  'http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ suitid + '&gender=' + gender);
+                window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
             });
 
             $('#suits-container').on('click','.dressurl',function(){
@@ -433,7 +434,7 @@ var callBackFunction = {
         strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
 
-        var url ='http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188&suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
+        var url ='http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
         strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
     },
