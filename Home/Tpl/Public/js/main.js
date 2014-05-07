@@ -129,7 +129,7 @@ var timer;
             var _this = this;
 
             //点击let's go按钮跳转到天猫首页
-            $('.youyigui_btn').on('click',function(){
+            $('.youyigui_btn,.dr_logo').on('click',function(){
                 window.open('http://a1761.oadz.com/link/C/1761/721/CxPszkT1lM4WsFgzgD1ae-O3Pqo_/p06d/0/http://j.koolbao.com/tb/57303596/uniqlo.bigodata.com.cn/u2/mini.php/Index.html/?kid=11727_51912_151244_195188');
             });
 
