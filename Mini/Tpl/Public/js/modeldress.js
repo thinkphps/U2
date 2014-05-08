@@ -74,9 +74,42 @@ var pageElement = {
                 }
             }
         });
-
+    },
+    getUrlParam :function(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r!=null) return unescape(r[2]); return -1; //返回参数值
+    },
+    getGenderValue : function(gender){
+        var genderValue = 15474;
+        if(gender == 1){
+            genderValue = 15474;
+        }
+        else if(gender == 2){
+            genderValue = 15478;
+        }
+        else if(gender == 3){
+            genderValue = 15583;
+        }
+        else if(gender == 4){
+            genderValue = 15581;
+        }
+        else{
+            genderValue = 15474;
+        }
+        return genderValue;
     }
 };
+
+//白衣回调函数
+function Model_loadok_callback(){
+    var suitid = pageElement.getUrlParam('suitid');
+    if( suitid != -1){
+        var sex = pageElement.getUrlParam('gender');
+        var gender = pageElement.getGenderValue(sex);
+        get_baiyi_dp(suitid,gender);
+    }
+}
 
 (function($, window, document,undefined) {
 
@@ -104,18 +137,14 @@ var pageElement = {
                 callback.call(this);
             }
         },
-        getUrlParam :function(name){
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r!=null) return unescape(r[2]); return -1; //返回参数值
-        },
+
         addClothesBySuitID : function(){
             var _this = this;
-            var suitid = _this.getUrlParam('suitid');
+            var suitid = pageElement.getUrlParam('suitid');
             if( suitid != -1){
-                var sex = _this.getUrlParam('gender');
-                var gender = _this.getGenderValue(sex);
-                get_baiyi_dp(suitid,gender);
+                var sex = pageElement.getUrlParam('gender');
+                var gender = pageElement.getGenderValue(sex);
+
                 //根据首页迁移过来的性别显示背景
                 pageElement.$ulgender.find('a').removeClass('select');
                 if(sex==1){
@@ -131,25 +160,6 @@ var pageElement = {
                 _mini.getSuits();
                 pageElement.$btnExpansion.click();
             }
-        },
-        getGenderValue : function(gender){
-            var genderValue = 15474;
-            if(gender == 1){
-                genderValue = 15474;
-            }
-            else if(gender == 2){
-                genderValue = 15478;
-            }
-            else if(gender == 3){
-                genderValue = 15583;
-            }
-            else if(gender == 4){
-                genderValue = 15581;
-            }
-            else{
-                genderValue = 15474;
-            }
-            return genderValue;
         },
         callDressingFunction : function(){
             var $img = $(this).find('img')
