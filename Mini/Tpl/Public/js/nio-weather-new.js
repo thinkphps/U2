@@ -251,14 +251,14 @@ jQuery(function($){
         },
         setBackground : function(str){
             this.removeBackgroundClass();
-            if(str.indexOf("雪") > 0){
+            if(str.indexOf("雪") >= 0){
                 $("#main_con").addClass("water5")
             }
-            else if(str.indexOf("大雨") > 0 || str.indexOf("暴雨") > 0 ||
-                str.indexOf("雷雨") > 0 || str.indexOf("冰雹") > 0 ){
+            else if(str.indexOf("大雨") >= 0 || str.indexOf("暴雨") >= 0 ||
+                str.indexOf("雷雨") >= 0 || str.indexOf("冰雹") >= 0 ){
                 $("#main_con").addClass("water4")
             }
-            else if(str.indexOf("雨") > 0){
+            else if(str.indexOf("雨") >= 0){
                 $("#main_con").addClass("water3")
             }
             else if(str == "晴"){
