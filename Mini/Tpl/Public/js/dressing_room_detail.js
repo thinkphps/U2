@@ -538,10 +538,16 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
+                if(v.num>0){
                 strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
                 strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
+                 }else{
+                strHtml += '<h3 class="'+color+'">'+ v.title+'</h3>';
+                strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
+                strHtml += '<div class="inf_con"><p class="price">已售罄</p>';
+                }
                 strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
                 strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
             }

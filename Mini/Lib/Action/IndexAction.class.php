@@ -321,7 +321,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 }else{
                     $newkeyword =  $keyword;
                 }
-                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and g.approve_status='onsale' and g.num>=15 and title like '%{$newkeyword}%' order by g.uptime desc limit {$start},{$page_num}";
+                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and g.approve_status='onsale' and title like '%{$newkeyword}%' order by g.uptime desc limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
             }
             if(!empty($result)){
@@ -374,7 +374,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 $cstr = rtrim($cstr,',');
                 $where.=" and g.ccateid in (".$cstr.")";
             }
-            $where.=" and bg.approve_status='onsale' and bg.num>=15";
+            $where.=" and bg.approve_status='onsale'";
             if(isset($tem)){
                 $case = ",case when g.wid=".$widvalue['wid']." then 0 end wo";
                 $ordr = "order by wo asc,";

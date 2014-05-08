@@ -268,6 +268,13 @@ function Model_loadok_callback(){
                     if( data.code == 1){
                         var clothesInfo = data.data
                         $this.data('buy_url',clothesInfo.detail_url);
+                        if(clothesInfo.num<=0){
+                        $this.html('<font style="color:red;font-weight:bold;">已售罄</font>'+clothesInfo.title);
+                        $this.attr('title','(已售罄)'+clothesInfo.title);
+                       }else{
+                        $this.html(clothesInfo.title);
+                        $this.attr('title',clothesInfo.title);
+                        }
                     }
                 });
             });
@@ -326,7 +333,9 @@ function Model_loadok_callback(){
             }).on('mouseleave','.buy_btns .buyurl',function(){
                 $(this).css({'background':'#fff','color':'#666'});
             }).on('click','.buy_btns span',function(){
+                if($(this).data('buy_url')){
                 window.open( $(this).data('buy_url') );
+                }
             });
 
             pageElement.$divSyj.on('mouseleave',function(){
