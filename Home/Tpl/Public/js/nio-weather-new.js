@@ -224,16 +224,16 @@ var weather = {
     },
     setBackground : function(str){
         this.removeBackgroundClass();
-        if(str.indexOf("Ñ©") > 0){
+        if(str.indexOf("Ñ©") >= 0){
             $("#div_header").addClass("dr_header_bg5")
             $("#div_main").addClass("dr_main_con_bg5")
         }
-        else if(str.indexOf("´óÓê") > 0 || str.indexOf("±©Óê") > 0 ||
-            str.indexOf("À×Óê") > 0 || str.indexOf("±ù±¢") > 0 ){
+        else if(str.indexOf("´óÓê") >= 0 || str.indexOf("±©Óê") >= 0 ||
+            str.indexOf("À×Óê") >= 0 || str.indexOf("±ù±¢") >= 0 ){
             $("#div_header").addClass("dr_header_bg4")
             $("#div_main").addClass("dr_main_con_bg4")
         }
-        else if(str.indexOf("Óê") > 0){
+        else if(str.indexOf("Óê") >= 0){
             $("#div_header").addClass("dr_header_bg3")
             $("#div_main").addClass("dr_main_con_bg3")
         }
