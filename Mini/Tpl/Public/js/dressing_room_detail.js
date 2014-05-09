@@ -527,7 +527,11 @@ var _mini = {
                     strHtml+= '搭配';
                 }
                 else{
+                    if(v.num==0){
+                    strHtml+= '搭配';
+                    }else{
                     strHtml += '试穿';
+                    }
                 }
                 strHtml += '</a></dt>';
                 strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
