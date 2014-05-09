@@ -214,4 +214,17 @@ class ProductSynModel extends Model{
             ->select();
     }
 
+    //计算每种颜色的库存
+    public function getSkuNum($num_iid){
+        $sql = "select sum(quantity) as skunum from u_products where num_iid={$num_iid} group by cid";
+        $result = M('Goods')->query($sql);
+        $skunum = 1;
+        foreach($result as $k=>$v){
+        if($v['skunum']==0){
+         $skunum = 0;
+         break;
+        }
+        }
+        return $skunum;
+    }
 } 

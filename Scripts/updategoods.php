@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //更新商品
 require_once('init.php');
 require_once('TopSdk.php');
@@ -21,8 +21,7 @@ $pagenum = ceil($resp['total_results']/200);
 $products = new ItemGetRequest;//获取商品详细信息
 $ccate = new ItemcatsGetRequest;
 $ccate->setFields('cid,parent_cid,name,is_parent');
-echo $pagenum;
-exit;
+
 //获取商品详细信息
 for($i=1;$i<=$pagenum;$i++){
 //if($i==1){
@@ -52,40 +51,49 @@ foreach($goods as $k=>$v){
 	$product = $c->execute($products, $db->token);
 	$product_arr = (array)$product->item;
 	//更新goods
-        $proarr = explode(';',$product_arr['props_name']);
-	foreach($proarr as $kp=>$vp){
-        if($kp==0){
-        $vparr = explode(':',$vp);
-	//if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
+    $proarr = explode(';',$product_arr['props_name']);
+	/*foreach($proarr as $kp=>$vp){
+    $vparr = explode(':',$vp);
+	if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
 	$item_bn = $vparr[3];
-	//break;
-	//}
-        }
+	break;
 	}
+	}*/
+	$item_bn = 'UQ'.$product_arr['outer_id'];
+	$v['title'] = addslashes($v['title']);
 	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
     $db->mysqlquery($sql);
     unset($sql);
 
 	$product_arr_sku = (array)$product_arr['skus']->sku;
 	$prop_imgs = (array)$product_arr['prop_imgs']->prop_img;
-
+    //颜色
+	$property_alias = (array)$product_arr['property_alias'];
+    $arrcolor = getcolor($property_alias[0]);
+	//颜色
 	foreach($product_arr_sku as $k2=>$v2){
 	$v2 = (array)$v2;
+	$properties = explode(';',$v2['properties']);
 	if($v2['quantity']>0){
 	$psql = "select `id`,`url` from `u_products` where `sku_id`='".$v2['sku_id']."'";
 	$p_list = $db->mysqlfetch($psql);
 	unset($psql);
 	if(!empty($p_list[0])){
 	//更新
-	$psql = "update `u_products` set `properties`='".$v2['properties']."',`properties_name`='".$v2['properties_name']."',`quantity`='".$v2['quantity']."' where `sku_id`='".$v2['sku_id']."'";
-	$db->mysqlquery($psql);
-	unset($psql);
-	/*if(file_exists($root_dir.'/'.$p_list[0]['url'])){
-     unlink($root_dir.'/'.$p_list[0]['url']);
-	}*/
-	}else{
-	//插入
-	$properties = explode(';',$v2['properties']);
+    $kucolor = explode(':',$properties[0]);
+	$cid = 0;
+	$cstr = '';
+    foreach($arrcolor as $kcc=>$vcc){
+    if($vcc['id']==$kucolor[1]){
+    $cid = $vcc['cid'];
+    $cstr = $vcc['cv'];
+	break;
+	}
+	}
+
+    //20140429
+	$pro_img_url = '';
+    if(!file_exists($root_dir.'/'.$p_list[0]['url'])){
 	$url = '';
 	foreach($prop_imgs as $k5=>$v5){
 	if($v5->properties==$properties[0]){
@@ -93,10 +101,41 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
-	//获取product的图片
-    $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url);
+    $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));
-	$insql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`properties`,`properties_name`,`quantity`,`url`) values ('".$good_list[0]['id']."','".$good_list[0]['num_iid']."','".$v2['sku_id']."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."')";
+     //unlink($root_dir.'/'.$p_list[0]['url']);
+    $pro_img_url = ",url='".$save_image[1]."'";
+	}
+	//20140429
+	$psql = "update `u_products` set `cid`='".$cid."',`cvalue`='".$cstr."',`properties`='".$v2['properties']."',`properties_name`='".$v2['properties_name']."',`quantity`='".$v2['quantity']."' {$pro_img_url} where `sku_id`='".$v2['sku_id']."'";
+	$db->mysqlquery($psql);
+	unset($psql);
+	/*if(file_exists($root_dir.'/'.$p_list[0]['url'])){
+     unlink($root_dir.'/'.$p_list[0]['url']);
+	}*/
+	}else{
+	//插入
+	$url = '';
+	foreach($prop_imgs as $k5=>$v5){
+	if($v5->properties==$properties[0]){
+	$url = $v5->url;
+	break;
+	}
+	}
+    $kucolor = explode(':',$properties[0]);
+	$cid = 0;
+	$cstr = '';
+    foreach($arrcolor as $kcc=>$vcc){
+    if($vcc['id']==$kucolor[1]){
+    $cid = $vcc['cid'];
+    $cstr = $vcc['cv'];
+	break;
+	}
+	}
+	//获取product的图片
+    $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
+    @file_put_contents($save_image[0], file_get_contents($url));
+	$insql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`) values ('".$good_list[0]['id']."','".$good_list[0]['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."')";
 	$db->mysqlquery($insql);
 	unset($insql);
 	}
@@ -111,9 +150,9 @@ foreach($goods as $k=>$v){
     $db->mysqlquery($delsql);
     unset($delsql);
 	}
-	}		
+	}
 	}else{
-	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`properties`,`properties_name`,`quantity`,`url`) values ";
+	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`) values ";
      //有新商品
 	$ppsql = '';
 	//获取分类
@@ -132,23 +171,18 @@ foreach($goods as $k=>$v){
     $cname.=$cv['name'].'-';
 	}
 	$cname = rtrim($cname,'-');
-	//更新goods
-        $proarr = explode(';',$product_arr['props_name']);
-	foreach($proarr as $kp=>$vp){
-        if($kp==0){
-        $vparr = explode(':',$vp);
-	//if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
-	$item_bn = $vparr[3];
-	//break;
-	//}
-        }
-	}
-	$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$item_bn."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
+    $item_bn = 'UQ'.$product_arr['outer_id'];
+	$v['title'] = addslashes($v['title']);
+	$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
     $db->mysqlquery($sql);
     $goods_id = mysql_insert_id();
     unset($sql);
 	$product_arr_sku = (array)$product_arr['skus']->sku;
 	$prop_imgs = (array)$product_arr['prop_imgs']->prop_img;
+    //颜色
+	$property_alias = (array)$product_arr['property_alias'];
+    $arrcolor = getcolor($property_alias);
+	//颜色
 	if(!empty($product_arr_sku)){
 	foreach($product_arr_sku as $k2=>$v2){
 	$v2 = (array)$v2;
@@ -161,10 +195,21 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
+
+    $kucolor = explode(':',$properties[0]);
+	$cid = 0;
+	$cstr = '';
+    foreach($arrcolor as $kcc=>$vcc){
+    if($vcc['id']==$kucolor[1]){
+    $cid = $vcc['cid'];
+    $cstr = $vcc['cv'];
+	break;
+	}
+	}
 	//获取product的图片
-    $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url);
+    $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));	
-	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."'),";
+	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."'),";
 	}
 	}
 	//插入product
@@ -194,5 +239,16 @@ unset($result);
 	   }
 	   $catarr[] = $recate;
 	   return $catarr;
+}
+//组织颜色数据
+function getcolor($property_alias){
+    $arr_property = explode(';',$property_alias);
+	$arr_pro = array();
+    foreach($arr_property as $ka=>$va){
+    $arr_va = explode(':',$va);
+	$arr_color = explode(' ',$arr_va[2]);
+	$arr_pro[] = array('id'=>$arr_va[1],'cid'=>$arr_color[0],'cv'=>$arr_va[2]);
+	}
+	return $arr_pro;
 }
 exit;
