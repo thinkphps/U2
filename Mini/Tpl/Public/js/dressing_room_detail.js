@@ -538,7 +538,7 @@ var _mini = {
                 strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
                 var sty = '';
-                if(v.skunum==0){
+                if(v.skunum==0 && v.num!=0){
                     sty = 'style="background:url('+tmplPath+'/images/icon2.png) no-repeat scroll 165px 0 #EEEEEE; padding:10px 8px; overflow:hidden;"';
                 }
                 strHtml += '<div class="product_color none" '+sty+'><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
