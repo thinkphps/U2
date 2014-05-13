@@ -657,11 +657,9 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     $.uniqlo.zid = 0;
     $.uniqlo.kid = 1;
     $.uniqlo.minikeyword = keyword;
-    if(keyword){
         getgoods(0,0,0,0,0,0,1,0,keyword);
         _mini.initialization();
         $.uniqlo.index.week.find('.w_select').removeClass('w_select');
-    }
 
 });
 

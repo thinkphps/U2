@@ -74,7 +74,8 @@ foreach($goods as $k=>$v){
 	foreach($product_arr_sku as $k2=>$v2){
 	$v2 = (array)$v2;
 	$properties = explode(';',$v2['properties']);
-	if($v2['quantity']>0){
+    //sku库存等于0
+	//if($v2['quantity']>0){
 	$psql = "select `id`,`url` from `u_products` where `sku_id`='".$v2['sku_id']."'";
 	$p_list = $db->mysqlfetch($psql);
 	unset($psql);
@@ -139,7 +140,8 @@ foreach($goods as $k=>$v){
 	$db->mysqlquery($insql);
 	unset($insql);
 	}
-	}else{
+	/*}else{
+	sku库存等于0
 	$desql = "select `url` from `u_products` where `sku_id`='".$v2['sku_id']."'";
     $deresult = $db->mysqlfetch($desql);
 	unset($desql);
@@ -149,7 +151,7 @@ foreach($goods as $k=>$v){
     $delsql = "delete from `u_products` where `sku_id`='".$v2['sku_id']."'";
     $db->mysqlquery($delsql);
     unset($delsql);
-	}
+	}*/
 	}
 	}else{
 	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`) values ";
@@ -186,7 +188,7 @@ foreach($goods as $k=>$v){
 	if(!empty($product_arr_sku)){
 	foreach($product_arr_sku as $k2=>$v2){
 	$v2 = (array)$v2;
-	if($v2['quantity']>0){
+	//if($v2['quantity']>0){sku库存等于0
 	$properties = explode(';',$v2['properties']);
 	$url = '';
 	foreach($prop_imgs as $k5=>$v5){
@@ -204,7 +206,7 @@ foreach($goods as $k=>$v){
     $cid = $vcc['cid'];
     $cstr = $vcc['cv'];
 	break;
-	}
+	//}sku库存等于0
 	}
 	//获取product的图片
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);

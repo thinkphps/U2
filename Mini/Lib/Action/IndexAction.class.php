@@ -312,21 +312,24 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
             }
         }else if($kid>0){
             //快速搜索走这里
-            if($keyword){
+           if($keyword){
+            $isair = is_int(strpos($keyword,' '));
+            if($isair){
+                $keywordArr = explode(' ',$keyword);
+                $newkeyword = implode('%',$keywordArr);
+            }else{
+                $newkeyword =  $keyword;
+            }
+             $liketitle = "and g.title like '%{$newkeyword}%'";
+           }else{
+             $liketitle = '';
+           }
                 if(!empty($uid)){
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=g.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=g.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $isair = is_int(strpos($keyword,' '));
-                if($isair){
-                    $keywordArr = explode(' ',$keyword);
-                    $newkeyword = implode('%',$keywordArr);
-                }else{
-                    $newkeyword =  $keyword;
-                }
-                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' and title like '%{$newkeyword}%' order by g.uptime desc limit {$start},{$page_num}";
+                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' {$liketitle} order by g.uptime desc limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
-            }
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
@@ -387,13 +390,23 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 $ordr = "order by ";
             }
             if(!empty($uid)){
-                $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=bg.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=bg.num_iid";
+                $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=al.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=al.num_iid";
                 $fieldlb = ",lo.id as loveid,bu.id as buyid";
             }
             if($sid!=4){
-                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+              if(!empty($uid)){
+              $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num.") as al ".$wherelb;
+               }else{
+              $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+              }
             }else{
-                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+             if(!empty($uid)){
+                $sql = "select al.*{$fieldlb} from (select g.good_id".$case.",bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                }else{
+                 $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+                }
             }
             $result = $goodtag->query($sql);
             if(!empty($result)){
@@ -426,8 +439,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
         $this->ajaxReturn($returnArr, 'JSON');
     }
     public function waterdata($result,$lid,$bid,$keyword){
-        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.cTVbad&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
-        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://uniqlo.tmall.com/search.htm?scid=914395109" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2Y8bCXBdaXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
+        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?spm=a1z10.4.w49-18552554362.1.vcYIQa&search=y&scid=138188209&viewType=grid&orderType=_newOn' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T27QW.XRRXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
+        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?spm=a1z10.4.w49-18552554362.10.vcYIQa" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2w_QOXKdXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
