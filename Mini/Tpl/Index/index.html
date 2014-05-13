@@ -762,7 +762,8 @@ $('.imgrd').css(css);
 
         //mini中部类别切换
         $('#cateu2').on('click','li',function(){
-            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
+            var tmpscrolltop;
+            setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
@@ -785,7 +786,8 @@ $('.imgrd').css(css);
         });
         //mini中部类别选择
         $('#cstyle2').on('click','li a',function(){
-            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
+            var tmpscrolltop;
+            setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
@@ -829,7 +831,8 @@ $('.imgrd').css(css);
         });
        //点击自定义分类
         $('.left_tj').on('click','li.upclothes',function(){
-            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
+            var tmpscrolltop;
+            setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
@@ -871,7 +874,8 @@ $('.imgrd').css(css);
             $(window).scrollTop(tmpscrolltop);
         });
         $('.right_tj').on('click','li.doclothes',function(){
-            setTimeout(function(){var tmpscrolltop = $(window).scrollTop();},100)
+            var tmpscrolltop;
+            setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
             $.weather.nextpage = 0;
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
