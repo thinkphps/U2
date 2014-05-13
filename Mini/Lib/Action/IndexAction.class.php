@@ -301,6 +301,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
             $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
+
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 }
