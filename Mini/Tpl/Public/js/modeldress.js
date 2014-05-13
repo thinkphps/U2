@@ -474,7 +474,13 @@ function Model_loadok_callback(){
                 var gender = $proInfo.data('gender');
                 var isud = $proInfo.data('isud');
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
+                var $cselected = $('#watercontainer').find('li.pro-selected').children('a');
+                if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode){
                 _this.dressing(barcode,gender,sex,isud,$wrapper_box,$(this));
+               }else{
+                    $('#watercontainer').find('li.pro-selected').removeClass("pro-selected");
+                    $(this).addClass('pro-selected');
+                }
             });
 
             //点击男童、女童穿衣上身
