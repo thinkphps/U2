@@ -251,6 +251,7 @@ function Model_loadok_callback(){
                     colorHtml += '<li data-barcode="'+ colors[i].uq + colors[i].colorid +'" title="'+title+'"><a href="javascript:;" data-colorid="'+ colors[i].colorid + '" ';
                     colorHtml += 'style="background:url('+ imgurl +') center no-repeat;background-size:cover;" ';
                     colorHtml += 'data-gender="'+ colors[i].gender+'" ';
+                    colorHtml += 'data-num_iid="'+ colors[i].num_iid+'" ';
                     colorHtml += 'data-uqcode="'+ colors[i].uq +'" ';
                     colorHtml += 'data-colorid="' + colors[i].colorid + '" ';
                     colorHtml += 'data-imgurl="'+ imgurl +'"> ';
@@ -474,8 +475,9 @@ function Model_loadok_callback(){
                 var gender = $proInfo.data('gender');
                 var isud = $proInfo.data('isud');
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
+                //kimi
                 var $cselected = $('#watercontainer').find('li.pro-selected').children('a');
-                if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode){
+                if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode || $cselected.data('num_iid')==$proInfo.data('num_iid')){
                 _this.dressing(barcode,gender,sex,isud,$wrapper_box,$(this));
                }else{
                     $('#watercontainer').find('li.pro-selected').removeClass("pro-selected");

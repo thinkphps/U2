@@ -180,6 +180,7 @@ class ProductSynModel extends Model{
             ->join('INNER JOIN u_products on u_products.num_iid=u_goods.num_iid and left(u_products.cvalue,2)=u_products_beubeu.color')
             ->field('
                     distinct u_products_beubeu.color as colorid,
+                    u_products.num_iid as num_iid,
                     u_products.url  as colorcode,
                     u_color.color_name as colorname,
                     left(u_goods.item_bn,8) as uq ,
