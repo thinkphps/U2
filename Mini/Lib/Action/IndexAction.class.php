@@ -382,6 +382,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 $where.=" and g.ccateid in (".$cstr.")";
             }
             //$where.=" and bg.approve_status='onsale'";
+            $where.=" and bg.isdel=0";
             if(isset($tem)){
                 $case = ",case when g.wid=".$widvalue['wid']." then 0 end wo";
                 $ordr = "order by wo asc,";
