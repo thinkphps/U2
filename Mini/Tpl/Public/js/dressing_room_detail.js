@@ -616,6 +616,7 @@ var _mini = {
                         $this.removeClass(strClass);
                         $this.addClass(strClass+'_0');
                     }
+
                 }
                 else{
                     if(strClass.substr(length - 2,2)== '_0'){
