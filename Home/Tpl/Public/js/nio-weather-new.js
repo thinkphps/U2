@@ -261,7 +261,7 @@ var weather = {
         if(data.newstorre){
             $('.preferential_1').remove();
             $('#tablink1').remove();
-            $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a>'+data.newstorre+'</a></li>');
+            $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+data.newstorre+'</a></li>');
             $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
         }else{
             $('.preferential_1').remove();
