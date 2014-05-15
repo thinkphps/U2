@@ -1583,9 +1583,9 @@ li.mini-bot-range{
 .mini-aside{
     background: #7d7d7d;
     width: 57px;
-    top: 94px;
+    top: 50%;
     left: 50%;
-    margin-left: 485px;
+    margin-left: -580px;
     /*z-index: 3;*/
 }
 .mini-aside li{
@@ -1610,15 +1610,16 @@ li.mini-bot-range{
     height: 246px;
     border: 3px solid #d1d1d1;
     cursor: default;
-    right: 65px;
+    left: 65px;
     top: 0;
     color: #000;
+    z-index: 3;
 }
 .mini-aside-form span.mini-btn{
-    background-position: -49px -131px;
+    background-position: -40px -131px;
     width: 10px;
     height: 12px;
-    right: -10px;
+    left: -10px;
     top: 15px;
 }
 .mini-aside-form h4{
