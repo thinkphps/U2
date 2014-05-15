@@ -63,7 +63,7 @@ class GetinfoModel extends Action{
                 $pid = $cid;
                 break;
         }
-        $clist = M('Areas')->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+        $clist = M('Areas')->field('region_id,local_name')->where(array('p_region_id'=>$pid,'disabled'=>'false'))->select();
         return $clist;
     }
 
