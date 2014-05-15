@@ -186,7 +186,7 @@ jQuery(function($){
                  $('#ddlShop').html(str);
                  }else{
                  if(data.baiduerjiid>0){
-                 $('#emptymsg').html('本地区暂无优衣库门店，请选择其他城市的门店');
+                 $('#emptymsg').html('本地区暂无优衣库门店，请选择其他地区');
                  }
                  }
                  });
