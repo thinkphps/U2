@@ -9,7 +9,7 @@ class ExportAction extends Action{
 		   $offset = 0;
 		   $ke = 1;
 		   $fp = fopen($filename,'w');
-		   $head = array('后台ID','货号','商品名称','商品数字ID','商品库存','上架状态','性别','部位','指数','最低气温','最高气温','场合','风格','自定义分类');
+		   $head = array('后台ID','货号','商品名称','商品数字ID','商品库存','上架状态','性别','部位','指数','最低气温','最高气温','风格','自定义分类');
 		   foreach($head as $i=>$v){
 		   $head[$i] = iconv('utf-8','gbk',$v);
 		   }
@@ -33,14 +33,20 @@ class ExportAction extends Action{
 		   $sd[6] = iconv('utf-8','gbk','通用');
 		   break;
 		   case '1' :
-		   $sd[6] = 'WOMEN';
+		   $sd[6] = iconv('utf-8','gbk','女装');
 		   break;
 		   case '2' :
-		   $sd[6] = 'MEN';
+		   $sd[6] = iconv('utf-8','gbk','男装');
 		   break;
 		   case '3' :
-		   $sd[6] = 'KIDS';
+		   $sd[6] = iconv('utf-8','gbk','女童');
 		   break;
+           case '4' :
+           $sd[6] = iconv('utf-8','gbk','童装');
+           break;
+               case '5' :
+                   $sd[6] = iconv('utf-8','gbk','婴幼儿');
+           break;
 		   }
 		   switch($v['isud']){
 		   case '0' :
@@ -61,6 +67,9 @@ class ExportAction extends Action{
 		   case '5' : 
 		   $sd[7] = iconv('utf-8','gbk','内衣');
 		   break;
+           case '6' :
+              $sd[7] = iconv('utf-8','gbk','婴幼儿');
+              break;
 		   }
 		   $windexlist = $gtag->join('u_windex on u_windex.id=u_goodtag.wid')->field('u_goodtag.stm,u_goodtag.etm,u_goodtag.ccateid,u_windex.wname')->where(array('u_goodtag.good_id'=>$v['id']))->group('u_goodtag.wid')->select();
 		   $wstr = '';
@@ -90,34 +99,22 @@ class ExportAction extends Action{
 		   }else{
 		   $sd[10] = 0;
 		   }
-		   $taglist = $gtag->join('u_tag on u_tag.id=u_goodtag.tag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id']))->group('u_goodtag.tag_id')->select();
-		   $tstr = '';
-		   foreach($taglist as $tk=>$tv){
-		   if($tv['name']){
-		   $tstr.=$tv['name'].',';
-		   }
-		   }	   
-           if(!empty($tstr)){
-           $tstr = rtrim($tstr,',');
-           $sd[11] = iconv('utf-8','gbk',$tstr);
-           }else{
-           $sd[11] = '';
-           }
-		   $ftaglist = $gtag->join('u_tag on u_tag.id=u_goodtag.ftag_id')->field('u_tag.name')->where(array('u_goodtag.good_id'=>$v['id']))->group('u_goodtag.ftag_id')->select();
+
+		   $ftaglist = $gtag->join('u_settings_suit_style us on us.ID=u_goodtag.ftag_id')->field('us.description')->where(array('u_goodtag.good_id'=>$v['id']))->group('u_goodtag.ftag_id')->select();
 		   $fstr = '';
 		   foreach($ftaglist as $fk=>$fv){
-		   if($fv['name']){
-		   $fstr.=$fv['name'].',';
+		   if($fv['description']){
+		   $fstr.=$fv['description'].',';
 		   }
 		   }	   
            if(!empty($fstr)){
            $fstr = rtrim($fstr,',');
-           $sd[12] = iconv('utf-8','gbk',$fstr);
+           $sd[11] = iconv('utf-8','gbk',$fstr);
            }else{
-           $sd[12] = '';
+           $sd[11] = '';
            }
 		   $cfind = $customcate->field('name')->where(array('id'=>$windexlist[0]['ccateid']))->find();		   
-		   $sd[13] = iconv('utf-8','gbk',$cfind['name']);
+		   $sd[12] = iconv('utf-8','gbk',$cfind['name']);
 		   fputcsv($fp,$sd);
 		   }
            $offset+=$step;
@@ -127,4 +124,46 @@ class ExportAction extends Action{
 fclose($fp);
 echo '完成';
 	}
+
+    public function exportshop(){
+        $handle = fopen('Upload/1.csv','r');
+        $i = 0;
+        $shop = M('Shop');
+        while($data = fgetcsv($handle)){
+            if($i>0 && !empty($data)){
+                $time = date('Y-m-d H:i:s');
+                //$data[3] = $this->iconvfun($data[3]);
+                $data[0] = $this->iconvfun($data[0]);
+                $result = $shop->field('id,store_id')->where(array('store_id'=>$data[0]))->find();
+                if(!empty($result)){
+                    $daarr = array('store_id'=>$this->iconvfun(intval($data[0])),
+                        'longitude'=>$this->iconvfun($data[6]),
+                        'latitude'=>$this->iconvfun($data[7]),
+                        'saddress'=>$this->iconvfun($data[5]),
+                        'tradetime'=>$this->iconvfun($data['11']),
+                        'scall'=>$this->iconvfun($data[10]),
+                        'sange'=>$this->iconvfun($data[12]));
+                    $daarr = array('tradetime'=>$this->iconvfun(trim($data['11'])));
+                    $shop->where(array('id'=>$result['id']))->save($daarr);
+                }else{
+                    echo $data[3].'<br/>';
+                    $daarr = array('store_id'=>$this->iconvfun(intval($data[0])),
+                        'longitude'=>$this->iconvfun($data[6]),
+                        'latitude'=>$this->iconvfun($data[7]),
+                        'sname'=>$this->iconvfun($data[3]),
+                        'saddress'=>$this->iconvfun($data[5]),
+                        'tradetime'=>$this->iconvfun($data[11]),
+                        'scall'=>$this->iconvfun($data[10]),
+                        'sange'=>$this->iconvfun($data[12]),
+                        'createtime'=>$time);
+                    $shop->add($daarr);
+                }
+            }
+            $i++;
+        }
+    }
+
+    public function iconvfun($v){
+        return iconv('GB2312','UTF-8',$v);
+    }
 }
