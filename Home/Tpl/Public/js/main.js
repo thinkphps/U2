@@ -5,7 +5,7 @@
 //var jsonpHomeUrl = 'http://localhost/U2/index.php/Index';
 //var tmplPath = 'http://localhost/U2/Home/Tpl/Public/';
 //var baseurl='http://localhost/U2/';
-var timer;
+var timer,loadid = 0;
 (function($, window, document,undefined) {
 
     var TmallUniqloHome = function() {
@@ -37,7 +37,7 @@ var timer;
                     }else{
                         $.pron = remote_ip_info.province;
                     }
-                    _this.getSuits();
+                    //_this.getSuits();
                 }
             });
 
@@ -265,9 +265,16 @@ var timer;
 
 
             $('.weather').on('mouseenter',function(){
+                if(loadid==0){
+                $('#suits-container').html('<div id="loadid" style="text-align:center; line-height=400px;padding-top:135px;"><img src="'+tmplPath+'/images/5-121204193R0-50.gif"></div>');
+                }
                 $("#div_main").show();
                 $("#w_zk").hide();
                 $("#w_sq").show();
+                if(loadid==0){
+                _this.getSuits();
+                   loadid  = 1;
+                }
             });
 
         },
