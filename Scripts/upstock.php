@@ -25,6 +25,7 @@ $products->setFields('num,approve_status,sku.quantity,sku.sku_id');
 	$products->setNumIid($v['num_iid']);
 	$product = $c->execute($products, $db->token);
 	$product_arr = (array)$product->item;
+    if(!empty($product_arr)){
     $product_arr_sku = (array)$product_arr['skus']->sku;
 	$sql = "update `u_goods` set `approve_status`='".$product_arr['approve_status']."',`num`='".$product_arr['num']."' where `id`='".$v['id']."'";
 	$db->mysqlquery($sql);
@@ -35,6 +36,11 @@ $products->setFields('num,approve_status,sku.quantity,sku.sku_id');
         $psql = "update `u_products` set `quantity`=".$v2['quantity']." where goods_id=".$v['id']." and sku_id=".$v2['sku_id'];
         $db->mysqlquery($psql);
      }
+    }else{
+       $sql = "update `u_goods` set `isdel`=1 where `num_iid`=".$v['num_iid'];
+       $db->mysqlquery($sql);
+        unset($sql);
+    }
 	}
 	}
 	$offset+=$limit;
