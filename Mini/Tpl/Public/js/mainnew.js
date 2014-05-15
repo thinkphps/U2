@@ -809,7 +809,8 @@ jQuery(function($){
                         title = title.substring(0,15) + "...";
                     }
                     //将衣服信息增加到购买列表
-                    cabnet.buybtns.find("ul").append($('<li title="'+ img.attr("alt") +'"><a barcode="'+barcode+'" uqrcode="'+ uqcode +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    //cabnet.buybtns.find("ul").append($('<li title="'+ img.attr("alt") +'"><a barcode="'+barcode+'" uqrcode="'+ uqcode +'" target="_blank" href="'+ img.attr("url") +'" >'+ title +'</a></li>'));
+                    cabnet.buybtns.find("ul").append($('<li title=""><a barcode="'+barcode+'" uqrcode="'+ uqcode +'" target="_blank" href="'+ img.attr("url") +'" ></a></li>'));
                     //将衣服颜色缩略图设置为选中状态
                     cabnet.colorImg.find("li a[barcode='"+ barcode +"']").parent().addClass("pro-selected");
                 }
