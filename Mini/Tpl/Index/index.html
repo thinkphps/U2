@@ -84,6 +84,7 @@
             </div>
         </if>
         <a href="http://uniqlo.tmall.com/" class="tmail" target='__blank'><i></i>优衣库天猫旗舰店</a>
+        <a href="http://www.uniqlo.cn/" class="tmail2" target='__blank'><i></i>优衣库官方旗舰店</a>
     </div>
 </div>
 
@@ -533,12 +534,12 @@
                 <li class="rw_yinyouer" data-gender="4"><a href="javascript:;"></a></li>
             </ul>
             <ul class="ch_sub_nav" id='cstyle2'>
-                <li class="ch_all"><a href="javascript:;" data-suitstyle="all" class="select"></a></li>
-                <li><a href="javascript:;" class="ch_a_1" data-suitstyle="6"></a><a href="javascript:;" class="ch_a_2" data-suitstyle="4"></a></li>
-                <li><a href="javascript:;" class="ch_b_1" data-suitstyle="7"></a><a href="javascript:;" class="ch_b_2" data-suitstyle="9"></a></li>
-                <li><a href="javascript:;" class="ch_c_1" data-suitstyle="8"></a><a href="javascript:;" class="ch_c_2" data-suitstyle="5"></a></li>
-                <li><a href="javascript:;" class="ch_d_1" data-suitstyle="1"></a><a href="javascript:;" class="ch_d_2" data-suitstyle="2"></a></li>
-                <li class="last"><a href="javascript:;" class="ch_e_1" data-suitstyle="3"></a><a href="javascript:;" class="ch_e_2" data-suitstyle="10"></a></li>
+                <li class="ch_all"><a href="javascript:;" data-suitstyle="all" class="select ch_c"></a></li>
+                <li><a href="javascript:;" class="ch_a_1 ch_c" data-suitstyle="6"></a><a href="javascript:;" class="ch_a_2 ch_c" data-suitstyle="4"></a></li>
+                <li><a href="javascript:;" class="ch_b_1 ch_c" data-suitstyle="7"></a><a href="javascript:;" class="ch_b_2 ch_c" data-suitstyle="9"></a></li>
+                <li><a href="javascript:;" class="ch_c_1 ch_c" data-suitstyle="8"></a><a href="javascript:;" class="ch_c_2 ch_c" data-suitstyle="5"></a></li>
+                <li><a href="javascript:;" class="ch_d_1 ch_c" data-suitstyle="1"></a><a href="javascript:;" class="ch_d_2 ch_c" data-suitstyle="2"></a></li>
+                <li class="last"><a href="javascript:;" class="ch_e_1 ch_c" data-suitstyle="3"></a><a href="javascript:;" class="ch_e_2 ch_c" data-suitstyle="10"></a></li>
             </ul>
             <div class="none" id="style-mask2"></div>
             <div class="none style-children_mask" ></div>
@@ -657,7 +658,7 @@
 
 
 <!--选择城市弹窗-->
-<div class="map_light_box none" id="mapdiv">
+<div class="map_light_box none" id="mapdiv" >
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
     <h3>离您最近的优衣库UNIQLO门店</h3>
     <div class="mb15">
@@ -793,10 +794,12 @@ $('.imgrd').css(css);
             $.uniqlo.kid = 0;
             $.weather.nextpage = 0;
             $.weather.str = '';
+            if($(this).hasClass('ch_c')){
             $(this).siblings('a').removeClass('select');
             $(this).parent('li').siblings('li').children('a').removeClass('select');
             $(this).addClass('select');
             _mini.getGoods();
+           }
             $(window).scrollTop(tmpscrolltop);
         });
 
