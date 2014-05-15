@@ -463,30 +463,178 @@ var _mini = {
     },
     left : [],
     right : [],
-    showStyleMask2 : function(gender){
+    setStyleHover : function(){
+        var $leftstyle = $('#cstyle2').children('li').children('a');
+        $.each($leftstyle,function(li,lv){
+            var fvalue = $(this).data('suitstyle');
+            if(!$(this).hasClass('ch_c')){
+                $(this).addClass('ch_c');
+            }
+            $(this).css({'cursor':'pointer','background-color':'transparent','opacity':'1'});
+            $(this).hover(function(){
+                switch (fvalue){
+                    case 6:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -70px no-repeat');
+                        break;
+                    case 4:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -105px no-repeat');
+                        break;
+                    case 7:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -70px no-repeat');
+                        break;
+                    case 9:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -105px no-repeat');
+                        break;
+                    case 8:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -70px no-repeat');
+                        break;
+                    case 5:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -105px no-repeat');
+                        break;
+                    case 1:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -70px no-repeat');
+                        break;
+                    case 2:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -105px no-repeat');
+                        break;
+                    case 3:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -70px no-repeat');
+                        break;
+                    case 10:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -105px no-repeat');
+                        break;
+                    default :
 
-        if(gender == 4){
-            $('#style-mask2').removeClass('children-style-mask2');
-            $('#style-mask2').removeClass('male-style-mask2');
-            $('#style-mask2').addClass('baby-style-mask2').show();
-            $('.style-children_mask').hide();
-        }else if(gender == 3){
-            $('#style-mask2').removeClass('baby-style-mask2');
-            $('#style-mask2').removeClass('male-style-mask2');
-            $('#style-mask2').addClass('children-style-mask2').show();
-            $('.style-children_mask').show();
+                }
+            },function(){
+                switch (fvalue){
+                    case 6:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px 0 no-repeat');
+                        break;
+                    case 4:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -35px no-repeat');
+                        break;
+                    case 7:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px 0 no-repeat');
+                        break;
+                    case 9:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -35px no-repeat');
+                        break;
+                    case 8:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px 0 no-repeat');
+                        break;
+                    case 5:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -35px no-repeat');
+                        break;
+                    case 1:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px 0 no-repeat');
+                        break;
+                    case 2:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -35px no-repeat');
+                        break;
+                    case 3:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px 0 no-repeat');
+                        break;
+                    case 10:
+                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -35px no-repeat');
+                        break;
+                    default :
+
+                }
+            });
+        });
+    },
+    showStyleMask2 : function(gender){
+        var $leftstyle = $('#cstyle2').children('li').children('a');
+        if(gender == 2){
+            $.each($leftstyle,function(){
+                var $this = $(this);
+                var fvalue = $this.data('suitstyle');
+                var strClass =$this.attr('class');
+                var length = strClass.length;
+                if(fvalue==6 ){
+                    if($this.hasClass('ch_a_1')){
+                        $this.removeClass('ch_a_1');
+                        $this.addClass('ch_a_1_0');
+                    }
+                }
+                else if(fvalue == 7){
+                    if($this.hasClass('ch_b_1')){
+                        $this.removeClass('ch_b_1');
+                        $this.addClass('ch_b_1_0');
+                    }
+                }
+                else{
+                    if(strClass.substr(length - 2,2)== '_0'){
+                        $this.removeClass(strClass);
+                        $this.addClass(strClass.substr(0,length-2));
+                    }
+                }
+            });
         }
-        else if(gender == 2){
-            $('#style-mask2').removeClass('baby-style-mask2');
-            $('#style-mask2').removeClass('children-style-mask2');
-            $('#style-mask2').addClass('male-style-mask2').show();
-            $('.style-children_mask').hide();
+        else if(gender == 3){
+            $.each($leftstyle,function(){
+                var $this = $(this);
+                var fvalue = $this.data('suitstyle');
+                var strClass =$this.attr('class');
+                var length = strClass.length;
+                if(fvalue == 5 ){
+                    if($this.hasClass('ch_c_2')){
+                        $this.removeClass('ch_c_2');
+                        $this.addClass('ch_c_2_0');
+                    }
+                }
+                else if(fvalue == 8){
+                    if($this.hasClass('ch_c_1')){
+                        $this.removeClass('ch_c_1');
+                        $this.addClass('ch_c_1_0');
+                    }
+                }
+                else if(fvalue == 9){
+                    if($this.hasClass('ch_b_2')){
+                        $this.removeClass('ch_b_2');
+                        $this.addClass('ch_b_2_0');
+                    }
+                }
+                else{
+                    if(strClass.substr(length - 2,2)== '_0'){
+                        $this.removeClass(strClass);
+                        $this.addClass(strClass.substr(0,length-2));
+                    }
+                }
+            });
+        }
+        else if(gender == 4){
+            $.each($leftstyle,function(){
+                var $this = $(this);
+
+                var fvalue = $this.data('suitstyle');
+                var strClass =$this.attr('class');
+                var length = strClass.length;
+                if(fvalue!='all'){
+                    if(strClass.substr(length - 2,2) != '_0'){
+                        $this.removeClass(strClass);
+                        $this.addClass(strClass+'_0');
+                    }
+                }
+                else{
+                    if(strClass.substr(length - 2,2)== '_0'){
+                        $this.removeClass(strClass);
+                        $this.addClass(strClass.substr(0,length-2));
+                    }
+                }
+            });
         }
         else{
-            $('#style-mask2').removeClass('baby-style-mask2').hide();
-            $('#style-mask2').removeClass('children-style-mask2').hide();
-            $('#style-mask2').removeClass('male-style-mask2').hide();
-            $('.style-children_mask').hide();
+            $.each($leftstyle,function(){
+                var $this = $(this);
+                var strClass =$this.attr('class');
+                var length = strClass.length;
+                if(strClass.substr(length - 2,2)== '_0'){
+                    $this.removeClass(strClass);
+                    $this.addClass(strClass.substr(0,length-2));
+                }
+            });
         }
     },
     getProductInfo : function(data){
