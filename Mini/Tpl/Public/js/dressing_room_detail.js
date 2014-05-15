@@ -463,87 +463,6 @@ var _mini = {
     },
     left : [],
     right : [],
-    setStyleHover : function(){
-        var $leftstyle = $('#cstyle2').children('li').children('a');
-        $.each($leftstyle,function(li,lv){
-            var fvalue = $(this).data('suitstyle');
-            if(!$(this).hasClass('ch_c')){
-                $(this).addClass('ch_c');
-            }
-            $(this).css({'cursor':'pointer','background-color':'transparent','opacity':'1'});
-            $(this).hover(function(){
-                switch (fvalue){
-                    case 6:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -70px no-repeat');
-                        break;
-                    case 4:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -105px no-repeat');
-                        break;
-                    case 7:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -70px no-repeat');
-                        break;
-                    case 9:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -105px no-repeat');
-                        break;
-                    case 8:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -70px no-repeat');
-                        break;
-                    case 5:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -105px no-repeat');
-                        break;
-                    case 1:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -70px no-repeat');
-                        break;
-                    case 2:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -105px no-repeat');
-                        break;
-                    case 3:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -70px no-repeat');
-                        break;
-                    case 10:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -105px no-repeat');
-                        break;
-                    default :
-
-                }
-            },function(){
-                switch (fvalue){
-                    case 6:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px 0 no-repeat');
-                        break;
-                    case 4:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -420px -35px no-repeat');
-                        break;
-                    case 7:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px 0 no-repeat');
-                        break;
-                    case 9:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -528px -35px no-repeat');
-                        break;
-                    case 8:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px 0 no-repeat');
-                        break;
-                    case 5:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -636px -35px no-repeat');
-                        break;
-                    case 1:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px 0 no-repeat');
-                        break;
-                    case 2:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -744px -35px no-repeat');
-                        break;
-                    case 3:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px 0 no-repeat');
-                        break;
-                    case 10:
-                        $(this).css( 'background','url('+imgpath+'/images/detail_main_con_sub_nav.png) -852px -35px no-repeat');
-                        break;
-                    default :
-
-                }
-            });
-        });
-    },
     showStyleMask2 : function(gender){
         var $leftstyle = $('#cstyle2').children('li').children('a');
         if(gender == 2){
@@ -616,7 +535,6 @@ var _mini = {
                         $this.removeClass(strClass);
                         $this.addClass(strClass+'_0');
                     }
-
                 }
                 else{
                     if(strClass.substr(length - 2,2)== '_0'){
