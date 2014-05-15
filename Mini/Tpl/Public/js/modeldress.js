@@ -198,7 +198,8 @@ function Model_loadok_callback(){
                     pageElement.BarcodeList.push(barcode);
 //                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
                     strLi += '<li data-title="'+ title +'" ><div class="buyurl">';
-                    strLi += '<span title="'+title+'" data-barcode="'+barcode+'">'+title+'</span>'
+                    //strLi += '<span title="'+title+'" data-barcode="'+barcode+'">'+title+'</span>'
+                    strLi += '<span title="" data-barcode="'+barcode+'"></span>'
                     strLi +='</div></li>'
                 }
                 $buyUl.append(strLi);
