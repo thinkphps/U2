@@ -481,6 +481,8 @@ function Model_loadok_callback(){
                 if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode || $cselected.data('num_iid')==$proInfo.data('num_iid')){
                 _this.dressing(barcode,gender,sex,isud,$wrapper_box,$(this));
                }else{
+                    $('#watercontainer').find('li.pro-selected').parent().parent().parent().hide();
+                    $('#watercontainer').find('li.pro-selected').parent().parent().parent().siblings('dl').find('a.select').removeClass('select');
                     $('#watercontainer').find('li.pro-selected').removeClass("pro-selected");
                     $(this).addClass('pro-selected');
                 }

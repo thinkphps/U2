@@ -1581,12 +1581,11 @@ li.mini-bot-range{
 /*== mini-aside ==*/
 
 .mini-aside{
-    background: #7d7d7d;
+    display: block;
     width: 57px;
-    top: 50%;
-    left: 50%;
-    margin-left: -600px;
-    z-index: 3;
+    position: absolute;
+    left: 0;
+    bottom: 42px;
 }
 .mini-aside li{
     padding: 14px 0;
