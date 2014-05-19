@@ -53,7 +53,7 @@ class RecoModel extends Model{
            $page = 1;
            $start = 0;
         }
-        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('uptime desc')->limit($start.','.$page_num)->select();
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
         //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
         foreach($beubeu_suits_list as $k=>$v){
             switch($v['suitGenderID']){

@@ -80,7 +80,7 @@ class IndexAction extends Action {
             $beubeu_suits_list = unserialize(S('styledata'));
         }else{
             //默认模特图
-            $beubeu_suits_list = $beubeu_suits->cache(true)->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('uptime desc')->limit('0,4')->select();
+            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('suitID desc')->limit('0,4')->select();
             //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
             foreach($beubeu_suits_list as $k=>$v){
                 switch($v['suitGenderID']){
