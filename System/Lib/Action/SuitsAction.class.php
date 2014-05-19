@@ -13,9 +13,9 @@ class SuitsAction extends Action{
                $sutis = M('Suits');
                $style = M('SettingsSuitStyle');
                $where = array();
-               $suitGenderID = trim($this->_post('pid'));
-               $suitStyleID = trim($this->_post('stylevalue'));
-               $batchDate = trim($this->_post('batchDate'));
+               $suitGenderID = trim($this->_request('pid'));
+               $suitStyleID = trim($this->_request('stylevalue'));
+               $batchDate = trim($this->_request('batchDate'));
                $pagestr = '';
                if(!empty($suitGenderID)){
                    $where['suitGenderID'] = $suitGenderID;
@@ -69,6 +69,7 @@ class SuitsAction extends Action{
                $this->assign('suitGenderID',$suitGenderID);
                $this->assign('suitStyleID',$suitStyleID);
                $this->assign('batchDate',$batchDate);
+               $this->assign('p',$_GET['p']);
               $this->display();
            }else{
                $this->display('Login/index');
@@ -76,7 +77,15 @@ class SuitsAction extends Action{
        }
     public function add(){
           if(!empty($this->aid)){
-             $suitID = trim($this->_request('id'));
+              $suitID = trim($this->_request('id'));
+              $p = trim($this->_request('p'));
+              $suitGenderID = trim($this->_request('pid'));
+              $suitStyleID = trim($this->_request('stylevalue'));
+              $batchDate = trim($this->_request('batchDate'));
+              $this->assign('suitGenderID',$suitGenderID);
+              $this->assign('suitStyleID',$suitStyleID);
+              $this->assign('batchDate',$batchDate);
+              $this->assign('p',$p);
              $gender = M('SettingsSuitGender');
              $resultGender = $gender->field('*')->select();
              if(!empty($suitID)){
@@ -102,19 +111,23 @@ class SuitsAction extends Action{
     public function doadd(){
         if(!empty($this->aid)){
             $id = trim($this->_post('id'));
+            $ssuitGenderID = trim($this->_request('spid'));
+            $ssuitStyleID = trim($this->_request('sstylevalue'));
+            $sbatchDate = trim($this->_request('sbatchDate'));
+            $p = trim($this->_request('p'));
             $suitGenderID = trim($this->_post('pid'));
             if(empty($suitGenderID)){
-                $this->error('类别不能为空',U('Suits/add'));
+                $this->error('类别不能为空',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
                 exit;
             }
             $suitStyleID = trim($this->_post('stylevalue'));
             if(empty($suitStyleID)){
-                $this->error('风格不能为空',U('Suits/add'));
+                $this->error('风格不能为空',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
                 exit;
             }
             $suitImageUrl = trim($this->_post('suitImageUrl'));
             if(empty($suitImageUrl)){
-                $this->error('图片不能为空',U('Suits/add'));
+                $this->error('图片不能为空',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
                 exit;
             }
             $batchDate = trim($this->_post('batchDate'));
@@ -130,7 +143,7 @@ class SuitsAction extends Action{
                 }
             }
             if($flag==1){
-                $this->error('商品id不能为空',U('Suits/add'));
+                $this->error('商品id不能为空',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
                 exit;
             }
           $time = date('Y-m-d H:i:s');
@@ -152,7 +165,7 @@ class SuitsAction extends Action{
              $str = rtrim($str,',');
              $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`,`cid`) values ".$str;
              $detail->query($sql);
-             $this->success('提交成功',U('Suits/index'));
+             $this->success('提交成功',U('Suits/index',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
              exit;
          }else{
               //添加
@@ -173,13 +186,13 @@ class SuitsAction extends Action{
              $str = rtrim($str,',');
              $sql = "insert into `u_suits_goodsdetail` (`suitID`,`num_iid`,`cid`) values ".$str;
               $detail->query($sql);
-              $this->success('提交成功',U('Suits/index'));
+              $this->success('提交成功',U('Suits/index',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'sbatchDate'=>$sbatchDate)));
               exit;
           }else{
-              $this->error('新增失败',U('Suits/add'));
+              $this->error('新增失败',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
           }
          }else{
-           $this->error('图片已被使用',U('Suits/add'));
+           $this->error('图片已被使用',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
          }
          }
         }else{
