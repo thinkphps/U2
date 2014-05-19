@@ -200,6 +200,7 @@ var timer,loadid = 0;
                 }else{
                     var cnm = $('#spid option:selected').text();
                 }
+				weather.tipcity = cnm;
 
                 _this.$weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
                     callback: function(city, temper, info){
@@ -302,6 +303,7 @@ var timer,loadid = 0;
                     }
                     $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
                     H.map.centerAndZoom(city, 11);
+                    weather.tipcity = city;
                     _this.$weather.init({'city' : city, 'province': province,imgpath : window.imgpath,'subindex':'1',
                         callback: function(city, temper, info){
                             var avg = callBackFunction.getavg(temper.high,temper.low);
@@ -538,7 +540,22 @@ var callBackFunction = {
     }
 };
 
+//tips点击店铺
+$('#scrollDiv').on('click','#tipshopid',function(){
+    $("#mapdiv").show();
+    var list =   H.map.getOverlays();
+    for(var i=1;i<list.length;i++){
+        if(list[i].title == $('#tipshopid').text() ){
+            H.setMarkerCenter(list[i]);
+        }
+    }
 
+    var tipcity =   weather.tipcity ?  weather.tipcity:remote_ip_info.city;
+    weather.init({'city' : tipcity,imgpath : window.imgpath,'subid':'1','shopid':$(this).data('shopid'),
+        callback: function(city, temper, info){
+        }
+    });
+});
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
 var tabcount = new Array("3");

@@ -121,7 +121,7 @@ var weather = {
             if(!info.sname && !info.tradetime){
                 var tv = '暂时还没有店铺信息，请选择其他地区';
             }else{
-                var tv = info.sname+'<br>'+info.tradetime;
+                var tv = '<span id="tipshopid" data-shopid="'+info.id+'">'+info.sname+'</span><br>'+info.tradetime;
             }
             $('#shopid').html(tv);
         }

@@ -94,7 +94,7 @@ class GetinfoModel extends Action{
     }
 
     public function shopinfo($id){
-        $result = M('Shop')->field('sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
+        $result = M('Shop')->field('id,sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
         return $result;
     }
 
