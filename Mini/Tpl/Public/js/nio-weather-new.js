@@ -116,7 +116,7 @@ jQuery(function($){
                 if(!info.sname && !info.tradetime){
                     var tv = '暂时还没有店铺信息，请选择其他地区';
                 }else{
-                    var tv = info.sname+'<br>'+info.tradetime;
+                    var tv = '<span id="tipshopid" data-shopid="'+info.id+'">'+info.sname+'</span><br>'+info.tradetime;
                 }
                 $('#shopid').html(tv);
             }
@@ -181,7 +181,7 @@ jQuery(function($){
                  if(pv.sel == 1){
                  var sel =  "selected='selected'";
                  }
-                 str+="<option value='"+pv.sname+'<br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
+                 str+="<option value='<span id=\"tipshopid\">"+pv.sname+'</span><br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
                  });
                  $('#ddlShop').html(str);
                  }else{
@@ -350,6 +350,7 @@ jQuery(function($){
             $.weather.nextpage = 0;
             $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             H.map.centerAndZoom(city, 11);
+            $.weather.tipcity = city;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
                 callback: function(city, temper, info){
                     //kimi

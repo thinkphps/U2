@@ -240,6 +240,7 @@ class APIAction extends Action
         $weatherInfo['cbn'] = $cbn['pinying'];
         $weatherInfo['tradetime'] = $shop['tradetime'];
         $weatherInfo['sname'] = $shop['sname'];
+        $weatherInfo['id'] = $shop['id'];
         $weatherInfo['plist'] = $pro;
         $weatherInfo['clist'] = $clist;
         $weatherInfo['indexcity'] = $cbn;

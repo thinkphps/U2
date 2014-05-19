@@ -1083,7 +1083,7 @@ $('#moreid').on('click',function(){
         }else{
             var cnm = $('#spid option:selected').text();
         }
-
+        $.weather.tipcity = cnm;
         $.weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
             callback: function(city, temper, info){
                 var avg = getavg(temper.high,temper.low);

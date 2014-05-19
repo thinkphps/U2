@@ -1253,5 +1253,19 @@ jQuery(function($){
   $.uniqlo.deffer.on('loading', function(e, callback, delay){
     setTimeout(callback, delay || 300000)
   })
-
+//tips点击店铺
+  $('#scrollDiv').on('click','#tipshopid',function(){
+      $("#mapdiv").show();
+      var list =   H.map.getOverlays();
+          for(var i=1;i<list.length;i++){
+          if(list[i].title == $('#tipshopid').text() ){
+            H.setMarkerCenter(list[i]);
+           }
+           }
+      var tipcity = $.weather.tipcity ? $.weather.tipcity:remote_ip_info.city;
+      $.weather.init({'city' : tipcity,imgpath : window.imgpath,'subid':'1','shopid':$(this).data('shopid'),
+          callback: function(city, temper, info){
+          }
+      });
+  });
 })

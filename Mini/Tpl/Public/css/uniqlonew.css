@@ -1582,7 +1582,7 @@ li.mini-bot-range{
 
 .mini-aside{
     display: block;
-    width: 57px;
+    width: 70px;
     position: absolute;
     left: 0;
     bottom: 42px;
@@ -1609,7 +1609,7 @@ li.mini-bot-range{
     height: 246px;
     border: 3px solid #d1d1d1;
     cursor: default;
-    left: 65px;
+    left: 78px;
     top: 0;
     color: #000;
     z-index: 3;
