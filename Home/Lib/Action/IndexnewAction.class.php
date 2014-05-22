@@ -146,8 +146,8 @@ class IndexnewAction extends Action{
         $pid = trim($this->_request('pid'));//省id
         $callback=$_GET['callback'];
         $area = M('Areas');
-        /*$baiduid = trim($this->_request('baiduid'));
-        $shopid = trim($this->_request('shopid'));//店铺id
+        $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
+        /*$shopid = trim($this->_request('shopid'));//店铺id
         $scid = trim($this->_request('cid'));
         $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
         $Weather = D('Getinfo');
@@ -156,7 +156,12 @@ class IndexnewAction extends Action{
             $pid = $Weather->getId($baiduid,$pid,$scid);
         }
         if($baiduid!=2){*/
+            if($levelid==0){
             $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+            }else if($levelid==1){
+            $sql = "select region_id,local_name from u_areas where p_region_id=(select region_id from u_areas where p_region_id={$pid})";
+            $list = $area->query($sql);
+            }
         /* if(empty($baiduid) && count($list)==1){
              $list[0]['sel'] = 1;
          }
