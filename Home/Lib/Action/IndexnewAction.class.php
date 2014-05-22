@@ -144,45 +144,45 @@ class IndexnewAction extends Action{
 
     public function getcity(){
         $pid = trim($this->_request('pid'));//省id
-        $baiduid = trim($this->_request('baiduid'));
+        $callback=$_GET['callback'];
+        $area = M('Areas');
+        /*$baiduid = trim($this->_request('baiduid'));
         $shopid = trim($this->_request('shopid'));//店铺id
         $scid = trim($this->_request('cid'));
         $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
-        $callback=$_GET['callback'];
-        $area = M('Areas');
         $Weather = D('Getinfo');
         $shop = M('Shop');
         if(!empty($baiduid)){
             $pid = $Weather->getId($baiduid,$pid,$scid);
         }
-        if($baiduid!=2){
+        if($baiduid!=2){*/
             $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
-            if(empty($baiduid) && count($list)==1){
-                $list[0]['sel'] = 1;
-            }
-        }else{
-            switch($pid){
-                case 1 :
-                case 21 :
-                case 42 :
-                case 62 :
-                    $where = array('aid'=>$scid);
-                    break;
-                default :
-                    $where = array('cityid'=>$scid);
-                    break;
-            }
-            $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
-            foreach($list as $k=>$v){
-                if($v['id'] == $shopid){
-                    $list[$k]['sel'] = 1;
-                }
-            }
-        }
+        /* if(empty($baiduid) && count($list)==1){
+             $list[0]['sel'] = 1;
+         }
+     /*}else{
+       switch($pid){
+             case 1 :
+             case 21 :
+             case 42 :
+             case 62 :
+                 $where = array('aid'=>$scid);
+                 break;
+             default :
+                 $where = array('cityid'=>$scid);
+                 break;
+         }
+         $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
+         foreach($list as $k=>$v){
+             if($v['id'] == $shopid){
+                 $list[$k]['sel'] = 1;
+             }
+         }
+     }*/
         $arr['clist'] = $list;
-        $arr['baiduerjiid'] = $baiduerjiid;
+        /*$arr['baiduerjiid'] = $baiduerjiid;
         $arr['shopid'] = $shopid;
-        $re = json_encode($arr);
+        $re = json_encode($arr);*/
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
