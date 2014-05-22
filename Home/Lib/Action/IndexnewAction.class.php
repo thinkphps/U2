@@ -57,7 +57,7 @@ class IndexnewAction extends Action{
             unset($pinyin);
             unset($shop);
         }
-        $weatherInfo["pinyin"] = $arr['pinying'];
+        $weatherInfo["pinyin"] = $arr['pinyin'];
         $weatherInfo['tradetime'] = $arr['shop']['tradetime'];
         $weatherInfo['sname'] = $arr['shop']['sname'];
         $re = json_encode($weatherInfo);
