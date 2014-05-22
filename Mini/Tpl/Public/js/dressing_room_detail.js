@@ -727,7 +727,13 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
         getgoods(0,0,0,0,0,0,1,0,keyword);
         _mini.initialization();
         $.uniqlo.index.week.find('.w_select').removeClass('w_select');
-
+    $.each($('#cstyle2').children('li').children('a'),function(){
+        var strClass =$(this).attr('class'),length = strClass.length;
+        if(strClass.substr(length - 2,2)== '_0'){
+            $(this).removeClass(strClass);
+            $(this).addClass(strClass.substr(0,length-2));
+        }
+    })
 });
 
 document.onkeydown = function(e){

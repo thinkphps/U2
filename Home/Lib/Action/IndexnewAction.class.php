@@ -1,30 +1,5 @@
 <?php
 class IndexnewAction extends Action{
-    public function index(){
-        $callback=$_GET['callback'];
-        $getcity = D('Getinfo');
-        $arrcity = $getcity->GetCityInfo();
-        $isc = is_int(strpos($arrcity['city'],'市'));
-        if(!$isc){
-            $city = $arrcity['city'].'市';
-        }else{
-            $arrcity['city'] = str_replace('市','',$arrcity['city']);
-        }
-        //取天气
-        $weather = $getcity->getweather($city,'');
-        $weatherInfo["pinying"] = $weather['pinying'];
-        $weatherInfo["cityname"] = $arrcity['city'];
-        $weatherInfo["weather1"] = json_decode($weather['weather1'],true);
-        $weatherInfo["weather2"] = json_decode($weather['weather2'],true);
-        $weatherInfo["weather3"] = json_decode($weather['weather3'],true);
-        $weatherInfo["weather4"] = json_decode($weather['weather4'],true);
-        $weatherInfo["weather5"] = json_decode($weather['weather5'],true);
-        $weatherInfo["weather6"] = json_decode($weather['weather6'],true);
-        $re = json_encode($weatherInfo);
-        $re = iconv('utf8','gbk',$re);
-        echo $callback."($re)";
-    }
-
     //获取店铺信息
     public function getshopinfo(){
         $callback=$_GET['callback'];
@@ -40,23 +15,45 @@ class IndexnewAction extends Action{
         //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
-
+   //传入城市code获取城市所对应的省列表,城市列表
+ public function getCityInfo(){
+     $id = trim($this->_request('id'));
+     $callback=$_GET['callback'];
+     if(S('h'.$id)){
+         $arr = unserialize(S('h'.$id));
+     }else{
+         $Weather = D('Getinfo');
+         $plist = $Weather->getpca();//省列表
+         $nowcity = $Weather->getarea($cityid='',$id);//取得当前城市信息
+         $clist = $Weather->getcity($nowcity['p_region_id']);//取得当前城市对应省下的城市列表
+         $arr['plist'] = $plist;
+         $arr['nowcity'] = $nowcity;
+         $arr['clist'] = $clist;
+         S('h'.$id,serialize(),array('type'=>'file'));
+     }
+     $re = json_encode($weatherInfo);
+     echo $callback."($re)";
+ }
     //传城市取天气数据
     public function getcitywerther(){
+        $id = trim($this->_request('id'));
         $callback=$_GET['callback'];
-        $getcity = D('Getinfo');
-        //取天气
-        $weather = $getcity->getweather($city,'');
-        $weatherInfo["pinying"] = $weather['pinying'];
-        $weatherInfo["cityname"] = $arrcity['city'];
-        $weatherInfo["weather1"] = json_decode($weather['weather1'],true);
-        $weatherInfo["weather2"] = json_decode($weather['weather2'],true);
-        $weatherInfo["weather3"] = json_decode($weather['weather3'],true);
-        $weatherInfo["weather4"] = json_decode($weather['weather4'],true);
-        $weatherInfo["weather5"] = json_decode($weather['weather5'],true);
-        $weatherInfo["weather6"] = json_decode($weather['weather6'],true);
+        $Weather = D('Getinfo');
+        $returnObj =  $Weather->GetWeatherInfoByID($id);
+        $weatherInfo["cityname"] = $returnObj[0]['commoncityname'];
+        $weatherInfo["weather1"] = json_decode($returnObj[0]['weather1'],true);
+        $weatherInfo["weather2"] = json_decode($returnObj[0]['weather2'],true);
+        $weatherInfo["weather3"] = json_decode($returnObj[0]['weather3'],true);
+        $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
+        $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
+        if(S('hp'.$id)){
+            $pinyin = unserialize(S('hp'.$id));
+        }else{
+            $pinyin = $Weather->getPinyin($id);
+            S('hp'.$id,serialize(),array('type'=>'file'));
+        }
+        $weatherInfo["pinyin"] = $pinyin['pinying'];
         $re = json_encode($weatherInfo);
-        $re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
 

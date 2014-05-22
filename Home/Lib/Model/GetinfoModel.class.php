@@ -1,52 +1,39 @@
 <?php
 class GetinfoModel extends Action{
-    public function GetCityInfo(){
-        $ip = get_client_ip();
-
-    }
-    public function getcity(){
-        $url = C('CITYURL1').$ip;
-        $data = file_get_contents($url);
-        $arrdata = (array)json_decode($data);
-        if($arrdata['code']==0){
-            $arrdata['data'] = (array)$arrdata->data;
-            $arr = array('province'=>$arrdata['data']['region'],'city'=>$arrdata['data']['city']);
-        }else{
-            $data2 = file_get_contents(C('CITYURL2'));
-            $data2 = (array)$data2;
-            $arr = array('province'=>$data2['province'],'city'=>$data2['city']);
-        }
-        return $arr;
-    }
-
-    public function getweather($city='',$city_bn=''){
-        $weather = M('Weather');
-        if(!empty($city)){
-            $cbn = $this->getarea($city);
-            $weathervalue = $weather->field('weather1,weather2,weather3,weather4,weather5')->where(array('cityid'=>$cbn['citybn']))->find();
-            $weathervalue['pinying'] = $cbn['pinying'];
-        }else{
-            if(!empty($city_bn)){
-                $weathervalue = $weather->field('weather1,weather2,weather3,weather4,weather5')->where(array('cityid'=>$city_bn))->find();
-            }
-        }
-        return $weathervalue;
-    }
-
-    public function getarea($city='',$citybn=''){
+//取得当前城市信息
+    public function getarea($cityid='',$citybn=''){
         $area = M('Areas');
-        if(!empty($city)){
-            $cbn = $area->field('region_id,local_name,p_region_id,citybn,pinying')->where(array('local_name'=>$city))->find();
+        if(!empty($cityid)){
+            $cbn = $area->field('region_id,local_name,p_region_id,pinying')->where(array('local_name'=>$city))->find();
         }else if(!empty($citybn)){
-            $cbn = $area->field('region_id,local_name,p_region_id,citybn,pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
+            $cbn = $area->field('region_id,local_name,p_region_id,pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
         }
+        S('h'.$cityid.$citybn,serialize($cbn),array('type'=>'file'));
         return $cbn;
     }
-    //????
+
+    //获取省
     public function getpca(){
-        $area = M('Areas');
-        $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
+        if(S('phinfo')){
+            $prolist = unserialize(S('phinfo'));
+        }else{
+            $area = M('Areas');
+            $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL'),'disabled'=>'false'))->select();
+            S('phinfo',serialize(),array('type'=>'file'));
+       }
         return $prolist;
+    }
+    //获取当前城市所对应的省
+    public function getcity($pid){
+        $area = M('Areas');
+        $clist = M('Areas')->field('region_id,local_name')->where(array('p_region_id'=>$pid,'disabled'=>'false'))->select();
+        return $clist;
+    }
+    //通过城市编号获取城市拼音
+    public function getPinyin($citybn){
+        $area = M('Areas');
+        $pinyin = $area->field('pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
+        return $pinyin;
     }
     public function getCityList($cid,$pid){
         switch($pid){
