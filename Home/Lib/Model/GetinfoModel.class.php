@@ -32,7 +32,7 @@ class GetinfoModel extends Action{
     //通过城市编号获取城市拼音
     public function getPinyin($citybn){
         $area = M('Areas');
-        $pinyin = $area->field('pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
+        $pinyin = $area->field('region_id,pinying')->where(array('citybn'=>$citybn,'region_grade'=>2))->find();
         return $pinyin;
     }
     public function getCityList($cid,$pid){
