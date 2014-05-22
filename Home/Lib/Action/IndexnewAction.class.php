@@ -1,30 +1,5 @@
 <?php
 class IndexnewAction extends Action{
-    public function index(){
-        $callback=$_GET['callback'];
-        $getcity = D('Getinfo');
-        $arrcity = $getcity->GetCityInfo();
-        $isc = is_int(strpos($arrcity['city'],'市'));
-        if(!$isc){
-            $city = $arrcity['city'].'市';
-        }else{
-            $arrcity['city'] = str_replace('市','',$arrcity['city']);
-        }
-        //取天气
-        $weather = $getcity->getweather($city,'');
-        $weatherInfo["pinying"] = $weather['pinying'];
-        $weatherInfo["cityname"] = $arrcity['city'];
-        $weatherInfo["weather1"] = json_decode($weather['weather1'],true);
-        $weatherInfo["weather2"] = json_decode($weather['weather2'],true);
-        $weatherInfo["weather3"] = json_decode($weather['weather3'],true);
-        $weatherInfo["weather4"] = json_decode($weather['weather4'],true);
-        $weatherInfo["weather5"] = json_decode($weather['weather5'],true);
-        $weatherInfo["weather6"] = json_decode($weather['weather6'],true);
-        $re = json_encode($weatherInfo);
-        $re = iconv('utf8','gbk',$re);
-        echo $callback."($re)";
-    }
-
     //获取店铺信息
     public function getshopinfo(){
         $callback=$_GET['callback'];
