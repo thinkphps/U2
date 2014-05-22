@@ -180,7 +180,7 @@ class IndexnewAction extends Action{
          }
      }*/
         $arr['clist'] = $list;
-        $re = json_encode($arr)
+        $re = json_encode($arr);
         /*$arr['baiduerjiid'] = $baiduerjiid;
         $arr['shopid'] = $shopid;
         ;*/
