@@ -29,9 +29,9 @@ class IndexnewAction extends Action{
          $arr['plist'] = $plist;
          $arr['nowcity'] = $nowcity;
          $arr['clist'] = $clist;
-         S('h'.$id,serialize(),array('type'=>'file'));
+         S('h'.$id,serialize($arr),array('type'=>'file'));
      }
-     $re = json_encode($weatherInfo);
+     $re = json_encode($arr);
      echo $callback."($re)";
  }
     //传城市取天气数据
