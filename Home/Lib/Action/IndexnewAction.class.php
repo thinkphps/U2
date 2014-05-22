@@ -46,13 +46,20 @@ class IndexnewAction extends Action{
         $weatherInfo["weather3"] = json_decode($returnObj[0]['weather3'],true);
         $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
         $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
-        if(S('hp'.$id)){
-            $pinyin = unserialize(S('hp'.$id));
+        if(S('hpin'.$id)){
+            $arr = unserialize(S('hpin'.$id));
         }else{
             $pinyin = $Weather->getPinyin($id);
-            S('hp'.$id,serialize(),array('type'=>'file'));
+            $shop = $Weather->shopinfo($pinyin['region_id']);
+            $arr['pinyin'] = $pinyin['pinying'];
+            $arr['shop'] = $shop;
+            S('hpin'.$id,serialize($arr),array('type'=>'file'));
+            unset($pinyin);
+            unset($shop);
         }
-        $weatherInfo["pinyin"] = $pinyin['pinying'];
+        $weatherInfo["pinyin"] = $arr['pinying'];
+        $weatherInfo['tradetime'] = $arr['shop']['tradetime'];
+        $weatherInfo['sname'] = $arr['shop']['sname'];
         $re = json_encode($weatherInfo);
         echo $callback."($re)";
     }
