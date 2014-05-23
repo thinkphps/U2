@@ -74,7 +74,7 @@ class IndexnewAction extends Action{
         }else{
         $shop = M('Shop');
         if($levelid==0){
-            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->seelct();
+            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->select();
         }else if($levelid==1){
             $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->select();
         }
