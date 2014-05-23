@@ -10,6 +10,7 @@ var timer,loadid = 0;
 
     var TmallUniqloHome = function() {
         this.$weather = weather;
+
         this.provi = '';
     }
 
@@ -37,7 +38,6 @@ var timer,loadid = 0;
                     }else{
                         $.pron = remote_ip_info.province;
                     }
-                    //_this.getSuits();
                 }
             });
 
@@ -128,9 +128,14 @@ var timer,loadid = 0;
         controlsEvent : function(){
             var _this = this;
 
+
+            $("#closemap").on("click",function(){
+                $("#mapdiv").hide();
+            });
+
+
             //点击let's go按钮跳转到天猫首页
             $('.youyigui_btn,.dr_logo').on('click',function(){
-
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
             });
 
@@ -168,49 +173,8 @@ var timer,loadid = 0;
                         _this.$weather.occasion = _this.$weather.occasion?_this.$weather.occasion:0;
                         _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                         _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
-
                         _this.getSuits();
-                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
-                        _this.$weather.jsonpFcuntion(jsonpurl);
                         //往mimi传城市
-                        _this.sendcity(city,info.city);
-                    }
-                });
-            });
-
-            $('#le1').on('change',function(){
-                var pvalue = $('#le1 option:selected').val();
-                var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpGetcity&pid="+pvalue;
-                _this.$weather.jsonpFcuntion(url);
-            });
-
-            //地图城市切换
-            $('#spid').on('change',function(){
-                var pid = $('#spid option:selected').val();
-                var url = baseurl+"index.php/Indexnew/getcity?callback=weather.jsonpBaiduCity&pid="+pid+"&baiduid=1";
-                _this.$weather.jsonpFcuntion(url);
-            });
-
-            $('#scid').on('change',function(){
-                H.map.centerAndZoom($("#scid option:selected").text(), 11);
-                var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
-                var cityname = $('#scid option:selected').text();
-                if(cityname[cityname.length-1]=='市'){
-                    var cnm = cityname.replace('市','');
-                }else{
-                    var cnm = $('#spid option:selected').text();
-                }
-				weather.tipcity = cnm;
-
-                _this.$weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
-                    callback: function(city, temper, info){
-                        var avg = callBackFunction.getavg(temper.high,temper.low);
-                        _this.$weather.avg = avg;
-                        avg = avg?avg:0;
-                        _this.$weather.occasion = _this.$weather.occasion?_this.$weather.occasion:0;
-                        _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
-                        _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
-                        _this.getSuits();
                         _this.sendcity(city,info.city);
                     }
                 });
@@ -279,12 +243,59 @@ var timer,loadid = 0;
             });
 
         },
+        bindProvinceOrCitys : function(){
+            //如果当前省市中没有数据则去数据库取数据
+            if($('#le1').html().length < 20){
+                //获取省市
+                var jsonpurl = baseurl +'index.php/Indexnew/getCityInfo?callback=callBackFunction.bindCity&id='+weather.cityCode;
+                this.$weather.jsonpFcuntion(jsonpurl);
+            }else if($('#spid').html().length < 10){
+                $('#spid').html($('#le1').html());
+                $('#spid').change();
+            }
+        },
+        //省市操作
         cityOperator : function(){
             var _this = this;
+
             $('#btn-city-close').on('click',this.hideCityDiv);
 
+            //点击显示地图
+            $("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
+                //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
+                _this.bindProvinceOrCitys();
+                $("#mapdiv").show();
+                H.init();
+            });
+
             $('#btn-city-change').on('click',function(){
+                _this.bindProvinceOrCitys();
                 $('#div-citys').show();
+            });
+
+            $('#le1').on('change',function(){
+                var pvalue = $('#le1 option:selected').val();
+                var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpGetcity&pid="+pvalue;
+                _this.$weather.jsonpFcuntion(url);
+            });
+            //店铺改变后定位到当前店铺所在位置
+            $("#ddlShop").on("change",function(){
+                var list =   H.map.getOverlays();
+                for(var i=1;i<list.length;i++){
+                    if(list[i].title == $('#ddlShop option:selected').text() ){
+                        H.setMarkerCenter(list[i]);
+                        if(list[i].url[list[i].url.length-1]=='市'){
+                            var cnm = list[i].url.replace('市','');
+                        }
+                        weather.tipcity = cnm;
+                        $('#a_shopinfo').html($('#ddlShop option:selected').text());
+                        $('#shopinfo').hide();
+                        $('#a_shopinfo2').show();
+                        //tips
+                        callBackFunction.tipsfunction($('#ddlShop option:selected').val());
+                        return;
+                    }
+                }
             });
 
             $('#btn-change').on('click',function(){
@@ -302,9 +313,8 @@ var timer,loadid = 0;
                         }
                     }
                     $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
-                    H.map.centerAndZoom(city, 11);
                     weather.tipcity = city;
-                    _this.$weather.init({'city' : city, 'province': province,imgpath : window.imgpath,'subindex':'1',
+                    _this.$weather.init({'city' : city, 'province': province,'subindex':'1',
                         callback: function(city, temper, info){
                             var avg = callBackFunction.getavg(temper.high,temper.low);
                             _this.$weather.avg = avg;
@@ -313,8 +323,6 @@ var timer,loadid = 0;
                             _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
                             _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
                             _this.getSuits();
-                            var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.callbackSuits&tem='+avg;
-                            _this.$weather.jsonpFcuntion(jsonpurl);
                             //往mimi传城市
                             _this.sendcity(city,info.city);
                         }
@@ -324,6 +332,53 @@ var timer,loadid = 0;
 
                 } else alert('请选择城市！');
             });
+
+
+            //地图城市切换
+            $('#spid').on('change',function(){
+                var pid = $('#spid option:selected').val();
+                var levelid = 0;
+                switch(pid){
+                    case "1" :
+                    case "21" :
+                    case "42" :
+                    case "62" :
+                        levelid = 1;
+                        break
+                    default :
+                        levelid = 0;
+                        break;
+                }
+                var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpBaiduCity&pid="+pid+"&levelid=" + levelid;
+                _this.$weather.jsonpFcuntion(url);
+            });
+
+            $('#scid').on('change',function(){
+                H.map.centerAndZoom($("#scid option:selected").text(), 11);
+                var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
+                var cityname = $('#scid option:selected').text();
+                if(cityname[cityname.length-1]=='市'){
+                    var cnm = cityname.replace('市','');
+                }else{
+                    var cnm = $('#spid option:selected').text();
+                }
+                weather.tipcity = cnm;
+
+                _this.$weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
+                    callback: function(city, temper, info){
+                        var avg = callBackFunction.getavg(temper.high,temper.low);
+                        _this.$weather.avg = avg;
+                        avg = avg?avg:0;
+                        _this.$weather.occasion = _this.$weather.occasion?_this.$weather.occasion:0;
+                        _this.$weather.sex = _this.$weather.sex?_this.$weather.sex:0;
+                        _this.$weather.set = _this.$weather.set?_this.$weather.set:0;
+                        _this.getSuits();
+                        _this.sendcity(city,info.city);
+                    }
+                });
+            });
+
+
         },
 
         hideCityDiv : function(){
@@ -414,12 +469,21 @@ var callBackFunction = {
     jsonpGetcity : function(data){
         var str = '<option value="0">请选择</option>';
         $.each(data.clist,function(pin,pv){
-            if(pv.sel==1){
-                var sel2 = "selected='selected'";
-            }
-            str+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
+            str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
         });
         $('#le2').html(str);
+        var pid = $('#le1').val();
+        switch (pid){
+            case "1" :
+            case "21" :
+            case "42" :
+            case "62" :
+                $('#le2').val(data.clist[0].region_id);
+                break
+            default :
+                $('#le2').val(0);
+                break;
+        }
     },
     jsonpCallbackm :function(data){
 
@@ -495,6 +559,7 @@ var callBackFunction = {
     //将店铺信息添加到地图中
     mapBindMarker : function (data){
         H.initData(data);
+        H.IsAddMarker = 1;
     },
     jsonpCallback3 : function(da){
         if(da.flag1=='p'){
@@ -537,6 +602,43 @@ var callBackFunction = {
             $('#qtm').addClass('none');
         }
         $.uniqlo.kvSlider();
+    },
+    jsonpBaiduCity : function(data){
+        var str = '<option value="0">请选择</option>';
+        $.each(data.clist,function(pin,pv){
+            str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+        });
+        $('#scid').html(str);
+        $('#ddlShop').html('<option value="0">请选择</option>');
+    },
+    bindCity : function(data){
+
+        //绑定省份
+        var plist = data.plist;
+        var strOptions = '<option value="0">请选择</option>';
+        for(var i = 0 ; i < plist.length;i++ ){
+            strOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
+        }
+        $('#le1').html(strOptions);
+
+        //绑定地图层中的省份
+        $('#spid').html(strOptions);
+
+        //绑定城市
+        var clist = data.clist;
+        strOptions = '<option value="0">请选择</option>';
+        for(var i = 0 ; i < clist.length;i++ ){
+            strOptions += '<option value="'+ clist[i].region_id +'">'+ clist[i].local_name +'</option>';
+        }
+        $('#le2').html(strOptions);
+
+        //设置省份选中芗
+        $('#le1').val(data.nowcity.p_region_id);
+        $('#spid').val(data.nowcity.p_region_id);
+        $('#spid').change();
+        //设置城市选中项
+        $('#le2').val(data.nowcity.region_id);
+
     }
 };
 

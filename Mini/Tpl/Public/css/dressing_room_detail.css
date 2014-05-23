@@ -606,7 +606,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .syj_btn.select a.syj_btn_expansion{ background:url(../images/syj_btn.png) 0 -160px no-repeat;}
 .syj_btn.select a.syj_btn_expansion:hover{ background:url(../images/syj_btn.png) 0 -224px no-repeat; }
 
-.syj{ width:320px; height:540px; position:relative; top:-200px; border:1px solid #ff0000; left:-290px; background:#FFF; z-index:100;}
+.syj{ width:320px; height:540px; position:relative; top:-200px; border:1px solid #ff0000; left:-290px; background:#FFF; z-index:100;overflow: hidden;}
 .syj .baiyi_syj{ width:400px; height:520px;position: relative;top:-30px;margin-left: -33px;}
 .syj .baiyi_syj .beubeu_copy2{left:70px;}
 .btn_line{ width:474px; height:42px; position:absolute; bottom:0;}
