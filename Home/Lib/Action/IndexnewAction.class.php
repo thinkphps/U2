@@ -311,44 +311,69 @@ class IndexnewAction extends Action{
     }
   //对比方法
    public function getConSuits2(){
-       /*$callback=$_GET['callback'];
-       $page = 1;
-               $sql = "(SELECT u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,u_suits.beubeuSuitID,
-	                         g.description,ug.num_iid,ug.pic_url,ug.detail_url,ug.title FROM `u_suits`
-                            LEFT JOIN u_settings_suit_style AS g ON u_suits.suitStyleID = g.ID where u_suits.suitStyleID = 7
-                            and u_suits.suitGenderID = 1 and u_suits.approve_status = 0 and u_suits.beubeuSuitID IS NOT NULL
-                            ORDER BY u_suits.suitID DESC limit 0,10) as suits
-                            LEFT join u_suits_goodsdetail as usg1 on suits.suitID = usg1.suitID
-                            INNER JOIN u_beubeu_goods ug ON usg1.num_iid = ug.num_iid
-                            WHERE ug.approve_status = 'onsale' AND ug.num >= '15'";
-               $result = M('Suits')->query($sql);
+       $callback=$_GET['callback'];
+       $sid = trim($this->_request('sid'));//性别
+       $fid = trim($this->_request('fid'));//风格
+       $page = trim($this->_request('page'));
+       $sid = $sid?$sid:0;
+       $fid = $fid?$fid:0;
+       $page = $page?$page:1;
+       $page_num = 10;
+       $start = ($page-1)*$page_num;
+       $Weather = D('Getinfo');
+       if($fid!=0){
+           $where['fid'] = ' and u_suits.suitStyleID='.$fid;
+           $where2['u_suits.suitStyleID'] = $fid;
+       }
+       switch($sid){
+           case 3 :
+               $where['sid'] = ' and u_suits.suitGenderID in (3,4)';
+               $where2['u_suits.suitGenderID'] = array('exp','IN(3,4)');
+               break;
+           case 1 :
+           case 2 :
+               $where['sid'] = ' and u_suits.suitGenderID='.$sid;
+               $where2['u_suits.suitGenderID'] = intval($sid);
+               break;
+       }
+       if($sid==0 && $fid==0){
+           //风格，类别都没有选走这里
+           $setingtem = $Weather->getKeyValue('temperature');
+           if($tem>$setingtem['value']){
+               $type = 1;
+           }else{
+               $type = 2;
+           }
+           $listResult = $Weather->getSutsValue($type);
+           $slav = array();
+           foreach($listResult as $k=>$v){
+               $slav[] = $v['suitID'];
+           }
+           $arr = $Weather->getData($slav,$listResult);
+           if(!empty($arr)){
+               $list = array('code'=>1,'da'=>$arr);
+           }else{
+               $list = array('code'=>0);
+           }
+       }else{
+           if($sid!=4){
+               $page_arr = array($start,$page_num,$page);
+               $listResult = $Weather->getSuitsResult($where,$where2,$page_arr);
                $slav = array();
-               $arr = array();
-               foreach($result as $k=>$v){
+               foreach($listResult['da'] as $k=>$v){
                    $slav[] = $v['suitID'];
                }
-
-               $distslav = array_unique($slav);
-               $count = count($distslav);
-               $j = 0;
-               foreach($distslav as $k2=>$v2){
-                   $chil = array();
-                  foreach($result as $k=>$v){
-                  if($v2==$v['suitID']){
-                      $arr[$j] = array('suitID'=>$v['suitID'],'suitGenderID'=>$v['suitGenderID'],'suitImageUrl'=>$v['suitImageUrl'],'beubeuSuitID'=>$v['beubeuSuitID'],'description'=>$v['description']);
-                      $chil[] = array('num_iid'=>$v['num_iid'],'pic_url'=>$v['pic_url'],'detail_url'=>$v['detail_url'],'title'=>$v['title']);
-                      $arr[$j]['detail'] = $chil;
-                  }
-                  }
-                   $j++;
-               }
+               $arr = $Weather->getData($slav,$listResult['da']);
                if(!empty($arr)){
-                   $list = array('code'=>1,'page'=>$page+1,'count'=>$count,'da'=>$arr);
+                   $list = array('code'=>1,'page'=>$page+1,'count'=>$listResult['count'],'da'=>$arr);
                }else if($listResult['code']==0){
                    $list = array('code'=>0,'page'=>$page+1);
                }
+           }
+       }
+       unset($listResult);
        $re = json_encode($list);
-       echo $callback."($re)";*/
+       echo $callback."($re)";
    }
 //点击按钮取数据
     public function getgood(){

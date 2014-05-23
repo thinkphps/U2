@@ -120,7 +120,6 @@ class GetinfoModel extends Action{
     }
 
     public function getSutsValue($type){
-        //$suitSelect = M('SuitsSelect')->cache(true)->join('inner join u_suits suits on u_suits_select.suitID=suits.suitID')->field('suits.suitID,suits.suitImageUrl')->where(array('u_suits_select.selected'=>'1','u_suits_select.type'=>$type))->select();
         $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."'";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
@@ -145,4 +144,56 @@ class GetinfoModel extends Action{
        }
         return $resultArr;
     }
+
+    //kimi2014523
+    public function getSuitsResult($arr,$where2,$page_arr){
+        $where2['u_suits.approve_status'] = 0;
+        $where2['u_suits.beubeuSuitID'] = array('exp','IS NOT NULL');
+        $suits = M('Suits');
+        $count =  $suits->field('u_suits.suitID')->where($where2)->count();
+        $pages = ceil($count/$page_arr[1]);
+        if($page_arr[2]>$pages){
+            $resultArr = array('code'=>0,'没有数据');
+        }else{
+        $sql = "select suits.*,ug.num_iid,ug.pic_url,ug.detail_url,ug.title from (SELECT u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,u_suits.beubeuSuitID,
+	                         g.description FROM `u_suits`
+                            LEFT JOIN u_settings_suit_style AS g ON u_suits.suitStyleID = g.ID where 1".$arr['fid']."
+                            ".$arr['sid']." and u_suits.approve_status = 0 and u_suits.beubeuSuitID IS NOT NULL
+                            ORDER BY u_suits.suitID DESC limit ".$page_arr[0].",".$page_arr[1].") as suits
+                            LEFT join u_suits_goodsdetail as usg1 on suits.suitID = usg1.suitID
+                            INNER JOIN u_beubeu_goods ug ON usg1.num_iid = ug.num_iid
+                            WHERE ug.approve_status = 'onsale' AND ug.num >= '15'";
+        $result = $suits->query($sql);
+        $resultArr = array('code'=>1,'count'=>$count,'da'=>$result);
+        }
+        return $resultArr;
+    }
+
+    public function getDefaultSuit($type){
+       $sql = "select su.*,ug.num_iid,ug.pic_url,ug.detail_url,ug.title from (select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from
+`u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on
+suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."') as su left JOIN
+u_suits_goodsdetail as de on de.suitID=su.suitID inner join u_beubeu_goods ug on
+de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15' )";
+        return M('Suits')->query($sql);
+    }
+
+  public function getData($slav,$result){
+      $arr = array();
+      $distslav = array_unique($slav);
+      $count = count($distslav);
+      $j = 0;
+      foreach($distslav as $k2=>$v2){
+          $chil = array();
+          foreach($result as $k=>$v){
+              if($v2==$v['suitID']){
+                  $arr[$j] = array('suitID'=>$v['suitID'],'suitGenderID'=>$v['suitGenderID'],'suitImageUrl'=>$v['suitImageUrl'],'beubeuSuitID'=>$v['beubeuSuitID'],'description'=>$v['description']);
+                  $chil[] = array('num_iid'=>$v['num_iid'],'pic_url'=>$v['pic_url'],'detail_url'=>$v['detail_url'],'title'=>$v['title']);
+                  $arr[$j]['detail'] = $chil;
+              }
+          }
+          $j++;
+      }
+      return $arr;
+  }
 }
