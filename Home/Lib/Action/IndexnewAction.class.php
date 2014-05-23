@@ -69,15 +69,14 @@ class IndexnewAction extends Action{
         $id = trim($this->_request('id'));//城市或者区域id
         $callback=$_GET['callback'];
         $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
-
         if(S('ca'.$id)){
             $list = unserialize(S('ca'.$id));
         }else{
         $shop = M('Shop');
         if($levelid==0){
-            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->seelct();
+            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->seelct();
         }else if($levelid==1){
-            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->order('showtag desc')->select();
+            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->select();
         }
             S('ca'.$id,serialize($list),array('type'=>'file'));
         }
