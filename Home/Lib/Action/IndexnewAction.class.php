@@ -69,6 +69,7 @@ class IndexnewAction extends Action{
         $id = trim($this->_request('id'));//城市或者区域id
         $callback=$_GET['callback'];
         $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
+
         if(S('ca'.$id)){
             $list = unserialize(S('ca'.$id));
         }else{
