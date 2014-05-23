@@ -60,6 +60,7 @@ class IndexnewAction extends Action{
         $weatherInfo["pinyin"] = $arr['pinyin'];
         $weatherInfo['tradetime'] = $arr['shop']['tradetime'];
         $weatherInfo['sname'] = $arr['shop']['sname'];
+        $weatherInfo['sname'] = $arr['shop']['id'];
         $weatherInfo['newstore'] = C('NEWSRORE');
         $re = json_encode($weatherInfo);
         echo $callback."($re)";
