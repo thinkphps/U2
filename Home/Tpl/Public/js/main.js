@@ -435,7 +435,7 @@ var callBackFunction = {
             for(var i =0;i<detail.length;i++){
                 numids[i] = detail[i].num_iid;
                 strItem += '<div class="circle">'
-                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank" title="'+detail[i].title +'">';
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'&kid=11727_51912_165824_211542" target="_blank" title="'+detail[i].title +'">';
                 strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
             }
         }
