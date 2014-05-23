@@ -85,6 +85,21 @@ class IndexnewAction extends Action{
         $re = json_encode($list);
         echo $callback."($re)";
     }
+
+    //通过店铺id获取所在城市id
+    public function getShopId(){
+        $id = trim($this->_request('id'));//店铺id
+        $callback=$_GET['callback'];
+        $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
+        $shop = M('Shop');
+        if($levelid==0){
+            $list = $shop->field('cityid')->where(array('id'=>$id))->select();
+        }else if($levelid==1){
+            $list = $shop->field('aid')->where(array('id'=>$id))->select();
+        }
+        $re = json_encode($list);
+        echo $callback."($re)";
+    }
     //get weatherinfo
     public function GetWeatherByCityID()
     {
@@ -294,7 +309,47 @@ class IndexnewAction extends Action{
         $re = json_encode($list);
         echo $callback."($re)";
     }
+  //对比方法
+   public function getConSuits2(){
+       /*$callback=$_GET['callback'];
+       $page = 1;
+               $sql = "(SELECT u_suits.suitID,u_suits.suitGenderID,u_suits.suitImageUrl,u_suits.beubeuSuitID,
+	                         g.description,ug.num_iid,ug.pic_url,ug.detail_url,ug.title FROM `u_suits`
+                            LEFT JOIN u_settings_suit_style AS g ON u_suits.suitStyleID = g.ID where u_suits.suitStyleID = 7
+                            and u_suits.suitGenderID = 1 and u_suits.approve_status = 0 and u_suits.beubeuSuitID IS NOT NULL
+                            ORDER BY u_suits.suitID DESC limit 0,10) as suits
+                            LEFT join u_suits_goodsdetail as usg1 on suits.suitID = usg1.suitID
+                            INNER JOIN u_beubeu_goods ug ON usg1.num_iid = ug.num_iid
+                            WHERE ug.approve_status = 'onsale' AND ug.num >= '15'";
+               $result = M('Suits')->query($sql);
+               $slav = array();
+               $arr = array();
+               foreach($result as $k=>$v){
+                   $slav[] = $v['suitID'];
+               }
 
+               $distslav = array_unique($slav);
+               $count = count($distslav);
+               $j = 0;
+               foreach($distslav as $k2=>$v2){
+                   $chil = array();
+                  foreach($result as $k=>$v){
+                  if($v2==$v['suitID']){
+                      $arr[$j] = array('suitID'=>$v['suitID'],'suitGenderID'=>$v['suitGenderID'],'suitImageUrl'=>$v['suitImageUrl'],'beubeuSuitID'=>$v['beubeuSuitID'],'description'=>$v['description']);
+                      $chil[] = array('num_iid'=>$v['num_iid'],'pic_url'=>$v['pic_url'],'detail_url'=>$v['detail_url'],'title'=>$v['title']);
+                      $arr[$j]['detail'] = $chil;
+                  }
+                  }
+                   $j++;
+               }
+               if(!empty($arr)){
+                   $list = array('code'=>1,'page'=>$page+1,'count'=>$count,'da'=>$arr);
+               }else if($listResult['code']==0){
+                   $list = array('code'=>0,'page'=>$page+1);
+               }
+       $re = json_encode($list);
+       echo $callback."($re)";*/
+   }
 //点击按钮取数据
     public function getgood(){
         $tem = trim($this->_request('tem'));//平均温度
