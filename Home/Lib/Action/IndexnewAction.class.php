@@ -93,9 +93,9 @@ class IndexnewAction extends Action{
         $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
         $shop = M('Shop');
         if($levelid==0){
-            $list = $shop->field('cityid')->where(array('id'=>$id))->select();
+            $list = $shop->field('cityid')->where(array('id'=>$id))->find();
         }else if($levelid==1){
-            $list = $shop->field('aid')->where(array('id'=>$id))->select();
+            $list = $shop->field('aid')->where(array('id'=>$id))->find();
         }
         $re = json_encode($list);
         echo $callback."($re)";
