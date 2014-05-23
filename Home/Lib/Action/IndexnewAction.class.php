@@ -97,7 +97,8 @@ class IndexnewAction extends Action{
         }else if($levelid==1){
             $list = $shop->field('aid')->where(array('id'=>$id))->find();
         }
-        $re = json_encode($list);
+        $arr['id'] = $list['cityid']?$list['cityid']:$list['aid'];
+        $re = json_encode($arr);
         echo $callback."($re)";
     }
     //get weatherinfo
