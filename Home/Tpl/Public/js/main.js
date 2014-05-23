@@ -1,5 +1,5 @@
 /**
- * Created by jack on 14-4-11.
+ * Created by jack.wu on 14-4-11.
  */
 
 //var jsonpHomeUrl = 'http://localhost/U2/index.php/Index';
@@ -26,7 +26,6 @@ var timer,loadid = 0;
 
             //天气初始化
             _this.$weather.init({
-                'subindex':1,
                 city : remote_ip_info.city || null,
                 callback: function(city, temper, info){
                     var avg = callBackFunction.getavg(temper.high,temper.low);
@@ -127,12 +126,9 @@ var timer,loadid = 0;
         },
         controlsEvent : function(){
             var _this = this;
-
-
             $("#closemap").on("click",function(){
                 $("#mapdiv").hide();
             });
-
 
             //点击let's go按钮跳转到天猫首页
             $('.youyigui_btn,.dr_logo').on('click',function(){
@@ -154,18 +150,15 @@ var timer,loadid = 0;
                 window.open( dressurl );
             });
 
-
             // 首页天气切换
             $('#ulweek').on('click', 'li', function(){
                 var $that = $(this)
                 $that.addClass('w_select').siblings('.w_select').removeClass('w_select');
 
                 _this.$weather.init({
-                    'subindex':1,
-                    'shopid':_this.$weather.shopid,
                     index : $that.index() + 1,
                     city:$('#nio-city').text(),
-                    imgpath : window.imgpath,
+                    isMapChange :1,
                     callback: function(city, temper, info){
                         var avg = callBackFunction.getavg(temper.high,temper.low);
                         _this.$weather.avg = avg;
@@ -231,14 +224,14 @@ var timer,loadid = 0;
 
             $('.weather').on('mouseenter',function(){
                 if(loadid==0){
-                $('#suits-container').html('<div id="loadid" style="text-align:center; line-height=400px;padding-top:135px;"><img src="'+tmplPath+'/images/5-121204193R0-50.gif"></div>');
+                    $('#suits-container').html('<div id="loadid" style="text-align:center; line-height=400px;padding-top:135px;"><img src="'+tmplPath+'/images/5-121204193R0-50.gif"></div>');
                 }
                 $("#div_main").show();
                 $("#w_zk").hide();
                 $("#w_sq").show();
                 if(loadid==0){
-                _this.getSuits();
-                   loadid  = 1;
+                    _this.getSuits();
+                    loadid  = 1;
                 }
             });
 
@@ -252,7 +245,25 @@ var timer,loadid = 0;
             }else if($('#spid').html().length < 10){
                 $('#spid').html($('#le1').html());
                 $('#spid').change();
+                $('#spid').data('static',0);
             }
+        },
+        callGetShops : function(pid,cid){
+            //加载当前选中城市的店铺信息
+            var levelid = 0;
+            switch(pid){
+                case "1" :
+                case "21" :
+                case "42" :
+                case "62" :
+                    levelid = 1;
+                    break
+                default :
+                    levelid = 0;
+                    break;
+            }
+            var jsonpurl = baseurl +'index.php/Indexnew/getCityShop?callback=callBackFunction.bindShops&id='+cid+"&levelid=" + levelid;
+            this.$weather.jsonpFcuntion(jsonpurl);
         },
         //省市操作
         cityOperator : function(){
@@ -268,6 +279,25 @@ var timer,loadid = 0;
                 H.init();
             });
 
+            //tips点击店铺
+            $('#scrollDiv').on('click','.preferential_2',function(){
+                $("#mapdiv").show();
+                stop_autochange();
+                var list =   H.map.getOverlays();
+                _this.bindProvinceOrCitys();
+                $('#a_shopinfo').html($('#tipshopid').text());
+                $('#shopInfo').hide();
+                $('#a_shopinfo2').show();
+                for(var i=1;i<list.length;i++){
+                    if(list[i].title == $('#tipshopid').text() ){
+                        setTimeout(function(){
+                            H.setMarkerCenter(list[i]);
+                        },100);
+                        return;
+                    }
+                }
+            });
+
             $('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
                 $('#div-citys').show();
@@ -281,18 +311,16 @@ var timer,loadid = 0;
             //店铺改变后定位到当前店铺所在位置
             $("#ddlShop").on("change",function(){
                 var list =   H.map.getOverlays();
+
+                var strHtml = '<span id="tipshopid" data-shopid="'+$('#ddlShop').val()+'">'+$('#ddlShop option:selected').text()+'</span><br>' + $('#ddlShop option:selected').data('opentime');
+                $('#a_shopinfo').html($('#ddlShop option:selected').text());
+                $('#shopInfo').hide();
+                $('#a_shopinfo2').show();
+                //tips
+                callBackFunction.tipsfunction(strHtml);
                 for(var i=1;i<list.length;i++){
                     if(list[i].title == $('#ddlShop option:selected').text() ){
                         H.setMarkerCenter(list[i]);
-                        if(list[i].url[list[i].url.length-1]=='市'){
-                            var cnm = list[i].url.replace('市','');
-                        }
-                        weather.tipcity = cnm;
-                        $('#a_shopinfo').html($('#ddlShop option:selected').text());
-                        $('#shopinfo').hide();
-                        $('#a_shopinfo2').show();
-                        //tips
-                        callBackFunction.tipsfunction($('#ddlShop option:selected').val());
                         return;
                     }
                 }
@@ -314,7 +342,7 @@ var timer,loadid = 0;
                     }
                     $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
                     weather.tipcity = city;
-                    _this.$weather.init({'city' : city, 'province': province,'subindex':'1',
+                    _this.$weather.init({'city' : city, 'province': province,
                         callback: function(city, temper, info){
                             var avg = callBackFunction.getavg(temper.high,temper.low);
                             _this.$weather.avg = avg;
@@ -329,13 +357,17 @@ var timer,loadid = 0;
                     });
                     _this.hideCityDiv();
                     $('#li_day0').addClass('w_select').siblings('.w_select').removeClass('w_select');
-
+                    //将地图层中的省市也选中
+                    $('#spid').val($('#le1').val());
+                    $('#spid').change();
+                    $('#spid').data('static',0);
                 } else alert('请选择城市！');
             });
 
 
             //地图城市切换
             $('#spid').on('change',function(){
+                $('#spid').data('static',1);
                 var pid = $('#spid option:selected').val();
                 var levelid = 0;
                 switch(pid){
@@ -353,10 +385,22 @@ var timer,loadid = 0;
                 _this.$weather.jsonpFcuntion(url);
             });
 
-            $('#scid').on('change',function(){
+            $('#scid').on('click',function(){
+                callBackFunction.ISMapOper = 0;
+            }).on('change',function(){
+
+                var pid = $('#spid').val(),cid = $('#scid').val();
+                if(callBackFunction.ISMapOper == 1){
+                    _this.callGetShops(pid,cid);
+                }else{
+
                 H.map.centerAndZoom($("#scid option:selected").text(), 11);
-                var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
                 var cityname = $('#scid option:selected').text();
+                 _this.callGetShops(pid,cid);
+                //设置切换城市模块的省市选中项
+                $('#le1').val(pid,cid);
+                $('#le1').change();
+
                 if(cityname[cityname.length-1]=='市'){
                     var cnm = cityname.replace('市','');
                 }else{
@@ -364,7 +408,7 @@ var timer,loadid = 0;
                 }
                 weather.tipcity = cnm;
 
-                _this.$weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
+                _this.$weather.init({'city' : cnm,
                     callback: function(city, temper, info){
                         var avg = callBackFunction.getavg(temper.high,temper.low);
                         _this.$weather.avg = avg;
@@ -376,15 +420,14 @@ var timer,loadid = 0;
                         _this.sendcity(city,info.city);
                     }
                 });
+                }
             });
-
 
         },
 
         hideCityDiv : function(){
             $('#div-citys').hide();
         }
-
 
     }//prototype
 
@@ -395,6 +438,7 @@ var timer,loadid = 0;
 
 
 var callBackFunction = {
+    ISMapOper : 0, //是否地图中的操作
     PageSize : 10,//每页数量
     PageIndex : 1,//当前页
     CurrentPageSize : 6,//显示数量
@@ -433,7 +477,7 @@ var callBackFunction = {
                 this.PageCount = parseInt(list.count);
             }
 
-           this.setPageButtonDisplay(false);
+            this.setPageButtonDisplay(false);
         }
         else{
             for(var i = 0 ;i < listlength;i++){
@@ -481,7 +525,18 @@ var callBackFunction = {
                 $('#le2').val(data.clist[0].region_id);
                 break
             default :
-                $('#le2').val(0);
+
+                if(callBackFunction.ISMapOper == 0){
+                    if($('#scid').val() != '0'){
+                        $('#le2').val($('#scid').val());
+                    }else{
+                        $('#le2').val(0);
+                    }
+                }
+                else{
+                    $('#le2').val(0);
+                }
+
                 break;
         }
     },
@@ -543,18 +598,16 @@ var callBackFunction = {
         var avg = Math.ceil((parseInt(low)+parseInt(high))/2);
         return avg;
     },
-    tipsfunction : function(v,k){
+    tipsfunction : function(strContent){
         //tips
         stop_autochange();
-        if(k){
-            for (i = 1; i <=3; i++) {
-                $('#tablink' + i).removeClass('current');
-                $('.preferential_' + i).css('display','none');
-            }
-            $('#tablink2').addClass('current');
-            $('.preferential_2').css('display','block');
+        for (i = 1; i <=3; i++) {
+            $('#tablink' + i).removeClass('current');
+            $('.preferential_' + i).css('display','none');
         }
-        $('#shopid').html(v);
+        $('#tablink2').addClass('current');
+        $('.preferential_2').css('display','block');
+        $('#shopid').html(strContent);
     },
     //将店铺信息添加到地图中
     mapBindMarker : function (data){
@@ -563,20 +616,19 @@ var callBackFunction = {
     },
     jsonpCallback3 : function(da){
         if(da.flag1=='p'){
-                //如果是婴幼儿走这里
-                if(da.sid==4){
-                    if(da.fl==1){
-                        $('#upc').html(da.ustr);
-                        $('#downc').html(da.dstr);
-                    }else{
-                        $('#taoz').html(da.ustr);
-                    }
-                }else{
+            //如果是婴幼儿走这里
+            if(da.sid==4){
+                if(da.fl==1){
                     $('#upc').html(da.ustr);
                     $('#downc').html(da.dstr);
+                }else{
+                    $('#taoz').html(da.ustr);
                 }
+            }else{
+                $('#upc').html(da.ustr);
+                $('#downc').html(da.dstr);
+            }
         }
-
         if(da.fl==1){
             if(da.sid==4){
                 $('.index-single').removeClass('none');
@@ -609,6 +661,26 @@ var callBackFunction = {
             str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
         });
         $('#scid').html(str);
+        if($('#spid').data('static') == 1){
+            $('#scid').val("0");
+        }
+        else{
+            var pid = $('#le1').val();
+            switch (pid){
+                case "1" :
+                case "21" :
+                case "42" :
+                case "62" :
+                    $('#scid').val("0");
+                    break
+                default :
+                    $('#scid').val($('#le2').val());
+                    if(callBackFunction.ISMapOper == 1){
+                        $('#scid').change();
+                    }
+                    break;
+            }
+        }
         $('#ddlShop').html('<option value="0">请选择</option>');
     },
     bindCity : function(data){
@@ -636,28 +708,50 @@ var callBackFunction = {
         $('#le1').val(data.nowcity.p_region_id);
         $('#spid').val(data.nowcity.p_region_id);
         $('#spid').change();
+        $('#spid').data('static',0);
         //设置城市选中项
         $('#le2').val(data.nowcity.region_id);
+    },
+    bindShops : function(data){
+        var strOption = '<option value="0">请选择</option>';
+        if(data != null){
+            for(var i = 0; i < data.length;i++){
+                strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].tradetime.replace(/\//g,'') +'">' + data[i].sname + '</option>';
+            }
+        }
+        $('#ddlShop').html(strOption);
+        if(callBackFunction.ISMapOper == 1){
+            $('#ddlShop').val($('#tipshopid').data('shopid'));
+        }
+        else{
+            $('#ddlShop').val(0);
+        }
+    },
+    callGetCityIDByShopid:function(shopid){
+        callBackFunction.ISMapOper = 1;
+
+        switch($('#spid').val()){
+            case "1" :
+            case "21" :
+            case "42" :
+            case "62" :
+                levelid = 1;
+                break
+            default :
+                levelid = 0;
+                break;
+        }
+        var jsonpurl = baseurl +'index.php/Indexnew/getShopId?callback=callBackFunction.setCityIDByShopid&id='+shopid+"&levelid="+levelid;
+        weather.jsonpFcuntion(jsonpurl);
+    },
+    setCityIDByShopid:function(data){
+        $('#scid').val(data.id);
+        $('#scid').change();
 
     }
 };
 
-//tips点击店铺
-$('#scrollDiv').on('click','#tipshopid',function(){
-    $("#mapdiv").show();
-    var list =   H.map.getOverlays();
-    for(var i=1;i<list.length;i++){
-        if(list[i].title == $('#tipshopid').text() ){
-            H.setMarkerCenter(list[i]);
-        }
-    }
 
-    var tipcity =   weather.tipcity ?  weather.tipcity:remote_ip_info.city;
-    weather.init({'city' : tipcity,imgpath : window.imgpath,'subid':'1','shopid':$(this).data('shopid'),
-        callback: function(city, temper, info){
-        }
-    });
-});
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
 var tabcount = new Array("3");

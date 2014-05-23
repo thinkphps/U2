@@ -77,16 +77,51 @@ var weather = {
         return (n < 10 ? '0' : '') + n;
     },
     ajax : function(code, option){
-        var that = this,
-            city = option.city;
-        var subindex = option.subindex ? option.subindex:0;
-        var subid = option.subid ? option.subid : 0;
-        var shopid = option.shopid ? option.shopid : 0;
-        option.baiduerjiid = option.baiduerjiid ? option.baiduerjiid:-1;//百度地图上的select二级选择值（直辖市）
+        var that = this;
         //调用接口，天气信息
         that.currentOption = option;
         var jsonpurl = baseurl+"index.php/Indexnew/getcitywerther?callback=weather.weatherJsonpCallback&id="+code;
         this.jsonpFcuntion(jsonpurl);
+    },
+    showTips : function(newstorre,sname,tradetime,shopid,isMapChange){
+
+        if(isMapChange == 0){
+            //kimi判断是否有新店开张
+            if(newstorre){
+                $('.preferential_1').remove();
+                $('#tablink1').remove();
+                $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+newstorre+'</a></li>');
+                $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
+
+            }else{
+                $('.preferential_1').remove();
+                $('#tablink1').remove();
+            }
+            if(!sname && !tradetime){
+                var tv = '暂时还没有店铺信息，请选择其他地区';
+            }else{
+                var tv = '<span id="tipshopid" data-shopid="'+shopid+'">'+sname+'</span><br>'+tradetime;
+            }
+            $('#shopid').html(tv);
+            stop_autochange();
+            var lilength = $('#scrollDiv').children().length;
+            slength = 3-lilength+1;
+            counter = 3-lilength;
+            loadtabs[0] = 3-lilength+1;
+            do {
+                a = 0;
+                b = 1;
+                easytabs(b, loadtabs[a]);
+                a++;
+                b++;
+            } while (b <= menucount);
+            if (autochangemenu != 0) {
+                start_autochange();
+            }
+            $('#a_shopinfo').html('您附近的优衣库门店');
+            $('#shopInfo').show();
+            $('#a_shopinfo2').hide();
+        }
     },
     setText : function(info, option){
         var time  = this.time();
@@ -195,41 +230,9 @@ var weather = {
         JSONP.src=url;
         document.getElementsByTagName("head")[0].appendChild(JSONP);
     },
-    showTips : function(newstorre,sname,tradetime){
-        //kimi判断是否有新店开张
-        if(newstorre){
-            $('.preferential_1').remove();
-            $('#tablink1').remove();
-            $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+newstorre+'</a></li>');
-            $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
-            if(!sname && !tradetime){
-                var tv = '暂时还没有店铺信息，请选择其他地区';
-            }else{
-                var tv = '<span id="tipshopid" data-shopid="'+shopid+'">'+sname+'</span><br>'+tradetime;
-            }
-            $('#shopid').html(tv);
-        }else{
-            $('.preferential_1').remove();
-            $('#tablink1').remove();
-        }
-        stop_autochange();
-        var lilength = $('#scrollDiv').children().length;
-        slength = 3-lilength+1;
-        counter = 3-lilength;
-        loadtabs[0] = 3-lilength+1;
-        do {
-            a = 0;
-            b = 1;
-            easytabs(b, loadtabs[a]);
-            a++;
-            b++;
-        } while (b <= menucount);
-        if (autochangemenu != 0) {
-            start_autochange();
-        }
-    },
     weatherJsonpCallback : function(data){
-        this.showTips(data.newstore,data.sname,data.tradetime);
+        var isMapChange = this.currentOption.isMapChange ? this.currentOption.isMapChange:0;
+        this.showTips(data.newstore,data.sname,data.tradetime,data.shopid,isMapChange);
         this.setText(data,this.currentOption);
     },
     removeBackgroundClass:function(){
@@ -242,28 +245,6 @@ var weather = {
         }
     }
     ,
-
-    jsonpBaiduCity2 : function(data){
-        $('#ddlShop').html('<option value="0">请选择</option>');
-        if(data.shopid=='undefined'){
-            $('#a_shopinfo').html('您附近的优衣库门店');
-        }
-        var str = '<option value="0">请选择</option>';
-        if(data.clist){
-            $('#emptymsg').html('');
-            $.each(data.clist,function(pin,pv){
-                if(pv.sel == 1){
-                    var sel =  "selected='selected'";
-                }
-                str+="<option value='"+pv.sname+'<br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
-            });
-            $('#ddlShop').html(str);
-        }else{
-            if(data.baiduerjiid>0){
-                $('#emptymsg').html('本地区暂无优衣库门店，请选择其他地区');
-            }
-        }
-    },
     temp : function(str){
         var first, second, low = 0, high = 0;
         if(str){
@@ -282,10 +263,7 @@ var weather = {
         }
     },
     init : function(option){
-
         var city = option.city
-//            if(city === remote_ip_info['city'] && this[city]) return this.setText(this[city], option);
-//            city = remote_ip_info['city'] = city || remote_ip_info['city'];
         for (var i = 0, len = citys.length; i < len; i ++) {
             if(citys[i].n === city) break;
         }
