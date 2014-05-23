@@ -75,9 +75,9 @@ class IndexnewAction extends Action{
         }else{
         $shop = M('Shop');
         if($levelid==0){
-            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
+            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->seelct();
         }else if($levelid==1){
-            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->order('showtag desc')->limit('0,1')->find();
+            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->order('showtag desc')->select();
         }
             S('ca'.$id,serialize($list),array('type'=>'file'));
         }
