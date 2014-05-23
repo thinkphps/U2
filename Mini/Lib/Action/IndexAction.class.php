@@ -440,7 +440,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
         $this->ajaxReturn($returnArr, 'JSON');
     }
     public function waterdata($result,$lid,$bid,$keyword){
-        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?scid=138188209&kid=11727_51912_165828_211546' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T28yhfX30XXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
+        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?scid=138188209&kid=11727_51912_165828_211546' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T2sdBwXY4aXXXXXXXX_!!196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
         $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://j.koolbao.com/tb/57303596/www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2w_QOXKdXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
