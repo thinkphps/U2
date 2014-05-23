@@ -64,7 +64,25 @@ class IndexnewAction extends Action{
         $re = json_encode($weatherInfo);
         echo $callback."($re)";
     }
-
+    //通过城市id或者区域id获取店铺
+    public function getCityShop(){
+        $id = trim($this->_request('id'));//城市或者区域id
+        $callback=$_GET['callback'];
+        $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
+        if(S('ca'.$id)){
+            $list = unserialize(S('ca'.$id));
+        }else{
+        $shop = M('Shop');
+        if($levelid==0){
+            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->order('showtag desc')->limit('0,1')->find();
+        }else if($levelid==1){
+            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->order('showtag desc')->limit('0,1')->find();
+        }
+            S('ca'.$id,serialize($list),array('type'=>'file'));
+        }
+        $re = json_encode($list);
+        echo $callback."($re)";
+    }
     //get weatherinfo
     public function GetWeatherByCityID()
     {
