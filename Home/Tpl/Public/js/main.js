@@ -207,7 +207,7 @@ var timer,loadid = 0;
                 if(callBackFunction.CurrentPageSize < callBackFunction.PageCount){
 
                     //如果当前当前记录==已加载记录数，则ajax去后台取下一页数据
-                    if(callBackFunction.CurrentPageSize=callBackFunction.CurrentLoadSize){
+                    if(callBackFunction.CurrentPageSize==callBackFunction.CurrentLoadSize){
                         var gender = $('#ulgender').find('.select').data('gender');
                         var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
                         var jsonpurl = baseurl +'index.php/Indexnew/getConSuits2?callback=callBackFunction.pageNextSuits&tem='
