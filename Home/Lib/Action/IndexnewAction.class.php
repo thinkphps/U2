@@ -313,6 +313,7 @@ class IndexnewAction extends Action{
   //对比方法
    public function getConSuits2(){
        $callback=$_GET['callback'];
+       $tem = trim($this->_request('tem'));
        $sid = trim($this->_request('sid'));//性别
        $fid = trim($this->_request('fid'));//风格
        $page = trim($this->_request('page'));
