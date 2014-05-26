@@ -210,7 +210,7 @@ var timer,loadid = 0;
                     if(callBackFunction.CurrentPageSize=callBackFunction.CurrentLoadSize){
                         var gender = $('#ulgender').find('.select').data('gender');
                         var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
-                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits?callback=callBackFunction.pageNextSuits&tem='
+                        var jsonpurl = baseurl +'index.php/Indexnew/getConSuits2?callback=callBackFunction.pageNextSuits&tem='
                             + _this.$weather.avg +  '&sid='+gender+'&fid='+suitStyle + '&page=' + callBackFunction.PageIndex;
                         _this.$weather.jsonpFcuntion(jsonpurl);
                     }else{
