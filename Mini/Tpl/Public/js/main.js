@@ -1256,10 +1256,14 @@ jQuery(function($){
 //tips点击店铺
   $('#scrollDiv').on('click','#tipshopid',function(){
       $("#mapdiv").show();
+      stop_autochange();
       var list =   H.map.getOverlays();
           for(var i=1;i<list.length;i++){
           if(list[i].title == $('#tipshopid').text() ){
-            H.setMarkerCenter(list[i]);
+              setTimeout(function(){
+                  H.setMarkerCenter(list[i]);
+              },100);
+              return;
            }
            }
       var tipcity = $.weather.tipcity ? $.weather.tipcity:remote_ip_info.city;
