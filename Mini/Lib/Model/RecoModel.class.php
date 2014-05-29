@@ -91,20 +91,28 @@ class RecoModel extends Model{
     public function getCusData($where){
      return M('Customcate')->field('id,name')->where($where)->select();
     }
+    public function getCusData2($where){
+        return M('Sellercats')->field('ID as id,cateName as name')->where($where)->select();
+    }
     public function getCateList($isud){
-        $customcate = M('Customcate');
-        $custom = $customcate->cache(true)->field('id,name')->where(array('gtype'=>array('neq','5'),'isud'=>$isud))->group('name')->select();
-        foreach($custom as $k=>$v){
-            $idlist = $customcate->cache(true)->field('id')->where(array('name'=>$v['name'],'isud'=>$isud))->select();
-            $idstr = '';
-            foreach($idlist as $k1=>$v1){
-                if($v1){
-                    $idstr.=$v1['id'].'_';
-                }
+    $customcate = M('Customcate');
+    $custom = $customcate->cache(true)->field('id,name')->where(array('gtype'=>array('neq','5'),'isud'=>$isud))->group('name')->select();
+    foreach($custom as $k=>$v){
+        $idlist = $customcate->cache(true)->field('id')->where(array('name'=>$v['name'],'isud'=>$isud))->select();
+        $idstr = '';
+        foreach($idlist as $k1=>$v1){
+            if($v1){
+                $idstr.=$v1['id'].'_';
             }
-            $idstr = rtrim($idstr,'_');
-            $ucuslist[] = array('id'=>$idstr,'name'=>$v['name']);
-         }
-        return $ucuslist;
+        }
+        $idstr = rtrim($idstr,'_');
+        $ucuslist[] = array('id'=>$idstr,'name'=>$v['name']);
+    }
+    return $ucuslist;
+}
+    public function getCateList2($where){
+        $customcate = M('Sellercats');
+        $custom = $customcate->field('ID as id,cateName as name')->where($where)->select();
+        return $custom;
     }
 }
