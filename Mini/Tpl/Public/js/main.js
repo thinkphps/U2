@@ -1254,7 +1254,7 @@ jQuery(function($){
     setTimeout(callback, delay || 300000)
   })
 //tips点击店铺
-  $('#scrollDiv').on('click','#tipshopid',function(){
+  $('#scrollDiv').on('click','.preferential_2',function(){
       $("#mapdiv").show();
       stop_autochange();
       var list =   H.map.getOverlays();
