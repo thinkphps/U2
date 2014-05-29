@@ -19,8 +19,8 @@ class IndexnewAction extends Action{
  public function getCityInfo(){
      $id = trim($this->_request('id'));
      $callback=$_GET['callback'];
-     if(S('h'.$id)){
-         $arr = unserialize(S('h'.$id));
+     if(S('h1'.$id)){
+         $arr = unserialize(S('h1'.$id));
      }else{
          $Weather = D('Getinfo');
          $plist = $Weather->getpca();//Ê¡ÁÐ±í
@@ -29,7 +29,7 @@ class IndexnewAction extends Action{
          $arr['plist'] = $plist;
          $arr['nowcity'] = $nowcity;
          $arr['clist'] = $clist;
-         S('h'.$id,serialize($arr),array('type'=>'file'));
+         S('h1'.$id,serialize($arr),array('type'=>'file'));
      }
      $re = json_encode($arr);
      echo $callback."($re)";
@@ -195,7 +195,7 @@ class IndexnewAction extends Action{
             if($levelid==0){
             $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
             }else if($levelid==1){
-            $sql = "select region_id,local_name from u_areas where p_region_id=(select region_id from u_areas where p_region_id={$pid})";
+            $sql = "select region_id,local_name from u_areas where p_region_id=(select region_id from u_areas where p_region_id={$pid}) and disabled='false'";
             $list = $area->query($sql);
             }
         /* if(empty($baiduid) && count($list)==1){
@@ -346,7 +346,7 @@ class IndexnewAction extends Action{
            }else{
                $type = 2;
            }
-           $listResult = $Weather->getSutsValue($type);
+           $listResult = $Weather->getDefaultSuit($type);
            $slav = array();
            foreach($listResult as $k=>$v){
                $slav[] = $v['suitID'];
