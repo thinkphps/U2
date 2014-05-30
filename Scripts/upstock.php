@@ -12,6 +12,7 @@ $c->format = 'json';
 $products = new ItemGetRequest;//获取商品详细信息
 $products->setFields('num,approve_status,sku.quantity,sku.sku_id');
 //判断是否能取到数据
+
 $req = new ItemsOnsaleGetRequest;
 $req->setFields("num_iid,title,price");
 $req->setIsTaobao("true");

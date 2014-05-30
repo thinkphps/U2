@@ -104,7 +104,6 @@ class GetinfoAction extends Action{
         $this->ajaxReturn($arr, 'JSON');
     }
 
-
     //给jack返回款号和色号
     public function getCidItembn(){
         $suitid = trim($this->_post('suitid'));

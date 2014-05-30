@@ -33,7 +33,6 @@ $result = $c->execute($req, $db->token);
 
 $products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,prop_img');
 $goods = (array)$result->items->item;
-
 $goods_arr = array();
 $pstr = '';
 $time = date('Y-m-d H:i:s');

@@ -472,12 +472,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
         }
         return $result;
     }
-//取出颜色和图片
-    public function getColorPic($numiid){
-        $sql = "SELECT if( length( cid ) =1, concat( 0, cid ) , cid ) as cid,url FROM `u_products` where `num_iid`='".$numiid."'";
-        $list = M('Products')->query($sql);
-        return $list;
-    }
+
 //收入衣柜
     public function addwar(){
         if(session("uniq_user_name")){
