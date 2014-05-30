@@ -480,30 +480,24 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
     //手机版广告
     public function waterdataMobile($result,$lid,$bid,$keyword){
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div></div>';
         }
         else{
-            $str = $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div>';;
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div></div>';;
         }
-        $keywordsqr = '<div class="productinfo"><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div></div>';
-        $orderstr = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div>';
         $arr_count = count($result);
         if($arr_count==0){
-            array_splice($result,0,0,array(array('first'=>1,'lb'=>$str)));
-            array_splice($result,1,0,array(array('first'=>2,'k'=>$keywordsqr)));
-            array_splice($result,2,0,array(array('first'=>3,'o'=>$orderstr)));
+            array_splice($result,0,0,array(array('first'=>1,'ad'=>$str)));
         }else{
-            array_splice($result,1,0,array(array('first'=>1,'lb'=>$str)));
-            array_splice($result,2,0,array(array('first'=>2,'k'=>$keywordsqr)));
-            array_splice($result,3,0,array(array('first'=>3,'o'=>$orderstr)));
+            array_splice($result,1,0,array(array('first'=>1,'ad'=>$str)));
         }
 
         return $result;
