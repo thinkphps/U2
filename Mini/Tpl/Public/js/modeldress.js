@@ -336,7 +336,7 @@ function Model_loadok_callback(){
                 $(this).css({'background':'#fff','color':'#666'});
             }).on('click','.buy_btns span',function(){
                 if($(this).data('buy_url')){
-                window.open( $(this).data('buy_url')+'&kid=11727_51912_165824_211542');
+                window.open( $(this).data('buy_url'));
                 }
             });
 

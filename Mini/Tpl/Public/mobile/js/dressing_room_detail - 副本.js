@@ -563,11 +563,11 @@ var _mini = {
         var loveCss='',buyCss='';
         $.each(data.da,function(p,v){
             if(v.first==1){
-                strHtml+= v.ad;
+                strHtml+= v.lb;
             }else if(v.first==2){
-                strHtml+= v.ad;
+                strHtml+= v.k;
             }else  if(v.first==3){
-                strHtml+= v.cb;
+                strHtml+= v.o;
             }
             else{
                 loveCss='';
@@ -587,7 +587,12 @@ var _mini = {
                     buyCss = ' select';
                 }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
-                strHtml += '<img class="product_img" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
+                strHtml += '<img src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
+                strHtml += '<dl>';
+                strHtml += '<dd class="btn_xh"><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i><span>喜欢</span></a></dd>';
+                strHtml += '<dd class="btn_ym select"><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i><span>已买</span></a></dd>';
+                strHtml += '</dl>';
+
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
@@ -600,9 +605,10 @@ var _mini = {
                     strHtml += '试穿';
                     }
                 }
-                strHtml += '</a></dt>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
+                strHtml += '</a>';
+                strHtml += '<a href="javascript:;" class="tuijian">推荐</a></dt>';
+                strHtml += '</dl>';
+
                 //颜色
                 var sty = '';
                 if(v.skunum==0 && v.num!=0){
@@ -614,7 +620,7 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
                 if(v.num>0){
-                strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
+                strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'&kid=11727_51912_165824_211542" target="_blank">'+ v.title+'</a></h3>';
                 strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
@@ -748,12 +754,12 @@ $('#watercontainer').waterfall({
     itemCls: 'productinfo',
 //    prefix: 'productinfo',
     fitWidth: true,
-    colWidth: 228,
-    gutterWidth: 10,
+    colWidth: 142,
+    gutterWidth: 20,
     gutterHeight: 0,
     align: 'center',
     minCol: 1,
-    maxCol: 4,
+    //maxCol: 4,
     maxPage: -1,
     path: function(page){
         return goodurl +'?page='+ page;

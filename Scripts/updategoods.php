@@ -25,7 +25,7 @@ $ccate->setFields('cid,parent_cid,name,is_parent');
 //获取商品详细信息
 for($i=1;$i<=$pagenum;$i++){
 //if($i==1){
-$req->setFields("num_iid,title,cid,pic_url,num,approve_status,list_time,delist_time,price");
+$req->setFields("seller_cids,num_iid,title,cid,pic_url,num,approve_status,list_time,delist_time,price");
 $req->setPageNo($i);
 $req->setIsTaobao("true");
 $req->setPageSize(200);
@@ -33,7 +33,6 @@ $result = $c->execute($req, $db->token);
 
 $products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,prop_img');
 $goods = (array)$result->items->item;
-
 $goods_arr = array();
 $pstr = '';
 $time = date('Y-m-d H:i:s');
@@ -52,24 +51,46 @@ foreach($goods as $k=>$v){
 	$product_arr = (array)$product->item;
 	//更新goods
     $proarr = explode(';',$product_arr['props_name']);
-	/*foreach($proarr as $kp=>$vp){
-    $vparr = explode(':',$vp);
-	if(in_array('1632501',$vparr) || in_array('2100010',$vparr)){
-	$item_bn = $vparr[3];
-	break;
-	}
-	}*/
+
 	$item_bn = 'UQ'.$product_arr['outer_id'];
 	$v['title'] = addslashes($v['title']);
-	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
+    $detail_url = 'http://detail.tmall.com/item.htm?id='.$v['num_iid'].'&kid=11727_51912_165824_211542';
+	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`detail_url`='".$detail_url."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
     $db->mysqlquery($sql);
     unset($sql);
-
+    //0528更新商品开始
+        $v['seller_cids'] = ltrim($v['seller_cids'],',');
+        $sell_cate = explode(',',$v['seller_cids']);
+        $goodcatesql = "select `cateID` from `u_catesgoods` where `num_iid`=".$v['num_iid'];
+        $good_result = $db->mysqlfetch($goodcatesql);
+         $aellarr = array();
+        foreach($good_result as $ks=>$vs){
+            $aellarr[] = $vs['cateID'];
+        }
+        foreach($sell_cate as $ks1=>$vs1){
+            if(!empty($vs1)){
+            if(!in_array($vs1,$aellarr)){
+              $gcinsql = "insert into `u_catesgoods` (`num_iid`,`cateID`) values ('".$v['num_iid']."','".$vs1."')";
+              $db->mysqlquery($gcinsql);
+            }
+           }
+        }
+        unset($goodcatesql);
+        unset($good_result);
+        $goodcatesql = "select `cateID` from `u_catesgoods` where `num_iid`=".$v['num_iid'];
+        $good_result = $db->mysqlfetch($goodcatesql);
+        foreach($good_result as $ks2=>$vs2){
+           if(!in_array($vs2['cateID'],$sell_cate)){
+              $gcdelsql = "delete from `u_catesgoods` where `num_iid`=".$v['num_iid']." and `cateID`=".$vs2['cateID'];
+              $db->mysqlquery($gcdelsql);
+           }
+        }
+    //0528更新商品结束
 	$product_arr_sku = (array)$product_arr['skus']->sku;
 	$prop_imgs = (array)$product_arr['prop_imgs']->prop_img;
     //颜色
-	$property_alias = (array)$product_arr['property_alias'];
-    $arrcolor = getcolor($property_alias[0]);
+	$property_alias = $product_arr['property_alias'];
+    $arrcolor = getcolor($property_alias);
 	//颜色
 	foreach($product_arr_sku as $k2=>$v2){
 	$v2 = (array)$v2;
@@ -82,6 +103,7 @@ foreach($goods as $k=>$v){
 	if(!empty($p_list[0])){
 	//更新
     $kucolor = explode(':',$properties[0]);
+	//$kucolor2 = explode(':',$properties[1]);
 	$cid = 0;
 	$cstr = '';
     foreach($arrcolor as $kcc=>$vcc){
@@ -175,14 +197,25 @@ foreach($goods as $k=>$v){
 	$cname = rtrim($cname,'-');
     $item_bn = 'UQ'.$product_arr['outer_id'];
 	$v['title'] = addslashes($v['title']);
-	$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
+    $detail_url = 'http://detail.tmall.com/item.htm?id='.$v['num_iid'].'&kid=11727_51912_165824_211542';
+	//$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
+     $sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$detail_url."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
     $db->mysqlquery($sql);
     $goods_id = mysql_insert_id();
+    //0528插入店铺自定义分类开始
+    $sell_cate = explode(',',$v['seller_cids']);
+    foreach($sell_cate as $ks=>$vs){
+        if(!empty($vs)){
+        $sellsql = "insert into `u_catesgoods` (`num_iid`,`cateID`) values ('".$v['num_iid']."','".$vs."')";
+        $db->mysqlquery($sellsql);
+        }
+    }
+    //0528插入店铺自定义分类结束
     unset($sql);
 	$product_arr_sku = (array)$product_arr['skus']->sku;
 	$prop_imgs = (array)$product_arr['prop_imgs']->prop_img;
     //颜色
-	$property_alias = (array)$product_arr['property_alias'];
+	$property_alias = $product_arr['property_alias'];
     $arrcolor = getcolor($property_alias);
 	//颜色
 	if(!empty($product_arr_sku)){
@@ -217,12 +250,13 @@ foreach($goods as $k=>$v){
 	//插入product
 	$prosql.=$ppsql;
 	$psql = rtrim($prosql,',');
-    $db->mysqlquery($prosql);
+    $db->mysqlquery($psql);
 	unset($ppsql);
 	unset($prosql);
 	}
 	}
-	}
+    }
+
 }
 unset($result);
 //}
