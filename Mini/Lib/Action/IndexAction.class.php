@@ -81,7 +81,6 @@ class IndexAction extends Action {
         }else{
             //默认模特图
             $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('suitID desc')->limit('0,4')->select();
-            //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
             foreach($beubeu_suits_list as $k=>$v){
                 switch($v['suitGenderID']){
                     case 1 :
@@ -98,29 +97,22 @@ class IndexAction extends Action {
                         break;
                 }
                 $beubeu_suits_list[$k]['sex'] = $sex;
-                /*$detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
-                if(!empty($detailResult)){
-                 foreach($detailResult as $k2=>$v2){
-                     $detailResult[$k2]['sex'] = $sex;
-                 }
-                    $beubeu_suits_list[$k]['detail'] = json_encode($detailResult);
-                }else{
-                $beubeu_suits_list[$k]['detail'] = 0;
-                }*/
             }
             S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
         }
-        //默认女士上下装自定义分类
+        //默认上下装自定义分类
         if(S('cust1')){
             $ucuslist = unserialize(S('cust1'));
         }else{
-            $ucuslist  = $recomodel->getCateList('1');//上装
+            $where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
+            $ucuslist  = $recomodel->getCateList2($where);//上装
             S('cust11',serialize($ucuslist),array('type'=>'file'));
         }
         if(S('cust12')){
             $dcuslist = unserialize(S('cust12'));
         }else{
-            $dcuslist  = $recomodel->getCateList('2');//下装
+            $where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
+            $dcuslist  = $recomodel->getCateList2($where);//下装
             S('cust12',serialize($dcuslist),array('type'=>'file'));
         }
         $this->assign('beubeu_suits_list',$beubeu_suits_list);
@@ -328,7 +320,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=g.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=g.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' {$liketitle} order by g.uptime desc limit {$start},{$page_num}";
+                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as g {$wherelb} where  g.istag='2' {$liketitle} order by g.num_iid desc limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -379,12 +371,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                     }
                 }
                 $cstr = rtrim($cstr,',');
-                $where.=" and g.ccateid in (".$cstr.")";
+                $catewhere = " and cg.cateID in (".$cstr.")";
             }
             //$where.=" and bg.approve_status='onsale'";
-            $where.=" and bg.isdel=0";
+            //$where.=" and bg.isdel=0";
             if(isset($tem)){
-                $case = ",case when g.wid=".$widvalue['wid']." then 0 end wo";
+                $case = ",case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo";
                 $ordr = "order by wo asc,";
             }else{
                 $case = '';
@@ -395,19 +387,32 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 $fieldlb = ",lo.id as loveid,bu.id as buyid";
             }
             if($sid!=4){
-                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
-              if(!empty($uid)){
-              $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num.") as al ".$wherelb;
-               }else{
-              $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
-              }
+                $goodstable = '`u_beubeu_goods`';
             }else{
-                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
-             if(!empty($uid)){
-                $sql = "select al.*{$fieldlb} from (select g.good_id".$case.",bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num.") as al ".$wherelb;
-                }else{
-                 $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
-                }
+                $goodstable = '`u_goods`';
+            }
+            if($zid && !empty($zid)){
+                 if(!isset($tem) && empty($sid) && empty($fid)){
+                  //如果只有自定义分类
+                    if(!empty($uid)){
+                      $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by bg.num_iid limit ".$start.",".$page_num.") as al ".$wherelb;
+                    }else{
+                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2".$catewhere ." order by bg.num_iid limit ".$start.",".$page_num;
+                    }
+                 }else{
+                    //有自定义分类也有其他的条件
+                    if(!empty($uid)){
+                      $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num.")  as al ".$wherelb;
+                    }else{
+                        $sql = "select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num;
+                    }
+                 }
+            }else{
+            if(!empty($uid)){
+                $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num.") as al ".$wherelb;
+            }else{
+                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num;
+            }
             }
             $result = $goodtag->query($sql);
             if(!empty($result)){
@@ -425,14 +430,6 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
            }*/
         }
         if(!empty($result)){
-//            $arr['tem'] = $tem;
-//            $arr['sid'] = $sid;
-//            $arr['lid'] = $lid;
-//            $arr['bid'] = $bid;
-//            $arr['fid'] = $fid;
-//            $arr['zid'] = $zid;
-//            $arr['kid'] = $kid;
-//            $arr['keyword'] = $keyword;
             $returnArr = array('code'=>1,'da'=>$result,'timestamp'=>$timestamp);
         }else{
             $returnArr = array('code'=>0,'msg'=>'没有数据');
@@ -441,7 +438,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
     }
     public function waterdata($result,$lid,$bid,$keyword){
         $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?scid=138188209&kid=11727_51912_165828_211546' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T2sdBwXY4aXXXXXXXX_!!196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
-        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://j.koolbao.com/tb/57303596/www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2w_QOXKdXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
+        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2w_QOXKdXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';

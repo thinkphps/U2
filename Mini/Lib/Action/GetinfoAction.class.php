@@ -74,16 +74,28 @@ class GetinfoAction extends Action{
         }else{
         $recomodel = D('Reco');
         if($sid!=4 && $sid!=0){
-            $ucuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'1'));//上装
-            $dcuslist  = $recomodel->getCusData(array('gtype'=>$sid,'isud'=>'2'));//下装
+            if($sid==3){
+                $where['gender'] = array('exp','in(3,4)');
+            }else{
+                $where['gender'] = $sid;
+            }
+                $where['isud'] = 1;
+                $where['selected'] = 1;
+            $ucuslist  = $recomodel->getCusData2($where);//上装
+            $where['isud'] = 2;
+            $dcuslist  = $recomodel->getCusData2($where);//下装
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
         }else if($sid==4){
-            $babylist  = $recomodel->getCusData(array('gtype'=>'5'));//上装
+            $where['gender'] = 5;
+            $where['selected'] = 1;
+            $babylist  = $recomodel->getCusData2($where);//上装
             $arr['b'] = $babylist;
         }else if($sid==0){
-            $ucuslist = $recomodel->getCateList('1');
-            $dcuslist = $recomodel->getCateList('2');
+            $where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
+            $ucuslist = $recomodel->getCateList2($where);
+            $where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
+            $dcuslist = $recomodel->getCateList2($where);
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
         }

@@ -11,6 +11,14 @@ $c->secretKey = $db->secretKey;
 $c->format = 'json';
 $products = new ItemGetRequest;//获取商品详细信息
 $products->setFields('num,approve_status,sku.quantity,sku.sku_id');
+//判断是否能取到数据
+$req = new ItemsOnsaleGetRequest;
+$req->setFields("num_iid,title,price");
+$req->setIsTaobao("true");
+$req->setPageSize(1);
+$resp = $c->execute($req, $db->token);
+if(isset($resp->items->item) && !empty($resp->items->item)){
+//判断是否能取到数据
     $offset = 0;
 	$limit = 200;
     $ke = 1;
@@ -47,4 +55,5 @@ $products->setFields('num,approve_status,sku.quantity,sku.sku_id');
 	sleep(2);
 	unset($result);
 	}
+}
 exit;
