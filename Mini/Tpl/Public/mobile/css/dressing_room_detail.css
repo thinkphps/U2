@@ -391,7 +391,7 @@ button,label{cursor:pointer; }
 
 
 /*列表 - 信息*/
-.product_inf{ position:absolute; top:3.8em; left:0.75em; width:12.5em; height:auto; overflow:hidden; text-align:center;  color:#666;}
+.product_inf{ position:absolute; top:1.8em; left:0.75em; width:12.5em; height:auto; overflow:hidden; text-align:center;  color:#666;}
 .product_inf .inf_top{ width:12.5em; height:1em; background:url(../images/product_inf_bg.png) 0 0 no-repeat; background-size:12.5em 18.2em;}
 
 .product_inf .inf_con{  width:10.9em; height:auto; background:url(../images/product_inf_bg.png) 0 -0.8em repeat-y; background-size:12.5em 18.2em; padding:0.4em 0.8em; overflow:hidden;}
@@ -432,7 +432,7 @@ button,label{cursor:pointer; }
 
 /*我的试衣间*/
 .syj_btn{ position:fixed; top:50%; margin-top:-21.8em; right:0em; z-index:110;}
-.syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:18em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
+.syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:36em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
 
 .syj{ width:28m; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
 .syj .baiyi_syj{ width:25.5em; height:31.5em; margin:1.25em; background:#0F9;}
