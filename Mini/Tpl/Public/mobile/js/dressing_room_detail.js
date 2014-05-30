@@ -591,8 +591,8 @@ var _mini = {
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i><span>已买</span></a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i><span>喜欢</span></a></dd></dl>';
+                strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
+                strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
@@ -605,7 +605,7 @@ var _mini = {
                         strHtml += '试穿';
                     }
                 }
-                strHtml += '</a><a href="#" class="tuijian">推荐</a></dt>';
+                strHtml += '</a><a href="#" class="tuijian">推荐</a></dt></dl>';
 
                 //颜色
                 var sty = '';
@@ -752,10 +752,10 @@ $('#watercontainer').waterfall({
     itemCls: 'productinfo',
 //    prefix: 'productinfo',
     fitWidth: true,
-//    colWidth: 142,
-    gutterWidth: 20,
+    colWidth: 142,
+    gutterWidth: 10,
     gutterHeight: 0,
-    align: 'center',
+    align: 'left',
     minCol: 1,
     //maxCol: 4,
     maxPage: -1,
