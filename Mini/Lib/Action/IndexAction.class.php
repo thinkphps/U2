@@ -424,7 +424,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid,$keyword);
+                if(is_mobile()){
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword);
+                }else{
+                    //$result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword);
+                }
             }
             /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
            }*/
@@ -472,7 +477,37 @@ where bg.num_iid = li.num_iid and li.buyid is not null limit ".$start.",".$page_
         }
         return $result;
     }
+    //手机版广告
+    public function waterdataMobile($result,$lid,$bid,$keyword){
+        if($lid == 1 && $bid == 0){
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div></div>';
+        }
+        else if($lid == 0 && $bid == 1){
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div></div></div>';
 
+        }else if($lid == 1 && $bid == 1){
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div></div></div>';
+        }else if($lid == 0 && $bid == 0 ){
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div></div>';
+        }
+        else{
+            $str = $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div></div>';;
+        }
+        $keywordsqr = '<div class="productinfo"><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div></div>';
+        $orderstr = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group2"><a href="#" class="scrd">试穿热度</a><a href="#" class="xpfx">新品发行</a><a href="#" class="jgpx">价格排序<span>↓</span></a></div></div>';
+        $arr_count = count($result);
+        if($arr_count==0){
+            array_splice($result,0,0,array(array('first'=>1,'lb'=>$str)));
+            array_splice($result,1,0,array(array('first'=>2,'k'=>$keywordsqr)));
+            array_splice($result,2,0,array(array('first'=>3,'o'=>$orderstr)));
+        }else{
+            array_splice($result,1,0,array(array('first'=>1,'lb'=>$str)));
+            array_splice($result,2,0,array(array('first'=>2,'k'=>$keywordsqr)));
+            array_splice($result,3,0,array(array('first'=>3,'o'=>$orderstr)));
+        }
+
+        return $result;
+    }
 //收入衣柜
     public function addwar(){
         if(session("uniq_user_name")){
