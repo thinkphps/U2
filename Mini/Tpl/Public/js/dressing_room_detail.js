@@ -614,7 +614,7 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
                 if(v.num>0){
-                strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'&kid=11727_51912_165824_211542" target="_blank">'+ v.title+'</a></h3>';
+                strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
                 strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                 strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
                 strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';

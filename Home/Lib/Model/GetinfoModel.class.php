@@ -181,7 +181,6 @@ de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15
   public function getData($slav,$result){
       $arr = array();
       $distslav = array_unique($slav);
-      $count = count($distslav);
       $j = 0;
       foreach($distslav as $k2=>$v2){
           $chil = array();

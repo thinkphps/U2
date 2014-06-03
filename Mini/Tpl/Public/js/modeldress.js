@@ -157,7 +157,7 @@ function Model_loadok_callback(){
                     pageElement.$ulgender.find('a:eq(2)').addClass('select');
                     $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
                 }
-                _mini.getSuits();
+                //_mini.getSuits();
                 pageElement.$btnExpansion.click();
             }
         },
@@ -336,7 +336,7 @@ function Model_loadok_callback(){
                 $(this).css({'background':'#fff','color':'#666'});
             }).on('click','.buy_btns span',function(){
                 if($(this).data('buy_url')){
-                window.open( $(this).data('buy_url')+'&kid=11727_51912_165824_211542');
+                window.open( $(this).data('buy_url'));
                 }
             });
 

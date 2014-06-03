@@ -15,6 +15,6 @@ return array(
 	'TAOSECRET'=>'d7c0a4eee53d638546c816a91c4e0244',
 	'TAOCAABACK'=>'http://phoneicolor.networking.io/uniqlo/mini.php/Index/callback',
 	'UNIQLOURL'=>'http://localhost/U2/',
-    'NEWSRORE'=>'',
+    'NEWSRORE'=>'sdgdg',
 );
 ?>
