@@ -18,7 +18,7 @@ button{overflow:visible; padding:0;vertical-align:middle; }
 button,label{cursor:pointer; }
 .clearfix:after{content:"."; height:0; visibility:hidden; display:block; clear:both; font-size:0; line-height:0;}
 .clearfix{*zoom:1;}
-
+.none {display: none;}
 
 /*头部*/
 .header{ width:100%; height:11.5em; background:#FFF;}
@@ -388,7 +388,8 @@ button,label{cursor:pointer; }
 .wrapper_box_btn_group2 a.xpfx{ width:6.9em; height:4em; line-height:4em;}
 .wrapper_box_btn_group2 a.jgpx{ width:13.8em; height:4em; line-height:4em; border-top:0.1em solid #eee;}
 .wrapper_box_btn_group2 a.jgpx span{ font-weight:bold; margin:0 0.5em;}
-
+.wrapper_box_btn_group2 .sequence{ float:left; width:12.8em; height:2em; line-height:2em; border-top:0.1em solid #eee; padding:1em 0.5em 1.2em 0.5em; background:#FFF;}
+.wrapper_box_btn_group2 .sequence select{ width:10.8em; height:2em; line-height:2em;}
 
 /*列表 - 信息*/
 .product_inf{ position:absolute; top:1.8em; left:0.75em; width:12.5em; height:auto; overflow:hidden; text-align:center;  color:#666;}
@@ -431,16 +432,16 @@ button,label{cursor:pointer; }
 
 
 /*我的试衣间*/
-.syj_btn{ position:fixed; top:50%; margin-top:-21.8em; right:0em; z-index:110;}
-.syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:36em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
+.syj_btn{ position:fixed; top:64%; margin-top:-21.8em; right:0em; z-index:110;}
+.syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:15em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
 
 .syj{ width:28m; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
-.syj .baiyi_syj{ width:25.5em; height:31.5em; margin:1.25em; background:#0F9;}
+.syj .baiyi_syj{ width:25.5em; height:31.5em; margin:1.25em;}
 .btn_line{ width:28em; height:3.6em; position:absolute; bottom:0;}
 .btn_line a{ display:block; float:left; height:3.6em; line-height:3.6em;}
 .btn_line a.buy_btn{ width:12em; background:#ff0000; color:#FFF;}
 .btn_line a.buy_btn i{ display:block; float:left; width:3em; height:3em; background:url(../images/buy_icon.png) 0 0 no-repeat; background-size:2.5em 2.5em; margin:0.5em 0.5em 0 2em;}
-.btn_line a.sc_btn{ width:8em; background:#a1a1a1; color:#FFF; text-align:center;}
+.btn_line a.sc_btn{ width:8em; background:#a1a1a1; color:#FFF; text-align:center;display: none;}
 .btn_line a.bc_btn{ width:8em; background:#d1d1d1; color:#FFF; text-align:center;}
 
 
@@ -448,6 +449,11 @@ button,label{cursor:pointer; }
 .btn_line .icon-medium-plus .bshare-custom{ float:left;}
 .btn_line .bshare-custom span{ float:left; color:#666; font-size:0.8em; margin:1.3em 1em 0 1em; }
 .btn_line .bshare-custom .bshare-custom a{ float:left; margin:1em 0 0 0; }
+
+.buy_btns{ left:0px; bottom:42px; z-index:999; position: absolute;}
+.buy_btns .buyurl {cursor: pointer; line-height: 15px;background:#fff;color:#666;padding: 5px 5px 5px 5px;}
+.buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
+.buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
 /*kimi*/
 #waterfall-loading img{width:16px;height:11px;}
