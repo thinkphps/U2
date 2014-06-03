@@ -222,9 +222,6 @@ $(function(){
     }($))
 
     /* ============ login && logout ============ */
-
-
-
 })
 var _mini = {
     timestamp : '',
