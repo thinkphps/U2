@@ -157,7 +157,7 @@ function Model_loadok_callback(){
                     pageElement.$ulgender.find('a:eq(2)').addClass('select');
                     $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
                 }
-                _mini.getSuits();
+                //_mini.getSuits();
                 pageElement.$btnExpansion.click();
             }
         },
