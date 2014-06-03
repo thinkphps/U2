@@ -92,18 +92,43 @@ class SuitsSynModel extends Model{
         return $returnValue;
     }
 
+//    matchtype =1仅更新suits表的beubeuSuitID
+//    除此情况以外仅更新beubeusuit
     private function AddSuitsHistory($suits,$batchid,$createtime){
         for($i = 0; $i < count($suits); $i++)
         {
-            $suitsHistory = M('beubeu_suits_history');
-            $map['suitID'] =  $suits[$i]['id'];
-            $map['suitStyleID'] = $suits[$i]['style'];
-            $map['suitGenderID'] = $suits[$i]['gender'];
-            $map['suitImageUrl'] = $suits[$i]['pic'];
+            $matchtype = $suits[$i]['matchtype'];
+            $fx_matchid = $suits[$i]["fx_matchid"];
+            if (!isset($matchtype)|| empty($matchtype)){
+                $matchtype = 0;
+            }else{
+                if ($matchtype==1){
+                    $matchtype = 1;
+                }else{
+                    $matchtype = 0;
+                }
+            }
+            if (!isset($fx_matchid)|| empty($fx_matchid)){
+                $fx_matchid = "0";
+            }
 
-            for($j = 0; $j<count($suits[$i]['products']); $j++){
-                if($j<11){
-                    $map['suitproduct'.($j+1)] = $suits[$i]['products'][$j]['uq'];
+            $suitsHistory = M('beubeu_suits_history');
+            $map = array();
+            $map['suitID'] =  $suits[$i]['id'];
+
+            if($matchtype == 1){
+                $map['matchtype'] = $matchtype;
+                $map['fx_matchid'] = $fx_matchid;
+
+            }else{
+                $map['suitStyleID'] = $suits[$i]['style'];
+                $map['suitGenderID'] = $suits[$i]['gender'];
+                $map['suitImageUrl'] = $suits[$i]['pic'];
+
+                for($j = 0; $j<count($suits[$i]['products']); $j++){
+                    if($j<11){
+                        $map['suitproduct'.($j+1)] = $suits[$i]['products'][$j]['uq'];
+                    }
                 }
             }
             $map['batchid'] = $batchid;
@@ -112,33 +137,55 @@ class SuitsSynModel extends Model{
         }
     }
 
+//    matchtype =1仅更新suits表的beubeuSuitID
+//    除此情况以外仅更新beubeusuit
     private function AddOrUpdateSuits($beubeusuit,$createtime){
         $returnProduct = array();
         $suits = M('beubeu_suits');
+        $fxsuits = M('suits');
 
         for($i = 0; $i < count($beubeusuit); $i++)
         {
-            $map['suitID'] = $beubeusuit[$i]['id'];
-            $map['suitStyleID'] = $beubeusuit[$i]['style'];
-            $map['suitGenderID'] = $beubeusuit[$i]['gender'];
-            $map['suitImageUrl'] = $beubeusuit[$i]['pic'];
-
-
-            $result = $suits->field('suitID')->where($map)->find();
-            if(isset($result))
-            {
-                $map['uptime'] = $createtime;
-                $suits->where('suitID='.$result['suitID'])->save($map);
+            $matchtype = $beubeusuit[$i]['matchtype'];
+            $fx_matchid = $beubeusuit[$i]["fx_matchid"];
+            if (!isset($fx_matchid)|| empty($fx_matchid)){
+                $fx_matchid = 0;
             }
-            else
-            {
-                $map['createtime'] = $createtime;
-                $map['uptime'] = $createtime;
-                $suits->add($map);
+            if (!isset($matchtype)|| empty($matchtype)){
+                $matchtype = 0;
+            }else{
+                if ($matchtype==1){
+                    $matchtype = 1;
+                }else{
+                    $matchtype = 0;
+                }
             }
+            $map = array();
+            if ($matchtype ==1){
+                $map['uptime'] = $createtime;
+                $map['beubeuSuitID'] = $beubeusuit[$i]['id'];
+                $fxsuits->where('suitID='.$fx_matchid)->save($map);
+            }else{
+                $map['suitID'] = $beubeusuit[$i]['id'];
+                $map['suitStyleID'] = $beubeusuit[$i]['style'];
+                $map['suitGenderID'] = $beubeusuit[$i]['gender'];
+                $map['suitImageUrl'] = $beubeusuit[$i]['pic'];
 
-            $this->UpdateSuitGoods($beubeusuit[$i]);
+                $result = $suits->field('suitID')->where($map)->find();
+                if(isset($result))
+                {
+                    $map['uptime'] = $createtime;
+                    $suits->where('suitID='.$result['suitID'])->save($map);
+                }
+                else
+                {
+                    $map['createtime'] = $createtime;
+                    $map['uptime'] = $createtime;
+                    $suits->add($map);
+                }
 
+                $this->UpdateSuitGoods($beubeusuit[$i]);
+            }
         }
 
         return $returnProduct;
