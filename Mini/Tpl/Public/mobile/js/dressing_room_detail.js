@@ -381,8 +381,6 @@ var _mini = {
         $.weather.nextpage = 0;
         $.uniqlo.fid = fid;
         getgoods($.weather.avg,sid,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-
-
     },
     getzid : function(sid){
         $.post(midstyleurl,{sid:sid},function(data,status){
