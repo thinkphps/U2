@@ -132,10 +132,12 @@ function Model_loadok_callback(){
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
             Model.CurrClothesCallback = this.beu_getallclothes;
-            $('.beubeu_btns').css('top','21.6em');
-            $('.beubeu_btns3').css('left','-2px').css('top','18em');
-            $('#showmodelhead').css('top','24em');
-            $('#beubeu_shoes').css({'top':'19em','left':'4em'});
+            $('.beubeu_btns').css('top','16.6em');
+            $('.beubeu_btns3').css('left','-2px').css('top','13em');
+            $('#showmodelhead').css('top','19em');
+            $('#beubeu_shoes').css({'top':'13em','left':'4em'});
+            $('#beubeu_loading2').css({'height':'24em','left':'5em'});
+            $('#beu_showimg').css({'position':'absolute','top':'0em'});
             if ( callback ) {
                 callback.call(this);
             }

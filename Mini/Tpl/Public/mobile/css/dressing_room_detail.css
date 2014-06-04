@@ -408,7 +408,7 @@ button,label{cursor:pointer; }
 /*列表 - 选择颜色*/
 .product_color{ background:#eee; padding:1em 0.8em; overflow:hidden;}
 .product_color h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:0.5em;}
-.product_color ul li{ float:left; margin:0.4em 0.5em;}
+.product_color ul li{ float:left; margin:0.4em 0.3em;}
 .product_color img{ width:2em; height:2em; margin:0;}
 
 
@@ -446,7 +446,7 @@ button,label{cursor:pointer; }
 .btn_line .icon-medium-plus .bshare-custom{ float:left;}
 .btn_line .bshare-custom span{ float:left; color:#666; font-size:0.8em; margin:1.3em 1em 0 1em; }
 .btn_line .bshare-custom .bshare-custom a{ float:left; margin:1em 0 0 0; }
-
+.mini-cab-share2{padding-left: 12.7em;}
 .buy_btns{ left:0px; bottom:42px; z-index:999; position: absolute;}
 .buy_btns .buyurl {cursor: pointer; line-height: 15px;background:#fff;color:#666;padding: 5px 5px 5px 5px;}
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
