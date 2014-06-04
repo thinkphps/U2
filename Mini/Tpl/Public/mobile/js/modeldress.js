@@ -292,7 +292,7 @@ function Model_loadok_callback(){
             var _this = this;
 
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
-            $('.my_yyg_model').on('click','.model',_this.callDressingFunction);
+            $('#sfid').on('click','.model',_this.callDressingFunction);
 
             pageElement.$btnExpansion.on('click',function(){
                 _this.objShowOrHide(pageElement.$divSyj);

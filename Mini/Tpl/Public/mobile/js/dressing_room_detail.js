@@ -302,7 +302,8 @@ var _mini = {
                     $('#changeid').attr('la',data.page);
                      //}
                     if(data.def){
-                        var deflength = data.def.length,str = "";
+                        var deflength = 2//data.def.length
+                            ,str = "";
                         if(data['count'] && data['count']>4){
                             $('#btn-mask').addClass('none')
                         }else{
@@ -310,19 +311,20 @@ var _mini = {
                         }
                         for(var i = 0 ;i < deflength;i++){
                             if(i<4){
-                                var show = "style='display:block;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
+                                var show = "style='display:block;'";
                             }else{
-                                var show = "style='display:none;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
+                                var show = "style='display:none;'";
                             }
-                            if(gender==1){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
-                            }
-                            if(gender==2){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
-                            }
-                            if(gender==3){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
-                            }
+//                            if(gender==1){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
+//                            if(gender==2){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
+//                            if(gender==3){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
+                            str += '<div class="model"><img src="'+data.def[i].suitImageUrl+'.400x533.png" data-detail="['+data.def[i].suitID+','+ data.def[i].sex +']"></div>';
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
