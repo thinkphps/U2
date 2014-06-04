@@ -142,6 +142,7 @@ function Model_loadok_callback(){
             var _this = this;
             var suitid = pageElement.getUrlParam('suitid');
             if( suitid != -1){
+                $('#changeid').attr('la',1);
                 var sex = pageElement.getUrlParam('gender');
                 var gender = pageElement.getGenderValue(sex);
 
@@ -157,7 +158,7 @@ function Model_loadok_callback(){
                     pageElement.$ulgender.find('a:eq(2)').addClass('select');
                     $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
                 }
-                //_mini.getSuits();
+                _mini.getSuits();
                 pageElement.$btnExpansion.click();
             }
         },
