@@ -212,7 +212,6 @@ $(function(){
                 aside.tips.html('请填写内容').show();
             }
         });
-
         aside.succ.on('click', function(){
             aside.succ.hide();
             aside.tips.hide();

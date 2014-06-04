@@ -253,7 +253,6 @@ button,label{cursor:pointer; }
 .weather ul li.w_select p.w_t_2{ color:#FFF;}
 .weather ul li.w_select p.w_t_week{ color:#FFF;}
 .weather ul li.w_select p.w_t_name{ color:#FFF;}
-
 /*分类*/
 .dr_main_con_sub_nav{ float:left; width:100%; height:7.5em; background:url(../images/dr_main_con_sub_nav_bg.png) 0 repeat;}
 .dr_main_con_sub_nav ul{ display:block; height:7.5em; margin:0 auto;}
