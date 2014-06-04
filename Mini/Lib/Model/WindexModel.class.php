@@ -160,4 +160,26 @@ class WindexModel extends Model{
         $result = $goodtag->cache(true)->join('INNER JOIN u_beubeu_goods on u_beubeu_goods.id=u_goodtag.good_id')->field('u_beubeu_goods.id,u_beubeu_goods.num_iid,u_beubeu_goods.type,u_beubeu_goods.title,u_beubeu_goods.num,u_beubeu_goods.price,u_beubeu_goods.pic_url,u_beubeu_goods.detail_url,u_goodtag.ccateid')->where($where)->group('u_goodtag.good_id')->order('u_beubeu_goods.uptime desc')->limit('0,4')->select();
         return $result;
     }
+    //kimi20140603 获取排序数据
+    public function getOrderStr($oid=1){
+           switch($oid){
+               case 1 :
+                   $orderStr = 'bg.num_iid desc';//默认排序
+               break;
+               case 2 :
+                   $orderStr = 'bg.num_iid desc';//热度排序
+               break;
+               case 3 :
+                   $orderStr = 'bg.num_iid desc';//新品排序
+               break;
+               case 4 :
+                   $orderStr = 'bg.price asc';//价格升序
+               break;
+               case 5 :
+                   $orderStr = 'bg.price desc';//价格降序
+                   break;
+           }
+          return $orderStr;
+    }
+
 }

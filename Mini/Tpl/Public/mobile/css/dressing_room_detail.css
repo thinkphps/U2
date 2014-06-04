@@ -54,6 +54,8 @@ button,label{cursor:pointer; }
 
 .header_bot a.tmail{ float:right; color:#FFF; margin:0 0.5em 0 0;}
 .header_bot a.tmail i{ display:block; float:left; width:1.1em; height:1.1em; background:url(../images/tmall_icon.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
+.header_bot a.tmail2{ float:right; color:#FFF; margin:0 0.5em 0 0;}
+.header_bot a.tmail2 i{ display:block; float:left; width:1.1em; height:1.1em; background:url(../images/18543588712819864175.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
 
 
 /*我的优衣柜*/
@@ -280,7 +282,7 @@ button,label{cursor:pointer; }
 .style_btn_group a.style_select span{ color:#FFF;}
 
 
-.style_btn_group_detail{ float:left; width:100%; width:100%;}
+.style_btn_group_detail{ position: fixed; width:50%;top: 50%;left: 25%;z-index: 11;z-inde:1000;}
 .style_btn_group_detail ul li{ float:left; width:25%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
 .style_btn_group_detail ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center; position:relative; padding:0 0 0 2em;}
 .style_btn_group_detail ul li a i{ display:block; float:left; width:2em; height:2em; position:absolute; left:50%; top:1em; margin-left:-2.5em;}

@@ -387,7 +387,7 @@ var _mini = {
         }
     },
     getGoods : function(){
-        var sid = $('#cateu2 li .rw_select').data('gender');
+        var sid = $('#cateu2 li.rw_select').data('gender');
         var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
         fid = fid ? fid : 0;
         this.showStyleMask2(sid);
@@ -641,9 +641,6 @@ var _mini = {
         }
     }
 }
-
-
-
 $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
     var num_iid = $(this).data('id');
     $(this).toggleClass('select');
@@ -685,9 +682,6 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
 
     }
 });
-
-
-
 
 $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
 
@@ -737,7 +731,15 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
         }
     })
 });
-
+//kimi20140604点击风格
+$('.style_btn_group').on('click','.style_select',function(){
+    $('div.mini-mask').show();
+    $('.style_btn_group_detail').show();
+});
+$('.style_btn_group_detail').on('click','.mini-form-close',function(){
+    $('div.mini-mask').hide();
+    $('.style_btn_group_detail').hide();
+});
 document.onkeydown = function(e){
     var ev = document.all ? window.event : e;
     if(ev.keyCode==13) {
@@ -822,6 +824,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
     $('#waterfall-loading').remove();
+    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 1;
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg
@@ -832,6 +835,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
             zid : zid,//$.uniqlo.zid,//自定义分类
             kid : kid,//$.uniqlo.kid,//快速搜索标记
             keyword : keyword,
+            oid : oid,
             timestamp : _mini.timestamp
         },
         state:{curPage:1},
@@ -840,6 +844,10 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     });
 
 }
+//排序
+$('#watercontainer').on('change','#gorder',function(){
+    getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,0,$('#keywordid').val());
+});
 function delgo(id){
     if(id>0){
 //删除cokkie里的数据
