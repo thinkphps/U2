@@ -360,7 +360,7 @@
     <div class="my_yyg_model">
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
     	<div class="model">
-        	<img src="{$pvo.suitImageUrl}.240x550.png" />
+        	<img src="{$pvo.suitImageUrl}.240x550.png" data-detail='[{$pvo.suitID},{$pvo.sex}]'/>
             <div class="model_try"></div>
         </div>
      </volist>
@@ -471,7 +471,8 @@
         </div>
         
         
-        <div class="style_btn_group_detail">
+        <div class="style_btn_group_detail mini-pop none">
+            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a>
         	<ul>
                 <li class="a1" style="width:50%"><a href="#"><i></i>全部</a></li>
             	<li class="a2 select"><a href="#"><i></i>可爱</a></li>
