@@ -26,7 +26,7 @@ button,label{cursor:pointer; }
 .header_inf{ width:100%; height:8.2em;}
 .header_inf table tr th{ height:8.2em; width:13.5em; border-right:0.1em solid #eee; padding:0 0 0 1.5em;}
 .header_inf table tr th a{ display:block; float:left; width:12em; height:4.4em;}
-.header_inf table tr th a img{width:144px;height: 53px;}
+.header_inf table tr th a img{width:10em;height: 5em;}
 
 .header_inf table tr td.city_inf{ height:4.8em; border-bottom:0.1em solid #eee; padding:0 0 0 1.5em;}
 .header_inf table tr td.city_inf .city_name{ float:left; margin-right:1em;}
@@ -429,7 +429,7 @@ button,label{cursor:pointer; }
 
 
 /*我的试衣间*/
-.syj_btn{ position:fixed; top:64%; margin-top:-21.8em; right:0em; z-index:110;}
+.syj_btn{ position:fixed; top:44%; margin-top:-21.8em; right:0em; z-index:110;}
 .syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:15em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
 
 .syj{ width:28m; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
@@ -455,4 +455,17 @@ button,label{cursor:pointer; }
 /*kimi*/
 #waterfall-loading img{width:16px;height:11px;}
 .right_search{width:13.9em;}
+
+/*登录弹窗*/
+/*.mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:30em; margin-left:-12.5em; border:0.2em solid #eee;}*/
+/*.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}*/
+/*.mini-login h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}*/
+/*.mini-login .mini-control{ width:20em; margin:0 0 0 2em;}*/
+/*.mini-login .mini-control label{ font-size:1em; line-height:2em; color:#999;}*/
+/*.mini-login .mini-control input{ width:17em; height:3em;}*/
+/*.mini-login .mini-control a.mini-login-fetch{ display:block; height:4em; line-height:4em; float:left;}*/
+/*.mini-login .mini-control label.nomargin{ float:right; width:7em; line-height:4em;}*/
+/*.mini-login .mini-control label.nomargin input { float:left; width:1.5em; height:1.5em; line-height:4em; margin:0.75em 0.5em 0 0;}*/
+/*.mini-login .mini-control a.mini-login-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF;}*/
+/*.mini-login .mini-control a.mini-login-reg{ float:left; line-height:4em;}*/
 
