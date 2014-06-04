@@ -385,7 +385,7 @@
                 <li><a href="#" class="detail_sub_btn14"></a></li>
             </ul>
         </div>
-        <a href="#" class="expansion2"></a>
+        <a href="javascript:;" class="expansion2"></a>
     </div>
 </div>
 
@@ -519,38 +519,73 @@
 
 
 <!--试衣间按钮-->
-<div class="syj_btn" >
-    <a href="#" class="syj_btn_expansion syj_btn"></a>
-    <div class="syj none">
-        <div class="baiyi_syj"></div>
-        <div class="btn_line">
-        	<a href="#" class="buy_btn"><i></i><p>我要购买</p></a>
-            <a href="#" class="sc_btn">收藏整套搭配</a>
-            <a href="#" class="bc_btn">保存此搭配</a>
-            <div class="bshare-custom icon-medium-plus">
-                <span>将此搭配分享到：</span>
-                <div class="bshare-custom">
-                	<div class="bsPromo bsPromo2"></div>
-                    <a title="分享到QQ空间" class="bshare-qzone"></a>
-                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
-                    <a title="分享到人人网" class="bshare-renren"></a>
-                    <a title="分享到腾讯微博" class="bshare-qqmb"></a>
-                </div>
-                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
-                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+<div class="syj_btn  ">
+    <a href="javascript:;" class="syj_btn_move"></a>
+    <a href="javascript:;" class="syj_btn_expansion "></a>
+    <div class="syj none" >
+        <div class="baiyi_syj" id="beubeu_loadImg"></div>
+        <div class="baby_fitting_room none" id="baby_fitting_room">
+            <div class="tops_bottoms none" id="tops_bottoms">
+                <img src="#"/>
+            </div>
+            <div class="bottoms none" id="bottoms">
+                <img src="#"/>
+            </div>
+            <div class="single none" id="single">
+                <img src="#"/>
             </div>
         </div>
-        
-        <div class="buy_btns">
+
+        <div class="btn_line">
+            <a href="javascript:;" class="buy_btn"><i></i><p>我要购买</p></a>
+            <a href="javascript:;" class="sc_btn none">收藏整套搭配</a>
+            <!--<a href="javascript:;" class="bc_btn">保存此搭配</a>-->
+            <!--<a href="javascript:;" class="bc_btn">将此搭配分享到：</a>-->
+            <div class="mini-cab-share2">
+                <!--<span>将此搭配分享到：</span>-->
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_32x32"  onmouseover="funcShare()">
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_renren"></a>
+                </div>
+                <!-- JiaThis Button END -->
+                <!-- JiaThis Button BEGIN -->
+                <script type="text/javascript">
+                    var jiathis_config={
+                        url:"http://uniqlo.bigodata.com.cn/u2/",
+                        summary:"#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店",
+                        title : " ",
+                        pic:"http://115.29.38.96/uniqlo/Mini/Tpl/Public/images/share.jpg",
+                        shortUrl:false,
+                        hideMore:false
+                    }
+                    funcShare = function(){
+                        var src = Model.GetDIY(); // 取出当前搭配图片
+                        jiathis_config={
+                            url:"http://uniqlo.bigodata.com.cn/u2/",
+                            summary:"#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店",
+                            title : " ",
+                            pic:src,
+                            shortUrl:false,
+                            hideMore:false
+                        }
+                        // 执行分享操作
+                    }
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
+            </div>
+        </div>
+        <div class="buy_btns none">
             <ul>
-                <li><a href="#">仅配饰</a></li>
-                <li><a href="#">仅下装</a></li>
-                <li><a href="#">仅上装</a></li>
-                <li><a href="#">整套</a></li>
             </ul>
         </div>
-	</div>
+    </div>
 </div>
+
 <!--选择城市弹窗-->
 <div class="map_light_box none" id="mapdiv" >
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
@@ -610,8 +645,7 @@
 <script type="text/javascript" src="__TMPL__Public/js/waterfall/waterfall.min.js"></script>
 
 <script type="text/javascript" src="__TMPL__Public/mobile/js/dressing_room_detail.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/modeldress.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="__TMPL__Public/mobile/js/modeldress.js"></script>
 <script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
 </body>
 </html>
@@ -671,12 +705,11 @@ $(function(){
         $.weather.str = '';
         var sid = $(this).data('gender');
         $.uniqlo.fid = 0;
-        $(this).siblings().children('a').removeClass('select');
-        $('#cstyle2 li').siblings().children('a.select').removeClass('select');
-        $(this).children('a').addClass('select');
+        $('#cateu2 li').removeClass('rw_select');
+        $('#cstyle2 li').removeClass('select');
+        $(this).addClass('rw_select');
         _mini.getzid($(this).data('gender'));
         _mini.getGoods();
-        $('#cstyle2 .select').removeClass('select');
         $('.ch_all a').addClass('select');
         $(window).scrollTop(tmpscrolltop);
     });

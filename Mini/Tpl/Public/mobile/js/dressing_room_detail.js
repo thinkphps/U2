@@ -3,34 +3,7 @@
  */
 
 $(function(){
-    $(".syj_btn").draggable({
-        drag:function(event, ui){
-            var mleft =  $(".syj").width()+2;
-            if(ui.position.left<mleft){
-                $(".syj").css('margin-left',mleft+'px');
-            }else{
-                $(".syj").css('margin-left','');
-            }
-        },
-        stop: function( event, ui ) {
-            if(ui.position.top<0){
-                $(".syj_btn").animate({'top':'50px'}, 400);
-            }
 
-            if(ui.position.top>$(window).height()-$(".syj_btn").height()){
-                var mtop = $(window).height()-$(".syj_btn").height();
-                $(".syj_btn").animate({'top':mtop + 'px'}, 400);
-            }
-
-            if(ui.position.left<0){
-                $(".syj_btn").animate({'left':'10px'}, 400);
-            }
-            if(ui.position.left>$(window).width()-$(".syj_btn").width()){
-                var mleft = $(window).width()-$(".syj_btn").width() - 10;
-                $(".syj_btn").animate({'left':mleft + 'px'}, 400);
-            }
-        }
-    });
 
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
@@ -48,6 +21,19 @@ $(function(){
         dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
         $("body").click(function(i){ !$(i.target).parents(".select_city").first().is(s) ? _hide():"";});
     })
+
+
+    //左侧风格按钮
+    $('.expansion2').on('click',function(){
+        if($('.detail_sub_nav').is(':hidden')){
+            $('.detail_sub_nav').show();
+            $(this).css('left','5em');
+        }
+        else{
+            $('.detail_sub_nav').hide();
+            $(this).css('left','0em');
+        }
+    });
 
     var miniMask = $('div.mini-mask');
     $("#shopinfo").on("click",function(){
@@ -226,7 +212,6 @@ $(function(){
                 aside.tips.html('请填写内容').show();
             }
         });
-
         aside.succ.on('click', function(){
             aside.succ.hide();
             aside.tips.hide();
@@ -236,9 +221,6 @@ $(function(){
     }($))
 
     /* ============ login && logout ============ */
-
-
-
 })
 var _mini = {
     timestamp : '',
@@ -387,7 +369,7 @@ var _mini = {
         }
     },
     getGoods : function(){
-        var sid = $('#cateu2 li').siblings().children('a.select').parent('li').data('gender');
+        var sid = $('#cateu2 li .rw_select').data('gender');
         var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
         fid = fid ? fid : 0;
         this.showStyleMask2(sid);
@@ -395,8 +377,6 @@ var _mini = {
         $.weather.nextpage = 0;
         $.uniqlo.fid = fid;
         getgoods($.weather.avg,sid,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-
-
     },
     getzid : function(sid){
         $.post(midstyleurl,{sid:sid},function(data,status){
@@ -450,7 +430,7 @@ var _mini = {
     initialization : function(){
         $('#ulweek .w_select').removeClass('w_select');
         $('#li_day0').addClass('w_select');
-        $('#cateu2 .select').removeClass('select')
+        $('#cateu2 .rw_select').removeClass('rw_select')
         $('.rw_all a').addClass('select');
         $('#cstyle2 .select').removeClass('select');
         $('.ch_all a').addClass('select');
@@ -591,8 +571,8 @@ var _mini = {
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
                 strHtml += '<img width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i><span>已买</span></a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i><span>喜欢</span></a></dd></dl>';
+                strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
+                strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
                 strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
@@ -605,7 +585,7 @@ var _mini = {
                         strHtml += '试穿';
                     }
                 }
-                strHtml += '</a><a href="#" class="tuijian">推荐</a></dt>';
+                strHtml += '</a><a href="#" class="tuijian">推荐</a></dt></dl>';
 
                 //颜色
                 var sty = '';
@@ -752,10 +732,10 @@ $('#watercontainer').waterfall({
     itemCls: 'productinfo',
 //    prefix: 'productinfo',
     fitWidth: true,
-//    colWidth: 142,
-    gutterWidth: 20,
+    colWidth: 142,
+    gutterWidth: 10,
     gutterHeight: 0,
-    align: 'center',
+    align: 'left',
     minCol: 1,
     //maxCol: 4,
     maxPage: -1,
