@@ -78,7 +78,7 @@ $(function(){
     $('.left_btn').on('click',function(){
         if(weekLeftNum < 3){
             var left = $('#ulweek').position().left;
-            $('#ulweek').css('left', left -= 160);
+            $('#ulweek').css('left', left -= 135);
             weekLeftNum += 1;
         }
     });
@@ -86,7 +86,7 @@ $(function(){
     $('.right_btn').on('click',function(){
         if(weekLeftNum > 0){
             var left = $('#ulweek').position().left;
-            $('#ulweek').css('left', left += 160);
+            $('#ulweek').css('left', left += 135);
             weekLeftNum -= 1;
         }
     });
