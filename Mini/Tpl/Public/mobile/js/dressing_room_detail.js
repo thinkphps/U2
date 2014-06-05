@@ -418,7 +418,7 @@ var _mini = {
                     $('#alldid').nextAll('li').remove();
                     $('#alldid').after(dstr);
                 }else{
-                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
+                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
                     $('.right_tj').css('display','none');
                     $.each(data.b,function(i,bname){
                         bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";

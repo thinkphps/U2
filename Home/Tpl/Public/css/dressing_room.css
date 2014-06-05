@@ -523,9 +523,10 @@ a.light_box_close{  background:url(http://img03.taobaocdn.com/imgextra/i3/196993
 }
 
 /*切换按钮*/
-.dr_main_con a.home_arrow_left{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat; width:29px; height:51px; position:absolute; top:245px; left:-60px; z-index:50; cursor:pointer;}
-.dr_main_con a.home_arrow_left:hover{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 -51px no-repeat;}
+.dr_main_con a.home_arrow_left{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2IBRWX54XXXXXXXXX-196993935.png) 0 0 repeat; width:50px; height:100px; position:absolute; top:220px; left:0px; z-index:500; cursor:pointer;}
+.dr_main_con a.home_arrow_left span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat; width:29px; height:51px; margin:23px 0 0 8px;}
+.dr_main_con a.home_arrow_left:hover span{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 -51px no-repeat;}
 
-.dr_main_con a.home_arrow_right{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px 0 no-repeat; width:29px; height:51px; position:absolute; top:245px; right:-60px; z-index:50; cursor:pointer;}
-.dr_main_con a.home_arrow_right:hover{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px -51px no-repeat;}
-
+.dr_main_con a.home_arrow_right{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2IBRWX54XXXXXXXXX-196993935.png) 0 0 repeat; width:50px; height:100px; position:absolute; top:220px; right:0px; z-index:500; cursor:pointer;}
+.dr_main_con a.home_arrow_right span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px 0 no-repeat; width:29px; height:51px; margin:23px 0 0 13px;}
+.dr_main_con a.home_arrow_right:hover span{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px -51px no-repeat;}
