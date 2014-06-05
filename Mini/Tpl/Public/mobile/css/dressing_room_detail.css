@@ -52,6 +52,9 @@ button,label{cursor:pointer; }
 .header_bot .login_after{ float:left; padding:0 0.5em;}
 .header_bot .login_after a{ float:left; display:block; height:2.7em; line-height:2.8em; color:#F00; background:#FFF; margin:0.3em 0.5em 0.3em 0; padding:0 1em;}
 
+.header_bot .login p{ float:left; margin:0 0.5em;}
+.header_bot .login a{ float:left; display:block; height:2.7em; line-height:2.8em; color:#F00; margin:0.3em 0.2em 0.3em 0; padding:0 0.3em; color:#ddd;}
+
 .header_bot a.tmail{ float:right; color:#FFF; margin:0 0.5em 0 0;}
 .header_bot a.tmail i{ display:block; float:left; width:1.1em; height:1.1em; background:url(../images/tmall_icon.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
 .header_bot a.tmail2{ float:right; color:#FFF; margin:0 0.5em 0 0;}
@@ -59,20 +62,19 @@ button,label{cursor:pointer; }
 
 
 /*我的优衣柜*/
-.my_yyg{ width:100%; height:36.8em; position:relative;}
-.my_yyg.changjing0{ background:url(../images/my_yyg_bg0.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing1{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing2{ background:url(../images/my_yyg_bg2.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing3{ background:url(../images/my_yyg_bg3.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing4{ background:url(../images/my_yyg_bg4.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-
-
+.my_yyg{ width:100%; height:42.8em; position:relative;}
+.my_yyg.changjing0{ background:url(../images/my_yyg_bg0.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing1{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing2{ background:url(../images/my_yyg_bg2.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing3{ background:url(../images/my_yyg_bg3.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing4{ background:url(../images/my_yyg_bg4.jpg) center 0 no-repeat; background-size:auto 42.8em;}
 
 
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:26em; margin:0 auto; }
 .model{ float:left; width:15.7em; height:36em; margin:0.8em -1.5em 0 -1.5em; position:relative;}
-.model img{ width:100%; height:100%;}
+.model img{ width:129%; height:100%;}
+.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
 
 
 /*左侧分类导航*/
@@ -164,11 +166,14 @@ button,label{cursor:pointer; }
 .weather{ float:left; width:100%; height:8.1em; background:url(../images/weather_bg.png) 0 repeat; position:relative; overflow:hidden;}
 
 .weather ul { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
-.weather ul li{ float:left; height:5.8em; width:13.5em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c; padding:1.3em; position:relative;}
-.weather ul li i{ display:block; float:left; width:5.5em; height:5.5em; }
+.weather ul li{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
+.weather ul li i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;
+-moz-transform:scale(0.8,0.8);  
+-webkit-transform:scale(0.8,0.8);  
+-o-transform:scale(0.8,0.8);  }
 
-.weather a.left_btn{position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
-.weather a.right_btn{position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather a.left_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather a.right_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
 
 .weather ul li i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat; background-size:55em 55em;}
 .weather ul li i.nio-1{ background:url(../images/weather_icon.png) -5.5em 0 no-repeat; background-size:55em 55em;}
@@ -243,10 +248,10 @@ button,label{cursor:pointer; }
 
 
 
-.weather ul li p.w_t_1{ position:absolute; left:2em; top:0.3em; font-size:3.8em;}
-.weather ul li p.w_t_2{ position:absolute; left:12.2em; top:3.5em;}
-.weather ul li p.w_t_week{ position:absolute; left:12.2em; top:2.1em;}
-.weather ul li p.w_t_name{ position:absolute; left:7.7em; top:5.4em;}
+.weather ul li p.w_t_1{ position:absolute; left:1.58em; top:0.45em; font-size:3.4em;}
+.weather ul li p.w_t_2{ position:absolute; left:9.5em; top:3.6em;}
+.weather ul li p.w_t_week{ position:absolute; left:9.5em; top:2.15em;}
+.weather ul li p.w_t_name{ position:absolute; left:5.5em; top:5em;}
 
 .weather ul li.w_select{ background:url(../images/w_select_bg1.png) 0 0 repeat;}
 .weather ul li.last{ background:none;}
@@ -493,15 +498,161 @@ button,label{cursor:pointer; }
 .right_search{width:13.9em;}
 
 /*登录弹窗*/
-/*.mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:30em; margin-left:-12.5em; border:0.2em solid #eee;}*/
-/*.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}*/
-/*.mini-login h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}*/
-/*.mini-login .mini-control{ width:20em; margin:0 0 0 2em;}*/
-/*.mini-login .mini-control label{ font-size:1em; line-height:2em; color:#999;}*/
-/*.mini-login .mini-control input{ width:17em; height:3em;}*/
-/*.mini-login .mini-control a.mini-login-fetch{ display:block; height:4em; line-height:4em; float:left;}*/
-/*.mini-login .mini-control label.nomargin{ float:right; width:7em; line-height:4em;}*/
-/*.mini-login .mini-control label.nomargin input { float:left; width:1.5em; height:1.5em; line-height:4em; margin:0.75em 0.5em 0 0;}*/
-/*.mini-login .mini-control a.mini-login-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF;}*/
-/*.mini-login .mini-control a.mini-login-reg{ float:left; line-height:4em;}*/
+.mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:32em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
+.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-login h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
+.mini-login .mini-control{ width:20em; margin:0 0 0 2em;}
+.mini-login .mini-control label{ font-size:1em; line-height:2em; color:#999;}
+.mini-login .mini-control input{ width:17em; height:3em; margin-bottom:1em;}
+.mini-login .mini-control a.mini-login-fetch{ display:block; height:4em; line-height:4em; float:left;}
+.mini-login .mini-control label.nomargin{ float:right; width:7em; line-height:4em;}
+.mini-login .mini-control label.nomargin input { float:left; width:1.5em; height:1.5em; line-height:4em; margin:0.75em 0.5em 0 0;}
+.mini-login .mini-control a.mini-login-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF;}
+.mini-login .mini-control a.mini-login-reg{ float:left; line-height:4em;}
 
+
+
+/*注册弹窗*/
+.mini-register{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
+.mini-register a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-register h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
+.mini-register .mini-control{ width:20em; margin:0 0 0 2em; }
+.mini-register .mini-control label{ font-size:1em; line-height:2em; color:#999; }
+.mini-register .mini-control input{ width:17em; height:3em; margin-bottom:1em;}
+.mini-register .mini-control a.mini-btns{ display:block; width:100%; height:3em; line-height:3em; text-align:center; background:#F00; color:#FFF; margin:1em 0;}
+.mini-register .mini-control span{ display:block; margin:1em 0;}
+.mini-register .mini-control input.js-checked{ width:auto; float:left; margin-right:0.5em; margin-top:0.2em;}
+.mini-register .mini-control input.mini-rel{ width:auto; float:left; margin-right:0.5em; margin-top:0.2em;}
+.mini-register .mini-control input.mini-rel2{ width:auto; float:left; margin-right:0.5em; margin-top:0.2em;}
+.mini-register .mini-control a.mini-reg-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF; margin-bottom:1em;}
+.mini-register .mini-control a.mini-reg-login{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#999; border:none; color:#FFF; margin-bottom:2em;}
+
+
+/*城市弹窗*/
+.mini-city{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
+.mini-city a.mini-city-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-city h3{ font-size:2em; color:#9C0; margin:0 0 1em 1.25em;}
+.mini-city .mini-control{ width:20em; margin:0 0 0 2em; }
+.mini-city .mini-control label{ font-size:1em; line-height:2em; color:#999; }
+.mini-city .mini-control select{ width:17em; height:3em; margin-bottom:1em;}
+.mini-city .mini-control input.mini-city-submit{ display:block; float:left; width:17em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
+
+/*== 地图弹窗 ==*/
+.map_light_box{ width:760px;  background:#FFF; position:fixed; top:100px; left:50%; margin-left:-400px; z-index:999; padding:20px;}
+a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
+.map_light_box h3{ font-size:20px; color:#999;  font-weight:normal;}
+.light_box_u_map_con{ background:#555; width:760px; height:405px;}
+
+
+.mini-mask{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    cursor: pointer;
+    position: absolute;
+}
+
+
+.mini-mask2{
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    cursor: pointer;
+    position: absolute;
+}
+
+
+/*颜色选择*/
+.sale-colors i {
+    display: none
+}
+.sale-colors .pro-selected i {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    text-indent: -99em;
+    display: block;
+    background-image: url(../images/mini/mini-selected.png);
+    background-repeat: no-repeat;
+    background-position: 0 -49px;
+}
+.sale-colors .tb-out-of-stock i {
+    display: none
+}
+.sale-colors li {
+    float: left;
+    width: 34px;
+    position: relative;
+    margin: 0 4px 4px 0;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 1px
+}
+.sale-colors li a {
+    float: left;
+    background-color: #fff;
+    white-space: nowrap;
+    width: auto!important;
+    min-width: 10px;
+    padding: 0 6px;
+    text-align: center;
+    border: 1px solid #b8b7bd;
+    color: #000;
+    text-decoration: none
+}
+.sale-colors li a:hover {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li.pro-selected a {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li.pro-selected a:hover {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li a:focus {
+    outline: 0
+}
+.sale-colors li.pro-selected li a {
+    border: 1px solid #e2e1e3;
+    margin: 0
+}
+.sale-colors li span {
+    padding-left: 1px
+}
+.sale-colors .color-img li a {
+    width: 32px!important;
+    height: 32px;
+    padding: 0;
+    line-height: 32px;
+    background-repeat: no-repeat;
+    outline: 0;
+    background-position: center center
+}
+.sale-colors .color-img li span {
+    display: block;
+    text-indent: -9999em
+}
+.sale-colors .color-img li.tb-txt a {
+    padding: 0 5px;
+    width: auto!important
+}
+.sale-colors .color-img li.tb-txt span {
+    text-indent: 0;
+    width: auto
+}
