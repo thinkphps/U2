@@ -2113,36 +2113,7 @@ a.index-archor{
 .mini-reg-submit,.mini-relate-submit{
     width: 100px;
 }
-.mini-clause{
-    width: 414px;
-    height: 372px;
-    margin: -210px 0 0 -215px;
-}
-.mini-clause div{
-    font-size: 12px;
-    width: 418px;
-    height: 300px;
-    padding-right: 5px;
-    overflow: auto;
-    margin-bottom: 10px;
-    line-height: 18px;
-}
-.mini-clause button{
-    width: 70px;
-    height: 30px;
-    background: #e70012;
-    color: #fff;
-    border: 0 none;
-    font: 14px "Microsoft Yahei";
-    cursor: pointer;
-}
-.mini-clause p{
-    margin: 10px 0;
-}
-p .mini-clause-btn{
-    color: #676767;
-    text-decoration: underline;
-}
+
 
 /*== mini-login ==*/
 

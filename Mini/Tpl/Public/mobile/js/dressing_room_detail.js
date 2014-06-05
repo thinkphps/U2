@@ -1084,7 +1084,7 @@ function getFuncCode(){
                             clearInterval($.uniqlo.activePhone);
                             return false;
                         }else{
-                            $('#getTimeCode').css('display','inline');
+                            $('#getTimeCode').css('display','inline-flex');
                             $('#getCode').css('display','none');
                             $('#getNextCode').css('display','none');
                             var i=0;
@@ -1096,7 +1096,7 @@ function getFuncCode(){
                                     $('#time_show').html(180);
                                 }
                                 if( i > 179 ){
-                                    $('#getTimeCode').css('display','none');
+                                    $('#getTimeCode').css('display','inline-flex');
                                     $('#getNextCode').css('display','inline-block');
                                     clearInterval($.uniqlo.activePhone);
                                 }
@@ -1117,7 +1117,7 @@ function getFuncCode2(){
             clearInterval($.uniqlo.activePhone2);
             return false;
         }else{
-            $('#getTimeCode2').css('display','inline');
+            $('#getTimeCode2').css('display','inline-flex');
             $('#getCode2').css('display','none');
             $('#getNextCode2').css('display','none');
             var i=0;
@@ -1129,7 +1129,7 @@ function getFuncCode2(){
                     $('#time_show2').html(180);
                 }
                 if( i > 179 ){
-                    $('#getTimeCode2').css('display','none');
+                    $('#getTimeCode2').css('display','inline-flex');
                     $('#getNextCode2').css('display','inline-block');
                     clearInterval($.uniqlo.activePhone2);
                 }
