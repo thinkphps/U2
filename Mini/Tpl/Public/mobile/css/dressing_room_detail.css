@@ -62,21 +62,19 @@ button,label{cursor:pointer; }
 
 
 /*我的优衣柜*/
-.my_yyg{ width:100%; height:36.8em; position:relative;}
-.my_yyg.changjing0{ background:url(../images/my_yyg_bg0.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing1{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing2{ background:url(../images/my_yyg_bg2.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing3{ background:url(../images/my_yyg_bg3.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-.my_yyg.changjing4{ background:url(../images/my_yyg_bg4.jpg) center 0 no-repeat; background-size:auto 36.8em;}
-
-
+.my_yyg{ width:100%; height:42.8em; position:relative;}
+.my_yyg.changjing0{ background:url(../images/my_yyg_bg0.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing1{ background:url(../images/my_yyg_bg1.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing2{ background:url(../images/my_yyg_bg2.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing3{ background:url(../images/my_yyg_bg3.jpg) center 0 no-repeat; background-size:auto 42.8em;}
+.my_yyg.changjing4{ background:url(../images/my_yyg_bg4.jpg) center 0 no-repeat; background-size:auto 42.8em;}
 
 
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:26em; margin:0 auto; }
 .model{ float:left; width:15.7em; height:36em; margin:0.8em -1.5em 0 -1.5em; position:relative;}
-.model img{ width:100%; height:100%;}
-.my_yyg_model a.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
+.model img{ width:129%; height:100%;}
+.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
 
 
 /*左侧分类导航*/

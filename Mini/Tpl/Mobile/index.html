@@ -368,8 +368,16 @@
 </form>
 
 <!--我的优衣柜-->
-<div class="my_yyg changjing4">
+<div class="my_yyg changjing1">
     <div class="my_yyg_model" id="sfid">
+        <!--<volist id='pvo' name='beubeu_suits_list' key='pk'>-->
+            <!--<div class="model" style='display:block;' >-->
+                <!--<div class="model_try2 none"></div>-->
+                <!--<div style='width: 400px;height: 533px;margin-left: -138px'>-->
+                    <!--<img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</volist>-->
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
     	<div class="model">
         	<img src="{$pvo.suitImageUrl}.240x550.png" data-detail='[{$pvo.suitID},{$pvo.sex}]'/>
@@ -377,7 +385,7 @@
         </div>
      </volist>
     </div>
-    
+    <a href="javascript:;" class="change" id='changeid' la='2'></a>
     <div class="detail_sub_nav_main" style="left:0em;" >
     	<div class="detail_sub_nav">
             <ul id="ulgender">
