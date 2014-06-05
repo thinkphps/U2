@@ -393,7 +393,22 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $goodstable = '`u_goods`';
             }
-            if($zid && !empty($zid)){
+            if($sid!=4){
+                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+                if(!empty($uid)){
+                    $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                }else{
+                    $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num;
+                }
+            }else{
+                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
+                if(!empty($uid)){
+                    $sql = "select al.*{$fieldlb} from (select g.good_id".$case.",bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                }else{
+                    $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."bg.num_iid desc limit ".$start.",".$page_num;
+                }
+            }
+            /*if($zid && !empty($zid)){
                  if(!isset($tem) && empty($sid) && empty($fid)){
                   //如果只有自定义分类
                     if(!empty($uid)){
@@ -415,7 +430,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
-            }
+            }*/
+
+//error_log(print_r($sql,1),3,'1.txt');
             $result = $goodtag->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
