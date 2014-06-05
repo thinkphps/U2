@@ -496,7 +496,8 @@ button,label{cursor:pointer; }
 /*kimi*/
 #waterfall-loading img{width:16px;height:11px;}
 .right_search{width:13.9em;}
-
+.noshow{background-color:#333333;cursor:default;}
+.noshow:hover{color:#333333;}
 /*登录弹窗*/
 .mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:32em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
 .mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
