@@ -370,9 +370,9 @@
     <div class="detail_sub_nav_main" style="left:0em;" >
     	<div class="detail_sub_nav">
             <ul id="ulgender">
-                <li class="big_btn" data-gender="1"><a href="#" class="detail_sub_btn1 select"></a></li>
-                <li class="big_btn" data-gender="2"><a href="#" class="detail_sub_btn2"></a></li>
-                <li class="big_btn" data-gender="3"><a href="#" class="detail_sub_btn3"></a></li>
+                <li class="big_btn" data-gender="1"><a href="javascript:;" class="detail_sub_btn1 select"></a></li>
+                <li class="big_btn" data-gender="2"><a href="javascript:;" class="detail_sub_btn2"></a></li>
+                <li class="big_btn" data-gender="3"><a href="javascript:;" class="detail_sub_btn3"></a></li>
                 <!--<li class="big_btn"><a href="#" class="detail_sub_btn4"></a></li>-->
 
             </ul>
@@ -469,48 +469,45 @@
         
         <!--分类2-->
         <div class="style_btn_group">
-        	<a href="javascript:;" class="style_select">风格<br /><span>STYLE</span></a>
-            <a href="javascript:;">上装<br /><span>TOPS</span></a>
-            <a href="javascript:;" style="border:none;">下装<br /><span>BOTTOMS</span></a>
+        	<a href="javascript:;" class="" data-fsx='1'>风格<br /><span>STYLE</span></a>
+            <a href="javascript:;" data-fsx='2'>上装<br /><span>TOPS</span></a>
+            <a href="javascript:;" style="border:none;" data-fsx='3'>下装<br /><span>BOTTOMS</span></a>
         </div>
         
         
         <div class="style_btn_group_detail mini-pop none">
             <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a>
-        	<ul>
-                <li class="a1" style="width:50%"><a href="#"><i></i>全部</a></li>
-            	<li class="a2 select"><a href="#"><i></i>可爱</a></li>
-                <li class="a3"><a href="#"><i></i>淑女</a></li>
-                <li class="a4"><a href="#"><i></i>成熟</a></li>
-                <li class="a5"><a href="#"><i></i>休闲</a></li>
-                <li class="a6"><a href="#"><i></i>英伦</a></li>
-                <li class="a7"><a href="#"><i></i>居家</a></li>
-                <li class="a8"><a href="#"><i></i>通勤</a></li>
-                <li class="a9"><a href="#"><i></i>商务</a></li>
-                <li class="a10"><a href="#"><i></i>简约</a></li>
-                <li class="a11"><a href="#"><i></i>运动</a></li>
+        	<ul id='cstyle2'>
+                <li class="a1" style="width:100%" data-suitstyle="all"><a href="javascript:;"><i></i>全部</a></li>
+            	<li class="a2 select" data-suitstyle="6"><a href="javascript:;"><i></i>可爱</a></li>
+                <li class="a3" data-suitstyle="7"><a href="javascript:;"><i></i>淑女</a></li>
+                <li class="a4" data-suitstyle="8"><a href="javascript:;"><i></i>成熟</a></li>
+                <li class="a5" data-suitstyle="1"><a href="javascript:;"><i></i>休闲</a></li>
+                <li class="a6" data-suitstyle="3"><a href="javascript:;"><i></i>英伦</a></li>
+                <li class="a7" data-suitstyle="4"><a href="javascript:;"><i></i>居家</a></li>
+                <li class="a8" data-suitstyle="9"><a href="javascript:;"><i></i>通勤</a></li>
+                <li class="a9" data-suitstyle="5"><a href="javascript:;"><i></i>商务</a></li>
+                <li class="a10" data-suitstyle="2"><a href="javascript:;" data-suitstyle="2"><i></i>简约</a></li>
+                <li class="a11" data-suitstyle="10"><a href="javascript:;"><i></i>运动</a></li>
+            </ul>
+        </div>
+        <div class="tag_text mini-pop none left_tj">
+            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a>
+            <ul>
+                <li id='alluid' class='upclothes select' la='0'><a href="javascript:;">全部上装</a></li>
+                <volist id='ucvo' name='ucuslist'>
+                <li class='upclothes zleft' la='{$ucvo.id}' class='upclothes zleft'><a href="javascript:;" >{$ucvo.name}</a></li>
+                 </volist>
             </ul>
         </div>
         
-        
-        <div class="tag_text" style="display:none;">
+        <div class="tag_text2 mini-pop none right_tj">
+            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a>
         	<ul>
-            	<li class="select"><a href="#">全部上装</a></li>
-                <li><a href="#">羽绒服</a></li>
-                <li><a href="#">外套</a></li>
-                <li><a href="#">大衣</a></li>
-                <li><a href="#">开衫</a></li>
-                <li><a href="#">羽绒服</a></li>
-                <li><a href="#">外套</a></li>
-                <li><a href="#">大衣</a></li>
-                <li><a href="#">开衫</a></li>
-                <li><a href="#">羽绒服</a></li>
-                <li><a href="#">外套</a></li>
-                <li><a href="#">大衣</a></li>
-                <li><a href="#">开衫</a></li>
-                <li><a href="#">羽绒服</a></li>
-                <li><a href="#">外套</a></li>
-                <li><a href="#">大衣</a></li>
+            	<li id='alldid' class='select doclothes' la='0'><a href="javascript:;">全部下装</a></li>
+                <volist id='dcvo' name='dcuslist'>
+                <li la='{$dcvo.id}' class='doclothes zright'><a href="javascript:;">{$dcvo.name}</a></li>
+                </volist>
             </ul>
         </div>
         
@@ -708,6 +705,7 @@ $(function(){
         _mini.right.length = 0;
         $.weather.str = '';
         var sid = $(this).data('gender');
+        $('.style_btn_group a').removeClass('style_select');
         $.uniqlo.fid = 0;
         $('#cateu2 li').removeClass('rw_select');
         $('#cstyle2 li').removeClass('select');
@@ -718,7 +716,7 @@ $(function(){
         $(window).scrollTop(tmpscrolltop);
     });
     //mini中部类别选择
-    $('#cstyle2').on('click','li a',function(){
+    $('#cstyle2').on('click','li',function(){
         var tmpscrolltop;
         setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
         $.uniqlo.lid = 0;
@@ -730,8 +728,8 @@ $(function(){
         var strClass =$this.attr('class');
         var length = strClass.length;
         if(strClass.substr(length - 2,2) != '_0'){
-            $this.siblings('a').removeClass('select');
-            $this.parent('li').siblings('li').children('a').removeClass('select');
+            $this.removeClass('select');
+            $this.siblings('li').removeClass('select');
             $this.addClass('select');
             _mini.getGoods();
         }
@@ -779,12 +777,12 @@ $(function(){
         $.weather.str = '';
         var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
         if(zid!=0){
-            $('#alluid').children('a').removeClass('w_select');
+            $('#alluid').removeClass('select');
         }else{
-            $('.zleft').children('a').removeClass('w_select');
+            $('.zleft').removeClass('select');
         }
-        if($(this).children('a').hasClass('w_select')){
-            $(this).children('a').removeClass('w_select');
+        if($(this).hasClass('select')){
+            $(this).removeClass('select');
             var i = $.inArray(zid, _mini.left);
             if(i !== -1){
                 _mini.left.splice(i, 1)
@@ -795,15 +793,15 @@ $(function(){
             }else{
                 _mini.left.length = 0;
             }
-            $(this).children('a').addClass('w_select');
+            $(this).addClass('select');
         }
 
-        var rightallsel = $('#alldid').children('a').hasClass('w_select');
+        var rightallsel = $('#alldid').hasClass('select');
 
         var leftLen = _mini.left.length,rightLen = _mini.right.length;
         if(leftLen==zleftlength || (leftLen == 0 && rightallsel==false && rightLen==0)){   //如果左边全选
-            $('#alluid').children('a').addClass('w_select');
-            $('.zleft').children('a').removeClass('w_select');
+            $('#alluid').addClass('select');
+            $('.zleft').removeClass('select');
             _mini.left.length = 0;
         }else{
 

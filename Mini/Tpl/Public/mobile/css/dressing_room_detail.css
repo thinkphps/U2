@@ -282,8 +282,8 @@ button,label{cursor:pointer; }
 .style_btn_group a.style_select span{ color:#FFF;}
 
 
-.style_btn_group_detail{ position: fixed; width:50%;top: 50%;left: 25%;z-index: 11;z-inde:1000;}
-.style_btn_group_detail ul li{ float:left; width:25%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
+.style_btn_group_detail{ background-color: #FFFFFF;position: absolute; margin-left: -15em;width:30em;top: 5em;left: 50%;z-index: 11;}
+.style_btn_group_detail ul li{ float:left; width:50%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
 .style_btn_group_detail ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center; position:relative; padding:0 0 0 2em;}
 .style_btn_group_detail ul li a i{ display:block; float:left; width:2em; height:2em; position:absolute; left:50%; top:1em; margin-left:-2.5em;}
 
@@ -313,15 +313,49 @@ button,label{cursor:pointer; }
 .style_btn_group_detail ul li.a9.select a i{ background:url(../images/dr_main_con_sub_nav.png) -2em -16em no-repeat; background-size:4em 22em;}
 .style_btn_group_detail ul li.a10.select a i{ background:url(../images/dr_main_con_sub_nav.png) -2em -18em no-repeat; background-size:4em 22em;}
 .style_btn_group_detail ul li.a11.select a i{ background:url(../images/dr_main_con_sub_nav.png) -2em -20em no-repeat; background-size:4em 22em;}
-
-
-
-.tag_text{ float:left; width:100%; width:100%;}
-.tag_text ul li{ float:left; width:25%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.7;}
+/*kimi*/
+.style_btn_group_detail ul li.a2_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -2em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a2_0 a{cursor:default;}
+.style_btn_group_detail ul li.a2_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a3_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -4em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a3_0 a{cursor:default;}
+.style_btn_group_detail ul li.a3_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a4_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -6em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a4_0 a{cursor:default;}
+.style_btn_group_detail ul li.a4_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a5_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -8em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a5_0 a{cursor:default;}
+.style_btn_group_detail ul li.a5_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a6_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -10em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a6_0 a{cursor:default;}
+.style_btn_group_detail ul li.a6_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a7_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -12em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a7_0 a{cursor:default;}
+.style_btn_group_detail ul li.a7_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a8_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -14em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a8_0 a{cursor:default;}
+.style_btn_group_detail ul li.a8_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a9_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -16em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a9_0 a{cursor:default;}
+.style_btn_group_detail ul li.a9_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a10_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -18em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a10_0 a{cursor:default;}
+.style_btn_group_detail ul li.a10_0 a:hover{color:#333333;}
+.style_btn_group_detail ul li.a11_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -20em no-repeat; background-size:4em 22em;}
+.style_btn_group_detail ul li.a11_0 a{cursor:default;}
+.style_btn_group_detail ul li.a11_0 a:hover{color:#333333;}
+/*kimi*/
+.tag_text{ position:absolute; z-index:999; width:30em; left:50%; top:5em; margin-left:-15em;}
+.tag_text ul li{ float:left; width:33.33%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y;}
 .tag_text ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center;}
-
 .tag_text ul li.select{ background:#666 url(../images/line1.png) right 0 repeat-y;}
 .tag_text ul li.select a{ color:#FFF;}
+
+.tag_text2{ position:absolute; z-index:999; width:30em; left:50%; top:5em; margin-left:-15em;}
+.tag_text2 ul li{ float:left; width:33.33%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y;}
+.tag_text2 ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center;}
+.tag_text2 ul li.select{ background:#666 url(../images/line1.png) right 0 repeat-y;}
+.tag_text2 ul li.select a{ color:#FFF;}
 
 /*列表 - 常规*/
 .tj_wrapper { float:left; width:100%; margin:2em auto; }

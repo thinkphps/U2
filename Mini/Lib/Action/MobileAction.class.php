@@ -51,8 +51,8 @@ class MobileAction extends Action{
        $suit_style = M('SettingsSuitStyle');
        $beubeu_suits = M('BeubeuSuits');
        $recomodel = D('Reco');
-       if(S('styledata')){
-           $beubeu_suits_list = unserialize(S('styledata'));
+       if(S('mstyledata')){
+           $beubeu_suits_list = unserialize(S('mstyledata'));
        }else{
            //默认模特图
 
@@ -74,7 +74,7 @@ class MobileAction extends Action{
                }
                $beubeu_suits_list[$k]['sex'] = $sex;
            }
-           S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
+           S('mstyledata',serialize($beubeu_suits_list),array('type'=>'file'));
        }
        //默认女士上下装自定义分类
        if(S('cust1')){
