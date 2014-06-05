@@ -138,6 +138,9 @@ function Model_loadok_callback(){
             $('#beubeu_shoes').css({'top':'13em','left':'4em'});
             $('#beubeu_loading2').css({'height':'24em','left':'5em'});
             $('#beu_showimg').css({'position':'absolute','top':'0em'});
+            $('#show_csw').css({'left':'18.2em','top':'16.9em'});
+            $('#beubeu_copy_c').css({'left':'6.5em','top':'17.5em'});
+            $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
             if ( callback ) {
                 callback.call(this);
             }
