@@ -570,3 +570,89 @@ a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; wid
     cursor: pointer;
     position: absolute;
 }
+
+
+/*颜色选择*/
+.sale-colors i {
+    display: none
+}
+.sale-colors .pro-selected i {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    text-indent: -99em;
+    display: block;
+    background-image: url(../images/mini/mini-selected.png);
+    background-repeat: no-repeat;
+    background-position: 0 -49px;
+}
+.sale-colors .tb-out-of-stock i {
+    display: none
+}
+.sale-colors li {
+    float: left;
+    width: 34px;
+    position: relative;
+    margin: 0 4px 4px 0;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 1px
+}
+.sale-colors li a {
+    float: left;
+    background-color: #fff;
+    white-space: nowrap;
+    width: auto!important;
+    min-width: 10px;
+    padding: 0 6px;
+    text-align: center;
+    border: 1px solid #b8b7bd;
+    color: #000;
+    text-decoration: none
+}
+.sale-colors li a:hover {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li.pro-selected a {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li.pro-selected a:hover {
+    border: 2px solid #be0106;
+    margin: -1px
+}
+.sale-colors li a:focus {
+    outline: 0
+}
+.sale-colors li.pro-selected li a {
+    border: 1px solid #e2e1e3;
+    margin: 0
+}
+.sale-colors li span {
+    padding-left: 1px
+}
+.sale-colors .color-img li a {
+    width: 32px!important;
+    height: 32px;
+    padding: 0;
+    line-height: 32px;
+    background-repeat: no-repeat;
+    outline: 0;
+    background-position: center center
+}
+.sale-colors .color-img li span {
+    display: block;
+    text-indent: -9999em
+}
+.sale-colors .color-img li.tb-txt a {
+    padding: 0 5px;
+    width: auto!important
+}
+.sale-colors .color-img li.tb-txt span {
+    text-indent: 0;
+    width: auto
+}
