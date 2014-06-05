@@ -428,6 +428,7 @@ var _mini = {
                     });
                     bstr+='</ul>';
                     $('.left_tj').html(bstr);
+                    $('#alldid').nextAll('li').remove();
                 }
             }
         },'json');
