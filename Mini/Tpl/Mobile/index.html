@@ -856,11 +856,11 @@ $(function(){
     function setzid(leftLen,rightLen){
         $.uniqlo.zid = ''
         //both select all
-        if($('#alldid').children('a').hasClass('w_select') && $('#alluid').children('a').hasClass('w_select')){
+        if($('#alldid').hasClass('select') && $('#alluid').hasClass('select')){
             $.uniqlo.zid = 0
         }else{
             //left select all
-            if(leftLen == 0 && $('#alluid').children('a').hasClass('w_select')){
+            if(leftLen == 0 && $('#alluid').hasClass('w_select')){
                 var arrleft2 = [];
                 $('.zleft').each(function(){
                     arrleft2.push($(this).attr('la'));
@@ -870,7 +870,7 @@ $(function(){
                 $.uniqlo.zid = _mini.left.join('_');
             }
             //right select all
-            if(rightLen == 0 && $('#alldid').children('a').hasClass('w_select')){
+            if(rightLen == 0 && $('#alldid').hasClass('select')){
                 var arright2 = [];
                 $('.zright').each(function(){
                     arright2.push($(this).attr('la'));
