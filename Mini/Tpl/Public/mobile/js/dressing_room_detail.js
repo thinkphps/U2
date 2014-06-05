@@ -422,6 +422,7 @@ var _mini = {
                 }else{
                     $('.style_btn_group a:eq(1)').html('全部<br><span>ALL</span>');
                     $('.style_btn_group a:eq(2)').addClass('noshow');
+                    $('.style_btn_group a:eq(2)').children('span').css('color',"#333333");
                     var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
                     $.each(data.b,function(i,bname){
                         bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
