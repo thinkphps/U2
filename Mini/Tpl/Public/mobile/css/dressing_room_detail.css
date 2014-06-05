@@ -542,8 +542,13 @@ button,label{cursor:pointer; }
 a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
 .map_light_box h3{ font-size:20px; color:#999;  font-weight:normal;}
 .light_box_u_map_con{ background:#555; width:760px; height:405px;}
-
-
+/*中部类别，自定义分类关闭*/
+.style_btn_group_detail .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
+.style_btn_group_detail .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
+.tag_text .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
+.tag_text .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
+.tag_text2 .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
+.tag_text2 .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
 .mini-mask{
     background: #000;
     opacity: 0.5;
