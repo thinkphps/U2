@@ -320,34 +320,34 @@ button,label{cursor:pointer; }
 .style_btn_group_detail ul li.a11.select a i{ background:url(../images/dr_main_con_sub_nav.png) -2em -20em no-repeat; background-size:4em 22em;}
 /*kimi*/
 .style_btn_group_detail ul li.a2_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -2em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a2_0 a{cursor:default;}
+.style_btn_group_detail ul li.a2_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a2_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a3_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -4em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a3_0 a{cursor:default;}
+.style_btn_group_detail ul li.a3_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a3_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a4_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -6em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a4_0 a{cursor:default;}
+.style_btn_group_detail ul li.a4_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a4_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a5_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -8em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a5_0 a{cursor:default;}
+.style_btn_group_detail ul li.a5_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a5_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a6_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -10em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a6_0 a{cursor:default;}
+.style_btn_group_detail ul li.a6_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a6_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a7_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -12em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a7_0 a{cursor:default;}
+.style_btn_group_detail ul li.a7_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a7_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a8_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -14em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a8_0 a{cursor:default;}
+.style_btn_group_detail ul li.a8_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a8_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a9_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -16em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a9_0 a{cursor:default;}
+.style_btn_group_detail ul li.a9_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a9_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a10_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -18em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a10_0 a{cursor:default;}
+.style_btn_group_detail ul li.a10_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a10_0 a:hover{color:#333333;}
 .style_btn_group_detail ul li.a11_0 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -20em no-repeat; background-size:4em 22em;}
-.style_btn_group_detail ul li.a11_0 a{cursor:default;}
+.style_btn_group_detail ul li.a11_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a11_0 a:hover{color:#333333;}
 /*kimi*/
 .tag_text{ position:absolute; z-index:999; width:30em; left:50%; top:5em; margin-left:-15em;}
@@ -496,7 +496,8 @@ button,label{cursor:pointer; }
 /*kimi*/
 #waterfall-loading img{width:16px;height:11px;}
 .right_search{width:13.9em;}
-
+.noshow{background-color:#333333;cursor:default;}
+.noshow:hover{color:#333333;}
 /*登录弹窗*/
 .mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:32em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
 .mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
@@ -576,12 +577,9 @@ a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; wid
 .map_light_box h3{ font-size:20px; color:#999;  font-weight:normal;}
 .light_box_u_map_con{ background:#555; width:760px; height:405px;}
 /*中部类别，自定义分类关闭*/
-.style_btn_group_detail .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
-.style_btn_group_detail .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
-.tag_text .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
-.tag_text .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
-.tag_text2 .mini-btn{ background: url(../images/mini/mini-btn.png) no-repeat; position: absolute;overflow: hidden;text-indent: 200%; white-space: nowrap;}
-.tag_text2 .mini-form-close{background-position: -32px -57px;width: 9px;height: 9px;right: 5px;top: 5px; -webkit-transition: all .2s;transition: all .2s;}
+.style_btn_group_detail a.mini-form-close{ display:block; font-size:2em; position:absolute; left:14em; top:0.4em; color:#F00;}
+.tag_text a.mini-form-close{ display:block; font-size:2em; position:absolute; left:14em; top:0.4em; color:#F00;}
+.tag_text2 a.mini-form-close{ display:block; font-size:2em; position:absolute; left:14em; top:0.4em; color:#F00;}
 .mini-mask{
     background: #000;
     opacity: 0.5;

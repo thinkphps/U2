@@ -410,6 +410,8 @@ var _mini = {
                     $('#alluid').children('a').text('全部上装');
                     $('#alluid').addClass('select');
                     $('#alldid').addClass('select');
+                    $('.style_btn_group a:eq(1)').html('全部上装<br><span>TOPS</span>');
+                    $('.style_btn_group a:eq(2)').removeClass('noshow');
                     var ustr = '',dstr='';
                     $.each(data.u,function(i,name){
                         ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
@@ -422,13 +424,16 @@ var _mini = {
                     $('#alldid').nextAll('li').remove();
                     $('#alldid').after(dstr);
                 }else{
-                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
-                    $('.right_tj').css('display','none');
+                    $('.style_btn_group a:eq(1)').html('全部<br><span>ALL</span>');
+                    $('.style_btn_group a:eq(2)').addClass('noshow');
+                    $('.style_btn_group a:eq(2)').children('span').css('color',"#333333");
+                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
                     $.each(data.b,function(i,bname){
                         bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
                     });
                     bstr+='</ul>';
                     $('.left_tj').html(bstr);
+                    $('#alldid').nextAll('li').remove();
                 }
             }
         },'json');
@@ -722,6 +727,7 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
 //kimi20140604点击风格
 $('.style_btn_group').on('click','a',function(){
     var fsxvalue = $(this).data('fsx');
+    if(!$(this).hasClass('noshow')){
     $('.style_btn_group a').removeClass('style_select');
     if(fsxvalue==1){
         $('div.mini-mask').show();
@@ -736,7 +742,7 @@ $('.style_btn_group').on('click','a',function(){
         $('.tag_text2').show();
         $(this).addClass('style_select');
     }
-
+}
 });
 $('.style_btn_group_detail').on('click','.mini-form-close',function(){
     $('div.mini-mask').hide();
