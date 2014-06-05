@@ -27,6 +27,7 @@ $(function(){
     $("#mapdiv").draggable();
 
 
+
     //左侧风格按钮
     $('.expansion2').on('click',function(){
         if($('.detail_sub_nav').is(':hidden')){
