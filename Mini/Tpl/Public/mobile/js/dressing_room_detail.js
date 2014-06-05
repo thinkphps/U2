@@ -20,7 +20,11 @@ $(function(){
         dt.click(function(){dd.is(":hidden")?_show():_hide();});
         dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
         $("body").click(function(i){ !$(i.target).parents(".select_city").first().is(s) ? _hide():"";});
-    })
+    });
+
+
+    //地图框拖动
+    $("#mapdiv").draggable();
 
 
     //左侧风格按钮
