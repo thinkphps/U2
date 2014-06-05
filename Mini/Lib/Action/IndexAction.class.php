@@ -225,6 +225,7 @@ class IndexAction extends Action {
         $zid = $zid?$zid:0;
         $kid = $kid?$kid:0;
         $page = $page?$page:1;
+        $oid = $oid?$oid:1;
         $goodtag = M('Goodtag');
         $windex = D('Windex');
         $page_num = 25;

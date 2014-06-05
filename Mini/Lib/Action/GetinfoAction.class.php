@@ -75,27 +75,30 @@ class GetinfoAction extends Action{
         $recomodel = D('Reco');
         if($sid!=4 && $sid!=0){
             if($sid==3){
-                $where['gender'] = array('exp','in(3,4)');
+                $where['gtype'] = array('exp','in(3,4)');
             }else{
-                $where['gender'] = $sid;
+                $where['gtype'] = $sid;
             }
-                $where['isud'] = 1;
-                $where['selected'] = 1;
-            $ucuslist  = $recomodel->getCusData2($where);//上装
-            $where['isud'] = 2;
-            $dcuslist  = $recomodel->getCusData2($where);//下装
+                $where['isud'] = '1';
+                //$where['selected'] = 1;
+            //$ucuslist  = $recomodel->getCusData2($where);//上装
+            $ucuslist  = $recomodel->getCusData($where);//上装
+
+            $where['isud'] = '2';
+            //$dcuslist  = $recomodel->getCusData2($where);//下装
+            $dcuslist  = $recomodel->getCusData($where);//下装
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
         }else if($sid==4){
-            $where['gender'] = 5;
-            $where['selected'] = 1;
-            $babylist  = $recomodel->getCusData2($where);//上装
+            $where['gtype'] = 5;
+            //$where['selected'] = 1;
+            $babylist  = $recomodel->getCusData($where);//上装
             $arr['b'] = $babylist;
         }else if($sid==0){
-            $where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
-            $ucuslist = $recomodel->getCateList2($where);
-            $where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
-            $dcuslist = $recomodel->getCateList2($where);
+            //$where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
+            $ucuslist = $recomodel->getCateList('1');
+            //$where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
+            $dcuslist = $recomodel->getCateList('2');
             $arr['u'] = $ucuslist;
             $arr['d'] = $dcuslist;
         }

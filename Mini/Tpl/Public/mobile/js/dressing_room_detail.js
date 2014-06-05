@@ -390,7 +390,7 @@ var _mini = {
     },
     getGoods : function(){
         var sid = $('#cateu2 li.rw_select').data('gender');
-        var fid = $('#cstyle2 li').siblings().children('a.select').data('suitstyle');
+        var fid = $('#cstyle2 li.select').data('suitstyle');
         fid = fid ? fid : 0;
         this.showStyleMask2(sid);
         $.weather.sex = sid;
@@ -403,24 +403,9 @@ var _mini = {
             if(data){
                 //上下装
                 if(sid!=4){
-                    $('.right_tj').css('display','block');
-                    $('.zk_btn').css('display','block');
-                    $('.left_tj').css('width','466px');
-                    $('.left_tj ul').css('width','466px');
                     $('#alluid').children('a').text('全部上装');
-                    $('#alluid').children('a').addClass('w_select');
-                    $('#alldid').children('a').addClass('w_select');
-                    if($('.zk_btn').hasClass('upselect')){
-                        $('.left_tj').css('height','auto');
-                        $('.left_tj ul').css('height','auto');
-                        $('.right_tj').css('height','auto');
-                        $('.right_tj ul').css('height','auto');
-                    }else{
-                        $('.left_tj').css('height','26px');
-                        $('.left_tj ul').css('height','26px');
-                        $('.right_tj').css('height','26px');
-                        $('.right_tj ul').css('height','26px');
-                    }
+                    $('#alluid').addClass('select');
+                    $('#alldid').addClass('select');
                     var ustr = '',dstr='';
                     $.each(data.u,function(i,name){
                         ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
@@ -433,16 +418,13 @@ var _mini = {
                     $('#alldid').nextAll('li').remove();
                     $('#alldid').after(dstr);
                 }else{
-                    var bstr = '<ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
+                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">关闭</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
                     $('.right_tj').css('display','none');
-                    $('.zk_btn').css('display','none');
                     $.each(data.b,function(i,bname){
                         bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
                     });
                     bstr+='</ul>';
                     $('.left_tj').html(bstr);
-                    $('.left_tj').css('width','650px');
-                    $('.left_tj ul').css('width','650px');
                 }
             }
         },'json');
@@ -464,7 +446,7 @@ var _mini = {
     left : [],
     right : [],
     showStyleMask2 : function(gender){
-        var $leftstyle = $('#cstyle2').children('li').children('a');
+        var $leftstyle = $('#cstyle2').children('li');
         if(gender == 2){
             $.each($leftstyle,function(){
                 var $this = $(this);
@@ -472,15 +454,15 @@ var _mini = {
                 var strClass =$this.attr('class');
                 var length = strClass.length;
                 if(fvalue==6 ){
-                    if($this.hasClass('ch_a_1')){
-                        $this.removeClass('ch_a_1');
-                        $this.addClass('ch_a_1_0');
+                    if($this.hasClass('a2')){
+                        $this.removeClass('a2');
+                        $this.addClass('a2_0');
                     }
                 }
                 else if(fvalue == 7){
-                    if($this.hasClass('ch_b_1')){
-                        $this.removeClass('ch_b_1');
-                        $this.addClass('ch_b_1_0');
+                    if($this.hasClass('a3')){
+                        $this.removeClass('a3');
+                        $this.addClass('a3_0');
                     }
                 }
                 else{
@@ -498,21 +480,21 @@ var _mini = {
                 var strClass =$this.attr('class');
                 var length = strClass.length;
                 if(fvalue == 5 ){
-                    if($this.hasClass('ch_c_2')){
-                        $this.removeClass('ch_c_2');
-                        $this.addClass('ch_c_2_0');
+                    if($this.hasClass('a9')){
+                        $this.removeClass('a9');
+                        $this.addClass('a9_0');
                     }
                 }
                 else if(fvalue == 8){
-                    if($this.hasClass('ch_c_1')){
-                        $this.removeClass('ch_c_1');
-                        $this.addClass('ch_c_1_0');
+                    if($this.hasClass('a4')){
+                        $this.removeClass('a4');
+                        $this.addClass('a4_0');
                     }
                 }
                 else if(fvalue == 9){
-                    if($this.hasClass('ch_b_2')){
-                        $this.removeClass('ch_b_2');
-                        $this.addClass('ch_b_2_0');
+                    if($this.hasClass('a8')){
+                        $this.removeClass('a8');
+                        $this.addClass('a8_0');
                     }
                 }
                 else{
@@ -734,13 +716,38 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
     })
 });
 //kimi20140604点击风格
-$('.style_btn_group').on('click','.style_select',function(){
-    $('div.mini-mask').show();
-    $('.style_btn_group_detail').show();
+$('.style_btn_group').on('click','a',function(){
+    var fsxvalue = $(this).data('fsx');
+    $('.style_btn_group a').removeClass('style_select');
+    if(fsxvalue==1){
+        $('div.mini-mask').show();
+        $('.style_btn_group_detail').show();
+        $(this).addClass('style_select');
+    }else if(fsxvalue==2){
+        $('div.mini-mask').show();
+        $('.tag_text').show();
+        $(this).addClass('style_select');
+    }else if(fsxvalue==3){
+        $('div.mini-mask').show();
+        $('.tag_text2').show();
+        $(this).addClass('style_select');
+    }
+
 });
 $('.style_btn_group_detail').on('click','.mini-form-close',function(){
     $('div.mini-mask').hide();
     $('.style_btn_group_detail').hide();
+    $('.style_btn_group a').removeClass('style_select');
+});
+$('.tag_text').on('click','.mini-form-close',function(){
+    $('div.mini-mask').hide();
+    $('.tag_text').hide();
+    $('.style_btn_group a').removeClass('style_select');
+});
+$('.tag_text2').on('click','.mini-form-close',function(){
+    $('div.mini-mask').hide();
+    $('.tag_text2').hide();
+    $('.style_btn_group a').removeClass('style_select');
 });
 document.onkeydown = function(e){
     var ev = document.all ? window.event : e;
