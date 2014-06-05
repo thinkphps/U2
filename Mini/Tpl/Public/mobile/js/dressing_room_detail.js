@@ -76,18 +76,18 @@ $(function(){
     //天气左右移动按钮事件
     var weekLeftNum = 0;
     $('.left_btn').on('click',function(){
-        if(weekLeftNum < 3){
-            var left = $('#ulweek').position().left;
-            $('#ulweek').css('left', left -= 135);
-            weekLeftNum += 1;
-        }
-    });
-
-    $('.right_btn').on('click',function(){
         if(weekLeftNum > 0){
             var left = $('#ulweek').position().left;
             $('#ulweek').css('left', left += 135);
             weekLeftNum -= 1;
+        }
+    });
+
+    $('.right_btn').on('click',function(){
+        if(weekLeftNum < 3){
+            var left = $('#ulweek').position().left;
+            $('#ulweek').css('left', left -= 135);
+            weekLeftNum += 1;
         }
     });
 
