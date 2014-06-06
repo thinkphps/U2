@@ -58,7 +58,7 @@ button,label{cursor:pointer; }
 .header_bot a.tmail{ float:right; color:#FFF; margin:0 0.5em 0 0;}
 .header_bot a.tmail i{ display:block; float:left; width:1.1em; height:1.1em; background:url(../images/tmall_icon.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
 .header_bot a.tmail2{ float:right; color:#FFF; margin:0 0.5em 0 0;}
-.header_bot a.tmail2 i{ display:block; float:left; width:1.1em; height:1.1em; background:url(../images/18543588712819864175.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
+.header_bot a.tmail2 i{ display:block; float:left; width:1.1em; height:1.1em;border: 1px solid #fe7f7f; background:url(../images/18543588712819864175.png) 0 0 no-repeat; background-size:1.1em 1.1em; margin:1.1em 0.5em;}
 
 
 /*我的优衣柜*/
