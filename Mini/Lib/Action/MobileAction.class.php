@@ -1,10 +1,10 @@
 <?php
 class MobileAction extends Action{
     public function _initialize(){
-        if(!is_mobile()){
-            //$this->redirect('Index/index');
-            //exit;
-        }
+        /*if(!is_mobile()){
+            $this->redirect('Index/index');
+            exit;
+        }*/
     }
    public function index(){
        if(cookie('uniq_user_name') && cookie('uniq_user_id')){
