@@ -693,15 +693,24 @@ $(function(){
         $(this).siblings().children('a').removeClass('select');
         $(this).children('a').addClass('select');
         $('#ul_index-bar-place li').siblings().children('a').removeClass('select');
+        for(var i = 1;i<=3;i++){
+            if($(".my_yyg").hasClass("changjing"+ i)){
+                $(".my_yyg").removeClass("changjing"+ i);
+                break;
+            }
+        }
         if(sid==1){
-            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
-            $('.mini-aside').css('bottom','42px');
+            $(".my_yyg").addClass('changjing1')
+//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
+//            $('.mini-aside').css('bottom','42px');
         }else if(sid==2){
-            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
-            $('.mini-aside').css('bottom','113px');
+            $(".my_yyg").addClass('changjing2')
+//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
+//            $('.mini-aside').css('bottom','113px');
         }else if(sid==3 || sid == 4){
-            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
-            $('.mini-aside').css('bottom','143px');
+            $(".my_yyg").addClass('changjing3')
+//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
+//            $('.mini-aside').css('bottom','143px');
         }
         _mini.getSuits();
     });
