@@ -402,10 +402,10 @@ var _mini = {
             if(data){
                 //上下装
                 if(sid!=4){
-                    $('#alluid').children('a').text('全部上装');
+                    //$('#alluid').children('a').text('全部上装');
                     $('#alluid').addClass('select');
                     $('#alldid').addClass('select');
-                    $('.style_btn_group a:eq(1)').html('全部上装<br><span>TOPS</span>');
+                    $('.style_btn_group a:eq(1)').html('上装<br><span>TOPS</span>');
                     $('.style_btn_group a:eq(2)').removeClass('noshow');
                     var ustr = '',dstr='';
                     $.each(data.u,function(i,name){
