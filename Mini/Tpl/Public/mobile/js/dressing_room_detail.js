@@ -591,7 +591,7 @@ var _mini = {
                         strHtml += '试穿';
                     }
                 }
-                strHtml += '</a><a href="#" class="tuijian">推荐</a></dt></dl>';
+                strHtml += '</a></dt></dl>';
 
                 //颜色
                 var sty = '';

@@ -2,6 +2,12 @@
 // 优衣库mini站,author:kimi
 class IndexAction extends Action {
     public $uniq_user_name;
+    public function _initialize(){
+        if(is_mobile()){
+            $this->redirect('Mobile/index');
+            exit;
+        }
+    }
     public function index(){
         if(cookie('uniq_user_name') && cookie('uniq_user_id')){
             session("uniq_user_name",cookie('uniq_user_name'));
@@ -152,7 +158,11 @@ class IndexAction extends Action {
         cookie('uniq_user_name',null);
         cookie('uniq_user_id',null);
         session_destroy();
-        $this->redirect('Index/index');
+        if(is_mobile()){
+           $this->redirect('Mobile/index');
+        }else{
+           $this->redirect('Index/index');
+        }
     }
 
 //删除
@@ -258,7 +268,12 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid,$keyword);
+                if(is_mobile()){
+                    $parmas = array('oid'=>$oid);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                }else{
+                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                  }
             }
         }else if($lid==1 && $bid!=1){
             $sql = "
@@ -280,7 +295,12 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid,$keyword);
+                if(is_mobile()){
+                    $parmas = array('oid'=>$oid);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                }else{
+                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                }
             }
         }else if($bid==1 && $lid!=1){
             $sql = "
@@ -302,7 +322,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid,$keyword);
+                if(is_mobile()){
+                    $parmas = array('oid'=>$oid);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                }else{
+                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+               }
             }
         }else if($kid>0){
             //快速搜索走这里
@@ -333,7 +358,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $result = array();
             }
             if($page==1){
-                $result = $this->waterdata($result,$lid,$bid,$keyword);
+                if(is_mobile()){
+                    $parmas = array('oid'=>$oid);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                }else{
+                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+              }
             }
         }else{
             //普通走这里
@@ -394,14 +424,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $goodstable = '`u_goods`';
             }
             if($sid!=4){
-                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
                 if(!empty($uid)){
                     $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
                 }else{
                     $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                 }
             }else{
-                //$sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id {$wherelb} where 1 ".$where." group by g.good_id ".$ordr."uptime desc limit ".$start.",".$page_num;
                 if(!empty($uid)){
                     $sql = "select al.*{$fieldlb} from (select g.good_id".$case.",bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
                 }else{
@@ -431,8 +459,6 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
             }*/
-
-//error_log(print_r($sql,1),3,'1.txt');
             $result = $goodtag->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -444,7 +470,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }
             if($page==1){
                 if(is_mobile()){
-                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword);
+                    $parmas = array('oid'=>$oid);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
                     //$result = $this->waterdata($result,$lid,$bid,$keyword);
                     $parmas = array('oid'=>$oid);

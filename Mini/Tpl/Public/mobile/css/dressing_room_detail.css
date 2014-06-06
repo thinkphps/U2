@@ -371,8 +371,8 @@ button,label{cursor:pointer; }
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
-.wrapper_box dl dt a{ display:block; float:left; width:8.4em; height:3em; line-height:3em; background:#bbb; color:#FFF;}
-.wrapper_box dl dt a i{ display:block; float:left; width:1.3em; height:1em; background:url(../images/try_icon.png) 0 0 no-repeat; background-size:1.3em 1em; margin:1em 0.5em 0 2.2em;}
+.wrapper_box dl dt a{ display:block; float:left; width:13.9em; height:3em; line-height:3em; background:#bbb; color:#FFF;}
+.wrapper_box dl dt a i{ display:block; float:left; width:1.3em; height:1em; background:url(../images/try_icon.png) 0 0 no-repeat; background-size:1.3em 1em; margin:1em 0.5em 0 4.9em;}
 .wrapper_box dl dt a.tuijian{ text-align:center; width:5.5em; background:#F00;}
 
 .wrapper_box dl dd a{ color:#999;}
