@@ -424,7 +424,6 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
                 }
                 $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
-                error_log(print_r(microtime().'==',1),3,'3.txt');
                 $colorData = $windex->colorDetail($colorsql);
             /*if($zid && !empty($zid)){
                  if(!isset($tem) && empty($sid) && empty($fid)){
@@ -452,7 +451,6 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             $result = $goodtag->query($sql);
             if(!empty($result)){
                 $windex->doColor($result,$colorData);
-                error_log(print_r(microtime().'==',1),3,'3.txt');
             }else{
                 $result = array();
             }
