@@ -22,9 +22,6 @@ $(function(){
         $("body").click(function(i){ !$(i.target).parents(".select_city").first().is(s) ? _hide():"";});
     });
 
-    //地图框拖动
-    $("#mapdiv").draggable();
-
     //左侧风格按钮
     $('.expansion2').on('click',function(){
         if($('.detail_sub_nav').is(':hidden')){
@@ -838,6 +835,7 @@ $('#watercontainer').waterfall({
 });
 
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
+    $('.mini-mask').css('height',$(document).height());
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
     $('#waterfall-loading').remove();

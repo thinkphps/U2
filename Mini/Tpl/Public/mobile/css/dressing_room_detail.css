@@ -74,7 +74,7 @@ button,label{cursor:pointer; }
 .my_yyg_model{ width:26em; margin:0 auto;overflow: hidden; }
 .model{ float:left; width:15.7em; height:36em; margin:0.8em -1.5em 0 -1.5em; position:relative;}
 .model img{ width:129%; height:100%;}
-.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
+.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:absolute; top:35em; left:50%; margin-left:-3em;}
 
 
 /*左侧分类导航*/
@@ -500,7 +500,7 @@ button,label{cursor:pointer; }
 .noshow:hover{color:#333333;}
 /*登录弹窗*/
 .mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:32em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
-.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; margin-left:11em; top:0.7em; color:#F00;}
 .mini-login h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
 .mini-login .mini-control{ width:20em; margin:0 0 0 2em;}
 .mini-login .mini-control label{ font-size:1em; line-height:2em; color:#999;}
@@ -515,7 +515,7 @@ button,label{cursor:pointer; }
 
 /*注册弹窗*/
 .mini-register{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
-.mini-register a.mini-form-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-register a.mini-form-close{ display:block; font-size:2em; position:relative;  margin-left:11em; top:0.7em; color:#F00;}
 .mini-register h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
 .mini-register .mini-control{ width:20em; margin:0 0 0 2em; }
 .mini-register .mini-control label{ font-size:1em; line-height:2em; color:#999; }
@@ -529,39 +529,6 @@ button,label{cursor:pointer; }
 .mini-register .mini-control a.mini-reg-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF; margin-bottom:1em;}
 .mini-register .mini-control a.mini-reg-login{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#999; border:none; color:#FFF; margin-bottom:2em;}
 
-/*隐私条款*/
-.mini-clause{
-    width: 414px;
-    height: 372px;
-    margin: -210px 0 0 -215px;
-}
-.mini-clause div{
-    font-size: 12px;
-    width: 418px;
-    height: 300px;
-    padding-right: 5px;
-    overflow: auto;
-    margin-bottom: 10px;
-    line-height: 18px;
-}
-.mini-clause button{
-    width: 70px;
-    height: 30px;
-    background: #e70012;
-    color: #fff;
-    border: 0 none;
-    font: 14px "Microsoft Yahei";
-    cursor: pointer;
-}
-.mini-clause p{
-    margin: 10px 0;
-}
-p .mini-clause-btn{
-    color: #676767;
-    text-decoration: underline;
-}
-
-
 /*城市弹窗*/
 .mini-city{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
 .mini-city a.mini-city-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
@@ -569,13 +536,17 @@ p .mini-clause-btn{
 .mini-city .mini-control{ width:20em; margin:0 0 0 2em; }
 .mini-city .mini-control label{ font-size:1em; line-height:2em; color:#999; }
 .mini-city .mini-control select{ width:17em; height:3em; margin-bottom:1em;}
-.mini-city .mini-control input.mini-city-submit{ display:block; float:left; width:17em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
+.mini-city-submit{ display:block; float:left; width:17em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
 
 /*== 地图弹窗 ==*/
-.map_light_box{ width:760px;  background:#FFF; position:fixed; top:100px; left:50%; margin-left:-400px; z-index:999; padding:20px;}
+.map_light_box{background:#FFF; position:absolute; left:50%; top:5em; width:26em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
 a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
+.map_light_box .mini-control{ width:20em; margin:0 0 0 2em; }
+.map_light_box .mini-control label{ font-size:1em; line-height:2em; color:#999; }
+.map_light_box .mini-control select{ width:17em; height:3em; margin-bottom:1em;}
 .map_light_box h3{ font-size:20px; color:#999;  font-weight:normal;}
-.light_box_u_map_con{ background:#555; width:760px; height:405px;}
+.light_box_u_map_con{ background:#555; width:25.5em; height:405px;}
+
 /*中部类别，自定义分类关闭*/
 .style_btn_group_detail a.mini-form-close{ display:block; font-size:2em; position:absolute; left:14em; top:0.4em; color:#F00;}
 .tag_text a.mini-form-close{ display:block; font-size:2em; position:absolute; left:14em; top:0.4em; color:#F00;}
@@ -692,3 +663,41 @@ a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; wid
     text-indent: 0;
     width: auto
 }
+
+/*隐私声明*/
+.mini-clause{ background:#FFF; position:absolute; left:50%; top:38em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 120;}
+.mini-clause h3{ font-size:2em; color:#9C0; margin:1.5em 0 1em 0; text-align:center;}
+.mini-clause-con{ width:22em; height:22em; padding-right:0.5em; overflow:auto; margin:0 0 1em 2em; }
+.mini-clause p{ color:#666; line-height:2em; margin:1em 0;}
+.mini-clause b{ color:#666; line-height:2em;}
+.mini-clause .mini-control button {margin-left: 0.8em;}
+
+/*修改密码*/
+.mini-change-password{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
+.mini-change-password a.mini-form-close{ display:block; font-size:2em; position:relative;  margin-left:11em; top:0.7em; color:#F00;}
+.mini-change-password h3{ font-size:2em; color:#9C0; margin:0 0 0.5em 1.15em;}
+.mini-change-password .mini-control{ width:20em; margin:0 0 0 2em;}
+.mini-change-password .mini-control label{ font-size:1em; line-height:2em; color:#999;}
+.mini-change-password .mini-control input{ width:17em; height:3em; margin-bottom:1em;}
+.mini-change-password .mini-control a.mini-login-fetch{ display:block; height:4em; line-height:4em; float:left;}
+.mini-change-password .mini-control label.nomargin{ float:right; width:7em; line-height:4em;}
+.mini-change-password .mini-control label.nomargin input { float:left; width:1.5em; height:1.5em; line-height:4em; margin:0.75em 0.5em 0 0;}
+.mini-change-password .mini-control a.mini-password-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#F00; border:none; color:#FFF; margin-bottom:2em;}
+
+.mini-control-tips{ margin:1em 2em; color:#F00;}
+
+.mini-change-succ{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; margin-left:-12.5em; border:0.2em solid #eee;}
+.mini-change-succ p{ text-align:center; color:#333; font-size:2em; line-height:5em;}
+.mini-change-succ button{ margin-left: 0.8em;}
+
+/*忘记密码*/
+.mini-fetch{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
+.mini-fetch h3{ font-size:2em; color:#9C0; margin:0 0 0.5em 1.15em;}
+.mini-fetch a.mini-form-close{ display:block; font-size:2em; position:relative;  margin-left:11em; top:0.7em; color:#F00;}
+.mini-fetch a.mini-fetch-back{ width: 20.5em;}
+.mini-fetch .mini-control{ width:20em; margin:0 0 0 2em;}
+.mini-fetch .mini-control label{ font-size:1em; line-height:2em; color:#999;}
+.mini-fetch .mini-control input{ width:17em; height:3em; margin-bottom:1em;}
+.mini-fetch .mini-fetch-succ{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; margin-left:-12.5em; border:0.2em solid #eee;}
+.mini-fetch .mini-fetch-succ p{ text-align:center; color:#333; font-size:2em; line-height:3em;}
+.mini-fetch .mini-fetch-succ button{ margin-left: 0.8em;}

@@ -361,14 +361,31 @@ function Model_loadok_callback(){
                 $(this).parent().parent().find('.tryon').click();
             });
 
-            //鼠标移动到衣服上显示价格、库存等详细信息
-            pageElement.$watercontainer.on('mouseenter','.wrapper_box img',function(){
-                $(this).parent().parent().find('.product_inf').show();
+            //点击衣服 显示价格、库存等详细信息
+            pageElement.$watercontainer.on('click','.wrapper_box img',function(){
+                //如果已显示价格图层，就隐藏
+                var $productInfo = $(this).parent().parent().find('.product_inf');
+               if($productInfo.is(':hidden')){
+                   $productInfo.show();
+               }else{
+                   $productInfo.hide();
+               }
             });
-            //鼠标移出隐藏价格、库存等详细信息
+
+            pageElement.$watercontainer.on('click','.product_inf',function(){
+                //如果已显示价格图层，就隐藏
+                var $productInfo = $(this);
+                if($productInfo.is(':hidden')){
+                    $productInfo.show();
+                }else{
+                    $productInfo.hide();
+                }
+            });
+
+            //鼠标移出隐藏色块
             pageElement.$watercontainer.on('mouseleave','.wrapper_box',function(){
                 var $this = $(this);
-                $(this).find('.product_inf').hide();
+//                $(this).find('.product_inf').hide();
                 var $color_img = $this.find('.color-img');
                 var $tryon =  $(this).find('.tryon');
                 var gender = $tryon.data('gendertype');

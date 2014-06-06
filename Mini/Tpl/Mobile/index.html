@@ -199,9 +199,9 @@
     <button id="relateButton" name="relateButton" onclick="return do_relate();">刷新激活状态</button>
 </div>
 <!-- 隐私权保护声明 -->
-<div class="mini-clause mini-pop pf none">
+<div class="mini-clause mini-pop none">
     <h3>隐私声明</h3>
-    <div>
+    <div class="mini-clause-con">
         <p>优衣库 虚拟试衣间（【uniqlo.bigodata.com.cn】，以下称“本网站”）隐私保护声明系本网站保护用户个人隐私的承诺。鉴于网络的特性，本网站将无可避免地与您产生直接或间接的互动关系，故特此说明本网站对用户个人信息所采取的收集、使用和保护政策，请您务必仔细阅读：</p>
         <b>一、非个人化信息</b>
         <p>我们将通过您的IP地址来收集非个人化的信息，例如您的浏览器性质、操作系统种类、给您提供接入服务的ISP的域名等，以优化在您计算机屏幕上显示的页面。通过收集上述信息，我们亦进行客流量统计。</p>
@@ -255,7 +255,7 @@
         <p>4、由于与本网站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果。</p>
         <p>本网站之保护隐私声明的修改及更新权均属于优衣库虚拟试衣间<br>联络方式为：【<a href="mailto:u@BIGOData.com.cn">u@BIGOData.com.cn</a>】</p>
     </div>
-    <p class="tc"><button>关闭</button></p>
+    <div class="mini-control"><button class="mini-city-submit">关闭</button></div>
 </div>
 
 <!-- 登录 -->
@@ -285,7 +285,7 @@
 
 <!-- 找回密码 -->
 <form class="mini-fetch mini-pop pf none">
-    <a href="javascript:;" class="mini-form-close mini-btn" >关闭</a> <!-- David -->
+    <a href="javascript:;" class="mini-form-close mini-btn" >X</a> <!-- David -->
     <h3>找回密码</h3>
     <div class="mini-control">
         <label class="mini-label">手机号码</label>
@@ -308,19 +308,19 @@
         <p class="mini-control-tips" id="f_error_msg"></p>
     </div>
     <div class="mini-control tr">
-        <input type="button" onclick="return do_find_pwd();" value="提交" class="mini-fetch-submit" />
-        <a href="javascript:;" class="mini-fetch-back fl">返回</a>
+        <input type="button" onclick="return do_find_pwd();" value="提交" class="mini-fetch-submit mini-city-submit" />
+        <a href="javascript:;" class="mini-fetch-back mini-city-submit">返回</a>
     </div>
 
     <div class="mini-fetch-succ mini-pop tc pa none">
         <p>密码将发送至您的手机请注意查收</p>
-        <button type="button">确定</button>
+        <button type="button" class="mini-city-submit">确定</button>
     </div>
 </form>
 
 <!-- 修改密码 -->
-<form class="mini-change-password pa none">
-    <a href="javascript:;" class="mini-change-close mini-btn"></a>
+<form class="mini-change-password none">
+    <a href="javascript:;" class="mini-form-close mini-change-close mini-btn">X</a>
     <span class="mini-btn"></span>
     <h3>修改密码</h3>
     <div class="mini-control">
@@ -342,11 +342,12 @@
         </label>
     </div>
     <p class="mini-control-tips" id="pwd_error_msg"></p>
-    <input type="button" onclick="return change_pwd();" value="提交" class="mini-change-submit" />
-
-    <div class="mini-change-succ tc pa none">
+    <div class="mini-control">
+    <a href="javascript:;" onclick="return change_pwd();" class="mini-password-submit" >提交</a>
+    </div>
+    <div class="mini-change-succ none">
         <p>密码修改成功</p>
-        <button type="button">确定</button>
+        <button type="button" class="mini-city-submit">确定</button>
     </div>
 </form>
 
@@ -370,14 +371,6 @@
 <!--我的优衣柜-->
 <div class="my_yyg changjing1">
     <div class="my_yyg_model" id="sfid">
-        <!--<volist id='pvo' name='beubeu_suits_list' key='pk'>-->
-            <!--<div class="model" style='display:block;' >-->
-                <!--<div class="model_try2 none"></div>-->
-                <!--<div style='width: 400px;height: 533px;margin-left: -138px'>-->
-                    <!--<img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</volist>-->
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
     	<div class="model">
         	<img src="{$pvo.suitImageUrl}.240x550.png" data-detail='[{$pvo.suitID},{$pvo.sex}]'/>
@@ -411,9 +404,6 @@
         <a href="javascript:;" class="expansion2"></a>
     </div>
 </div>
-
-
-
 
 <!--主体内容-->
 <div class="main_con main_con water6">
@@ -609,19 +599,20 @@
 <!--选择城市弹窗-->
 <div class="map_light_box none" id="mapdiv" >
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
-    <h3>离您最近的优衣库UNIQLO门店</h3>
+    <h3>最近的优衣库UNIQLO门店</h3>
     <div class="mb15">
-        <select name="" id="spid" class="mr10" style="width:150px;">
-            <option selected="selected" value="44444">上海</option>
-            <option value="55555">北京</option>
-        </select>
+        <div class="mini-control">
+            <select name="" id="spid" class="mr10" style="width:150px;"></select>
+        </div>
+        <div class="mini-control">
         <select name="" id="scid"  class="mr10" style="width:150px;">
-            <option selected="selected" value="44444">徐汇区</option>
-            <option value="55555">闵行区</option>
-        </select>
+        </select></div>
+        <div class="mini-control">
         <select name="" id="ddlShop" style="width:200px;">
             <option value='0'>请选择</option>
-        </select>&nbsp;<span id='emptymsg'  style="font-size:10px;color: #999999;"></span>
+
+        </select></div>
+        <div class="mini-control"><span id='emptymsg'  style="font-size:10px;color: #999999;"></span></div>
     </div>
     <div class="light_box_u_map_con" id="allmap"></div>
 </div>
@@ -677,6 +668,10 @@ $('.imgrd').css(css);
 
 
 $(function(){
+
+
+    //设置遮罩层的高度
+    $('.mini-mask').css('height',$(document).height());
 
     setTimeout(function(){
         $('.imgrd').css({
