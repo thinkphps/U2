@@ -2,12 +2,6 @@
 // 优衣库mini站,author:kimi
 class IndexAction extends Action {
     public $uniq_user_name;
-    public function _initialize(){
-        if(is_mobile()){
-            $this->redirect('Mobile/index');
-            exit;
-        }
-    }
     public function index(){
         if(cookie('uniq_user_name') && cookie('uniq_user_id')){
             session("uniq_user_name",cookie('uniq_user_name'));
@@ -347,7 +341,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=bg.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=bg.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select g.num_iid,g.type,g.isud,g.title,g.num,g.price,g.pic_url,g.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  g.istag='2' {$liketitle} order by {$ostr} limit {$start},{$page_num}";
+                $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} {$ostr} limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -403,16 +397,17 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     }
                 }
                 $cstr = rtrim($cstr,',');
-                $catewhere = " and cg.cateID in (".$cstr.")";
+                //$catewhere = " and cg.cateID in (".$cstr.")";
+                $where.= " and g.wid in (".$cstr.")";
             }
             //$where.=" and bg.approve_status='onsale'";
             //$where.=" and bg.isdel=0";
             if(isset($tem)){
-                $case = ",case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo";
-                $ordr = "order by wo asc,";
+                $case = "case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo";
+                $ordr = "order by wo asc";
             }else{
                 $case = '';
-                $ordr = "order by ";
+                $ordr = "";
             }
             if(!empty($uid)){
                 $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=al.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=al.num_iid";
@@ -423,19 +418,14 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $goodstable = '`u_goods`';
             }
-            if($sid!=4){
                 if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
+                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
                 }else{
-                    $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_beubeu_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                    $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
                 }
-            }else{
-                if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select g.good_id".$case.",bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
-                }else{
-                    $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join `u_goods` as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
-                }
-            }
+                $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
+                error_log(print_r(microtime().'==',1),3,'3.txt');
+                $colorData = $windex->colorDetail($colorsql);
             /*if($zid && !empty($zid)){
                  if(!isset($tem) && empty($sid) && empty($fid)){
                   //如果只有自定义分类
@@ -461,10 +451,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }*/
             $result = $goodtag->query($sql);
             if(!empty($result)){
-                foreach($result as $k1=>$v1){
-                    $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
-                }
+                $windex->doColor($result,$colorData);
+                error_log(print_r(microtime().'==',1),3,'3.txt');
             }else{
                 $result = array();
             }

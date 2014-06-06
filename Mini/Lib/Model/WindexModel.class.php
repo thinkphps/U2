@@ -164,22 +164,41 @@ class WindexModel extends Model{
     public function getOrderStr($oid=1){
            switch($oid){
                case 1 :
-                   $orderStr = 'bg.num_iid desc';//默认排序
+                   $orderStr = 'order by bg.num_iid desc';//默认排序
                break;
                case 2 :
-                   $orderStr = 'bg.num_iid desc';//热度排序
+                   $orderStr = 'order by bg.num_iid desc';//热度排序
                break;
                case 3 :
-                   $orderStr = 'bg.num_iid desc';//新品排序
+                   $orderStr = 'order by bg.num_iid desc';//新品排序
                break;
                case 4 :
-                   $orderStr = 'bg.price asc';//价格升序
+                   $orderStr = 'order by bg.price asc';//价格升序
                break;
                case 5 :
-                   $orderStr = 'bg.price desc';//价格降序
+                   $orderStr = 'order by bg.price desc';//价格降序
                    break;
            }
           return $orderStr;
     }
+   public function colorDetail($csql){
+       $insql = "select qw.num_iid from ($csql) as qw";
+       $sql = "SELECT distinct u_products_beubeu.color as colorid,u_products.num_iid as num_iid,u_products.url  as colorcode,u_color.color_name as colorname,left(u_goods.item_bn,8) as uq,u_settings.value as gender FROM `u_goods` INNER JOIN u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq INNER JOIN u_settings on u_settings.key = u_goods.gender INNER JOIN u_color on u_color.id = u_products_beubeu.color INNER JOIN u_products on u_products.num_iid=u_goods.num_iid and u_products.cid=u_products_beubeu.color WHERE u_goods.num_iid in($insql) AND ( u_products_beubeu.status = '1' ) GROUP BY uq,colorid ORDER BY u_products_beubeu.id ";
+    return M('Goods')->query($sql);
+}
 
+    public function doColor(&$result,$colorData){
+        $productSyn = D('ProductSyn');
+        foreach($result as $k1=>$v1){
+            $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
+            //$result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+            $chil = array();
+            foreach($colorData as $k2=>$v2){
+               if($v1['num_iid']==$v2['num_iid']){
+                   $chil[] = $v2;
+               }
+            }
+            $result[$k1]['products'] = $chil;
+        }
+    }
 }
