@@ -575,7 +575,7 @@ var _mini = {
 
 
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
-                strHtml += '<img width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
+                strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl>';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
@@ -630,22 +630,33 @@ var _mini = {
     }
 }
 $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
-    var num_iid = $(this).data('id');
-    $(this).toggleClass('select');
-    if($(this).hasClass('select')){
-        addbuy(num_iid,1,1)//添加
-    } else {
-        addbuy(num_iid,1,0)//取消
+    if($('.login').length == 0){
+        alert('没有登录');
+    }
+    else{
+        var num_iid = $(this).data('id');
+        $(this).toggleClass('select');
+        if($(this).hasClass('select')){
+            addbuy(num_iid,1,1)//添加
+        } else {
+            addbuy(num_iid,1,0)//取消
+        }
     }
 });
 $('#watercontainer').on('click','.btn_ym',function(){    //购买
-    var num_iid = $(this).data('id');
-    $(this).toggleClass('select');
-    if($(this).hasClass('select')){
-        addbuy(num_iid,2,1)//添加
-    } else {
-        addbuy(num_iid,2,0)//取消
+    if($('.login').length == 0){
+        alert('没有登录');
     }
+    else{
+        var num_iid = $(this).data('id');
+        $(this).toggleClass('select');
+        if($(this).hasClass('select')){
+            addbuy(num_iid,2,1)//添加
+        } else {
+            addbuy(num_iid,2,0)//取消
+        }
+    }
+
 });
 $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
     //如果没有登录则弹出注册框

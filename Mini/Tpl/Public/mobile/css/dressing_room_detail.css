@@ -482,7 +482,6 @@ button,label{cursor:pointer; }
 .btn_line a.sc_btn{ width:8em; background:#a1a1a1; color:#FFF; text-align:center;display: none;}
 .btn_line a.bc_btn{ width:8em; background:#d1d1d1; color:#FFF; text-align:center;}
 
-
 .btn_line .icon-medium-plus{ float:left; width:28em; height:3.6em; background:#FFF;}
 .btn_line .icon-medium-plus .bshare-custom{ float:left;}
 .btn_line .bshare-custom span{ float:left; color:#666; font-size:0.8em; margin:1.3em 1em 0 1em; }
@@ -492,6 +491,11 @@ button,label{cursor:pointer; }
 .buy_btns .buyurl {cursor: pointer; line-height: 15px;background:#fff;color:#666;padding: 5px 5px 5px 5px;}
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
+
+.syj .baby_fitting_room{width: 28em;}
+.syj .baby_fitting_room .tops_bottoms {margin-left: 5em;}
+.syj .baby_fitting_room .bottoms {margin-left: 5em; position: fixed;top: 23em;}
+.syj .baby_fitting_room .single {margin:8em  0 0 5em;}
 
 /*kimi*/
 #waterfall-loading img{width:16px;height:11px;}
