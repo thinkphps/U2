@@ -198,6 +198,7 @@ class WindexModel extends Model{
                    $chil[] = $v2;
                }
             }
+
             $result[$k1]['products'] = $chil;
         }
     }
