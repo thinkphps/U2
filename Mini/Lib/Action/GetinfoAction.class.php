@@ -21,6 +21,7 @@ class GetinfoAction extends Action{
                 case 3 :
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
+                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
                 case 4 :
@@ -49,6 +50,7 @@ class GetinfoAction extends Action{
                 case 1 :
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
+                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
             }

@@ -80,7 +80,7 @@ class IndexAction extends Action {
             $beubeu_suits_list = unserialize(S('styledata'));
         }else{
             //默认模特图
-            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1))->order('suitID desc')->limit('0,4')->select();
+            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1,'approve_status'=>0))->order('suitID desc')->limit('0,4')->select();
             foreach($beubeu_suits_list as $k=>$v){
                 switch($v['suitGenderID']){
                     case 1 :
@@ -100,7 +100,7 @@ class IndexAction extends Action {
             }
             S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
         }
-        //默认上下装自定义分类
+        //默认女士上下装自定义分类
         if(S('cust1')){
             $ucuslist = unserialize(S('cust1'));
         }else{
@@ -408,6 +408,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $case = '';
                 $ordr = "";
+                $fi = 'g.id';
             }
             if(!empty($uid)){
                 $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=al.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=al.num_iid";
@@ -419,11 +420,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $goodstable = '`u_goods`';
             }
                 if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
+                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
                 }else{
-                    $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
+                    $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
                 }
                 $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
+
                 $colorData = $windex->colorDetail($colorsql);
             /*if($zid && !empty($zid)){
                  if(!isset($tem) && empty($sid) && empty($fid)){
@@ -459,9 +461,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    //$result = $this->waterdata($result,$lid,$bid,$keyword);
-                    $parmas = array('oid'=>$oid);
-                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    //$parmas = array('oid'=>$oid);
+                    //$result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }
             }
             /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
