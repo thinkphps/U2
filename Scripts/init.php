@@ -54,7 +54,8 @@ public function createdir($filename,$dir='',$path='',$img='',$flag = 1){
       if($flag==1){
 	  $path.='/'.$filename.'.png';
       }else if($flag==2){
-      $path.='/'.$filename.'.jpg';
+      //$path.='/'.$filename.'.jpg';
+          $path.='/'.$filename.'.'.$extension;
       }
 	  $arr[] = $save_image;
 	  $arr[] = $path;
