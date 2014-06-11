@@ -340,7 +340,7 @@ var timer,loadid = 0;
                             city = city.slice(0, (temp === '区' ? -2 : -1));
                         }
                     }
-                    $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
+                    //$('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
                     weather.tipcity = city;
                     _this.$weather.init({'city' : city, 'province': province,
                         callback: function(city, temper, info){
@@ -554,7 +554,7 @@ var callBackFunction = {
             for(var i =0;i<detail.length;i++){
                 numids[i] = detail[i].num_iid;
                 strItem += '<div class="circle">'
-                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'&kid=11727_51912_165824_211542" target="_blank" title="'+detail[i].title +'">';
+                strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank" title="'+detail[i].title +'">';
                 strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
             }
         }
