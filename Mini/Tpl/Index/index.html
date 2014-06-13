@@ -480,10 +480,8 @@
         </li>
     </ul>
     <div class="pa none" id="style-mask"></div>
-
+    <div class="rightmsg">注：衣物实际库存及价格请参照优衣库官方网站</div>
 </div>
-
-
 
 <!--主体内容-->
 <div class="main_con" id="main_con">
@@ -578,17 +576,9 @@
             <h3><p>更多商品</p><span></span></h3>
             <div class="left_tj">
                 <ul>
-                    <li id='alluid' class='upclothes' la='0'><a href="javascript:;" class="w_select">全部上装</a></li>
+                    <li id='alluid' class='upclothes' la='0'><a href="javascript:;" class="w_select">全部</a></li>
                     <volist id='ucvo' name='ucuslist'>
                     <li class='upclothes zleft' la='{$ucvo.id}'><a href="javascript:;">{$ucvo.name}</a></li>
-                    </volist>
-                </ul>
-            </div>
-            <div class="right_tj">
-                <ul>
-                    <li id='alldid' class='doclothes' la='0'><a href="javascript:;" class="w_select">全部下装</a></li>
-                    <volist id='dcvo' name='dcuslist'>
-                        <li class='doclothes zright' la='{$dcvo.id}'><a href="javascript:;">{$dcvo.name}</a></li>
                     </volist>
                 </ul>
             </div>
@@ -878,7 +868,7 @@ $('.imgrd').css(css);
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
             }else{
-               $('.zleft').children('a').removeClass('w_select');
+                $('.zleft').children('a').removeClass('w_select');
             }
             if($(this).children('a').hasClass('w_select')){
              $(this).children('a').removeClass('w_select');
@@ -895,60 +885,14 @@ $('.imgrd').css(css);
              $(this).children('a').addClass('w_select');
             }
 
-            var rightallsel = $('#alldid').children('a').hasClass('w_select');
-
-            var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(leftLen==zleftlength || (leftLen == 0 && rightallsel==false && rightLen==0)){   //如果左边全选
+            var leftLen = _mini.left.length;
+            if(leftLen==zleftlength || leftLen == 0 ){   //如果左边全选
                 $('#alluid').children('a').addClass('w_select');
                 $('.zleft').children('a').removeClass('w_select');
                 _mini.left.length = 0;
-            }else{
-
             }
-           setzid(leftLen,rightLen);
+            $.uniqlo.zid = _mini.left.join('_');
            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-            $(window).scrollTop(tmpscrolltop);
-        });
-        $('.right_tj').on('click','li.doclothes',function(){
-            var tmpscrolltop;
-            setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
-            $.weather.nextpage = 0;
-            $.uniqlo.lid = 0;
-            $.uniqlo.bid = 0;
-            $.uniqlo.kid = 0;
-            $.weather.str = '';
-//            var zid = $(this).attr('la');
-            var zid = $(this).attr('la'),zrightlength = $('.zright').length;
-            if(zid!=0){
-
-                $('#alldid').children('a').removeClass('w_select');
-            }else{
-                $('.zright').children('a').removeClass('w_select');
-            }
-
-            if($(this).children('a').hasClass('w_select')){
-                $(this).children('a').removeClass('w_select');
-                var i = $.inArray(zid, _mini.right);
-                if(i !== -1){
-                    _mini.right.splice(i, 1)
-                }
-            }else{
-                if(zid!=0){
-                    _mini.right.push(zid);
-                }else{
-                    _mini.right.length = 0;
-                }
-                $(this).children('a').addClass('w_select');
-            }
-            var leftallsel = $('#alluid').children('a').hasClass('w_select');
-            var leftLen = _mini.left.length,rightLen = _mini.right.length;
-            if(rightLen==zrightlength || (rightLen == 0 && leftallsel == false && leftLen==0)){
-                $('#alldid').children('a').addClass('w_select');
-                $('.zright').children('a').removeClass('w_select');
-            } else {
-            }
-            setzid(leftLen,rightLen);
-            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
             $(window).scrollTop(tmpscrolltop);
         });
 
