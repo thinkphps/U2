@@ -1,0 +1,83 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>店铺自定义分类管理</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="{:U('Sellcate/index')}" method='post'>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">请输入关键字</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="请输入关键字" name='keyword' value='{$keyword}'>
+        </div>
+        <div class="form-group">
+            <label>类别</label>
+            <select name='gender'>
+                <option value='0'>请选择</option>
+                <option value='1' <if condition="$gender eq 1">selected='selected'</if>>女</option>
+                <option value='2' <if condition="$gender eq 2">selected='selected'</if>>男</option>
+                <option value='3' <if condition="$gender eq 3">selected='selected'</if>>童装</option>
+                <option value='4' <if condition="$gender eq 4">selected='selected'</if>>幼儿</option>
+                <option value='5' <if condition="$gender eq 5">selected='selected'</if>>婴儿</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label>部位</label>
+            <select name='isud''>
+            <option value='0'>没有标签</option>
+            <option value='1' <if condition="$isud eq 1">selected='selected'</if>>上装</option>
+            <option value='2' <if condition="$isud eq 2">selected='selected'</if>>下装</option>
+            <option value='3' <if condition="$isud eq 3">selected='selected'</if>>内衣</option>
+            <option value='4' <if condition="$isud eq 4">selected='selected'</if>>配饰</option>
+            <option value='5' <if condition="$isud eq 5">selected='selected'</if>>特辑</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>是否显示</label>
+            <select name='issel'>
+                <option value='-1'>请选择</option>
+                <option value='0' <if condition="$issel eq 0">selected='selected'</if>>不显示</option>
+                <option value='1' <if condition="$issel eq 1">selected='selected'</if>>显示</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">搜索</button>
+    </form>
+    <table class="table table-striped table-hover text-center table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>分类ID</th>
+            <th>名称</th>
+            <th>别名</th>
+            <th>父类ID</th>
+            <th>排序ID</th>
+            <th>类别</th>
+            <th>部位</th>
+            <th>是否显示</th>
+            <th>有无商品</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id='vo' name='sells'>
+            <tr>
+                <td>{$vo.ID}</td>
+                <td>{$vo.cateName}</td>
+                <td>{$vo.shortName}</td>
+                <td>{$vo.parentID}</td>
+                <td>{$vo.sort_order}</td>
+                <td><if condition="$vo['gender'] eq 1">女<elseif condition="$vo['gender'] eq 2"/>男<elseif condition="$vo['gender'] eq 3"/>童装<elseif condition="$vo['gender'] eq 4"/>幼儿<elseif condition="$vo['gender'] eq 5"/>婴儿</if></td>
+                <td><if condition="$vo['isud'] eq 1">上装<elseif condition="$vo['isud'] eq 2"/>下装<elseif condition="$vo['isud'] eq 3"/>内衣<elseif condition="$vo['isud'] eq 4"/>配饰<elseif condition="$vo['isud'] eq 5"/>特辑</if></td>
+                <td><if condition="$vo['selected'] eq 1">显示<elseif condition="$vo['selected'] eq 0"/>不显示</if></td>
+                <td><if condition="$vo['isshow'] eq 0">有<elseif condition="$vo['isshow'] eq 2"/>没有</if></td>
+                <td><a href="{:U('Sellcate/selledit',array('id'=>$vo['ID']))}" class="btn btn-primary">编辑</a></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            {$page}
+        </ul>
+    </div>
+</div>
+<include file="Public:footer"/>

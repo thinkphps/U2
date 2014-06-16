@@ -1,0 +1,116 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li><a href="{:U('Sellcate/index')}">店铺自定义分类管理</a></li>
+        <li class="active"><strong>编辑</strong></li>
+    </ol>
+    <form class="form-horizontal" role="form" action="{:U('Sellcate/add')}" method='post'>
+        <input type='hidden' value='{$result.ID}' name='cid'>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">分类ID</label>
+            <div class="col-lg-3">
+                {$result.ID}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">名称</label>
+            <div class="col-lg-5">
+                {$result.cateName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">父类ID</label>
+            <div class="col-lg-5">
+                {$result.parentID}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">排序ID</label>
+            <div class="col-lg-5">
+                <input type="tel" class="form-control" id="inputTel" placeholder="排序ID" name='sort_order' value='{$result.sort_order}'>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">是否显示</label>
+            <div class="col-lg-2">
+                <select name='issel'>
+                    <option value='0' <if condition="$result.selected eq 0">selected='selected'</if>>不显示</option>
+                    <option value='1' <if condition="$result.selected eq 1">selected='selected'</if>>显示</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">类别</label>
+            <div class="col-lg-2">
+                <select name='gender'>
+                    <option value='0'>请选择</option>
+                    <option value='1' <if condition="$result.gender eq 1">selected='selected'</if>>女</option>
+                    <option value='2' <if condition="$result.gender eq 2">selected='selected'</if>>男</option>
+                    <option value='3' <if condition="$result.gender eq 3">selected='selected'</if>>童装</option>
+                    <option value='4' <if condition="$result.gender eq 4">selected='selected'</if>>幼儿</option>
+                    <option value='5' <if condition="$result.gender eq 5">selected='selected'</if>>婴儿</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">部位</label>
+            <div class="col-lg-2">
+                <select name='isud''>
+                <option value='0'>没有标签</option>
+                <option value='1' <if condition="$result.isud eq 1">selected='selected'</if>>上装</option>
+                <option value='2' <if condition="$result.isud eq 2">selected='selected'</if>>下装</option>
+                <option value='3' <if condition="$result.isud eq 3">selected='selected'</if>>内衣</option>
+                <option value='4' <if condition="$result.isud eq 4">selected='selected'</if>>配饰</option>
+                <option value='5' <if condition="$result.isud eq 5">selected='selected'</if>>特辑</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTel" class="col-lg-2 control-label">别名</label>
+            <div class="col-lg-2">
+                <input type="tel" class="form-control" id="inputTel" placeholder="别名" name='shortName' value='{$result.shortName}'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-success">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public:footer"/>
+<script>
+    var cityurl = "{:U('Shop/getcity')}",areaurl = "{:U('Shop/getarea')}";
+    var H = Object();
+    $(function(){
+        H.pfunction = function(v,flag){
+            if(flag==1){
+                $.post(cityurl,{pid:v},function(data,status){
+                    if(data.code==1){
+                        $('#pname').nextAll().remove();
+                        $('#pname').after(data.data);
+                    }else{
+                        alert(data.msg);
+                    }
+                },'JSON');
+            }
+        }
+        $('#pname').change(function(){
+            H.pfunction($('#pname option:selected').val(),1);
+        });
+        $('.form-horizontal').on('change','#cname',function(){
+            var id = $('#cname option:selected').val();
+            $.post(areaurl,{cid:id},function(data,status){
+                if(data.code==1){
+                    $('#cname').nextAll().remove();
+                    $('#cname').after(data.data);
+                    $('#showid').text('当前最大值:'+data.showtag);
+                }else{
+                    alert(data.msg);
+                }
+            },'JSON');
+        });
+    });
+
+</script>
