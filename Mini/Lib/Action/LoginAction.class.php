@@ -27,7 +27,7 @@ class LoginAction extends Action{
 				$collection->where(array('uid'=>session("uniq_user_id")))->delete();
 			}
 			//用户登陆后吧cookie里的三件商品放进有衣柜
-			$cooiid = $cooiid = $this->_post('nologiidu').$this->_post('nologiidd');;
+			$cooiid = $cooiid = $this->_post('nologiidu').$this->_post('nologiidd');
 			$time = date('Y-m-d H:i:s');
           if(!empty($cooiid)){
 			$arrcooiid = explode('_',$cooiid);
