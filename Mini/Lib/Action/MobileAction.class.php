@@ -77,21 +77,15 @@ class MobileAction extends Action{
            S('mstyledata',serialize($beubeu_suits_list),array('type'=>'file'));
        }
        //默认女士上下装自定义分类
-       if(S('cust1')){
-           $ucuslist = unserialize(S('cust1'));
-       }else{
-           $ucuslist  = $recomodel->getCateList('1');//上装
-           S('cust11',serialize($ucuslist),array('type'=>'file'));
-       }
        if(S('cust12')){
-           $dcuslist = unserialize(S('cust12'));
+           $ucuslist = unserialize(S('cust12'));
        }else{
-           $dcuslist  = $recomodel->getCateList('2');//下装
-           S('cust12',serialize($dcuslist),array('type'=>'file'));
+           $where = array('selected'=>1,'shortName'=>array('neq',''));
+           $ucuslist  = $recomodel->getCateList2($where);//自定义分类
+           S('cust12',serialize($ucuslist),array('type'=>'file'));
        }
        $this->assign('beubeu_suits_list',$beubeu_suits_list);
        $this->assign('ucuslist',$ucuslist);
-       $this->assign('dcuslist',$dcuslist);
        //优衣库二期
        $this->assign('nick',$nick);
        $this->assign('newstore',C('NEWSRORE'));
