@@ -582,7 +582,8 @@
                     </volist>
                 </ul>
             </div>
-            <div class="zk_btn"><a href="javascript:;"></a></div><input type='checkbox' value='1' id='chscid'>多选
+            <div class="zk_btn"><a href="javascript:;"></a><span class="mleft">更多</span></div>
+            <div class="zk_btn2"><a href="javascript:;"></a><span class='mrtop'>单选</span></div>
         </div>
 
     </div>
@@ -831,7 +832,7 @@ $('.imgrd').css(css);
 
         //点击自定义分类向下按钮
         $('.zk_btn').on('click',function(){
-            if($('.left_tj').css('height') == '26px'){
+            if($('.left_tj').css('height') == '52px'){
                 $('.left_tj').css('height','auto');
                 $('.left_tj ul').css('height','auto');
                 $('.right_tj').css('height','auto');
@@ -843,10 +844,10 @@ $('.imgrd').css(css);
                     $('.zk_btn').addClass('upselect');
                 }
             }else{
-                $('.left_tj').css('height','26px');
-                $('.left_tj ul').css('height','26px');
-                $('.right_tj').css('height','26px');
-                $('.right_tj ul').css('height','26px');
+                $('.left_tj').css('height','52px');
+                $('.left_tj ul').css('height','52px');
+                $('.right_tj').css('height','52px');
+                $('.right_tj ul').css('height','52px');
                 if($('.zk_btn').hasClass('upselect')){
                     $('.zk_btn').removeClass('upselect');
                 }
@@ -864,7 +865,7 @@ $('.imgrd').css(css);
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             $.weather.str = '';
-            var zid = $(this).attr('la'),zleftlength = $('.zleft').length,iscbox = $('#chscid').is(':checked');
+            var zid = $(this).attr('la'),zleftlength = $('.zleft').length,iscbox = $('.zk_btn2').hasClass('upselect');
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
             }else{

@@ -409,10 +409,10 @@ var _mini = {
                         $('.right_tj').css('height','auto');
                         $('.right_tj ul').css('height','auto');
                     }else{
-                        $('.left_tj').css('height','26px');
-                        $('.left_tj ul').css('height','26px');
-                        $('.right_tj').css('height','26px');
-                        $('.right_tj ul').css('height','26px');
+                        $('.left_tj').css('height','52px');
+                        $('.left_tj ul').css('height','52px');
+                        $('.right_tj').css('height','52px');
+                        $('.right_tj ul').css('height','52px');
                     }
                     var ustr = '',dstr='';
                     $.each(data.u,function(i,name){
@@ -794,13 +794,17 @@ $('#watercontainer').waterfall({
 
     debug: false
 });
-$('.yyk_tj').on('click','#chscid',function(){   //自定义分类全选
-    if(!$(this).is(':checked')){
-        _mini.left.length = 0;
-        $('.zleft').children('a').removeClass('w_select');
-        $('#alluid').children('a').removeClass('w_select');
-    }
-
+$('.zk_btn2').on('click',function(){   //自定义分类全选
+        if($('.zk_btn2').hasClass('upselect')){  //单选
+            $('.zk_btn2').removeClass('upselect');
+            _mini.left.length = 0;
+            $(this).children('span.mrtop').html('单选');
+            $('.zleft').children('a').removeClass('w_select');
+            $('#alluid').children('a').removeClass('w_select');
+        }else{  //多选
+            $('.zk_btn2').addClass('upselect');
+            $(this).children('span.mrtop').html('多选');
+        }
 });
 $('.login').on('click','#homeid',function(){  //个人中心
     $('.user_center').removeClass('none');
