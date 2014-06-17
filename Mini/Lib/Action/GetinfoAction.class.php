@@ -8,7 +8,11 @@ class GetinfoAction extends Action{
             $sid = $sid?$sid:0;
             $fid = $fid?$fid:0;
             $page = $page?$page:1;
+            if(is_mobile()){
+            $page_num = 2;
+            }else{
             $page_num = 4;
+            }
             $start = ($page-1)*$page_num;
             /*if(S('sid'.$tem.$sid.$fid)){
              $arr = unserialize(S('sid'.$tem.$sid.$fid));
@@ -76,33 +80,24 @@ class GetinfoAction extends Action{
         }else{
         $recomodel = D('Reco');
         if($sid!=4 && $sid!=0){
-            if($sid==3){
-                $where['gtype'] = array('exp','in(3,4)');
-            }else{
-                $where['gtype'] = $sid;
-            }
-                $where['isud'] = '1';
-                //$where['selected'] = 1;
-            //$ucuslist  = $recomodel->getCusData2($where);//上装
-            $ucuslist  = $recomodel->getCusData($where);//上装
-
-            $where['isud'] = '2';
-            //$dcuslist  = $recomodel->getCusData2($where);//下装
-            $dcuslist  = $recomodel->getCusData($where);//下装
+            $where['gender'] = $sid;
+            $where['selected'] = 1;
+            $where['shortName'] = array('neq','');
+            $where['isshow']= 0;
+            $ucuslist  = $recomodel->getCusData2($where);//上装
+            //$ucuslist  = $recomodel->getCusData($where);//上装
             $arr['u'] = $ucuslist;
-            $arr['d'] = $dcuslist;
         }else if($sid==4){
-            $where['gtype'] = 5;
-            //$where['selected'] = 1;
-            $babylist  = $recomodel->getCusData($where);//上装
-            $arr['b'] = $babylist;
+            $where['gender'] = array('exp','in(4,5)');
+            $where['selected'] = 1;
+            $where['shortName'] = array('neq','');
+            $where['isshow']= 0;
+            $babylist  = $recomodel->getCusData2($where);//上装
+            $arr['u'] = $babylist;
         }else if($sid==0){
-            //$where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
-            $ucuslist = $recomodel->getCateList('1');
-            //$where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
-            $dcuslist = $recomodel->getCateList('2');
+            $where = array('selected'=>1,'shortName'=>array('neq',''),'isshow'=>0);
+            $ucuslist = $recomodel->getCateList2($where);
             $arr['u'] = $ucuslist;
-            $arr['d'] = $dcuslist;
         }
         S('midsid'.$sid,serialize($arr),array('type'=>'file'));
         }

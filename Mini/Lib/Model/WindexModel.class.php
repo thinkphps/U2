@@ -164,19 +164,19 @@ class WindexModel extends Model{
     public function getOrderStr($oid=1){
            switch($oid){
                case 1 :
-                   $orderStr = 'order by bg.num_iid desc';//默认排序
+                   $orderStr = 'bg.num_iid desc';//默认排序
                break;
                case 2 :
-                   $orderStr = 'order by bg.num_iid desc';//热度排序
+                   $orderStr = 'bg.num_iid desc';//热度排序
                break;
                case 3 :
-                   $orderStr = 'order by bg.num_iid desc';//新品排序
+                   $orderStr = 'bg.num_iid desc';//新品排序
                break;
                case 4 :
-                   $orderStr = 'order by bg.price asc';//价格升序
+                   $orderStr = 'bg.price asc';//价格升序
                break;
                case 5 :
-                   $orderStr = 'order by bg.price desc';//价格降序
+                   $orderStr = 'bg.price desc';//价格降序
                    break;
            }
           return $orderStr;

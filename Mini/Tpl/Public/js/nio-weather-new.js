@@ -348,7 +348,7 @@ jQuery(function($){
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
             $.weather.nextpage = 0;
-            $('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
+            //$('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
             H.map.centerAndZoom(city, 11);
             $.weather.tipcity = city;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',

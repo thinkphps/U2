@@ -401,13 +401,6 @@ var _mini = {
     getzid : function(sid){
         $.post(midstyleurl,{sid:sid},function(data,status){
             if(data){
-                //上下装
-                if(sid!=4){
-                    $('.right_tj').css('display','block');
-                    $('.zk_btn').css('display','block');
-                    $('.left_tj').css('width','466px');
-                    $('.left_tj ul').css('width','466px');
-                    $('#alluid').children('a').text('全部上装');
                     $('#alluid').children('a').addClass('w_select');
                     $('#alldid').children('a').addClass('w_select');
                     if($('.zk_btn').hasClass('upselect')){
@@ -425,25 +418,9 @@ var _mini = {
                     $.each(data.u,function(i,name){
                         ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
                     });
-                    $.each(data.d,function(i,name){
-                        dstr+="<li class='doclothes zright' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                    });
                     $('#alluid').nextAll('li').remove();
                     $('#alluid').after(ustr);
-                    $('#alldid').nextAll('li').remove();
-                    $('#alldid').after(dstr);
-                }else{
-                    var bstr = '<ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
-                    $('.right_tj').css('display','none');
-                    $('.zk_btn').css('display','none');
-                    $.each(data.b,function(i,bname){
-                        bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
-                    });
-                    bstr+='</ul>';
-                    $('.left_tj').html(bstr);
-                    $('.left_tj').css('width','650px');
-                    $('.left_tj ul').css('width','650px');
-                }
+
             }
         },'json');
     },
@@ -683,10 +660,6 @@ $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
 
     }
 });
-
-
-
-
 $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
 
     //如果没有登录则弹出注册框
@@ -714,6 +687,7 @@ $('#watercontainer').on('click','#buydata',function(){         //右侧已购买
 
 $('#watercontainer').on('click','#keybutton',function(){          //右侧keyword
     $.weather.nextpage = 0;
+    _mini.left.length = 0;
     var keyword = $('#keywordid').val();
     $(this).addClass('select');
     $('#cldatas').removeClass('select');
@@ -751,7 +725,7 @@ $('#watercontainer').waterfall({
     colWidth: 228,
     gutterWidth: 10,
     gutterHeight: 0,
-    align: 'center',
+    align: 'left',
     minCol: 1,
     maxCol: 4,
     maxPage: -1,
@@ -820,7 +794,20 @@ $('#watercontainer').waterfall({
 
     debug: false
 });
+$('.yyk_tj').on('click','#chscid',function(){   //自定义分类全选
+    if(!$(this).is(':checked')){
+        _mini.left.length = 0;
+        $('.zleft').children('a').removeClass('w_select');
+        $('#alluid').children('a').removeClass('w_select');
+    }
 
+});
+$('.login').on('click','#homeid',function(){  //个人中心
+    $('.user_center').removeClass('none');
+});
+$('#close-home').click(function(){
+    $('.user_center').addClass('none');
+});
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();

@@ -353,7 +353,7 @@ function Model_loadok_callback(){
             });
 
             //点击衣服调用试穿按钮功能
-            pageElement.$watercontainer.on('click','.product_inf',function(){
+           /* pageElement.$watercontainer.on('click','.product_inf',function(){
                 $(this).parent().find('.tryon').click();
             });
             //点击衣服调用试穿按钮功能
@@ -370,7 +370,7 @@ function Model_loadok_callback(){
                }else{
                    $productInfo.hide();
                }
-            });
+            });*/
 
             pageElement.$watercontainer.on('click','.product_inf',function(){
                 //如果已显示价格图层，就隐藏
@@ -383,7 +383,7 @@ function Model_loadok_callback(){
             });
 
             //鼠标移出隐藏色块
-            pageElement.$watercontainer.on('mouseleave','.wrapper_box',function(){
+            /*pageElement.$watercontainer.on('mouseleave','.wrapper_box',function(){
                 var $this = $(this);
 //                $(this).find('.product_inf').hide();
                 var $color_img = $this.find('.color-img');
@@ -422,14 +422,14 @@ function Model_loadok_callback(){
                         }
                     }
                 }
-            });
+            });*/
 
             //点击试穿按钮，显示颜色
             $('#watercontainer').on('click','.tryon',function(){
                 var $this = $(this);
                 if(!$this.hasClass('select')){
                     pageElement.IsHide = 1;
-                    var $wrapper_box = $this.parent().parent().parent();
+                    var $wrapper_box = $this.parent();
                     var gender = $this.data('gendertype');
                     $this.addClass('select');
                     if( gender == 5){
@@ -489,6 +489,45 @@ function Model_loadok_callback(){
 
                     }
 //                $this.data('selected',1);
+                }else{
+                    //再次点击
+                    $this = $(this).parent();
+                    var $color_img = $this.find('.color-img');
+                    var $tryon =  $(this).parent().find('.tryon');
+                    var gender = $tryon.data('gendertype');
+                    if(gender == 5){
+                        var isud = $tryon.data('isud');
+                        if(isud == 1){
+                            if(!$('#tops_bottoms').is(':hidden')){
+                                if($tryon.data('imgurl') != $('#tops_bottoms img').attr('src')){
+                                    $tryon.removeClass('select');
+                                }
+                            }
+                        }else if(isud == 2){   //如果是下装，则将图片显示到下部
+                            if(!$('#bottoms').is(':hidden')){
+                                if($tryon.data('imgurl') != $('#bottoms img').attr('src')){
+                                    $tryon.removeClass('select');
+                                }
+                            }
+                        }
+                        else{
+                            if(!$('#single').is(':hidden')){
+                                if($tryon.data('imgurl') != $('#single img').attr('src')){
+                                    $tryon.removeClass('select');
+                                }
+                            }
+                        }
+                    }else{
+                        pageElement.IsHide = 0;
+                        if( $color_img.find('.pro-selected').length == 0){
+                            $this.find('.product_color').hide();
+                            if($tryon.hasClass('select')){
+                                $tryon.removeClass('select');
+                                $tryon.data('selected',0);
+                                pageElement.currentColRelayout($($this.parent()[0]),-1);
+                            }
+                        }
+                    }
                 }
             });
 

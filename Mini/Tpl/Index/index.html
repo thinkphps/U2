@@ -480,7 +480,7 @@
         </li>
     </ul>
     <div class="pa none" id="style-mask"></div>
-    <div class="rightmsg">注：衣物实际库存及价格请参照优衣库官方网站</div>
+    <div class="rightmsg">备注： 商品实际库存及售价请参照优衣库网店数据。</div>
 </div>
 
 <!--主体内容-->
@@ -582,7 +582,7 @@
                     </volist>
                 </ul>
             </div>
-            <div class="zk_btn"><a href="javascript:;"></a></div>
+            <div class="zk_btn"><a href="javascript:;"></a></div><input type='checkbox' value='1' id='chscid'>多选
         </div>
 
     </div>
@@ -864,12 +864,13 @@ $('.imgrd').css(css);
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             $.weather.str = '';
-            var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
+            var zid = $(this).attr('la'),zleftlength = $('.zleft').length,iscbox = $('#chscid').is(':checked');
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
             }else{
                 $('.zleft').children('a').removeClass('w_select');
             }
+            if(iscbox){
             if($(this).children('a').hasClass('w_select')){
              $(this).children('a').removeClass('w_select');
                 var i = $.inArray(zid, _mini.left);
@@ -892,6 +893,17 @@ $('.imgrd').css(css);
                 _mini.left.length = 0;
             }
             $.uniqlo.zid = _mini.left.join('_');
+            }else{
+                    if($(this).children('a').hasClass('w_select')){
+                        $(this).children('a').removeClass('w_select');
+                    }else{
+                        $('.zleft').children('a').removeClass('w_select');
+                        $('#alluid').children('a').removeClass('w_select');
+                        $(this).children('a').addClass('w_select');
+                    }
+                    _mini.left.push(zid);
+                    $.uniqlo.zid = zid;
+                }
            getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
             $(window).scrollTop(tmpscrolltop);
         });

@@ -101,23 +101,15 @@ class IndexAction extends Action {
             S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
         }
         //默认女士上下装自定义分类
-        if(S('cust1')){
-            $ucuslist = unserialize(S('cust1'));
+        if(S('cust11')){
+            $ucuslist = unserialize(S('cust11'));
         }else{
-            $where = array('gender'=>array('neq',5),'isud'=>1,'selected'=>1);
-            $ucuslist  = $recomodel->getCateList2($where);//上装
+            $where = array('selected'=>1,'shortName'=>array('neq',''),'isshow'=>0);
+            $ucuslist  = $recomodel->getCateList2($where);//自定义分类
             S('cust11',serialize($ucuslist),array('type'=>'file'));
-        }
-        if(S('cust12')){
-            $dcuslist = unserialize(S('cust12'));
-        }else{
-            $where = array('gender'=>array('neq',5),'isud'=>2,'selected'=>1);
-            $dcuslist  = $recomodel->getCateList2($where);//下装
-            S('cust12',serialize($dcuslist),array('type'=>'file'));
         }
         $this->assign('beubeu_suits_list',$beubeu_suits_list);
         $this->assign('ucuslist',$ucuslist);
-        $this->assign('dcuslist',$dcuslist);
         //优衣库二期
 
         $this->assign('nick',$nick);
@@ -341,7 +333,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=bg.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=bg.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} {$ostr} limit {$start},{$page_num}";
+                $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} order by {$ostr} limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -397,14 +389,14 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     }
                 }
                 $cstr = rtrim($cstr,',');
-                //$catewhere = " and cg.cateID in (".$cstr.")";
-                $where.= " and g.wid in (".$cstr.")";
+                $catewhere = " and cg.cateID in (".$cstr.")";
+                //$where.= " and g.wid in (".$cstr.")";
             }
             //$where.=" and bg.approve_status='onsale'";
             //$where.=" and bg.isdel=0";
             if(isset($tem)){
                 $case = "case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo";
-                $ordr = "order by wo asc";
+                $ordr = "order by wo asc,";
             }else{
                 $case = '';
                 $ordr = "";
@@ -419,40 +411,44 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $goodstable = '`u_goods`';
             }
-                if(!empty($uid)){
+              /*if(!empty($uid)){
                     $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
                 }else{
                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
                 }
                 $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
 
-                $colorData = $windex->colorDetail($colorsql);
-            /*if($zid && !empty($zid)){
-                 if(!isset($tem) && empty($sid) && empty($fid)){
+                $colorData = $windex->colorDetail($colorsql);*/
+          if($zid && !empty($zid)){
+                 if(!isset($tem) && empty($sid) && empty($fid) && !isset($tem)){
                   //如果只有自定义分类
                     if(!empty($uid)){
                       $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
                     }else{
-                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2".$catewhere ." order by {$ostr} limit ".$start.",".$page_num;
+                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num;
                     }
                  }else{
                     //有自定义分类也有其他的条件
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
-                        $sql = "select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                      $sql = "select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
                  }
             }else{
             if(!empty($uid)){
-                $sql = "select al.*{$fieldlb} from (select g.good_id{$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
+                $sql = "select al.*{$fieldlb} from (select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
             }else{
-                $sql = "select g.good_id".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+               $sql = "select ".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
-            }*/
+            }
             $result = $goodtag->query($sql);
             if(!empty($result)){
-                $windex->doColor($result,$colorData);
+                //$windex->doColor($result,$colorData);
+                foreach($result as $k1=>$v1){
+                    $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
+                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                }
             }else{
                 $result = array();
             }

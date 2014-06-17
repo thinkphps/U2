@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>优衣库试衣间</title>
 <link href="__TMPL__Public/mobile/css/dressing_room_detail.css" rel="stylesheet" type="text/css" />
-    <!--<link href="__TMPL__Public/mobile/css/uniqlonew.css" rel="stylesheet" type="text/css" />-->
+<link href="__TMPL__Public/mobile/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -47,7 +47,7 @@
             <a href="{:U('Index/loginout')}" >退出登录</a>
         </div>
         </if>
-        <a href="http://www.uniqlo.cn/?kid=11727_51912_165320_210820" class="tmail2" target='__blank'><i></i>旗舰店</a>
+        <a href="http://www.uniqlo.cn/?kid=11727_51912_165320_210820" class="tmail2" target='__blank'><i></i>官方店</a>
         <a href="http://uniqlo.tmall.com/?kid=11727_51912_165316_210816" class="tmail" target='__blank'><i></i>天猫店</a>
     </div>
 </div>
@@ -410,8 +410,8 @@
     <div class="filters">
         <!--天气-->
         <div class="weather">
-            <ul id="ulweek">
-                <li class="w_select" id="li_day0">
+            <ul id="ulweek swiper-wrapper">
+                <li class="w_select swiper-slide" id="li_day0">
                     <i title="晴天" class="nio-0" id="title_day0"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day0">20</p>
@@ -422,7 +422,7 @@
                     <a href="javascript:;"></a>
                     <div class="close_w_ts none"></div>
                 </li>
-                <li id="li_day1">
+                <li id="li_day1 swiper-slide">
                     <i title="晴天" class="nio-1" id="title_day1"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day1">20</p>
@@ -431,7 +431,7 @@
                         <p class="w_t_name" id="name_day1">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day2">
+                <li id="li_day2 swiper-slide">
                     <i title="晴天" class="nio-2" id="title_day2"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day2">20</p>
@@ -440,7 +440,7 @@
                         <p class="w_t_name" id="name_day2">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day3">
+                <li id="li_day3 swiper-slide">
                     <i title="晴天" class="nio-3" id="title_day3"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day3">20</p>
@@ -449,7 +449,7 @@
                         <p class="w_t_name" id="name_day3">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day4">
+                <li id="li_day4 swiper-slide">
                     <i title="晴天" class="nio-33" id="title_day4"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day4">20</p>
@@ -479,51 +479,33 @@
         <!--分类2-->
         <div class="style_btn_group">
         	<a href="javascript:;" class="" data-fsx='1'>风格<br /><span>STYLE</span></a>
-            <a href="javascript:;" data-fsx='2'>上装<br /><span>TOPS</span></a>
-            <a href="javascript:;" style="border:none;" data-fsx='3'>下装<br /><span>BOTTOMS</span></a>
+            <a href="javascript:;" data-fsx='2'>全部分类<br /><span>ALL CATALOG</span></a>
+            <div class="style_btn_group_detail mini-pop none">
+                <ul id='cstyle2'>
+                    <li class="a1" style="width:100%" data-suitstyle="all"><a href="javascript:;"><i></i>全部</a></li>
+                    <li class="a2" data-suitstyle="6"><a href="javascript:;"><i></i>可爱</a></li>
+                    <li class="a3" data-suitstyle="7"><a href="javascript:;"><i></i>淑女</a></li>
+                    <li class="a4" data-suitstyle="8"><a href="javascript:;"><i></i>成熟</a></li>
+                    <li class="a5" data-suitstyle="1"><a href="javascript:;"><i></i>休闲</a></li>
+                    <li class="a6" data-suitstyle="3"><a href="javascript:;"><i></i>英伦</a></li>
+                    <li class="a7" data-suitstyle="4"><a href="javascript:;"><i></i>居家</a></li>
+                    <li class="a8" data-suitstyle="9"><a href="javascript:;"><i></i>通勤</a></li>
+                    <li class="a9" data-suitstyle="5"><a href="javascript:;"><i></i>商务</a></li>
+                    <li class="a10" data-suitstyle="2"><a href="javascript:;" data-suitstyle="2"><i></i>简约</a></li>
+                    <li class="a11" data-suitstyle="10"><a href="javascript:;"><i></i>运动</a></li>
+                </ul>
+            </div>
+            <div class="tag_text mini-pop none left_tj">
+                <ul>
+                    <li id='alluid' class='upclothes select' la='0'><a href="javascript:;">全部分类</a></li>
+                    <volist id='ucvo' name='ucuslist'>
+                        <li class='upclothes zleft' la='{$ucvo.id}' class='upclothes zleft'><a href="javascript:;" >{$ucvo.name}</a></li>
+                    </volist>
+                </ul>
+          </div>
         </div>
-        
-        
-        <div class="style_btn_group_detail mini-pop none">
-            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a>
-        	<ul id='cstyle2'>
-                <li class="a1" style="width:100%" data-suitstyle="all"><a href="javascript:;"><i></i>全部</a></li>
-            	<li class="a2" data-suitstyle="6"><a href="javascript:;"><i></i>可爱</a></li>
-                <li class="a3" data-suitstyle="7"><a href="javascript:;"><i></i>淑女</a></li>
-                <li class="a4" data-suitstyle="8"><a href="javascript:;"><i></i>成熟</a></li>
-                <li class="a5" data-suitstyle="1"><a href="javascript:;"><i></i>休闲</a></li>
-                <li class="a6" data-suitstyle="3"><a href="javascript:;"><i></i>英伦</a></li>
-                <li class="a7" data-suitstyle="4"><a href="javascript:;"><i></i>居家</a></li>
-                <li class="a8" data-suitstyle="9"><a href="javascript:;"><i></i>通勤</a></li>
-                <li class="a9" data-suitstyle="5"><a href="javascript:;"><i></i>商务</a></li>
-                <li class="a10" data-suitstyle="2"><a href="javascript:;" data-suitstyle="2"><i></i>简约</a></li>
-                <li class="a11" data-suitstyle="10"><a href="javascript:;"><i></i>运动</a></li>
-            </ul>
-        </div>
-        <div class="tag_text mini-pop none left_tj">
-            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a>
-            <ul>
-                <li id='alluid' class='upclothes select' la='0'><a href="javascript:;">全部上装</a></li>
-                <volist id='ucvo' name='ucuslist'>
-                <li class='upclothes zleft' la='{$ucvo.id}' class='upclothes zleft'><a href="javascript:;" >{$ucvo.name}</a></li>
-                 </volist>
-            </ul>
-        </div>
-        
-        <div class="tag_text2 mini-pop none right_tj">
-            <a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a>
-        	<ul>
-            	<li id='alldid' class='select doclothes' la='0'><a href="javascript:;">全部下装</a></li>
-                <volist id='dcvo' name='dcuslist'>
-                <li la='{$dcvo.id}' class='doclothes zright'><a href="javascript:;">{$dcvo.name}</a></li>
-                </volist>
-            </ul>
-        </div>
-        
 	</div>
-    
-    
-    
+
     <!--列表-->
     <div class="tj_wrapper" id='watercontainer'></div>
 </div>
@@ -657,6 +639,7 @@
 
 <script type="text/javascript" src="__TMPL__Public/mobile/js/dressing_room_detail.js"></script>
 <script type="text/javascript" src="__TMPL__Public/mobile/js/modeldress.js"></script>
+<script type="text/javascript" src="__TMPL__Public/mobile/js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
 </body>
@@ -668,7 +651,11 @@ $('.imgrd').css(css);
 
 
 $(function(){
-
+    var mySwiper = new Swiper('.weather',{
+        loop:true,
+        grabCursor: true,
+        paginationClickable: true
+    })
 
     //设置遮罩层的高度
     $('.mini-mask').css('height',$(document).height());
@@ -701,16 +688,10 @@ $(function(){
         }
         if(sid==1){
             $(".my_yyg").addClass('changjing1')
-//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
-//            $('.mini-aside').css('bottom','42px');
         }else if(sid==2){
             $(".my_yyg").addClass('changjing2')
-//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
-//            $('.mini-aside').css('bottom','113px');
         }else if(sid==3 || sid == 4){
             $(".my_yyg").addClass('changjing3')
-//            $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
-//            $('.mini-aside').css('bottom','143px');
         }
         _mini.getSuits();
     });
@@ -730,6 +711,7 @@ $(function(){
         $.weather.str = '';
         var sid = $(this).data('gender');
         $('.style_btn_group a').removeClass('style_select');
+        $('.mini-pop').hide();
         $.uniqlo.fid = 0;
         $('#cateu2 li').removeClass('rw_select');
         $('#cstyle2 li').removeClass('select');
@@ -846,13 +828,13 @@ $(function(){
         var zid = $(this).attr('la'),zrightlength = $('.zright').length;
         if(zid!=0){
 
-            $('#alldid').children('a').removeClass('w_select');
+            $('#alldid').removeClass('select');
         }else{
-            $('.zright').children('a').removeClass('w_select');
+            $('.zright').removeClass('select');
         }
 
-        if($(this).children('a').hasClass('w_select')){
-            $(this).children('a').removeClass('w_select');
+        if($(this).hasClass('select')){
+            $(this).removeClass('select');
             var i = $.inArray(zid, _mini.right);
             if(i !== -1){
                 _mini.right.splice(i, 1)
@@ -863,13 +845,13 @@ $(function(){
             }else{
                 _mini.right.length = 0;
             }
-            $(this).children('a').addClass('w_select');
+            $(this).addClass('select');
         }
-        var leftallsel = $('#alluid').children('a').hasClass('w_select');
+        var leftallsel = $('#alluid').children('a').hasClass('select');
         var leftLen = _mini.left.length,rightLen = _mini.right.length;
         if(rightLen==zrightlength || (rightLen == 0 && leftallsel == false && leftLen==0)){
-            $('#alldid').children('a').addClass('w_select');
-            $('.zright').children('a').removeClass('w_select');
+            $('#alldid').addClass('select');
+            $('.zright').removeClass('select');
         } else {
         }
         setzid(leftLen,rightLen);

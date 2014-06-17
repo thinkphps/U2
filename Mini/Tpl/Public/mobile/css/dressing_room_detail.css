@@ -153,7 +153,7 @@ button,label{cursor:pointer; }
 .main_con.water5 li a.w_select{ background:#6a7786; color:#FFF;}
 
 .main_con.water6{ background:#ccd4db url(../images/detail_main_con_bg6.jpg) center 0 no-repeat;}
-.main_con.water6 li.w_select{ background:#636875;}
+.main_con.water6 li.w_select{ background:#1C6397;}
 .main_con.water6 .yyk_tj h3{ color:#636875;}
 .main_con.water6 li a.w_select{ background:#636875; color:#FFF;}
 
@@ -281,15 +281,15 @@ button,label{cursor:pointer; }
 
 /*分类2*/
 .style_btn_group{ float:left; width:100%; background:#FFF;}
-.style_btn_group a{ display:block; float:left; width:33%; height:2.6em; border-right:0.1em solid #eee; text-align:center; font-size:1.6em; line-height:1.2em; padding:0.8em 0 0 0;}
+.style_btn_group a{ display:block; float:left; width:49.9%; height:2.6em; border-right:0.1em solid #eee; text-align:center; font-size:1.6em; line-height:1.2em; padding:0.8em 0 0 0;}
 .style_btn_group a span{ font-size:0.6em; line-height:0.8em; color:#999;}
 .style_btn_group a.style_select{ background:#f00; color:#FFF;}
 .style_btn_group a.style_select span{ color:#FFF;}
 
 
-.style_btn_group_detail{ background-color: #FFFFFF;position: absolute; margin-left: -15em;width:30em;top: 5em;left: 50%;z-index: 11;}
+.style_btn_group_detail{ background-color: #FFFFFF;position: absolute;width:100%;top: 7.01%;z-index: 11;}
 .style_btn_group_detail ul li{ float:left; width:50%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
-.style_btn_group_detail ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center; position:relative; padding:0 0 0 2em;}
+.style_btn_group_detail ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center; position:relative;width:100%;}
 .style_btn_group_detail ul li a i{ display:block; float:left; width:2em; height:2em; position:absolute; left:50%; top:1em; margin-left:-2.5em;}
 
 .style_btn_group_detail ul li.a1 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat; background-size:4em 22em;}
@@ -350,17 +350,11 @@ button,label{cursor:pointer; }
 .style_btn_group_detail ul li.a11_0 a{cursor:default;background-color: #000;}
 .style_btn_group_detail ul li.a11_0 a:hover{color:#333333;}
 /*kimi*/
-.tag_text{ position:absolute; z-index:999; width:30em; left:50%; top:5em; margin-left:-15em;}
+.tag_text{ position:absolute; z-index:999; width:100%; top:7.01%;}
 .tag_text ul li{ float:left; width:33.33%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y;}
-.tag_text ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center;}
+.tag_text ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center;width:100%;}
 .tag_text ul li.select{ background:#666 url(../images/line1.png) right 0 repeat-y;}
 .tag_text ul li.select a{ color:#FFF;}
-
-.tag_text2{ position:absolute; z-index:999; width:30em; left:50%; top:5em; margin-left:-15em;}
-.tag_text2 ul li{ float:left; width:33.33%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y;}
-.tag_text2 ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center;}
-.tag_text2 ul li.select{ background:#666 url(../images/line1.png) right 0 repeat-y;}
-.tag_text2 ul li.select a{ color:#FFF;}
 
 /*列表 - 常规*/
 .tj_wrapper { float:left; width:100%; margin:2em auto; }
@@ -387,15 +381,15 @@ button,label{cursor:pointer; }
 .wrapper_box dl dd.btn_xh.select a i{ background:url(../images/list_icon.png) -2em -2.4em no-repeat; background-size:4em 6em;}
 .wrapper_box dl dd.btn_ym.select a i{  background:url(../images/list_icon.png) -2em -4em no-repeat; background-size:4em 6em;}
 
-.wrapper_box h3{ display:block; float:left; width:11.9em; line-height:1.5em; height:auto; padding:1em; font-weight:normal;}
-.wrapper_box h3 a{ color:#FFF;}
-.wrapper_box h3 a:hover{ color:#f5f5f5;}
-.wrapper_box h3.h_orange{ background:#f19f49;}
-.wrapper_box h3.h_blue{ background:#597798;}
-.wrapper_box h3.h_pink{ background:#ea777a;}
-
-
-
+.wrapper_box h3{ display:block; float:left; width:12.9em; line-height:1.5em; height:auto; font-weight:normal;padding:0.5em;}
+.wrapper_box h3 a{ color:#999999;}
+.wrapper_box h3.h_orange{ color:#999999;}
+.wrapper_box h3.h_blue{ color:#999999;}
+.wrapper_box h3.h_pink{ color:#999999;}
+/*售价库存*/
+.pri_num{color:#999999;}
+.pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
+.pri_num span.stock2{color:#FF0000;margin:0 0.5em;}
 
 /*列表 - 按钮组*/
 .wrapper_box_btn_group{}

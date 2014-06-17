@@ -1580,13 +1580,7 @@ li.mini-bot-range{
 
 /*== mini-aside ==*/
 
-.mini-aside{
-    display: block;
-    width: 70px;
-    position: absolute;
-    left: 0;
-    bottom: 42px;
-}
+.mini-aside{display: block;width: 70px; position: absolute;left: 0;bottom: 42px;z-index:105;}
 .mini-aside li{
     padding: 14px 0;
     border-bottom: 1px dotted #fff;

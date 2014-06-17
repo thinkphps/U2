@@ -1148,7 +1148,6 @@ jQuery(function($){
         cate.ps.find('a.mini-p-0,a.mini-s-0').addClass('mini-cate-checked')
       }
     })
-
     index.suit.on('click', 'a', function(){
       cate.design.left.length = cate.design.right.length = 0
       $.uniqlo.zid = 0

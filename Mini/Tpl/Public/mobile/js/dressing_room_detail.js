@@ -91,7 +91,7 @@ $(function(){
     });
 
     $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
-
+        if(!$(this).hasClass('w_select')){
         $.uniqlo.lid = 0;
         $.uniqlo.bid = 0;
         $.weather.nextpage = 0;
@@ -110,6 +110,12 @@ $(function(){
                 getgoods(avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
             }
         })
+		}else{
+        $.weather.nextpage = 0;
+        $.weather.avg = '';
+        getgoods('',$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        $.uniqlo.index.week.find('.w_select').removeClass('w_select');
+		}
     })
 
     //点击天气红色X，取消温度
@@ -400,36 +406,14 @@ var _mini = {
     getzid : function(sid){
         $.post(midstyleurl,{sid:sid},function(data,status){
             if(data){
-                //上下装
-                if(sid!=4){
-                    //$('#alluid').children('a').text('全部上装');
                     $('#alluid').addClass('select');
                     $('#alldid').addClass('select');
-                    $('.style_btn_group a:eq(1)').html('上装<br><span>TOPS</span>');
-                    $('.style_btn_group a:eq(2)').removeClass('noshow');
-                    var ustr = '',dstr='';
+                    var ustr = '';
                     $.each(data.u,function(i,name){
                         ustr+="<li class='upclothes zleft' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
                     });
-                    $.each(data.d,function(i,name){
-                        dstr+="<li class='doclothes zright' la='"+name.id+"'><a href='javascript:;'>"+name.name+"</a></li>";
-                    });
                     $('#alluid').nextAll('li').remove();
                     $('#alluid').after(ustr);
-                    $('#alldid').nextAll('li').remove();
-                    $('#alldid').after(dstr);
-                }else{
-                    $('.style_btn_group a:eq(1)').html('全部<br><span>ALL</span>');
-                    $('.style_btn_group a:eq(2)').addClass('noshow');
-                    $('.style_btn_group a:eq(2)').children('span').css('color',"#333333");
-                    var bstr = '<a class="mini-form-close mini-btn" style="z-index:15;" href="javascript:;">X</a><ul><li id="alluid" class="upclothes" la="0"><a href="javascript:;" class="w_select">全部</a></li>';
-                    $.each(data.b,function(i,bname){
-                        bstr+="<li class='upclothes zleft' la='"+bname.id+"'><a href='javascript:;'>"+bname['name']+"</a></li>";
-                    });
-                    bstr+='</ul>';
-                    $('.left_tj').html(bstr);
-                    $('#alldid').nextAll('li').remove();
-                }
             }
         },'json');
     },
@@ -560,10 +544,13 @@ var _mini = {
                 buyCss='';
                 if(v.type==1){
                     color = 'h_pink';
+                    color2 = '#EA777A';
                 }else if(v.type==2){
                     color = 'h_blue';
+                    color2 = '#597798';
                 }else if(v.type == 3 || v.type==4 || v.type == 5){
                     color = 'h_orange';
+                    color2 = '#F19F49';
                 }
 
                 if(v.loveid != null && v.loveid != undefined){
@@ -573,12 +560,13 @@ var _mini = {
                     buyCss = ' select';
                 }
 
-                strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;">';
+                strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl>';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
-                strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
+                strHtml += '<dl class="pri_num" style="border-top:1px solid '+color2+';"><span class="price">￥'+ v.price+'</span>库存<span class="stock2">'+ v.num+'</span>件</dl>';
+                /*strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
                     strHtml+= '搭配';
@@ -590,7 +578,7 @@ var _mini = {
                         strHtml += '试穿';
                     }
                 }
-                strHtml += '</a></dt></dl>';
+                strHtml += '</a></dt></dl>';*/
 
                 //颜色
                 var sty = '';
@@ -604,16 +592,16 @@ var _mini = {
                 strHtml += '</ul></div>';
                 if(v.num>0){
                     strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'&kid=11727_51912_165824_211542" target="_blank">'+ v.title+'</a></h3>';
-                    strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
-                    strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
-                    strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
+                    //strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
+                    //strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
+                    //strHtml += '<p class="stock">剩余库存<span>'+ v.num+'</span>件</p>';
                 }else{
                     strHtml += '<h3 class="'+color+'">'+ v.title+'</h3>';
-                    strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
-                    strHtml += '<div class="inf_con"><p class="price">已售罄</p>';
+                    //strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
+                    //strHtml += '<div class="inf_con"><p class="price">已售罄</p>';
                 }
-                strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
-                strHtml += '<div class="inf_bom"><a href="javascript:;" class="select"></a></div></div></div></div>';
+                //strHtml += '<div class="inf_xx"><p>'+ v.title +'</p></div></div>';
+                strHtml += '</div></div>';
             }
         });
         return strHtml;
@@ -733,35 +721,34 @@ $('#watercontainer').on('click','#keybutton',function(){          //右侧keywor
 $('.style_btn_group').on('click','a',function(){
     var fsxvalue = $(this).data('fsx');
     if(!$(this).hasClass('noshow')){
-    $('.style_btn_group a').removeClass('style_select');
     if(fsxvalue==1){
-        $('div.mini-mask').show();
-        $('.style_btn_group_detail').show();
-        $(this).addClass('style_select');
+        $('.tag_text').hide();
+        $('.style_btn_group a:eq(1)').removeClass('style_select');
+        if($(this).hasClass('style_select')){
+            $('.style_btn_group_detail').hide();
+            $(this).removeClass('style_select');
+        }else{
+            $('.style_btn_group_detail').show();
+            $(this).addClass('style_select');
+        }
+
     }else if(fsxvalue==2){
-        $('div.mini-mask').show();
-        $('.tag_text').show();
-        $(this).addClass('style_select');
-    }else if(fsxvalue==3){
-        $('div.mini-mask').show();
-        $('.tag_text2').show();
-        $(this).addClass('style_select');
+        $('.style_btn_group_detail').hide();
+        $('.style_btn_group a:eq(0)').removeClass('style_select');
+        if($(this).hasClass('style_select')){
+            $('.tag_text').hide();
+            $(this).removeClass('style_select');
+        }else{
+            $('.tag_text').show();
+            $(this).addClass('style_select');
+        }
+
     }
 }
-});
-$('.style_btn_group_detail').on('click','.mini-form-close',function(){
-    $('div.mini-mask').hide();
-    $('.style_btn_group_detail').hide();
-    $('.style_btn_group a').removeClass('style_select');
 });
 $('.tag_text').on('click','.mini-form-close',function(){
     $('div.mini-mask').hide();
     $('.tag_text').hide();
-    $('.style_btn_group a').removeClass('style_select');
-});
-$('.tag_text2').on('click','.mini-form-close',function(){
-    $('div.mini-mask').hide();
-    $('.tag_text2').hide();
     $('.style_btn_group a').removeClass('style_select');
 });
 document.onkeydown = function(e){
@@ -778,8 +765,8 @@ $('#watercontainer').waterfall({
     fitWidth: true,
     colWidth: 142,
     gutterWidth: 10,
-    gutterHeight: 0,
-    align: 'center',
+    gutterHeight: -10,
+    align: 'left',
     minCol: 1,
     //maxCol: 4,
     maxPage: -1,
