@@ -92,7 +92,21 @@ class RecoModel extends Model{
      return M('Customcate')->field('id,name')->where($where)->select();
     }
     public function getCusData2($where){
-        return M('Sellercats')->field('ID as id,shortName as name')->where($where)->order('sort_order asc')->select();
+        $sell = M('Sellercats');
+        $result = $sell->field('ID as id,shortName as name')->where($where)->group('shortName')->order('sort_order asc')->select();
+        foreach($result as $k=>$v){
+            $idlist = $sell->cache(true)->field('ID as id')->where(array('selected'=>1,'shortName'=>$v['name'],'isshow'=>0))->select();
+            $idstr = '';
+            foreach($idlist as $k1=>$v1){
+                if($v1){
+                    $idstr.=$v1['id'].'_';
+                }
+            }
+            $idstr = rtrim($idstr,'_');
+            $ucuslist[] = array('id'=>$idstr,'name'=>$v['name']);
+        }
+        unset($result);
+        return $ucuslist;
     }
     public function getCateList($isud){
     $customcate = M('Customcate');
@@ -114,7 +128,7 @@ class RecoModel extends Model{
         $customcate = M('Sellercats');
         $custom = $customcate->cache(true)->field('ID as id,shortName as name')->where($where)->group('shortName')->order('sort_order asc')->select();
         foreach($custom as $k=>$v){
-            $idlist = $customcate->cache(true)->field('ID as id')->where(array('shortName'=>$v['name'],'isshow'=>0))->select();
+            $idlist = $customcate->cache(true)->field('ID as id')->where(array('selected'=>1,'shortName'=>$v['name'],'isshow'=>0))->select();
             $idstr = '';
             foreach($idlist as $k1=>$v1){
                 if($v1){
