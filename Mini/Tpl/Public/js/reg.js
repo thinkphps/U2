@@ -65,17 +65,17 @@ jQuery(function($) {
   Register.clause.on('click', 'button', function() {
     return Register.clause.hide();
   });
-  Register.changePWBtn.on('click', function() {
-    var left, offset, that, top;
-    that = $(this);
-    offset = that.position();
-    left = offset.left;
-    top = offset.top;
-    return Register.changePW.css({
-      'left': left + 72,
-      'top': top - 5
-    }).show();
-  });
+//  Register.changePWBtn.on('click', function() {
+//    var left, offset, that, top;
+//    that = $(this);
+//    offset = that.position();
+//    left = offset.left;
+//    top = offset.top;
+//    return Register.changePW.css({
+//      'left': left + 72,
+//      'top': top - 5
+//    }).show();
+//  });
   Register.changePW.on('click', 'a.mini-change-close', function() {
     Register.changePW.hide();
     return Register.hideTip();
