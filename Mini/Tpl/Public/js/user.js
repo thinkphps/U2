@@ -34,5 +34,5 @@ jQuery(function($) {
         $('.user_center').hide();
     });
     //衣服换一组显示
-    UserCenter.change_yf
+
 });
