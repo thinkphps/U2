@@ -148,4 +148,19 @@ where u_suits.approve_status=0 and u_suits.suitID = ".$suitid;
         }
         $this->ajaxReturn($returnArr, 'JSON');
     }
+//个人中心
+public function getCollData(){
+    $page = trim($this->_request('page'));
+    $page = ($page>0) ? $page : 1;
+    $page_num = 4;
+    $start = ($page-1)*$page_num;
+    $recomodel = D('Reco');
+    $where['uid'] = session("uniq_user_id");
+    $defaultResult = $recomodel->getBenebnColl($where,$page,$page_num,$start)
+    $arr['page'] = $defaultResult['page'];
+    $arr['prepage'] = $page;
+    $arr['count'] = $defaultResult['count'];
+    $arr['def'] = $defaultResult['result'];
+    $this->ajaxReturn($arr, 'JSON');
+}
 }

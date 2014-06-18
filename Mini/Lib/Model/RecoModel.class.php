@@ -140,4 +140,18 @@ class RecoModel extends Model{
         }
         return $ucuslist;
     }
+  public function getBenebnColl($where,$page,$page_num,$start){
+      $beubeu_coll = M('BeubeuCollection');
+      $count = $beubeu_coll->field('id')->where($where)->count();
+      $num = ceil($count/$page_num);
+      if($page>$num){
+          $page = 1;
+          $start = 0;
+      }
+      $result = $beubeu_coll->field('pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
+      $arr['page'] = $page+1;
+      $arr['result'] = $result;
+      $arr['count'] = $count;
+      return $arr;
+  }
 }
