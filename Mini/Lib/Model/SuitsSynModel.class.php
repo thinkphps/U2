@@ -115,7 +115,6 @@ class SuitsSynModel extends Model{
             $suitsHistory = M('beubeu_suits_history');
             $map = array();
             $map['suitID'] =  $suits[$i]['id'];
-
             if($matchtype == 1){
                 $map['matchtype'] = $matchtype;
                 $map['fx_matchid'] = $fx_matchid;
@@ -165,7 +164,7 @@ class SuitsSynModel extends Model{
             if ($matchtype ==1){
                 $map['uptime'] = $createtime;
                 $map['beubeuSuitID'] = $beubeusuit[$i]['id'];
-                $fxsuits->where('suitID='.$fx_matchid)->save($map);
+                $fxsuits->where(array('suitID'=>$fx_matchid))->save($map);
             }else{
                 $map['suitID'] = $beubeusuit[$i]['id'];
                 $map['suitStyleID'] = $beubeusuit[$i]['style'];
