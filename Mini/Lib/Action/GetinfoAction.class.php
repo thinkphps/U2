@@ -163,5 +163,41 @@ public function getCollData(){
     $arr['def'] = $defaultResult['result'];
     $this->ajaxReturn($arr, 'JSON');
 }
+public function delBeubenColl(){
+   $id = trim($this->_request('id'));//百衣收藏id
+   if(!empty(session("uniq_user_id"))){
+       $beubeu_coll = M('BeubeuCollection');
+       $res = $beubeu_coll->where(array('id'=>$id))->delete();
+       if($res){
+          M('BeubeuCollGoods')->where(array('bcid'=>$id))->delete();
+           $arr['code'] = 1;
+           $arr['msg'] = '删除成功';
+       }else{
+           $arr['code'] = 0;
+           $arr['msg'] = '参数错误';
+       }
+   }else{
+    $arr['code'] = 0;
+    $arr['msg'] = '没有登录';
+   }
+    $this->ajaxReturn($arr, 'JSON');
+}
 
+    //获取是否领了优惠劵
+public function getIsColl(){
+    if(!empty(session("uniq_user_id"))){
+       $result = M('Users')->field('collflag')->where(array('id'=>session("uniq_user_id")))->find();
+       if(!empty($result)){
+           $arr['code'] = 1;
+           $arr['collflag'] = $result['collflag'];
+       }else{
+           $arr['code'] = 0;
+           $arr['msg'] = '此用户不存在';
+       }
+    }else{
+        $arr['code'] = 0;
+        $arr['msg'] = '没有登录';
+    }
+    $this->ajaxReturn($arr, 'JSON');
+}
 }
