@@ -200,4 +200,21 @@ public function getIsColl(){
     }
     $this->ajaxReturn($arr, 'JSON');
 }
+public function setCollFlag(){
+    $uid = session("uniq_user_id");
+    if($uid){
+    $result = M('Users')->field('collflag')->where(array('id'=>$uid))->find();
+    if(!empty($result)){
+        $arr['code'] = 1;
+        $arr['collflag'] = $result['collflag'];
+    }else{
+        $arr['code'] = 0;
+        $arr['msg'] = '此用户不存在';
+    }
+    }else{
+        $arr['code'] = 0;
+        $arr['msg'] = '没有登录';
+    }
+    $this->ajaxReturn($arr, 'JSON');
+}
 }
