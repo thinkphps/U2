@@ -146,6 +146,7 @@ class SuitsSynModel extends Model{
 
         for($i = 0; $i < count($beubeusuit); $i++)
         {
+            $returnProduct[] = $beubeusuit[$i]['id'];
             $matchtype = $beubeusuit[$i]['matchtype'];
             $fx_matchid = $beubeusuit[$i]["fx_matchid"];
             if (!isset($fx_matchid)|| empty($fx_matchid)){
