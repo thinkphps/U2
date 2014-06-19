@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>优衣库试衣间</title>
 <link href="__TMPL__Public/mobile/css/dressing_room_detail.css" rel="stylesheet" type="text/css" />
-<!--<link href="__TMPL__Public/mobile/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />-->
+<link href="__TMPL__Public/mobile/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -410,7 +410,7 @@
     <div class="filters">
         <!--天气-->
         <div class="weather">
-            <ul id="ulweek swiper-wrapper">
+            <ul id="ulweek" class='swiper-wrapper'>
                 <li class="w_select swiper-slide" id="li_day0">
                     <i title="晴天" class="nio-0" id="title_day0"></i>
                     <div class="w_temperature">
@@ -422,7 +422,7 @@
                     <a href="javascript:;"></a>
                     <div class="close_w_ts none"></div>
                 </li>
-                <li id="li_day1 swiper-slide">
+                <li id="li_day1" class='swiper-slide'>
                     <i title="晴天" class="nio-1" id="title_day1"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day1">20</p>
@@ -431,7 +431,7 @@
                         <p class="w_t_name" id="name_day1">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day2 swiper-slide">
+                <li id="li_day2" class='swiper-slide'>
                     <i title="晴天" class="nio-2" id="title_day2"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day2">20</p>
@@ -440,7 +440,7 @@
                         <p class="w_t_name" id="name_day2">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day3 swiper-slide">
+                <li id="li_day3" class='swiper-slide'>
                     <i title="晴天" class="nio-3" id="title_day3"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day3">20</p>
@@ -449,7 +449,7 @@
                         <p class="w_t_name" id="name_day3">晴转小雨</p>
                     </div>
                 </li>
-                <li id="li_day4 swiper-slide">
+                <li id="li_day4" class='swiper-slide'>
                     <i title="晴天" class="nio-33" id="title_day4"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day4">20</p>
@@ -639,7 +639,7 @@
 
 <script type="text/javascript" src="__TMPL__Public/mobile/js/dressing_room_detail.js"></script>
 <script type="text/javascript" src="__TMPL__Public/mobile/js/modeldress.js"></script>
-<!--<script type="text/javascript" src="__TMPL__Public/mobile/js/idangerous.swiper-2.1.min.js"></script>-->
+<script type="text/javascript" src="__TMPL__Public/mobile/js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
 </body>
@@ -651,11 +651,12 @@ $('.imgrd').css(css);
 
 
 $(function(){
-   /* var mySwiper = new Swiper('.weather',{
-        loop:true,
+   var mySwiper = new Swiper('.weather',{
+        //loop:true,
         grabCursor: true,
-        paginationClickable: true
-    })*/
+        //paginationClickable: true,
+       slidesPerView: 2
+    })
 
     //设置遮罩层的高度
     $('.mini-mask').css('height',$(document).height());
@@ -732,6 +733,8 @@ $(function(){
         $.weather.str = '';
         var $this = $(this);
         var strClass =$this.attr('class');
+        $('.style_btn_group a').removeClass('style_select');
+        $('.style_btn_group_detail').hide();
         var length = strClass.length;
         if(strClass.substr(length - 2,2) != '_0'){
             $this.removeClass('select');
@@ -781,6 +784,8 @@ $(function(){
         $.uniqlo.bid = 0;
         $.uniqlo.kid = 0;
         $.weather.str = '';
+        $('.style_btn_group a').removeClass('style_select');
+        $('.tag_text').hide();
         var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
         if(zid!=0){
             $('#alluid').removeClass('select');
