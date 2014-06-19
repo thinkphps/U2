@@ -731,5 +731,6 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 
 .youhui{ width:240px; height:60px; position:absolute; right:15px; top:15px;}
 .youhui a.youhui_icon{ display:block; width:68px; height:60px; background:url(../images/youhui_icon.png) 0 0 no-repeat; position:absolute;right:0; top:0;}
+.youhui a.youhui_icon_block{  position:absolute;right:0; top:0;display:block; width:68px; height:60px; cursor: default;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);background:url(../images/youhui_icon.png) 0 0 no-repeat;background-color: rgba(0,0,0,.5);}
 .youhui p{ display:block; width:122px; height:36px; background:#FFF; padding:12px 88px 12px 20px; color:#666;}
 .youhui p a{ color:#F00; margin:0 5px;}
