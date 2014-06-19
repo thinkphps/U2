@@ -28,6 +28,7 @@ jQuery(function($) {
                 if(collflag == 1){
                     UserCenter.youhui_icon.removeClass('youhui_icon');
                     UserCenter.youhui_icon.addClass('youhui_icon_block');
+                    UserCenter.youhui_icon.hide();
                 }
                 else{
                     //如果收藏超过10套则弹出消息提示框：您的收藏已超过10套，请点击‘确定’领取优惠
