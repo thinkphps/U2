@@ -149,6 +149,22 @@ class RecoModel extends Model{
           $start = 0;
       }
       $result = $beubeu_coll->field('id,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
+      $str = '';
+      foreach($result as $k=>$v){
+      $str.=$v['id'].',';
+      }
+      $str = rtrim($str);
+      $sql = "select bg.`num_iid`,bg.`pic_url` from (select num_iid from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $detail = $beubeu_coll->query($sql);
+      foreach($result as $k1=>$v1){
+          $detailArr = array();
+          foreach($detail as $k2=>$v2){
+             if($v1['num_iid']==$v2['num_iid']){
+                 $detailArr[] = $v2;
+             }
+          }
+          $result[$k1]['detail'] = $detailArr;
+      }
       $arr['page'] = $page+1;
       $arr['result'] = $result;
       return $arr;
