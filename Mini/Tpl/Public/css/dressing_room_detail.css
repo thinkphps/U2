@@ -684,7 +684,7 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 /*个人中心*/
 .user_center{ width:100%; height:750px; background: url(../images/user_center_bg.jpg) center top no-repeat ; position:absolute; top:116px; left:0; z-index:10;}
 
-.user_center_title{ width:200px; text-align:center; position:absolute; top:35px; left:50%; margin-left:-100px; z-index:10;}
+.user_center_title{  text-align:center; position:absolute; top:35px; left:50%; margin-left:-100px; z-index:10;}
 .user_center_title h2{ font-size:26px; color:#676767; font-weight:normal;}
 .user_center_title h2 span{ color:#F00; margin-right:5px;}
 .user_center_title a.change_yf{ display:block; width:120px; height:30px; line-height:30px; margin:7px auto; background:#ff0000; color:#FFF; font-size:14px;}
