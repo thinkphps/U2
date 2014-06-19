@@ -201,13 +201,19 @@ public function getIsColl(){
     $this->ajaxReturn($arr, 'JSON');
 }
 public function setCollFlag(){
-    echo $uid = session("uniq_user_id");
-    exit;
+    $uid = session("uniq_user_id");
     if($uid){
-    $result = M('Users')->field('collflag')->where(array('id'=>$uid))->find();
+    $user = M('Users');
+    $result = $user->field('id')->where(array('id'=>$uid))->find();
     if(!empty($result)){
+        $re = $user->where(array('id'=>$uid))->save(array('collflag'=>1));
+        if($re){
         $arr['code'] = 1;
-        $arr['collflag'] = $result['collflag'];
+        $arr['msg'] = '领取成功';
+        }else{
+        $arr['code'] = 0;
+        $arr['msg'] = '领取失败';
+        }
     }else{
         $arr['code'] = 0;
         $arr['msg'] = '此用户不存在';
