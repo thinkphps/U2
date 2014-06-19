@@ -10,6 +10,7 @@ jQuery(function($) {
         exitUserCenter : $('.center_btn6'),
         collocationNum : $('#lbl_collection'),
         change_yf :$('.change_yf'),
+        youhui_icon : $('#youhui_icon'),
         init : function(){
             //设置昵称
             $('#lblnick').text('您');
@@ -20,6 +21,18 @@ jQuery(function($) {
             if(cnum > 10){
                 alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
             }
+        },
+        //或跌搭配
+        bindCollections : function(){
+            var page = UserCenter.change_yf.data('page');
+            $.post(getCollDataUrl,{page:page},function(data){
+                if(data['code'] > 0){
+
+                }else{
+
+                    return false;
+                }
+            });
         }
     }
 
@@ -34,5 +47,20 @@ jQuery(function($) {
         $('.user_center').hide();
     });
     //衣服换一组显示
+    UserCenter.change_yf.on('click',function(){
 
+    });
+
+    //点击优惠券修改状态
+    UserCenter.youhui_icon.on('click',function(){
+        $.post(setCollFlagUrl,function(data){
+            if(data['code'] > 0){
+                UserCenter.youhui_icon.removeClass('youhui_icon');
+                UserCenter.youhui_icon.addClass('youhui_icon_block');
+            }else{
+
+                return false;
+            }
+        });
+    });
 });
