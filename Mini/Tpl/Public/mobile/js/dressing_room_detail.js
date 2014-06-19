@@ -3,13 +3,17 @@
  */
 
 $(function(){
-
-
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
-        H.initData(data);
+       // H.initData(data);
     },'json');
+    $("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
+        $("#mapdiv").show();
+    })
+    $("#closemap").on("click",function(){
+        $("#mapdiv").hide();
+    });
     $(".select_city").each(function(){
         var s=$(this);
         var z=parseInt(s.css("z-index"));

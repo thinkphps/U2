@@ -596,7 +596,7 @@
         </select></div>
         <div class="mini-control"><span id='emptymsg'  style="font-size:10px;color: #999999;"></span></div>
     </div>
-    <div class="light_box_u_map_con" id="allmap"></div>
+    <!--<div class="light_box_u_map_con" id="allmap"></div>-->
 </div>
 <script type='text/javascript'>
     //性别对应的标记
@@ -631,8 +631,8 @@
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
-<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
+<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>-->
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/waterfall/waterfall.min.js"></script>
@@ -644,7 +644,7 @@
 <script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
 </body>
 </html>
-<script >
+<script>
 var css = {};
 css['transform']='rotateY(90deg)';
 $('.imgrd').css(css);
@@ -987,7 +987,7 @@ $('#moreid').on('click',function(){
     //getgoods($.weather.avg);
 });
 $('#scid').on('change',function(){
-    H.map.centerAndZoom($("#scid option:selected").text(), 11);
+    //H.map.centerAndZoom($("#scid option:selected").text(), 11);
     var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
     var cityname = $('#scid option:selected').text();
     if(cityname[cityname.length-1]=='市'){
