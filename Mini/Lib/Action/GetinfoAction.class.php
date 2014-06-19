@@ -203,7 +203,7 @@ public function getIsColl(){
 public function setCollFlag(){
     $uid = session("uniq_user_id");
     if($uid){
-    $user = M('Users');
+    $user = M('User');
     $result = $user->field('id')->where(array('id'=>$uid))->find();
     if(!empty($result)){
         $re = $user->where(array('id'=>$uid))->save(array('collflag'=>1));
