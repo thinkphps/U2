@@ -157,9 +157,14 @@ public function getCollData(){
     $recomodel = D('Reco');
     $where['uid'] = session("uniq_user_id");
     $defaultResult = $recomodel->getBenebnColl($where,$page,$page_num,$start);
+    if($page==1){
+       //获取用户信息
+        $userinfo = $recomodel->getUserInfo();
+        $arr['uname'] = $userinfo[0];
+        $arr['collflag'] = $userinfo[1];
+        $arr['collcount'] = $userinfo[2];
+    }
     $arr['page'] = $defaultResult['page'];
-    $arr['prepage'] = $page;
-    $arr['count'] = $defaultResult['count'];
     $arr['def'] = $defaultResult['result'];
     $this->ajaxReturn($arr, 'JSON');
 }
@@ -180,24 +185,6 @@ public function delBeubenColl(){
     $arr['code'] = 0;
     $arr['msg'] = '没有登录';
    }
-    $this->ajaxReturn($arr, 'JSON');
-}
-
-    //获取是否领了优惠劵
-public function getIsColl(){
-    if(!empty(session("uniq_user_id"))){
-       $result = M('Users')->field('collflag')->where(array('id'=>session("uniq_user_id")))->find();
-       if(!empty($result)){
-           $arr['code'] = 1;
-           $arr['collflag'] = $result['collflag'];
-       }else{
-           $arr['code'] = 0;
-           $arr['msg'] = '此用户不存在';
-       }
-    }else{
-        $arr['code'] = 0;
-        $arr['msg'] = '没有登录';
-    }
     $this->ajaxReturn($arr, 'JSON');
 }
 public function setCollFlag(){

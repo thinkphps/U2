@@ -151,7 +151,23 @@ class RecoModel extends Model{
       $result = $beubeu_coll->field('id,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
       $arr['page'] = $page+1;
       $arr['result'] = $result;
-      $arr['count'] = $count;
       return $arr;
   }
+
+public function getUserInfo(){
+    $uid = session("uniq_user_id");
+    $user = M('User')->field('user_name,mobile,taobao_name,collflag')->where(array('id'=>$uid))->find();
+    $collcount = M('BeubeuCollection')->field('id')->where(array('uid'=>$uid))->count();
+    if(!empty($user['user_name'])){
+       $uname =  $user['user_name'];
+    }else if(!empty($user['taobao_name'])){
+        $uname =  $user['taobao_name'];
+    }else if(!empty($user['mobile'])){
+        $uname =  $user['mobile'];
+    }
+    $arr[] = $uname;
+    $arr[] = $user['collflag'];
+    $arr[] = $collcount;
+    return $arr;
+}
 }
