@@ -204,8 +204,9 @@ public function setCollFlag(){
     $uid = session("uniq_user_id");
     if($uid){
     $user = M('User');
-    $result = $user->field('id')->where(array('id'=>$uid))->find();
+    $result = $user->field('id,collflag')->where(array('id'=>$uid))->find();
     if(!empty($result)){
+        if($result['collflag']==0){
         $re = $user->where(array('id'=>$uid))->save(array('collflag'=>1));
         if($re){
         $arr['code'] = 1;
@@ -213,6 +214,10 @@ public function setCollFlag(){
         }else{
         $arr['code'] = 0;
         $arr['msg'] = '领取失败';
+        }
+       }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '已经领取';
         }
     }else{
         $arr['code'] = 0;
