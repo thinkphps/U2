@@ -201,7 +201,8 @@ public function getIsColl(){
     $this->ajaxReturn($arr, 'JSON');
 }
 public function setCollFlag(){
-    $uid = session("uniq_user_id");
+    echo $uid = session("uniq_user_id");
+    exit;
     if($uid){
     $result = M('Users')->field('collflag')->where(array('id'=>$uid))->find();
     if(!empty($result)){
