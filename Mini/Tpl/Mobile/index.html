@@ -8,7 +8,7 @@
 <link href="__TMPL__Public/mobile/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body style="overflow-x:hidden">
 <!--头部-->
 <div class="header">
 	<!--头部-信息-->
@@ -410,8 +410,10 @@
     <div class="filters">
         <!--天气-->
         <div class="weather">
-            <ul id="ulweek" class='swiper-wrapper'>
-                <li class="w_select swiper-slide" id="li_day0">
+            <div id="ulweek" class='ulweek swiper-wrapper'>
+            <!--<ul id="ulweek" class='swiper-wrapper'>-->
+                <div class="li_day w_select swiper-slide" id="li_day0">
+                <!--<li class="w_select swiper-slide" id="li_day0">-->
                     <i title="晴天" class="nio-0" id="title_day0"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day0">20</p>
@@ -421,8 +423,10 @@
                     </div>
                     <a href="javascript:;"></a>
                     <div class="close_w_ts none"></div>
-                </li>
-                <li id="li_day1" class='swiper-slide'>
+                <!--</li>-->
+                </div>
+                <div id="li_day1" class='li_day swiper-slide'>
+                <!--<li id="li_day1" class='swiper-slide'>-->
                     <i title="晴天" class="nio-1" id="title_day1"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day1">20</p>
@@ -430,8 +434,9 @@
                         <p class="w_t_week" id="week_day1">星期二</p>
                         <p class="w_t_name" id="name_day1">晴转小雨</p>
                     </div>
-                </li>
-                <li id="li_day2" class='swiper-slide'>
+                <!--</li>-->
+                </div>
+                <div id="li_day2" class='li_day swiper-slide'>
                     <i title="晴天" class="nio-2" id="title_day2"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day2">20</p>
@@ -439,8 +444,8 @@
                         <p class="w_t_week" id="week_day2">星期三</p>
                         <p class="w_t_name" id="name_day2">晴转小雨</p>
                     </div>
-                </li>
-                <li id="li_day3" class='swiper-slide'>
+                </div>
+                <div id="li_day3" class='li_day swiper-slide'>
                     <i title="晴天" class="nio-3" id="title_day3"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day3">20</p>
@@ -448,8 +453,9 @@
                         <p class="w_t_week" id="week_day3">星期四</p>
                         <p class="w_t_name" id="name_day3">晴转小雨</p>
                     </div>
-                </li>
-                <li id="li_day4" class='swiper-slide'>
+                <!--</li>-->
+                </div>
+                <div id="li_day4" class='li_day swiper-slide'>
                     <i title="晴天" class="nio-33" id="title_day4"></i>
                     <div class="w_temperature">
                         <p class="w_t_1" id="h_day4">20</p>
@@ -457,8 +463,8 @@
                         <p class="w_t_week" id="week_day4">星期五</p>
                         <p class="w_t_name" id="name_day4">晴转小雨</p>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
             <a href="javascript:;" class="left_btn"><</a>
             <a href="javascript:;" class="right_btn">></a>
         </div>
@@ -598,6 +604,7 @@
     </div>
     <!--<div class="light_box_u_map_con" id="allmap"></div>-->
 </div>
+
 <script type='text/javascript'>
     //性别对应的标记
     var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';
@@ -640,8 +647,9 @@
 <script type="text/javascript" src="__TMPL__Public/mobile/js/dressing_room_detail.js"></script>
 <script type="text/javascript" src="__TMPL__Public/mobile/js/modeldress.js"></script>
 <script type="text/javascript" src="__TMPL__Public/mobile/js/idangerous.swiper-2.1.min.js"></script>
-<script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>
-<script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
+<!--<script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>-->
+<script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript>
+    <a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
 </body>
 </html>
 <script>
@@ -650,13 +658,28 @@ css['transform']='rotateY(90deg)';
 $('.imgrd').css(css);
 
 
+
 $(function(){
    var mySwiper = new Swiper('.weather',{
         //loop:true,
-        grabCursor: true,
+//        grabCursor: true,
         //paginationClickable: true,
-       slidesPerView: 2
+       visibilityFullFit: true,
+//       slidesPerView:'auto',
+       cssWidthAndHeight : true,
+       slidesPerView: 2,
+       watchActiveIndex: true
+    });
+
+    $('.left_btn').on('click', function(e){
+        e.preventDefault()
+        mySwiper.swipePrev()
     })
+    $('.right_btn').on('click', function(e){
+        e.preventDefault()
+        mySwiper.swipeNext()
+    })
+
 
     //设置遮罩层的高度
     $('.mini-mask').css('height',$(document).height());
@@ -947,40 +970,6 @@ $('#ul_index-bar-place').on('click','li',function(){
 //换一批
 $('#changeid').on('click',function(){
     _mini.getSuits();
-    /*var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
-     if(page==1){
-     $('#changeid').attr('la',+page+1);
-     startnum = page*4;
-     }else if(page==pagenum){
-     $('#changeid').attr('la',1);
-     startnum = 0;
-     }else{
-     $('#changeid').attr('la',+page+1);
-     startnum = page*4;
-     }
-     if(pagenum!=1){
-     $('.model').css('display','none');
-     for(var i=0;i<4;i++){
-     if($('.model').eq(startnum+i)){
-     $('.model').eq(startnum+i).css('display','block');
-     }
-     }
-     var css = {};
-     css['transform']='rotateY(90deg)';
-     $('.imgrd').css(css);
-     setTimeout(function(){
-     $('.imgrd').css({
-     '-webkit-transition': 'all 0.5s ease-in-out',
-     '-moz-transition': 'all 0.5s ease-in-out',
-     '-o-transition': 'all 0.5s ease-in-out',
-     '-ms-transition': 'all 0.5s ease-in-out',
-     'transition': 'all 0.5s ease-in-out'
-     });
-     var css = {};
-     css['transform']='matrix(1, 0, 0, 1, 0, 0)';
-     $('.imgrd').css(css);
-     },100);
-     }*/
 });
 
 $('#moreid').on('click',function(){

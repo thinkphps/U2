@@ -30,7 +30,7 @@ Basic Swiper Styles
 }
 .swiper-wrapper {
 	position:relative;
-	width:100%;
+	/*width:100%;*/
 	-webkit-transition-property:-webkit-transform, left, top;
 	-webkit-transition-duration:0s;
 	-webkit-transform:translate3d(0px,0,0);
@@ -66,7 +66,7 @@ Basic Swiper Styles
 	margin: 0 auto;
 }
 .swiper-slide {
-    width:50%;
+    /*width:50%;*/
 	float: left;
 }
 

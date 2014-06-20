@@ -71,7 +71,7 @@ button,label{cursor:pointer; }
 
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:26em; margin:0 auto;}
-.model{ float:left; width:15.7em; height:36em; margin:0.8em -1.5em 0 -1.5em; position:relative;}
+.model{ float:left; width:15.7em; height:36em; margin:0.8em -1.5em 0 -1.5em; position:relative; overflow: hidden;}
 .model img{ width:27em; height:36em;left:50%;margin-left:-13em;position:absolute}
 .change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
 
@@ -164,101 +164,106 @@ button,label{cursor:pointer; }
 /*天气*/
 .weather{ float:left; width:100%; height:8.1em; background:url(../images/weather_bg.png) 0 repeat; position:relative; overflow:hidden;}
 
-.weather ul { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
-.weather ul li{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
-.weather ul li i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;
--moz-transform:scale(0.8,0.8);  
--webkit-transform:scale(0.8,0.8);  
--o-transform:scale(0.8,0.8);  }
+/*.weather ul { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}*/
+/*.weather ul li{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}*/
+/*.weather ul li i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;-moz-transform:scale(0.8,0.8);*/
+/*-webkit-transform:scale(0.8,0.8);  */
+/*-o-transform:scale(0.8,0.8);  }*/
 
-.weather a.left_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
-.weather a.right_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather .ulweek { width:100px; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
+.weather .ulweek .li_day{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
+.weather .ulweek .li_day i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;-moz-transform:scale(0.8,0.8);
+    -webkit-transform:scale(0.8,0.8);
+    -o-transform:scale(0.8,0.8);  }
 
-.weather ul li i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-1{ background:url(../images/weather_icon.png) -5.5em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-2{ background:url(../images/weather_icon.png) -11em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-3{ background:url(../images/weather_icon.png) -16.5em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-4{ background:url(../images/weather_icon.png) -22em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-5{ background:url(../images/weather_icon.png) -27.5em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-6{ background:url(../images/weather_icon.png) -33em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-7{ background:url(../images/weather_icon.png) -38.5em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-8{ background:url(../images/weather_icon.png) -44em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-9{ background:url(../images/weather_icon.png) -49.5em 0 no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-10{ background:url(../images/weather_icon.png) 0 -50px no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-11{ background:url(../images/weather_icon.png) -5.5em -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-12{ background:url(../images/weather_icon.png) -11em -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-13{ background:url(../images/weather_icon.png) -16.5em -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-14{ background:url(../images/weather_icon.png) -22em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-15{ background:url(../images/weather_icon.png) -27.5em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-16{ background:url(../images/weather_icon.png) -33em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-17{ background:url(../images/weather_icon.png) -38.5em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-18{ background:url(../images/weather_icon.png) -44em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-19{ background:url(../images/weather_icon.png) -49.5em  -5.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-20{ background:url(../images/weather_icon.png) 0 -100px no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-21{ background:url(../images/weather_icon.png) -5.5em -100px no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-22{ background:url(../images/weather_icon.png) -11em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-23{ background:url(../images/weather_icon.png) -16.5em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-24{ background:url(../images/weather_icon.png) -22em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-25{ background:url(../images/weather_icon.png) -27.5em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-26{ background:url(../images/weather_icon.png) -33em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-27{ background:url(../images/weather_icon.png) -38.5em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-28{ background:url(../images/weather_icon.png) -44em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-29{ background:url(../images/weather_icon.png) -49.5em -11em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-30{ background:url(../images/weather_icon.png) 0 -16.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-31{ background:url(../images/weather_icon.png) -5.5em -16.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-32{ background:url(../images/weather_icon.png) -11em -16.5em no-repeat; background-size:55em 55em;}
-.weather ul li i.nio-33{ background:url(../images/weather_icon.png) -16.5em -16.5em no-repeat; background-size:55em 55em;}
+.weather .left_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather .right_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
 
-.weather ul li.w_select i.nio-0{ background:url(../images/weather_icon.png) 0 -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-1{ background:url(../images/weather_icon.png) -5.5em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-2{ background:url(../images/weather_icon.png) -11em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-3{ background:url(../images/weather_icon.png) -16.5em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-4{ background:url(../images/weather_icon.png) -22em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-5{ background:url(../images/weather_icon.png) -27.5em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-6{ background:url(../images/weather_icon.png) -33em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-7{ background:url(../images/weather_icon.png) -38.5em -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-8{ background:url(../images/weather_icon.png) -44 -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-9{ background:url(../images/weather_icon.png) -49.5 -27.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-10{ background:url(../images/weather_icon.png) 0 -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-11{ background:url(../images/weather_icon.png) -5.5em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-12{ background:url(../images/weather_icon.png) -11em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-13{ background:url(../images/weather_icon.png) -16.5em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-14{ background:url(../images/weather_icon.png) -22em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-15{ background:url(../images/weather_icon.png) -27.5em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-16{ background:url(../images/weather_icon.png) -33em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-17{ background:url(../images/weather_icon.png) -38.5em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-18{ background:url(../images/weather_icon.png) -44em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-19{ background:url(../images/weather_icon.png) -49.5em -33em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-20{ background:url(../images/weather_icon.png) 0 -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-21{ background:url(../images/weather_icon.png) -5.5em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-22{ background:url(../images/weather_icon.png) -11em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-23{ background:url(../images/weather_icon.png) -16.5em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-24{ background:url(../images/weather_icon.png) -22em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-25{ background:url(../images/weather_icon.png) -27.5em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-26{ background:url(../images/weather_icon.png) -33em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-27{ background:url(../images/weather_icon.png) -38.5em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-28{ background:url(../images/weather_icon.png) -44em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-29{ background:url(../images/weather_icon.png) -49.5em -38.5em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-30{ background:url(../images/weather_icon.png) 0 -44em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-31{ background:url(../images/weather_icon.png) -5.5em -44em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-32{ background:url(../images/weather_icon.png) -11em -44em no-repeat; background-size:55em 55em;}
-.weather ul li.w_select i.nio-33{ background:url(../images/weather_icon.png) -16.5em -44em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-1{ background:url(../images/weather_icon.png) -5.5em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-2{ background:url(../images/weather_icon.png) -11em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-3{ background:url(../images/weather_icon.png) -16.5em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-4{ background:url(../images/weather_icon.png) -22em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-5{ background:url(../images/weather_icon.png) -27.5em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-6{ background:url(../images/weather_icon.png) -33em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-7{ background:url(../images/weather_icon.png) -38.5em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-8{ background:url(../images/weather_icon.png) -44em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-9{ background:url(../images/weather_icon.png) -49.5em 0 no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-10{ background:url(../images/weather_icon.png) 0 -50px no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-11{ background:url(../images/weather_icon.png) -5.5em -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-12{ background:url(../images/weather_icon.png) -11em -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-13{ background:url(../images/weather_icon.png) -16.5em -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-14{ background:url(../images/weather_icon.png) -22em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-15{ background:url(../images/weather_icon.png) -27.5em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-16{ background:url(../images/weather_icon.png) -33em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-17{ background:url(../images/weather_icon.png) -38.5em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-18{ background:url(../images/weather_icon.png) -44em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-19{ background:url(../images/weather_icon.png) -49.5em  -5.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-20{ background:url(../images/weather_icon.png) 0 -100px no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-21{ background:url(../images/weather_icon.png) -5.5em -100px no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-22{ background:url(../images/weather_icon.png) -11em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-23{ background:url(../images/weather_icon.png) -16.5em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-24{ background:url(../images/weather_icon.png) -22em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-25{ background:url(../images/weather_icon.png) -27.5em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-26{ background:url(../images/weather_icon.png) -33em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-27{ background:url(../images/weather_icon.png) -38.5em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-28{ background:url(../images/weather_icon.png) -44em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-29{ background:url(../images/weather_icon.png) -49.5em -11em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-30{ background:url(../images/weather_icon.png) 0 -16.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-31{ background:url(../images/weather_icon.png) -5.5em -16.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-32{ background:url(../images/weather_icon.png) -11em -16.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek i.nio-33{ background:url(../images/weather_icon.png) -16.5em -16.5em no-repeat; background-size:55em 55em;}
+
+.weather .ulweek.w_select i.nio-0{ background:url(../images/weather_icon.png) 0 -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-1{ background:url(../images/weather_icon.png) -5.5em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-2{ background:url(../images/weather_icon.png) -11em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-3{ background:url(../images/weather_icon.png) -16.5em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-4{ background:url(../images/weather_icon.png) -22em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-5{ background:url(../images/weather_icon.png) -27.5em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-6{ background:url(../images/weather_icon.png) -33em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-7{ background:url(../images/weather_icon.png) -38.5em -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-8{ background:url(../images/weather_icon.png) -44 -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-9{ background:url(../images/weather_icon.png) -49.5 -27.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-10{ background:url(../images/weather_icon.png) 0 -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-11{ background:url(../images/weather_icon.png) -5.5em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-12{ background:url(../images/weather_icon.png) -11em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-13{ background:url(../images/weather_icon.png) -16.5em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-14{ background:url(../images/weather_icon.png) -22em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-15{ background:url(../images/weather_icon.png) -27.5em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-16{ background:url(../images/weather_icon.png) -33em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-17{ background:url(../images/weather_icon.png) -38.5em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-18{ background:url(../images/weather_icon.png) -44em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-19{ background:url(../images/weather_icon.png) -49.5em -33em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-20{ background:url(../images/weather_icon.png) 0 -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-21{ background:url(../images/weather_icon.png) -5.5em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-22{ background:url(../images/weather_icon.png) -11em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-23{ background:url(../images/weather_icon.png) -16.5em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-24{ background:url(../images/weather_icon.png) -22em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-25{ background:url(../images/weather_icon.png) -27.5em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-26{ background:url(../images/weather_icon.png) -33em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-27{ background:url(../images/weather_icon.png) -38.5em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-28{ background:url(../images/weather_icon.png) -44em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-29{ background:url(../images/weather_icon.png) -49.5em -38.5em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-30{ background:url(../images/weather_icon.png) 0 -44em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-31{ background:url(../images/weather_icon.png) -5.5em -44em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-32{ background:url(../images/weather_icon.png) -11em -44em no-repeat; background-size:55em 55em;}
+.weather .ulweek.w_select i.nio-33{ background:url(../images/weather_icon.png) -16.5em -44em no-repeat; background-size:55em 55em;}
 
 
 
 
-.weather ul li p.w_t_1{ position:absolute; left:1.58em; top:0.45em; font-size:3.4em;}
-.weather ul li p.w_t_2{ position:absolute; left:9.5em; top:3.6em;}
-.weather ul li p.w_t_week{ position:absolute; left:9.5em; top:2.15em;}
-.weather ul li p.w_t_name{ position:absolute; left:5.5em; top:5em;}
+.weather .ulweek .li_day p.w_t_1{ position:absolute; left:1.58em; top:0.45em; font-size:3.4em;}
+.weather .ulweek .li_day p.w_t_2{ position:absolute; left:9.5em; top:3.6em;}
+.weather .ulweek .li_day p.w_t_week{ position:absolute; left:9.5em; top:2.15em;}
+.weather .ulweek .li_day p.w_t_name{ position:absolute; left:5.5em; top:5em;}
 
-.weather ul li.w_select{ background:url(../images/w_select_bg1.png) 0 0 repeat;}
-.weather ul li.last{ background:none;}
-.weather ul li.last.w_select{ background:url(../images/w_select_bg1.png) 0 0 repeat;}
-.weather ul li.w_select p.w_t_1{ color:#FFF;}
-.weather ul li.w_select p.w_t_2{ color:#FFF;}
-.weather ul li.w_select p.w_t_week{ color:#FFF;}
-.weather ul li.w_select p.w_t_name{ color:#FFF;}
+.weather .ulweek .li_day.w_select{ background: #1c6397;}
+.weather .ulweek .li_day.last{ background:none;}
+.weather .ulweek .li_day.last.w_select{ background:url(../images/w_select_bg1.png) 0 0 repeat;}
+.weather .ulweek .li_day.w_select p.w_t_1{ color:#FFF;}
+.weather .ulweek .li_day.w_select p.w_t_2{ color:#FFF;}
+.weather .ulweek .li_day.w_select p.w_t_week{ color:#FFF;}
+.weather .ulweek .li_day.w_select p.w_t_name{ color:#FFF;}
 /*分类*/
 .dr_main_con_sub_nav{ float:left; width:100%; height:7.5em; background:url(../images/dr_main_con_sub_nav_bg.png) 0 repeat;}
 .dr_main_con_sub_nav ul{ display:block; height:7.5em; margin:0 auto;}

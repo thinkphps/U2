@@ -77,24 +77,25 @@ $(function(){
     });
 
     //天气左右移动按钮事件
-    var weekLeftNum = 0;
-    $('.left_btn').on('click',function(){
-        if(weekLeftNum > 0){
-            var left = $('#ulweek').position().left;
-            $('#ulweek').css('left', left += 135);
-            weekLeftNum -= 1;
-        }
-    });
+//    var weekLeftNum = 0;
+//    $('.left_btn').on('click',function(){
+//        if(weekLeftNum > 0){
+//            var left = $('#ulweek').position().left;
+//            $('#ulweek').css('left', left += 135);
+//            weekLeftNum -= 1;
+//        }
+//    });
+//
+//    $('.right_btn').on('click',function(){
+//        if(weekLeftNum < 3){
+//            var left = $('#ulweek').position().left;
+//            $('#ulweek').css('left', left -= 135);
+//            weekLeftNum += 1;
+//        }
+//    });
 
-    $('.right_btn').on('click',function(){
-        if(weekLeftNum < 3){
-            var left = $('#ulweek').position().left;
-            $('#ulweek').css('left', left -= 135);
-            weekLeftNum += 1;
-        }
-    });
 
-    $.uniqlo.index.week.on('click', 'li', function(){                  // 首页天气切换
+    $.uniqlo.index.week.on('click', '.li_day', function(){                  // 首页天气切换
         if(!$(this).hasClass('w_select')){
         $.uniqlo.lid = 0;
         $.uniqlo.bid = 0;
