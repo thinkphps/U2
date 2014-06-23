@@ -99,6 +99,7 @@ button,label{cursor:pointer; }
 .my_yyg_title a.change_yf{ display:block; width:80px; height:30px; line-height:30px; margin:7px auto; background:#ff0000; color:#FFF; font-size:14px;}
 .my_yyg_title a.change_yf:hover{ background:#900;}
 .my_yyg_title p{ color:#333;}
+.my_yyg_title a.chother{background:url("../images/zk_btn.png") no-repeat scroll 0 -20px rgba(0, 0, 0, 0);height:20px;width:20px;left:19%;top:79%;position: absolute;}
 
 /*我的优衣柜- 模特*/
 .my_yyg_model{ width:960px; margin:0 auto; }
@@ -468,15 +469,11 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 
 
 /*优衣库推荐款式*/
-.yyk_tj{ width:950px; height:auto; position:relative; margin-bottom:7px; overflow:hidden;}
-.yyk_tj h3{ display:block; width:950px; height:58px; padding:12px 0 0 0; background:url(../images/dr_main_con_sub_nav_bg2.png) 0 0 repeat; text-align:center;}
-.yyk_tj h3 p{ font-size:18px; font-weight:bold;margin-top:12px;}
-.yyk_tj h3 span{ font-size:9px; font-weight:normal;}
-
-.left_tj{ float:left; background:url(../images/dr_main_con_sub_nav_bg3.png) 0 0 repeat; width:91%; height:52px; padding:4px;}
-.left_tj ul{ display:block; float:left; width:100%; height:52px; overflow:hidden;}
+.yyk_tj{ width:950px; height:auto; position:relative; margin-bottom:30px; overflow:hidden;}
+.left_tj{ float:left; background:url(../images/dr_main_con_sub_nav_bg3.png) 0 0 repeat; width:942px; padding:4px;}
+.left_tj ul.tag{display:block; float:left; width:803px; overflow:hidden; margin-left:1px;height:53px;overflow: hidden;}
 .left_tj ul li{ float:left; margin:0 1px 1px 0;}
-.left_tj ul li a{ display:block; width:85px; height:26px; line-height:26px; background:url(../images/dr_main_con_sub_nav_bg4.png) 0 0 repeat; text-align:center; color:#999;}
+.left_tj ul li a{ display:block; width:79px; height:26px; line-height:26px; background:url(../images/dr_main_con_sub_nav_bg4.png) 0 0 repeat; text-align:center; color:#999;}
 .left_tj ul li a:hover{ background:#999; color:#FFF;}
 
 .right_tj{ float:right; background:url(../images/dr_main_con_sub_nav_bg3.png) 0 0 repeat; width:466px; height:26px; padding:4px;}
@@ -485,19 +482,12 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .right_tj ul li a{ display:block; width:90px; height:26px; line-height:26px; background:url(../images/dr_main_con_sub_nav_bg4.png) 0 0 repeat; text-align:center; color:#999;}
 .right_tj ul li a:hover{ background:#999; color:#FFF;}
 
-.zk_btn a{ display:block; width:20px; height:20px; background:url(../images/zk_btn.png) 0 0 no-repeat; position:absolute; left:92.5%; margin-left:-4px; top:105px; z-index:9;}
-.zk_btn a:hover{ background:url(../images/zk_btn.png) 0 -20px no-repeat; }
-
-.zk_btn.upselect a{display:block; width:20px; height:20px; background:url(../images/zk_btn.png) -20px 0 no-repeat; position:absolute; left:92.5%; margin-left:-4px; top:105px; z-index:15;}
-.zk_btn.upselect a:hover{ background:url(../images/zk_btn.png) -20px -20px no-repeat; }
-.zk_btn .mleft{position: absolute; margin-left: 29px; font-weight: bold; color: rgb(0, 0, 0); font-size: 14px; top: 106px;}
-
-.zk_btn2 a{ display:block; width:20px; height:20px; background:url(../images/zk_btn1.png) 0 0 no-repeat; position:absolute; left:92.5%; margin-left:-4px; top:78px; z-index:9;}
-.zk_btn2 a:hover{ background:url(../images/zk_btn1.png) 0 -20px no-repeat; }
-
-.zk_btn2.upselect a{display:block; width:20px; height:20px; background:url(../images/zk_btn1.png) -20px 0 no-repeat; position:absolute; left:92.5%; margin-left:-4px; top:78px; z-index:15;}
-.zk_btn2.upselect a:hover{ background:url(../images/zk_btn1.png) -20px -20px no-repeat; }
-.zk_btn2 .mrtop{position: absolute; margin-left: 29px; font-weight: bold; color: rgb(0, 0, 0); font-size: 14px; top: 78px;}
+.left_tj ul.tag_btn li a{ width:68px; height:46px; padding:7px 0 0 0; background:#999; color:#FFF;}
+.left_tj ul.tag_btn li a:hover{ background:#666;}
+.left_tj ul.tag_btn li a.select{ background:#F00;}
+.left_tj ul.tag_btn li a i{ display:block; width:20px; height:20px; margin:0 auto 0 auto;}
+.left_tj ul.tag_btn li a i.duoxuan{ background:url(../images/tab_btn.png) 0 0 no-repeat;}
+.left_tj ul.tag_btn li a i.gengduo{ background:url(../images/tab_btn.png) 0 -20px no-repeat;}
 /*优衣库推荐款式-内容*/
 .tj_wrapper { width:962px; margin:0 auto; overflow:hidden; }
 .wrapper_box{ float:left; background:#FFF; width:228px; overflow:hidden; margin:0 6px 12px 6px; position:relative;}

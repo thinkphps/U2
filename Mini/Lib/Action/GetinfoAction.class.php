@@ -216,4 +216,84 @@ public function setCollFlag(){
     }
     $this->ajaxReturn($arr, 'JSON');
 }
+    //添加beubeu收藏
+public function addBeubenColl(){
+    $uid = session("uniq_user_id");
+    if($uid){
+        $fuid = trim($this->_request('uid'));
+
+    }else{
+        $arr['code'] = 0;
+        $arr['msg'] = '没有登录';
+    }
+}
+public function getUserInfo(){
+      $uid = session("uniq_user_id");
+      if($uid){
+        $result = M('User')->field('user_name,mobile,taobao_name')->where(array('id'=>$uid))->find();
+        if(!empty($result)){
+            $arr['code'] = 1;
+            $arr['result'] = $result;
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '没有此用户';
+        }
+      }else{
+           $arr['code'] = 0;
+           $arr['msg'] = '没有登录';
+      }
+    $this->ajaxReturn($arr, 'JSON');
+}
+public function changeName(){
+    //修改user_name
+    $uid = session("uniq_user_id");
+    if($uid){
+        $user = M('User');
+        $uname = trim($this->_post('uname'));
+        $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
+        $user_name = session("uniq_user_name");
+        if($result['mobile']==$user_name || $result['taobao_name']==$user_name){
+           $re = $user->where(array('id'=>$uid))->save(array('user_name'=>$uname));
+           if($re){
+               $arr['code'] = 1;
+               $arr['msg'] = '编辑成功';
+           }else{
+               $arr['code'] = 0;
+               $arr['msg'] = '编辑失败';
+           }
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '用户信息不匹配';
+        }
+    }else{
+      $arr['code'] = 0;
+      $arr['msg'] = '没有登录';
+    }
+}
+public function changeTaoName(){
+        //修改淘宝账号
+        $uid = session("uniq_user_id");
+        if($uid){
+            $user = M('User');
+            $tname = trim($this->_post('taobao_name'));
+            $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
+            $user_name = session("uniq_user_name");
+            if($result['mobile']==$user_name || $result['taobao_name']==$user_name){
+                $re = $user->where(array('id'=>$uid))->save(array('taobao_name'=>$tname));
+                if($re){
+                    $arr['code'] = 1;
+                    $arr['msg'] = '编辑成功';
+                }else{
+                    $arr['code'] = 0;
+                    $arr['msg'] = '编辑失败';
+                }
+            }else{
+                $arr['code'] = 0;
+                $arr['msg'] = '用户信息不匹配';
+            }
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '没有登录';
+        }
+    }
 }
