@@ -16,6 +16,13 @@ jQuery(function($) {
         btn_changepwd : $('#btn_changepwd'),
         changepwd : $('#changepwd'),
         ulMenu : $('#ul_menu'),
+        changeName : $('#change_name'),
+        btnChangeName :$('#btn_changename'),
+        myWardrobe : $('#my_wardrobe'),
+        btnChangetbname :$('#btn_changetbname'),
+        changeTBname : $('#changetbname'),
+        txtUsername :$('#txtusername'),
+        txttbname :$('#txttbname'),
         init : function(){
             UserCenter.bindCollections(0);
         },
@@ -107,10 +114,65 @@ jQuery(function($) {
         }
     });
 
+    //我的衣柜
+    UserCenter.myWardrobe.on('click',function(){
+        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).addClass('select');
+        $('div[name=user_l_box]').hide();
+    });
+
     //修改密码
     UserCenter.btn_changepwd.on('click',function(){
         UserCenter.ulMenu.find('li').removeClass('select');
         $(this).addClass('select');
+        $('div[name=user_l_box]').hide();
         UserCenter.changepwd.show();
+    });
+
+    //修改账号
+    UserCenter.btnChangeName.on('click',function(){
+        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).addClass('select');
+        $('div[name=user_l_box]').hide();
+        UserCenter.changeName.show();
+    });
+
+    //关联淘宝账号
+    UserCenter.btnChangetbname.on('click',function(){
+        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).addClass('select');
+        $('div[name=user_l_box]').hide();
+        UserCenter.changeTBname.show();
+    });
+
+    $('#btn_change_name').on('click',function(){
+        //提交修改账户
+        var username = UserCenter.txtUsername.val();
+        if(username.length > 0){
+            $.post(changeNameUrl,{uname:username},function(data){
+                if(data['code'] == '1'){
+                    $('#lblnick').val(username);
+                    UserCenter.txtUsername.val('');
+                    $('#changename_msg').html('账户修改成功！');
+                }
+            });
+        }else{
+            $('#changename_msg').html('账户不能为空！');
+        }
+    });
+
+    $('#btn_change_name').on('click',function(){
+        //提交修改淘宝账号
+        var tbname = UserCenter.txttbname.val();
+        if(tbname.length > 0){
+            $.post(changeNameUrl,{uname:tbname},function(data){
+                if(data['code'] == '1'){
+                    UserCenter.txttbname.val('');
+                    $('#changetbname_msg').html('淘宝登录名已关联！');
+                }
+            });
+        }else{
+            $('#changetbname_msg').html('淘宝登录名不能为空！');
+        }
     });
 });

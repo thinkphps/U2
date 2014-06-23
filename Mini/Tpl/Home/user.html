@@ -60,13 +60,13 @@
     <div class="user_center_btn">
         <ul id="ul_menu">
             <li class="center_btn1"><a href="javascript:;"><span></span>当前账户信息</a></li>
-            <li class="center_btn2 select"><a href="javascript:;"><span></span>我的衣柜</a></li>
+            <li class="center_btn2 select" id="my_wardrobe"><a href="javascript:;"><span></span>我的衣柜</a></li>
             <li class="center_btn3" id="btn_changepwd"><a href="javascript:;" class="mini-changepw-btn"><span></span>修改密码</a></li>
-            <li class="center_btn4"><a href="javascript:;"><span></span>修改账户</a></li>
-            <li class="center_btn5"><a href="javascript:;"><span></span>关联淘宝账户</a></li>
+            <li class="center_btn4" id="btn_changename"><a href="javascript:;"><span></span>修改账户</a></li>
+            <li class="center_btn5" id="btn_changetbname"><a href="javascript:;"><span></span>关联淘宝账户</a></li>
             <li class="center_btn6" id="close-home"><a href="javascript:;" ><span></span>关闭用户中心</a></li>
         </ul>
-        <div class="user_l_box none" id="userinfo" style="top:-100px;">
+        <div class="user_l_box none" name="user_l_box" id="userinfo" style="top:-100px;">
             <form>
                 <!--<div class="mini-control">-->
                     <!--<label>用户ID<input type="password" id="c_old_password" placeholder="用户ID"></label>-->
@@ -82,7 +82,7 @@
                 <!--</div>-->
             </form>
         </div>
-        <div class="user_l_box none" id="changepwd" style="top:-100px;">
+        <div class="user_l_box none" name="user_l_box" id="changepwd" style="top:-100px;">
             <form>
                 <div class="mini-control">
                     <label>旧密码<input type="password" id="c_old_password" placeholder="6-16位字符，区分大小写"></label>
@@ -99,6 +99,34 @@
                 </div>
             </form>
             <p class="mini-control-tips" id="pwd_error_msg"></p>
+        </div>
+        <div class="user_l_box none" name="user_l_box" id="change_name" style="top:-100px;">
+            <form>
+                <div class="mini-control">
+                    <label>账户<input type="text" id="txtusername" placeholder="6-16位字符，区分大小写"></label>
+                </div>
+                <div class="mini-control">
+                    <label>  <a href="javascript:;"  class="mini-btns" id="btn_change_name">提交</a></label>
+                </div>
+                <div class="mini-control">
+                    <p class="mini-control-tips" id="changename_msg"></p>
+                </div>
+            </form>
+
+        </div>
+        <div class="user_l_box none" name="user_l_box" id="changetbname" style="top:-100px;">
+            <form>
+                <div class="mini-control">
+                    <label>淘宝登录名<input type="text" id="txttbname" placeholder="6-16位字符，区分大小写"></label>
+                </div>
+                <div class="mini-control">
+                    <label>  <a href="javascript:;"  class="mini-btns" id="btn_change_tbname">提交</a></label>
+                </div>
+                <div class="mini-control">
+                    <p class="mini-control-tips" id="changetbname_msg"></p>
+                </div>
+            </form>
+
         </div>
     </div>
     <div class="youhui">
