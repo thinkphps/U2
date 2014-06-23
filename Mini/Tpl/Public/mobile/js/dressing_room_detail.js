@@ -1,11 +1,12 @@
 /**
  * Created by jack on 14-4-8.
  */
-
+var gd = {};
 $(function(){
     var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
+        gd.goods = data;
        // H.initData(data);
     },'json');
     $("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
@@ -756,6 +757,19 @@ $('.tag_text').on('click','.mini-form-close',function(){
     $('.tag_text').hide();
     $('.style_btn_group a').removeClass('style_select');
 });
+$("#ddlShop").on("change",function(){
+    var list =   gd.goods;
+    for(var i=1;i<list.length;i++){
+        if(list[i][0] == $('#ddlShop option:selected').text() ){
+            $('#mo-sh').text(list[i][0]);
+            $('#mo-shd').text(list[i][1]);
+            $('#mo-shc').text(list[i][6]); //电话
+            $('#mo-shf').text(list[i][4]); //范围
+            $('#mo-sht').text(list[i][5]); //时间
+        }
+    }
+   $('.mo-sinfo').show();
+})
 document.onkeydown = function(e){
     var ev = document.all ? window.event : e;
     if(ev.keyCode==13) {
@@ -909,15 +923,7 @@ function addbuy(id,flag,isdel){
         },'json');
     }
 }
-//取出添加到大配件衣服的tag信息
-function adddapei(id,po){
-    if(id>0){
-        $.post(addda,{id:id,po:po},function(data,status){
-            $(po).siblings('.mini-cab-slide').find('ul').html(data);
-            $.uniqlo.cabSlider();
-        });
-    }
-}
+
 function getavg(high,low){
     //修复气温求平均值没有转换为INT类型的bug
     var avg = Math.ceil((parseInt(low)+parseInt(high))/2);

@@ -424,8 +424,8 @@ button,label{cursor:pointer; }
 .wrapper_box_btn_group2 a.xpfx{ width:6.9em; height:4em; line-height:4em;}
 .wrapper_box_btn_group2 a.jgpx{ width:13.8em; height:4em; line-height:4em; border-top:0.1em solid #eee;}
 .wrapper_box_btn_group2 a.jgpx span{ font-weight:bold; margin:0 0.5em;}
-.wrapper_box_btn_group2 .sequence{ float:left; width:12.8em; height:2em; line-height:2em; border-top:0.1em solid #eee; padding:1em 0.5em 1.2em 0.5em; background:#FFF;}
-.wrapper_box_btn_group2 .sequence select{ width:10.8em; height:2em; line-height:2em;}
+.wrapper_box_btn_group2 .sequence{ float:left; width:12.8em; height:3em; line-height:2em; border-top:0.1em solid #eee; padding:1em 0.5em 1.2em 0.5em; background:#FFF;}
+.wrapper_box_btn_group2 .sequence select{ width:10.8em; height:3em; line-height:2em;}
 
 /*列表 - 信息*/
 .product_inf{ position:absolute; top:1.8em; left:0.75em; width:12.5em; height:auto; overflow:hidden; text-align:center;  color:#666;}
@@ -703,3 +703,17 @@ a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; wid
 .mini-fetch .mini-fetch-succ{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; margin-left:-12.5em; border:0.2em solid #eee;}
 .mini-fetch .mini-fetch-succ p{ text-align:center; color:#333; font-size:2em; line-height:3em;}
 .mini-fetch .mini-fetch-succ button{ margin-left: 0.8em;}
+
+/*城市弹窗2*/
+.mini-city2{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;}
+.mini-city2 a.mini-city-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-city2 h3{ font-size:2em; color:#9C0; margin:0 0 1em 1.25em;}
+.mini-city2 .mini-control{ width:20em; margin:0 0 0 2em; }
+.mini-city2 .mini-control label{ font-size:1em; line-height:2em; color:#999; }
+.mini-city2 .mini-control select{ width:17em; height:3em; margin-bottom:1em;}
+.mini-city2 .mini-control a.mini-city-submit{ display:block; float:left; width:21em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
+.mini-city2 .mini-control table{ color:#333; text-align:left; margin-bottom:2em;}
+
+.mini-city2 .mini-control table tr th{ padding:0.5em 0;}
+.mini-city2 .mini-control table tr th h4{ font-size:1.6em; color:#F00; line-height:2.5em;}
+.mini-city2 .mini-control table tr td{padding:0.5em 0;}
