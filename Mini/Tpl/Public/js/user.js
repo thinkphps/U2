@@ -61,14 +61,22 @@ jQuery(function($) {
             var strHtml = '';
             for(var i = 0;i<list.length;i++){
                 strHtml += '<div class="model">';
-                strHtml += '<div class="model_yj">';
-                strHtml += '<img src="'+ tmplPath +'/images/yj/yj_women.png" />';
+                strHtml += '<div class="model_yj" data-suitid="'+ list[i].suitID +'">';
+                var gender = list[i].gender;
+                if( gender == '15478'){
+                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_men.png"  />';
+                }else if(gender == '15474'){
+                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_women.png"  />';
+                }else{
+                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_chr.png"  />';
+                }
+
                 strHtml += '<img src="'+ list[i].pic_body + '" />';
                 strHtml += '</div>';
                 var detiles = list[i].detail;
                 strHtml += '<ul>';
                 for(var j = 0;j<detiles.length;j++){
-                    strHtml += '<li><a href="#"><img src="__TMPL__Public/images/yffff.png"  /></a></li>'
+                    strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + detiles[j].pic_url +'"  /></a></li>'
                 }
                 strHtml += '</ul>';
                 strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"></a>'
@@ -172,7 +180,7 @@ jQuery(function($) {
         if(username.length > 0){
             $.post(changeNameUrl,{uname:username},function(data){
                 if(data['code'] == '1'){
-                    $('#lblnick').val(username);
+                    $('#lblnick').text(username);
                     UserCenter.txtUsername.val('');
                     $('#changename_msg').html('账户修改成功！');
                 }
