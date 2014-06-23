@@ -641,6 +641,7 @@ a.light_box_close{ display:block; background:url(../images/close2.png) 0 0 no-re
 .map_light_box h3{ font-size:20px; color:#999; line-height:60px; font-weight:normal;}
 .light_box_u_map_con{ float:left; background:#555; width:760px; height:405px;}
 
+
 .xuanze{ }
 .select_city{ position:relative; float:left; margin:0 10px 15px 0;}
 .select_city dt{ height:34px; display:inline-block; border:1px solid #ff0000; background:#fff url(../images/qiehuan.png) right 0 no-repeat; line-height:34px; font-weight:bold; padding-left:10px; cursor:pointer; width:250px;padding-right:12px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;position:relative;z-index:99;color:#666; font-weight:normal;}
@@ -693,12 +694,18 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 
 .user_center_con{ width:960px; margin:0 auto;}
 .user_center_con .model{ float:left; width:240px; height:550px; margin:100px 0 0 0; position:relative;}
+
+.user_center_con .model .model_yj{float:left; width:240px; height:550px; position:relative;}
+.user_center_con .model .model_yj img{ display:block; width:400px; height:533px; position:absolute; left:50%; top:0; margin-left:-200px;}
+
 .user_center_con .model ul{ display:block; width:54px; position:absolute; bottom:50px; right:0;}
 .user_center_con .model ul li{ float:left; display:block; width:54px; height:54px; background:url(../images/model_bg.png) 0 0 no-repeat;}
 .user_center_con .model ul li a img{ width:50px; margin:2px;}
 
+.user_center_con .model a.del_sc_btn{ display:block; width:41px; height:41px; background:url(../images/close2.png) 0 0 no-repeat; position:absolute; left:50%; top:30px; margin-left:-24px;}
 
-.user_center .user_center_btn{ float:left; height:100px; width:100%; background:url(../images/dr_main_con_sub_nav_bg.png) 0 0 repeat;position:fixed;top:87%;}
+
+.user_center .user_center_btn{ float:left; height:100px; width:100%; background:url(../images/dr_main_con_sub_nav_bg.png) 0 0 repeat; position:relative;}
 .user_center .user_center_btn ul{ display:block; width:950px; height:100px;  margin:0 auto; background:#fff;}
 .user_center .user_center_btn ul li{ display:block; float:left; width:160px; height:100px; border-right:1px solid #eee; color:#333;}
 .user_center .user_center_btn ul li a{ display:block; width:160px; text-align:center;}
@@ -728,6 +735,15 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_center .user_center_btn ul li.center_btn4.select a:hover span{ background:url(../images/user_center_icon.png) 0 -150px no-repeat;}
 .user_center .user_center_btn ul li.center_btn5.select a:hover span{ background:url(../images/user_center_icon.png) 0 -200px no-repeat;}
 .user_center .user_center_btn ul li.center_btn6.select a:hover span{ background:url(../images/user_center_icon.png) 0 -250px no-repeat;}
+
+.user_l_box{ position:absolute; left:50%; margin-left:-475px; width:948px; height:100px; background:#eee; border:1px solid #ddd; border-bottom:none;}
+.user_l_box .mini-control{ float:left; font-size:14px; color:#333; margin-left:15px; margin-top:28px;}
+.user_l_box .mini-control input{ margin-left:10px; height:40px; line-height:40px; padding:0 10px;border:
+	1px solid #ddd;
+    -moz-border-radius:5px;      /* Gecko browsers */
+    -webkit-border-radius:5px;   /* Webkit browsers */
+    border-radius:5px;            /* W3C syntax */
+}
 
 .youhui{ width:240px; height:60px; position:absolute; right:15px; top:15px;}
 .youhui a.youhui_icon{ display:block; width:68px; height:60px; background:url(../images/youhui_icon.png) 0 0 no-repeat; position:absolute;right:0; top:0;}
