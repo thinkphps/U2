@@ -1364,8 +1364,11 @@ function change_pwd(){
     $.post(changepwdurl,{old_password:old_password,new_password:new_password},function(data){
         if(data['code'] > 0){
             //$('.mini-change-password').hide();
-            $('.mini-change-succ').show();
-            $('#pwd_error_msg').html('');
+//            $('.mini-change-succ').show();
+            $('#pwd_error_msg').html('密码修改成功！');
+            $('#c_old_password').val('');
+            $('#c_new_password').val('');
+            $('#c_reg_new_password').val('');
         }else{
             $('#pwd_error_msg').html(data['msg']);
             return false;

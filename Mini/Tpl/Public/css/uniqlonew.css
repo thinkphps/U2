@@ -2193,9 +2193,13 @@ a.index-archor{
 .mini-reg-login,.mini-login-reg,.mini-fetch-back{
     margin-top: 6px;
 }
-.mini-control a{
-    color: #606060;
-    text-decoration: underline;
+/*.mini-control a{*/
+    /*color: #606060;*/
+    /*text-decoration: underline;*/
+/*}*/
+.mini-control a:hover{
+    color: #F7F5F5;
+    /*text-decoration: underline;*/
 }
 .mini-control-tips,a.mini-clause-btn{
     color: #f00;
