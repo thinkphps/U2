@@ -148,7 +148,7 @@ class RecoModel extends Model{
           $page = 1;
           $start = 0;
       }
-      $result = $beubeu_coll->field('id,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
+      $result = $beubeu_coll->field('id,gender,suitID,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
       $str = '';
       foreach($result as $k=>$v){
       $str.=$v['id'].',';
