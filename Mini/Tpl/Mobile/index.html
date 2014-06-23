@@ -585,10 +585,9 @@
 </div>
 
 <!--选择城市弹窗-->
-<div class="map_light_box none" id="mapdiv" >
+    <form class="mini-city2 linkageselect none" style="" id="mapdiv">
     <a href="javascript:;" class="light_box_close" id="closemap"></a>
-    <h3>最近的优衣库UNIQLO门店</h3>
-    <div class="mb15">
+    <h3>请选择门店</h3>
         <div class="mini-control">
             <select name="" id="spid" class="mr10" style="width:150px;"></select>
         </div>
@@ -598,12 +597,29 @@
         <div class="mini-control">
         <select name="" id="ddlShop" style="width:200px;">
             <option value='0'>请选择</option>
-
         </select></div>
-        <div class="mini-control"><span id='emptymsg'  style="font-size:10px;color: #999999;"></span></div>
-    </div>
-    <!--<div class="light_box_u_map_con" id="allmap"></div>-->
-</div>
+        <div class="mini-control none mo-sinfo">
+            <table width="100%">
+                <tr><th colspan="2"><h4 id='mo-sh'>上海宝山万达广场店</h4></th></tr>
+                <tr>
+                    <th width="30%" valign="top">地址：</th>
+                    <td width="70%" valign="top" id='mo-shd'>上海市宝山区一二八纪念路988弄1号万达广场1-2F（地铁一号线共康站）</td>
+                </tr>
+                <tr>
+                    <th valign="top">电话：</th>
+                    <td valign="top" id='mo-shc'>021-56477585</td>
+                </tr>
+                <tr>
+                    <th valign="top">销售范围：</th>
+                    <td valign="top" id='mo-shf'>男装、女装、童装、婴幼儿装</td>
+                </tr>
+                <tr>
+                    <th valign="top">营业时间：</th>
+                    <td valign="top" id='mo-sht'>周一至周日 10:00 - 22:00</td>
+                </tr>
+            </table>
+        </div>
+</form>
 
 <script type='text/javascript'>
     //性别对应的标记
@@ -944,6 +960,7 @@ $(function(){
     //地图城市切换
     $('#spid').on('change',function(){
         var pid = $('#spid option:selected').val();
+        $('.mo-sinfo').hide();
         var url = sendurl+"mini.php/API/getcity";
         $.post(url,{pid:pid,baiduid:1},function(data,status){
             var str = '<option value="0">请选择</option>';
@@ -978,6 +995,7 @@ $('#moreid').on('click',function(){
 $('#scid').on('change',function(){
     //H.map.centerAndZoom($("#scid option:selected").text(), 11);
     var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
+    $('.mo-sinfo').hide();
     var cityname = $('#scid option:selected').text();
     if(cityname[cityname.length-1]=='市'){
         var cnm = cityname.replace('市','');

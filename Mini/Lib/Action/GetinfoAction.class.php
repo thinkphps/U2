@@ -269,6 +269,7 @@ public function changeName(){
       $arr['code'] = 0;
       $arr['msg'] = '没有登录';
     }
+    $this->ajaxReturn($arr, 'JSON');
 }
 public function changeTaoName(){
         //修改淘宝账号
@@ -296,4 +297,5 @@ public function changeTaoName(){
             $arr['msg'] = '没有登录';
         }
     }
+$this->ajaxReturn($arr, 'JSON');
 }
