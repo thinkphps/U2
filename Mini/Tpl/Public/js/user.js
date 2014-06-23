@@ -13,6 +13,9 @@ jQuery(function($) {
         youhui_icon : $('#youhui_icon'),
         centor_con : $('#conter_con'),
         del_sc_btn : $('.del_sc_btn'),
+        btn_changepwd : $('#btn_changepwd'),
+        changepwd : $('#changepwd'),
+        ulMenu : $('#ul_menu'),
         init : function(){
             UserCenter.bindCollections(0);
         },
@@ -102,5 +105,12 @@ jQuery(function($) {
                 }
             });
         }
+    });
+
+    //修改密码
+    UserCenter.btn_changepwd.on('click',function(){
+        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).addClass('select');
+        UserCenter.changepwd.show();
     });
 });
