@@ -252,7 +252,7 @@ public function changeName(){
         $uname = trim($this->_post('uname'));
         $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
         $user_name = session("uniq_user_name");
-        if($result['mobile']==$user_name){
+        if(!empty($result)){
            $re = $user->where(array('id'=>$uid))->save(array('user_name'=>$uname));
            if($re){
                $arr['code'] = 1;
@@ -279,7 +279,7 @@ public function changeTaoName(){
             $tname = trim($this->_post('taobao_name'));
             $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
             $user_name = session("uniq_user_name");
-            if($result['mobile']==$user_name){
+            if(!empty($result)){
                 $re = $user->where(array('id'=>$uid))->save(array('taobao_name'=>$tname));
                 if($re){
                     $arr['code'] = 1;
