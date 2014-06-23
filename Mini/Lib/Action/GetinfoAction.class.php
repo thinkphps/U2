@@ -251,7 +251,10 @@ public function changeName(){
         $user = M('User');
         $uname = trim($this->_post('uname'));
         $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
+        print_r($result);
         $user_name = session("uniq_user_name");
+        echo $user_name;
+        exit;
         if($result['mobile']==$user_name || $result['taobao_name']==$user_name){
            $re = $user->where(array('id'=>$uid))->save(array('user_name'=>$uname));
            if($re){
