@@ -23,6 +23,8 @@ jQuery(function($) {
         changeTBname : $('#changetbname'),
         txtUsername :$('#txtusername'),
         txttbname :$('#txttbname'),
+        userinfo : $('#userinfo'),
+        btnUserInfo :$('#btn_userinfo'),
         init : function(){
             UserCenter.bindCollections(0);
         },
@@ -114,6 +116,14 @@ jQuery(function($) {
         }
     });
 
+    //账户信息
+    UserCenter.btnUserInfo.on('click',function(){
+        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).addClass('select');
+        $('div[name=user_l_box]').hide();
+        UserCenter.userinfo.show();
+    });
+
     //我的衣柜
     UserCenter.myWardrobe.on('click',function(){
         UserCenter.ulMenu.find('li').removeClass('select');
@@ -161,14 +171,18 @@ jQuery(function($) {
         }
     });
 
-    $('#btn_change_name').on('click',function(){
+    $('#btn_change_tbname').on('click',function(){
         //提交修改淘宝账号
         var tbname = UserCenter.txttbname.val();
         if(tbname.length > 0){
-            $.post(changeNameUrl,{uname:tbname},function(data){
+            $.post(changeTaoNameUrl,{taobao_name:tbname},function(data){
                 if(data['code'] == '1'){
                     UserCenter.txttbname.val('');
+                    $('#lblusername').text(tbname);
                     $('#changetbname_msg').html('淘宝登录名已关联！');
+                }
+                else{
+                    $('#changetbname_msg').html(data['msg']);
                 }
             });
         }else{

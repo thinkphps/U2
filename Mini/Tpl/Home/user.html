@@ -59,7 +59,7 @@
     </div>
     <div class="user_center_btn">
         <ul id="ul_menu">
-            <li class="center_btn1"><a href="javascript:;"><span></span>当前账户信息</a></li>
+            <li class="center_btn1" id="btn_userinfo"><a href="javascript:;"><span></span>当前账户信息</a></li>
             <li class="center_btn2 select" id="my_wardrobe"><a href="javascript:;"><span></span>我的衣柜</a></li>
             <li class="center_btn3" id="btn_changepwd"><a href="javascript:;" class="mini-changepw-btn"><span></span>修改密码</a></li>
             <li class="center_btn4" id="btn_changename"><a href="javascript:;"><span></span>修改账户</a></li>
@@ -67,20 +67,15 @@
             <li class="center_btn6" id="close-home"><a href="javascript:;" ><span></span>关闭用户中心</a></li>
         </ul>
         <div class="user_l_box none" name="user_l_box" id="userinfo" style="top:-100px;">
-            <form>
-                <!--<div class="mini-control">-->
-                    <!--<label>用户ID<input type="password" id="c_old_password" placeholder="用户ID"></label>-->
-                <!--</div>-->
-                <!--<div class="mini-control">-->
-                    <!--<label>昵称<input type="password" id="c_new_password" placeholder="昵称"></label>-->
-                <!--</div>-->
-                <!--<div class="mini-control">-->
-                    <!--<label>淘宝ID<input type="password" id="c_reg_new_password" placeholder="淘宝ID"></label>-->
-                <!--</div>-->
-                <!--<div class="mini-control">-->
-                    <!--<label>淘宝登录名<input type="password" id="c_reg_new_password" placeholder="淘宝登录名"></label>-->
-                <!--</div>-->
-            </form>
+                <div class="mini-control">
+                    <label>账号<input type="password" id="showuserinfo" ></label>
+                </div>
+                <div class="mini-control">
+                    <label>手机<input type="password" id="showmobile"></label>
+                </div>
+                <div class="mini-control">
+                    <label>淘宝登录名<input type="password" id="shoutbname" ></label>
+                </div>
         </div>
         <div class="user_l_box none" name="user_l_box" id="changepwd" style="top:-100px;">
             <form>
