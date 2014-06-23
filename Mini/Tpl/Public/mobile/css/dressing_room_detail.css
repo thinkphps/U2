@@ -502,7 +502,7 @@ button,label{cursor:pointer; }
 .noshow:hover{color:#333333;}
 /*登录弹窗*/
 .mini-login{ background:#FFF; position:absolute; left:50%; top:5em; width:25em; height:32em; margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
-.mini-login a.mini-form-close{ display:block; font-size:2em; position:relative; margin-left:11em; top:0.7em; color:#F00;}
+.mini-login a.mini-form-close{ background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
 .mini-login h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
 .mini-login .mini-control{ width:20em; margin:0 0 0 2em;}
 .mini-login .mini-control label{ font-size:1em; line-height:2em; color:#999;}
@@ -517,7 +517,7 @@ button,label{cursor:pointer; }
 
 /*注册弹窗*/
 .mini-register{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
-.mini-register a.mini-form-close{ display:block; font-size:2em; position:relative;  margin-left:11em; top:0.7em; color:#F00;}
+.mini-register a.mini-form-close{  background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
 .mini-register h3{ font-size:2em; color:#9C0; margin:0 0 0.25em 1.25em;}
 .mini-register .mini-control{ width:20em; margin:0 0 0 2em; }
 .mini-register .mini-control label{ font-size:1em; line-height:2em; color:#999; }
@@ -533,7 +533,7 @@ button,label{cursor:pointer; }
 
 /*城市弹窗*/
 .mini-city{ background:#FFF; position:absolute; left:50%; top:5em; width:25em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
-.mini-city a.mini-city-close{ display:block; font-size:2em; position:relative; left:11em; top:0.7em; color:#F00;}
+.mini-city a.mini-city-close{ background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
 .mini-city h3{ font-size:2em; color:#9C0; margin:0 0 1em 1.25em;}
 .mini-city .mini-control{ width:20em; margin:0 0 0 2em; }
 .mini-city .mini-control label{ font-size:1em; line-height:2em; color:#999; }

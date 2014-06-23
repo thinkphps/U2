@@ -758,7 +758,7 @@ $('.tag_text').on('click','.mini-form-close',function(){
     $('.style_btn_group a').removeClass('style_select');
 });
 $("#ddlShop").on("change",function(){
-    var list =   gd.goods;
+    var list = gd.goods;
     for(var i=1;i<list.length;i++){
         if(list[i][0] == $('#ddlShop option:selected').text() ){
             $('#mo-sh').text(list[i][0]);
