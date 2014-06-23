@@ -392,7 +392,8 @@
     <div class="my_yyg_title">
         <h2>我的试衣间</h2>
         <a href="javascript:;" class="change_yf" id='changeid' la='2'>换一批</a>
-        <a href="#m">想获取其他试穿，请点击更多商品</a>
+        <a href="#m" class='chother'></a>
+        <a href="#m">更多单品搭配</a>
         <div class="none change-btn-mask" id="btn-mask"></div>
     </div>
 
@@ -573,17 +574,18 @@
 
         <!--优衣库推荐款式-->
         <div class="yyk_tj">
-            <h3><p>更多商品</p><span></span></h3>
             <div class="left_tj">
-                <ul>
+                <ul class='tag'>
                     <li id='alluid' class='upclothes' la='0'><a href="javascript:;" class="w_select">全部</a></li>
                     <volist id='ucvo' name='ucuslist'>
                     <li class='upclothes zleft' la='{$ucvo.id}'><a href="javascript:;">{$ucvo.name}</a></li>
                     </volist>
                 </ul>
+                <ul class="tag_btn">
+                    <li><a href="javascript:;" class="select"><i class="duoxuan"></i>多选</a></li>
+                    <li><a href="javascript:;"><i class="gengduo"></i>更多</a></li>
+                </ul>
             </div>
-            <div class="zk_btn"><a href="javascript:;"></a><span class="mleft">更多</span></div>
-            <div class="zk_btn2"><a href="javascript:;"></a><span class='mrtop'>单选</span></div>
         </div>
 
     </div>
@@ -835,28 +837,22 @@ $('.imgrd').css(css);
 
 
         //点击自定义分类向下按钮
-        $('.zk_btn').on('click',function(){
-            if($('.left_tj').css('height') == '52px'){
-                $('.left_tj').css('height','auto');
-                $('.left_tj ul').css('height','auto');
-                $('.right_tj').css('height','auto');
-                $('.right_tj ul').css('height','auto');
-                if($('.zk_btn').hasClass('upselect')){
-                    $('.zk_btn').removeClass('upselect');
+        $('.tag_btn').on('click','li:eq(1)',function(){
+            if($('.tag').css('height') == '53px'){
+                $('.tag').css('height','auto');
+                if($(this).children('a').hasClass('select')){
+                    $(this).children('a').removeClass('select');
                 }
                 else{
-                    $('.zk_btn').addClass('upselect');
+                    $(this).children('a').addClass('select');
                 }
             }else{
-                $('.left_tj').css('height','52px');
-                $('.left_tj ul').css('height','52px');
-                $('.right_tj').css('height','52px');
-                $('.right_tj ul').css('height','52px');
-                if($('.zk_btn').hasClass('upselect')){
-                    $('.zk_btn').removeClass('upselect');
+                $('.tag').css('height','53px');
+                if($(this).children('a').hasClass('select')){
+                    $(this).children('a').removeClass('select');
                 }
                 else{
-                    $('.zk_btn').addClass('upselect');
+                    $(this).children('a').addClass('select');
                 }
             }
         });
@@ -869,7 +865,7 @@ $('.imgrd').css(css);
             $.uniqlo.bid = 0;
             $.uniqlo.kid = 0;
             $.weather.str = '';
-            var zid = $(this).attr('la'),zleftlength = $('.zleft').length,iscbox = $('.zk_btn2').hasClass('upselect');
+            var zid = $(this).attr('la'),zleftlength = $('.zleft').length,iscbox = $('.tag_btn').children('li:eq(0)').children('a').hasClass('select');
             if(zid!=0){
                 $('#alluid').children('a').removeClass('w_select');
             }else{

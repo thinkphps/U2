@@ -153,13 +153,13 @@ class RecoModel extends Model{
       foreach($result as $k=>$v){
       $str.=$v['id'].',';
       }
-      $str = rtrim($str);
-      $sql = "select bg.`num_iid`,bg.`pic_url` from (select num_iid from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $str = rtrim($str,',');
+      $sql = "select t1.bcid,bg.`num_iid`,bg.`pic_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
       $detail = $beubeu_coll->query($sql);
       foreach($result as $k1=>$v1){
           $detailArr = array();
           foreach($detail as $k2=>$v2){
-             if($v1['num_iid']==$v2['num_iid']){
+             if($v1['id']==$v2['bcid']){
                  $detailArr[] = $v2;
              }
           }
