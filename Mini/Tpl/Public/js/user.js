@@ -41,14 +41,20 @@ jQuery(function($) {
                 UserCenter.collocationNum.text(cnum);
                 var collflag = data['collflag'];
                 if(collflag == 1){
-                    UserCenter.youhui_icon.removeClass('youhui_icon');
-                    UserCenter.youhui_icon.addClass('youhui_icon_block');
+                    UserCenter.youhui_icon.data('isreceive',1);
+//                    UserCenter.youhui_icon.removeClass('youhui_icon');
+//                    UserCenter.youhui_icon.addClass('youhui_icon_block');
 //                    UserCenter.youhui_icon.hide();
                 }
                 else{
+                    UserCenter.youhui_icon.data('isreceive',0);
                     //如果收藏超过10套则弹出消息提示框：您的收藏已超过10套，请点击‘确定’领取优惠
                     if(cnum > 10){
+                        UserCenter.youhui_icon.show();
                         alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
+                    }
+                    else{
+                        UserCenter.youhui_icon.hide();
                     }
                 }
                 UserCenter.change_yf.data(data['page']);
@@ -61,8 +67,8 @@ jQuery(function($) {
             var strHtml = '';
             for(var i = 0;i<list.length;i++){
                 strHtml += '<div class="model">';
-                strHtml += '<div class="model_yj" data-suitid="'+ list[i].suitID +'">';
                 var gender = list[i].gender;
+                strHtml += '<div class="model_yj" data-suitid="'+ list[i].suitID +'" data-gender="'+ gender +'">';
                 if( gender == '15478'){
                     strHtml += '<img src="'+ tmplPath +'/images/yj/yj_men.png"  />';
                 }else if(gender == '15474'){
@@ -111,16 +117,20 @@ jQuery(function($) {
     });
     //点击优惠券修改状态
     UserCenter.youhui_icon.on('click',function(){
-        if( $(this).hasClass('youhui_icon')){
+        var isreceive = UserCenter.youhui_icon.data('isreceive');
+        if( isreceive != 1){
             $.post(setCollFlagUrl,function(data){
                 if(data['code'] > 0){
                     UserCenter.youhui_icon.removeClass('youhui_icon');
-                    UserCenter.youhui_icon.addClass('youhui_icon_block');
+                    UserCenter.youhui_icon.data('isreceive',1);
+//                    UserCenter.youhui_icon.addClass('youhui_icon_block');
                 }else{
 
                     return false;
                 }
             });
+        }else{
+            alert('您已领取优惠券！');
         }
     });
 
@@ -206,6 +216,17 @@ jQuery(function($) {
             });
         }else{
             $('#changetbname_msg').html('淘宝登录名不能为空！');
+        }
+    });
+
+    //穿衣
+    UserCenter.centor_con.on('click','.model_yj',function(){
+        var $model_yj = $(this);
+        var gender = $model_yj.data('gender');
+        var suitid = $model_yj.data('suitid');
+        get_baiyi_dp(suitid,gender);
+        if(pageElement.$divSyj.is(':hidden')){
+            pageElement.$btnExpansion.click();
         }
     });
 });
