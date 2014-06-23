@@ -122,6 +122,17 @@ jQuery(function($) {
         $(this).addClass('select');
         $('div[name=user_l_box]').hide();
         UserCenter.userinfo.show();
+        $.post(getUserInfoUrl,function(data){
+            console.log(data);
+            if(data['code'] > 0){
+                var info = data['result'];
+                $('#showuserinfo').val(info.user_name);
+                $('#showmobile').val(info.mobile);
+                $('#shoutbname').val(info.taobao_name);
+            }else{
+                return false;
+            }
+        });
     });
 
     //我的衣柜
