@@ -296,6 +296,6 @@ public function changeTaoName(){
             $arr['code'] = 0;
             $arr['msg'] = '没有登录';
         }
+    $this->ajaxReturn($arr, 'JSON');
     }
-$this->ajaxReturn($arr, 'JSON');
 }
