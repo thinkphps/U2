@@ -390,16 +390,16 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 }
                 $cstr = rtrim($cstr,',');
                 $catewhere = " and cg.cateID in (".$cstr.")";
-                //$where.= " and g.wid in (".$cstr.")";
+                //$where.= " and g.ccateid in (".$cstr.")";
             }
             //$where.=" and bg.approve_status='onsale'";
             //$where.=" and bg.isdel=0";
             if(isset($tem)){
-                $case = "case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo";
+                $case = "case when g.wid=".$widvalue['wid']." then 0 else g.wid end wo,";
                 $ordr = "order by wo asc,";
             }else{
                 $case = '';
-                $ordr = "";
+                $ordr = "order by ";
                 $fi = 'g.id';
             }
             if(!empty($uid)){
@@ -430,16 +430,16 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                  }else{
                     //有自定义分类也有其他的条件
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
-                      $sql = "select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
                  }
             }else{
             if(!empty($uid)){
-                $sql = "select al.*{$fieldlb} from (select {$case},bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
+                $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
             }else{
-               $sql = "select ".$case.", bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+               $sql = "select ".$case." bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
             }
             $result = $goodtag->query($sql);
