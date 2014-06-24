@@ -118,19 +118,24 @@ jQuery(function($) {
     //点击优惠券修改状态
     UserCenter.youhui_icon.on('click',function(){
         var isreceive = UserCenter.youhui_icon.data('isreceive');
-        if( isreceive != 1){
-            $.post(setCollFlagUrl,function(data){
-                if(data['code'] > 0){
-                    UserCenter.youhui_icon.removeClass('youhui_icon');
-                    UserCenter.youhui_icon.data('isreceive',1);
-//                    UserCenter.youhui_icon.addClass('youhui_icon_block');
-                }else{
+        var colnum = UserCenter.collocationNum.text();
+        if(colnum > 10){
+            if( isreceive != 1){
+                $.post(setCollFlagUrl,function(data){
+                    if(data['code'] > 0){
+                        UserCenter.youhui_icon.removeClass('youhui_icon');
+                        UserCenter.youhui_icon.data('isreceive',1);
+    //                    UserCenter.youhui_icon.addClass('youhui_icon_block');
+                    }else{
 
-                    return false;
-                }
-            });
+                        return false;
+                    }
+                });
+            }else{
+                alert('您已领取优惠券！');
+            }
         }else{
-            alert('您已领取优惠券！');
+            alert('收藏满10套方可领取优惠券！');
         }
     });
 
