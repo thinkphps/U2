@@ -487,7 +487,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .left_tj ul.tag_btn li a i.duoxuan{ background:url(../images/tab_btn.png) 0 0 no-repeat;}
 .left_tj ul.tag_btn li a i.gengduo{ background:url(../images/tab_btn.png) 0 -20px no-repeat;}
 .yyk_tj{ width:950px; height:auto; position:relative; margin-bottom:20px; overflow:hidden;}
-.yyk_tj h3{ display:block; width:950px; height:58px; padding:33px 0 0 0; background:url(../images/dr_main_con_sub_nav_bg2.png) 0 0 repeat; text-align:center;color:#636875;font-size:18px;font-weight: bold;}
+.yyk_tj h3{ display:block; width:950px; height:20px; background:url(../images/dr_main_con_sub_nav_bg2.png) 0 0 repeat; text-align:center;color:#636875;font-size:18px;font-weight: bold;overflow: hidden;}
 /*优衣库推荐款式-内容*/
 .tj_wrapper { width:962px; margin:0 auto; overflow:hidden; }
 .wrapper_box{ float:left; background:#FFF; width:228px; overflow:hidden; margin:0 6px 12px 6px; position:relative;}
