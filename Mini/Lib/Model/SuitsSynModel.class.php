@@ -124,6 +124,51 @@ class SuitsSynModel extends Model{
                 $map['suitGenderID'] = $suits[$i]['gender'];
                 $map['suitImageUrl'] = $suits[$i]['pic'];
 
+                $pic = $suits[$i]['pic_head'];
+                if (isset($pic)){
+                   if(empty($pic)){
+                       $map['suitImageUrlHead'] = "";
+                   } else{
+                       $map['suitImageUrlHead'] = $pic;
+                   }
+                }
+
+                $pic = $suits[$i]['pic_body'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlBody'] = "";
+                    } else{
+                        $map['suitImageUrlBody'] = $pic;
+                    }
+                }
+
+                $pic = $suits[$i]['pic_shose'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlShose'] = "";
+                    } else{
+                        $map['suitImageUrlShose'] = $pic;
+                    }
+                }
+
+                $pic = $suits[$i]['pic_match'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlMatch'] = "";
+                    } else{
+                        $map['suitImageUrlMatch'] = $pic;
+                    }
+                }
+
+                $tag = $suits[$i]['tag'];
+                if (isset($tag)){
+                    if(empty($tag)){
+                        $map['tag'] = "";
+                    } else{
+                        $map['tag'] = $tag;
+                    }
+                }
+
                 for($j = 0; $j<count($suits[$i]['products']); $j++){
                     if($j<11){
                         $map['suitproduct'.($j+1)] = $suits[$i]['products'][$j]['uq'];
@@ -167,11 +212,55 @@ class SuitsSynModel extends Model{
                 $fxsuits->where(array('suitID'=>$fx_matchid))->save($map);
             }else{
                 $map['suitID'] = $beubeusuit[$i]['id'];
+                $result = $suits->field('suitID')->where($map)->find();
+
                 $map['suitStyleID'] = $beubeusuit[$i]['style'];
                 $map['suitGenderID'] = $beubeusuit[$i]['gender'];
                 $map['suitImageUrl'] = $beubeusuit[$i]['pic'];
+                $pic = $suits[$i]['pic_head'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlHead'] = "";
+                    } else{
+                        $map['suitImageUrlHead'] = $pic;
+                    }
+                }
 
-                $result = $suits->field('suitID')->where($map)->find();
+                $pic = $suits[$i]['pic_body'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlBody'] = "";
+                    } else{
+                        $map['suitImageUrlBody'] = $pic;
+                    }
+                }
+
+                $pic = $suits[$i]['pic_shose'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlShose'] = "";
+                    } else{
+                        $map['suitImageUrlShose'] = $pic;
+                    }
+                }
+
+                $pic = $suits[$i]['pic_match'];
+                if (isset($pic)){
+                    if(empty($pic)){
+                        $map['suitImageUrlMatch'] = "";
+                    } else{
+                        $map['suitImageUrlMatch'] = $pic;
+                    }
+                }
+
+                $tag = $suits[$i]['tag'];
+                if (isset($tag)){
+                    if(empty($tag)){
+                        $map['tag'] = "";
+                    } else{
+                        $map['tag'] = $tag;
+                    }
+                }
                 if(isset($result))
                 {
                     $map['uptime'] = $createtime;

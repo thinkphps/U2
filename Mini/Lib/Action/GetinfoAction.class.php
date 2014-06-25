@@ -170,7 +170,8 @@ public function getCollData(){
 }
 public function delBeubenColl(){
    $id = trim($this->_request('id'));//百衣收藏id
-   if(!empty(session("uniq_user_id"))){
+    $uid = session("uniq_user_id");
+   if(!empty($uid)){
        $beubeu_coll = M('BeubeuCollection');
        $res = $beubeu_coll->where(array('id'=>$id))->delete();
        if($res){
@@ -220,8 +221,53 @@ public function setCollFlag(){
 public function addBeubenColl(){
     $uid = session("uniq_user_id");
     if($uid){
-        $fuid = trim($this->_request('uid'));
-
+        $fuid = trim($this->_post('uid'));
+        $headpic = trim($this->_post('headpic'));
+        $bodypic = trim($this->_post('bodypic'));
+        $shoespic = trim($this->_post('shoespic'));
+        $clothespic = trim($this->_post('clothespic'));
+        $gender = trim($this->_post('gender'));
+        $suitid = trim($this->_post('suitid'));
+        $str_num_iid = trim($this->_post('num_iid'));
+        $beuben = M('BeubeuCollection');
+        $result = $beuben->field('id')->where(array('uid'=>$uid,'suitID'=>$suitid))->find();
+        if(empty($result)){
+           $time = date('Y-m-d H:i:s');
+           $data = array('uid'=>$uid,
+                         'gender'=>$gender,
+                         'suitID'=>$suitid,
+                         'pic_head'=>$headpic,
+                         'pic_body'=>$bodypic,
+                         'pic_shoes'=>$shoespic,
+                         'pic_clothes'=>$clothespic,
+                         'createtime'=>$time);
+           $res = $beuben->add($data);
+           if($res>0){
+               $is_g = is_int(strpos($str_num_iid,'_'));
+               if(!$is_g){
+                   $str_num_iid = $str_num_iid.'_';
+                   $num_iid = explode('_',$str_num_iid);
+                   $insql = "insert into `u_beubeu_coll_goods` (`bcid`,`num_iid`) values ";
+                   $str = '';
+                   foreach($num_iid as $k=>$v){
+                    if($v){
+                        $str.="('".$res."','".$v."'),";
+                    }
+                   }
+                   $str = rtrim($str,',');
+                   $insql.=$str;
+                   $beuben->query($insql);
+                   $arr['code'] = 1;
+                   $arr['msg'] = '收藏成功';
+               }
+           }else{
+               $arr['code'] = 0;
+               $arr['msg'] = '收藏失败';
+           }
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '已经被收藏';
+        }
     }else{
         $arr['code'] = 0;
         $arr['msg'] = '没有登录';
