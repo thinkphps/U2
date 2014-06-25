@@ -202,4 +202,7 @@ class WindexModel extends Model{
             $result[$k1]['products'] = $chil;
         }
     }
+    public function getSellCateSex($id){
+        return M('Sellercats')->field('gender')->where(array('ID'=>$id))->find();
+    }
 }

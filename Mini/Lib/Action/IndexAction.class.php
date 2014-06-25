@@ -383,6 +383,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $cstr = '';
                 $ccid = explode('_',$zid);
                 $ccid = array_unique($ccid);
+                $gzid = $ccid[0];
                 foreach($ccid as $k=>$v){
                     if($v){
                         $cstr.=$v.',';
@@ -408,6 +409,12 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }
             if($sid!=4){
                 $goodstable = '`u_beubeu_goods`';
+                if(!empty($zid)){
+                    $sellsex = $windex->getSellCateSex($gzid);
+                    if($sellsex['gender']==4 || $sellsex['gender']==5){
+                    $goodstable = '`u_goods`';
+                    }
+                }
             }else{
                 $goodstable = '`u_goods`';
             }
@@ -474,7 +481,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
     }
     public function waterdata($result,$lid,$bid,$keyword){
         $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?scid=138188209&kid=11727_51912_165828_211546' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T2sdBwXY4aXXXXXXXX_!!196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
-        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2w_QOXKdXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
+        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2aPx6X90XXXXXXXXX_!!196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
