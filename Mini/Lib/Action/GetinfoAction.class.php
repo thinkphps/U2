@@ -217,8 +217,8 @@ public function setCollFlag(){
     }
     $this->ajaxReturn($arr, 'JSON');
 }
-    //添加beubeu收藏
 public function addBeubenColl(){
+    //添加beubeu收藏
     $uid = session("uniq_user_id");
     if($uid){
         $fuid = trim($this->_post('uid'));
