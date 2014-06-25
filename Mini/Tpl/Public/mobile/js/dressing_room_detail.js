@@ -765,7 +765,7 @@ $("#ddlShop").on("change",function(){
             $('#mo-shd').text(list[i][1]);
             $('#mo-shc').text(list[i][6]); //电话
             $('#mo-shf').text(list[i][4]); //范围
-            $('#mo-sht').text(list[i][5]); //时间
+            $('#mo-sht').html(list[i][5]); //时间
         }
     }
    $('.mo-sinfo').show();
