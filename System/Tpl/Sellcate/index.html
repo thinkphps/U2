@@ -69,7 +69,7 @@
                 <td><if condition="$vo['isud'] eq 1">上装<elseif condition="$vo['isud'] eq 2"/>下装<elseif condition="$vo['isud'] eq 3"/>内衣<elseif condition="$vo['isud'] eq 4"/>配饰<elseif condition="$vo['isud'] eq 5"/>特辑</if></td>
                 <td><if condition="$vo['selected'] eq 1">显示<elseif condition="$vo['selected'] eq 0"/>不显示</if></td>
                 <td><if condition="$vo['isshow'] eq 0">有<elseif condition="$vo['isshow'] eq 2"/>没有</if></td>
-                <td><a href="{:U('Sellcate/selledit',array('id'=>$vo['ID']))}" class="btn btn-primary">编辑</a></td>
+                <td><a href="{:U('Sellcate/selledit',array('id'=>$vo['ID'],'p'=>$p))}" class="btn btn-primary">编辑</a></td>
             </tr>
         </volist>
         </tbody>

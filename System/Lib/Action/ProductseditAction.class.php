@@ -47,54 +47,9 @@ public function index(){
 	for($i=-10;$i<=40;$i++){
     $temarr[] = $i;
 	}
-	//取出自定义分类
-      switch($gtaglist[0]['gtype']){
-	  	case 1 :
-		if($gtaglist[0]['isud']==1){
-		$str="<span style='color:red;'>WOMEN-上装</span>";	
-		}else if($gtaglist[0]['isud']==2){
-		$str="<span style='color:red;'>WOMEN-下装</span>";		
-		}else if($gtaglist[0]['isud']==3){
-		$str="<span style='color:red;'>WOMEN-配饰</span>";	
-		}else if($gtaglist[0]['isud']==4){
-		$str="<span style='color:red;'>WOMEN-套装</span>";	
-		}else if($gtaglist[0]['isud']==5){
-		$str="<span style='color:red;'>WOMEN-内衣</span>";	
-		}
-		break;
-	  	case 2 :
-		if($gtaglist[0]['isud']==1){
-		$str="<span style='color:red;'>MAN-上装</span>";	
-		}else if($gtaglist[0]['isud']==2){
-		$str="<span style='color:red;'>MAN-下装</span>";		
-		}else if($gtaglist[0]['isud']==3){
-		$str="<span style='color:red;'>MAN-配饰</span>";	
-		}else if($gtaglist[0]['isud']==4){
-		$str="<span style='color:red;'>MAN-套装</span>";	
-		}else if($gtaglist[0]['isud']==5){
-		$str="<span style='color:red;'>MAN-内衣</span>";	
-		}
-		break;	
-	  	case 3 :
-		if($gtaglist[0]['isud']==1){
-		$str="<span style='color:red;'>KIDS-上装</span>";	
-		}else if($gtaglist[0]['isud']==2){
-		$str="<span style='color:red;'>KIDS-下装</span>";		
-		}else if($gtaglist[0]['isud']==3){
-		$str="<span style='color:red;'>KIDS-配饰</span>";	
-		}else if($gtaglist[0]['isud']==4){
-		$str="<span style='color:red;'>KIDS-套装</span>";	
-		}else if($gtaglist[0]['isud']==5){
-		$str="<span style='color:red;'>KIDS-内衣</span>";	
-		}
-		break;
-	    case 4 :
-		if($gtaglist[0]['isud']==6){
-		$str.="<span style='color:red;'>BABY-婴幼儿装</span>";	
-		}
-		break;	
-      }	
-	$ccatelist = $customcate->field('*')->where(array('gtype'=>$gtaglist[0]['gtype'],'isud'=>$gtaglist[0]['isud']))->select();
+	//取出店铺自定义分类
+
+	$ccatelist = D('Admin')->getSellCate($result['num_iid']);
 
 	$this->assign('list',$list);
 	$this->assign('result',$result);
@@ -109,7 +64,6 @@ public function index(){
 	$this->assign('cate2',$cate2);
 	$this->assign('isdoubt',$isdoubt);
 	$this->assign('p',$_REQUEST['p']);
-	$this->assign('str',$str);
     $this->display();
 	}else{
     $this->error('参数错误',U('Products/index'));
@@ -152,7 +106,6 @@ public function doedit(){
         exit;
     }
 	$arr['isud'] = $arr['isud']?$arr['isud']:'0';
-	$arr['ccate'] =$arr['ccate']?$arr['ccate']:0;
 	unset($_POST);
 	//风格
     $farr = $arr['tag2'];
@@ -172,7 +125,6 @@ public function doedit(){
 			            'isud'=>$arr['isud'],
 			            'tag_id'=>0,
 		                'ftag_id'=>0,
-		                'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k],
                         'etm'=>$arr['etp'][$k]);
 	$gtmodel->add($data);
@@ -188,7 +140,6 @@ public function doedit(){
 			            'isud'=>$arr['isud'],
 			            'tag_id'=>0,
                         'ftag_id'=>0,
-		                'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
                         'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
 	$gtmodel->where(array('wid'=>$v,'good_id'=>$id))->save($data);
@@ -211,7 +162,6 @@ public function doedit(){
 			            'isud'=>$arr['isud'],
 			            'tag_id'=>0,//场合
 	                    'ftag_id'=>$v1,
-			            'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
                         'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
     $gtmodel->add($data);
@@ -227,7 +177,6 @@ public function doedit(){
                         'gtype'=>$arr['gtype'],
 			            'isud'=>$arr['isud'],
 	                    'ftag_id'=>$v1,
-			            'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
                         'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
     $res = $gtmodel->add($data);
@@ -238,12 +187,10 @@ public function doedit(){
                         'gtype'=>$arr['gtype'],
 			            'isud'=>$arr['isud'],
 			            'ftag_id'=>$v1,
-			            'ccateid'=>$arr['ccate'],
                         'stm'=>$arr['stp'][$k]?$arr['stp'][$k]:0,
                         'etm'=>$arr['etp'][$k]?$arr['etp'][$k]:0);
      $gtmodel->where(array('id'=>$tagre['id']))->save($data);
      $res = !empty($tagre['id'])?$tagre['id']:$res;
-	 $gtmodel->where(array('wid'=>$v,'good_id'=>$id))->save(array('ccateid'=>$arr['ccate']));
 	}
 	}
 	}
@@ -328,7 +275,6 @@ public function doedit(){
 			            'isud'=>$v['isud'],
 			            'tag_id'=>0,
 				        'ftag_id'=>$v['ftag_id'],
-				        'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
                         'etm'=>$v['etm']);
 
@@ -341,7 +287,6 @@ public function doedit(){
 			            'isud'=>$v['isud'],
 			            'tag_id'=>0,
 			            'ftag_id'=>$v['ftag_id'],
-			            'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
                         'etm'=>$v['etm']);
 		  $gtmodel->add($data); 
@@ -357,7 +302,6 @@ public function doedit(){
 			            'isud'=>$olist[$k]['isud'],
 			            'tag_id'=>0,
 				        'ftag_id'=>$olist[$k]['ftag_id'],
-				        'ccateid'=>$olist[$k]['ccateid'],
                         'stm'=>$olist[$k]['stp'],
                         'etm'=>$olist[$k]['etp']);
           $gtmodel->where(array('id'=>$v['id']))->save($data);  
@@ -375,7 +319,6 @@ public function doedit(){
 			            'isud'=>$v['isud'],
 			            'tag_id'=>0,
 			            'ftag_id'=>$v['ftag_id'],
-			            'ccateid'=>$v['ccateid'],
                         'stm'=>$v['stm'],
                         'etm'=>$v['etm']);
 		  $gtmodel->add($data);        

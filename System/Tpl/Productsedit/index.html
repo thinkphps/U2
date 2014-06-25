@@ -300,12 +300,11 @@
     </div>
 
       <div class="form-group">
-      <label class="col-lg-1 control-label">选择自定义分类：</label>
+      <label class="col-lg-1 control-label">自定义分类：</label>
       <div class="col-lg-10" id='zidy'>
-      	{$str}
 	  <if condition="$ccatelist neq ''">
       <volist id='cvo' name='ccatelist'>
-       <input type="radio" name="ccate" value="{$cvo.id}" <if condition="$cvo['id'] eq $gtaglist[0]['ccateid']">checked='checked'</if>>{$cvo.name}&nbsp;&nbsp;
+       {$cvo.shortName}&nbsp;&nbsp;
 	  </volist>
 	  </if>
       </div>
@@ -411,7 +410,7 @@ var ur = '{:U('Productsedit/ajaxt')}',sexurl = "{:U('Productsedit/sexStyle')}";
 var ur2 = '{:U('Productsedit/ajaxcate')}';
 var ur3 = '{:U('Productsedit/ajaxt2')}';
 $(function(){	
- $('#isudid').change(function(){
+ /*$('#isudid').change(function(){
 	 var gtypevalue = $('#gtypeid option:selected').val();
      if(gtypevalue==3 || gtypevalue==4){
          gtypevalue = 3;
@@ -433,7 +432,7 @@ $(function(){
 		   });
 	  }
 	  }
-	 });
+	 });*/
 
 $('#gtypeid').change(function(){
     var gtypevalue = $('#gtypeid option:selected').val(),gtypetext = $('#gtypeid option:selected').text();

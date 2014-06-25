@@ -21,8 +21,11 @@ class SellcateAction extends Action{
             $keyword = trim($this->_request('keyword'));
             $gender = $this->_request('gender');//类别
             $isud = $this->_request('isud');//部位
+            if(isset($_REQUEST['issel'])){
             $issel = $this->_request('issel');//是否显示
-
+            }else{
+                $issel = -1;
+            }
             $pagestr = '';
             import("@.ORG.Pageyu");
             if(!empty($gender)){
@@ -52,7 +55,8 @@ class SellcateAction extends Action{
             $sells = $sell->field('*')->where($where)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
             $page = $p->showPage();
             $this->assign('sells',$sells);
-            $this->assign('page',$_GET['page']);
+            $this->assign('p',$_GET['p']);
+            $this->assign('page',$page);
             $this->assign('gender',$gender);
             $this->assign('isud',$isud);
             $this->assign('issel',$issel);
@@ -65,13 +69,15 @@ class SellcateAction extends Action{
     public function selledit(){
         if(!empty($this->aid)){
            $id = trim($this->_request('id'));
+           $p = trim($this->_request('p'));
            if($id>0){
                $sell = M('Sellercats');
                $result = $sell->field('*')->where(array('ID'=>$id))->find();
                $this->assign('result',$result);
+               $this->assign('p',$p);
                $this->display();
            }else{
-               $this->error('参数错误',U('Sellcate/index'));
+               $this->error('参数错误',U('Sellcate/index',array('p'=>$p)));
                exit;
            }
         }else{
@@ -82,6 +88,7 @@ class SellcateAction extends Action{
     public function add(){
         if(!empty($this->aid)){
           $cid = trim($this->_request('cid'));
+          $p = trim($this->_request('p'));
           if($cid>0){
               $sell = M('Sellercats');
               $sort_order = trim($this->_request('sort_order'));
@@ -96,14 +103,14 @@ class SellcateAction extends Action{
                             'shortName'=>$shortName);
               $res = $sell->where(array('ID'=>$cid))->save($data);
               if($res){
-                  $this->success('提交成功',U('Sellcate/index'));
+                  $this->success('提交成功',U('Sellcate/index',array('p'=>$p)));
                   exit;
               }else{
-                  $this->error('提交失败',U('Sellcate/selledit',array('id'=>$cid)));
+                  $this->error('提交失败',U('Sellcate/selledit',array('id'=>$cid,'p'=>$p)));
                   exit;
               }
           }else{
-              $this->error('参数错误',U('Sellcate/index'));
+              $this->error('参数错误',U('Sellcate/index',array('p'=>$p)));
               exit;
           }
         }else{
