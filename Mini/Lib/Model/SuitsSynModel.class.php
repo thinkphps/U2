@@ -217,7 +217,7 @@ class SuitsSynModel extends Model{
                 $map['suitStyleID'] = $beubeusuit[$i]['style'];
                 $map['suitGenderID'] = $beubeusuit[$i]['gender'];
                 $map['suitImageUrl'] = $beubeusuit[$i]['pic'];
-                $pic = $suits[$i]['pic_head'];
+                $pic = $beubeusuit[$i]['pic_head'];
                 if (isset($pic)){
                     if(empty($pic)){
                         $map['suitImageUrlHead'] = "";
@@ -226,7 +226,7 @@ class SuitsSynModel extends Model{
                     }
                 }
 
-                $pic = $suits[$i]['pic_body'];
+                $pic = $beubeusuit[$i]['pic_body'];
                 if (isset($pic)){
                     if(empty($pic)){
                         $map['suitImageUrlBody'] = "";
@@ -235,7 +235,7 @@ class SuitsSynModel extends Model{
                     }
                 }
 
-                $pic = $suits[$i]['pic_shose'];
+                $pic = $beubeusuit[$i]['pic_shoes'];
                 if (isset($pic)){
                     if(empty($pic)){
                         $map['suitImageUrlShose'] = "";
@@ -244,7 +244,7 @@ class SuitsSynModel extends Model{
                     }
                 }
 
-                $pic = $suits[$i]['pic_match'];
+                $pic = $beubeusuit[$i]['pic_match'];
                 if (isset($pic)){
                     if(empty($pic)){
                         $map['suitImageUrlMatch'] = "";
@@ -253,7 +253,7 @@ class SuitsSynModel extends Model{
                     }
                 }
 
-                $tag = $suits[$i]['tag'];
+                $tag = $beubeusuit[$i]['tag'];
                 if (isset($tag)){
                     if(empty($tag)){
                         $map['tag'] = "";
