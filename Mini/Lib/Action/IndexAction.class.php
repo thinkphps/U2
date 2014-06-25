@@ -354,7 +354,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         }else{
             //普通走这里
             /*if(S('good'.$sid.$fid.$zid.$tem.$page)){
-             $result = unserialize(S('good'.$sid.$fid.$zid.$tem.$page));
+             $result = S('good'.$sid.$fid.$zid.$tem.$page);
             }else{*/
             $where = '';
             if(isset($tem)){
@@ -469,7 +469,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     //$result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }
             }
-            /*S('good'.$sid.$fid.$zid.$tem.$page,serialize($result),array('type'=>'file'));
+            /*S('good'.$sid.$fid.$zid.$tem.$page,$result,array('type'=>'file'));
            }*/
         }
         if(!empty($result)){
