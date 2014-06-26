@@ -393,8 +393,9 @@ button,label{cursor:pointer; }
 /*售价库存*/
 .pri_num{color:#999999;}
 .pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
-.pri_num span.stock2{color:#FF0000;margin:0 0.5em;}
-
+.pri_num span.stock2{color:#FF0000;margin:0 0.5em;font-size:15px;}
+.wrapper_box .isnum{color:#999999;}
+.wrapper_box .nonum{color:#000;}
 /*列表 - 按钮组*/
 .wrapper_box_btn_group{}
 

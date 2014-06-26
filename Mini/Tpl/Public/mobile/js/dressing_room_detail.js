@@ -549,29 +549,29 @@ var _mini = {
                 loveCss='';
                 buyCss='';
                 if(v.type==1){
-                    color = 'h_pink';
                     color2 = '#EA777A';
                 }else if(v.type==2){
-                    color = 'h_blue';
                     color2 = '#597798';
                 }else if(v.type == 3 || v.type==4 || v.type == 5){
-                    color = 'h_orange';
                     color2 = '#F19F49';
                 }
-
                 if(v.loveid != null && v.loveid != undefined){
                     loveCss = ' select';
                 }
                 if(v.buyid != null && v.buyid != undefined){
                     buyCss = ' select';
                 }
-
+               if(v.num>0){
+                 var num_msg = '库存<span class="stock2">'+ v.num+'</span>件',color = 'isnum';
+               }else{
+                 var num_msg = '<span class="stock2">已售罄</span>',color = 'nonum';
+               }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
                 strHtml += '<dl>';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
-                strHtml += '<dl class="pri_num" style="border-top:1px solid '+color2+';"><span class="price">￥'+ v.price+'</span>库存<span class="stock2">'+ v.num+'</span>件</dl>';
+                strHtml += '<dl class="pri_num" style="border-top:1px solid '+color2+';"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
                 /*strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
@@ -589,7 +589,7 @@ var _mini = {
                 //颜色
                 var sty = '';
                 if(v.skunum==0 && v.num!=0){
-                    sty = 'style="background:url('+tmplPath+'/images/icon2.png) no-repeat scroll 165px 0 #EEEEEE; padding:10px 8px; overflow:hidden;"';
+                    sty = 'style="background:url('+tmplPath+'/images/icon3.png) no-repeat scroll 96px 0 #EEEEEE; padding:10px 8px; overflow:hidden;"';
                 }
                 strHtml += '<div class="product_color none" '+sty+'><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
                 strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';
