@@ -365,7 +365,7 @@ button,label{cursor:pointer; }
 .wrapper_box{ float:left; background:#FFF; width:13.9em; margin:1em 1em; position:relative;}
 .wrapper_box.banner_box img{ width:auto; height:auto; margin:0;}
 
-.wrapper_box img{ display:block; width:10em; height:10em; margin:1.95em;}
+.wrapper_box img{ display:block; width:150px; height:150px;}
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
