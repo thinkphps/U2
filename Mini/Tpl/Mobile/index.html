@@ -486,29 +486,35 @@
         <div class="style_btn_group">
         	<a href="javascript:;" class="" data-fsx='1'>风格<br /><span>STYLE</span></a>
             <a href="javascript:;" data-fsx='2'>分类<br /><span>CATALOG</span></a>
-            <div class="style_btn_group_detail mini-pop none">
-                <ul id='cstyle2'>
-                    <li class="a1" style="width:100%" data-suitstyle="all"><a href="javascript:;"><i></i>全部</a></li>
-                    <li class="a2" data-suitstyle="6"><a href="javascript:;"><i></i>可爱</a></li>
-                    <li class="a3" data-suitstyle="7"><a href="javascript:;"><i></i>淑女</a></li>
-                    <li class="a4" data-suitstyle="8"><a href="javascript:;"><i></i>成熟</a></li>
-                    <li class="a5" data-suitstyle="1"><a href="javascript:;"><i></i>休闲</a></li>
-                    <li class="a6" data-suitstyle="3"><a href="javascript:;"><i></i>英伦</a></li>
-                    <li class="a7" data-suitstyle="4"><a href="javascript:;"><i></i>居家</a></li>
-                    <li class="a8" data-suitstyle="9"><a href="javascript:;"><i></i>通勤</a></li>
-                    <li class="a9" data-suitstyle="5"><a href="javascript:;"><i></i>商务</a></li>
-                    <li class="a10" data-suitstyle="2"><a href="javascript:;" data-suitstyle="2"><i></i>简约</a></li>
-                    <li class="a11" data-suitstyle="10"><a href="javascript:;"><i></i>运动</a></li>
-                </ul>
+        </div>
+        <div class="shaixuan_btn none">
+            <div class="shaixuan_btn_con">
+                <a href="javascript:;" class="shaixuan_btn_a"></a>
+                <a href="javascript:;" class="shaixuan_btn_b"></a>
             </div>
-            <div class="tag_text mini-pop none left_tj">
-                <ul>
-                    <li id='alluid' class='upclothes select' la='0'><a href="javascript:;">全部分类</a></li>
-                    <volist id='ucvo' name='ucuslist'>
-                        <li class='upclothes zleft' la='{$ucvo.id}' class='upclothes zleft'><a href="javascript:;" >{$ucvo.name}</a></li>
-                    </volist>
-                </ul>
-          </div>
+        </div>
+        <div class="style_btn_group_detail mini-pop none">
+            <ul id='cstyle2'>
+                <li class="a1" style="width:100%" data-suitstyle="all"><a href="javascript:;"><i></i>全部</a></li>
+                <li class="a2" data-suitstyle="6"><a href="javascript:;"><i></i>可爱</a></li>
+                <li class="a3" data-suitstyle="7"><a href="javascript:;"><i></i>淑女</a></li>
+                <li class="a4" data-suitstyle="8"><a href="javascript:;"><i></i>成熟</a></li>
+                <li class="a5" data-suitstyle="1"><a href="javascript:;"><i></i>休闲</a></li>
+                <li class="a6" data-suitstyle="3"><a href="javascript:;"><i></i>英伦</a></li>
+                <li class="a7" data-suitstyle="4"><a href="javascript:;"><i></i>居家</a></li>
+                <li class="a8" data-suitstyle="9"><a href="javascript:;"><i></i>通勤</a></li>
+                <li class="a9" data-suitstyle="5"><a href="javascript:;"><i></i>商务</a></li>
+                <li class="a10" data-suitstyle="2"><a href="javascript:;" data-suitstyle="2"><i></i>简约</a></li>
+                <li class="a11" data-suitstyle="10"><a href="javascript:;"><i></i>运动</a></li>
+            </ul>
+        </div>
+        <div class="tag_text mini-pop none left_tj">
+            <ul>
+                <li id='alluid' class='upclothes select' la='0'><a href="javascript:;">全部分类</a></li>
+                <volist id='ucvo' name='ucuslist'>
+                    <li class='upclothes zleft' la='{$ucvo.id}' class='upclothes zleft'><a href="javascript:;" >{$ucvo.name}</a></li>
+                </volist>
+            </ul>
         </div>
 	</div>
 
@@ -748,7 +754,7 @@ $(function(){
         $.weather.str = '';
         var sid = $(this).data('gender');
         $('.style_btn_group a').removeClass('style_select');
-        $('.mini-pop').hide();
+        $('.mini-pop').addClass('none'),$('.shaixuan_btn').addClass('none');
         $.uniqlo.fid = 0;
         $('#cateu2 li').removeClass('rw_select');
         $('#cstyle2 li').removeClass('select');
@@ -781,9 +787,6 @@ $(function(){
 
         $(window).scrollTop(tmpscrolltop);
     });
-
-
-
 
     //点击自定义分类向下按钮
     $('.zk_btn').on('click',function(){
@@ -820,8 +823,6 @@ $(function(){
         $.uniqlo.bid = 0;
         $.uniqlo.kid = 0;
         $.weather.str = '';
-        $('.style_btn_group a').removeClass('style_select');
-        $('.tag_text').hide();
         var zid = $(this).attr('la'),zleftlength = $('.zleft').length;
         if(zid!=0){
             $('#alluid').removeClass('select');
@@ -846,99 +847,15 @@ $(function(){
         var rightallsel = $('#alldid').hasClass('select');
 
         var leftLen = _mini.left.length,rightLen = _mini.right.length;
-        if(leftLen==zleftlength || (leftLen == 0 && rightallsel==false && rightLen==0)){   //如果左边全选
+        if(leftLen==zleftlength || leftLen == 0){   //如果左边全选
             $('#alluid').addClass('select');
             $('.zleft').removeClass('select');
             _mini.left.length = 0;
-        }else{
-
         }
-        setzid(leftLen,rightLen);
-        getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+        $.uniqlo.zid = _mini.left.join('_');
+        //getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
         $(window).scrollTop(tmpscrolltop);
     });
-    $('.right_tj').on('click','li.doclothes',function(){
-        var tmpscrolltop;
-        setTimeout(function(){tmpscrolltop = $(window).scrollTop();},100)
-        $.weather.nextpage = 0;
-        $.uniqlo.lid = 0;
-        $.uniqlo.bid = 0;
-        $.uniqlo.kid = 0;
-        $.weather.str = '';
-//            var zid = $(this).attr('la');
-        var zid = $(this).attr('la'),zrightlength = $('.zright').length;
-        if(zid!=0){
-
-            $('#alldid').removeClass('select');
-        }else{
-            $('.zright').removeClass('select');
-        }
-
-        if($(this).hasClass('select')){
-            $(this).removeClass('select');
-            var i = $.inArray(zid, _mini.right);
-            if(i !== -1){
-                _mini.right.splice(i, 1)
-            }
-        }else{
-            if(zid!=0){
-                _mini.right.push(zid);
-            }else{
-                _mini.right.length = 0;
-            }
-            $(this).addClass('select');
-        }
-        var leftallsel = $('#alluid').children('a').hasClass('select');
-        var leftLen = _mini.left.length,rightLen = _mini.right.length;
-        if(rightLen==zrightlength || (rightLen == 0 && leftallsel == false && leftLen==0)){
-            $('#alldid').addClass('select');
-            $('.zright').removeClass('select');
-        } else {
-        }
-        setzid(leftLen,rightLen);
-        getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
-        $(window).scrollTop(tmpscrolltop);
-    });
-
-    function setzid(leftLen,rightLen){
-        $.uniqlo.zid = ''
-        //both select all
-        if($('#alldid').hasClass('select') && $('#alluid').hasClass('select')){
-            $.uniqlo.zid = 0
-        }else{
-            //left select all
-            if(leftLen == 0 && $('#alluid').hasClass('w_select')){
-                var arrleft2 = [];
-                $('.zleft').each(function(){
-                    arrleft2.push($(this).attr('la'));
-                });
-                $.uniqlo.zid = arrleft2.join('_');
-            }else{
-                $.uniqlo.zid = _mini.left.join('_');
-            }
-            //right select all
-            if(rightLen == 0 && $('#alldid').hasClass('select')){
-                var arright2 = [];
-                $('.zright').each(function(){
-                    arright2.push($(this).attr('la'));
-                });
-                if($.uniqlo.zid){
-                    $.uniqlo.zid = $.uniqlo.zid  + '_'+arright2.join('_');
-                }else{
-                    $.uniqlo.zid = arright2.join('_');
-                }
-            }else{
-                if(rightLen>0){
-                    if($.uniqlo.zid){
-                        $.uniqlo.zid = $.uniqlo.zid  + '_'+ _mini.right.join('_');
-                    }else{
-                        $.uniqlo.zid = _mini.right.join('_');
-                    }
-                }
-            }
-        }
-
-    }
 
     $('#le1').on('change',function(){
         var pvalue = $('#le1 option:selected').val();

@@ -728,34 +728,37 @@ $('.style_btn_group').on('click','a',function(){
     var fsxvalue = $(this).data('fsx');
     if(!$(this).hasClass('noshow')){
     if(fsxvalue==1){
-        $('.tag_text').hide();
+        $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none');
         $('.style_btn_group a:eq(1)').removeClass('style_select');
         if($(this).hasClass('style_select')){
-            $('.style_btn_group_detail').hide();
+            $('.style_btn_group_detail').addClass('none');
             $(this).removeClass('style_select');
         }else{
-            $('.style_btn_group_detail').show();
+            $('.style_btn_group_detail').removeClass('none');
             $(this).addClass('style_select');
         }
 
     }else if(fsxvalue==2){
-        $('.style_btn_group_detail').hide();
+        $('.shaixuan_btn').removeClass('none');
+        $('.style_btn_group_detail').addClass('none');
         $('.style_btn_group a:eq(0)').removeClass('style_select');
-        if($(this).hasClass('style_select')){
-            $('.tag_text').hide();
+        if($(this).hasClass('style_select')){  //影藏
+            $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none');
             $(this).removeClass('style_select');
         }else{
-            $('.tag_text').show();
+            $('.tag_text').removeClass('none'),$('.shaixuan_btn').removeClass('none');
             $(this).addClass('style_select');
         }
-
     }
 }
 });
-$('.tag_text').on('click','.mini-form-close',function(){
-    $('div.mini-mask').hide();
-    $('.tag_text').hide();
-    $('.style_btn_group a').removeClass('style_select');
+$('.shaixuan_btn_con').on('click','a:eq(0)',function(){   //确定
+    $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+});
+$('.shaixuan_btn_con').on('click','a:eq(1)',function(){   //取消
+    $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    _mini.left.length = 0;
 });
 $("#ddlShop").on("change",function(){
     var list = gd.goods;
