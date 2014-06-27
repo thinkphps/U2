@@ -329,8 +329,8 @@ jQuery(function($){
         location.toggle();
     });
 
-    location.submit(function(){
-        var that = $(this),
+    $('#assfs').click(function(){
+        var that = location,
             option = that.find('option:checked'),
             province = option.first().text(),
             prov = province,
@@ -357,7 +357,6 @@ jQuery(function($){
                     $.weather.avg = avg;
                     getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
                     //往index传城市
-                    restart_autochange();
                     sendcity(city,info.city);
                 }
             });
@@ -371,4 +370,7 @@ jQuery(function($){
     }).on('click', 'a.mini-city-close', function(){
             location.hide();
         });
+    location.on('click', 'a.mini-city-close', function(){
+        location.hide();
+    });
 });

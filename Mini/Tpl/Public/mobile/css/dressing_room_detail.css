@@ -268,7 +268,7 @@ button,label{cursor:pointer; }
 .dr_main_con_sub_nav{ float:left; width:100%; height:7.5em; background:url(../images/dr_main_con_sub_nav_bg.png) 0 repeat;}
 .dr_main_con_sub_nav ul{ display:block; height:7.5em; margin:0 auto;}
 .dr_main_con_sub_nav ul li{ display:block; float:left; height:7.5em; width:20%; background:url(../images/line2.png) right 0 no-repeat;}
-.dr_main_con_sub_nav ul li a{ display:block; width:6.8em; height:6.8em; background:#F00; margin:0 auto; }
+.dr_main_con_sub_nav ul li a{ display:block; width:6.8em; height:7em; background:#F00; margin:0 auto; }
 .dr_main_con_sub_nav ul li.rw_all a{ background:url(../images/detail_main_con_sub_nav.png) 0 0 no-repeat; background-size:96em 14em;}
 .dr_main_con_sub_nav ul li.rw_nvzhuang a{ background:url(../images/detail_main_con_sub_nav.png) -7em 0 no-repeat; background-size:96em 14em;}
 .dr_main_con_sub_nav ul li.rw_nanzhuang a{ background:url(../images/detail_main_con_sub_nav.png) -14em 0 no-repeat; background-size:96em 14em;}
@@ -294,7 +294,7 @@ button,label{cursor:pointer; }
 .style_btn_group_detail{ background-color: #FFFFFF;position: absolute;width:100%;top: 7.01%;z-index: 11;}
 .style_btn_group_detail ul li{ float:left; width:50%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
 .style_btn_group_detail ul li a{ display:block; font-size:1.2em; height:4em; line-height:4em; text-align:center; position:relative;width:100%;}
-.style_btn_group_detail ul li a i{ display:block; float:left; width:2em; height:2em; position:absolute; left:50%; top:1em; margin-left:-2.5em;}
+.style_btn_group_detail ul li a i{ display:block; float:left; width:2em; height:2em; position:absolute; left:50%; top:1em; margin-left:-3.5em;}
 
 .style_btn_group_detail ul li.a1 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 0 no-repeat; background-size:4em 22em;}
 .style_btn_group_detail ul li.a2 a i{ background:url(../images/dr_main_con_sub_nav.png) 0 -2em no-repeat; background-size:4em 22em;}
@@ -365,7 +365,7 @@ button,label{cursor:pointer; }
 .wrapper_box{ float:left; background:#FFF; width:13.9em; margin:1em 1em; position:relative;}
 .wrapper_box.banner_box img{ width:auto; height:auto; margin:0;}
 
-.wrapper_box img{ display:block; width:150px; height:150px;}
+.wrapper_box img{ display:block; width:150px; height:150px;margin-left:-6px;}
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
@@ -540,7 +540,8 @@ button,label{cursor:pointer; }
 .mini-city .mini-control label{ font-size:1em; line-height:2em; color:#999; }
 .mini-city .mini-control select{ width:17em; height:3em; margin-bottom:1em;}
 .mini-city-submit{ display:block; float:left; width:17em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
-
+.mini-city-submit2{ display:block; float:left; width:20em; height:3em; line-height:3em; text-align:center; background:#f00; border:none; color:#FFF; margin-bottom:2em;}
+.mini-city-submit2:hover{color:#fff;}
 /*== 地图弹窗 ==*/
 .map_light_box{background:#FFF; position:absolute; left:50%; top:5em; width:26em;  margin-left:-12.5em; border:0.2em solid #eee;z-index: 100;}
 a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; width:41px; height:41px; position:absolute; right:-15px; top:-15px;}
