@@ -151,7 +151,7 @@ button,label{cursor:pointer; }
 .main_con.water5 .yyk_tj h3{ color:#6a7786;}
 .main_con.water5 li a.w_select{ background:#6a7786; color:#FFF;}
 
-.main_con.water6{ background:#ccd4db url(../images/detail_main_con_bg6.jpg) center 0 no-repeat;}
+.main_con.water6{ background:#ccd4db url(../images/detail_main_con_bg2.jpg) center 0 no-repeat;}
 .main_con.water6 li.w_select{ background:#1C6397;}
 .main_con.water6 .yyk_tj h3{ color:#636875;}
 .main_con.water6 li a.w_select{ background:#636875; color:#FFF;}
@@ -170,14 +170,14 @@ button,label{cursor:pointer; }
 /*-webkit-transform:scale(0.8,0.8);  */
 /*-o-transform:scale(0.8,0.8);  }*/
 
-.weather .ulweek { width:100px; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
+.weather .ulweek { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
 .weather .ulweek .li_day{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
 .weather .ulweek .li_day i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;-moz-transform:scale(0.8,0.8);
     -webkit-transform:scale(0.8,0.8);
     -o-transform:scale(0.8,0.8);  }
 
-.weather .left_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
-.weather .right_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather .left_btn{ position:absolute; display:block; background:rgb(0, 51, 102); width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;opacity: 0.4;}
+.weather .right_btn{ position:absolute; display:block; background:rgb(0, 51, 102); width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;opacity: 0.4;}
 
 .weather .ulweek i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat; background-size:55em 55em;}
 .weather .ulweek i.nio-1{ background:url(../images/weather_icon.png) -5.5em 0 no-repeat; background-size:55em 55em;}
@@ -370,7 +370,7 @@ button,label{cursor:pointer; }
 .wrapper_box{ float:left; background:#FFF; width:13.9em; margin:1em 1em; position:relative;}
 .wrapper_box.banner_box img{ width:auto; height:auto; margin:0;}
 
-.wrapper_box img{ display:block; width:150px; height:150px;margin-left:-6px;}
+.wrapper_box img{ display:block; width:141px; height:150px;margin-left:-1px;}
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
@@ -392,11 +392,10 @@ button,label{cursor:pointer; }
 
 .wrapper_box h3{ display:block; float:left; width:12.9em; line-height:1.5em; height:auto; font-weight:normal;padding:0.5em;}
 .wrapper_box h3 a{ color:#999999;}
-.wrapper_box h3.h_orange{ color:#999999;}
-.wrapper_box h3.h_blue{ color:#999999;}
-.wrapper_box h3.h_pink{ color:#999999;}
+.wrapper_box .anniu_bgred{ background: url("../images/anniu_bg_red.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgblu{ background: url("../images/anniu_bgblu.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgorg{ background: url("../images/anniu_bg_org.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
 /*售价库存*/
-.wrapper_box dl.anniu{ background:url(../images/anniu_bg.png) 0 bottom repeat-x; background-size:0.5em 4em;}
 .pri_num{color:#999999;}
 .pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
 .pri_num span.stock2{color:#FF0000;margin:0 0.5em;font-size:15px;}
