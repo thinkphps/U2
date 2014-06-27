@@ -145,6 +145,7 @@ function Model_loadok_callback(){
             $('.beubeu_list').css({'left':'0em','top':'10em'});
             $('#beubeu_copy_c').css({'left':'3em'});
             $('#beubeu_copy_lw').css({'top':'366px'});
+
             if ( callback ) {
                 callback.call(this);
             }

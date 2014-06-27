@@ -466,8 +466,6 @@ button,label{cursor:pointer; }
 .product_set ul li a{ display:block; width:4.5em; height:4.5em; border:0.1em solid #ddd; padding:0.2em; background:#FFF;}
 .product_set img{ width:4.5em; height:4.5em; margin:0;}
 
-
-
 /*我的试衣间*/
 .syj_btn{ position:fixed; top:44%; margin-top:-21.8em; right:0em; z-index:110;}
 .syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:15em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
