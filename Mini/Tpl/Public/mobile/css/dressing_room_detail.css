@@ -379,7 +379,7 @@ button,label{cursor:pointer; }
 .wrapper_box dl dt a.tuijian{ text-align:center; width:5.5em; background:#F00;}
 
 .wrapper_box dl dd a{ color:#999;}
-.wrapper_box dl dd a span{ float:left;}
+.wrapper_box dl dd a span{ float:left;color:#fff;}
 .wrapper_box dl dd.btn_xh{ float:left; margin:1.3em 0 1em 0.5em;}
 .wrapper_box dl dd.btn_xh i{ display:block; float:left; width:1.8em; height:1.8em; margin:-0.2em 0.5em 0 0; background:url(../images/list_icon.png) 0 -2.4em no-repeat; background-size:4em 6em;}
 .wrapper_box dl dd.btn_ym{ float:right; margin:1.3em 0.8em 1em 0;}
