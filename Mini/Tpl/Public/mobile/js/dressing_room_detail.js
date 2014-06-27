@@ -568,10 +568,10 @@ var _mini = {
                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
-                strHtml += '<dl>';
+                strHtml += '<dl class="anniu">';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
-                strHtml += '<dl class="pri_num" style="border-top:1px solid '+color2+';"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
+                strHtml += '<dl class="pri_num"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
                 /*strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
