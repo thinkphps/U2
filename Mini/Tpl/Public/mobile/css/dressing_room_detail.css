@@ -370,7 +370,7 @@ button,label{cursor:pointer; }
 .wrapper_box{ float:left; background:#FFF; width:13.9em; margin:1em 1em; position:relative;}
 .wrapper_box.banner_box img{ width:auto; height:auto; margin:0;}
 
-.wrapper_box img{ display:block; width:150px; height:150px;margin-left:-6px;}
+.wrapper_box img{ display:block; width:141px; height:150px;margin-left:-1px;}
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
