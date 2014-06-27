@@ -170,14 +170,14 @@ button,label{cursor:pointer; }
 /*-webkit-transform:scale(0.8,0.8);  */
 /*-o-transform:scale(0.8,0.8);  }*/
 
-.weather .ulweek { width:100px; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
+.weather .ulweek { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
 .weather .ulweek .li_day{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
 .weather .ulweek .li_day i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;-moz-transform:scale(0.8,0.8);
     -webkit-transform:scale(0.8,0.8);
     -o-transform:scale(0.8,0.8);  }
 
-.weather .left_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
-.weather .right_btn{ position:absolute; display:block; background:#F00; width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;}
+.weather .left_btn{ position:absolute; display:block; background:rgb(0, 51, 102); width:2.5em; height:8.1em; line-height:8.1em; left:0; top:0; text-align:center; color:#FFF; font-weight:bold;opacity: 0.4;}
+.weather .right_btn{ position:absolute; display:block; background:rgb(0, 51, 102); width:2.5em; height:8.1em; line-height:8.1em; right:0; top:0; text-align:center; color:#FFF; font-weight:bold;opacity: 0.4;}
 
 .weather .ulweek i.nio-0{ background:url(../images/weather_icon.png) 0 0 no-repeat; background-size:55em 55em;}
 .weather .ulweek i.nio-1{ background:url(../images/weather_icon.png) -5.5em 0 no-repeat; background-size:55em 55em;}
@@ -392,11 +392,10 @@ button,label{cursor:pointer; }
 
 .wrapper_box h3{ display:block; float:left; width:12.9em; line-height:1.5em; height:auto; font-weight:normal;padding:0.5em;}
 .wrapper_box h3 a{ color:#999999;}
-.wrapper_box h3.h_orange{ color:#999999;}
-.wrapper_box h3.h_blue{ color:#999999;}
-.wrapper_box h3.h_pink{ color:#999999;}
+.wrapper_box .anniu_bgred{ background: url("../images/anniu_bg_red.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgblu{ background: url("../images/anniu_bgblu.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgorg{ background: url("../images/anniu_bg_org.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
 /*售价库存*/
-.wrapper_box dl.anniu{ background:url(../images/anniu_bg.png) 0 bottom repeat-x; background-size:0.5em 4em;}
 .pri_num{color:#999999;}
 .pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
 .pri_num span.stock2{color:#FF0000;margin:0 0.5em;font-size:15px;}

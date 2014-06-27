@@ -549,11 +549,11 @@ var _mini = {
                 loveCss='';
                 buyCss='';
                 if(v.type==1){
-                    color2 = '#EA777A';
+                    color2 = 'anniu_bgred';
                 }else if(v.type==2){
-                    color2 = '#597798';
+                    color2 = 'anniu_bgblu';
                 }else if(v.type == 3 || v.type==4 || v.type == 5){
-                    color2 = '#F19F49';
+                    color2 = 'anniu_bgorg';
                 }
                 if(v.loveid != null && v.loveid != undefined){
                     loveCss = ' select';
@@ -568,7 +568,7 @@ var _mini = {
                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
-                strHtml += '<dl class="anniu">';
+                strHtml += '<dl class="'+color2+'">';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
                 strHtml += '<dl class="pri_num"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
