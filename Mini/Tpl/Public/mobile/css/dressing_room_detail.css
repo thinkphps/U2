@@ -472,8 +472,8 @@ button,label{cursor:pointer; }
 .syj_btn{ position:fixed; top:44%; margin-top:-21.8em; right:0em; z-index:110;}
 .syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:15em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
 
-.syj{ width:28m; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
-.syj .baiyi_syj{ width:25.5em; height:31.5em; margin:1.25em;}
+.syj{ width:25em; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
+.syj .baiyi_syj{ width:25.5em; height:31.5em; }
 .btn_line{ width:28em; height:3.6em; position:absolute; bottom:0;}
 .btn_line a{ display:block; float:left; height:3.6em; line-height:3.6em;}
 .btn_line a.buy_btn{ width:12em; background:#ff0000; color:#FFF;}
