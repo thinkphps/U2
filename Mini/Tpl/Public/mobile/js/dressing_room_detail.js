@@ -568,10 +568,10 @@ var _mini = {
                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
-                strHtml += '<dl>';
+                strHtml += '<dl class="anniu">';
                 strHtml += '<dd class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><a href="javascript:;"  ><i></i><span>喜欢</span></a></dd>';
                 strHtml += '<dd class="btn_ym'+ buyCss +'"  data-id="'+ v.num_iid+'"><a href="javascript:;" ><i></i><span>已买</span></a></dd></dl>';
-                strHtml += '<dl class="pri_num" style="border-top:1px solid '+color2+';"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
+                strHtml += '<dl class="pri_num"><span class="price">￥'+ v.price+'</span>'+num_msg+'</dl>';
                 /*strHtml += '<dl><dt><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" ';
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
@@ -728,34 +728,37 @@ $('.style_btn_group').on('click','a',function(){
     var fsxvalue = $(this).data('fsx');
     if(!$(this).hasClass('noshow')){
     if(fsxvalue==1){
-        $('.tag_text').hide();
+        $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none');
         $('.style_btn_group a:eq(1)').removeClass('style_select');
         if($(this).hasClass('style_select')){
-            $('.style_btn_group_detail').hide();
+            $('.style_btn_group_detail').addClass('none');
             $(this).removeClass('style_select');
         }else{
-            $('.style_btn_group_detail').show();
+            $('.style_btn_group_detail').removeClass('none');
             $(this).addClass('style_select');
         }
 
     }else if(fsxvalue==2){
-        $('.style_btn_group_detail').hide();
+        $('.shaixuan_btn').removeClass('none');
+        $('.style_btn_group_detail').addClass('none');
         $('.style_btn_group a:eq(0)').removeClass('style_select');
-        if($(this).hasClass('style_select')){
-            $('.tag_text').hide();
+        if($(this).hasClass('style_select')){  //影藏
+            $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none');
             $(this).removeClass('style_select');
         }else{
-            $('.tag_text').show();
+            $('.tag_text').removeClass('none'),$('.shaixuan_btn').removeClass('none');
             $(this).addClass('style_select');
         }
-
     }
 }
 });
-$('.tag_text').on('click','.mini-form-close',function(){
-    $('div.mini-mask').hide();
-    $('.tag_text').hide();
-    $('.style_btn_group a').removeClass('style_select');
+$('.shaixuan_btn_con').on('click','a:eq(0)',function(){   //确定
+    $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
+});
+$('.shaixuan_btn_con').on('click','a:eq(1)',function(){   //取消
+    $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    _mini.left.length = 0;
 });
 $("#ddlShop").on("change",function(){
     var list = gd.goods;
