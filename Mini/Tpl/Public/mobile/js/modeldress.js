@@ -132,18 +132,18 @@ function Model_loadok_callback(){
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
             Model.CurrClothesCallback = this.beu_getallclothes;
-            $('.beubeu_btns').css({'top':'22.6em','left':'0em'});
-            $('.beubeu_btns3').css('left','-0em').css('top','19em');
-            $('#showmodelhead').css({'top':'19em','left':'2em'});
-            $('#beubeu_shoes').css({'top':'19em','left':'4em'});
+            $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
+            $('.beubeu_btns3').css('left','-0em').css('top','13em');
+            $('#showmodelhead').css({'top':'14em','left':'0em'});
+            $('#beubeu_shoes').css({'top':'13em','left':'4em'});
             $('#beubeu_loading2').css({'height':'24em','left':'5em'});
             $('#beu_showimg').css({'position':'absolute','top':'-1em'});
-            $('#show_csw').css({'left':'19.9em','top':'21.9em'});
+            $('#show_csw').css({'left':'17.9em','top':'15.9em'});
             $('#beubeu_copy_c').css({'left':'6.5em','top':'17.5em'});
             $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
             $('#beu_img').css({'width':'28em','height':'34em'});
-            $('.beubeu_list').css({'left':'0em','top':'10em'});
-            $('#beubeu_copy_c').css({'left':'3em'});
+            $('.beubeu_list').css({'top':'12em','left':'-1em'});
+            $('#beubeu_copy_c').css({'left':'2em'});
             $('#beubeu_copy_lw').css({'top':'366px'});
 
             if ( callback ) {
