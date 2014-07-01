@@ -392,9 +392,9 @@ button,label{cursor:pointer; }
 
 .wrapper_box h3{ display:block; float:left; width:12.9em; line-height:1.5em; height:auto; font-weight:normal;padding:0.5em;}
 .wrapper_box h3 a{ color:#999999;}
-.wrapper_box .anniu_bgred{ background: url("../images/anniu_bg_red.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
-.wrapper_box .anniu_bgblu{ background: url("../images/anniu_bgblu.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
-.wrapper_box .anniu_bgorg{ background: url("../images/anniu_bg_org.png") repeat-x scroll 0 bottom / 0.5em 4em rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgred{ background: url("../images/anniu_bg_red.png")  rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgblu{ background: url("../images/anniu_bgblu.png")  rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgorg{ background: url("../images/anniu_bg_org.png")  rgba(0, 0, 0, 0);}
 /*售价库存*/
 .pri_num{color:#999999;}
 .pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
