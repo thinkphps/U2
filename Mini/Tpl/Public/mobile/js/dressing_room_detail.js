@@ -275,13 +275,12 @@ var _mini = {
                         }else{
                             $('#btn-mask').removeClass('none');
                         }
+                        var show='';
                         for(var i = 0 ;i < deflength;i++){
-                            if(i<4){
-                                var show = "style='display:block;'";
-                            }else{
-                                var show = "style='display:none;'";
+                            if(i==1){
+                                var show = "klfg";
                             }
-                            str += "<div class=\"model\" "+show+"><div style='width: 180px;height: 180px;margin-top: 150px'><img class='imgrd' data-detail='"+data.def[i].detail_url+".400x533.png' src='/"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
+                            str += "<div class=\"model "+show+"\"><div style='width: 180px;height: 180px;margin-top: 150px'><img class='imgrd' data-detail='"+data.def[i].detail_url+".400x533.png' src='/"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
