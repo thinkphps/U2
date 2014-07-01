@@ -74,7 +74,7 @@ button,label{cursor:pointer; }
 .header_bot{ width:100%; height:26px; line-height:34px; background:#ff0000; padding:4px 0;}
 .header_bot a{ display:block; float:left; width:68px; height:26px; line-height:26px; text-align:center; color:#ff0000; background:#FFF; margin:0 0 0 5px;}
 .header_bot a.zc_btn{ margin:0 0 0 15px;}
-.header_bot a:hover{ background:#900; color:#FFF;}
+.header_bot a:hover{ background:#900; color:#FFF;height:26px; line-height:26px;margin:0 0 0 5px;}
 .header_bot a.tmail{ float:right; background:#ff0000; color:#FFF; text-align:left; width:auto; margin:0 20px 0 0;}
 .header_bot a.tmail i{ display:block; float:left; width:16px; height:16px; background:url(../images/tmail_icon.png) 0 0 no-repeat; margin:5px 8px 0 0;}
 .header_bot a.tmail2{ float:right; background:#ff0000; color:#FFF; text-align:left; width:auto; margin:0 20px 0 0;}
@@ -728,7 +728,7 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 
 .user_l_box{ position:absolute; left:50%; margin-left:-475px; width:948px; height:100px; background:#eee; border:1px solid #ddd; border-bottom:none;}
 .user_l_box .mini-control{ float:left; font-size:14px; color:#333; margin-left:15px; margin-top:28px;}
-.user_l_box .mini-control input{ margin-left:10px; height:40px; line-height:40px; padding:0 10px;border:
+.user_l_box .mini-control input{ margin-left:10px; height:40px; line-height:40px; padding:0 10px;background-color:grey;border:
 	1px solid #ddd;
     -moz-border-radius:5px;      /* Gecko browsers */
     -webkit-border-radius:5px;   /* Webkit browsers */

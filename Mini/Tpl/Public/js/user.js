@@ -141,7 +141,9 @@ jQuery(function($) {
 
     //账户信息
     UserCenter.btnUserInfo.on('click',function(){
-        UserCenter.ulMenu.find('li').removeClass('select');
+        //UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).siblings('li').removeClass('select');
+        if(!$(this).hasClass('select')){
         $(this).addClass('select');
         $('div[name=user_l_box]').hide();
         UserCenter.userinfo.show();
@@ -156,6 +158,11 @@ jQuery(function($) {
                 return false;
             }
         });
+    }else{
+            $(this).removeClass('select');
+            UserCenter.userinfo.hide();
+            UserCenter.myWardrobe.addClass('select');
+     }
     });
 
     //我的衣柜
@@ -167,10 +174,16 @@ jQuery(function($) {
 
     //修改密码
     UserCenter.btn_changepwd.on('click',function(){
-        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).siblings('li').removeClass('select');
+        if(!$(this).hasClass('select')){
         $(this).addClass('select');
         $('div[name=user_l_box]').hide();
         UserCenter.changepwd.show();
+       }else{
+            $(this).removeClass('select');
+            UserCenter.changepwd.hide();
+            UserCenter.myWardrobe.addClass('select');
+      }
     });
 
     //修改账号
@@ -183,10 +196,16 @@ jQuery(function($) {
 
     //关联淘宝账号
     UserCenter.btnChangetbname.on('click',function(){
-        UserCenter.ulMenu.find('li').removeClass('select');
+        $(this).siblings('li').removeClass('select');
+        if(!$(this).hasClass('select')){
         $(this).addClass('select');
         $('div[name=user_l_box]').hide();
         UserCenter.changeTBname.show();
+        }else{
+            $(this).removeClass('select');
+            UserCenter.changeTBname.hide();
+            UserCenter.myWardrobe.addClass('select');
+        }
     });
 
     $('#btn_change_name').on('click',function(){
