@@ -8,6 +8,7 @@ var pageElement = {
     ,ChildrenType : 4
     ,Ischanged : 0
     ,$btnBuy : $('.buy_btn')
+    ,$sc_btn : $('.sc_btn')
     ,$divBuys : $('.buy_btns')
     ,$btnExpansion : $('.syj_btn_expansion')    //右边浮动收缩模特按钮
     ,$divSyj : $('.syj')
@@ -283,7 +284,6 @@ function Model_loadok_callback(){
             });
             pageElement.Ischanged = 0;
         },
-
         elementEvent : function(){
             var _this = this;
 
@@ -330,7 +330,19 @@ function Model_loadok_callback(){
                 }
                 _this.objShowOrHide(pageElement.$divBuys);
             });
-
+            pageElement.$sc_btn.on('click',function(){
+             //收藏
+                    var nu = '';
+                    pageElement.$divBuys.find('span').each(function(){
+                        var $this = $(this);
+                        nu+=$this.data('barcode').substring(0,8)+'_';
+                    });
+                var x = Model.get_baiyi_dp_info();
+                $.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: x.pic_body,headpic: x.pic_head,pic_match: x.pic_match,shoespic: x.pic_shoes,suitid: x.suitid},function(data,status){
+                //$.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: 'qw',headpic: 'qw1',pic_match: 'qw2',shoespic: 'qw4',suitid: 34646},function(data,status){
+                alert(data.msg);
+                },'json');
+            });
             pageElement.$divSyj.on('mouseenter','.buyurl',function(){
                 $(this).css({'background':'#999','color':'#fff'});
             }).on('mouseleave','.buy_btns .buyurl',function(){

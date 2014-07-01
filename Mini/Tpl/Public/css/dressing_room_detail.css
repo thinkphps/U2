@@ -607,7 +607,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .btn_line a.buy_btn{ width:122px; background:#ff0000; color:#FFF; font-size:14px;}
 .btn_line a.buy_btn i{ display:block; float:left; width:28px; height:29px; background:url(../images/buy_icon.png) 0 0 no-repeat; margin:7px 10px 0 10px;}
 .btn_line a.buy_btn:hover{ background:#900;}
-.btn_line a.sc_btn{ width:102px; background:#a1a1a1; color:#FFF; text-align:center;}
+.btn_line a.sc_btn{ width:102px; background:#ff0000; color:#FFF; text-align:center;border-left:1px #999 solid;}
 .btn_line a.sc_btn:hover{ background:#999;}
 .btn_line a.bc_btn{  width:105px; background:#d1d1d1; color:#FFF; text-align:center;
     cursor: default;}
@@ -616,7 +616,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
-.mini-cab-share2{ float:left; margin:2px 0 0 6px; color:#666;padding-top: 6px;}
+.mini-cab-share2{ float:left; margin:2px 0 0 1px; color:#666;padding-top: 9px;}
 .mini-cab-share2 span{ line-height:20px;}
 
 .baby_fitting_room {width: 300px;height: 480px; margin: 10px;position: relative;left:30px;}

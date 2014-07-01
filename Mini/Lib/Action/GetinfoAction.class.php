@@ -221,14 +221,14 @@ public function addBeubenColl(){
     //添加beubeu收藏
     $uid = session("uniq_user_id");
     if($uid){
-        $fuid = trim($this->_post('uid'));
         $headpic = trim($this->_post('headpic'));
         $bodypic = trim($this->_post('bodypic'));
         $shoespic = trim($this->_post('shoespic'));
-        $clothespic = trim($this->_post('clothespic'));
+        $clothespic = trim($this->_post('pic_match'));
         $gender = trim($this->_post('gender'));
         $suitid = trim($this->_post('suitid'));
-        $str_num_iid = trim($this->_post('num_iid'));
+        $uq = trim($this->_post('uq'));
+        $num_iid = $this->getCollNumm_iid($uq);
         $beuben = M('BeubeuCollection');
         $result = $beuben->field('id')->where(array('uid'=>$uid,'suitID'=>$suitid))->find();
         if(empty($result)){
@@ -243,12 +243,9 @@ public function addBeubenColl(){
                          'createtime'=>$time);
            $res = $beuben->add($data);
            if($res>0){
-               $is_g = is_int(strpos($str_num_iid,'_'));
-               if(!$is_g){
-                   $str_num_iid = $str_num_iid.'_';
-                   $num_iid = explode('_',$str_num_iid);
                    $insql = "insert into `u_beubeu_coll_goods` (`bcid`,`num_iid`) values ";
                    $str = '';
+                   if(!empty($num_iid)){
                    foreach($num_iid as $k=>$v){
                     if($v){
                         $str.="('".$res."','".$v."'),";
@@ -257,9 +254,9 @@ public function addBeubenColl(){
                    $str = rtrim($str,',');
                    $insql.=$str;
                    $beuben->query($insql);
+                }
                    $arr['code'] = 1;
                    $arr['msg'] = '收藏成功';
-               }
            }else{
                $arr['code'] = 0;
                $arr['msg'] = '收藏失败';
@@ -272,6 +269,7 @@ public function addBeubenColl(){
         $arr['code'] = 0;
         $arr['msg'] = '没有登录';
     }
+    $this->ajaxReturn($arr, 'JSON');
 }
 public function getUserInfo(){
       $uid = session("uniq_user_id");
@@ -343,5 +341,25 @@ public function changeTaoName(){
             $arr['msg'] = '没有登录';
         }
     $this->ajaxReturn($arr, 'JSON');
+    }
+
+    public function getCollNumm_iid($uq){
+        //通过uq获取num_iid
+        if(!empty($uq)){
+            $goods = M('Goods');
+            $is_g = is_int(strpos($uq,'_'));
+            if(!$is_g){
+                $uq = $uq.'_';
+            }
+            $arr_uq = explode('_',$uq);
+            foreach($arr_uq as $k=>$v){
+                if($v){
+                    $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' and `num`>0 order by num desc";
+                    $result = $goods->query($sql);
+                    $arr[] = $result[0]['num_iid'];
+                }
+            }
+            return $arr;
+        }
     }
 }
