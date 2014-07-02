@@ -728,12 +728,13 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 
 .user_l_box{ position:absolute; left:50%; margin-left:-475px; width:948px; height:100px; background:#eee; border:1px solid #ddd; border-bottom:none;}
 .user_l_box .mini-control{ float:left; font-size:14px; color:#333; margin-left:15px; margin-top:28px;}
-.user_l_box .mini-control input{ margin-left:10px; height:40px; line-height:40px; padding:0 10px;background-color:grey;border:
+.user_l_box .mini-control input{ margin-left:10px; height:40px; line-height:40px; padding:0 10px;border:
 	1px solid #ddd;
     -moz-border-radius:5px;      /* Gecko browsers */
     -webkit-border-radius:5px;   /* Webkit browsers */
     border-radius:5px;            /* W3C syntax */
 }
+.usclass{background-color:#eee;}
 .user_l_box .mini-control .mini-btns{margin-top: 6px;}
 .user_l_box .mini-control-tips {
     float: left;}
