@@ -40,6 +40,7 @@ jQuery(function($) {
                 var cnum =  data['collcount'];
                 UserCenter.collocationNum.text(cnum);
                 var collflag = data['collflag'];
+                $('#txttbname').val(data['tname']);
                 if(collflag == 1){
                     UserCenter.youhui_icon.data('isreceive',1);
 //                    UserCenter.youhui_icon.removeClass('youhui_icon');
@@ -77,12 +78,12 @@ jQuery(function($) {
                     strHtml += '<img src="'+ tmplPath +'/images/yj/yj_chr.png"  />';
                 }
 
-                strHtml += '<img src="'+ list[i].pic_body + '" />';
+                strHtml += '<img src="'+ list[i].pic_clothes + '" />';
                 strHtml += '</div>';
                 var detiles = list[i].detail;
                 strHtml += '<ul>';
                 for(var j = 0;j<detiles.length;j++){
-                    strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + detiles[j].pic_url +'"  /></a></li>'
+                    strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                 }
                 strHtml += '</ul>';
                 strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"></a>'
@@ -197,6 +198,7 @@ jQuery(function($) {
     //关联淘宝账号
     UserCenter.btnChangetbname.on('click',function(){
         $(this).siblings('li').removeClass('select');
+        $('#changetbname_msg').html('');
         if(!$(this).hasClass('select')){
         $(this).addClass('select');
         $('div[name=user_l_box]').hide();
@@ -232,7 +234,8 @@ jQuery(function($) {
                 if(data['code'] == '1'){
                     UserCenter.txttbname.val('');
                     $('#lblusername').text(tbname);
-                    $('#changetbname_msg').html('淘宝登录名已关联！');
+                    $('#txttbname').val(data['tname']);
+                    $('#changetbname_msg').html('淘宝登录名已关联成功！');
                 }
                 else{
                     $('#changetbname_msg').html(data['msg']);
