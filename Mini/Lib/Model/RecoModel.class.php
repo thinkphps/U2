@@ -55,14 +55,14 @@ class RecoModel extends Model{
         }
         $sql_where = '';
         if(!empty($where['suitStyleID'])){
-            $sql_where = ' and bs.suitStyleID='.$where['suitStyleID'];
+            $sql_where.= ' and bs.suitStyleID='.$where['suitStyleID'];
         }
         if(is_array($where['suitGenderID'])){
-            $sql_where = ' and bs.suitGenderID '.$where['suitGenderID'];
+            $sql_where.= ' and bs.suitGenderID '.$where['suitGenderID'];
         }else if(!is_array($where['suitGenderID']) && !empty($where['suitGenderID'])){
-            $sql_where = ' and bs.suitGenderID='.$where['suitGenderID'];
+            $sql_where.= ' and bs.suitGenderID='.$where['suitGenderID'];
         }
-        $sql_where = ' and bs.approve_status=0';
+        $sql_where.= ' and bs.approve_status=0';
         $sql = "SELECT suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch FROM `u_beubeu_suits` WHERE tag = (SELECT tag FROM `u_beubeu_suits` as bs WHERE 1 {$sql_where} group by bs.tag order by bs.tag desc limit {$start},{$page_num})";
         //$beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
         $beubeu_suits_list = $beubeu_suits->query($sql);
