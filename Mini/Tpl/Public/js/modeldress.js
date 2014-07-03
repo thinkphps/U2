@@ -139,7 +139,6 @@ function Model_loadok_callback(){
                 callback.call(this);
             }
         },
-
         addClothesBySuitID : function(){
             var _this = this;
             var suitid = pageElement.getUrlParam('suitid');
