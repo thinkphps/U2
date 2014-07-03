@@ -337,7 +337,7 @@ function Model_loadok_callback(){
                         nu+=$this.data('barcode').substring(0,8)+'_';
                     });
                 var x = Model.get_baiyi_dp_info();
-                $.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: x.pic_body,headpic: x.pic_head,pic_match: x.pic_match,shoespic: x.pic_shoes,suitid: x.suitid},function(data,status){
+                $.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: x.pic_body,headpic: x.pic_head,pic_match: x.pic_match,shoespic: x.pic_shoes,suitid: x.by_str},function(data,status){
                 //$.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: 'qw',headpic: 'qw1',pic_match: 'qw2',shoespic: 'qw4',suitid: 34646},function(data,status){
                 alert(data.msg);
                 },'json');

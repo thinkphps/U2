@@ -231,8 +231,8 @@ public function addBeubenColl(){
         $uq = trim($this->_post('uq'));
         $num_iid = $this->getCollNumm_iid($uq);
         $beuben = M('BeubeuCollection');
-        $result = $beuben->field('id')->where(array('uid'=>$uid,'suitID'=>$suitid))->find();
-        if(empty($result)){
+        $count = $beuben->field('id')->where(array('uid'=>$uid))->count();
+        if($count<50){
            $time = date('Y-m-d H:i:s');
            $data = array('uid'=>$uid,
                          'gender'=>$gender,
@@ -264,7 +264,7 @@ public function addBeubenColl(){
            }
         }else{
             $arr['code'] = 0;
-            $arr['msg'] = '已经被收藏';
+            $arr['msg'] = '一个用户最多只能收藏50套';
         }
     }else{
         $arr['code'] = 0;

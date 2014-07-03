@@ -110,7 +110,7 @@ class IndexAction extends Action {
             $ucuslist  = $recomodel->getCateList2($where);//自定义分类
             S('cust11',serialize($ucuslist),array('type'=>'file'));
         }
-        $this->assign('beubeu_suits_list',$beubeu_suits_list);
+        //$this->assign('beubeu_suits_list',$beubeu_suits_list);
         $this->assign('ucuslist',$ucuslist);
         //优衣库二期
 
