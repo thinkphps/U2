@@ -131,7 +131,12 @@ function Model_loadok_callback(){
             var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
             loadMymodel(touchid,key);
+//            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
             Model.CurrClothesCallback = this.beu_getallclothes;
+
+            $('#beu_img_head').hide();
+            $('#beu_img_body').hide();
+
             $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
             $('.beubeu_btns3').css('left','-0em').css('top','13em');
             $('#showmodelhead').css({'top':'14em','left':'0em'});
@@ -308,6 +313,7 @@ function Model_loadok_callback(){
                 var $parentDiv = $(this).parent();
                 if($parentDiv.hasClass('select')){
                     $parentDiv.removeClass('select');
+                    $parentDiv.css({'right':'0em','left':'','top':''});
                 }
                 else{
                     $parentDiv.addClass('select');

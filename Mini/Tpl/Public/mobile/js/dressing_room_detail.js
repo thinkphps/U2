@@ -77,6 +77,10 @@ $(function(){
         }
     });
 
+    $(".syj_btn").draggable({
+
+    });
+
     //天气左右移动按钮事件
 //    var weekLeftNum = 0;
 //    $('.left_btn').on('click',function(){
