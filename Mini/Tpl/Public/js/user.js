@@ -66,29 +66,31 @@ jQuery(function($) {
         //生成搭配html
         showColections : function(list){
             var strHtml = '';
-            for(var i = 0;i<list.length;i++){
-                strHtml += '<div class="model">';
-                var gender = list[i].gender;
-                strHtml += '<div class="model_yj" data-suitid="'+ list[i].suitID +'" data-gender="'+ gender +'">';
-                if( gender == '15478'){
-                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_men.png"  />';
-                }else if(gender == '15474'){
-                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_women.png"  />';
-                }else{
-                    strHtml += '<img src="'+ tmplPath +'/images/yj/yj_chr.png"  />';
-                }
+            if( list != null){
+                for(var i = 0;i<list.length;i++){
+                    strHtml += '<div class="model">';
+                    var gender = list[i].gender;
+                    strHtml += '<div class="model_yj" data-suitid="'+ list[i].suitID +'" data-gender="'+ gender +'">';
+                    if( gender == '15478'){
+                        strHtml += '<img src="'+ tmplPath +'/images/yj/yj_men.png"  />';
+                    }else if(gender == '15474'){
+                        strHtml += '<img src="'+ tmplPath +'/images/yj/yj_women.png"  />';
+                    }else{
+                        strHtml += '<img src="'+ tmplPath +'/images/yj/yj_chr.png"  />';
+                    }
 
-                strHtml += '<img src="'+ list[i].pic_clothes + '" />';
-                strHtml += '</div>';
-                var detiles = list[i].detail;
-                strHtml += '<ul>';
-                for(var j = 0;j<detiles.length;j++){
-                    strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                    strHtml += '<img src="'+ list[i].pic_clothes + '" />';
+                    strHtml += '<div class="model_del none" data-id="'+ list[i].id+'" ></div></div>';
+                    var detiles = list[i].detail;
+                    strHtml += '<ul>';
+                    for(var j = 0;j<detiles.length;j++){
+                        strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                    }
+                    strHtml += '</ul>';
+//                strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"></a>'
+                    strHtml += '</div>';
                 }
-                strHtml += '</ul>';
-                strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"></a>'
-                strHtml += '</div>';
-           }
+            }
            UserCenter.centor_con.html(strHtml);
         }
     }
@@ -108,14 +110,24 @@ jQuery(function($) {
         UserCenter.bindCollections(0);
     });
     //删除一套收藏
-    UserCenter.centor_con.on('click','.del_sc_btn',function(){
+    UserCenter.centor_con.on('click','.model_del',function(event){
         var cid = $(this).data('id');
         $.post(delBeubenCollUrl,{id:cid},function(data){
             if(data['code'] == '1'){
                UserCenter.bindCollections(-1);
             }
         });
+        event.stopPropagation();
     });
+
+    UserCenter.centor_con.on('mouseleave','.model_yj',function(){
+        $(this).find('.model_del ').hide();
+    });
+
+    UserCenter.centor_con.on('mouseenter','.model_yj',function(){
+        $(this).find('.model_del ').show();
+    });
+
     //点击优惠券修改状态
     UserCenter.youhui_icon.on('click',function(){
         var isreceive = UserCenter.youhui_icon.data('isreceive');

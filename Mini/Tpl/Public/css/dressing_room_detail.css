@@ -693,6 +693,8 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_center_title p{  color:#F00;}
 
 .user_center_con{ width:960px; margin:0 auto;}
+.model_del{ width:128px; height:89px; background:url(../images/model_del.png) 0 0 no-repeat; position:absolute; top:20px; left:160px; z-index:100;cursor: pointer;}
+
 .user_center_con .model{ float:left; width:240px; height:550px; margin:100px 0 0 0; position:relative;}
 
 .user_center_con .model .model_yj{float:left; width:240px; height:550px; position:relative;}
