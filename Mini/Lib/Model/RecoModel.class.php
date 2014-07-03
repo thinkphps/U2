@@ -47,6 +47,7 @@ class RecoModel extends Model{
     public function getBeubeu($where,$page,$page_num,$start){
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
+        $where['tag'] = array('neq',0);
         $count = $beubeu_suits->distinct(true)->field('tag')->where($where)->select();
         $count = count($count);
         $num = ceil($count/$page_num);
