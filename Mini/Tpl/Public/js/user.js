@@ -6,7 +6,7 @@ jQuery(function($) {
 
     var UserCenter;
     UserCenter = {
-        changePWBtn: $('.mini-changepw-btn'),
+        changePWBtn: $('#btnWardrobe'),
         exitUserCenter : $('.center_btn6'),
         collocationNum : $('#lbl_collection'),
         change_yf :$('#btnchange'),
@@ -58,7 +58,7 @@ jQuery(function($) {
                         UserCenter.youhui_icon.hide();
                     }
                 }
-                UserCenter.change_yf.data(data['page']);
+                UserCenter.change_yf.data('page',data['page']);
                 UserCenter.showColections(data['def']);
 
             });
@@ -102,6 +102,8 @@ jQuery(function($) {
         UserCenter.init();
     });
     UserCenter.exitUserCenter.on('click',function(){
+        UserCenter.change_yf.data('page',0);
+        UserCenter.myWardrobe.click();
         $('.my_yyg_title,#sfid').show();
         $('.user_center').hide();
     });
