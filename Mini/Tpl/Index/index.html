@@ -1054,28 +1054,6 @@ $('#moreid').on('click',function(){
         start_autochange();
     }
 
-
-function modeltip(e,act,gender){
-    if(act==1){
-        if(gender == 2){
-            e.find('.model_try2_man').each(function(){ $(this).removeClass('none');});
-        }else if(gender==3){
-            e.find('.model_try2_child').each(function(){ $(this).removeClass('none');});
-        }else{
-            e.find('.model_try2').each(function(){ $(this).removeClass('none');});
-        }
-
-    }else{
-        if(gender == 2){
-            e.find('.model_try2_man').each(function(){ $(this).addClass('none');});
-        }else if(gender==3){
-            e.find('.model_try2_child').each(function(){ $(this).addClass('none');});
-        }else{
-            e.find('.model_try2').each(function(){ $(this).addClass('none');});
-        }
-    }
-
-}
 function fleshVerify(){
     //重载验证码
     var time = new Date().getTime();
