@@ -116,7 +116,7 @@ button,label{cursor:pointer; }
 /*.model_try{ width:95px; height:95px; background:url(../images/model_try.png) 0 0 no-repeat; position:absolute; top:10px; left:160px; z-index:100;}*/
 .model_try2{ width:128px; height:89px; background:url(../images/model_try2.png) 0 0 no-repeat; position:absolute; top:20px; left:160px; z-index:100;}
 
-.my_yyg_model .model{float:left; width:240px; height:550px; position:relative; margin-top:50px;}
+.my_yyg_model .model{float:left; width:240px; height:550px; position:relative; margin-top:100px;}
 .my_yyg_model .model img{ display:block; width:400px; height:533px; position:absolute; left:50%; top:0; margin-left:-200px;}
 
 

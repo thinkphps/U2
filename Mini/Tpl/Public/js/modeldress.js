@@ -164,8 +164,7 @@ function Model_loadok_callback(){
             }
         },
         callDressingFunction : function(){
-            var $img = $(this).find('img')
-            pageElement.dressByBarcodeList($img.data('detail'));
+            pageElement.dressByBarcodeList($(this).data('detail'));
         },
         //隐藏显示空间
         objShowOrHide : function(obj){

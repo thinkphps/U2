@@ -303,26 +303,55 @@ var _mini = {
                     //}
                     if(data.def){
                         var deflength = data.def.length,str = "";
-                        if(data['count'] && data['count']>4){
-                            $('#btn-mask').addClass('none')
-                        }else{
-                            $('#btn-mask').removeClass('none');
-                        }
+//                        if(data['count'] && data['count']>4){
+//                            $('#btn-mask').addClass('none')
+//                        }else{
+//                            $('#btn-mask').removeClass('none');
+//                        }
+//                        <div class="model">
+//                            <img src="images/1.png" />
+//                            <img src="images/2.png" />
+//                            <img src="images/3.png" />
+//                            <img src="images/4.png" />
+//                            <div class="model_try2"></div>
+//                        </div>
                         for(var i = 0 ;i < deflength;i++){
-                            if(i<4){
-                                var show = "style='display:block;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
-                            }else{
-                                var show = "style='display:none;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
+                            str += ' <div class="model imgrd" data-detail="['+data.def[i].suitID+',' + data.def[i].sex + ']">';
+
+                            var suitImageUrlHead = data.def[i].suitImageUrlHead,suitImageUrlBody = data.def[i].suitImageUrlBody,
+                                suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch;
+                            if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlShose == ''){
+                                str += '<img src="'+ data.def[i].suitImageUrl +'" />';
+                                str += '<div class="model_try2 none"></div></div>';
                             }
-                            if(gender==1){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+                            else{
+                                //头部
+                                str += '<img src="'+  suitImageUrlHead +'" />';
+                                //身躯
+                                str += '<img src="'+  suitImageUrlBody +'" />';
+                                //衣服
+                                str += '<img src="'+  suitImageUrlShose +'" />';
+                                //鞋子
+                                str += '<img src="'+  suitImageUrlMatch +'" />';
+
+                                str += '<div class="model_try2 none"></div></div>';
                             }
-                            if(gender==2){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
-                            }
-                            if(gender==3){
-                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
-                            }
+
+
+//                            if(i<4){
+//                              var show = "style='display:block;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
+//                            }else{
+//                                var show = "style='display:none;' onmouseover='modeltip($(this),1," + gender +");' onmouseout='modeltip($(this),0," + gender +");'";
+//                            }
+//                            if(gender==1){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2 none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
+//                            if(gender==2){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2_man none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
+//                            if(gender==3){
+//                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
+//                            }
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
@@ -340,7 +369,7 @@ var _mini = {
                             var css = {};
                             css['transform']='matrix(1, 0, 0, 1, 0, 0)';
                             $('.imgrd').css(css);
-                        },100);
+                        },10);
                     }else{
                         $('#btn-mask').removeClass('none');
                         $('#sfid').html('');
@@ -606,6 +635,13 @@ var _mini = {
     }
 }
 
+
+$('#sfid').on('mouseleave','.imgrd',function(){
+    $(this).find('.model_try2 ').hide();
+});
+$('#sfid').on('mouseenter','.imgrd',function(){
+    $(this).find('.model_try2 ').show();
+});
 
 //点击左侧性别菜单，切换模特
 $('#ulgender').on('click','li',function(){
@@ -1016,44 +1052,6 @@ function stripHTML(msg)
 }
 
 !(function($){
-    /*
-     $('#user_name').blur(function(){
-     var user_name	= $('#user_name').val();
-     if(user_name){
-     $.post(ckeckuserurl,{user_name:user_name},function(data){
-     if(data['code'] < 0){
-     $('#msg_error').html(data['msg']);
-     return false;
-     }
-     });
-     }
-     });
-
-     $('#mobile').blur(function(){
-     var mobile	= $('#mobile').val();
-     if(mobile){
-     $.post(ckeckmobileurl,{mobile:mobile},function(data){
-     if(data['code'] < 0){
-     $('#msg_error').html(data['msg']);
-     return false;
-     }
-     });
-     }
-     });
-
-     $('#f_mobile').blur(function(){
-     var user_name	= $('#f_user_name').val();
-     var mobile	= $('#f_mobile').val();
-     if(user_name && mobile){
-     $.post(ckeckusermobileurl,{user_name:user_name,mobile:mobile},function(data){
-     if(data['code'] < 0){
-     $('#f_error_msg').html(data['msg']);
-     return false;
-     }
-     });
-     }
-     });
-     */
     $(".mini-activate-fail").click(function(){
         $('.mini-activate-fail').hide();
         $('.mini-activate').show();
@@ -1166,27 +1164,6 @@ function do_register(){
     var c_none = $('#checkbox-none').val();
     var verifying_code = $('#verifying_code').val();
     var isChecked = 1;
-    /*
-     if(!user_name){
-     $('#msg_error').html('请填写用户名');
-     return false;
-     }else{
-     var reg = /^[a-zA-Z0-9-_\u4e00-\u9fa5]{3,25}$/;
-     if(!reg.test(user_name)){
-     $('#msg_error').html('用户名格式错误');
-     return false;
-     }else{
-     /*
-     $.post(ckeckuserurl,{user_name:user_name},function(data){
-     if(data['code'] < 0){
-     $('#msg_error').html(data['msg']);
-     return false;
-     }
-     });
-
-     }
-     }
-     */
     if(!mobile){
         $('#msg_error').html('请填写手机号码');
         return false;
@@ -1219,29 +1196,7 @@ function do_register(){
         $('#msg_error').html('您两次输入的密码不一致');
         return false;
     }
-    /*
-     if($('#checkbox-phone').prop('checked')){
-     if(!mobile){
-     $('#msg_error').html('请填写手机号码');
-     return false;
-     }else{
-     var mobile_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
-     if(!mobile_reg.test(mobile)){
-     $('#msg_error').html('手机号码格式错误');
-     return false;
-     }else{
-     $.post(ckeckmobileurl,{mobile:mobile},function(data){
-     if(data['code'] < 0){
-     $('#msg_error').html(data['msg']);
-     return false;
-     }
-     });
-     }
-     }
-     }else{
-     mobile = '';
-     }
-     */
+
     if($('#checkbox-phone').prop('checked')){
         if(!taobao_name){
             $('#msg_error').html('请填写淘宝登录名');
