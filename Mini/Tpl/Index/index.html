@@ -398,24 +398,23 @@
     </div>
 
     <div class="my_yyg_model" id='sfid'>
-        <volist id='pvo' name='beubeu_suits_list' key='pk'>
-         <if condition="$pk elt 4">
-        <div class="model" style='display:block;' onmouseover="modeltip($(this),1);" onmouseout="modeltip($(this),0);">
-            <div class="model_try2 none"></div>
-            <div style='width: 400px;height: 533px;margin-left: -70px'>
-                <img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />
-            </div>
-        </div>
-        <else/>
-             <div class="model" style='display:none;' onmouseover="modeltip($(this),1);" onmouseout="modeltip($(this),0);">
-                 <div class="model_try2 none"></div>
-                 <div style='width: 400px;height: 533px;margin-left: -70px'>
-                    <img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />
-                 </div>
-
-             </div>
-       </if>
-        </volist>
+        <!--<volist id='pvo' name='beubeu_suits_list' key='pk'>-->
+         <!--<if condition="$pk elt 4">-->
+        <!--<div class="model" style='display:block;' onmouseover="modeltip($(this),1);" onmouseout="modeltip($(this),0);">-->
+            <!--<div class="model_try2 none"></div>-->
+            <!--<div style='width: 400px;height: 533px;margin-left: -70px'>-->
+                <!--<img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<else/>-->
+             <!--<div class="model" style='display:none;' onmouseover="modeltip($(this),1);" onmouseout="modeltip($(this),0);">-->
+                 <!--<div class="model_try2 none"></div>-->
+                 <!--<div style='width: 400px;height: 533px;margin-left: -70px'>-->
+                    <!--<img class='imgrd' src="{$pvo.suitImageUrl}.400x533.png" width="400" height="533" data-detail='[{$pvo.suitID},{$pvo.sex}]'  />-->
+                 <!--</div>-->
+             <!--</div>-->
+       <!--</if>-->
+        <!--</volist>-->
     </div>
 <!--放婴幼儿-->
     <div class="index-suit mini-kv none" style="display: none;" id='showbaby'>
@@ -490,7 +489,6 @@
         <!--天气-->
         <a name="m" id="m" ></a>
         <div class="weather">
-
             <ul id="ulweek">
                 <li class="w_select" id="li_day0">
                     <i title="晴天" class="nio-0" id="title_day0"></i>
@@ -571,7 +569,6 @@
             <div class="none style-children_mask" ></div>
         </div>
 
-
         <!--优衣库推荐款式-->
         <div class="yyk_tj">
             <div class="left_tj">
@@ -588,13 +585,9 @@
             </div>
             <h3>更多商品选择 优享随心搭配</h3>
         </div>
-
     </div>
 
     <div class="tj_wrapper" id='watercontainer'></div>
-
-
-
     <div class="product_more"><a href="javascript:;" id='moreid'></a></div>
     <div class="footer">
         <p>2014© Uniqlo.BIGOData.com.cn</p>
@@ -752,46 +745,8 @@
 </body>
 </html>
 <script >
-var css = {};
-css['transform']='rotateY(90deg)';
-$('.imgrd').css(css);
-
-
     $(function(){
-
-        setTimeout(function(){
-            $('.imgrd').css({
-                '-webkit-transition': 'all 0.5s ease-in-out',
-                '-moz-transition': 'all 0.5s ease-in-out',
-                '-o-transition': 'all 0.5s ease-in-out',
-                '-ms-transition': 'all 0.5s ease-in-out',
-                'transition': 'all 0.5s ease-in-out'
-            });
-            var css = {};
-            css['transform']='matrix(1, 0, 0, 1, 0, 0)';
-            $('.imgrd').css(css);
-        },100);
-
-        //点击左侧
-        $('#ulgender').on('click','li',function(){
-            $('#changeid').attr('la',1);
-            var sid = $(this).data('gender');
-            $(this).siblings().children('a').removeClass('select');
-            $(this).children('a').addClass('select');
-            $('#ul_index-bar-place li').siblings().children('a').removeClass('select');
-            if(sid==1){
-                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg1.jpg) center 0 no-repeat");
-                $('.mini-aside').css('bottom','42px');
-            }else if(sid==2){
-                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg2.jpg) center 0 no-repeat");
-                $('.mini-aside').css('bottom','113px');
-            }else if(sid==3 || sid == 4){
-                $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
-                $('.mini-aside').css('bottom','143px');
-            }
-            _mini.getSuits();
-        });
-
+        _mini.getSuits();
         //mini中部类别切换
         $('#cateu2').on('click','li',function(){
             var tmpscrolltop;
@@ -837,9 +792,6 @@ $('.imgrd').css(css);
 
             $(window).scrollTop(tmpscrolltop);
         });
-
-
-
 
         //点击自定义分类向下按钮
         $('.tag_btn').on('click','li:eq(1)',function(){
@@ -982,56 +934,7 @@ $('.imgrd').css(css);
             });
         });
     });
-    //左侧风格取数据
-    $('#ul_index-bar-place').on('click','li',function(){
-        $('#changeid').attr('la',1);
-        $(this).siblings().children('a').removeClass('select');
-        if($(this).children('a').hasClass('select')){
-            $(this).children('a').removeClass('select');
-        }else{
-            $(this).children('a').addClass('select');
-        }
-        _mini.getSuits();
-    });
 
-    //换一批
-    $('#changeid').on('click',function(){
-        _mini.getSuits();
-        /*var piclength = $('.model').length,pagenum = Math.ceil(piclength/4),page = $(this).attr('la'),startnum;
-           if(page==1){
-               $('#changeid').attr('la',+page+1);
-               startnum = page*4;
-           }else if(page==pagenum){
-               $('#changeid').attr('la',1);
-               startnum = 0;
-           }else{
-               $('#changeid').attr('la',+page+1);
-               startnum = page*4;
-           }
-            if(pagenum!=1){
-            $('.model').css('display','none');
-            for(var i=0;i<4;i++){
-                if($('.model').eq(startnum+i)){
-                $('.model').eq(startnum+i).css('display','block');
-                }
-            }
-                var css = {};
-                css['transform']='rotateY(90deg)';
-                $('.imgrd').css(css);
-                setTimeout(function(){
-                    $('.imgrd').css({
-                        '-webkit-transition': 'all 0.5s ease-in-out',
-                        '-moz-transition': 'all 0.5s ease-in-out',
-                        '-o-transition': 'all 0.5s ease-in-out',
-                        '-ms-transition': 'all 0.5s ease-in-out',
-                        'transition': 'all 0.5s ease-in-out'
-                    });
-                    var css = {};
-                    css['transform']='matrix(1, 0, 0, 1, 0, 0)';
-                    $('.imgrd').css(css);
-                },100);
-          }*/
-    });
 
 $('#moreid').on('click',function(){
     //getgoods($.weather.avg);
