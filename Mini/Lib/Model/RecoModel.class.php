@@ -47,14 +47,25 @@ class RecoModel extends Model{
     public function getBeubeu($where,$page,$page_num,$start){
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
-        $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
+        $count = $beubeu_suits->distinct(true)->field('tag')->where($where)->count();
         $num = ceil($count/$page_num);
         if($page>$num){
            $page = 1;
            $start = 0;
         }
-        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
-        //$beubeu_detail = M('BeubeuSuitsGoodsdetail');
+        $sql_where = '';
+        if(!empty($where['suitStyleID'])){
+            $sql_where = ' and bs.suitStyleID='.$where['suitStyleID'];
+        }
+        if(is_array($where['suitGenderID'])){
+            $sql_where = ' and bs.suitGenderID '.$where['suitGenderID'];
+        }else if(!is_array($where['suitGenderID']) && !empty($where['suitGenderID'])){
+            $sql_where = ' and bs.suitGenderID='.$where['suitGenderID'];
+        }
+        $sql_where = ' and bs.approve_status=0';
+        $sql = "SELECT suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch FROM `u_beubeu_suits` WHERE tag = (SELECT tag FROM `u_beubeu_suits` as bs WHERE 1 {$sql_where} group by bs.tag order by bs.tag desc limit {$start},{$page_num})";
+        //$beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
+        $beubeu_suits_list = $beubeu_suits->query($sql);
         foreach($beubeu_suits_list as $k=>$v){
             switch($v['suitGenderID']){
                 case 1 :
@@ -71,15 +82,6 @@ class RecoModel extends Model{
                     break;
             }
             $beubeu_suits_list[$k]['sex'] = $sex;
-        /*$detailResult = $beubeu_detail->cache(true)->field('item_bn')->where(array('suitID'=>$v['suitID']))->select();
-            if(!empty($detailResult)){
-                foreach($detailResult as $k2=>$v2){
-                    $detailResult[$k2]['sex'] = $sex;
-                }
-                $beubeu_suits_list[$k]['detail'] = json_encode($detailResult);
-            }else{
-                $beubeu_suits_list[$k]['detail'] = 0;
-            }*/
          }
         $arr['page'] = $page+1;
         $arr['result'] = $beubeu_suits_list;
@@ -184,6 +186,7 @@ public function getUserInfo(){
     $arr[] = $uname;
     $arr[] = $user['collflag'];
     $arr[] = $collcount;
+    $arr[] = $user['taobao_name'];
     return $arr;
 }
 }

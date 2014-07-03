@@ -11,7 +11,7 @@ class GetinfoAction extends Action{
             if(is_mobile()){
             $page_num = 2;
             }else{
-            $page_num = 4;
+            $page_num = 1;
             }
             $start = ($page-1)*$page_num;
             /*if(S('sid'.$tem.$sid.$fid)){
@@ -163,6 +163,7 @@ public function getCollData(){
         $arr['uname'] = $userinfo[0];
         $arr['collflag'] = $userinfo[1];
         $arr['collcount'] = $userinfo[2];
+        $arr['tname'] = $userinfo[3];
     }
     $arr['page'] = $defaultResult['page'];
     $arr['def'] = $defaultResult['result'];
@@ -322,11 +323,11 @@ public function changeTaoName(){
             $user = M('User');
             $tname = trim($this->_post('taobao_name'));
             $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
-            $user_name = session("uniq_user_name");
             if(!empty($result)){
                 $re = $user->where(array('id'=>$uid))->save(array('taobao_name'=>$tname));
                 if($re){
                     $arr['code'] = 1;
+                    $arr['tname'] = $tname;
                     $arr['msg'] = '编辑成功';
                 }else{
                     $arr['code'] = 0;

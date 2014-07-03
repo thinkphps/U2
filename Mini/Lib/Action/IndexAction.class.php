@@ -80,7 +80,9 @@ class IndexAction extends Action {
             $beubeu_suits_list = unserialize(S('styledata'));
         }else{
             //默认模特图
-            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where(array('suitGenderID'=>1,'approve_status'=>0))->order('suitID desc')->limit('0,4')->select();
+            $sql = "SELECT suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch FROM `u_beubeu_suits` WHERE tag = (SELECT tag FROM `u_beubeu_suits` as bs WHERE 1 bs.suitGenderID=1 and bs.approve_status=0 group by bs.tag order by bs.tag desc limit 0,1)";
+            //$beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where(array('suitGenderID'=>1,'approve_status'=>0))->order('suitID desc')->limit('0,4')->select();
+            $beubeu_suits_list = $beubeu_suits->query($sql);
             foreach($beubeu_suits_list as $k=>$v){
                 switch($v['suitGenderID']){
                     case 1 :
