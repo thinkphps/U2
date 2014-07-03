@@ -697,7 +697,7 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 
 .user_center .user_center_btn{ float:left; height:100px; width:100%; background:url(../images/dr_main_con_sub_nav_bg.png) 0 0 repeat; position:fixed;top:87%;}
 .user_center .user_center_btn ul{ display:block; width:950px; height:100px;  margin:0 auto; background:#fff;}
-.user_center .user_center_btn ul li{ display:block; float:left; width:160px; height:100px; border-right:1px solid #eee; color:#333;}
+.user_center .user_center_btn ul li{ display:block; float:left; width:177px; height:100px; border-right:1px solid #eee; color:#333;}
 .user_center .user_center_btn ul li a{ display:block; width:160px; text-align:center;}
 .user_center .user_center_btn ul li.center_btn6 { width:144px; border-right:none;}
 .user_center .user_center_btn ul li.center_btn6 a{ width:144px;}
