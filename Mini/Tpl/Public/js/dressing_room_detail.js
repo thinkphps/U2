@@ -320,7 +320,7 @@ var _mini = {
 
                             var suitImageUrlHead = data.def[i].suitImageUrlHead,suitImageUrlBody = data.def[i].suitImageUrlBody,
                                 suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch;
-                            if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlShose == ''){
+                            if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlMatch == ''){
                                 str += '<img src="'+ data.def[i].suitImageUrl +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
@@ -330,9 +330,9 @@ var _mini = {
                                 //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //衣服
-                                str += '<img src="'+  suitImageUrlShose +'" />';
+                                str += '<img src="'+ suitImageUrlMatch  +'" />';
                                 //鞋子
-                                str += '<img src="'+  suitImageUrlMatch +'" />';
+                                str += '<img src="'+ suitImageUrlShose  +'" />';
 
                                 str += '<div class="model_try2 none"></div></div>';
                             }
