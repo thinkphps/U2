@@ -30,6 +30,7 @@ jQuery(function($) {
         },
         //或跌搭配
         bindCollections : function(pageOffset){
+            $('ul.detail_sub_nav').css('z-index',1);
             var page =  parseInt(UserCenter.change_yf.data('page'));
             page += pageOffset;
             $.post(getCollDataUrl,{page:page},function(data){
@@ -102,6 +103,7 @@ jQuery(function($) {
         UserCenter.init();
     });
     UserCenter.exitUserCenter.on('click',function(){
+        $('ul.detail_sub_nav').css('z-index',105);
         UserCenter.change_yf.data('page',0);
         UserCenter.myWardrobe.click();
         $('.my_yyg_title,#sfid').show();
