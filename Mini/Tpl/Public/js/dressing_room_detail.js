@@ -329,10 +329,10 @@ var _mini = {
                                 str += '<img src="'+  suitImageUrlHead +'" />';
                                 //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
-                                //衣服
-                                str += '<img src="'+ suitImageUrlMatch  +'" />';
                                 //鞋子
                                 str += '<img src="'+ suitImageUrlShose  +'" />';
+                                //衣服
+                                str += '<img src="'+ suitImageUrlMatch  +'" />';
 
                                 str += '<div class="model_try2 none"></div></div>';
                             }
