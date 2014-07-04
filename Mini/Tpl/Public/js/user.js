@@ -200,7 +200,6 @@ jQuery(function($) {
             UserCenter.myWardrobe.addClass('select');
       }
     });
-
     //修改账号
     UserCenter.btnChangeName.on('click',function(){
         UserCenter.ulMenu.find('li').removeClass('select');
