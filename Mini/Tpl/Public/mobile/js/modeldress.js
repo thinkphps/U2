@@ -111,6 +111,23 @@ function Model_loadok_callback(){
     }
 }
 
+function change_baiyi_css(){
+//    alert(1);
+    $('#beubeu_copy_c').removeClass('beubeu_copy_c');
+    $('#beubeu_copy_c').css({'right':'3em','left':'','top':'15em','position':'relative','height':'auto'
+    ,'background-color':'#fff','z-index':'998','text-align':'left','font-size':'12px','float':'right'
+    ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'});
+    $('#beubeu_copy_lw').css({'top':'23em'});
+    $('#beubeu_copy_s').removeClass('beubeu_copy_s');
+    $('#beubeu_copy_s').css({'right':'4em','left':'','top':'17em','position':'relative','height':'102px'
+       ,'background-color':'#fff','z-index':'998','text-align':'left','font-size':'12px','float':'right'
+       ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'})
+}
+
+function change_baiyi_css_info(){
+    $('.beubeu_list').css({'top':'12em','left':'-1em'});
+}
+
 (function($, window, document,undefined) {
 
     var ModelDress = function(){
@@ -134,9 +151,10 @@ function Model_loadok_callback(){
 //            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
             Model.CurrClothesCallback = this.beu_getallclothes;
 
-            $('#beu_img_head').hide();
-            $('#beu_img_body').hide();
-
+//            $('#beu_img_head').hide();
+//            $('#beu_img_body').hide();
+            $('#beu_img_body').css({'width':'28em','height':'34em'});
+            $('#beu_img_head').css({'width':'28em','height':'34em'});
             $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
             $('.beubeu_btns3').css('left','-0em').css('top','13em');
             $('#showmodelhead').css({'top':'14em','left':'0em'});
@@ -144,10 +162,10 @@ function Model_loadok_callback(){
             $('#beubeu_loading2').css({'height':'24em','left':'5em'});
             $('#beu_showimg').css({'position':'absolute','top':'-1em'});
             $('#show_csw').css({'left':'17.9em','top':'15.9em'});
-            $('#beubeu_copy_c').css({'left':'6.5em','top':'17.5em'});
+
             $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
             $('#beu_img').css({'width':'28em','height':'34em'});
-            $('.beubeu_list').css({'top':'12em','left':'-1em'});
+
             $('#beubeu_copy_c').css({'left':'2em'});
             $('#beubeu_copy_lw').css({'top':'366px'});
             $('#beubeu_loading').css({'top':'12em','left':'5em'});
