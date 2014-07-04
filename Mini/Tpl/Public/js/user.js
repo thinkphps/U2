@@ -25,6 +25,7 @@ jQuery(function($) {
         txttbname :$('#txttbname'),
         userinfo : $('#userinfo'),
         btnUserInfo :$('#btn_userinfo'),
+        youhui_msg : $('#youhui_msg'),
         init : function(){
             UserCenter.bindCollections(0);
         },
@@ -140,9 +141,10 @@ jQuery(function($) {
             if( isreceive != 1){
                 $.post(setCollFlagUrl,function(data){
                     if(data['code'] > 0){
-                        UserCenter.youhui_icon.removeClass('youhui_icon');
+                        //UserCenter.youhui_icon.removeClass('youhui_icon');
                         UserCenter.youhui_icon.data('isreceive',1);
     //                    UserCenter.youhui_icon.addClass('youhui_icon_block');
+                        $('#youhui_msg').removeClass('none');
                         $('#youhui_msg').show();
                     }else{
 
@@ -156,7 +158,12 @@ jQuery(function($) {
             alert('收藏满10套方可领取优惠券！');
         }
     });
-
+    UserCenter.youhui_msg.on('click',function(){
+       if(!$(this).hasClass('none')){
+           $('#youhui_msg').addClass('none');
+           $('#youhui_msg').hide();
+       }
+    });
     //账户信息
     UserCenter.btnUserInfo.on('click',function(){
         //UserCenter.ulMenu.find('li').removeClass('select');
