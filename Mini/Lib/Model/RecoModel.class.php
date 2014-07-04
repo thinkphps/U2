@@ -178,12 +178,8 @@ public function getUserInfo(){
     $uid = session("uniq_user_id");
     $user = M('User')->field('user_name,mobile,taobao_name,collflag')->where(array('id'=>$uid))->find();
     $collcount = M('BeubeuCollection')->field('id')->where(array('uid'=>$uid))->count();
-    if(!empty($user['user_name'])){
-       $uname =  $user['user_name'];
-    }else if(!empty($user['taobao_name'])){
+    if(!empty($user['taobao_name'])){
         $uname =  $user['taobao_name'];
-    }else if(!empty($user['mobile'])){
-        $uname =  $user['mobile'];
     }
     $arr[] = $uname;
     $arr[] = $user['collflag'];
