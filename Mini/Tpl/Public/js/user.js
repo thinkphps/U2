@@ -266,7 +266,7 @@ jQuery(function($) {
         var $model_yj = $(this);
         var gender = $model_yj.data('gender');
         var suitid = $model_yj.data('suitid');
-        get_baiyi_dp(suitid,gender);
+        get_baiyi_dp_bystr(suitid);
         if(pageElement.$divSyj.is(':hidden')){
             pageElement.$btnExpansion.click();
         }
