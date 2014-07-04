@@ -662,7 +662,10 @@ $('#ulgender').on('click','li',function(){
     }
     _mini.getSuits();
 });
-
+//排序
+$('#watercontainer').on('change','#gorder',function(){
+    getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,0,$('#keywordid').val());
+});
 //左侧风格取数据
 $('#ul_index-bar-place').on('click','li',function(){
     $('#changeid').attr('la',1);
@@ -876,6 +879,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
     $('#waterfall-loading').remove();
+    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 1;
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg
@@ -885,6 +889,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
             fid : fid,//,$.uniqlo.fid,//风格id
             zid : zid,//$.uniqlo.zid,//自定义分类
             kid : kid,//$.uniqlo.kid,//快速搜索标记
+            oid : oid,
             keyword : keyword,
             timestamp : _mini.timestamp
         },
