@@ -191,7 +191,7 @@ public function delBeubenColl(){
 }
 public function setCollFlag(){
     $uid = session("uniq_user_id");
-    if($uid){
+    /*if($uid){
     $user = M('User');
     $result = $user->field('id,collflag')->where(array('id'=>$uid))->find();
     if(!empty($result)){
@@ -215,7 +215,8 @@ public function setCollFlag(){
     }else{
         $arr['code'] = 0;
         $arr['msg'] = '没有登录';
-    }
+    }*/
+    $arr['code'] = 1;
     $this->ajaxReturn($arr, 'JSON');
 }
 public function addBeubenColl(){

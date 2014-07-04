@@ -55,7 +55,9 @@ jQuery(function($) {
                     //如果收藏超过10套则弹出消息提示框：您的收藏已超过10套，请点击‘确定’领取优惠
                     if(cnum >= 10){
                         UserCenter.youhui_icon.show();
+                        if(pageOffset!=-1){
                         alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
+                         }
                     }
                     else{
                         //UserCenter.youhui_icon.hide();
@@ -154,7 +156,9 @@ jQuery(function($) {
                     }
                 });
             }else{
-                alert('您已领取优惠券！');
+                $('#youhui_msg').removeClass('none');
+                $('#youhui_msg').show();//目前没有优惠信息，有的话这两句要删掉
+                //alert('您已领取优惠券！');
             }
         }else{
             alert('收藏满10套方可领取优惠券！');
