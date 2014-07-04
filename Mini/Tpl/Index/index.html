@@ -77,9 +77,9 @@
             </if>
             <a href="javascript:;" class="mini-changepw-btn" id="btnWardrobe">个人衣柜</a>
             <if condition="$user['is_active'] eq 0">
-                <a href="javascript:;" class="mini-logout js-click" data-id="#logout">退出登录</a>
+                <a href="javascript:;" class="mini-logout js-click" data-id="#logout" id='utuichu'>退出登录</a>
                 <else />
-                <a href="{:U('Index/loginout')}" >退出登录</a>
+                <a href="{:U('Index/loginout')}" id='utuichu'>退出登录</a>
             </if>
             </div>
         </if>

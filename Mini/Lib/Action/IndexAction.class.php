@@ -256,11 +256,11 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
                 $result = array();
             }
             if($page==1){
+                $parmas = array('oid'=>$oid);
                 if(is_mobile()){
-                    $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
                   }
             }
         }else if($lid==1 && $bid!=1){
@@ -283,11 +283,11 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
                 $result = array();
             }
             if($page==1){
+                $parmas = array('oid'=>$oid);
                 if(is_mobile()){
-                    $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
                 }
             }
         }else if($bid==1 && $lid!=1){
@@ -310,11 +310,11 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $result = array();
             }
             if($page==1){
+                $parmas = array('oid'=>$oid);
                 if(is_mobile()){
-                    $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
                }
             }
         }else if($kid>0){
@@ -346,11 +346,11 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $result = array();
             }
             if($page==1){
+                $parmas = array('oid'=>$oid);
                 if(is_mobile()){
-                    $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
               }
             }
         }else{
@@ -462,11 +462,11 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $result = array();
             }
             if($page==1){
+                $parmas = array('oid'=>$oid);
                 if(is_mobile()){
-                    $parmas = array('oid'=>$oid);
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword);
+                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
                     //$parmas = array('oid'=>$oid);
                     //$result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }
@@ -481,23 +481,40 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         }
         $this->ajaxReturn($returnArr, 'JSON');
     }
-    public function waterdata($result,$lid,$bid,$keyword){
+    public function waterdata($result,$lid,$bid,$keyword,$arr){
+        switch($arr['oid']){
+            case 1 :
+                $sel1 = 'selected="selected"';
+                break;
+            case 2 :
+                $sel2 = 'selected="selected"';
+                break;
+            case 3 :
+                $sel3 = 'selected="selected"';
+                break;
+            case 4 :
+                $sel4 = 'selected="selected"';
+                break;
+            case 5 :
+                $sel5 = 'selected="selected"';
+                break;
+        }
         $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/search.htm?scid=138188209&kid=11727_51912_165828_211546' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/T2sdBwXY4aXXXXXXXX_!!196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
         $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2aPx6X90XXXXXXXXX_!!196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }
         else{
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }
 
         array_unshift($result,array('first'=>1,'ad'=>$ad));
@@ -537,18 +554,18 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             break;
         }
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="2" '.$sel2.'>热度</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="2" '.$sel2.'>热度</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="2" '.$sel2.'>热度</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="2" '.$sel2.'>热度</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div></div>';
         }
         else{
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="2" '.$sel2.'>热度</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><form action="#" method="get"><input name="search" type="text" value="'.$keyword.'" placeholder="款式或名称" id="keywordid" autocomplete="off"><a href="javascript:;" id="keybutton"></a></form></div><div class="wrapper_box wrapper_box_btn_group2"><div class="sequence"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option></select></div></div></div></div>';
         }
         $arr_count = count($result);
         if($arr_count==0){
