@@ -124,6 +124,10 @@ function change_baiyi_css(){
        ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'})
 }
 
+function change_baiyi_css_info(){
+    $('.beubeu_list').css({'top':'12em','left':'-1em'});
+}
+
 (function($, window, document,undefined) {
 
     var ModelDress = function(){
@@ -161,7 +165,7 @@ function change_baiyi_css(){
 
             $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
             $('#beu_img').css({'width':'28em','height':'34em'});
-            $('.beubeu_list').css({'top':'12em','left':'-1em'});
+
             $('#beubeu_copy_c').css({'left':'2em'});
             $('#beubeu_copy_lw').css({'top':'366px'});
             $('#beubeu_loading').css({'top':'12em','left':'5em'});
