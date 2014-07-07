@@ -128,18 +128,18 @@ class OfficialAction extends Action{
               if(empty($numiid)){
                   $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                       ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                      ->where(array('u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+                      ->where(array('u1.suitStyleID'=>$style))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
               }else{
                   if(!empty($style)){
                       $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                           ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
                           ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();
+                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
                   }else{
                       $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                           ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
                           ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid))->order('u1.uptime desc')->limit($firstRows.','.$maxRows)->select();;
+                          ->where(array('u3.num_iid'=>$numiid))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();;
                   }
               }
 
