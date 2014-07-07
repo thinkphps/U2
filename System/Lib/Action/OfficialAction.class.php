@@ -14,13 +14,12 @@ class OfficialAction extends Action{
             $stylelist = $styles->field('*')->select();
             $msuit = M('suits_select u1');
 
-            $result = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+            $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
-                where("u1.`type` = '1'")->select();
+                where(array('u1.selected'=>'1','u1.type' =>'1'))->select();
 
-
-            $selsuits1 = array();
+            /*$selsuits1 = array();
             foreach ( $stylelist as $r => $styleRow ){
                 $tmpimg = array("description"=>$styleRow["description"],"suitImageUrl"=>"__TMPL__Public/images/nosetting.jpg",
                     "suitID"=>"","suitStyleID"=>$styleRow['ID'],"selected"=>"");
@@ -35,14 +34,14 @@ class OfficialAction extends Action{
                    }
                 }
                 array_push($selsuits1,$tmpimg);
-            }
+            }*/
 
-            $result = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID,u1.selected')->
+            $selsuits2 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
-                where("u1.`type` = '2'")->select();
+                where(array('u1.selected'=>'1','u1.type' =>'2'))->select();
 
-            $selsuits2 = array();
+            /*$selsuits2 = array();
             foreach ( $stylelist as $r => $styleRow ){
                 $tmpimg = array("description"=>$styleRow["description"],"suitImageUrl"=>"__TMPL__Public/images/nosetting.jpg",
                     "suitID"=>"","suitStyleID"=>$styleRow['ID'],"selected"=>"");
@@ -58,7 +57,7 @@ class OfficialAction extends Action{
                 }
                 array_push($selsuits2,$tmpimg);
 
-            }
+            }*/
             $mtm = M('settings');
             $tm = $mtm -> field('value')->where(array('key'=>'temperature'))->select();
             if(!empty($tm)){
@@ -71,7 +70,6 @@ class OfficialAction extends Action{
             $this->assign('tm',$tm);
             $this->assign('selsuits1',$selsuits1);
             $this->assign('selsuits2',$selsuits2);
-//            $this->assign('daterange',$daterange);
             $this->display();
         }else{
             $this->display('Login/index');
@@ -165,7 +163,7 @@ class OfficialAction extends Action{
 
                   $result = $suitgoods->field('u1.num_iid,u2.title,u2.detail_url,u2.pic_url')
                       ->join("inner join u_goods u2 on u1.num_iid=u2.num_iid")
-                      ->where(array('u1.suitID'=>$dataRow["suitID"]))->select();
+                      ->where(array('u1.suitID'=>$dataRow["suitID"],'u2.num'=>array('egt',15)))->select();
                   if(!empty($result)){
                       $imgs[$r+1]["goods"] = $result;
                   }
@@ -184,24 +182,24 @@ class OfficialAction extends Action{
       if(!empty($this->aid)){
           $recosuits = $this->_post('reco');
           $recosuits = str_replace("'",'"',$recosuits);
-          $recosuits = json_decode($recosuits);
+          $recosuits = json_decode($recosuits,true);
 
           $msuit = M();
-          $res = $msuit->query('truncate table u_suits_select');
+          //$res = $msuit->query('truncate table u_suits_select');
           $msuit = M('suits_select');
           if(!empty($recosuits)){
               foreach ( $recosuits as $r => $dataRow ){
-                  if(!empty($dataRow->sid)){
-                      $sel='0';
-                      if($dataRow->reco=="true"){
-                          $sel='1';
-                      }
-                      $data = array("suitID"=>$dataRow->sid,"selected"=>$sel,"type"=>$dataRow->type);
+                  if(!empty($dataRow['sid'])){
+                      $result = $msuit->field('ID')->where(array("suitID"=>$dataRow['sid'],"type"=>$dataRow['type']))->find();
+                      if(empty($result)){
+                      $sel='1';
+                      $data = array("suitID"=>$dataRow['sid'],"selected"=>$sel,"type"=>$dataRow['type']);
                       $res = $msuit->add($data);
                       if(!$res){
                           echo 0;
                           exit;
                       }
+                  }
                   }
               }
               echo 1;
@@ -224,4 +222,29 @@ class OfficialAction extends Action{
           $this->display('Login/index');
       }
   }
+ public function del(){
+     if(!empty($this->aid)){
+       $suitid = trim($this->_post('suitid'));
+       $type = trim($this->_post('type'));
+       $msuit = M('suits_select');
+       $resu = $msuit->where(array('suitID'=>$suitid,'type'=>$type))->find();
+       if(!empty($resu)){
+       $res = $msuit->where(array('suitID'=>$suitid,'type'=>$type))->delete();
+       if($res){
+           $arr['code'] = 1;
+           $arr['msg'] = '删除成功';
+       }else{
+           $arr['code'] = 0;
+           $arr['msg'] = '删除失败';
+       }
+       }else{
+           $arr['code'] = 1;
+           $arr['msg'] = '删除成功';
+       }
+     }else{
+         $arr['code'] = 0;
+         $arr['msg'] = '没有登录';
+     }
+     $this->ajaxReturn($arr, 'JSON');
+ }
 }
