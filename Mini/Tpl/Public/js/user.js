@@ -92,7 +92,7 @@ jQuery(function($) {
                         strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                     }
                     strHtml += '</ul>';
-//                strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"></a>'
+                    strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"><span class="none"></span></a>'
                     strHtml += '</div>';
                 }
             }
@@ -119,7 +119,7 @@ jQuery(function($) {
         UserCenter.bindCollections(0);
     });
     //删除一套收藏
-    UserCenter.centor_con.on('click','.model_del',function(event){
+    UserCenter.centor_con.on('click','.del_sc_btn',function(event){
         var cid = $(this).data('id');
         $.post(delBeubenCollUrl,{id:cid},function(data){
             if(data['code'] == '1'){
@@ -130,11 +130,19 @@ jQuery(function($) {
     });
 
     UserCenter.centor_con.on('mouseleave','.model_yj',function(){
-        $(this).find('.model_del ').hide();
+        $(this).find('.model_del').hide();
     });
 
     UserCenter.centor_con.on('mouseenter','.model_yj',function(){
-        $(this).find('.model_del ').show();
+        $(this).find('.model_del').show();
+    });
+
+    UserCenter.centor_con.on('mouseleave','.del_sc_btn',function(){
+        $(this).find('span').hide();
+    });
+
+    UserCenter.centor_con.on('mouseenter','.del_sc_btn',function(){
+        $(this).find('span').css("display","block");
     });
 
     //点击优惠券修改状态

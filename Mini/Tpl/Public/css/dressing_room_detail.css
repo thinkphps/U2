@@ -693,7 +693,7 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_center_title p{  color:#F00;}
 
 .user_center_con{ width:960px; margin:0 auto;}
-.model_del{ width:128px; height:89px; background:url(../images/model_del.png) 0 0 no-repeat; position:absolute; top:20px; left:160px; z-index:100;cursor: pointer;}
+.model_del{ width:128px; height:89px; background:url(../images/model_try5.png) 0 0 no-repeat; position:absolute; top:70px; left:160px; z-index:100;cursor: pointer;}
 
 .user_center_con .model{ float:left; width:240px; height:550px; margin:100px 0 0 0; position:relative;}
 
@@ -704,7 +704,19 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_center_con .model ul li{ float:left; display:block; width:54px; height:54px; background:url(../images/model_bg.png) 0 0 no-repeat;}
 .user_center_con .model ul li a img{ width:50px; margin:2px;}
 
-.user_center_con .model a.del_sc_btn{ display:block; width:41px; height:41px; background:url(../images/close2.png) 0 0 no-repeat; position:absolute; left:50%; top:30px; margin-left:-24px;}
+
+.user_center_con .model a.del_sc_btn{  width:41px; height:41px; background:url(../images/close3.png) 0 0 no-repeat; position:absolute; right:0; top:30px;z-index:99;}
+.user_center_con .model a.del_sc_btn:hover{ background:url(../images/close3.png) 0 -41px no-repeat;}
+
+.user_center_con .model a.del_sc_btn span{  width:128px; height:89px; background:url(../images/model_try3.png) 0 0 no-repeat; position:relative; top:-80px; left:30px; z-index:999;}
+
+.user_center_con_8 .model{ float:left; width:120px; height:275px; margin:180px 0 0 0; position:relative;}
+.user_center_con_8 .model .model_yj{float:left; width:120px; height:275px; position:relative;}
+.user_center_con_8 .model .model_yj img{ display:block; width:200px; height:266px; position:absolute; left:50%; top:0; margin-left:-100px;}
+.user_center_con_8 .model a.del_sc_btn{ top:-30px;}
+.user_center_con_8 .model ul{ display:block; width:27px; position:absolute; bottom:20px; right:0;}
+.user_center_con_8 .model ul li{ float:left; display:block; width:27px; height:27px; background:url(../images/model_bg.png) 0 0 no-repeat; background-size:27px;}
+.user_center_con_8 .model ul li a img{ width:25px; margin:2px;}
 
 
 .user_center .user_center_btn{ z-index: 110; float:left; height:100px; width:100%; background:url(../images/dr_main_con_sub_nav_bg.png) 0 0 repeat; position:fixed;top:87%;}
