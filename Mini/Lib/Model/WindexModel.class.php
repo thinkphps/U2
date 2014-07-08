@@ -205,4 +205,34 @@ class WindexModel extends Model{
     public function getSellCateSex($id){
         return M('Sellercats')->field('gender')->where(array('ID'=>$id))->find();
     }
+
+    public function GetTuijian($item_bn,$num_iid){
+        $item_bn = substr($item_bn,0,8);
+        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 limit 0,3";
+        $result = M('Suits')->query($sql);
+        if(empty($result)){
+            unset($sql);
+            $sql = "select su.gender as sex,su.suitID,su.pic_clothes as suitImageUrl from `u_beubeu_collection` as su left join `u_beubeu_coll_goods` as sg on sg.bcid=su.id where sg.num_iid =".$num_iid." limit 0,3";
+            $result = M()->query($sql);
+        }else{
+        foreach($result as $k=>$v){
+            switch($v['suitGenderID']){
+                case 1 :
+                    $sex = 15474;
+                    break;
+                case 2 :
+                    $sex = 15478;
+                    break;
+                case 3 :
+                    $sex = 15583;
+                    break;
+                case 4 :
+                    $sex = 15581;
+                    break;
+            }
+            $result[$k]['sex'] = $sex;
+        }
+        }
+        return $result;
+    }
 }

@@ -33,15 +33,15 @@ var pageElement = {
     currentColRelayout : function($proInfo,changeType){
         var leftPx = $proInfo.position().left
             ,topPx = $proInfo.position().top
-            ,addHeight = $proInfo.find('.product_color').outerHeight();
+            ,addHeight = $proInfo.find('.product_color').outerHeight(),tuiheight = $proInfo.find('.tuicl').outerHeight();
         pageElement.$watercontainer.children('.productinfo').each(function(){
             var thisposition =  $(this).position();
             if(thisposition.left == leftPx && thisposition.top > topPx){
-                $(this).css('top',thisposition.top + addHeight * changeType);
+                $(this).css('top',thisposition.top + addHeight * changeType + tuiheight * changeType);
             }
         });
 
-        $('#watercontainer').height($('#watercontainer').height() + addHeight * changeType);
+        $('#watercontainer').height($('#watercontainer').height() + addHeight * changeType +tuiheight * changeType);
     },
     clearAllSelected : function(){
         $('#watercontainer .pro-selected').removeClass('pro-selected');
@@ -129,10 +129,10 @@ function Model_loadok_callback(){
         },
         showbaiyiModel : function(callback){
             /***新的百衣搭配间****/
-            /*var touchid= 854;
+            var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
-            loadMymodel(touchid,key);*/
-            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
+            loadMymodel(touchid,key);
+            //loadMymodel(858,'165ea085e3da6182e441b472989468fc');
             Model.CurrClothesCallback = this.beu_getallclothes;
             $('.beubeu_btns').css('left','25px');
             if ( callback ) {
@@ -402,6 +402,7 @@ function Model_loadok_callback(){
                     pageElement.IsHide = 0;
                     if( $color_img.find('.pro-selected').length == 0){
                         $this.find('.product_color').hide();
+                        $this.find('.tuicl').hide();
                         if($tryon.hasClass('select')){
                             $tryon.removeClass('select');
                             $tryon.data('selected',0);
@@ -469,16 +470,35 @@ function Model_loadok_callback(){
                     }
                     else{
 
-                        var $colorImg = $wrapper_box.find('.color-img');
+                        var $colorImg = $wrapper_box.find('.color-img'),$tuimsg = $wrapper_box.find('.tuicl');
                         $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
                         $wrapper_box.find('.product_color').show();
+                        $tuimsg.html('').append('<a href="javascript:;" class="tuijian">请选择推荐<span>↓</span></a><div class="product_set none"><h5>请选择套装</h5><ul class="tuidata"></ul></div>');
+                        $tuimsg.show();
                         pageElement.currentColRelayout($($wrapper_box.parent()[0]),1);
 
                     }
 //                $this.data('selected',1);
                 }
             });
-
+           //推荐
+            $('#watercontainer').on('click','.tuijian',function(){
+              var $this = $(this).parent(),$tuidata = eval($this.data('tuijian')),tuilength = $tuidata.length;
+                pageElement.IsHide = 1;
+                  var tstr = '',$wrapper_box = $this.parent();;
+                  for(var i=0;i<tuilength;i++){
+                      tstr += '<li class="tuiimg" data-suir="'+$tuidata[i].suitID+'" data-gender="'+$tuidata[i].sex+'"><a href="javascript:;"><img src="'+$tuidata[i].suitImageUrl+'" /></a></li>';
+                  }
+                $wrapper_box.find('.tuidata').html('').append(tstr);
+                $wrapper_box.find('.product_set').show();
+                pageElement.currentColRelayout($($wrapper_box.parent()[0]),0.47);
+            });
+            //推荐穿衣服
+            $('#watercontainer').on('click','.tuiimg',function(){
+              var $this = $(this),suitid = $this.data('suir'),sex = $this.data('gender');
+                $('.syj').show();
+                get_baiyi_dp(suitid,sex);
+            });
             //点击色块将衣服添加到模特身上
             $('#watercontainer').on("click",".color-img li",function(){
                 var $colorImg = $(this).parent();
