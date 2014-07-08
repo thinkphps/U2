@@ -142,7 +142,7 @@ jQuery(function($) {
     });
 
     UserCenter.centor_con.on('mouseenter','.del_sc_btn',function(){
-        $(this).find('span').show();
+        $(this).find('span').css("display","block");
     });
 
     //点击优惠券修改状态
