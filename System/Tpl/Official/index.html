@@ -75,6 +75,8 @@
                           </div>
                           <input type="hidden" value="{$vo.suitID}" data-suitID='{$vo.suitID}' class="delch" name="ckreco">
                           <label class="checkbox-inline">
+                              <input type="input" name='sort1{$vo.suitID}' id='sortid1{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
+                          <label class="checkbox-inline">
                               <input type="checkbox" name='ckdel' class="delch" onclick="clickoff($(this),{$vo.suitID},1);">删除</label>
                       </div>
                   </div>
@@ -96,6 +98,8 @@
                             <img src='{$vo.suitImageUrl}' width='120px' height='160px'>
                         </div>
                         <input type="hidden" value="{$vo.suitID}" data-suitID='{$vo.suitID}' class="delch" name="ckreco">
+                        <label class="checkbox-inline">
+                            <input type="input" name='sort2{$vo.suitID}' id='sortid2{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
                         <label class="checkbox-inline">
                             <input type="checkbox"  name='ckdel' class="delch" onclick="clickoff($(this),{$vo.suitID},2);">删除</label>
                     </div>
@@ -198,6 +202,7 @@
                 "<p class='js-official-id'>"+ description+ "</p><div>"+
                 "<img src='" + sutimg + "' width='120px' height='160px'></div>"
                 +'<input type="hidden" value="'+ sutid +'" data-suitID="'+ sutid +'" class="delch" name="ckreco">'
+                +'<label class="checkbox-inline"><input type="input" name="sort'+tuiid+sutid+'" id="sortid'+tuiid+sutid+'" placeholder="排序" size="3"></label>'
                 +"<label class='checkbox-inline'>"
                 + "<input type='checkbox' name='ckdel' class='delch' onclick='clickoff($(this),"+sutid+","+tuiid+");'>删除</label>"
                 +"</div></div></div>"
@@ -212,9 +217,9 @@
         var reco = "";
         $('#divreco'+id).find("input[name=ckreco]").each(function(){
             if(reco==""){
-                reco = "{'type':'"+id+"','sid':'"+ $(this).data('suitid') +"'}"
+                reco = "{'type':'"+id+"','sid':'"+ $(this).data('suitid') +"','oid':'"+ $('#sortid'+id+$(this).data('suitid')).val() +"'}"
             }else{
-                reco = reco + ",{'type':'"+id+"','sid':'"+ $(this).data('suitid') +"'}"
+                reco = reco + ",{'type':'"+id+"','sid':'"+ $(this).data('suitid') +"','oid':'"+ $('#sortid'+id+$(this).data('suitid')).val() +"'}"
             }
         })
         if(id==1){
