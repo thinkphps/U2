@@ -325,15 +325,14 @@ var _mini = {
                                 str += '<div class="model_try2 none"></div></div>';
                             }
                             else{
-                                //头部
-                                str += '<img src="'+  suitImageUrlHead +'" />';
                                 //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //鞋子
                                 str += '<img src="'+ suitImageUrlShose  +'" />';
                                 //衣服
                                 str += '<img src="'+ suitImageUrlMatch  +'" />';
-
+                                //头部
+                                str += '<img src="'+  suitImageUrlHead +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
 
