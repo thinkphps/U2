@@ -14,7 +14,7 @@ class OfficialAction extends Action{
             $stylelist = $styles->field('*')->select();
             $msuit = M('suits_select u1');
 
-            $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected')->
+            $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected,u1.sortid')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
                 where(array('u1.selected'=>'1','u1.type' =>'1'))->select();
@@ -36,7 +36,7 @@ class OfficialAction extends Action{
                 array_push($selsuits1,$tmpimg);
             }*/
 
-            $selsuits2 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected')->
+            $selsuits2 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected,u1.sortid')->
                 join('inner join u_suits u2 on u1.suitID=u2.suitID')->
                 join('left join u_settings_suit_style u3 on u2.suitStyleID = u3.ID')->
                 where(array('u1.selected'=>'1','u1.type' =>'2'))->select();
@@ -184,22 +184,24 @@ class OfficialAction extends Action{
           $recosuits = str_replace("'",'"',$recosuits);
           $recosuits = json_decode($recosuits,true);
 
-          $msuit = M();
+          $msuit = M('SuitsSelect');
           //$res = $msuit->query('truncate table u_suits_select');
-          $msuit = M('suits_select');
           if(!empty($recosuits)){
               foreach ( $recosuits as $r => $dataRow ){
                   if(!empty($dataRow['sid'])){
                       $result = $msuit->field('ID')->where(array("suitID"=>$dataRow['sid'],"type"=>$dataRow['type']))->find();
                       if(empty($result)){
                       $sel='1';
-                      $data = array("suitID"=>$dataRow['sid'],"selected"=>$sel,"type"=>$dataRow['type']);
+                      $data = array("suitID"=>$dataRow['sid'],"selected"=>$sel,"type"=>$dataRow['type'],'sortid'=>$dataRow['oid']);
                       $res = $msuit->add($data);
                       if(!$res){
                           echo 0;
                           exit;
                       }
-                  }
+                  }else{
+                      $data = array('sortid'=>$dataRow['oid']);
+                      $msuit->where(array("suitID"=>$dataRow['sid'],"type"=>$dataRow['type']))->save($data);
+                   }
                   }
               }
               echo 1;

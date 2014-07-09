@@ -120,7 +120,7 @@ class GetinfoModel extends Action{
     }
 
     public function getSutsValue($type){
-        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."'";
+        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss sortid desc";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){

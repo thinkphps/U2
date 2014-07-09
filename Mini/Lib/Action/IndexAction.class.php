@@ -238,7 +238,7 @@ class IndexAction extends Action {
         $buy = M('Buy');
         if($lid==1 && $bid==1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -265,7 +265,7 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
             }
         }else if($lid==1 && $bid!=1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -292,7 +292,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
             }
         }else if($bid==1 && $lid!=1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -335,7 +335,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=bg.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=bg.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} order by {$ostr} limit {$start},{$page_num}";
+                $sql = "select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} order by {$ostr} limit {$start},{$page_num}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -432,23 +432,23 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                  if(!isset($tem) && empty($sid) && empty($fid) && !isset($tem)){
                   //如果只有自定义分类
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
                     }else{
-                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num;
+                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num;
                     }
                  }else{
                     //有自定义分类也有其他的条件
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
-                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
                  }
             }else{
             if(!empty($uid)){
-                $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
+                $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
             }else{
-               $sql = "select ".$case." bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+               $sql = "select ".$case." bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
             }
             $result = $goodtag->query($sql);
@@ -457,17 +457,18 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
                 $result = array();
             }
+
             if($page==1){
                 $parmas = array('oid'=>$oid);
                 if(is_mobile()){
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
                     $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
-                    //$parmas = array('oid'=>$oid);
                     //$result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }
             }

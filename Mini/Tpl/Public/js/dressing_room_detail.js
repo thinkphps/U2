@@ -325,15 +325,14 @@ var _mini = {
                                 str += '<div class="model_try2 none"></div></div>';
                             }
                             else{
-                                //头部
-                                str += '<img src="'+  suitImageUrlHead +'" />';
                                 //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //鞋子
                                 str += '<img src="'+ suitImageUrlShose  +'" />';
                                 //衣服
                                 str += '<img src="'+ suitImageUrlMatch  +'" />';
-
+                                //头部
+                                str += '<img src="'+  suitImageUrlHead +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
 
@@ -608,6 +607,9 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
+                if(v.tuijian.length>0){
+                    strHtml += '<div class="tuicl none"  data-tuijian="'+ JSON.stringify(v.tuijian).replace(/\"/g,"'") +'"></div>';
+                }
                 if(v.num>0){
                     strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
                     strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
@@ -642,7 +644,6 @@ $('#sfid').on('mouseleave','.imgrd',function(){
 $('#sfid').on('mouseenter','.imgrd',function(){
     $(this).find('.model_try2 ').show();
 });
-
 //点击左侧性别菜单，切换模特
 $('#ulgender').on('click','li',function(){
     $('#changeid').attr('la',1);

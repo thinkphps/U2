@@ -769,3 +769,14 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .youhui p{ display:block; width:122px; height:36px; background:#FFF; padding:12px 88px 12px 20px; color:#666;}
 .youhui p a{ color:#F00; margin:0 5px;}
 #gorder{height:30px;line-height:30px;width:208px;margin:10px 0 0 10px;}
+.wrapper_box a.tuijian{ display:block; width:228px; line-height:40px; background:#F00; color:#FFF; text-align:center;}
+.wrapper_box a.tuijian:hover{ background:#C00;}
+.wrapper_box a.tuijian span{ margin:0 8px;}
+
+/*优衣库推荐款式-套装*/
+.product_set{ background:#eee; padding:10px 8px; overflow:hidden;}
+.product_set h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:5px;}
+.product_set ul li{ float:left; margin:4px 5px; border:1px solid #ddd; padding:1px; background:#FFF;}
+.product_set ul li a{ display:block; height:56px; background:#FFF;}
+.product_set img{ width:56px; height:56px; margin:0;}
+.tuicl{margin-bottom:5px;}
