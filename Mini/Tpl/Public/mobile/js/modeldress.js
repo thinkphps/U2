@@ -153,21 +153,19 @@ function change_baiyi_css_info(){
 
 //            $('#beu_img_head').hide();
 //            $('#beu_img_body').hide();
-            $('#beu_img_body').css({'width':'28em','height':'34em'});
-            $('#beu_img_head').css({'width':'28em','height':'34em'});
+            $('#beu_img_body').css({'width':'28em','height':'36em'});
+            $('#beu_img_head').css({'width':'28em','height':'36em'});
+            $('#beu_img_shose').css({'width':'28em','height':'36em'});
+            $('#beu_img').css({'width':'28em','height':'36em'});
             $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
             $('.beubeu_btns3').css('left','-0em').css('top','13em');
             $('#showmodelhead').css({'top':'14em','left':'0em'});
             $('#beubeu_shoes').css({'top':'13em','left':'4em'});
             $('#beubeu_loading2').css({'height':'24em','left':'5em'});
-            $('#beu_showimg').css({'position':'absolute','top':'-1em'});
+            $('#beu_showimg').css({'position':'absolute','top':'-3em'});
             $('#show_csw').css({'left':'17.9em','top':'15.9em'});
-
             $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
-            $('#beu_img').css({'width':'28em','height':'34em'});
-
             $('#beubeu_copy_c').css({'left':'2em'});
-            $('#beubeu_copy_lw').css({'top':'366px'});
             $('#beubeu_loading').css({'top':'12em','left':'5em'});
 
             if ( callback ) {
