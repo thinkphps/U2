@@ -607,7 +607,7 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
-                if(v.tuijian.length>0){
+                if(v.tuijian && v.tuijian.length>0){
                     strHtml += '<div class="tuicl none"  data-tuijian="'+ JSON.stringify(v.tuijian).replace(/\"/g,"'") +'"></div>';
                 }
                 if(v.num>0){
