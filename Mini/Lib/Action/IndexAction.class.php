@@ -213,7 +213,7 @@ class IndexAction extends Action {
         $keyword = trim($this->_request('keyword'));
         $timestamp = trim($this->_request('timestamp'));
         $oid = trim($this->_request('oid'));//排序id
-        if($this->_request('tem')<=-10){
+        if($this->_request('tem') && $this->_request('tem')<=-10){
             $tem = -10;
         }
         $lid = $lid?$lid:0;

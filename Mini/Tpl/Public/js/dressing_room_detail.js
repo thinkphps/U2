@@ -79,10 +79,10 @@ $(function(){
             $.weather.avg = avg;
             $.weather.getgurl = goodurl;
             $.pron = provi ? provi : remote_ip_info.province;
-
+            $('#li_day0').removeClass('w_select');
             $.uniqlo.index.gender.find('a').first().click()
             //首次加载获取数据
-            getgoods(avg);
+            getgoods();
 
         }
     });
