@@ -120,7 +120,8 @@ class GetinfoModel extends Action{
     }
 
     public function getSutsValue($type){
-        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss sortid desc";
+        echo $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss.sortid desc";
+        exit;
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
@@ -172,7 +173,7 @@ class GetinfoModel extends Action{
     public function getDefaultSuit($type){
        $sql = "select su.*,ug.num_iid,ug.pic_url,ug.detail_url,ug.title from (select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from
 `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on
-suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."') as su left JOIN
+suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss.sortid desc) as su left JOIN
 u_suits_goodsdetail as de on de.suitID=su.suitID inner join u_beubeu_goods ug on
 de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15' )";
         return M('Suits')->query($sql);

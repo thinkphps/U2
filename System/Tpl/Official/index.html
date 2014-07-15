@@ -75,9 +75,9 @@
                           </div>
                           <input type="hidden" value="{$vo.suitID}" data-suitID='{$vo.suitID}' class="delch" name="ckreco">
                           <label class="checkbox-inline">
-                              <input type="input" name='sort1{$vo.suitID}' id='sortid1{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
+                              <input type="input" name='sort1{$vo.suitID}' disabled='disabled' id='sortid1{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
                           <label class="checkbox-inline">
-                              <input type="checkbox" name='ckdel' class="delch" onclick="clickoff($(this),{$vo.suitID},1);">删除</label>
+                              <input type="checkbox" name='ckdel' disabled='disabled' class="delch" onclick="clickoff($(this),{$vo.suitID},1);">删除</label>
                       </div>
                   </div>
               </div>
@@ -99,9 +99,9 @@
                         </div>
                         <input type="hidden" value="{$vo.suitID}" data-suitID='{$vo.suitID}' class="delch" name="ckreco">
                         <label class="checkbox-inline">
-                            <input type="input" name='sort2{$vo.suitID}' id='sortid2{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
+                            <input type="input" name='sort2{$vo.suitID}' disabled='disabled' id='sortid2{$vo.suitID}' placeholder='排序' size='3' value="{$vo.sortid}"></label>
                         <label class="checkbox-inline">
-                            <input type="checkbox"  name='ckdel' class="delch" onclick="clickoff($(this),{$vo.suitID},2);">删除</label>
+                            <input type="checkbox" disabled='disabled' name='ckdel' class="delch" onclick="clickoff($(this),{$vo.suitID},2);">删除</label>
                     </div>
                 </div>
             </div>
@@ -151,10 +151,11 @@
         $('#btnchange'+id).hide();
         $('#divedit').show();
         if(id==1){
-          $('#btnchange2').attr('disabled','disabled')
+          $('#btnchange2').attr('disabled','disabled');
         }else if(id==2){
-         $('#btnchange1').attr('disabled','disabled')
+         $('#btnchange1').attr('disabled','disabled');
         }
+        $('#divreco'+id+' input').removeAttr('disabled');
         $("#tbsuits tbody").find("tr").each(function(){
             $(this).find("input[type='checkbox']").each(function(){
                 $(this).attr("checked",false);
