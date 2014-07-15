@@ -158,12 +158,15 @@ class RecoModel extends Model{
       $str.=$v['id'].',';
       }
       $str = rtrim($str,',');
-      $sql = "select t1.bcid,bg.`num_iid`,bg.`pic_url`,bg.`detail_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $sql = "select t1.bcid,bg.`num_iid`,bg.`title`,bg.`num`,bg.`pic_url`,bg.`detail_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
       $detail = $beubeu_coll->query($sql);
       foreach($result as $k1=>$v1){
           $detailArr = array();
           foreach($detail as $k2=>$v2){
              if($v1['id']==$v2['bcid']){
+                 if($v2['num']<=0){
+                     $v2['title'] = '已售罄'.$v2['title'];
+                 }
                  $detailArr[] = $v2;
              }
           }

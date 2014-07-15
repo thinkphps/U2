@@ -626,7 +626,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
 .buy_btns ul li a:hover{ background:#666; color:#FFF;}
 
-.mini-cab-share2{ float:left; margin:2px 0 0 1px; color:#666;padding-top: 9px;}
+.mini-cab-share2{ float:left; margin:2px 0 0 7px; color:#666;padding-top: 9px;}
 .mini-cab-share2 span{ line-height:20px;}
 
 .baby_fitting_room {width: 300px;height: 480px; margin: 10px;position: relative;left:30px;}

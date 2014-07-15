@@ -90,7 +90,12 @@ jQuery(function($) {
                     var detiles = list[i].detail;
                     strHtml += '<ul>';
                     for(var j = 0;j<detiles.length;j++){
-                        strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                        if(detiles[j].num<=0){
+                           var deurl = 'javascript:;';
+                        }else{
+                           var deurl = detiles[j].detail_url;
+                        }
+                        strHtml += '<li><a href="'+ deurl +'" target="_blank" title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                     }
                     strHtml += '</ul>';
                     strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"><span class="none"></span></a>'
