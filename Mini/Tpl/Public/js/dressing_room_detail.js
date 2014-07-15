@@ -319,20 +319,23 @@ var _mini = {
                             str += ' <div class="model imgrd" data-detail="['+data.def[i].suitID+',' + data.def[i].sex + ']">';
 
                             var suitImageUrlHead = data.def[i].suitImageUrlHead,suitImageUrlBody = data.def[i].suitImageUrlBody,
-                                suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch;
+                                suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch,
+                                suitImageUrl = data.def[i].suitImageUrl;
                             if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlMatch == ''){
                                 str += '<img src="'+ data.def[i].suitImageUrl +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
                             else{
-                                //身躯
+                                //全套衣服
+                                str += '<img src="'+  suitImageUrl +'" />';
+                               /* //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //鞋子
                                 str += '<img src="'+ suitImageUrlShose  +'" />';
                                 //衣服
                                 str += '<img src="'+ suitImageUrlMatch  +'" />';
                                 //头部
-                                str += '<img src="'+  suitImageUrlHead +'" />';
+                                str += '<img src="'+  suitImageUrlHead +'" />';*/
                                 str += '<div class="model_try2 none"></div></div>';
                             }
 
