@@ -356,7 +356,7 @@ public function changeTaoName(){
             $arr_uq = explode('_',$uq);
             foreach($arr_uq as $k=>$v){
                 if($v){
-                    $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' and `num`>0 order by num desc";
+                    $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' order by num desc";
                     $result = $goods->query($sql);
                     $arr[] = $result[0]['num_iid'];
                 }

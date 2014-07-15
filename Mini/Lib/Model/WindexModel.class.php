@@ -177,7 +177,13 @@ class WindexModel extends Model{
                break;
                case 5 :
                    $orderStr = 'bg.price desc';//价格降序
-                   break;
+               break;
+               case 6 :
+                   $orderStr = 'g.stm asc';//温度升序
+               break;
+               case 7 :
+                   $orderStr = 'g.etm desc';//温度降序
+               break;
            }
           return $orderStr;
     }
