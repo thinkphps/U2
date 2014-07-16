@@ -90,7 +90,38 @@ class RecoModel extends Model{
         $arr['count'] = $count;
         return $arr;
     }
-
+    public function getBeubeu2($where,$page,$page_num,$start){
+        $where['approve_status'] = 0;
+        $beubeu_suits = M('BeubeuSuits');
+        $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
+        $num = ceil($count/$page_num);
+        if($page>$num){
+            $page = 1;
+            $start = 0;
+        }
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
+        foreach($beubeu_suits_list as $k=>$v){
+            switch($v['suitGenderID']){
+                case 1 :
+                    $sex = 15474;
+                    break;
+                case 2 :
+                    $sex = 15478;
+                    break;
+                case 3 :
+                    $sex = 15583;
+                    break;
+                case 4 :
+                    $sex = 15581;
+                    break;
+            }
+            $beubeu_suits_list[$k]['sex'] = $sex;
+        }
+        $arr['page'] = $page+1;
+        $arr['result'] = $beubeu_suits_list;
+        $arr['count'] = $count;
+        return $arr;
+    }
     //取出自定义分类
     public function getCusData($where){
      return M('Customcate')->field('id,name')->where($where)->select();

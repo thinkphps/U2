@@ -11,8 +11,8 @@ $offset = 0;
 $limit = 200;
 $ke = 1;
 while($ke>0){
-    //$sql = "select `suitID`,`suitImageUrlHead`,`suitImageUrlBody`,`suitImageUrlShose`,`suitImageUrlMatch` from `u_beubeu_suits` where suitImageUrl='' limit $offset,$limit";
-    $sql = "select `suitID`,`suitImageUrlHead`,`suitImageUrlBody`,`suitImageUrlShose`,`suitImageUrlMatch` from `u_beubeu_suits` where 1 limit $offset,$limit";
+    $sql = "select `suitID`,`suitImageUrlHead`,`suitImageUrlBody`,`suitImageUrlShose`,`suitImageUrlMatch` from `u_beubeu_suits` where suitImageUrl='' limit $offset,$limit";
+    //$sql = "select `suitID`,`suitImageUrlHead`,`suitImageUrlBody`,`suitImageUrlShose`,`suitImageUrlMatch` from `u_beubeu_suits` where 1 limit $offset,$limit";
     $result = $db->mysqlfetch($sql);
     unset($sql);
     if(empty($result)){

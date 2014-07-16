@@ -473,7 +473,7 @@ function Model_loadok_callback(){
                         var $colorImg = $wrapper_box.find('.color-img'),$tuimsg = $wrapper_box.find('.tuicl');
                         $colorImg.html('').append(_this.getColorsHtml(eval($this.data('colors'))));
                         $wrapper_box.find('.product_color').show();
-                        $tuimsg.html('').append('<a href="javascript:;" class="tuijian">请选择推荐<span>↓</span></a><div class="product_set none"><h5>请选择套装</h5><ul class="tuidata"></ul></div>');
+                        $tuimsg.html('').append('<a href="javascript:;" class="tuijian">更多<span>↓</span></a><div class="product_set none"><h5>请选择套装</h5><ul class="tuidata"></ul></div>');
                         $tuimsg.show();
                         pageElement.currentColRelayout($($wrapper_box.parent()[0]),1);
 

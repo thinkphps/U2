@@ -332,10 +332,10 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
              $liketitle = '';
            }
                 if(!empty($uid)){
-                    $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=bg.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=bg.num_iid";
+                    $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=ol.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=ol.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url{$fieldlb} from `u_beubeu_goods` as bg {$wherelb} where  bg.istag='2' {$liketitle} order by {$ostr} limit {$start},{$page_num}";
+                $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
@@ -451,6 +451,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                $sql = "select ".$case." bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
             }
             }*/
+
             $result = $goodtag->query($sql);
             if(!empty($result)){
                 //$windex->doColor($result,$colorData);
@@ -468,8 +469,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 if(is_mobile()){
                     $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }else{
-                    $result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
-                    //$result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
+                    //$result = $this->waterdata($result,$lid,$bid,$keyword,$parmas);
+                    $result = $this->waterdataMobile($result,$lid,$bid,$keyword,$parmas);
                 }
             }
             /*S('good'.$sid.$fid.$zid.$tem.$page,$result,array('type'=>'file'));

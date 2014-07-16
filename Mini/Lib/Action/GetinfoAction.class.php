@@ -8,7 +8,8 @@ class GetinfoAction extends Action{
             $sid = $sid?$sid:0;
             $fid = $fid?$fid:0;
             $page = $page?$page:1;
-            if(is_mobile()){
+            $ism = is_mobile();
+            if($ism){
             $page_num = 2;
             }else{
             $page_num = 1;
@@ -26,7 +27,11 @@ class GetinfoAction extends Action{
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
                 $defaultwhere['approve_status'] = 0;
+                if($ism){
+                $defaultResult = $recomodel->getBeubeu2($defaultwhere,$page,$page_num,$start);
+                }else{
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
+                }
                 break;
                 case 4 :
                   //mini婴幼儿还是从以前商品取数据
@@ -55,7 +60,11 @@ class GetinfoAction extends Action{
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
                 $defaultwhere['approve_status'] = 0;
+                if($ism){
+                $defaultResult = $recomodel->getBeubeu2($defaultwhere,$page,$page_num,$start);
+                }else{
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
+                }
                 break;
             }
             $arr['page'] = $defaultResult['page'];
@@ -66,6 +75,7 @@ class GetinfoAction extends Action{
           //}
             $this->ajaxReturn($arr, 'JSON');
         }
+
     public function getGS($where){
            $list = M('SettingsGenderStyle')->cache(true)->join('inner join u_settings_suit_style as sss on u_settings_gender_style.styleID=sss.ID')->distinct(true)->field('sss.ID')->where($where)->select();
            return $list;
@@ -232,6 +242,7 @@ public function addBeubenColl(){
         $uq = trim($this->_post('uq'));
         $num_iid = $this->getCollNumm_iid($uq);
         $beuben = M('BeubeuCollection');
+        if(!empty($suitid)){
         $count = $beuben->field('id')->where(array('uid'=>$uid))->count();
         if($count<50){
            $time = date('Y-m-d H:i:s');
@@ -266,6 +277,10 @@ public function addBeubenColl(){
         }else{
             $arr['code'] = 0;
             $arr['msg'] = '一个用户最多只能收藏50套';
+        }
+    }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '参数错误';
         }
     }else{
         $arr['code'] = 0;
