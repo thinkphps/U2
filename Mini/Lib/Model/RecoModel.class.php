@@ -90,7 +90,38 @@ class RecoModel extends Model{
         $arr['count'] = $count;
         return $arr;
     }
-
+    public function getBeubeu2($where,$page,$page_num,$start){
+        $where['approve_status'] = 0;
+        $beubeu_suits = M('BeubeuSuits');
+        $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
+        $num = ceil($count/$page_num);
+        if($page>$num){
+            $page = 1;
+            $start = 0;
+        }
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
+        foreach($beubeu_suits_list as $k=>$v){
+            switch($v['suitGenderID']){
+                case 1 :
+                    $sex = 15474;
+                    break;
+                case 2 :
+                    $sex = 15478;
+                    break;
+                case 3 :
+                    $sex = 15583;
+                    break;
+                case 4 :
+                    $sex = 15581;
+                    break;
+            }
+            $beubeu_suits_list[$k]['sex'] = $sex;
+        }
+        $arr['page'] = $page+1;
+        $arr['result'] = $beubeu_suits_list;
+        $arr['count'] = $count;
+        return $arr;
+    }
     //取出自定义分类
     public function getCusData($where){
      return M('Customcate')->field('id,name')->where($where)->select();
@@ -158,12 +189,15 @@ class RecoModel extends Model{
       $str.=$v['id'].',';
       }
       $str = rtrim($str,',');
-      $sql = "select t1.bcid,bg.`num_iid`,bg.`pic_url`,bg.`detail_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $sql = "select t1.bcid,bg.`num_iid`,bg.`title`,bg.`num`,bg.`pic_url`,bg.`detail_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
       $detail = $beubeu_coll->query($sql);
       foreach($result as $k1=>$v1){
           $detailArr = array();
           foreach($detail as $k2=>$v2){
              if($v1['id']==$v2['bcid']){
+                 if($v2['num']<=0){
+                     $v2['title'] = '已售罄'.$v2['title'];
+                 }
                  $detailArr[] = $v2;
              }
           }

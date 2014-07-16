@@ -373,7 +373,7 @@
     <div class="my_yyg_model" id="sfid">
         <volist id='pvo' name='beubeu_suits_list' key='pk'>
     	<div class="model">
-        	<img src="{$pvo.suitImageUrl}.400x533.png" data-detail='[{$pvo.suitID},{$pvo.sex}]'/>
+        	<img src="{$basedir}/{$pvo.suitImageUrl}" data-detail='[{$pvo.suitID},{$pvo.sex}]'/>
             <div class="model_try"></div>
         </div>
      </volist>
@@ -491,8 +491,11 @@
         </div>
         <div class="shaixuan_btn none">
             <div class="shaixuan_btn_con">
+                <span class='' id='beijingtu'></span>
+                <div class="shuaixuan_icon">
                 <a href="javascript:;" class="shaixuan_btn_a"></a>
                 <a href="javascript:;" class="shaixuan_btn_b"></a>
+                </div>
             </div>
         </div>
         <div class="style_btn_group_detail mini-pop none">

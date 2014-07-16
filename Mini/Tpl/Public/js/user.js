@@ -32,6 +32,7 @@ jQuery(function($) {
         //或跌搭配
         bindCollections : function(pageOffset){
             $('ul.detail_sub_nav').css('z-index',1);
+            $('ul.mini-aside').css('z-index',1);
             $('#utuichu').hide();
             var page =  parseInt(UserCenter.change_yf.data('page'));
             page += pageOffset;
@@ -56,7 +57,7 @@ jQuery(function($) {
                     if(cnum >= 10){
                         UserCenter.youhui_icon.show();
                         if(pageOffset!=-1){
-                        alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
+                        //alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
                          }
                     }
                     else{
@@ -89,7 +90,12 @@ jQuery(function($) {
                     var detiles = list[i].detail;
                     strHtml += '<ul>';
                     for(var j = 0;j<detiles.length;j++){
-                        strHtml += '<li><a href="'+ detiles[j].detail_url +'" target="_blank"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                        if(detiles[j].num<=0){
+                           var deurl = 'javascript:;';
+                        }else{
+                           var deurl = detiles[j].detail_url;
+                        }
+                        strHtml += '<li><a href="'+ deurl +'" target="_blank" title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                     }
                     strHtml += '</ul>';
                     strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"><span class="none"></span></a>'
@@ -108,6 +114,7 @@ jQuery(function($) {
     });
     UserCenter.exitUserCenter.on('click',function(){
         $('ul.detail_sub_nav').css('z-index',105);
+        $('ul.mini-aside').css('z-index',105);
         UserCenter.change_yf.data('page',0);
         UserCenter.myWardrobe.click();
         $('.my_yyg_title,#sfid').show();
@@ -142,7 +149,7 @@ jQuery(function($) {
     });
 
     UserCenter.centor_con.on('mouseenter','.del_sc_btn',function(){
-        $(this).find('span').css("display","block");
+        //$(this).find('span').css("display","block");
     });
 
     //点击优惠券修改状态

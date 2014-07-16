@@ -256,7 +256,8 @@ jQuery(function($){
             }
             else if(str.indexOf("大雨") >= 0 || str.indexOf("暴雨") >= 0 ||
                 str.indexOf("雷雨") >= 0 || str.indexOf("冰雹") >= 0 ){
-                $("#main_con").addClass("water4")
+                $("#main_con").addClass("water4");
+                $('#luliji').css('color','red');
             }
             else if(str.indexOf("雨") >= 0){
                 $("#main_con").addClass("water3")

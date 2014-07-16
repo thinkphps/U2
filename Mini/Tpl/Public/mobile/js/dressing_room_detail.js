@@ -284,7 +284,7 @@ var _mini = {
                             if(i==1){
                                 var show = "klfg";
                             }
-                            str += "<div class=\"model "+show+"\"><div style='width: 180px;height: 180px;margin-top: 150px'><img class='imgrd' data-detail='"+data.def[i].detail_url+".400x533.png' src='/"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
+                            str += "<div class=\"model "+show+"\"><div style='width: 180px;height: 180px;margin-top: 150px'><img class='imgrd' data-detail='"+data.def[i].detail_url+"' src='"+rootPath+"/"+data.def[i].pic_url+"' width=\"180\" height=\"180\" /></div></div>";
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
@@ -338,7 +338,7 @@ var _mini = {
 //                            if(gender==3){
 //                                str += "<div class=\"model\" "+show+"><div class='model_try2_child none'></div><div style='width: 400px;height: 533px;margin-left: -70px'><img class='imgrd' data-detail='["+data.def[i].suitID+"," + data.def[i].sex + "]' src='"+data.def[i].suitImageUrl+".400x533.png' width=\"400\" height=\"533\" /></div></div>";
 //                            }
-                            str += '<div class="model"><img src="'+data.def[i].suitImageUrl+'.400x533.png" data-detail="['+data.def[i].suitID+','+ data.def[i].sex +']"></div>';
+                            str += '<div class="model"><img src="'+rootPath+'/'+data.def[i].suitImageUrl+'" data-detail="['+data.def[i].suitID+','+ data.def[i].sex +']"></div>';
                         }
                         $('#sfid').html(str);
                         $('#sfid').removeClass('none');
@@ -567,7 +567,7 @@ var _mini = {
                if(v.num>0){
                  var num_msg = '库存<span class="stock2">'+ v.num+'</span>件',color = 'isnum';
                }else{
-                 var num_msg = '<span class="stock2">已售罄</span>',color = 'nonum';
+                 var num_msg = '<span class="stock3">已售罄</span>',color = 'nonum';
                }
                 strHtml += '<div class="productinfo"><div class="wrapper_box"><a href="javascript:;" class="tryon" data-colors="'+ JSON.stringify(v.products).replace(/\"/g,"'") +'" data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'">';
                 strHtml += '<img class="product_img" width="200" height="200" src="http://uniqlo.bigodata.com.cn/' + v.pic_url + '" /></a>';
@@ -592,7 +592,7 @@ var _mini = {
                 //颜色
                 var sty = '';
                 if(v.skunum==0 && v.num!=0){
-                    sty = 'style="background:url('+tmplPath+'/images/icon3.png) no-repeat scroll 96px 0 #EEEEEE; padding:10px 8px; overflow:hidden;"';
+                    sty = 'style="background:url('+tmplPath+'/images/icon3.png) no-repeat scroll 96px 0 / 42px 42px #EEEEEE; padding:10px 8px; overflow:hidden;"';
                 }
                 strHtml += '<div class="product_color none" '+sty+'><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
                 strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';
@@ -757,11 +757,15 @@ $('.style_btn_group').on('click','a',function(){
 });
 $('.shaixuan_btn_con').on('click','a:eq(0)',function(){   //确定
     $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    $('#beijingtu').removeClass('quexiao').addClass('xuanz');
     getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
 });
 $('.shaixuan_btn_con').on('click','a:eq(1)',function(){   //取消
     $('.tag_text').addClass('none'),$('.shaixuan_btn').addClass('none'),$('.style_btn_group a').removeClass('style_select');
+    $('#beijingtu').removeClass('xuanz').addClass('quexiao');
+    $('.left_tj li').removeClass('select');
     _mini.left.length = 0;
+    getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,0,0,0);
 });
 $("#ddlShop").on("change",function(){
     var list = gd.goods;

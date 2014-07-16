@@ -291,10 +291,12 @@ button,label{cursor:pointer; }
 .style_btn_group a.style_select span{ color:#FFF;}
 /*kimi自定义分类确定取消*/
 .shaixuan_btn{ float:left; width:100%; height:6em; background:#F00;}
-.shaixuan_btn_con{ width:16em; height:6em; margin:0 auto;}
-.shaixuan_btn a{ display:block; float:left; width:4em; height:4em; background:#FFF; margin:1em 2em;}
-.shaixuan_btn a.shaixuan_btn_a{ background:url(../images/shaixuan_btn.png) 0 0 no-repeat; background-size:4em;}
-.shaixuan_btn a.shaixuan_btn_b{ background:url(../images/shaixuan_btn.png) 0 -4em no-repeat; background-size:4em;}
+.shaixuan_btn_con{ width:15.62em; height:5em; margin:0.5em auto; background:url(../images/shaixuan_bg.png) 0 0 no-repeat; background-size:15.62em 5em; position:relative;}
+span.xuanz{ display:block; position:absolute; background:url(../images/shaixuan_btn.png) 0 0 no-repeat; width:7em; height:4em; margin:0.5em 0; background-size:7em 4em;left:0.5em; top:0;}
+span.quexiao{ display:block; position:absolute; background:url(../images/shaixuan_btn.png) 0 0 no-repeat; width:7em; height:4em; margin:0.5em 0; background-size:7em 4em;left:8.5em; top:0;}
+.shuaixuan_icon{ width:15.62em;background:url(../images/shaixuan_icon.png) 0 0 no-repeat; background-size:15.62em 5em; height:5em; position:absolute; left:0; top:0;}
+.shuaixuan_icon a.shaixuan_btn_a{ display:block; float:left; width:4em; height:4em; margin:0.5em 2em;}
+.shuaixuan_icon a.shaixuan_btn_b{ display:block; float:right; width:4em; height:4em; margin:0.3em 1.5em;}
 
 .style_btn_group_detail{ background-color: #FFFFFF;position: absolute;width:100%;top: 7.01%;z-index: 11;}
 .style_btn_group_detail ul li{ float:left; width:50%; border-bottom:1px solid #ddd; background:#FFF url(../images/line1.png) right 0 repeat-y; opacity:0.6;}
@@ -370,7 +372,7 @@ button,label{cursor:pointer; }
 .wrapper_box{ float:left; background:#FFF; width:13.9em; margin:1em 1em; position:relative;}
 .wrapper_box.banner_box img{ width:auto; height:auto; margin:0;}
 
-.wrapper_box img{ display:block; width:141px; height:150px;margin-left:-1px;}
+.wrapper_box img{ display:block; width:150px; height:150px;margin:-6px;}
 
 .wrapper_box dl{ display:block; float:left; width:13.9em;}
 .wrapper_box dl dt{ display:block; float:left;}
@@ -380,9 +382,9 @@ button,label{cursor:pointer; }
 
 .wrapper_box dl dd a{ color:#999;}
 .wrapper_box dl dd a span{ float:left;color:#fff;}
-.wrapper_box dl dd.btn_xh{ float:left; margin:1.3em 0 1em 0.5em;}
+.wrapper_box dl dd.btn_xh{ float:left; margin:1em 0 0.5em 0.5em;}
 .wrapper_box dl dd.btn_xh i{ display:block; float:left; width:1.8em; height:1.8em; margin:-0.2em 0.5em 0 0; background:url(../images/list_icon.png) 0 -2.4em no-repeat; background-size:4em 6em;}
-.wrapper_box dl dd.btn_ym{ float:right; margin:1.3em 0.8em 1em 0;}
+.wrapper_box dl dd.btn_ym{ float:right; margin:1em 0.8em 0.5em 0;}
 .wrapper_box dl dd.btn_ym i{ display:block; float:left; width:1.8em; height:1.8em; margin:-0.4em 0.5em 0 0; background:url(../images/list_icon.png) 0 -4em no-repeat; background-size:4em 6em;}
 
 .wrapper_box dl dd.btn_xh.select a{ color:#ff0000;}
@@ -392,13 +394,14 @@ button,label{cursor:pointer; }
 
 .wrapper_box h3{ display:block; float:left; width:12.9em; line-height:1.5em; height:auto; font-weight:normal;padding:0.5em;}
 .wrapper_box h3 a{ color:#999999;}
-.wrapper_box .anniu_bgred{ background: url("../images/anniu_bg_red.png")  rgba(0, 0, 0, 0);}
-.wrapper_box .anniu_bgblu{ background: url("../images/anniu_bgblu.png")  rgba(0, 0, 0, 0);}
-.wrapper_box .anniu_bgorg{ background: url("../images/anniu_bg_org.png")  rgba(0, 0, 0, 0);}
+.wrapper_box .anniu_bgred{ background: #ea777a;line-height:1em;}
+.wrapper_box .anniu_bgblu{ background:#597798;line-height:1em;}
+.wrapper_box .anniu_bgorg{ background: #f19f49;line-height:1em;}
 /*售价库存*/
 .pri_num{color:#999999;}
 .pri_num span.price{color:#FF0000;font-size:15px;margin-right:5px;}
-.pri_num span.stock2{color:#FF0000;margin:0 0.5em;font-size:15px;}
+.pri_num span.stock2{color:#FF0000;margin:0 0.5em;font-size:11px;}
+.pri_num span.stock3{color:#FF0000;margin:0 0.5em;font-size:11px;margin-left:2em;}
 .wrapper_box .isnum{color:#999999;}
 .wrapper_box .nonum{color:#000;}
 /*列表 - 按钮组*/

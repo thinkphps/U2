@@ -76,13 +76,13 @@ $(function(){
         city : cityn || null,
         callback: function(city, temper, info){
             var avg = getavg(temper.high,temper.low);
-            $.weather.avg = avg;
+            //$.weather.avg = avg;
             $.weather.getgurl = goodurl;
             $.pron = provi ? provi : remote_ip_info.province;
-
+            $('#li_day0').removeClass('w_select');
             $.uniqlo.index.gender.find('a').first().click()
             //首次加载获取数据
-            getgoods(avg);
+            getgoods();
 
         }
     });
@@ -562,8 +562,10 @@ var _mini = {
             if(v.first==1){
                 strHtml+= v.ad;
             }else if(v.first==2){
-                strHtml+= v.ad;
+                strHtml+= v.ke;
             }else  if(v.first==3){
+                strHtml+= v.ad;
+            }else if(v.first==4){
                 strHtml+= v.cb;
             }
             else{
