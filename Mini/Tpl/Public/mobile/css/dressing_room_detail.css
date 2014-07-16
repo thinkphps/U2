@@ -170,9 +170,9 @@ button,label{cursor:pointer; }
 /*-webkit-transform:scale(0.8,0.8);  */
 /*-o-transform:scale(0.8,0.8);  }*/
 
-.weather .ulweek { width:300em; height:8.1em; display:block; float:left; position:relative; margin:0 2.5em;}
-.weather .ulweek .li_day{ float:left; height:8.1em; width:13.6em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
-.weather .ulweek .li_day i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:0.2em;-moz-transform:scale(0.8,0.8);
+.weather .ulweek { width:300em; height:8.1em; display:block; float:left; position:relative;}/* margin:0 2.5em;*/
+.weather .ulweek .li_day{ float:left; height:8.1em; width:16.3em; background:url(../images/line2.png) right 0 no-repeat ; color:#3c3c3c;  position:relative;}
+.weather .ulweek .li_day i{ display:block; float:left; width:5.5em; height:5.5em; position:absolute; top:1.2em; left:1.9em;-moz-transform:scale(0.8,0.8);
     -webkit-transform:scale(0.8,0.8);
     -o-transform:scale(0.8,0.8);  }
 
@@ -252,10 +252,10 @@ button,label{cursor:pointer; }
 
 
 
-.weather .ulweek .li_day p.w_t_1{ position:absolute; left:1.58em; top:0.45em; font-size:3.4em;}
-.weather .ulweek .li_day p.w_t_2{ position:absolute; left:9.5em; top:3.6em;}
-.weather .ulweek .li_day p.w_t_week{ position:absolute; left:9.5em; top:2.15em;}
-.weather .ulweek .li_day p.w_t_name{ position:absolute; left:5.5em; top:5em;}
+.weather .ulweek .li_day p.w_t_1{ position:absolute; left:2.08em; top:0.45em; font-size:3.4em;}
+.weather .ulweek .li_day p.w_t_2{ position:absolute; left:10.9em; top:3.6em;}
+.weather .ulweek .li_day p.w_t_week{ position:absolute; left:10.9em; top:2.15em;}
+.weather .ulweek .li_day p.w_t_name{ position:absolute; left:7.9em; top:5em;}
 
 .weather .ulweek .li_day.w_select{ background: #1c6397;}
 .weather .ulweek .li_day.last{ background:none;}

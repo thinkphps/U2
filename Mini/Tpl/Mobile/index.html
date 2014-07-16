@@ -464,12 +464,14 @@
                         <p class="w_t_name" id="name_day4">晴转小雨</p>
                     </div>
                 </div>
+                <!--<div  class="li_day swiper-slide">-->
+                <!--</div>-->
             </div>
             <a href="javascript:;" class="left_btn"><</a>
             <a href="javascript:;" class="right_btn">></a>
         </div>
-        
-        
+
+
         <!--分类-->
         <div class="dr_main_con_sub_nav">
             <ul class="rw_sub_nav" id='cateu2'>
@@ -684,10 +686,10 @@ $('.imgrd').css(css);
 $(function(){
    var mySwiper = new Swiper('.weather',{
        visibilityFullFit: true,
-//       slidesPerView:'auto',
-       cssWidthAndHeight : true,
-       slidesPerView: 'auto',
-       watchActiveIndex: true
+       slidesPerView:'auto',
+       cssWidthAndHeight : true
+//       slidesPerView: 'auto',
+//       watchActiveIndex: true
     });
 
     $('.left_btn').on('click', function(e){
