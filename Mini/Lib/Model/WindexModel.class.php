@@ -214,7 +214,7 @@ class WindexModel extends Model{
 
     public function GetTuijian($item_bn,$num_iid){
         $item_bn = substr($item_bn,0,8);
-        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 limit 0,3";
+        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 limit 0,3";
         $result = M('Suits')->query($sql);
         if(empty($result)){
             unset($sql);
