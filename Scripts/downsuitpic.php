@@ -28,8 +28,12 @@ while($ke>0){
             @file_put_contents($image_shose[0], file_get_contents($v2['suitImageUrlShose']));//鞋子
             $image_match = $db->createdir($v2['suitID'].'_Match',$root_dir.'/Upload/partsuits/Match/','Upload/partsuits/Match/',$v2['suitImageUrlMatch'],2);
             @file_put_contents($image_match[0], file_get_contents($v2['suitImageUrlMatch']));//衣服
+            $resql = "select `suitid` from `u_suit_pic` where `suitid`=".$v2['suitID'];
+            $re = $db->mysqlfetch($resql);
+            if(empty($re)){
             $insql = "insert into `u_suit_pic` (`suitid`,`pic_head`,`pic_body`,`pic_shose`,`pic_match`,`createtime`) values ('".$v2['suitID']."','".$image_head[1]."','".$image_body[1]."','".$image_shose[1]."','".$image_match[1]."','".$time."')";
             $db->mysqlquery($insql);
+          }
         }
     }
     $offset+=$limit;

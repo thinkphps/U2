@@ -19,16 +19,16 @@ while($ke>0){
     foreach($result as $k=>$v){
         $extension = pathinfo($v['pic_body'], PATHINFO_EXTENSION);
         if(file_exists($root_dir.'/'.$v['pic_body']) && $extension=='png'){
-        $white=new Imagick();
-        $white->newImage(600, 800, "white");
-        $im1=new Imagick($root_dir.'/'.$v['pic_body']);//身体
+        $white=new Imagick($root_dir.'/'.$v['pic_body']);//身体
+        //$white->newImage(600, 800, "white");
+        //$im1=new Imagick($root_dir.'/'.$v['pic_body']);
         $exten = pathinfo($v['pic_shose'], PATHINFO_EXTENSION);
         if($exten=='png'){
         $im4=new Imagick($root_dir.'/'.$v['pic_shose']);//鞋子
         }
         $im2=new Imagick($root_dir.'/'.$v['pic_match']);//衣服
         $im3=new Imagick($root_dir.'/'.$v['pic_head']);//头
-        $white->compositeimage($im1, Imagick::COMPOSITE_OVER, 0, 0);
+        //$white->compositeimage($im1, Imagick::COMPOSITE_OVER, 0, 0);
         if($exten=='png'){
         $white->compositeimage($im4, Imagick::COMPOSITE_OVER, 0, 0);
         }
