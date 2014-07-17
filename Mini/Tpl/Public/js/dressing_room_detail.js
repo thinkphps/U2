@@ -670,7 +670,13 @@ $('#ulgender').on('click','li',function(){
 });
 //排序
 $('#watercontainer').on('change','#gorder',function(){
+    if($('#gorder option:selected').val()==6){
+      if(!$('#ulweek li').hasClass('w_select')){
+          $('#ulweek li:eq(0)').click();
+      }
+    }else{
     getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,0,$('#keywordid').val());
+   }
 });
 //左侧风格取数据
 $('#ul_index-bar-place').on('click','li',function(){

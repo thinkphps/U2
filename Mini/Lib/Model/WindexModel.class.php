@@ -164,6 +164,7 @@ class WindexModel extends Model{
     public function getOrderStr($oid=1){
            switch($oid){
                case 1 :
+               case 6 :
                    $orderStr = 'bg.item_bn desc';//默认排序
                break;
                case 2 :
@@ -180,9 +181,6 @@ class WindexModel extends Model{
                break;
                case 6 :
                    $orderStr = 'g.stm asc';//温度升序
-               break;
-               case 7 :
-                   $orderStr = 'g.etm desc';//温度降序
                break;
            }
           return $orderStr;
