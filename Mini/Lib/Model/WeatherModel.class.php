@@ -41,7 +41,7 @@ class WeatherModel extends Model{
     //取得省
     public function getpca(){
         $area = M('Areas');
-        $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL')))->select();
+        $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL'),'disabled'=>'false'))->select();
         return $prolist;
     }
 
