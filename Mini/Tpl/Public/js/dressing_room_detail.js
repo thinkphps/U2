@@ -322,12 +322,12 @@ var _mini = {
                                 suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch,
                                 suitImageUrl = data.def[i].suitImageUrl;
                             if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlMatch == ''){
-                                str += '<img src="'+ data.def[i].suitImageUrl +'" />';
+                                str += '<img src="'+rootPath+'/'+  data.def[i].suitImageUrl +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
                             else{
                                 //全套衣服
-                                str += '<img src="'+  suitImageUrl +'" />';
+                                str += '<img src="'+rootPath+'/'+  suitImageUrl +'" />';
                                /* //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //鞋子
