@@ -214,11 +214,12 @@ public function getUserInfo(){
     $collcount = M('BeubeuCollection')->field('id')->where(array('uid'=>$uid))->count();
     if(!empty($user['taobao_name'])){
         $uname =  $user['taobao_name'];
+    }else{
+        $uname = '';
     }
     $arr[] = $uname;
     $arr[] = $user['collflag'];
     $arr[] = $collcount;
-    $arr[] = $user['taobao_name'];
     return $arr;
 }
 }
