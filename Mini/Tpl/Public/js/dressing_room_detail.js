@@ -838,6 +838,11 @@ $('#watercontainer').waterfall({
         renderData: function (data, dataType) {
             var tpl,
                 template;
+            if($.weather.dayu && $.weather.dayu==1){
+                $('#luliji').css('color','red');
+            }else{
+                $('#luliji').css('color','');
+            }
             if(data.code == 1){
                 if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
 //                tpl = $('#waterfall-tpl').html();

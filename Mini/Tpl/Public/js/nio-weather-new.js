@@ -252,24 +252,29 @@ jQuery(function($){
         setBackground : function(str){
             this.removeBackgroundClass();
             if(str.indexOf("雪") >= 0){
-                $("#main_con").addClass("water5")
+                $("#main_con").addClass("water5");
+                $.weather.dayu = 0;
             }
             else if(str.indexOf("大雨") >= 0 || str.indexOf("暴雨") >= 0 ||
                 str.indexOf("雷雨") >= 0 || str.indexOf("冰雹") >= 0 ){
                 $("#main_con").addClass("water4");
-                $('#luliji').css('color','red');
+                $.weather.dayu = 1;//大雨标志
             }
             else if(str.indexOf("雨") >= 0){
-                $("#main_con").addClass("water3")
+                $("#main_con").addClass("water3");
+                $.weather.dayu = 0;
             }
             else if(str == "晴"){
-                $("#main_con").addClass("water1")
+                $("#main_con").addClass("water1");
+                $.weather.dayu = 0;
             }
             else if(str == "阴"){
-                $("#main_con").addClass("water6")
+                $("#main_con").addClass("water6");
+                $.weather.dayu = 0;
             }
             else{
-                $("#main_con").addClass("water2")
+                $("#main_con").addClass("water2");
+                $.weather.dayu = 0;
             }
         },
         removeBackgroundClass:function(){
