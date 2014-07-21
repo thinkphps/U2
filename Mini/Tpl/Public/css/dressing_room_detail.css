@@ -780,6 +780,6 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .product_set{ background:#eee; padding:10px 8px; overflow:hidden;}
 .product_set h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:5px;}
 .product_set ul li{ float:left; margin:4px 5px; border:1px solid #ddd; padding:1px; background:#FFF;}
-.product_set ul li a{ display:block; height:74px; background:#FFF;}
-.product_set img{ width:56px; height:74px; margin:0;}
+.product_set ul li a{ display:block; height:74px; background:#FFF;overflow:hidden;position:relative;width:56px;}
+.product_set img{ width:80px; height:106px; margin:0;margin:-53px 0 0 -40px;position:absolute;top:50%;left:50%;}
 .tuicl{margin-bottom:5px;}
