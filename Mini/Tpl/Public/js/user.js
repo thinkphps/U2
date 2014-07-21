@@ -156,15 +156,20 @@ jQuery(function($) {
     UserCenter.youhui_icon.on('click',function(){
         var isreceive = UserCenter.youhui_icon.data('isreceive');
         var colnum = UserCenter.collocationNum.text();
-        if(colnum >= 10){
+        if(UserCenter.youhui_msg.hasClass('none')){
+            UserCenter.youhui_msg.removeClass('none');
+            UserCenter.youhui_msg.show();
+        }else{
+            UserCenter.youhui_msg.addClass('none');
+            UserCenter.youhui_msg.hide();
+        }
+        /*if(colnum >= 10){
             if( isreceive != 1){
                 $.post(setCollFlagUrl,function(data){
                     if(data['code'] > 0){
                         //UserCenter.youhui_icon.removeClass('youhui_icon');
                         UserCenter.youhui_icon.data('isreceive',1);
     //                    UserCenter.youhui_icon.addClass('youhui_icon_block');
-                        $('#youhui_msg').removeClass('none');
-                        $('#youhui_msg').show();
                     }else{
 
                         return false;
@@ -176,8 +181,8 @@ jQuery(function($) {
                 //alert('您已领取优惠券！');
             }
         }else{
-            alert('收藏满10套方可领取优惠券！');
-        }
+            //alert('收藏满10套方可领取优惠券！');
+        }*/
     });
     UserCenter.youhui_msg.on('click',function(){
        if(!$(this).hasClass('none')){

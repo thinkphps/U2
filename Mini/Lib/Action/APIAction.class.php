@@ -302,7 +302,7 @@ class APIAction extends Action
             $pid = $Weather->getId($baiduid,$pid,$scid);
         }
         if($baiduid!=2){
-            $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+            $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid,'disabled'=>'false'))->select();
             if(empty($baiduid) && count($list)==1){
                 $list[0]['sel'] = 1;
             }

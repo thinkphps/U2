@@ -164,6 +164,7 @@ class WindexModel extends Model{
     public function getOrderStr($oid=1){
            switch($oid){
                case 1 :
+               case 6 :
                    $orderStr = 'bg.item_bn desc';//默认排序
                break;
                case 2 :
@@ -180,9 +181,6 @@ class WindexModel extends Model{
                break;
                case 6 :
                    $orderStr = 'g.stm asc';//温度升序
-               break;
-               case 7 :
-                   $orderStr = 'g.etm desc';//温度降序
                break;
            }
           return $orderStr;
@@ -214,7 +212,7 @@ class WindexModel extends Model{
 
     public function GetTuijian($item_bn,$num_iid){
         $item_bn = substr($item_bn,0,8);
-        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 limit 0,3";
+        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 limit 0,3";
         $result = M('Suits')->query($sql);
         if(empty($result)){
             unset($sql);

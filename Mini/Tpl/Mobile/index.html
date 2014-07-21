@@ -378,7 +378,7 @@
         </div>
      </volist>
     </div>
-    <a href="javascript:;" class="change" id='changeid' la='2'></a>
+    <a href="javascript:;" class="change" id='changeid' la='1'></a>
 
     <div class="detail_sub_nav_main" style="left:0em;" >
     	<div class="detail_sub_nav">
@@ -781,7 +781,7 @@ $(function(){
         var $this = $(this);
         var strClass =$this.attr('class');
         $('.style_btn_group a').removeClass('style_select');
-        $('.style_btn_group_detail').hide();
+        $('.style_btn_group_detail').addClass('none');
         var length = strClass.length;
         if(strClass.substr(length - 2,2) != '_0'){
             $this.removeClass('select');

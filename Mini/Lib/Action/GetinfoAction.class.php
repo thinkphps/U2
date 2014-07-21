@@ -173,7 +173,6 @@ public function getCollData(){
         $arr['uname'] = $userinfo[0];
         $arr['collflag'] = $userinfo[1];
         $arr['collcount'] = $userinfo[2];
-        $arr['tname'] = $userinfo[3];
     }
     $arr['page'] = $defaultResult['page'];
     $arr['def'] = $defaultResult['result'];

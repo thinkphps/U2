@@ -9,7 +9,7 @@ upsuitsappove($db,$suits);
 unset($suits);
 $beubeusuits = getsuits($db,1);
 upbeubeusuitsappove($db,$beubeusuits);
-unset($weatherlist);
+unset($beubeusuits);
 
 function getsuits($db,$type){
     if($type==0){

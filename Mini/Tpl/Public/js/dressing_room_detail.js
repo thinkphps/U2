@@ -322,12 +322,12 @@ var _mini = {
                                 suitImageUrlShose= data.def[i].suitImageUrlShose,suitImageUrlMatch =data.def[i].suitImageUrlMatch,
                                 suitImageUrl = data.def[i].suitImageUrl;
                             if(suitImageUrlHead == '' && suitImageUrlBody == '' && suitImageUrlMatch == ''){
-                                str += '<img src="'+ data.def[i].suitImageUrl +'" />';
+                                str += '<img src="'+rootPath+'/'+  data.def[i].suitImageUrl +'" />';
                                 str += '<div class="model_try2 none"></div></div>';
                             }
                             else{
                                 //全套衣服
-                                str += '<img src="'+  suitImageUrl +'" />';
+                                str += '<img src="'+rootPath+'/'+  suitImageUrl +'" />';
                                /* //身躯
                                 str += '<img src="'+  suitImageUrlBody +'" />';
                                 //鞋子
@@ -670,7 +670,13 @@ $('#ulgender').on('click','li',function(){
 });
 //排序
 $('#watercontainer').on('change','#gorder',function(){
+    if($('#gorder option:selected').val()==6){
+      if(!$('#ulweek li').hasClass('w_select')){
+          $('#ulweek li:eq(0)').click();
+      }
+    }else{
     getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,0,$('#keywordid').val());
+   }
 });
 //左侧风格取数据
 $('#ul_index-bar-place').on('click','li',function(){
@@ -832,6 +838,11 @@ $('#watercontainer').waterfall({
         renderData: function (data, dataType) {
             var tpl,
                 template;
+            if($.weather.dayu && $.weather.dayu==1){
+                $('#luliji').css('color','red');
+            }else{
+                $('#luliji').css('color','');
+            }
             if(data.code == 1){
                 if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
 //                tpl = $('#waterfall-tpl').html();

@@ -119,6 +119,7 @@ class ShopAction extends Action{
 	}
 	$showtag = intval(trim($this->_post('showtag')));
     $message = trim($this->_post('message'));
+    $store_id = intval($this->_post('store_id'));
 	//20140328kimi
 	$time = date('Y-m-d H:i:s');
 	$shop = M('Shop');
@@ -126,6 +127,7 @@ class ShopAction extends Action{
 	$data = array('pid'=>$pid?$pid:0,
 		          'cityid'=>$cid?$cid:0,
 		          'aid'=>$aid?$aid:0,
+                  'store_id'=>$store_id,
 		          'longitude'=>$longitude,
 		          'latitude'=>$latitude,
 		          'showtag'=>$showtag,
@@ -141,6 +143,7 @@ class ShopAction extends Action{
 	$data = array('pid'=>$pid?$pid:0,
 		          'cityid'=>$cid?$cid:0,
 		          'aid'=>$aid?$aid:0,
+                  'store_id'=>$store_id,
 		          'longitude'=>$longitude,
 		          'latitude'=>$latitude,
 		          'showtag'=>$showtag,
