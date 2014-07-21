@@ -73,7 +73,7 @@ button,label{cursor:pointer; }
 .my_yyg_model{ width:26em; margin:0 auto;}
 .model{ float:left; width:15.7em; height:36em; margin:0.8em -4em 0em -1.5em; position:relative; overflow: hidden;}
 .model img{ width:27em; height:36em;left:50%;margin-left:-13em;position:absolute}
-.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:34em; left:50%; margin-left:-3em;}
+.change{ display:block; width:6em; height:6em; background:url(../images/change_icon.png) 0 0 no-repeat; background-size:6em 6em; position:relative; top:36.5em; left:50%; margin-left:-3em;}
 
 
 /*左侧分类导航*/

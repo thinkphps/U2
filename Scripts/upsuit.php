@@ -31,7 +31,6 @@ function upbeubeusuitsappove($db,$suits){
             }
             foreach($dresult as $k2=>$v2){
                 if(!in_array($v2['item_bn'],$item_arr)){
-                    echo $suit['suitID'];
                     $sql123 = "update `u_beubeu_suits` set `approve_status`=1 , `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
                     $db->mysqlquery($sql123);
                     break;
