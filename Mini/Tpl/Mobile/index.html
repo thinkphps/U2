@@ -378,7 +378,7 @@
         </div>
      </volist>
     </div>
-    <a href="javascript:;" class="change" id='changeid' la='1'></a>
+    <a href="javascript:;" class="change" id='changeid' la='2'></a>
 
     <div class="detail_sub_nav_main" style="left:0em;" >
     	<div class="detail_sub_nav">
@@ -723,8 +723,10 @@ $(function(){
 
     //点击左侧
     $('#ulgender').on('click','li',function(){
-        $('#changeid').attr('la',1);
         var sid = $(this).data('gender');
+        if(sid!=1){
+            $('#changeid').attr('la',1);
+        }
         $(this).siblings().children('a').removeClass('select');
         $(this).children('a').addClass('select');
         $('#ul_index-bar-place li').siblings().children('a').removeClass('select');
