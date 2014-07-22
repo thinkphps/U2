@@ -76,32 +76,6 @@ class IndexAction extends Action {
             }
         }
         //kimi 优衣库二期
-        if(S('styledata')){
-            $beubeu_suits_list = unserialize(S('styledata'));
-        }else{
-            //默认模特图
-            $sql = "SELECT suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch FROM `u_beubeu_suits` WHERE tag = (SELECT tag FROM `u_beubeu_suits` as bs WHERE  bs.suitGenderID=1 and bs.approve_status=0 group by bs.tag order by bs.tag desc limit 0,1)";
-            //$beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl,suitImageUrlHead,suitImageUrlBody,suitImageUrlShose,suitImageUrlMatch')->where(array('suitGenderID'=>1,'approve_status'=>0))->order('suitID desc')->limit('0,4')->select();
-            $beubeu_suits_list = $beubeu_suits->query($sql);
-            foreach($beubeu_suits_list as $k=>$v){
-                switch($v['suitGenderID']){
-                    case 1 :
-                        $sex = 15474;
-                        break;
-                    case 2 :
-                        $sex = 15478;
-                        break;
-                    case 3 :
-                        $sex = 15583;
-                        break;
-                    case 4 :
-                        $sex = 15581;
-                        break;
-                }
-                $beubeu_suits_list[$k]['sex'] = $sex;
-            }
-            S('styledata',serialize($beubeu_suits_list),array('type'=>'file'));
-        }
         //默认女士上下装自定义分类
         if(S('cust11')){
             $ucuslist = unserialize(S('cust11'));
@@ -110,7 +84,6 @@ class IndexAction extends Action {
             $ucuslist  = $recomodel->getCateList2($where);//自定义分类
             S('cust11',serialize($ucuslist),array('type'=>'file'));
         }
-        //$this->assign('beubeu_suits_list',$beubeu_suits_list);
         $this->assign('ucuslist',$ucuslist);
         //优衣库二期
 
