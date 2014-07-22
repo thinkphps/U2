@@ -196,7 +196,7 @@ class IndexAction extends Action {
         $zid = $zid?$zid:0;
         $kid = $kid?$kid:0;
         $page = $page?$page:1;
-        $oid = $oid?$oid:1;
+        $oid = $oid?$oid:3;
         $goodtag = M('Goodtag');
         $windex = D('Windex');
         $page_num = 25;
@@ -211,7 +211,7 @@ class IndexAction extends Action {
         $buy = M('Buy');
         if($lid==1 && $bid==1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -224,6 +224,7 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
                 $result = array();
@@ -238,7 +239,7 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
             }
         }else if($lid==1 && $bid!=1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -251,6 +252,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
                 $result = array();
@@ -265,7 +267,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
             }
         }else if($bid==1 && $lid!=1){
             $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -278,6 +280,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
                 $result = array();
@@ -308,12 +311,13 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=ol.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=ol.num_iid";
                     $fieldlb = ",lo.id as loveid,bu.id as buyid";
                 }
-                $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
+                $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
                 $result = M('BeubeuGoods')->query($sql);
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                     $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
                 $result = array();
@@ -412,9 +416,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                  }else{*/
                     //有自定义分类也有其他的条件
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
-                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
                  /*}
             }else{
@@ -484,18 +488,18 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2aPx6X90XXXXXXXXX_!!196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option><option value="6" '.$sel6.'>温度排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option><option value="6" '.$sel6.'>温度排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option><option value="6" '.$sel6.'>温度排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option><option value="6" '.$sel6.'>温度排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
         }
         else{
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="1" '.$sel1.'>默认排序</option><option value="3" '.$sel3.'>新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格降序</option><option value="6" '.$sel6.'>温度排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
         }
         $keystr = '<div class="productinfo"><div class="right_search2"><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));

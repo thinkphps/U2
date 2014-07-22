@@ -615,7 +615,7 @@ var _mini = {
                 if(v.tuijian && v.tuijian.length>0){
                     strHtml += '<div class="tuicl none"  data-tuijian="'+ JSON.stringify(v.tuijian).replace(/\"/g,"'") +'"></div>';
                 }
-                if(v.num>0){
+                if(v.num>0 && v.approve_status=='onsale'){
                     strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'" target="_blank">'+ v.title+'</a></h3>';
                     strHtml += '<div class="product_inf none"><div class="inf_top"></div>';
                     strHtml += '<div class="inf_con"><p class="price"><span>￥</span>'+ v.price+'</p>';
@@ -670,13 +670,7 @@ $('#ulgender').on('click','li',function(){
 });
 //排序
 $('#watercontainer').on('change','#gorder',function(){
-    if($('#gorder option:selected').val()==6){
-      if(!$('#ulweek li').hasClass('w_select')){
-          $('#ulweek li:eq(0)').click();
-      }
-    }else{
     getgoods($.weather.avg,$.weather.sex,$.uniqlo.lid,$.uniqlo.bid,$.uniqlo.fid,$.uniqlo.zid,$.uniqlo.kid,0,$('#keywordid').val());
-   }
 });
 //左侧风格取数据
 $('#ul_index-bar-place').on('click','li',function(){
@@ -896,7 +890,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
     $('#waterfall-loading').remove();
-    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 1;
+    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 3;
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg

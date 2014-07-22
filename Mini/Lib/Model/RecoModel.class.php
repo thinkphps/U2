@@ -44,7 +44,7 @@ class RecoModel extends Model{
         $arr = array('d_1','d_2','e_1','a_2','c_2','a_1','b_1','c_1','b_2','e_2');
         return $arr[$key-1];
     }
-    public function getBeubeu($where,$page,$page_num,$start){
+    public function getBeubeu2($where,$page,$page_num,$start){
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
         $where['tag'] = array('neq',0);
@@ -90,7 +90,7 @@ class RecoModel extends Model{
         $arr['count'] = $count;
         return $arr;
     }
-    public function getBeubeu2($where,$page,$page_num,$start){
+    public function getBeubeu($where,$page,$page_num,$start){
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
         $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
@@ -130,7 +130,13 @@ class RecoModel extends Model{
         $sell = M('Sellercats');
         $result = $sell->field('ID as id,shortName as name')->where($where)->group('shortName')->order('sort_order asc')->select();
         foreach($result as $k=>$v){
-            $idlist = $sell->cache(true)->field('ID as id')->where(array('selected'=>1,'shortName'=>$v['name'],'isshow'=>0))->select();
+			if(!empty($where['gender'])){
+            $arr2['gender'] = $where['gender'];
+			}
+            $arr2['selected'] = 1;
+            $arr2['shortName'] = $v['name'];
+            $arr2['isshow'] = 0;
+            $idlist = $sell->field('ID as id')->where($arr2)->select();
             $idstr = '';
             foreach($idlist as $k1=>$v1){
                 if($v1){
@@ -189,13 +195,13 @@ class RecoModel extends Model{
       $str.=$v['id'].',';
       }
       $str = rtrim($str,',');
-      $sql = "select t1.bcid,bg.`num_iid`,bg.`title`,bg.`num`,bg.`pic_url`,bg.`detail_url` from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $sql = "select t1.bcid,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
       $detail = $beubeu_coll->query($sql);
       foreach($result as $k1=>$v1){
           $detailArr = array();
           foreach($detail as $k2=>$v2){
              if($v1['id']==$v2['bcid']){
-                 if($v2['num']<=0){
+                 if($v2['num']<=0 || $v2['approve_status']=='instock'){
                      $v2['title'] = '【已售罄】'.$v2['title'];
                  }
                  $detailArr[] = $v2;
