@@ -109,6 +109,9 @@ function Model_loadok_callback(){
         var sex = pageElement.getUrlParam('gender');
         var gender = pageElement.getGenderValue(sex);
         get_baiyi_dp(suitid,gender);
+        if(pageElement.$divSyj.is(':hidden')){
+            pageElement.$btnExpansion.click();
+        }
     }
 }
 
