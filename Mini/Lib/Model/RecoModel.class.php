@@ -91,6 +91,7 @@ class RecoModel extends Model{
         return $arr;
     }
     public function getBeubeu($where,$page,$page_num,$start){
+        $where['suitImageUrl'] = array('neq','');
         $where['approve_status'] = 0;
         $beubeu_suits = M('BeubeuSuits');
         $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
