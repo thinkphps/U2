@@ -475,7 +475,7 @@ span.quexiao{ display:block; position:absolute; background:url(../images/shaixua
 .product_set img{ width:4.5em; height:4.5em; margin:0;}
 
 /*我的试衣间*/
-.syj_btn{ position:fixed; top:44%; margin-top:-21.8em; right:0em; z-index:110;}
+.syj_btn{ position:fixed; top:55%; margin-top:-21.8em; right:0em; z-index:110;}
 .syj_btn a.syj_btn_expansion{ width:3em; height:6em; position:absolute; top:15em; left:-3em; background:url(../images/sq1.png) 0 0 no-repeat; background-size:3em 6em;}
 
 .syj{ width:28em; height:37.5em; border:1px solid #ff0000;  background:#FFF; z-index:100;}
