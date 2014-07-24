@@ -3,6 +3,10 @@
 class IndexAction extends Action {
     public $uniq_user_name;
     public function index(){
+		$ism = is_mobile();
+		if($ism){
+         $this->redirect('Mobile/index');
+		}
         if(cookie('uniq_user_name') && cookie('uniq_user_id')){
             session("uniq_user_name",cookie('uniq_user_name'));
             session("uniq_user_id",cookie('uniq_user_id'));
@@ -405,29 +409,39 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                 $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
 
                 $colorData = $windex->colorDetail($colorsql);*/
-          /*if($zid && !empty($zid)){
-                 if(!isset($tem) && empty($sid) && empty($fid) && !isset($tem)){
-                  //如果只有自定义分类
-                    if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
-                    }else{
-                     $sql = "select bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where bg.istag='2' ".$catewhere ." order by {$ostr} limit ".$start.",".$page_num;
-                    }
-                 }else{*/
                     //有自定义分类也有其他的条件
+         if(isset($tem)){
                     if(!empty($uid)){
                       $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
                       $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
-                 /*}
-            }else{
-            if(!empty($uid)){
-                $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.") as al ".$wherelb;
-            }else{
-               $sql = "select ".$case." bg.num_iid,bg.type,bg.isud,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id  where 1 ".$where." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
-            }
-            }*/
+         }else{
+                $wheret = '';
+                if(!empty($sid)){
+                    switch($sid){
+                        case 1 :
+                        case 2 :
+                        $wheret.=" and g.gtype='".$sid."'";
+                            break;
+                        case 3 :
+                            $wheret.=" and g.gtype in ('3','4')";
+                            break;
+                        case 4 :
+                            $wheret.=" and g.gtype='5'";
+                            break;
+                    }
+                }
+                if(!empty($fid) && $fid!='all'){
+                    $wheret.=" and g.ftag_id='".$fid."'";
+                }
+                if(!empty($uid)){
+                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                }else{
+                   $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc
+limit ".$start.",".$page_num;
+                }
+          }
 
             $result = $goodtag->query($sql);
             if(!empty($result)){
