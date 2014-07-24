@@ -436,9 +436,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wheret.=" and g.ftag_id='".$fid."'";
                 }
                 if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
                 }else{
-                   $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc
+                   $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc
 limit ".$start.",".$page_num;
                 }
           }
