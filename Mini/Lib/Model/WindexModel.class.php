@@ -163,24 +163,18 @@ class WindexModel extends Model{
     //kimi20140603 获取排序数据
     public function getOrderStr($oid=1){
            switch($oid){
+               case 0 :
                case 1 :
-               case 6 :
                    $orderStr = 'bg.item_bn desc';//默认排序
                break;
-               case 2 :
-                   $orderStr = 'bg.num_iid desc';//热度排序
-               break;
                case 3 :
-                   $orderStr = 'bg.num_iid desc';//新品排序
+                   $orderStr = 'bg.list_time desc';//新品排序
                break;
                case 4 :
                    $orderStr = 'bg.price asc';//价格升序
                break;
                case 5 :
                    $orderStr = 'bg.price desc';//价格降序
-               break;
-               case 6 :
-                   $orderStr = 'g.stm asc';//温度升序
                break;
            }
           return $orderStr;

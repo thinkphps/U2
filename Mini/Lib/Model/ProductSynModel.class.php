@@ -177,7 +177,7 @@ class ProductSynModel extends Model{
             ->join('INNER JOIN u_products_beubeu on left(u_goods.item_bn,8) = u_products_beubeu.uq')
             ->join('INNER JOIN u_settings on u_settings.key = u_goods.gender')
             ->join('INNER JOIN u_color on u_color.id = u_products_beubeu.color')
-            ->join('INNER JOIN u_products on u_products.num_iid=u_goods.num_iid and left(u_products.cvalue,2)=u_products_beubeu.color')
+            ->join('INNER JOIN u_products on u_products.num_iid=u_goods.num_iid and u_products.cid=u_products_beubeu.color')
             ->field('
                     distinct u_products_beubeu.color as colorid,
                     u_products.num_iid as num_iid,

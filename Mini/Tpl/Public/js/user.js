@@ -90,12 +90,12 @@ jQuery(function($) {
                     var detiles = list[i].detail;
                     strHtml += '<ul>';
                     for(var j = 0;j<detiles.length;j++){
-                        if(detiles[j].num<=0){
-                           var deurl = 'javascript:;';
+                        if(detiles[j].num<=0 || detiles[j].approve_status=='instock'){
+                           var deurl = 'javascript:;',tar = '';
                         }else{
-                           var deurl = detiles[j].detail_url;
+                           var deurl = detiles[j].detail_url,tar = 'target="_blank"';
                         }
-                        strHtml += '<li><a href="'+ deurl +'" target="_blank" title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                        strHtml += '<li><a href="'+ deurl +'" '+tar+' title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                     }
                     strHtml += '</ul>';
                     strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"><span class="none"></span></a>'

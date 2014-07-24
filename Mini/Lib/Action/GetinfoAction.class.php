@@ -12,7 +12,7 @@ class GetinfoAction extends Action{
             if($ism){
             $page_num = 2;
             }else{
-            $page_num = 1;
+            $page_num = 4;
             }
             $start = ($page-1)*$page_num;
             /*if(S('sid'.$tem.$sid.$fid)){
@@ -27,11 +27,7 @@ class GetinfoAction extends Action{
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
                 $defaultwhere['approve_status'] = 0;
-                if($ism){
-                $defaultResult = $recomodel->getBeubeu2($defaultwhere,$page,$page_num,$start);
-                }else{
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
-                }
                 break;
                 case 4 :
                   //mini婴幼儿还是从以前商品取数据
@@ -60,11 +56,7 @@ class GetinfoAction extends Action{
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
                 $defaultwhere['approve_status'] = 0;
-                if($ism){
-                $defaultResult = $recomodel->getBeubeu2($defaultwhere,$page,$page_num,$start);
-                }else{
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
-                }
                 break;
             }
             $arr['page'] = $defaultResult['page'];
@@ -146,7 +138,7 @@ where u_suits.approve_status=0 and u_suits.suitID = ".$suitid;
         if(!empty($item_bn)){
 
            $goods = M('Goods');
-           $sql = "select num_iid,title,IF(num>0,detail_url,'') as detail_url,num from u_beubeu_goods where left(item_bn,8)='".$item_bn."' order by num desc";
+           $sql = "select num_iid,title,approve_status,IF(num>0 and approve_status='onsale',detail_url,'') as detail_url,num from u_beubeu_goods where left(item_bn,8)='".$item_bn."' order by num desc";
            $result = $goods->query($sql);
            if(!empty($result[0])){
                  $returnArr = array('code'=>1,'data'=>$result[0]);

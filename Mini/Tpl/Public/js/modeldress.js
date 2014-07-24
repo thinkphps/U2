@@ -109,6 +109,9 @@ function Model_loadok_callback(){
         var sex = pageElement.getUrlParam('gender');
         var gender = pageElement.getGenderValue(sex);
         get_baiyi_dp(suitid,gender);
+        if(pageElement.$divSyj.is(':hidden')){
+            pageElement.$btnExpansion.click();
+        }
     }
 }
 
@@ -271,7 +274,7 @@ function Model_loadok_callback(){
                     if( data.code == 1){
                         var clothesInfo = data.data
                         $this.data('buy_url',clothesInfo.detail_url);
-                        if(clothesInfo.num<=0){
+                        if(clothesInfo.num<=0 || clothesInfo.approve_status=='instock'){
                         $this.html('<font style="color:red;font-weight:bold;">已售罄</font>'+clothesInfo.title);
                         $this.attr('title','(已售罄)'+clothesInfo.title);
                        }else{
