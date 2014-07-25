@@ -890,7 +890,7 @@ function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
     $('#waterfall-loading').remove();
-    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 3;
+    var oid = $('#gorder option:selected').val(),oid = oid ? oid : 1;
     $('#watercontainer').waterfall('removeItems', $('.productinfo'));
     $('#watercontainer').waterfall('option', {
         params:{ tem : tem,//温度    $.weather.avg
