@@ -200,7 +200,7 @@ class IndexAction extends Action {
         $zid = $zid?$zid:0;
         $kid = $kid?$kid:0;
         $page = $page?$page:1;
-        $oid = $oid?$oid:3;
+        $oid = $oid?$oid:2;
         $goodtag = M('Goodtag');
         $windex = D('Windex');
         $page_num = 25;
@@ -401,6 +401,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             }else{
                 $goodstable = '`u_goods`';
             }
+            if($oid==1){
+               $mwhere = " and bg.approve_status='onsale'";
+            }
               /*if(!empty($uid)){
                     $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
                 }else{
@@ -412,9 +415,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     //有自定义分类也有其他的条件
          if(isset($tem)){
                     if(!empty($uid)){
-                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
+                      $sql = "select al.*{$fieldlb} from (select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere."{$mwhere} group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num.")  as al ".$wherelb;
                     }else{
-                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere." group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
+                      $sql = "select {$case}bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_goodtag` as g inner join {$goodstable} as bg on bg.id=g.good_id inner join `u_catesgoods` as cg on cg.num_iid=bg.num_iid where 1 ".$where." ".$catewhere."{$mwhere} group by g.good_id ".$ordr."{$ostr} limit ".$start.",".$page_num;
                     }
          }else{
                 $wheret = '';
@@ -436,9 +439,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $wheret.=" and g.ftag_id='".$fid."'";
                 }
                 if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
+                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
                 }else{
-                   $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$ordr}{$ostr},bg.id desc
+                   $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc
 limit ".$start.",".$page_num;
                 }
           }
@@ -502,18 +505,18 @@ limit ".$start.",".$page_num;
         $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://www.uniqlo.com/cn/styledictionary/?kid=11727_51912_165830_211548" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/T2aPx6X90XXXXXXXXX_!!196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
         }
         else if($lid == 0 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
 
         }else if($lid == 1 && $bid == 1){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn select" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
         }else if($lid == 0 && $bid == 0 ){
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
         }
         else{
-            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="3" '.$sel3.'>热销新品</option><option value="4" '.$sel4.'>价格升序</option><option value="5" '.$sel5.'>价格倒序</option><option value="1" '.$sel1.'>默认排序</option></select></div></div></div>';
+            $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
         }
         $keystr = '<div class="productinfo"><div class="right_search2"><div class="wrapper_box wrapper_box_search"><input name="search" type="text" value="'.$keyword.'" placeholder="输入您想要的款式或名称" autocomplete="off" id="keywordid"><a href="javascript:;" id="keybutton"></a></div></div></div>';
         array_unshift($result,array('first'=>1,'ad'=>$ad));

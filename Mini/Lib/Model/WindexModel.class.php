@@ -165,7 +165,10 @@ class WindexModel extends Model{
            switch($oid){
                case 0 :
                case 1 :
-                   $orderStr = 'bg.item_bn desc';//默认排序
+                   $orderStr = 'bg.num desc';//默认排序
+               break;
+               case 2 :
+                   $orderStr = 'bg.num_iid desc';//默认排序
                break;
                case 3 :
                    $orderStr = 'bg.list_time desc';//新品排序
