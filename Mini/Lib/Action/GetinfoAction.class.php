@@ -260,7 +260,7 @@ public function addBeubenColl(){
                    $beuben->query($insql);
                 }
                    $arr['code'] = 1;
-                   $arr['msg'] = '收藏成功';
+                   $arr['msg'] = '已收藏至您的个人衣柜';
            }else{
                $arr['code'] = 0;
                $arr['msg'] = '收藏失败';
