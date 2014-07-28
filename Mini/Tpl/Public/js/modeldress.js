@@ -14,6 +14,7 @@ var pageElement = {
     ,$divSyj : $('.syj')
     ,$ulgender : $('#ulgender')
     ,$watercontainer : $('#watercontainer')
+    ,$allsoucang : $('#allsoucang')
     ,dressByBarcode:function(barcode,gender){
         $('#beubeu_loadImg').show();
         $('#baby_fitting_room').hide();
@@ -109,9 +110,9 @@ function Model_loadok_callback(){
         var sex = pageElement.getUrlParam('gender');
         var gender = pageElement.getGenderValue(sex);
         get_baiyi_dp(suitid,gender);
-        if(pageElement.$divSyj.is(':hidden')){
-            pageElement.$btnExpansion.click();
-        }
+	if(pageElement.$divSyj.is(':hidden')){
+        pageElement.$btnExpansion.click();
+    }
     }
 }
 
@@ -162,7 +163,7 @@ function Model_loadok_callback(){
                     pageElement.$ulgender.find('a:eq(2)').addClass('select');
                     $('.changjing1').css("background","url("+imgpath+"/images/my_yyg_bg0.jpg) center 0 no-repeat");
                 }
-                _mini.getSuits();
+                //_mini.getSuits();
                 pageElement.$btnExpansion.click();
             }
         },
@@ -305,6 +306,7 @@ function Model_loadok_callback(){
 
             pageElement.$btnBuy.on('click',function(){
                 //如果当前选中的是婴儿，则将现在搭配间的衣服增加到购买列表
+                pageElement.$allsoucang.addClass('none');
                 if($('#beubeu_loadImg').is(':hidden')){
                     var $buyUl =  pageElement.$divBuys.find('ul');
                     $buyUl.html('');
@@ -342,8 +344,18 @@ function Model_loadok_callback(){
                 var x = Model.get_baiyi_dp_info();
                 $.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: x.pic_body,headpic: x.pic_head,pic_match: x.pic_match,shoespic: x.pic_shoes,suitid: x.by_str},function(data,status){
                 //$.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: 'qw',headpic: 'qw1',pic_match: 'qw2',shoespic: 'qw4',suitid: 34646},function(data,status){
-                alert(data.msg);
+                 if(data.code==1){
+                     $('#allsoucang').addClass('scsucc').removeClass('none');
+                     $('#soucangid').html(data.msg);
+                 }else{
+                    $('#allsoucang').addClass('scerror').removeClass('none');
+                    $('#soucangid').html(data.msg);
+                }
+                //alert(data.msg);
                 },'json');
+            });
+            pageElement.$allsoucang.on('click','#scclose',function(){
+                pageElement.$allsoucang.addClass('none');
             });
             pageElement.$divSyj.on('mouseenter','.buyurl',function(){
                 $(this).css({'background':'#999','color':'#fff'});

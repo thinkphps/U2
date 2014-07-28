@@ -26,6 +26,8 @@ jQuery(function($) {
         userinfo : $('#userinfo'),
         btnUserInfo :$('#btn_userinfo'),
         youhui_msg : $('#youhui_msg'),
+        youhuifirst : $('#youhuifirst'),
+        yhclose :$('#yhclose'),
         init : function(){
             UserCenter.bindCollections(0);
         },
@@ -57,7 +59,8 @@ jQuery(function($) {
                     if(cnum >= 10){
                         UserCenter.youhui_icon.show();
                         if(pageOffset!=-1){
-                        //alert('您的收藏已超过10套，请点击‘确定’领取优惠券');
+                            UserCenter.youhuifirst.removeClass('none');
+                            UserCenter.youhuifirst.show();
                          }
                     }
                     else{
@@ -156,16 +159,18 @@ jQuery(function($) {
     UserCenter.youhui_icon.on('click',function(){
         var isreceive = UserCenter.youhui_icon.data('isreceive');
         var colnum = UserCenter.collocationNum.text();
-        if(UserCenter.youhui_msg.hasClass('none')){
+        /*if(UserCenter.youhui_msg.hasClass('none')){
             UserCenter.youhui_msg.removeClass('none');
             UserCenter.youhui_msg.show();
         }else{
             UserCenter.youhui_msg.addClass('none');
             UserCenter.youhui_msg.hide();
-        }
-        /*if(colnum >= 10){
+        }*/
+        if(colnum >= 10){
             if( isreceive != 1){
-                $.post(setCollFlagUrl,function(data){
+                $('#youhui_msg').removeClass('none');
+                $('#youhui_msg').show();
+                /*$.post(setCollFlagUrl,function(data){
                     if(data['code'] > 0){
                         //UserCenter.youhui_icon.removeClass('youhui_icon');
                         UserCenter.youhui_icon.data('isreceive',1);
@@ -174,21 +179,55 @@ jQuery(function($) {
 
                         return false;
                     }
-                });
+                });*/
             }else{
                 $('#youhui_msg').removeClass('none');
                 $('#youhui_msg').show();//目前没有优惠信息，有的话这两句要删掉
-                //alert('您已领取优惠券！');
+                //$('#youhuim').html('是否立即领取优惠');
             }
         }else{
-            //alert('收藏满10套方可领取优惠券！');
-        }*/
+            if(isreceive==1){
+                //$('#youhuim').html('是否立即领取优惠');
+                $('#youhui_msg').removeClass('none');
+                $('#youhui_msg').show();
+            }else{
+                $('#youhui_msg').removeClass('none');
+                $('#youhui_msg').show();
+                //$('#youhuim').html('是否立即领取优惠');
+           }
+        }
+    });
+    UserCenter.yhclose.on('click',function(){
+        var isreceive = UserCenter.youhui_icon.data('isreceive');
+        var colnum = UserCenter.collocationNum.text();
+        if(colnum >= 10){
+            if( isreceive != 1){
+                $.post(setCollFlagUrl,function(data){
+                    if(data['code'] > 0){
+                        UserCenter.youhui_icon.data('isreceive',1);
+                    }else{
+
+                        return false;
+                    }
+                });
+            }else{
+                $('#youhui_msg').addClass('none');
+                $('#youhui_msg').hide();
+            }
+        }else{
+            $('#youhui_msg').addClass('none');
+            $('#youhui_msg').hide();
+        }
     });
     UserCenter.youhui_msg.on('click',function(){
        if(!$(this).hasClass('none')){
            $('#youhui_msg').addClass('none');
            $('#youhui_msg').hide();
        }
+    });
+    UserCenter.youhuifirst.on('click','#yhfclose',function(){
+        UserCenter.youhuifirst.addClass('none');
+        UserCenter.youhuifirst.hide();
     });
     //账户信息
     UserCenter.btnUserInfo.on('click',function(){

@@ -622,8 +622,12 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .btn_line a.sc_btn i{background:url(../images/buy_icon.png) 0 -29px no-repeat;}
 .btn_line a.sc_btn i{ display:block; float:left; width:28px; height:29px; margin:7px 1px 0 5px;}
 .btn_line a.sc_btn:hover{ background:#900;}
-.btn_line a.bc_btn{  width:105px; background:#d1d1d1; color:#FFF; text-align:center;
+.btn_line a.bc_btn{width:105px; background:#d1d1d1; color:#FFF; text-align:center;
     cursor: default;}
+.btn_line .scerror{background-color:rgba(243, 243, 243, 0.5); filter: Alpha(Opacity=50);width: 205px;height: 56px;margin: -48px 0 0 62px;padding: 12px 0;color:#000;position:absolute;z-index:138;text-align: center;top:-40px;}
+.btn_line .scsucc{background-color:rgba(243, 243, 243, 0.5); filter: Alpha(Opacity=50);width: 205px;height: 56px;margin: -48px 0 0 62px;padding: 12px 0;color:#000;position:absolute;z-index:138;text-align: center;top:-40px;}
+#allsoucang #soucangid{background-position: -116px 20px;width: 160px;font-size: 13px;line-height: 22px; margin: 0 auto 10px;text-align: center;}
+#allsoucang button{background-position: 0 0;width: 74px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)}
 .buy_btns{ left:0px; bottom:42px; z-index:999; position: absolute;}
 .buy_btns .buyurl {cursor: pointer; line-height: 15px;background:#fff;color:#666;padding: 5px 5px 5px 5px;}
 .buy_btns ul li a{ display:block; background:#fff; border-top:1px solid #eee; height:35px; line-height:35px; padding:0px 5px 0px 5px; color:#666;}
@@ -766,11 +770,13 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_l_box .mini-control-tips {
     float: left;}
 
-.youhui{ width:240px; height:60px; position:absolute; right:15px; top:15px;}
+.youhui{ width:270px; height:60px; position:absolute; right:15px; top:15px;}
 .youhui a.youhui_icon{ display:block; width:68px; height:60px; background:url(../images/youhui_icon.png) 0 0 no-repeat; position:absolute;right:0; top:0;}
 .youhui a.youhui_icon_block{  position:absolute;right:0; top:0;display:block; width:68px; height:60px; cursor: default;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);background:url(../images/youhui_icon.png) 0 0 no-repeat;background-color: rgba(0,0,0,.5);}
-.youhui p{ display:block; width:122px; height:36px; background:#FFF; padding:12px 88px 12px 20px; color:#666;}
-.youhui p a{ color:#F00; margin:0 5px;}
+.youhui div#youhui_msg{ display:block; width:170px; height:58px; background:#FFF; padding:2px 88px 0px 5px; color:#666;text-align: center;background-color:rgba(243, 243, 243, 0.5);filter: Alpha(Opacity=50);}
+div#youhui_msg #youhuim{font-size: 13px;line-height: 22px; margin: 0 auto 10px;}
+div#youhui_msg button{background-position: 0 0;width: 60px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);margin-right:5px;}
+div#youhui_msg #youhuit{width:200px;float:left;margin-top:3px;}
 #gorder{height:30px;line-height:30px;width:208px;margin:10px 0 0 10px;}
 .wrapper_box a.tuijian{ display:block; width:228px; line-height:40px; background:#a5a5a5; color:#FFF; text-align:center;}
 .wrapper_box a.tuijian:hover{ background:#C00;}
@@ -783,3 +789,6 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .product_set ul li a{ display:block; height:74px; background:#FFF;overflow:hidden;position:relative;width:56px;}
 .product_set img{ width:80px; height:106px; margin:0;margin:-53px 0 0 -40px;position:absolute;top:50%;left:50%;}
 .tuicl{margin-bottom:5px;}
+#youhuifirst{background:none repeat scroll 0 0 #f3f3f3;width: 240px;height: 80px;padding: 12px 0;color:#000;z-index:100;text-align: center;left:41%;top:40%;}
+#youhuifirst #youhuimf{width: 200px;font-size: 13px;line-height: 22px; margin: 0 auto 10px;text-align: center;}
+#youhuifirst button{background-position: 0 0;width: 74px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)}
