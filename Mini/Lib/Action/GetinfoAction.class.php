@@ -192,7 +192,7 @@ public function delBeubenColl(){
 }
 public function setCollFlag(){
     $uid = session("uniq_user_id");
-    /*if($uid){
+    if($uid){
     $user = M('User');
     $result = $user->field('id,collflag')->where(array('id'=>$uid))->find();
     if(!empty($result)){
@@ -216,8 +216,7 @@ public function setCollFlag(){
     }else{
         $arr['code'] = 0;
         $arr['msg'] = '没有登录';
-    }*/
-    $arr['code'] = 1;
+    }
     $this->ajaxReturn($arr, 'JSON');
 }
 public function addBeubenColl(){
@@ -233,7 +232,7 @@ public function addBeubenColl(){
         $uq = trim($this->_post('uq'));
         $num_iid = $this->getCollNumm_iid($uq);
         $beuben = M('BeubeuCollection');
-        if(!empty($suitid)){
+        if(!empty($suitid) && !empty($clothespic)){
         $count = $beuben->field('id')->where(array('uid'=>$uid))->count();
         if($count<50){
            $time = date('Y-m-d H:i:s');
@@ -271,7 +270,7 @@ public function addBeubenColl(){
         }
     }else{
             $arr['code'] = 0;
-            $arr['msg'] = '参数错误';
+            $arr['msg'] = '请先搭配';
         }
     }else{
         $arr['code'] = 0;
