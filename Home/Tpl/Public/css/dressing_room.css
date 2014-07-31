@@ -24,23 +24,23 @@ button,label{cursor:pointer; }
 
 
 /*头部*/
-.dr_header_con{ width:950px; height:162px; margin:0 auto; overflow:hidden;}
-.dr_header{ width:950px; height:82px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2edNYX4dXXXXXXXXX-196993935.png) 0 0 no-repeat; position: relative;}
-.dr_header_bg1{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2tLlUX1FaXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_header_bg2{ background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T20nBWX4tXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_header_bg3{ background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2LyVWX6dXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_header_bg4{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2CUFVX9VXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_header_bg5{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T26ehVXYVaXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_header_bg6{ background:url(http://img01.taobaocdn.com/imgextra/i1/196993935/T2J3dYXWVXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
+.dr_header_con{ width:990px; height:162px; margin:0 auto; overflow:hidden;}
+.dr_header{ width:990px; height:82px; background:url(../images/dr_header_bg.png) 0 0 no-repeat; position: relative;}
+.dr_header_bg1{ background:url(../images/dr_header_bg1.jpg) 0 0 no-repeat;}
+.dr_header_bg2{ background:url(../images/dr_header_bg2.jpg) 0 0 no-repeat;}
+.dr_header_bg3{ background:url(../images/dr_header_bg3.jpg) 0 0 no-repeat;}
+.dr_header_bg4{ background:url(../images/dr_header_bg4.jpg) 0 0 no-repeat;}
+.dr_header_bg5{ background:url(../images/dr_header_bg5.jpg) 0 0 no-repeat;}
+.dr_header_bg6{ background:url(../images/dr_header_bg6.jpg) 0 0 no-repeat;}
 
 /*头部-logo*/
 .dr_logo{ float:left; width:234px; height:82px;}
 .dr_logo a{ display:block; width:191px; height:51px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T29A4YXWpXXXXXXXXX-196993935.png) 0 0 no-repeat; text-indent:-9999px; margin:16px 0 0 23px;}
 
 /*头部-城市*/
-.dr_city{ float:left; width:355px; height:46px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2m9tVX_hXXXXXXXXX-196993935.png) left 0 no-repeat; padding:18px 20px; overflow:hidden; }
+.dr_city{ float:left; width:394px; height:46px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2m9tVX_hXXXXXXXXX-196993935.png) left 0 no-repeat; padding:18px 20px; overflow:hidden; }
 .city_name{ float:left; height:46px; border-right:1px solid #ddd; padding:0 20px 0 0; margin:0 20px 0 0; overflow:hidden;}
-.city_name h2{ font-size:26px; line-height:30px; font-weight:normal;}
+.city_name h2{ font-size:26px; line-height:30px; font-weight:normal;color:#3c3c3c;}
 .city_name span{ color:#a1a1a1;}
 
 .city{ float:left; margin:1px 0 0 0;}
@@ -63,9 +63,9 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con{ width:321px; height:82px; position:absolute; top:0; overflow:hidden;}
 .preferential ul.preferential_con li{ display:block; width:265px; height:58px; padding:11px 45px 11px 11px;}
 .preferential ul.preferential_con li i{ display:block; float:left; width:58px; height:57px; margin:0 12px 0 0;}
-.preferential ul.preferential_con li a{ cursor:pointer; margin-top:4px; display:block;}
-.preferential ul.preferential_con li p{ margin-top:10px;}
-.preferential ul.preferential_con li p a{ color:#F00; display:inline;}
+.preferential ul.preferential_con li a{ cursor:pointer; margin-top:4px; display:block;color:#3c3c3c;}
+.preferential ul.preferential_con li p{ margin-top:10px;color:#3c3c3c;}
+.preferential ul.preferential_con li p a{ color:#F00; display:inline;color:red;}
 
 .preferential ul.preferential_con li.preferential_1{border-top:3px solid #28ACA7;}
 .preferential ul.preferential_con li.preferential_1 i{ background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2XH0ZXV4XXXXXXXXX-196993935.png) -174px 0 no-repeat;}
@@ -78,10 +78,10 @@ button,label{cursor:pointer; }
 
 
 /*天气*/
-.weather{ width:950px; height:80px; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2IBRWX54XXXXXXXXX-196993935.png) 0 0 no-repeat; position:relative; overflow:hidden;}
+.weather{ width:990px; height:80px; background:url(../images/weather_bg.png) 0 0 no-repeat; position:relative; overflow:hidden;}
 
 .weather ul { display:block; float:left; height:80px; overflow:hidden;}
-.weather ul li{ float:left; height:50px; width:151px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2usXWX9hXXXXXXXXX-196993935.png) right 0 no-repeat; color:#3c3c3c; overflow:hidden; padding:15px 12px; position:relative; cursor:pointer; opacity:0.9;}
+.weather ul li{ float:left; height:50px; width:160px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2usXWX9hXXXXXXXXX-196993935.png) right 0 no-repeat; color:#3c3c3c; overflow:hidden; padding:15px 12px; position:relative; cursor:pointer; opacity:0.9;}
 .weather ul li i{ display:block; float:left; width:50px; height:50px; margin:0 10px 0 0;}
 
 .weather ul li i.nio-0{ background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2z9pUX0taXXXXXXXX-196993935.png) 0 0 no-repeat;}
@@ -178,17 +178,17 @@ button,label{cursor:pointer; }
 
 
 /*分类*/
-.dr_main_con{ width:950px; height:470px; margin:0 auto; position:relative;}
-.dr_main_con_bg1{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T25ldVX.4XXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_main_con_bg2{ background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2j_dVX_NXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_main_con_bg3{ background:url(http://img01.taobaocdn.com/imgextra/i1/196993935/T2Js4YX60XXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_main_con_bg4{ background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2dnFVX_dXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_main_con_bg5{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2u9VTX3RaXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
-.dr_main_con_bg6{ background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2Hj0WX6xXXXXXXXXX-196993935.jpg) 0 0 no-repeat;}
+.dr_main_con{ width:990px; height:470px; margin:0 auto; position:relative;}
+.dr_main_con_bg1{ background:url(../images/dr_main_con_bg1.jpg) 0 0 no-repeat;}
+.dr_main_con_bg2{ background:url(../images/dr_main_con_bg2.jpg) 0 0 no-repeat;}
+.dr_main_con_bg3{ background:url(../images/dr_main_con_bg3.jpg) 0 0 no-repeat;}
+.dr_main_con_bg4{ background:url(../images/dr_main_con_bg4.jpg) 0 0 no-repeat;}
+.dr_main_con_bg5{ background:url(../images/dr_main_con_bg5.jpg) 0 0 no-repeat;}
+.dr_main_con_bg6{ background:url(../images/dr_main_con_bg6.jpg) 0 0 no-repeat;}
 
-.dr_main_con_sub_nav{ width:950px; height:70px; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2jYdZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat;}
+.dr_main_con_sub_nav{ width:990px; height:70px; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2jYdZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat;}
 .dr_main_con_sub_nav ul{ float:left; height:70px;}
-.dr_main_con_sub_nav ul li{  float:left; height:70px; width:70px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2usXWX9hXXXXXXXXX-196993935.png) right 0 no-repeat;}
+.dr_main_con_sub_nav ul li{  float:left; height:70px; width:74px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2usXWX9hXXXXXXXXX-196993935.png) right 0 no-repeat;}
 .dr_main_con_sub_nav ul li.select{ background:#FFF;}
 .dr_main_con_sub_nav ul li a{ display:block; height:70px; width:70px;}
 
@@ -364,9 +364,9 @@ a.mini-kv-add{
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 350px;
+    width: 361px;
     height: 70px;
-    right: 180px;
+    right: 182px;
     top: 0;
     z-index: 2;
 }
@@ -374,9 +374,9 @@ a.mini-kv-add{
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 140px;
+    width: 146px;
     height: 35px;
-    right: 390px;
+    right: 400px;
     top: 0;
     z-index: 2;
 }
@@ -385,9 +385,9 @@ a.mini-kv-add{
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 140px;
+    width: 146px;
     height: 35px;
-    right: 320px;
+    right: 326px;
     top: 35px;
     z-index: 2;
 }
@@ -395,9 +395,9 @@ a.mini-kv-add{
     background: #000;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    width: 71px;
+    width: 75px;
     height: 35px;
-    right: 320px;
+    right: 326px;
     z-index: 2;
 }
 .ft16{
@@ -454,7 +454,7 @@ a.light_box_close{  background:url(http://img03.taobaocdn.com/imgextra/i3/196993
 
 /*CoverScroll*/
 #suits-container{
-    height:400px;width:950px;
+    height:400px;width:990px;
     position: relative;
     overflow:hidden;
 }
@@ -523,10 +523,10 @@ a.light_box_close{  background:url(http://img03.taobaocdn.com/imgextra/i3/196993
 }
 
 /*切换按钮*/
-.dr_main_con a.home_arrow_left{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2IBRWX54XXXXXXXXX-196993935.png) 0 0 repeat; width:50px; height:100px; position:absolute; top:220px; left:0px; z-index:500; cursor:pointer;}
-.dr_main_con a.home_arrow_left span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat; width:29px; height:51px; margin:23px 0 0 8px;}
-.dr_main_con a.home_arrow_left:hover span{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 -51px no-repeat;}
+.dr_main_con a.home_arrow_left{ display:block; background:url(http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/weather_bg2.png) 0 0 repeat; width:50px; height:100px; position:absolute; top:220px; left:0px; z-index:500; cursor:pointer;}
+/*.dr_main_con a.home_arrow_left span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) 0 0 no-repeat; width:29px; height:51px; margin:23px 0 0 8px;}*/
+.dr_main_con a.home_arrow_left:hover{ background:url(http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/weather_bg2.png) 0 -100px no-repeat;}
 
-.dr_main_con a.home_arrow_right{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2IBRWX54XXXXXXXXX-196993935.png) 0 0 repeat; width:50px; height:100px; position:absolute; top:220px; right:0px; z-index:500; cursor:pointer;}
-.dr_main_con a.home_arrow_right span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px 0 no-repeat; width:29px; height:51px; margin:23px 0 0 13px;}
-.dr_main_con a.home_arrow_right:hover span{ background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px -51px no-repeat;}
+.dr_main_con a.home_arrow_right{ display:block; background:url(http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/weather_bg2.png) -50px 0 repeat; width:50px; height:100px; position:absolute; top:220px; right:0px; z-index:500; cursor:pointer;}
+/*.dr_main_con a.home_arrow_right span{ display:block; background:url(http://img02.taobaocdn.com/imgextra/i2/196993935/T2Y0lZXVhXXXXXXXXX-196993935.png) -29px 0 no-repeat; width:29px; height:51px; margin:23px 0 0 13px;}*/
+.dr_main_con a.home_arrow_right:hover{ background:url(http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/images/weather_bg2.png) -50px -100px no-repeat;}

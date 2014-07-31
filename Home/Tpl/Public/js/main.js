@@ -487,7 +487,7 @@ var callBackFunction = {
         }
 
         $('#suits-container').html(strHtml);
-        $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
+        $('#suits-container').coverscroll({items:'.item',minfactor:35,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
             'limit':6, // how many steps should be shown on each side
             'width':8, // how wide is the visible section of the step in pixels
@@ -563,7 +563,7 @@ var callBackFunction = {
         strItem += '<div class="gotoroom none">';
 
         var url ='http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
-        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank">»•–Èƒ‚ ‘“¬º‰ ‘¥©</a></div></div>';
+        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank" style="color:#fff;">»•–Èƒ‚ ‘“¬º‰ ‘¥©</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){

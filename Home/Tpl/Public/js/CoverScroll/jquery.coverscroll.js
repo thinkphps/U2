@@ -5,6 +5,7 @@
         'init':function(options){
             // These are the default options
             var opt = {
+                'mintop':15,
                 'minfactor':20, // how much is the next item smaller than previous in pixels
                 'distribution':1.5, // how apart are the items (items become separated when this value is below 1)
                 'scalethreshold':0, // after how many items to start scaling
@@ -265,13 +266,14 @@
             var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
             var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
             var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
+            var mintop = (gopt.mintop===0||gopt.mintop > 0)?gopt.mintop:15; //dean
             if(insertid){
                 for(i=insertid;i<imgs.length;i++){
                     var citem = $(imgs.get(i));
                     citem.css({
                         'position':'absolute',
                         'left': w+10,
-                        'top':mleft
+                        'top':mintop
                     });
                 }
             }
@@ -419,13 +421,14 @@
         var middle = $(imgs.get(mindex));
         // take care of the middle item
         var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:5; //dean
+        var mintop = (opt.mintop===0||opt.mintop > 0)?opt.mintop:15; //dean
         var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
         var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
         var d = (el.height() > 250)?250:el.height();
         var css = {};
         if(isinit){
             css["left"] =  imglefts[mindex-mbegin];
-            css['top']=minfactor;
+            css['top']=mintop;
             css['width']=234;
         }else{
             if(mindex== mend-1 ){
@@ -446,6 +449,7 @@
         middle.fadeIn(80);
         // getting the params
         var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:5;
+        var mintop = (opt.mintop===0||opt.mintop > 0)?opt.mintop:15; //dean
         var distrib = opt.distribution?opt.distribution:2;
 
         var titleclass = opt.titleclass?opt.titleclass:'itemTitle';
@@ -483,7 +487,7 @@
 //                            citem.show();
                 }
 //                css["left"] =  imglefts[i];
-                css['top']=minfactor;
+                css['top']=mintop;
             }else{
                 css['width']=240
             }
@@ -549,7 +553,7 @@
 //                            citem.show();
                 }
 //                css["left"] =  imglefts[i];
-                css['top']=minfactor;
+                css['top']=mintop;
             }else {
                 if(i== imgs.length-1 ){
                     css['width']=240;
