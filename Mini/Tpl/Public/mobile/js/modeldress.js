@@ -151,12 +151,10 @@ function change_baiyi_css_info(){
 //            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
             Model.CurrClothesCallback = this.beu_getallclothes;
 
-//            $('#beu_img_head').hide();
-//            $('#beu_img_body').hide();
-            $('#beu_img_body').css({'width':'28em','height':'36em'});
-            $('#beu_img_head').css({'width':'28em','height':'36em'});
-            $('#beu_img_shose').css({'width':'28em','height':'36em'});
-            $('#beu_img').css({'width':'28em','height':'36em'});
+            //$('#beu_img_body').css({'width':'28em','height':'36em'});
+            //$('#beu_img_head').css({'width':'28em','height':'36em'});
+            //$('#beu_img_shose').css({'width':'28em','height':'36em'});
+            //$('#beu_img').css({'width':'28em','height':'36em'});
             $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
             $('.beubeu_btns3').css('left','-0em').css('top','13em');
             $('#showmodelhead').css({'top':'14em','left':'0em'});
