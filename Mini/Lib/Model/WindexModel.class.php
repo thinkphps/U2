@@ -232,6 +232,7 @@ class WindexModel extends Model{
                     break;
             }
             $result[$k]['sex'] = $sex;
+            $result[$k]['m'] = 1;
         }
         }
         return $result;
