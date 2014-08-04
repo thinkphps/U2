@@ -15,4 +15,10 @@ class LeaAction extends Action{
 	echo '添加失败';	
 	}
 	}
+    public function upShowTag(){
+        $uid = session("uniq_user_id");
+        if($uid>0){
+        M('User')->where(array('id'=>$uid))->save(array('showtag'=>array('exp','showtag+1')));
+        }
+    }
 }
