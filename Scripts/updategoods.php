@@ -33,6 +33,7 @@ $result = $c->execute($req, $db->token);
 
 $products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,prop_img');
 $goods = (array)$result->items->item;
+
 $goods_arr = array();
 $pstr = '';
 $time = date('Y-m-d H:i:s');
@@ -220,6 +221,7 @@ foreach($goods as $k=>$v){
 	//颜色
 	if(!empty($product_arr_sku)){
 	foreach($product_arr_sku as $k2=>$v2){
+    $ppsql = '';
 	$v2 = (array)$v2;
 	//if($v2['quantity']>0){sku库存等于0
 	$properties = explode(';',$v2['properties']);
@@ -260,7 +262,9 @@ foreach($goods as $k=>$v){
 }
 unset($result);
 //}
+sleep(1);
 }
+$db->mysqlquery("call pbenben()");
 //获取顶级分类
  function getcat($cid,&$catarr){
 	   global $c;
