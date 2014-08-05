@@ -56,7 +56,7 @@ class MobileAction extends Action{
        }else{
            //默认模特图
 
-           $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1,'approve_status'=>0))->order('suitID desc')->limit('0,2')->select();
+           $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where(array('suitGenderID'=>1,'suitImageUrl'=>array('neq',''),'approve_status'=>0))->order('suitID desc')->limit('0,2')->select();
            foreach($beubeu_suits_list as $k=>$v){
                switch($v['suitGenderID']){
                    case 1 :
