@@ -221,7 +221,6 @@ foreach($goods as $k=>$v){
 	//颜色
 	if(!empty($product_arr_sku)){
 	foreach($product_arr_sku as $k2=>$v2){
-    $ppsql = '';
 	$v2 = (array)$v2;
 	//if($v2['quantity']>0){sku库存等于0
 	$properties = explode(';',$v2['properties']);
@@ -241,13 +240,12 @@ foreach($goods as $k=>$v){
     $cid = $vcc['cid'];
     $cstr = $vcc['cv'];
 	break;
-	//}sku库存等于0
+	}
 	}
 	//获取product的图片
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));	
-	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."'),";
-	}
+	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."'),";	
 	}
 	//插入product
 	$prosql.=$ppsql;

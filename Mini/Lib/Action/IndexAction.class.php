@@ -501,8 +501,8 @@ limit ".$start.",".$page_num;
                 $sel7 = 'selected="selected"';
                 break;
         }
-        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/category-138188209.htm?kid=11727_51912_165828_280468' target='__blank'><img src='".C('UNIQLOURL')."Upload/ad/TB2qz8SaXXXXXa5XXXXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
-        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://uniqlo.tmall.com/category-639803611.htm?kid=11727_51912_228348_280466" target="__blank"><img src="'.C('UNIQLOURL').'Upload/ad/TB2bmxuaXXXXXXcXpXXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
+        $ad = "<div class='productinfo'><div class='wrapper_box banner_box'><a href='http://uniqlo.tmall.com/category-138188209.htm?kid=11727_51912_165828_280468' target='_blank'><img src='".C('UNIQLOURL')."Upload/ad/TB2qz8SaXXXXXa5XXXXXXXXXXXX-196993935.jpg' width='228' height='471' alt='' /></a></div></div>";
+        $ad2 = '<div class="productinfo"><div class="wrapper_box banner_box"><a href="http://uniqlo.tmall.com/category-639803611.htm?kid=11727_51912_228348_280466" target="_blank"><img src="'.C('UNIQLOURL').'Upload/ad/TB2bmxuaXXXXXXcXpXXXXXXXXXX-196993935.jpg" width="228" height="228" alt="" /></a></div></div>';
 
         if($lid == 1 && $bid == 0){
             $str = '<div class="productinfo"><div class="right_search"><div class="wrapper_box wrapper_box_btn_group"><a href="javascript:;" class="ysc_btn select" id="cldata"><i></i>我喜欢</a><a href="javascript:;" class="ygm_btn" id="buydata"><i></i>已购买</a></div><div class="wrapper_box wrapper_box_search"><select name="sequence" id="gorder"><option value="2" '.$sel2.'>最新商品</option><option value="3" '.$sel3.'>热销商品</option><option value="1" '.$sel1.'>库存排序</option><option value="4" '.$sel4.'>价格由低到高</option><option value="5" '.$sel5.'>价格由高到低</option></select></div></div></div>';
