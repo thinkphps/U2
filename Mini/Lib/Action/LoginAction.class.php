@@ -288,6 +288,17 @@ class LoginAction extends Action{
         import('ORG.Util.Image');
         Image::buildImageVerify();
     }
-
+    public function registerVery(){
+        import('ORG.Util.Image');
+        Image::buildImageVerify($length=4, $mode=1, $type='png', $width=48, $height=24, $verifyName='rverify');
+    }
+    public function check_registr_very(){
+        if(session('rverify') != md5($_POST['verify2'])) {
+            $login_arr = array('code'=>-2,'msg'=>'请填写正确的验证码');
+        }else{
+           $login_arr = array('code'=>1);
+        }
+        $this->ajaxReturn($login_arr,'JSON');
+    }
 }
 ?>

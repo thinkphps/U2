@@ -2197,10 +2197,6 @@ a.index-archor{
     /*color: #606060;*/
     /*text-decoration: underline;*/
 /*}*/
-.mini-control a:hover{
-    color: #F7F5F5;
-    /*text-decoration: underline;*/
-}
 .mini-control-tips,a.mini-clause-btn{
     color: #f00;
     height: 19px;
@@ -2220,7 +2216,7 @@ a.index-archor{
 }
 .mini-clause{
     width: 414px;
-    height: 372px;
+    height: 395px;
     margin: -210px 0 0 -215px;
 }
 .mini-clause div{

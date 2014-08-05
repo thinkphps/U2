@@ -95,12 +95,12 @@ button,label{cursor:pointer; }
 
 /*我的优衣柜- 标题*/
 .my_yyg_title{ width:200px; text-align:center; position:absolute; top:35px; left:50%; margin-left:-100px; z-index:10;}
-.my_yyg_title h2{ font-size:26px; color:#676767; font-weight:normal;}
+.my_yyg_title a.mysyj{ font-size:26px; color:#676767; font-weight:normal;}
+.my_yyg_title a.mysyj:hover{cursor: pointer;color:red;}
 .my_yyg_title a.change_yf{ display:block; width:80px; height:30px; line-height:30px; margin:7px auto; background:#ff0000; color:#FFF; font-size:14px;}
 .my_yyg_title a.change_yf:hover{ background:#900;}
 .my_yyg_title p{ color:#333;}
 .my_yyg_title a.chother{background:url("../images/zk_btn.png") no-repeat scroll 0 -20px rgba(0, 0, 0, 0);height:20px;width:20px;left:19%;top:79%;position: absolute;}
-
 /*我的优衣柜- 模特*/
 /*.my_yyg_model{ width:960px; margin:0 auto; }*/
 /*.model{ float:left; width:240px; height:550px; margin:100px 0 0 0;cursor: pointer;overflow: hidden}*/
@@ -770,10 +770,10 @@ a.mini-kv-add{width: 74px;height: 26px;top: 134px;left: 58px;display: block;colo
 .user_l_box .mini-control-tips {
     float: left;}
 
-.youhui{ width:270px; height:60px; position:absolute; right:15px; top:15px;}
+.youhui{ width:320px; height:60px; position:absolute; right:15px; top:15px;}
 .youhui a.youhui_icon{ display:block; width:68px; height:60px; background:url(../images/youhui_icon.png) 0 0 no-repeat; position:absolute;right:0; top:0;}
 .youhui a.youhui_icon_block{  position:absolute;right:0; top:0;display:block; width:68px; height:60px; cursor: default;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);background:url(../images/youhui_icon.png) 0 0 no-repeat;background-color: rgba(0,0,0,.5);}
-.youhui div#youhui_msg{ display:block; width:170px; height:58px; background:#FFF; padding:2px 88px 0px 5px; color:#666;text-align: center;background-color:rgba(243, 243, 243, 0.5);filter: Alpha(Opacity=50);}
+.youhui div#youhui_msg{ display:block; width:240px; height:58px; background:#FFF; padding:2px 88px 0px 5px; color:#666;text-align: center;background-color:rgba(243, 243, 243, 0.5);filter: Alpha(Opacity=50);}
 div#youhui_msg #youhuim{font-size: 13px;line-height: 22px; margin: 0 auto 10px;}
 div#youhui_msg button{background-position: 0 0;width: 60px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);margin-right:5px;}
 div#youhui_msg #youhuit{width:200px;float:left;margin-top:3px;}
