@@ -2,169 +2,6 @@
  * Created by jack.wu on 14-4-11.
  */
 
-
-
-/*
- * L1 animated rollover plugin
- */
-(function($){
-    $.fn["animatedRollover"] = function(options){
-        // settings
-        var settings = $.extend({
-            duration:350
-        }, options);
-
-        // main
-        this.each(function(){
-            $(this).hover(
-                function(){
-                    $(this)
-                        .find(".overlay")
-                        .stop()
-                        .css({left:-690})
-                        .animate({left:-230}, settings.duration, "easeOutQuart");
-                },
-                function(){
-                    $(this)
-                        .find(".overlay")
-                        .stop()
-                        .animate({left:230}, settings.duration*0.6, "easeInCubic");
-                }
-            );
-        });
-        return this;
-    };
-})(jQuery);
-
-/*
- * L1 uniqlo logo allocation plugin
- */
-(function($){
-
-    $.fn["logoAllocation"] = function(options){
-        // settings
-
-
-
-        var settings = $.extend({
-            // settings no logo
-            "cofMin"  : 400,
-            "cofMax"  : 600,
-            "retryMax":10
-        }, options);
-
-        var _content_logo_allocations = [];
-        var _content_logo_element = $("<li />")
-            .addClass("logo_block")
-            .addClass("contentH10")
-            .css({display:"none"});
-
-        // main
-        this.each(function(i, elem){
-
-            // 4-6??????????????1??
-            var cof = Math.floor(Math.random()*(settings.cofMax-settings.cofMin+1))+settings.cofMin;
-            var len = $(this).find(">li").length;
-            var cnt = Math.floor(len/cof);
-
-            for(var j=0; j<cnt; j++){
-                var k, h, r = settings.retryMax;
-
-                while(true){
-                    k = cof*j+j+1;
-                    k += Math.floor(Math.random()*cof)+1;
-                    // ?¤ã?????????????????·ã?ç¿»è¨³
-                    h = 0;
-                    $(this)
-                        .find(">li")
-                        .each(function(i,elem){
-                            h+= ($(this).hasClass("contentH05"))?0:
-                                ($(this).hasClass("contentH10"))?1:2;
-                            if(k==i+1){
-                                h++;
-                                return false;
-                            }
-                        });
-                    // æ¨?¸¦?³ã????????????????ç·?????å®?
-                    if($.inArray(h, _content_logo_allocations)!=-1){
-                        $.log("????£ã???: "+i.toString()+"-"+j.toString());
-                        r--;
-                        if(r>0) continue;
-                    }
-                    break;
-                }
-                if(r>0){
-                    _content_logo_allocations.push(h);
-                    $(this)
-                        .find(">li:nth-child("+k.toString()+")")
-                        //.after("<li class='logo_block contentH10'></li>");
-                        .after(_content_logo_element.clone());
-                }
-            }
-        });
-
-        if($(".id_top").hasClass("selected")){
-            // ie fix
-            if(!$.support.opacity){
-                $(".id_content_blocks .logo_block").show();
-            }else{
-                $(".id_content_blocks .logo_block").slideDown(600, "easeOutQuint");
-            }
-        }
-        $.log(_content_logo_allocations);
-        return this;
-    };
-})(jQuery);
-
-/*
- * L1 image crossfade plugin
- */
-(function($){
-    $.fn["crossFade"] = function(options){
-        // settings
-        var settings = $.extend({
-            "selector" : ">a>img:odd",
-            "duration" : 400,
-            //"interval" : 1330
-            "interval" : 2666
-        }, options);
-
-        // ie fix
-        if(!$.support.opacity) settings.interval *= 1.5;
-
-        // main
-        var $target = $(this).filter(":visible").find(settings.selector);
-        var _timer  = setInterval(function(){
-            $target.stop(true, true).fadeToggle(settings.duration, "easeInOutQuart");
-        },settings.interval);
-        return this;
-    };
-})(jQuery);
-
-/*
- * animated page top plugin
- */
-(function($){
-    $.fn["animatedPageTop"] = function(options){
-        // settings
-        var settings = $.extend({
-        }, options);
-
-        // main
-        this.each(function(){
-            $(this).click(function(){
-                //$(window).scrollTop(0);
-                $("html,body").animate({scrollTop:0}, "slow", "easeOutQuart");
-                $(this).blur();
-                return false;
-            });
-        });
-        return this;
-    };
-})(jQuery);
-
-
-
 //var jsonpHomeUrl = 'http://localhost/U2/index.php/Index';
 //var tmplPath = 'http://localhost/U2/Home/Tpl/Public/';
 //var baseurl='http://localhost/U2/';
@@ -208,12 +45,14 @@ var timer,loadid = 0;
             try
             {
                 var time1 =  setInterval(function(){
-                    if($(".id_content_blocks>ul").length > 0){
-                        $(".id_content_blocks>ul").logoAllocation();
-                        $(".id_content_blocks>ul>li").animatedRollover();
-                        $(".id_content_blocks .contentCrossFade").crossFade();
-                        $(".id_goPageTop>a").animatedPageTop();
-                        clearInterval(time1);
+                    if( typeof logoAllocation === 'function' ){
+                        if($(".id_content_blocks>ul").length > 0){
+                            $(".id_content_blocks>ul").logoAllocation();
+                            $(".id_content_blocks>ul>li").animatedRollover();
+                            $(".id_content_blocks .contentCrossFade").crossFade();
+                            $(".id_goPageTop>a").animatedPageTop();
+                            clearInterval(time1);
+                        }
                     }
                 }, 600);
             }
