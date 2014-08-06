@@ -40,6 +40,25 @@ var timer,loadid = 0;
                 }
             });
 
+
+            //如果天猫插件未绑定，则每隔0.6秒绑一次，直到绑上结束
+            try
+            {
+                var time1 =  setInterval(function(){
+                    if($(".id_content_blocks>ul").length > 0){
+                        $(".id_content_blocks>ul").logoAllocation();
+                        $(".id_content_blocks>ul>li").animatedRollover();
+                        $(".id_content_blocks .contentCrossFade").crossFade();
+                        $(".id_goPageTop>a").animatedPageTop();
+                        clearInterval(time1);
+                    }
+                }, 600);
+            }
+            catch (e)
+            {
+
+            }
+
         },
 
         sendcity :function(pro,city){
