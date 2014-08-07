@@ -5,7 +5,7 @@
  * Time: 上午11:40
  * To change this template use File | Settings | File Templates.
  */
-//jQuery(function($){
+//jQuery(function($BIGO){
 
 var weather = {
     currentOption : "",
@@ -88,23 +88,23 @@ var weather = {
         if(isMapChange == 0){
             //kimi判断是否有新店开张
             if(newstorre){
-                $('.preferential_1').remove();
-                $('#tablink1').remove();
-                $('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+newstorre+'</a></li>');
-                $('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
+                $BIGO('.preferential_1').remove();
+                $BIGO('#tablink1').remove();
+                $BIGO('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+newstorre+'</a></li>');
+                $BIGO('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
 
             }else{
-                $('.preferential_1').remove();
-                $('#tablink1').remove();
+                $BIGO('.preferential_1').remove();
+                $BIGO('#tablink1').remove();
             }
             if(!sname && !tradetime){
                 var tv = '暂时还没有店铺信息，请选择其他地区';
             }else{
                 var tv = '<span id="tipshopid" data-shopid="'+shopid+'">'+sname+'</span><br>'+tradetime;
             }
-            $('#shopid').html(tv);
+            $BIGO('#shopid').html(tv);
             stop_autochange();
-            var lilength = $('#scrollDiv').children().length;
+            var lilength = $BIGO('#scrollDiv').children().length;
             slength = 3-lilength+1;
             counter = 3-lilength;
             loadtabs[0] = 3-lilength+1;
@@ -118,9 +118,9 @@ var weather = {
             if (autochangemenu != 0) {
                 start_autochange();
             }
-            $('#a_shopinfo').html('您附近的优衣库门店');
-            $('#shopInfo').show();
-            $('#a_shopinfo2').hide();
+            $BIGO('#a_shopinfo').html('您附近的优衣库门店');
+            $BIGO('#shopInfo').show();
+            $BIGO('#a_shopinfo2').hide();
         }
     },
     setText : function(info, option){
@@ -147,47 +147,47 @@ var weather = {
         }
 
         //kimi
-        $('#nio-city').text(info.cityname);
-        $('#cinpinyin').text(info.pinyin);
-        $('#nio-tip').html(this.tips[arrIndex]);
+        $BIGO('#nio-city').text(info.cityname);
+        $BIGO('#cinpinyin').text(info.pinyin);
+        $BIGO('#nio-tip').html(this.tips[arrIndex]);
 
         //kimi
         //天气图标
-        $('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) )});
-        $('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) )});
-        $('#title_day2').attr({'title': info['weather3'].wt, 'class': 'nio-' + (parseInt(info['weather3'].di) )});
-        $('#title_day3').attr({'title': info['weather4'].wt, 'class': 'nio-' + (parseInt(info['weather4'].di) )});
-        $('#title_day4').attr({'title': info['weather5'].wt, 'class': 'nio-' + (parseInt(info['weather5'].di) )});
+        $BIGO('#title_day0').attr({'title': info['weather1'].wt, 'class': 'nio-' + (parseInt(info['weather1'].di) )});
+        $BIGO('#title_day1').attr({'title': info['weather2'].wt, 'class': 'nio-' + (parseInt(info['weather2'].di) )});
+        $BIGO('#title_day2').attr({'title': info['weather3'].wt, 'class': 'nio-' + (parseInt(info['weather3'].di) )});
+        $BIGO('#title_day3').attr({'title': info['weather4'].wt, 'class': 'nio-' + (parseInt(info['weather4'].di) )});
+        $BIGO('#title_day4').attr({'title': info['weather5'].wt, 'class': 'nio-' + (parseInt(info['weather5'].di) )});
 
         //星期几
-        $('#week_day0').text(time[0].day);
-        $('#week_day1').text(time[1].day);
-        $('#week_day2').text(time[2].day);
-        $('#week_day3').text(time[3].day);
-        $('#week_day4').text(time[4].day);
+        $BIGO('#week_day0').text(time[0].day);
+        $BIGO('#week_day1').text(time[1].day);
+        $BIGO('#week_day2').text(time[2].day);
+        $BIGO('#week_day3').text(time[3].day);
+        $BIGO('#week_day4').text(time[4].day);
 
         //最高温
-        $('#h_day0').html(info['weather1'].ht);
-        $('#h_day1').html(info['weather2'].ht);
-        $('#h_day2').html(info['weather3'].ht);
-        $('#h_day3').html(info['weather4'].ht);
-        $('#h_day4').html(info['weather5'].ht);
+        $BIGO('#h_day0').html(info['weather1'].ht);
+        $BIGO('#h_day1').html(info['weather2'].ht);
+        $BIGO('#h_day2').html(info['weather3'].ht);
+        $BIGO('#h_day3').html(info['weather4'].ht);
+        $BIGO('#h_day4').html(info['weather5'].ht);
 
         //最低温
-        $('#l_day0').html(info['weather1'].lt+'℃');
-        $('#l_day1').html(info['weather2'].lt+'℃');
-        $('#l_day2').html(info['weather3'].lt+'℃');
-        $('#l_day3').html(info['weather4'].lt+'℃');
-        $('#l_day4').html(info['weather5'].lt+'℃');
+        $BIGO('#l_day0').html(info['weather1'].lt+'℃');
+        $BIGO('#l_day1').html(info['weather2'].lt+'℃');
+        $BIGO('#l_day2').html(info['weather3'].lt+'℃');
+        $BIGO('#l_day3').html(info['weather4'].lt+'℃');
+        $BIGO('#l_day4').html(info['weather5'].lt+'℃');
 
         //文字描述
-        $('#name_day0').html(info['weather1'].wt);
-        $('#name_day1').html(info['weather2'].wt);
-        $('#name_day2').html(info['weather3'].wt);
-        $('#name_day3').html(info['weather4'].wt);
-        $('#name_day4').html(info['weather5'].wt);
+        $BIGO('#name_day0').html(info['weather1'].wt);
+        $BIGO('#name_day1').html(info['weather2'].wt);
+        $BIGO('#name_day2').html(info['weather3'].wt);
+        $BIGO('#name_day3').html(info['weather4'].wt);
+        $BIGO('#name_day4').html(info['weather5'].wt);
 
-        $('.weather').show();
+        $BIGO('.weather').show();
 
         this[option.city] = info['cityname'];
         var temper = {low: weatherinfo.lt,
@@ -199,29 +199,29 @@ var weather = {
     setBackground : function(str){
         this.removeBackgroundClass();
         if(str.indexOf("雪") >= 0){
-            $("#div_header").addClass("dr_header_bg5")
-            $("#div_main").addClass("dr_main_con_bg5")
+            $BIGO("#div_header").addClass("dr_header_bg5")
+            $BIGO("#div_main").addClass("dr_main_con_bg5")
         }
         else if(str.indexOf("大雨") >= 0 || str.indexOf("暴雨") >= 0 ||
             str.indexOf("雷雨") >= 0 || str.indexOf("冰雹") >= 0 ){
-            $("#div_header").addClass("dr_header_bg4")
-            $("#div_main").addClass("dr_main_con_bg4")
+            $BIGO("#div_header").addClass("dr_header_bg4")
+            $BIGO("#div_main").addClass("dr_main_con_bg4")
         }
         else if(str.indexOf("雨") >= 0){
-            $("#div_header").addClass("dr_header_bg3")
-            $("#div_main").addClass("dr_main_con_bg3")
+            $BIGO("#div_header").addClass("dr_header_bg3")
+            $BIGO("#div_main").addClass("dr_main_con_bg3")
         }
         else if(str == "晴"){
-            $("#div_header").addClass("dr_header_bg1")
-            $("#div_main").addClass("dr_main_con_bg1")
+            $BIGO("#div_header").addClass("dr_header_bg1")
+            $BIGO("#div_main").addClass("dr_main_con_bg1")
         }
         else if(str == "阴"){
-            $("#div_header").addClass("dr_header_bg6")
-            $("#div_main").addClass("dr_main_con_bg6")
+            $BIGO("#div_header").addClass("dr_header_bg6")
+            $BIGO("#div_main").addClass("dr_main_con_bg6")
         }
         else{
-            $("#div_header").addClass("dr_header_bg2")
-            $("#div_main").addClass("dr_main_con_bg2")
+            $BIGO("#div_header").addClass("dr_header_bg2")
+            $BIGO("#div_main").addClass("dr_main_con_bg2")
         }
     },
     jsonpFcuntion : function(url){
@@ -237,9 +237,9 @@ var weather = {
     },
     removeBackgroundClass:function(){
         for(var i = 1;i<=6;i++){
-            if($("#div_header").hasClass("dr_header_bg"+ i) && $("#div_main").hasClass("dr_main_con_bg"+ i)){
-                $("#div_header").removeClass("dr_header_bg"+ i);
-                $("#div_main").removeClass("dr_main_con_bg"+ i);
+            if($BIGO("#div_header").hasClass("dr_header_bg"+ i) && $BIGO("#div_main").hasClass("dr_main_con_bg"+ i)){
+                $BIGO("#div_header").removeClass("dr_header_bg"+ i);
+                $BIGO("#div_main").removeClass("dr_main_con_bg"+ i);
                 break;
             }
         }
@@ -285,7 +285,7 @@ var weather = {
 //weather.init();
 
 /*=================================*/
-// $.weather.init({
+// $BIGO.weather.init({
 // 		city : city,
 // 		callback: function(city, temper, info){
 // 			// city 城市名
@@ -298,7 +298,7 @@ var weather = {
 // })
 /*=================================*/
 
-//    $.weather = weather;
+//    $BIGO.weather = weather;
 
 /*== mini-city ==*/
 
