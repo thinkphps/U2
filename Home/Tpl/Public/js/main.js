@@ -51,6 +51,7 @@ var timer,loadid = 0;
         },
 
 
+
         //l4推荐模特图绑定
         getSuits :function(){
             var gender = $('#ulgender').find('.select').data('gender');
