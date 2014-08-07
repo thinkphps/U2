@@ -18,13 +18,12 @@ var list = [
 ]
 
 var arr = [];
+arr.push('<link href="http://localhost/u2/Home/Tpl/Public/css/dressing_room.css" rel="stylesheet" type="text/css" />')
+arr.push('<script type="text/javascript" src="http://localhost/u2/Home/Tpl/Public/js/jquery.js"></script>')
+arr.push('<script type="text/javascript">$BIGO = $.noConflict(true);</script>')
 for(var i = 0, ln = list.length; i < ln; i++){
-    arr.push('<');
-    arr.push('script src="'+ list[i] + '"' );
-    arr.push('>');
-    arr.push('</');
-    arr.push('script');
-    arr.push('>');
+    arr.push('<script src="'+ list[i] + '">' );
+    arr.push('</script>');
 }
 if(arr.length > 0){
     document.write(arr.join('') );
