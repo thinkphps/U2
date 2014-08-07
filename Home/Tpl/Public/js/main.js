@@ -39,6 +39,23 @@ var timer,loadid = 0;
                     }
                 }
             });
+
+            try{
+                var interval =  setInterval(function(){
+                    if($.fn['logoAllocation']){
+                        if($(".id_content_blocks>ul").length > 0){
+                            $(".id_content_blocks>ul").logoAllocation();
+                            $(".id_content_blocks>ul>li").animatedRollover();
+                            $(".id_content_blocks .contentCrossFade").crossFade();
+                            $(".id_goPageTop>a").animatedPageTop();
+                            clearInterval(interval);
+                        }
+                    }
+                }, 600);
+            }
+            catch(e){
+                console.log('interval');
+            }
         },
 
         sendcity :function(pro,city){
