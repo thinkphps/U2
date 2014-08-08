@@ -1,4 +1,4 @@
-(function($BIGO){
+(function($){
     // global options
     var gopt = {};
     var methods = {
@@ -35,10 +35,10 @@
             gopt = opt;
             var isScrolling = false;
             // Options are extended with user specified options
-            if (options){$BIGO.extend(opt, options);}
+            if (options){$.extend(opt, options);}
             // main loop for selected elements
             return this.each(function(){
-                var el = $BIGO(this);
+                var el = $(this);
                 if(opt.items){
                     var imgs = el.find(opt.items);
                 }else{
@@ -77,53 +77,53 @@
                 // add click events
                 if(imgs.length <= opt.scalethreshold && opt.staticbelowthreshold){
                     imgs.each(function(index){
-                        $BIGO(this).unbind('click.coverscroll');
-                        $BIGO(this).bind('click.coverscroll', function(){
-                            if($BIGO(this).hasClass(opt.selectedclass)){return true;}
+                        $(this).unbind('click.coverscroll');
+                        $(this).bind('click.coverscroll', function(){
+                            if($(this).hasClass(opt.selectedclass)){return true;}
                             selectItem(el, this);
-//                    $BIGO(this).find(".gotoroom").show();
-                            $BIGO(this).addClass(opt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+//                    $(this).find(".gotoroom").show();
+                            $(this).addClass(opt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                         //dean
-                        $BIGO(this).unbind('mouseover');
-                        $BIGO(this).on('mouseover', function(){
-                            if($BIGO(this).hasClass(opt.selectedclass)){return true;}
+                        $(this).unbind('mouseover');
+                        $(this).on('mouseover', function(){
+                            if($(this).hasClass(opt.selectedclass)){return true;}
                             selectItem(el, this);
 //                    setTimeout(function(){
-//                        $BIGO(this).addClass(opt.selectedclass);
-//                        $BIGO(this).find(".gotoroom").show();
+//                        $(this).addClass(opt.selectedclass);
+//                        $(this).find(".gotoroom").show();
 //
 //                    }, 100);
 
-//                    $BIGO(this).find(".gotoroom").show();
-                            $BIGO(this).addClass(opt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+//                    $(this).find(".gotoroom").show();
+                            $(this).addClass(opt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                     });
                 }else{
                     imgs.each(function(index){
 
-                        $BIGO(this).unbind('click.coverscroll');
-                        $BIGO(this).bind('click.coverscroll', function(){
-                            if($BIGO(this).hasClass(opt.selectedclass)){return true;}
+                        $(this).unbind('click.coverscroll');
+                        $(this).bind('click.coverscroll', function(){
+                            if($(this).hasClass(opt.selectedclass)){return true;}
                             showItems(el,  index,opt);
 
-//                    $BIGO(this).find(".gotoroom").show();
-                            $BIGO(this).addClass(opt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+//                    $(this).find(".gotoroom").show();
+                            $(this).addClass(opt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                         //dean
-                        $BIGO(this).unbind('mouseover');
+                        $(this).unbind('mouseover');
 
-                        $BIGO(this).bind('mouseover', function(){
-                            if($BIGO(this).hasClass(opt.selectedclass)){return true;}
+                        $(this).bind('mouseover', function(){
+                            if($(this).hasClass(opt.selectedclass)){return true;}
                             showItems(el,  index,opt);
-                            $BIGO(this).addClass(opt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+                            $(this).addClass(opt.selectedclass);
+                            $(this).find(".gotoroom").show();
 //                    setTimeout(function(){
-//                        $BIGO(this).addClass(opt.selectedclass);
-//                        $BIGO(this).find(".gotoroom").show();
+//                        $(this).addClass(opt.selectedclass);
+//                        $(this).find(".gotoroom").show();
 //
 //                    }, 100);
 
@@ -138,16 +138,16 @@
                 el.on('mouseleave',function(){
 
                     if(gopt.items){
-                        var imgs = $BIGO(this).find(gopt.items);
+                        var imgs = $(this).find(gopt.items);
                     }else{
-                        var imgs = $BIGO(this).find('img');
+                        var imgs = $(this).find('img');
                     }
 
                     var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
                     var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
                     var imglefts = countimglefts(el, imgs);
                     for(i=mbegin;i<mend;i++){
-                        var citem = $BIGO(imgs.get(i));
+                        var citem = $(imgs.get(i));
                         citem.removeClass(opt.selectedclass);
                         citem.find(".gotoroom").hide();
                         var css = {
@@ -164,7 +164,7 @@
                         imgs.each(function(ind){
 
                             zi = zi + ind;
-                            $BIGO(this).css('z-index',zi);
+                            $(this).css('z-index',zi);
                         });
                     },100);
                 })
@@ -232,16 +232,16 @@
         // select next
         'next':function(callback){
             //var opt = {};
-            //if (options){$BIGO.extend(opt, options);}
+            //if (options){$.extend(opt, options);}
             return this.each(function(){
-                var el = $BIGO(this);
+                var el = $(this);
                 el.find('.'+gopt.selectedclass+':eq(0)').next().trigger('click');
             });
         },
         // select previous
         'prev':function(){
             return this.each(function(){
-                var el = $BIGO(this);
+                var el = $(this);
                 el.find('.'+gopt.selectedclass+':eq(0)').prev().trigger('click');
             });
         },
@@ -253,7 +253,7 @@
                 return;
             }
             //hide this first
-            var lcitem = $BIGO(imgs.get(gopt.step.begin));
+            var lcitem = $(imgs.get(gopt.step.begin));
             var css = {
                 'width':234,
                 'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
@@ -269,7 +269,7 @@
             var mintop = (gopt.mintop===0||gopt.mintop > 0)?gopt.mintop:15; //dean
             if(insertid){
                 for(i=insertid;i<imgs.length;i++){
-                    var citem = $BIGO(imgs.get(i));
+                    var citem = $(imgs.get(i));
                     citem.css({
                         'position':'absolute',
                         'left': w+10,
@@ -281,7 +281,7 @@
             // take care of z-index
             setTimeout(function(){
                 for(i=mbegin;i<mend;i++){
-                    var citem = $BIGO(imgs.get(i));
+                    var citem = $(imgs.get(i));
                     mleft = (i==mbegin)?mleft: Math.round(mleft + 149 * 0.94)-3;
 
                     if(i==mend-1){
@@ -302,7 +302,7 @@
                 var zi = 100;
                 imgs.each(function(ind){
                     zi = zi + ind;
-                    $BIGO(this).css('z-index',zi);
+                    $(this).css('z-index',zi);
                 });
             },50);
 
@@ -311,43 +311,43 @@
                 if(imgs.length <= gopt.scalethreshold && gopt.staticbelowthreshold){
                     imgs.each(function(index){
                         if(index<insertid){return true;}
-                        $BIGO(this).unbind('click.coverscroll');
-                        $BIGO(this).bind('click.coverscroll', function(){
-                            if($BIGO(this).hasClass(gopt.selectedclass)){return true;}
+                        $(this).unbind('click.coverscroll');
+                        $(this).bind('click.coverscroll', function(){
+                            if($(this).hasClass(gopt.selectedclass)){return true;}
                             selectItem(el, this);
-    //                    $BIGO(this).find(".gotoroom").show();
-                            $BIGO(this).addClass(gopt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+    //                    $(this).find(".gotoroom").show();
+                            $(this).addClass(gopt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                         //dean
-                        $BIGO(this).unbind('mouseover');
-                        $BIGO(this).on('mouseover', function(){
-                            if($BIGO(this).hasClass(gopt.selectedclass)){return true;}
+                        $(this).unbind('mouseover');
+                        $(this).on('mouseover', function(){
+                            if($(this).hasClass(gopt.selectedclass)){return true;}
                             selectItem(el, this);
-                            $BIGO(this).addClass(gopt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+                            $(this).addClass(gopt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                     });
                 }else{
                     imgs.each(function(index){
                         if(index<insertid){return true;}
-                        $BIGO(this).unbind('click.coverscroll');
-                        $BIGO(this).bind('click.coverscroll', function(){
-                            if($BIGO(this).hasClass(gopt.selectedclass)){return true;}
+                        $(this).unbind('click.coverscroll');
+                        $(this).bind('click.coverscroll', function(){
+                            if($(this).hasClass(gopt.selectedclass)){return true;}
                             showItems(el,  index,gopt);
 
-    //                    $BIGO(this).find(".gotoroom").show();
-                            $BIGO(this).addClass(gopt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+    //                    $(this).find(".gotoroom").show();
+                            $(this).addClass(gopt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
                         //dean
-                        $BIGO(this).unbind('mouseover');
+                        $(this).unbind('mouseover');
 
-                        $BIGO(this).bind('mouseover', function(){
-                            if($BIGO(this).hasClass(gopt.selectedclass)){return true;}
+                        $(this).bind('mouseover', function(){
+                            if($(this).hasClass(gopt.selectedclass)){return true;}
                             showItems(el,  index,gopt);
-                            $BIGO(this).addClass(gopt.selectedclass);
-                            $BIGO(this).find(".gotoroom").show();
+                            $(this).addClass(gopt.selectedclass);
+                            $(this).find(".gotoroom").show();
                         });
 
                     });
@@ -365,7 +365,7 @@
             var mbegin =  (gopt.step.begin===0||gopt.step.begin > 0)?gopt.step.begin:0;
             var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit-1):0;
 
-            var hcitem = $BIGO(imgs.get(mend));
+            var hcitem = $(imgs.get(mend));
             var css = {
                 'width':234,
                 'transform': 'matrix(1, 0, 0, 1, 0, 0) scale(1)',
@@ -378,7 +378,7 @@
             var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
             var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
             for(i=mbegin;i<mend;i++){
-                var citem = $BIGO(imgs.get(i));
+                var citem = $(imgs.get(i));
                 mleft = (i==mbegin)?mleft: Math.round(mleft + 149 * 0.94)-3;
 
                 if(i==mbegin){
@@ -399,7 +399,7 @@
                 imgs.each(function(ind){
 
                     zi = zi + ind;
-                    $BIGO(this).css('z-index',zi);
+                    $(this).css('z-index',zi);
                 });
             },100);
         }
@@ -418,7 +418,7 @@
 //        }
         var minscale =  0.6;
         var angle = 45;
-        var middle = $BIGO(imgs.get(mindex));
+        var middle = $(imgs.get(mindex));
         // take care of the middle item
         var minfactor = (opt.minfactor===0||opt.minfactor > 0)?opt.minfactor:5; //dean
         var mintop = (opt.mintop===0||opt.mintop > 0)?opt.mintop:15; //dean
@@ -466,7 +466,7 @@
         var imgwithlist = new Array();
         var scale = minscale;
         for(i=mindex-1;i>=0;i--){
-            var citem = $BIGO(imgs.get(i));
+            var citem = $(imgs.get(i));
             cd = cd - minfactor;
             if(!sf){
                 cleft = Math.round(cleft - cd/distrib + minfactor); // diff
@@ -515,7 +515,7 @@
         if(!isinit){
             var mleft = minfactor;
             for(i=mbegin;i<=mindex-1;i++){
-                var citem = $BIGO(imgs.get(i));
+                var citem = $(imgs.get(i));
                 if(i==mbegin){
                     citem.css('left',mleft);
                 }else{
@@ -533,7 +533,7 @@
         var scale = minscale;
         imgwithlist = new Array();
         for(i=mindex+1;i<imgs.length;i++){
-            var citem = $BIGO(imgs.get(i));
+            var citem = $(imgs.get(i));
             cd = cd - minfactor;
             if(!sf){
                 cleft = Math.round(cleft + cd/distrib); // diff
@@ -582,7 +582,7 @@
         if(!isinit){
             var mleft = imglefts[mindex+1-mbegin]
             for(i=mindex+1;i<mend;i++){
-                var citem = $BIGO(imgs.get(i));
+                var citem = $(imgs.get(i));
                 if(i==mindex+1){
                     citem.css('left',mleft);
                 }else{
@@ -597,13 +597,13 @@
             var zi = 100;
             imgs.each(function(ind){
                 if(mindex>0){zi = zi + ind;}else{zi = zi - ind;}
-                $BIGO(this).css('z-index',zi);
+                $(this).css('z-index',zi);
             });
 //            dean
             if(mindex>0){
                 imgs.each(function(ind){
                     if(ind==mindex){
-                        $BIGO(this).css('z-index',zi+1);
+                        $(this).css('z-index',zi+1);
                     }
                 });
             }
@@ -612,7 +612,7 @@
     };
     function selectItem(el, elem){
 
-        elem = $BIGO(elem);
+        elem = $(elem);
         var imgs;
         // all items collection
         if(opt.items){
@@ -635,7 +635,7 @@
         var mend =  (gopt.step.limit > 0)? (mbegin + gopt.step.limit):0;
         var mleft =  (gopt.minfactor===0||gopt.minfactor > 0)?gopt.minfactor:5;
         for(i=mbegin;i<mend;i++){
-//              var citem = $BIGO(imgs.get(i));
+//              var citem = $(imgs.get(i));
             if(i==mend-1){allimglen = allimglen + 149}
             else{allimglen = allimglen + 149 * 0.94}
         }
@@ -644,7 +644,7 @@
 //          }
         imglefts.push(mleft)
         for(i=mbegin;i<mend-1;i++){
-//              var citem = $BIGO(imgs.get(i));
+//              var citem = $(imgs.get(i));
             mleft = Math.round(mleft + 149 * 0.94);
             mleft -= 3;
             imglefts.push(mleft);
@@ -652,35 +652,35 @@
         return imglefts;
     };
     // generic jQuery plugin skeleton
-    $BIGO.fn.coverscroll = function(method){
+    $.fn.coverscroll = function(method){
         if (methods[method]){
             return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
         }else if(typeof method === 'object' || ! method ) {
             return methods.init.apply(this, arguments);
         }else{
-            $BIGO.error( 'Method ' +  method + ' does not exist on this plugin' );
+            $.error( 'Method ' +  method + ' does not exist on this plugin' );
         }
     };
 
     //dean
-    $BIGO.fn.movenext = function(insertid){
+    $.fn.movenext = function(insertid){
 
         if(gopt.items){
-            var imgs = $BIGO(this).find(gopt.items);
+            var imgs = $(this).find(gopt.items);
         }else{
-            var imgs = $BIGO(this).find('img');
+            var imgs = $(this).find('img');
         }
-        return methods.movenext(imgs,$BIGO(this),insertid)
+        return methods.movenext(imgs,$(this),insertid)
     };
     //dean
-    $BIGO.fn.moveprev = function(){
+    $.fn.moveprev = function(){
 
         if(gopt.items){
-            var imgs = $BIGO(this).find(gopt.items);
+            var imgs = $(this).find(gopt.items);
         }else{
-            var imgs = $BIGO(this).find('img');
+            var imgs = $(this).find('img');
         }
-        return methods.moveprev(imgs,$BIGO(this))
+        return methods.moveprev(imgs,$(this))
 
     };
-})($BIGO);
+})(jQuery);

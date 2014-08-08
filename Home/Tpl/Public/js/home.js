@@ -1,10 +1,10 @@
 /**
  * Created by jack on 14-3-26.
  */
-$BIGO(function($BIGO){
-    $BIGO.fn.lazyload = function(){
+jQuery(function($){
+    $.fn.lazyload = function(){
         return this.each(function(){
-            var that = $BIGO(this),
+            var that = $(this),
                 parent = that.parent(),
                 index = parent.index(),
                 len = parent.parent('ul').find('li').length;
@@ -16,17 +16,17 @@ $BIGO(function($BIGO){
     }
 
     // 图片切换插件
-    $BIGO.fn.nioSlider = function(options){
+    $.fn.nioSlider = function(options){
         return this.each(function(){
-            var that = $BIGO(this)
+            var that = $(this)
             var ul = that.find('ul')
             var prev = that.siblings(options.prev)
             var next = that.siblings(options.next)
-            options = $BIGO.extend({
+            options = $.extend({
                 width : 180,
                 speed : 600,
                 min : 2,
-                callback: $BIGO.noop
+                callback: $.noop
             }, options)
 
             options.callback.call(that)
@@ -56,14 +56,14 @@ $BIGO(function($BIGO){
         })
     }
 
-    // $BIGO easing plugin
-    $BIGO.easing['jswing'] = $BIGO.easing['swing']
+    // jQuery easing plugin
+    jQuery.easing['jswing'] = jQuery.easing['swing']
 
-    $BIGO.extend( $BIGO.easing,
+    jQuery.extend( jQuery.easing,
         {
             def: 'easeOutExpo',
             swing: function (x, t, b, c, d) {
-                return $BIGO.easing[$BIGO.easing.def](x, t, b, c, d)
+                return jQuery.easing[jQuery.easing.def](x, t, b, c, d)
             },
             easeOutExpo: function (x, t, b, c, d) {
                 return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b
@@ -76,11 +76,11 @@ $BIGO(function($BIGO){
     var uniqlo = {                                           // uniqlo全局对象
 
         sliding : false,
-        cabContainer : $BIGO('.mini-cab-container'),
-        netContainer : $BIGO('.mini-net-container'),
-        kvContainer : $BIGO('.mini-kv-container'),
-        indexContainer: $BIGO('.index-slide-container'),
-        body : $BIGO('html, body'),
+        cabContainer : $('.mini-cab-container'),
+        netContainer : $('.mini-net-container'),
+        kvContainer : $('.mini-kv-container'),
+        indexContainer: $('.index-slide-container'),
+        body : $('html, body'),
         scrollTo : function(top){
             this.body.animate({'scrollTop' : top}, 300)
         },
@@ -108,7 +108,7 @@ $BIGO(function($BIGO){
                     this.find("img").lazyload();
                 }
             });
-//            $BIGO('.mini-kv-prev,.mini-kv-next')[($BIGO.weather.sex||0) == 0?'hide':'show']()
+//            $('.mini-kv-prev,.mini-kv-next')[($.weather.sex||0) == 0?'hide':'show']()
             return kv;
         },
         indexSlider : function(){
@@ -133,45 +133,45 @@ $BIGO(function($BIGO){
     uniqlo.indexSlider()
 
     // 导出全局对象供外部使用if need
-    $BIGO.uniqlo = uniqlo
+    $.uniqlo = uniqlo
 
     /* ============ cabnet交互效果 ============= */
 
-    !(function($BIGO){
+    !(function($){
 
         var cabnet = {                                         // 集中声明变量
             list      : [],                                      // 保存已添加的图片id
-            hoverBox  : $BIGO('.mini-net-content'),                 // 图片悬浮框
-            net       : $BIGO('.mini-net'),                       // 右侧net框
-            netConfirm: $BIGO('.mini-net-confirm'),               // 删除确认框
-            netSlide  : $BIGO('.mini-net-slide'),                 // 两个图片切换框
+            hoverBox  : $('.mini-net-content'),                 // 图片悬浮框
+            net       : $('.mini-net'),                       // 右侧net框
+            netConfirm: $('.mini-net-confirm'),               // 删除确认框
+            netSlide  : $('.mini-net-slide'),                 // 两个图片切换框
             netIsEmpty: true,                                    // net默认为空
-            netChoose : $BIGO('a.mini-net-choose'),                  // 挑选衣服按钮
-            cab       : $BIGO('div.mini-cab'),                       // 左侧的cab框
-            cabSlide  : $BIGO('div.mini-cab-slide'),                 // cab-slide框
-            cabTips   : $BIGO('div.mini-cab-tips'),                  // cab提示框
-            cabBuy    : $BIGO('a.mini-cab-buy'),                     // cab购买按钮
-            cabClear  : $BIGO('a.mini-cab-clear'),                   // cab清空按钮
-            cabPrev   : $BIGO('a.mini-cab-prev'),                    // cab-prev按钮
-            cabNext   : $BIGO('a.mini-cab-next'),                    // cab-next按钮
-            cabChoose : $BIGO('form.mini-cab-choose'),               // cab-choose框
+            netChoose : $('a.mini-net-choose'),                  // 挑选衣服按钮
+            cab       : $('div.mini-cab'),                       // 左侧的cab框
+            cabSlide  : $('div.mini-cab-slide'),                 // cab-slide框
+            cabTips   : $('div.mini-cab-tips'),                  // cab提示框
+            cabBuy    : $('a.mini-cab-buy'),                     // cab购买按钮
+            cabClear  : $('a.mini-cab-clear'),                   // cab清空按钮
+            cabPrev   : $('a.mini-cab-prev'),                    // cab-prev按钮
+            cabNext   : $('a.mini-cab-next'),                    // cab-next按钮
+            cabChoose : $('form.mini-cab-choose'),               // cab-choose框
             buyIsShow : false,                                   // cab-choose默认隐藏
-            cabEmpty  : $BIGO('a.mini-cab-empty'),                   // cab-empty框
-            netLike   : $BIGO('a.mini-net-like'),                    // net-like按钮
-            netHad    : $BIGO('a.mini-net-had')                     // net-had按钮
+            cabEmpty  : $('a.mini-cab-empty'),                   // cab-empty框
+            netLike   : $('a.mini-net-like'),                    // net-like按钮
+            netHad    : $('a.mini-net-had')                     // net-had按钮
         }
         cabnet.netEmpty = cabnet.net.find('a.mini-net-empty')  // netSlide提示框
 
-        $BIGO("#w_sq").on("click",function(){
-            $BIGO("#div_main").hide();
-            $BIGO(this).hide();
-            $BIGO("#w_zk").show();
+        $("#w_sq").on("click",function(){
+            $("#div_main").hide();
+            $(this).hide();
+            $("#w_zk").show();
         });
 
-        $BIGO("#w_zk").on("click",function(){
-            $BIGO("#div_main").show();
-            $BIGO(this).hide();
-            $BIGO("#w_sq").show();
+        $("#w_zk").on("click",function(){
+            $("#div_main").show();
+            $(this).hide();
+            $("#w_sq").show();
         });
 
         /* == net交互 == */
@@ -206,8 +206,8 @@ $BIGO(function($BIGO){
 
             if(uniqlo.sliding) return
 
-            var position = $BIGO(this).position()
-            var thisSlide = $BIGO(e.delegateTarget)
+            var position = $(this).position()
+            var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var top = pos === '#cab-top' ? 56 : 322
             var restSlide = thisSlide.siblings('div.mini-net-slide')
@@ -254,7 +254,7 @@ $BIGO(function($BIGO){
 
         cabnet.netLike.add(cabnet.netHad).on('click', function(e){
 
-            $BIGO(this).toggleClass('mini-net-checked')              // '喜欢'与'已买入'的类名切换
+            $(this).toggleClass('mini-net-checked')              // '喜欢'与'已买入'的类名切换
             e.stopPropagation()
 
         })
@@ -330,7 +330,7 @@ $BIGO(function($BIGO){
         }).on('click','input', function(){
 
             var pos = this.getAttribute('pos')
-            this.value = $BIGO(pos).find('img').first().attr('url')
+            this.value = $(pos).find('img').first().attr('url')
 
         }).on('hidden', function(){
 
@@ -370,9 +370,9 @@ $BIGO(function($BIGO){
 
         /* == 内页kv交互 == */
 
-        cabnet.kvSlide = $BIGO('.mini-kv-slide')                // kv-slide框
-        cabnet.kvHover = $BIGO('.product_inf')                // kv-hover框
-        cabnet.kvContent = $BIGO('.inf_con'),
+        cabnet.kvSlide = $('.mini-kv-slide')                // kv-slide框
+        cabnet.kvHover = $('.product_inf')                // kv-hover框
+        cabnet.kvContent = $('.inf_con'),
         cabnet.kvTimer = 0                                     // kv-hover框延迟
         cabnet.kvIsOpen = false                                // kv-hover状态
         cabnet.kvHover.price = cabnet.kvHover.find('strong')   // kv-hover价格
@@ -385,8 +385,8 @@ $BIGO(function($BIGO){
 
             if(uniqlo.sliding) return
 
-            var position = $BIGO(this).position()
-            var thisSlide = $BIGO(e.delegateTarget)
+            var position = $(this).position()
+            var thisSlide = $(e.delegateTarget)
             var pos = thisSlide.data('pos')
             var addBtn = cabnet.kvHover.find('a.mini-kv-add')
             var top = 186;
@@ -426,7 +426,7 @@ $BIGO(function($BIGO){
             cabnet.kvIsOpen = false
         }
 
-        $BIGO("#ulweek,.dr_main_con_sub_nav,.mini-kv-slide,.dr_header").on("mouseenter",hideKvhover);
+        $("#ulweek,.dr_main_con_sub_nav,.mini-kv-slide,.dr_header").on("mouseenter",hideKvhover);
         /* == cab、net、kv系列回调函数 == */
         function addCabCallback(){                             // 添加至左侧的callback
             var id = cabnet.hoverBox.data('id')
@@ -441,7 +441,7 @@ $BIGO(function($BIGO){
                 return alert('这件与您搭配间中的衣物性别不符哦')
             }
 
-            $BIGO(pos).find('ul').html('<li><img ' + ids + src + url + ' /></li>')
+            $(pos).find('ul').html('<li><img ' + ids + src + url + ' /></li>')
 
             cabnet.cab.trigger('add', [pos, id])                 // 触发cab的被添加自定义事件
         }
@@ -470,7 +470,7 @@ $BIGO(function($BIGO){
 
         function cabAjaxCallback(tag, id, src, pos){           // 这里的ajaxCallback只是测试用
             var ul = cabnet.hoverBox.data('rest').find('ul').html() // 待删除
-            $BIGO(pos).siblings('.mini-cab-slide').find('ul').html(ul)  // 待删除
+            $(pos).siblings('.mini-cab-slide').find('ul').html(ul)  // 待删除
 
             console.log(tag)                                     // 图片标签
             console.log(id)                                      // 图片id
@@ -485,13 +485,13 @@ $BIGO(function($BIGO){
             var url = this.getAttribute('url')
             var price = this.getAttribute('price')
             //价格
-            $BIGO('.price').html('<span>￥</span>' + price);
+            $('.price').html('<span>￥</span>' + price);
             //标题
-            $BIGO('.inf_xx p').text(this.getAttribute('alt'));
+            $('.inf_xx p').text(this.getAttribute('alt'));
             //查看详细
-            $BIGO('.inf_con a').attr('href',url);
+            $('.inf_con a').attr('href',url);
             //剩余库存
-            $BIGO('.stock span').text(this.getAttribute('rest'));
+            $('.stock span').text(this.getAttribute('rest'));
             cabnet.kvHover.data({                                // 保存图片src与id等信息
                 'src' : this.getAttribute('src'),
                 'tag' : this.getAttribute('tag'),
@@ -514,7 +514,7 @@ $BIGO(function($BIGO){
             var price = ' price="' + cabnet.kvHover.data('price') + '"'
             var ids = ' id="' + id + '"'
             var img = '<img' + src + sex + tag + url + place + price + ids + ' />'
-            $BIGO(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
+            $(pos).find('ul').prepend('<li>' + img + '</li>')     // netSlide添加图片
             cabnet.net.trigger('add', id)                         // 触发netSlide的被添加自定义事件
         }
 
@@ -522,35 +522,35 @@ $BIGO(function($BIGO){
             var id = cabnet.hoverBox.data('id')
             cabnet.hoverBox.fadeOut()
             cabnet.netSlide.find('#' + id).parent('li').fadeOut('normal', function(){
-                $BIGO(this).remove()
+                $(this).remove()
                 cabnet.net.trigger('del', id)                       // 触发netSlide的被删除自定义事件
             })
         }
-    }($BIGO))
+    }($))
 
     /* ========= index-bin && mini-cate ========= */
 
-    !(function($BIGO){
+    !(function($){
 
         var index = {                                                // 首页变量
-            box: $BIGO('#div_main'),
-            bin : $BIGO('#div_index-bin'),
-            btn : $BIGO('a.index-btn'),
+            box: $('#div_main'),
+            bin : $('#div_index-bin'),
+            btn : $('a.index-btn'),
             binIsOpen: false,
-            wea : $BIGO('div.index-wea'),
-            weaArea:$BIGO('#divArea'),
-            bar : $BIGO('div.index-bar'),
-            p0 : $BIGO('li.index-p-0'),
-            gender: $BIGO('#ulgender'),
-            suit: $BIGO('#div_mini-gender'),
-            tips: $BIGO('div.mini-gender-tips'),
-            place: $BIGO('#ul_index-bar-place'),
-            week: $BIGO('#ulweek'),
-            singleSlide: $BIGO('div.index-single'),
-            suitSlide: $BIGO('.index-suit'),
+            wea : $('div.index-wea'),
+            weaArea:$('#divArea'),
+            bar : $('div.index-bar'),
+            p0 : $('li.index-p-0'),
+            gender: $('#ulgender'),
+            suit: $('#div_mini-gender'),
+            tips: $('div.mini-gender-tips'),
+            place: $('#ul_index-bar-place'),
+            week: $('#ulweek'),
+            singleSlide: $('div.index-single'),
+            suitSlide: $('.index-suit'),
             suitIsOpen: false,
-            babyMask: $BIGO('div.mini-place-mask'),
-            babyUl: $BIGO('div.mini-baby-ul'),
+            babyMask: $('div.mini-place-mask'),
+            babyUl: $('div.mini-baby-ul'),
 
             closeBin: function(){
                 index.bin.add(index.bar).animate({'top': '-507px'}, 600, function(){
@@ -604,18 +604,18 @@ $BIGO(function($BIGO){
 
         index.suitSlide.on('suitOpen', function(){                // 显示套装
             //kimi
-            $BIGO.weather.set = 1;//是否选中套装标记
+            $.weather.set = 1;//是否选中套装标记
             //kimi
             index.suitSlide.show().prev().hide()
             index.suitIsOpen = true
-            getgoods($BIGO.weather.occasion,$BIGO.weather.sex,$BIGO.weather.set)
+            getgoods($.weather.occasion,$.weather.sex,$.weather.set)
         }).on('suitClose', function(){
             //kimi
-            $BIGO.weather.set = 0;
+            $.weather.set = 0;
             //kimi
             index.suitSlide.hide().prev().show()
             index.suitIsOpen = false
-            getgoods($BIGO.weather.occasion,$BIGO.weather.sex,$BIGO.weather.set)
+            getgoods($.weather.occasion,$.weather.sex,$.weather.set)
         })
         index.tips.on('click', function(){
             index.tips.fadeOut()
@@ -632,20 +632,20 @@ $BIGO(function($BIGO){
             }
         });
 
-        $BIGO.uniqlo.index = index
+        $.uniqlo.index = index
 
         var cate = {
-            cate : $BIGO('div.mini-cate'),
-            ps   : $BIGO('div.mini-cate-ps'),
-            place: $BIGO('div.mini-cate-place'),
-            placeUl: $BIGO('ul.mini-place-ul'),
-            placeAll: $BIGO('a.mini-p-0'),
-            style: $BIGO('div.mini-cate-style'),
-            styleUl: $BIGO('ul.mini-style-ul'),
-            styleAll: $BIGO('a.mini-s-0'),
-            design:$BIGO('div.mini-design'),
-            designAll: $BIGO('a.mini-design-all'),
-            designMore:$BIGO('a.mini-design-more'),
+            cate : $('div.mini-cate'),
+            ps   : $('div.mini-cate-ps'),
+            place: $('div.mini-cate-place'),
+            placeUl: $('ul.mini-place-ul'),
+            placeAll: $('a.mini-p-0'),
+            style: $('div.mini-cate-style'),
+            styleUl: $('ul.mini-style-ul'),
+            styleAll: $('a.mini-s-0'),
+            design:$('div.mini-design'),
+            designAll: $('a.mini-design-all'),
+            designMore:$('a.mini-design-more'),
 
             placeArr: {
                 'All': {
@@ -678,7 +678,7 @@ $BIGO(function($BIGO){
         }
 
         cate.designMore.on('click', function(){                   // 更多款式切换
-            $BIGO(this).toggleClass('mini-design-less')
+            $(this).toggleClass('mini-design-less')
                 .parent().prev().toggleClass('mini-design-auto')
         })
 
@@ -690,7 +690,7 @@ $BIGO(function($BIGO){
 
         cate.design.on('click', 'li a', function(){               // 其他任何款式
             cate.designAll.removeClass('mini-design-checked')
-            $BIGO(this).toggleClass('mini-design-checked')
+            $(this).toggleClass('mini-design-checked')
             getRandPro()
         })
 
@@ -701,7 +701,7 @@ $BIGO(function($BIGO){
                 index.suitSlide.trigger('suitClose')
             }
 
-            var that = $BIGO(this)
+            var that = $(this)
             index.togClass(that, 'mini-cate-checked')
             that.parent().prev().removeClass('mini-cate-checked')
             if(that.is('li.mini-p-4')){
@@ -711,7 +711,7 @@ $BIGO(function($BIGO){
 
         }).on('click', 'a.mini-cate-more', function(e){           // 下拉三角显示更多
 
-            $BIGO(this).hide().closest('ul').css('height', 'auto').find('a.mini-cate-less').show()
+            $(this).hide().closest('ul').css('height', 'auto').find('a.mini-cate-less').show()
             e.stopPropagation()
 
         }).on('click', 'a.mini-cate-less', function(e){           // 收起三角
@@ -726,7 +726,7 @@ $BIGO(function($BIGO){
                 index.suitSlide.trigger('suitClose')
             }
 
-            $BIGO(this).addClass('mini-cate-checked')
+            $(this).addClass('mini-cate-checked')
             cate.place.find('li.mini-cate-checked').removeClass('mini-cate-checked')
             getRandPro()
 
@@ -737,13 +737,13 @@ $BIGO(function($BIGO){
                 index.suitSlide.trigger('suitClose')
             }
 
-            $BIGO(this).addClass('mini-cate-checked')
+            $(this).addClass('mini-cate-checked')
             cate.style.find('li.mini-cate-checked').removeClass('mini-cate-checked')
             getRandPro()
 
         }).on('cateUlHide', function(e, ele){                     // 收起design的UL
 
-            $BIGO(ele).hide().closest('ul').css('height', 77).find('a.mini-cate-more').show()
+            $(ele).hide().closest('ul').css('height', 77).find('a.mini-cate-more').show()
 
         })
 
@@ -773,7 +773,7 @@ $BIGO(function($BIGO){
                 setImg(index.suitSlide.find('img'))
             } else {
                 index.singleSlide.find('div.mini-kv-slide').each(function(){
-                    setImg($BIGO(this).find('img'))
+                    setImg($(this).find('img'))
                 })
             }
         }
@@ -787,40 +787,40 @@ $BIGO(function($BIGO){
             }
         }
 
-    }($BIGO))
+    }($))
 
     /* =============== mini-aside =============== */
 
-    !(function($BIGO){
-        $BIGO('.mini-aside').on('click', 'li', function(){
-            var target = $BIGO(this).data('nav')
-            uniqlo.scrollTo( target === 'top' ? 0 : $BIGO('.' + target).offset().top)
+    !(function($){
+        $('.mini-aside').on('click', 'li', function(){
+            var target = $(this).data('nav')
+            uniqlo.scrollTo( target === 'top' ? 0 : $('.' + target).offset().top)
         })
-    }($BIGO))
+    }($))
 
     /* ============ login && logout ============ */
 
-    !(function($BIGO){
-        var login = $BIGO('.mini-login')
+    !(function($){
+        var login = $('.mini-login')
         var mask = login.prev()
-        $BIGO('.mini-login-btn').click(function(){
+        $('.mini-login-btn').click(function(){
             mask.add(login).hide()
         })
 
-        $BIGO('.mini-logout').click(function(){
+        $('.mini-logout').click(function(){
             mask.add(login).show()
         })
-    }($BIGO))
+    }($))
 
     /* ============ mini-bot-select ============ */
 
-    !(function($BIGO){
+    !(function($){
         var bot = {
-            choose : $BIGO('#mini-bot-choose'),
-            form1 : $BIGO('#mini-bot-form1'),
-            form2 : $BIGO('#mini-bot-form2'),
-            input : $BIGO('input.mini-bot-input'),
-            inputBin : $BIGO('div.mini-bot-sel')
+            choose : $('#mini-bot-choose'),
+            form1 : $('#mini-bot-form1'),
+            form2 : $('#mini-bot-form2'),
+            input : $('input.mini-bot-input'),
+            inputBin : $('div.mini-bot-sel')
         }
 
         bot.choose.on('click', function(){
@@ -839,6 +839,6 @@ $BIGO(function($BIGO){
         }).on('mouseleave', function(){
             bot.inputBin.hide()
         })
-    }($BIGO))
+    }($))
 
 })

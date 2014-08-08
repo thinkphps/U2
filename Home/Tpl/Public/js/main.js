@@ -6,7 +6,7 @@
 //var tmplPath = 'http://localhost/U2/Home/Tpl/Public/';
 //var baseurl='http://localhost/U2/';
 var timer,loadid = 0;
-(function($BIGO) {
+(function($, window, document,undefined) {
 
     var TmallUniqloHome = function() {
         this.$weather = weather;
@@ -33,29 +33,12 @@ var timer,loadid = 0;
 
                     var cookcity = _this.provi;
                     if(cookcity){
-                        $BIGO.pron =  _this.provi;
+                        $.pron =  _this.provi;
                     }else{
-                        $BIGO.pron = remote_ip_info.province;
+                        $.pron = remote_ip_info.province;
                     }
                 }
             });
-
-            try{
-                var interval =  setInterval(function(){
-                    if($.fn['logoAllocation']){
-                        if($(".id_content_blocks>ul").length > 0){
-                            $(".id_content_blocks>ul").logoAllocation();
-                            $(".id_content_blocks>ul>li").animatedRollover();
-                            $(".id_content_blocks .contentCrossFade").crossFade();
-                            $(".id_goPageTop>a").animatedPageTop();
-                            clearInterval(interval);
-                        }
-                    }
-                }, 600);
-            }
-            catch(e){
-                console.log('interval');
-            }
         },
 
         sendcity :function(pro,city){
@@ -71,53 +54,53 @@ var timer,loadid = 0;
 
         //l4推荐模特图绑定
         getSuits :function(){
-            var gender = $BIGO('#ulgender').find('.select').data('gender');
+            var gender = $('#ulgender').find('.select').data('gender');
             this.showStyleMask(gender);
             //如果选中的是婴幼儿则灰掉后面的风格选项，然后显示婴幼儿的衣服
             if( gender == 4){
-                $BIGO('#ul_index-bar-place').find('.select').removeClass('select');
-                $BIGO('.ch_all').addClass('select');
-                $BIGO('.ch_all a').addClass('select');
-                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=5&tid=0&pro='+$BIGO.pron;
+                $('#ul_index-bar-place').find('.select').removeClass('select');
+                $('.ch_all').addClass('select');
+                $('.ch_all a').addClass('select');
+                var url = jsonpHomeUrl +'/getgood?callback=callBackFunction.jsonpCallback3&tem='+this.$weather.avg+'&cid=0&sid=5&tid=0&pro='+$.pron;
                 this.$weather.jsonpFcuntion(url);
-                $BIGO('#suits-container').html('');
-                $BIGO("#suits-container").hide();
+                $('#suits-container').html('');
+                $("#suits-container").hide();
                 callBackFunction.setPageButtonDisplay(true);
             }
             else{
-                var suitStyle = $BIGO('#ul_index-bar-place').find('.select').data('suitstyle');
+                var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
                 var jsonpurl = baseurl +'index.php/Indexnew/getConSuits2?callback=callBackFunction.callbackSuits&tem='+this.$weather.avg +  '&sid='+gender+'&fid='+suitStyle;
                 this.$weather.jsonpFcuntion(jsonpurl);
             }
         },
         showStyleMask : function(gender){
             if( gender == 4){
-                $BIGO('#style-mask').removeClass('children-style-mask');
-                $BIGO('#style-mask').removeClass('male-style-mask');
-                $BIGO('#style-mask').addClass('baby-style-mask').show();
-                $BIGO('.style-children_mask').hide();
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').addClass('baby-style-mask').show();
+                $('.style-children_mask').hide();
             }
             else if(gender == 3){
 
-                $BIGO('#style-mask').removeClass('baby-style-mask');
-                $BIGO('#style-mask').removeClass('male-style-mask');
-                $BIGO('#style-mask').addClass('children-style-mask').show();
-                $BIGO('.style-children_mask').show();
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').addClass('children-style-mask').show();
+                $('.style-children_mask').show();
 //                $('.baby-style-mask').hide();
 //                $('.children-style-mask').show();
             }
             else if(gender == 2){
-                $BIGO('#style-mask').removeClass('baby-style-mask');
-                $BIGO('#style-mask').removeClass('children-style-mask');
-                $BIGO('#style-mask').addClass('male-style-mask').show();
-                $BIGO('.style-children_mask').hide();
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').addClass('male-style-mask').show();
+                $('.style-children_mask').hide();
             }
             else{
-                $BIGO('#style-mask').removeClass('baby-style-mask');
-                $BIGO('#style-mask').removeClass('children-style-mask');
-                $BIGO('#style-mask').removeClass('male-style-mask');
-                $BIGO('#style-mask').hide();
-                $BIGO('.style-children_mask').hide();
+                $('#style-mask').removeClass('baby-style-mask');
+                $('#style-mask').removeClass('children-style-mask');
+                $('#style-mask').removeClass('male-style-mask');
+                $('#style-mask').hide();
+                $('.style-children_mask').hide();
             }
         },
 
@@ -132,49 +115,49 @@ var timer,loadid = 0;
             }
             menunr = menunr - 1;
             for (i = 1; i <= tabcount[menunr]; i++) {
-                $BIGO('#'+tablink_idname[menunr] + i).removeClass('current');
-                $BIGO('.'+tabcontent_idname[menunr] + i).css('display','none');
+                $('#'+tablink_idname[menunr] + i).removeClass('current');
+                $('.'+tabcontent_idname[menunr] + i).css('display','none');
             }
 
-            if($BIGO('#'+tablink_idname[menunr] + active)){
-                $BIGO('#'+tablink_idname[menunr] + active).addClass('current');
-                $BIGO('.'+tabcontent_idname[menunr] + active).css('display','block');
+            if($('#'+tablink_idname[menunr] + active)){
+                $('#'+tablink_idname[menunr] + active).addClass('current');
+                $('.'+tabcontent_idname[menunr] + active).css('display','block');
             }
         },
         controlsEvent : function(){
             var _this = this;
-            $BIGO("#closemap").on("click",function(){
-                $BIGO("#mapdiv").hide();
+            $("#closemap").on("click",function(){
+                $("#mapdiv").hide();
             });
 
             //点击let's go按钮跳转到天猫首页
-            $BIGO('.youyigui_btn,.dr_logo').on('click',function(){
+            $('.youyigui_btn,.dr_logo').on('click',function(){
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
             });
 
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
-            $BIGO('#suits-container').on('click','.imgSuits',function(){
-                var suitid = $BIGO(this).data('suitid');
-                var gender = $BIGO(this).data('gender');
+            $('#suits-container').on('click','.imgSuits',function(){
+                var suitid = $(this).data('suitid');
+                var gender = $(this).data('gender');
                 //jsonpHomeUrl
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
             });
 
-            $BIGO('#suits-container').on('click','.dressurl',function(){
-                var dressurl = $BIGO(this).data('dressurl');
-                var gender = $BIGO(this).data('gender');
+            $('#suits-container').on('click','.dressurl',function(){
+                var dressurl = $(this).data('dressurl');
+                var gender = $(this).data('gender');
                 //jsonpHomeUrl
                 window.open( dressurl );
             });
 
             // 首页天气切换
-            $BIGO('#ulweek').on('click', 'li', function(){
-                var $that = $BIGO(this)
+            $('#ulweek').on('click', 'li', function(){
+                var $that = $(this)
                 $that.addClass('w_select').siblings('.w_select').removeClass('w_select');
 
                 _this.$weather.init({
                     index : $that.index() + 1,
-                    city:$BIGO('#nio-city').text(),
+                    city:$('#nio-city').text(),
                     isMapChange :1,
                     callback: function(city, temper, info){
                         var avg = callBackFunction.getavg(temper.high,temper.low);
@@ -191,61 +174,61 @@ var timer,loadid = 0;
             });
 
             //点击性别更换模特图
-            $BIGO('#ulgender').on('click','li',function(){
-                var $this = $BIGO(this);
+            $('#ulgender').on('click','li',function(){
+                var $this = $(this);
 //                alert($(this).data('gender'));
-                $BIGO('#ulgender').find('.select').removeClass('select');
+                $('#ulgender').find('.select').removeClass('select');
                 $this.addClass('select');
                 $this.find('a').addClass('select');
-                $BIGO('#ul_index-bar-place .select').removeClass('select');
-                $BIGO('.ch_all a').addClass('select');
-                $BIGO('.product_inf').hide();
+                $('#ul_index-bar-place .select').removeClass('select');
+                $('.ch_all a').addClass('select');
+                $('.product_inf').hide();
                 _this.getSuits();
 
             });
 
-            $BIGO('#ul_index-bar-place').on('click','li a',function(){
-                var $this = $BIGO(this);
-                $BIGO('#ul_index-bar-place').find('.select').removeClass('select');
+            $('#ul_index-bar-place').on('click','li a',function(){
+                var $this = $(this);
+                $('#ul_index-bar-place').find('.select').removeClass('select');
                 $this.addClass('select');
                 _this.getSuits();
             });
 
-            $BIGO('.home_arrow_left').on('click',function(){
+            $('.home_arrow_left').on('click',function(){
                 if( callBackFunction.CurrentPageSize > 6 ){
                     callBackFunction.CurrentPageSize -= 1;
                 }
-                $BIGO('#suits-container').moveprev();
+                $('#suits-container').moveprev();
             })
 
-            $BIGO('.home_arrow_right').on('click',function(){
+            $('.home_arrow_right').on('click',function(){
 
                 //如果当前记录<总记录数，则向下翻一条记录
                 if(callBackFunction.CurrentPageSize < callBackFunction.PageCount){
 
                     //如果当前当前记录==已加载记录数，则ajax去后台取下一页数据
                     if(callBackFunction.CurrentPageSize==callBackFunction.CurrentLoadSize){
-                        var gender = $BIGO('#ulgender').find('.select').data('gender');
-                        var suitStyle = $BIGO('#ul_index-bar-place').find('.select').data('suitstyle');
+                        var gender = $('#ulgender').find('.select').data('gender');
+                        var suitStyle = $('#ul_index-bar-place').find('.select').data('suitstyle');
                         var jsonpurl = baseurl +'index.php/Indexnew/getConSuits2?callback=callBackFunction.pageNextSuits&tem='
                             + _this.$weather.avg +  '&sid='+gender+'&fid='+suitStyle + '&page=' + callBackFunction.PageIndex;
                         _this.$weather.jsonpFcuntion(jsonpurl);
                     }else{
                         callBackFunction.CurrentPageSize += 1;
-                        $BIGO('#suits-container').movenext();
+                        $('#suits-container').movenext();
                     }
                 }
 
             })
 
 
-            $BIGO('.weather').on('mouseenter',function(){
+            $('.weather').on('mouseenter',function(){
                 if(loadid==0){
-                    $BIGO('#suits-container').html('<div id="loadid" style="text-align:center; line-height=400px;padding-top:135px;"><img src="'+tmplPath+'/images/5-121204193R0-50.gif"></div>');
+                    $('#suits-container').html('<div id="loadid" style="text-align:center; line-height=400px;padding-top:135px;"><img src="'+tmplPath+'/images/5-121204193R0-50.gif"></div>');
                 }
-                $BIGO("#div_main").show();
-                $BIGO("#w_zk").hide();
-                $BIGO("#w_sq").show();
+                $("#div_main").show();
+                $("#w_zk").hide();
+                $("#w_sq").show();
                 if(loadid==0){
                     _this.getSuits();
                     loadid  = 1;
@@ -255,14 +238,14 @@ var timer,loadid = 0;
         },
         bindProvinceOrCitys : function(){
             //如果当前省市中没有数据则去数据库取数据
-            if($BIGO('#le1').html().length < 20){
+            if($('#le1').html().length < 20){
                 //获取省市
                 var jsonpurl = baseurl +'index.php/Indexnew/getCityInfo?callback=callBackFunction.bindCity&id='+weather.cityCode;
                 this.$weather.jsonpFcuntion(jsonpurl);
-            }else if($BIGO('#spid').html().length < 10){
-                $BIGO('#spid').html($BIGO('#le1').html());
-                $BIGO('#spid').change();
-                $BIGO('#spid').data('static',0);
+            }else if($('#spid').html().length < 10){
+                $('#spid').html($('#le1').html());
+                $('#spid').change();
+                $('#spid').data('static',0);
             }
         },
         callGetShops : function(pid,cid){
@@ -286,27 +269,27 @@ var timer,loadid = 0;
         cityOperator : function(){
             var _this = this;
 
-            $BIGO('#btn-city-close').on('click',this.hideCityDiv);
+            $('#btn-city-close').on('click',this.hideCityDiv);
 
             //点击显示地图
-            $BIGO("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
+            $("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
                 //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
                 _this.bindProvinceOrCitys();
-                $BIGO("#mapdiv").show();
+                $("#mapdiv").show();
                 H.init();
             });
 
             //tips点击店铺
-            $BIGO('#scrollDiv').on('click','.preferential_2',function(){
-                $BIGO("#mapdiv").show();
+            $('#scrollDiv').on('click','.preferential_2',function(){
+                $("#mapdiv").show();
                 stop_autochange();
                 var list =   H.map.getOverlays();
                 _this.bindProvinceOrCitys();
-                $BIGO('#a_shopinfo').html($BIGO('#tipshopid').text());
-                $BIGO('#shopInfo').hide();
-                $BIGO('#a_shopinfo2').show();
+                $('#a_shopinfo').html($('#tipshopid').text());
+                $('#shopInfo').hide();
+                $('#a_shopinfo2').show();
                 for(var i=1;i<list.length;i++){
-                    if(list[i].title == $BIGO('#tipshopid').text() ){
+                    if(list[i].title == $('#tipshopid').text() ){
                         setTimeout(function(){
                             H.setMarkerCenter(list[i]);
                         },100);
@@ -315,38 +298,38 @@ var timer,loadid = 0;
                 }
             });
 
-            $BIGO('#btn-city-change').on('click',function(){
+            $('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
-                $BIGO('#div-citys').show();
+                $('#div-citys').show();
             });
 
-            $BIGO('#le1').on('change',function(){
-                var pvalue = $BIGO('#le1 option:selected').val();
+            $('#le1').on('change',function(){
+                var pvalue = $('#le1 option:selected').val();
                 var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpGetcity&pid="+pvalue;
                 _this.$weather.jsonpFcuntion(url);
             });
             //店铺改变后定位到当前店铺所在位置
-            $BIGO("#ddlShop").on("change",function(){
+            $("#ddlShop").on("change",function(){
                 var list =   H.map.getOverlays();
 
-                var strHtml = '<span id="tipshopid" data-shopid="'+$BIGO('#ddlShop').val()+'">'+$BIGO('#ddlShop option:selected').text()+'</span><br>' + $BIGO('#ddlShop option:selected').data('opentime');
-                $BIGO('#a_shopinfo').html($BIGO('#ddlShop option:selected').text());
-                $BIGO('#shopInfo').hide();
-                $BIGO('#a_shopinfo2').show();
+                var strHtml = '<span id="tipshopid" data-shopid="'+$('#ddlShop').val()+'">'+$('#ddlShop option:selected').text()+'</span><br>' + $('#ddlShop option:selected').data('opentime');
+                $('#a_shopinfo').html($('#ddlShop option:selected').text());
+                $('#shopInfo').hide();
+                $('#a_shopinfo2').show();
                 //tips
                 callBackFunction.tipsfunction(strHtml);
                 for(var i=1;i<list.length;i++){
-                    if(list[i].title == $BIGO('#ddlShop option:selected').text() ){
+                    if(list[i].title == $('#ddlShop option:selected').text() ){
                         H.setMarkerCenter(list[i]);
                         return;
                     }
                 }
             });
 
-            $BIGO('#btn-change').on('click',function(){
-                var $that = $BIGO(this),
-                    province = $BIGO('#le1 option:selected').text()
-                city = $BIGO('#le2 option:selected').text()
+            $('#btn-change').on('click',function(){
+                var $that = $(this),
+                    province = $('#le1 option:selected').text()
+                city = $('#le2 option:selected').text()
                 temp = city.slice(-1);
 
                 if(city !== '请选择'){
@@ -373,19 +356,19 @@ var timer,loadid = 0;
                         }
                     });
                     _this.hideCityDiv();
-                    $BIGO('#li_day0').addClass('w_select').siblings('.w_select').removeClass('w_select');
+                    $('#li_day0').addClass('w_select').siblings('.w_select').removeClass('w_select');
                     //将地图层中的省市也选中
-                    $BIGO('#spid').val($BIGO('#le1').val());
-                    $BIGO('#spid').change();
-                    $BIGO('#spid').data('static',0);
+                    $('#spid').val($('#le1').val());
+                    $('#spid').change();
+                    $('#spid').data('static',0);
                 } else alert('请选择城市！');
             });
 
 
             //地图城市切换
-            $BIGO('#spid').on('change',function(){
-                $BIGO('#spid').data('static',1);
-                var pid = $BIGO('#spid option:selected').val();
+            $('#spid').on('change',function(){
+                $('#spid').data('static',1);
+                var pid = $('#spid option:selected').val();
                 var levelid = 0;
                 switch(pid){
                     case "1" :
@@ -402,26 +385,26 @@ var timer,loadid = 0;
                 _this.$weather.jsonpFcuntion(url);
             });
 
-            $BIGO('#scid').on('click',function(){
+            $('#scid').on('click',function(){
                 callBackFunction.ISMapOper = 0;
             }).on('change',function(){
 
-                var pid = $BIGO('#spid').val(),cid = $BIGO('#scid').val();
+                var pid = $('#spid').val(),cid = $('#scid').val();
                 if(callBackFunction.ISMapOper == 1){
                     _this.callGetShops(pid,cid);
                 }else{
 
-                H.map.centerAndZoom($BIGO("#scid option:selected").text(), 11);
-                var cityname = $BIGO('#scid option:selected').text();
+                H.map.centerAndZoom($("#scid option:selected").text(), 11);
+                var cityname = $('#scid option:selected').text();
                  _this.callGetShops(pid,cid);
                 //设置切换城市模块的省市选中项
-                $BIGO('#le1').val(pid,cid);
-                $BIGO('#le1').change();
+                $('#le1').val(pid,cid);
+                $('#le1').change();
 
                 if(cityname[cityname.length-1]=='市'){
                     var cnm = cityname.replace('市','');
                 }else{
-                    var cnm = $BIGO('#spid option:selected').text();
+                    var cnm = $('#spid option:selected').text();
                 }
                 weather.tipcity = cnm;
 
@@ -443,7 +426,7 @@ var timer,loadid = 0;
         },
 
         hideCityDiv : function(){
-            $BIGO('#div-citys').hide();
+            $('#div-citys').hide();
         }
 
     }//prototype
@@ -451,7 +434,7 @@ var timer,loadid = 0;
     var tmHome = new TmallUniqloHome();
     tmHome.init();
 
-})($BIGO, window, document);
+})(jQuery, window, document);
 
 
 var callBackFunction = {
@@ -463,20 +446,20 @@ var callBackFunction = {
     CurrentLoadSize : 10,//当前已加载数量
     setPageButtonDisplay : function(isHide){
         if(isHide){
-            $BIGO('.home_arrow_left,.home_arrow_right').hide();
+            $('.home_arrow_left,.home_arrow_right').hide();
         }
         else{
-            $BIGO('.home_arrow_left,.home_arrow_right').show();
+            $('.home_arrow_left,.home_arrow_right').show();
         }
     },
     callbackSuits : function(list){
         this.PageIndex = list.page;
-        $BIGO("#div_index-bin,.index-suit").hide();
+        $("#div_index-bin,.index-suit").hide();
         this.CurrentPageSize = 6;
         this.CurrentLoadSize = 10;
         if(list.da == null){
             this.setPageButtonDisplay(true);
-            $BIGO("#suits-container").hide();
+            $("#suits-container").hide();
             return;
         }
         var strHtml = "";
@@ -503,14 +486,14 @@ var callBackFunction = {
             this.setPageButtonDisplay(true);
         }
 
-        $BIGO('#suits-container').html(strHtml);
-        $BIGO('#suits-container').coverscroll({items:'.item',minfactor:35,  'step':{ // compressed items on the side are steps
+        $('#suits-container').html(strHtml);
+        $('#suits-container').coverscroll({items:'.item',minfactor:35,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
             'limit':6, // how many steps should be shown on each side
             'width':8, // how wide is the visible section of the step in pixels
             'scale':true // scale down steps
         }});
-        $BIGO("#suits-container").show();
+        $("#suits-container").show();
     },
     //翻页获取L4模特图
     pageNextSuits : function(list){
@@ -523,35 +506,35 @@ var callBackFunction = {
         for(var i = 0 ;i < listlength;i++){
             strHtml += this.getCoverScrollItem(list.da[i]);
         }
-        $BIGO("#suits-container").append(strHtml);
-        $BIGO('#suits-container').movenext(this.CurrentPageSize);
+        $("#suits-container").append(strHtml);
+        $('#suits-container').movenext(this.CurrentPageSize);
         this.CurrentPageSize += 1;
     },
     jsonpGetcity : function(data){
         var str = '<option value="0">请选择</option>';
-        $BIGO.each(data.clist,function(pin,pv){
+        $.each(data.clist,function(pin,pv){
             str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
         });
-        $BIGO('#le2').html(str);
-        var pid = $BIGO('#le1').val();
+        $('#le2').html(str);
+        var pid = $('#le1').val();
         switch (pid){
             case "1" :
             case "21" :
             case "42" :
             case "62" :
-                $BIGO('#le2').val(data.clist[0].region_id);
+                $('#le2').val(data.clist[0].region_id);
                 break
             default :
 
                 if(callBackFunction.ISMapOper == 0){
-                    if($BIGO('#scid').val() != '0'){
-                        $BIGO('#le2').val($BIGO('#scid').val());
+                    if($('#scid').val() != '0'){
+                        $('#le2').val($('#scid').val());
                     }else{
-                        $BIGO('#le2').val(0);
+                        $('#le2').val(0);
                     }
                 }
                 else{
-                    $BIGO('#le2').val(0);
+                    $('#le2').val(0);
                 }
 
                 break;
@@ -619,12 +602,12 @@ var callBackFunction = {
         //tips
         stop_autochange();
         for (i = 1; i <=3; i++) {
-            $BIGO('#tablink' + i).removeClass('current');
-            $BIGO('.preferential_' + i).css('display','none');
+            $('#tablink' + i).removeClass('current');
+            $('.preferential_' + i).css('display','none');
         }
-        $BIGO('#tablink2').addClass('current');
-        $BIGO('.preferential_2').css('display','block');
-        $BIGO('#shopid').html(strContent);
+        $('#tablink2').addClass('current');
+        $('.preferential_2').css('display','block');
+        $('#shopid').html(strContent);
     },
     //将店铺信息添加到地图中
     mapBindMarker : function (data){
@@ -636,69 +619,69 @@ var callBackFunction = {
             //如果是婴幼儿走这里
             if(da.sid==4){
                 if(da.fl==1){
-                    $BIGO('#upc').html(da.ustr);
-                    $BIGO('#downc').html(da.dstr);
+                    $('#upc').html(da.ustr);
+                    $('#downc').html(da.dstr);
                 }else{
-                    $BIGO('#taoz').html(da.ustr);
+                    $('#taoz').html(da.ustr);
                 }
             }else{
-                $BIGO('#upc').html(da.ustr);
-                $BIGO('#downc').html(da.dstr);
+                $('#upc').html(da.ustr);
+                $('#downc').html(da.dstr);
             }
         }
         if(da.fl==1){
             if(da.sid==4){
-                $BIGO('.index-single').removeClass('none');
-                $BIGO('.index-suit').addClass('none');
-                $BIGO('.index-suit').css('display','none');
-                $BIGO('.index-single').css('display','block');
+                $('.index-single').removeClass('none');
+                $('.index-suit').addClass('none');
+                $('.index-suit').css('display','none');
+                $('.index-single').css('display','block');
             }
-            $BIGO('#tishi').css('display','none');
-            $BIGO('#qtm').removeClass('none');
+            $('#tishi').css('display','none');
+            $('#qtm').removeClass('none');
         }else{
             if(da.sid==4){
-                $BIGO('.index-single').addClass('none');
-                $BIGO('.index-suit').removeClass('none');
-                $BIGO('.index-suit').css('display','block');
-                $BIGO('.index-single').css('display','none');
+                $('.index-single').addClass('none');
+                $('.index-suit').removeClass('none');
+                $('.index-suit').css('display','block');
+                $('.index-single').css('display','none');
             }else{
-                $BIGO('.index-single').removeClass('none');
-                $BIGO('.index-suit').addClass('none');
-                $BIGO('.index-suit').css('display','none');
-                $BIGO('.index-single').css('display','block');
+                $('.index-single').removeClass('none');
+                $('.index-suit').addClass('none');
+                $('.index-suit').css('display','none');
+                $('.index-single').css('display','block');
             }
-            $BIGO('#tishi').css('display','none');
-            $BIGO('#qtm').addClass('none');
+            $('#tishi').css('display','none');
+            $('#qtm').addClass('none');
         }
-        $BIGO.uniqlo.kvSlider();
+        $.uniqlo.kvSlider();
     },
     jsonpBaiduCity : function(data){
         var str = '<option value="0">请选择</option>';
-        $BIGO.each(data.clist,function(pin,pv){
+        $.each(data.clist,function(pin,pv){
             str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
         });
-        $BIGO('#scid').html(str);
-        if($BIGO('#spid').data('static') == 1){
-            $BIGO('#scid').val("0");
+        $('#scid').html(str);
+        if($('#spid').data('static') == 1){
+            $('#scid').val("0");
         }
         else{
-            var pid = $BIGO('#le1').val();
+            var pid = $('#le1').val();
             switch (pid){
                 case "1" :
                 case "21" :
                 case "42" :
                 case "62" :
-                    $BIGO('#scid').val("0");
+                    $('#scid').val("0");
                     break
                 default :
-                    $BIGO('#scid').val($BIGO('#le2').val());
+                    $('#scid').val($('#le2').val());
                     if(callBackFunction.ISMapOper == 1){
-                        $BIGO('#scid').change();
+                        $('#scid').change();
                     }
                     break;
             }
         }
-        $BIGO('#ddlShop').html('<option value="0">请选择</option>');
+        $('#ddlShop').html('<option value="0">请选择</option>');
     },
     bindCity : function(data){
 
@@ -708,10 +691,10 @@ var callBackFunction = {
         for(var i = 0 ; i < plist.length;i++ ){
             strOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
         }
-        $BIGO('#le1').html(strOptions);
+        $('#le1').html(strOptions);
 
         //绑定地图层中的省份
-        $BIGO('#spid').html(strOptions);
+        $('#spid').html(strOptions);
 
         //绑定城市
         var clist = data.clist;
@@ -719,15 +702,15 @@ var callBackFunction = {
         for(var i = 0 ; i < clist.length;i++ ){
             strOptions += '<option value="'+ clist[i].region_id +'">'+ clist[i].local_name +'</option>';
         }
-        $BIGO('#le2').html(strOptions);
+        $('#le2').html(strOptions);
 
         //设置省份选中芗
-        $BIGO('#le1').val(data.nowcity.p_region_id);
-        $BIGO('#spid').val(data.nowcity.p_region_id);
-        $BIGO('#spid').change();
-        $BIGO('#spid').data('static',0);
+        $('#le1').val(data.nowcity.p_region_id);
+        $('#spid').val(data.nowcity.p_region_id);
+        $('#spid').change();
+        $('#spid').data('static',0);
         //设置城市选中项
-        $BIGO('#le2').val(data.nowcity.region_id);
+        $('#le2').val(data.nowcity.region_id);
     },
     bindShops : function(data){
         var strOption = '<option value="0">请选择</option>';
@@ -736,18 +719,18 @@ var callBackFunction = {
                 strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].tradetime.replace(/\//g,'') +'">' + data[i].sname + '</option>';
             }
         }
-        $BIGO('#ddlShop').html(strOption);
+        $('#ddlShop').html(strOption);
         if(callBackFunction.ISMapOper == 1){
-            $BIGO('#ddlShop').val($BIGO('#tipshopid').data('shopid'));
+            $('#ddlShop').val($('#tipshopid').data('shopid'));
         }
         else{
-            $BIGO('#ddlShop').val(0);
+            $('#ddlShop').val(0);
         }
     },
     callGetCityIDByShopid:function(shopid){
         callBackFunction.ISMapOper = 1;
 
-        switch($BIGO('#spid').val()){
+        switch($('#spid').val()){
             case "1" :
             case "21" :
             case "42" :
@@ -762,8 +745,8 @@ var callBackFunction = {
         weather.jsonpFcuntion(jsonpurl);
     },
     setCityIDByShopid:function(data){
-        $BIGO('#scid').val(data.id);
-        $BIGO('#scid').change();
+        $('#scid').val(data.id);
+        $('#scid').change();
 
     }
 };
@@ -791,13 +774,13 @@ function easytabs(menunr, active) {
     }
     menunr = menunr - 1;
     for (i = 1; i <= tabcount[menunr]; i++) {
-        $BIGO('#'+tablink_idname[menunr] + i).removeClass('current');
-        $BIGO('.'+tabcontent_idname[menunr] + i).css('display','none');
+        $('#'+tablink_idname[menunr] + i).removeClass('current');
+        $('.'+tabcontent_idname[menunr] + i).css('display','none');
     }
 
-    if($BIGO('#'+tablink_idname[menunr] + active)){
-        $BIGO('#'+tablink_idname[menunr] + active).addClass('current');
-        $BIGO('.'+tabcontent_idname[menunr] + active).css('display','block');
+    if($('#'+tablink_idname[menunr] + active)){
+        $('#'+tablink_idname[menunr] + active).addClass('current');
+        $('.'+tabcontent_idname[menunr] + active).css('display','block');
     }
 }
 
