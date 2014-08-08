@@ -149,16 +149,24 @@ var timer,loadid = 0;
 
             //点击let's go按钮跳转到天猫首页
             $BIGO('.youyigui_btn,.dr_logo').on('click',function(){
+               var ua = window.navigator.userAgent;
+                if(ua.indexOf('MetaSr')>0){
+                    window.open('http://uniqlo.bigodata.com.cn/u2/');
+                }else{
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
-            });
+                }
+			});
 
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $BIGO('#suits-container').on('click','.imgSuits',function(){
                 var suitid = $BIGO(this).data('suitid');
                 var gender = $BIGO(this).data('gender');
-                //jsonpHomeUrl
+                if(ua.indexOf('MetaSr')>0){
+                    window.open('http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
+                }else{   
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
-            });
+				}
+			});
 
             $BIGO('#suits-container').on('click','.dressurl',function(){
                 var dressurl = $BIGO(this).data('dressurl');
