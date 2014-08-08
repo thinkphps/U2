@@ -173,18 +173,18 @@ $(function(){
         aside.form.on('click', 'a.mini-form-close', function(){
             aside.form.trigger('hidden')
         }).on('click', function(e){
-            e.stopPropagation()
-        }).on('shown', function(){
-            aside.form.show()
-            // aside.msg.addClass('mini-msg-checked')
-            aside.formIsOpen = true
-            aside.select.text('请选择主题')
-            aside.input.val('')
-        }).on('hidden', function(){
-            aside.form.hide()
-            // aside.msg.removeClass('mini-msg-checked')
-            aside.formIsOpen = false
-        })
+                e.stopPropagation()
+            }).on('shown', function(){
+                aside.form.show()
+                // aside.msg.addClass('mini-msg-checked')
+                aside.formIsOpen = true
+                aside.select.text('请选择主题')
+                aside.input.val('')
+            }).on('hidden', function(){
+                aside.form.hide()
+                // aside.msg.removeClass('mini-msg-checked')
+                aside.formIsOpen = false
+            })
 
         aside.select.on('click', function(){
             aside.options.trigger(aside.optionsIsOpen? 'optionsHide' : 'optionsShow')
@@ -194,14 +194,14 @@ $(function(){
             aside.options.hide()
             aside.optionsIsOpen = false
         }).on('optionsShow', function(){
-            aside.options.show()
-            aside.optionsIsOpen = true
-        }).on('click', 'li', function(){
-            var that = this
-            aside.select.text(that.innerHTML)
-            aside.input.val(that.id)
-            aside.options.trigger('optionsHide')
-        })
+                aside.options.show()
+                aside.optionsIsOpen = true
+            }).on('click', 'li', function(){
+                var that = this
+                aside.select.text(that.innerHTML)
+                aside.input.val(that.id)
+                aside.options.trigger('optionsHide')
+            })
         //意见反馈
 
         aside.form.submit(function(event){
@@ -328,14 +328,14 @@ var _mini = {
                             else{
                                 //全套衣服
                                 str += '<img src="'+rootPath+'/'+  suitImageUrl +'" />';
-                               /* //身躯
-                                str += '<img src="'+  suitImageUrlBody +'" />';
-                                //鞋子
-                                str += '<img src="'+ suitImageUrlShose  +'" />';
-                                //衣服
-                                str += '<img src="'+ suitImageUrlMatch  +'" />';
-                                //头部
-                                str += '<img src="'+  suitImageUrlHead +'" />';*/
+                                /* //身躯
+                                 str += '<img src="'+  suitImageUrlBody +'" />';
+                                 //鞋子
+                                 str += '<img src="'+ suitImageUrlShose  +'" />';
+                                 //衣服
+                                 str += '<img src="'+ suitImageUrlMatch  +'" />';
+                                 //头部
+                                 str += '<img src="'+  suitImageUrlHead +'" />';*/
                                 str += '<div class="model_try2 none"></div></div>';
                             }
 
@@ -639,6 +639,15 @@ var _mini = {
         else{
             return true;
         }
+    },
+    checkLogin : function(){
+        if($('.login').length == 0){
+            $('.mini-login-btn').click();
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
 
@@ -886,6 +895,10 @@ $('.login').on('click','#homeid',function(){  //个人中心
 $('#close-home').click(function(){
     $('.user_center').addClass('none');
 });
+$('.my_yyg_title').on('click','.mysyj',function(){
+    _mini.checkLogin();
+   $('#btnWardrobe').click();
+})
 function getgoods(tem,sid,lid,bid,fid,zid,kid,loadmore,keyword){
     if(keyword == undefined){ keyword = ""}
     _mini.timestamp = new Date().getTime();
@@ -1088,11 +1101,21 @@ function getFuncCode(){
             $('#msg_error').html('手机号码格式错误');
             return false;
         }else{
+            $('#msg_error').html('');
             $.post(ckeckmobileurl,{mobile:mobile},function(data){
                 if(data['code'] < 0){
                     $('#msg_error').html(data['msg']);
                     return false;
                 }else{
+                    $('#msg_error').html('');
+                    $.post(checkrvery,{verify2:$('#verify2').val()},function(data2,status){
+                     if(data2.code<0){
+                         $('#msg_error').html(data2.msg);
+                         var time = new Date().getTime();
+                         document.getElementById('verifyImg2').src= regurl+'/Login/registerVery/'+time;
+                         return false;
+                     }else{
+                    $('#msg_error').html('');
                     $.post(activephone,{mobile:mobile},function(data){
                         if(data['code'] < 0){
                             $('#msg_error').html(data['msg']);
@@ -1118,6 +1141,8 @@ function getFuncCode(){
                             }, 1000);
                         }
                     });
+                    }
+                },'json');
                 }
             });
         }
@@ -1475,14 +1500,6 @@ function do_refresh_relate(){
         }, 3000);
     }
 }
-
-/*function fleshVerify(){
- //重载验证码
- var time = new Date().getTime();
- document.getElementById('verifyImg').src= '__APP__/Login/verify/'+time;
- }*/
-
-
 $(function(){
     $('.js-checked').change(function(){
         if ($('.js-checked:checked').length == 1) {

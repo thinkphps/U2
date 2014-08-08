@@ -133,10 +133,10 @@ function Model_loadok_callback(){
         },
         showbaiyiModel : function(callback){
             /***新的百衣搭配间****/
-            /*var touchid= 854;
+            var touchid= 854;
             var key="8f1a6e3f182904ad22170f56c890e533";
-            loadMymodel(touchid,key);*/
-            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
+            loadMymodel(touchid,key);
+            //loadMymodel(858,'165ea085e3da6182e441b472989468fc');
             Model.CurrClothesCallback = this.beu_getallclothes;
             $('.beubeu_btns').css('left','25px');
             if ( callback ) {
@@ -347,6 +347,10 @@ function Model_loadok_callback(){
                  if(data.code==1){
                      $('#allsoucang').addClass('scsucc').removeClass('none');
                      $('#soucangid').html(data.msg);
+                     if(!$('.user_center').hasClass('none')){
+                         $('#btnchange').data('page',0);
+                         $('#btnWardrobe').click();
+                     }
                  }else{
                     $('#allsoucang').addClass('scerror').removeClass('none');
                     $('#soucangid').html(data.msg);
@@ -356,6 +360,9 @@ function Model_loadok_callback(){
             });
             pageElement.$allsoucang.on('click','#scclose',function(){
                 pageElement.$allsoucang.addClass('none');
+                if($('.login').length == 0){
+                    $('.mini-login-btn').click();
+                }
             });
             pageElement.$divSyj.on('mouseenter','.buyurl',function(){
                 $(this).css({'background':'#999','color':'#fff'});
@@ -500,17 +507,20 @@ function Model_loadok_callback(){
             $('#watercontainer').on('click','.tuijian',function(){
               var $this = $(this).parent(),$tuidata = eval($this.data('tuijian')),tuilength = $tuidata.length;
                 pageElement.IsHide = 1;
-                  var tstr = '',$wrapper_box = $this.parent();;
+                  var tstr = '',$wrapper_box = $this.parent();
+                if(!$(this).hasClass('sel')){
+                    $(this).addClass('sel');
                   for(var i=0;i<tuilength;i++){
                       tstr += '<li class="tuiimg" data-suir="'+$tuidata[i].suitID+'" data-gender="'+$tuidata[i].sex+'"><a href="javascript:;"><img src="'+$tuidata[i].suitImageUrl+'" /></a></li>';
                   }
                 $wrapper_box.find('.tuidata').html('').append(tstr);
                 $wrapper_box.find('.product_set').show();
                 pageElement.currentColRelayout($($wrapper_box.parent()[0]),0.47);
+                }
             });
             //推荐穿衣服
             $('#watercontainer').on('click','.tuiimg',function(){
-              var $this = $(this),suitid = $this.data('suir'),sex = $this.data('gender');
+                var $this = $(this),suitid = $this.data('suir'),sex = $this.data('gender');
                 $('.syj').show();
                 get_baiyi_dp(suitid,sex);
             });

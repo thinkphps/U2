@@ -112,7 +112,7 @@ jQuery(function($) {
     $.UserCenter = UserCenter;
     UserCenter.changePWBtn.on('click',function(){
         $('.my_yyg_title,#sfid').hide();
-        $('.user_center').show();
+        $('.user_center').removeClass('none').show();
         UserCenter.init();
     });
     UserCenter.exitUserCenter.on('click',function(){
@@ -121,7 +121,7 @@ jQuery(function($) {
         UserCenter.change_yf.data('page',0);
         UserCenter.myWardrobe.click();
         $('.my_yyg_title,#sfid').show();
-        $('.user_center').hide();
+        $('.user_center').addClass('none').hide();
         $('#utuichu').show();
     });
     //衣服换一组显示
@@ -170,7 +170,7 @@ jQuery(function($) {
             if( isreceive != 1){
                 $('#youhui_msg').removeClass('none');
                 $('#youhui_msg').show();
-                /*$.post(setCollFlagUrl,function(data){
+                $.post(setCollFlagUrl,function(data){
                     if(data['code'] > 0){
                         //UserCenter.youhui_icon.removeClass('youhui_icon');
                         UserCenter.youhui_icon.data('isreceive',1);
@@ -179,7 +179,7 @@ jQuery(function($) {
 
                         return false;
                     }
-                });*/
+                });
             }else{
                 $('#youhui_msg').removeClass('none');
                 $('#youhui_msg').show();//目前没有优惠信息，有的话这两句要删掉
@@ -188,35 +188,13 @@ jQuery(function($) {
         }else{
             if(isreceive==1){
                 //$('#youhuim').html('是否立即领取优惠');
-                $('#youhui_msg').removeClass('none');
-                $('#youhui_msg').show();
+                //$('#youhui_msg').removeClass('none');
+                //$('#youhui_msg').show();
             }else{
-                $('#youhui_msg').removeClass('none');
-                $('#youhui_msg').show();
+                //$('#youhui_msg').removeClass('none');
+                //$('#youhui_msg').show();
                 //$('#youhuim').html('是否立即领取优惠');
            }
-        }
-    });
-    UserCenter.yhclose.on('click',function(){
-        var isreceive = UserCenter.youhui_icon.data('isreceive');
-        var colnum = UserCenter.collocationNum.text();
-        if(colnum >= 10){
-            if( isreceive != 1){
-                $.post(setCollFlagUrl,function(data){
-                    if(data['code'] > 0){
-                        UserCenter.youhui_icon.data('isreceive',1);
-                    }else{
-
-                        return false;
-                    }
-                });
-            }else{
-                $('#youhui_msg').addClass('none');
-                $('#youhui_msg').hide();
-            }
-        }else{
-            $('#youhui_msg').addClass('none');
-            $('#youhui_msg').hide();
         }
     });
     UserCenter.youhui_msg.on('click',function(){

@@ -554,7 +554,7 @@
             <div class="mini-cab-share2">
                 <!--<span>将此搭配分享到：</span>-->
                 <!-- JiaThis Button BEGIN -->
-                <div class="jiathis_style_32x32"  onmouseover="funcShare()">
+                <div class="jiathis_style"  onmouseover="funcShare()">
                     <a class="jiathis_button_tsina"></a>
                     <a class="jiathis_button_qzone"></a>
                     <a class="jiathis_button_weixin"></a>
@@ -660,7 +660,7 @@
     var getJackNumiidUrl = '{:U('Getinfo/getJackNumiid')}';
 </script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
-<script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI.js"></script>
+<script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI_test.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
@@ -726,6 +726,8 @@ $(function(){
         var sid = $(this).data('gender');
         if(sid!=1){
             $('#changeid').attr('la',1);
+        }else{
+            $('#changeid').attr('la',2);
         }
         $(this).siblings().children('a').removeClass('select');
         $(this).children('a').addClass('select');

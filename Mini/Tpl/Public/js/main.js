@@ -181,10 +181,11 @@ jQuery(function($){
 //      }, 3000)
 
       cabnet.tsClose.on('click',function(){
-          $("div.tsxx1").hide();
-          cabnet.miniMask2.hide();
+          $("div.tsxx2").addClass('none');
+          cabnet.miniMask2.addClass('none');
+          $.post(uppopo,{},function(data,status){
+          });
       });
-
 
       /* == net交互 == */
 
