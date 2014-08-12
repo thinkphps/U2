@@ -37,10 +37,6 @@ public function index(){
 	}
 
 	$where['good_id'] = $id;
-    $wh2['tag_id'] = array('neq','0');
-    $wh2['_logic'] = 'OR';
-    $wh2['ftag_id'] = array('neq','0');
-    $where['_complex'] = $wh2;
     $gtaglist = $gtmodel->field('*')->where($where)->order('id asc')->group('wid')->select();
 	//温度
 	$temarr = array();
@@ -101,7 +97,7 @@ public function doedit(){
      $this->error('没打性别标签',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'])));
         exit;
     }
-    if(count($arr['tag2'])<=0){
+    if(count($arr['tag2'])<=0 && $arr['gtype']!=6){
     $this->error('风格标签没有打',U('Productsedit/index',array('id'=>$id,'p'=>$_REQUEST['p'])));
         exit;
     }
@@ -249,6 +245,9 @@ public function doedit(){
             break;
         case 5 :
             $gender = 'error';
+            break;
+        case 6 :
+            $gender = 'peijian';
             break;
     }
 	$goodarr['gender'] = $gender;
@@ -560,7 +559,11 @@ public function sexStyle(){
      if($sid>0){
          $adminModel = D('Admin');
          $list = $adminModel->getSexStyle($sid);
+         if(!empty($list)){
          $returnArr = array('code'=>1,'data'=>$list);
+         }else{
+             $returnArr = array('code'=>0);
+         }
      }else{
          $returnArr = array('code'=>0,'msg'=>'参数错误');
      }
