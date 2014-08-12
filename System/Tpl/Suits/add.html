@@ -81,6 +81,7 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
+                <input type='hidden' name='ems' value='0' id='emgid'>
                 <input type='hidden' name='id' value="{$result.suitID}">
                 <button type="submit" class="btn btn-success">提交</button>
             </div>
@@ -171,10 +172,11 @@
             $.post(numurl,{num_iid:numiidvalue},function(data,status){
              if(data.code==1){
              that.parent('.numcid').nextAll('.numsty').remove();
-             that.parent('.numcid').after('<div class="numsty">'+data.str+'</div>');
+             that.parent('.numcid').after('<div class="numsty" style="color:green;">'+data.str+'</div>');
             }else{
                  that.parent('.numcid').nextAll('.numsty').remove();
-                 that.parent('.numcid').after('<div class="numsty">'+data.msg+'</div>');
+                 that.parent('.numcid').after('<div class="numsty" style="color:red;">'+data.msg+'</div>');
+                 $('#emgid').val('1');
              }
             },'json');
         });
