@@ -577,6 +577,8 @@ var _mini = {
                     color = 'h_blue';
                 }else if(v.type == 3 || v.type==4 || v.type == 5){
                     color = 'h_orange';
+                }else if(v.type == 6){
+                    color = 'h_grenn';
                 }
 
                 if(v.loveid != null && v.loveid != undefined){
@@ -611,6 +613,10 @@ var _mini = {
                 strHtml += '<div class="product_gender none"><h5>请选择性别</h5><ul>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
+                strHtml += '</ul></div>';
+                strHtml += '<div class="product_gender2 none"><h5>请选择性别</h5><ul>';
+                strHtml += '<li><a href="javascript:;"  data-gender="15478" >男</a></li>';
+                strHtml += '<li><a href="javascript:;"  data-gender="15474">女</a></li>';
                 strHtml += '</ul></div>';
                 if(v.tuijian && v.tuijian.length>0){
                     strHtml += '<div class="tuicl none"  data-tuijian="'+ JSON.stringify(v.tuijian).replace(/\"/g,"'") +'"></div>';

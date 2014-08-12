@@ -530,7 +530,7 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .wrapper_box h3.h_orange{ background:#f19f49;}
 .wrapper_box h3.h_blue{ background:#597798;}
 .wrapper_box h3.h_pink{ background:#ea777a;}
-
+.wrapper_box h3.h_grenn{ background:#61d1c2;}
 
 
 .wrapper_box_btn_group{ background:#fff url(../images/line1.png) 113px 0 no-repeat;}
@@ -585,6 +585,12 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .product_gender ul li a{ display:block; background:#a0a0a0; width:96px; height:30px; line-height:30px; text-align:center; color:#FFF;}
 .product_gender ul li a:hover{ background:#900;}
 .product_gender ul li a.select{ background:#900;}
+.product_gender2{ background:#eee; padding:10px 8px; overflow:hidden;}
+.product_gender2 h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:5px;}
+.product_gender2 ul li{ float:left; margin:4px 5px 4px 5px;}
+.product_gender2 ul li a{ display:block; background:#a0a0a0; width:96px; height:30px; line-height:30px; text-align:center; color:#FFF;}
+.product_gender2 ul li a:hover{ background:#900;}
+.product_gender2 ul li a.select{ background:#900;}
 
 /*优衣库推荐款式-更多*/
 .product_more a{ display:block; width:950px; height:65px; background:url(../images/product_more.png) 0 0 no-repeat; margin:20px auto;}
