@@ -52,7 +52,7 @@ class SellcateAction extends Action{
             }
             $count = $sell->where($map)->count();
             $p = new Page($count,20,$pagestr);
-            $sells = $sell->field('*')->where($where)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
+            $sells = $sell->field('*')->where($map)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
             $page = $p->showPage();
             $this->assign('sells',$sells);
             $this->assign('p',$_GET['p']);
