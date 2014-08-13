@@ -30,6 +30,7 @@ foreach($oneCate as $k2=>$v2){
      $db->mysqlquery($upsql);
      unset($upsql);
         foreach($cate as $k3=>$v3){
+          $v3 = (array)$v3;
           $ucsql = "select ID from u_sellercats where ID=".$v3['cid'];
           $result2 = $db->mysqlfetch($ucsql);
           if(!empty($result2[0])){
