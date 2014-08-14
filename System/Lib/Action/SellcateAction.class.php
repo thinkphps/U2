@@ -26,21 +26,37 @@ class SellcateAction extends Action{
             }else{
                 $issel = -1;
             }
+            if(isset($_REQUEST['isshow'])){
+               $isshow = $this->_request('isshow');//是否有商品
+            }else{
+               $isshow = -1;
+            }
             $pagestr = '';
+            $sqlwhere = '';
             import("@.ORG.Pageyu");
             if(!empty($gender)){
                 $map['gender'] = $gender;
+                $sqlwhere.=' and s2.gender='.$gender;
                 $pagestr.= '/gender/'.$gender;
             }
             if(!empty($isud)){
                 $map['isud'] = $isud;
+                $sqlwhere.=' and s2.isud='.$isud;
                 $pagestr.= '/isud/'.$isud;
             }
             if($issel==1 || $issel==0){
                 $map['selected'] = $issel;
+                $sqlwhere.=' and s2.selected='.$issel;
                 $pagestr.= '/issel/'.$issel;
             }else{
                 $issel = -1;
+            }
+            if($isshow==1 || $isshow==0){
+                $map['isshow'] = $isshow;
+                $sqlwhere.=' and s2.isshow='.$isshow;
+                $pagestr.= '/isshow/'.$isshow;
+            }else{
+                $isshow = -1;
             }
             if(!empty($keyword)){
                 $where['ID'] = $keyword;
@@ -48,11 +64,14 @@ class SellcateAction extends Action{
                 $where['shortName']  = array('like','%'.$keyword.'%');
                 $where['_logic'] = 'or';
                 $map['_complex'] = $where;
+                $sqlwhere.=" and (s2.ID=".$keyword." or s2.cateName like '%".$keyword."%' or s2.shortName like '%".$keyword."%')";
                 $pagestr.="/keyword/".$keyword;
             }
             $count = $sell->where($map)->count();
             $p = new Page($count,20,$pagestr);
-            $sells = $sell->field('*')->where($map)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
+            //$sells = $sell->field('*')->where($map)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
+            $sql = "SELECT s2.*,s3.cateName as pname from u_sellercats as s2 left join (select * from u_sellercats where parentID=0) as s3 on s3.ID=s2.parentID where 1".$sqlwhere." limit ".$p->firstRows.",".$p->maxRows;
+            $sells = $sell->query($sql);
             $page = $p->showPage();
             $this->assign('sells',$sells);
             $this->assign('p',$_GET['p']);
@@ -61,6 +80,7 @@ class SellcateAction extends Action{
             $this->assign('isud',$isud);
             $this->assign('issel',$issel);
             $this->assign('keyword',$keyword);
+            $this->assign('isshow',$isshow);
             $this->display();
         }else{
             $this->display('Login/index');

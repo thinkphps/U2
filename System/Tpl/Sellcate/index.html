@@ -33,6 +33,14 @@
             </select>
         </div>
         <div class="form-group">
+            <label>是否有商品</label>
+            <select name='isshow'>
+                <option value='-1'>请选择</option>
+                <option value='0' <if condition="$isshow eq 0">selected='selected'</if>>有</option>
+                <option value='1' <if condition="$isshow eq 1">selected='selected'</if>>没有</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label>是否显示</label>
             <select name='issel'>
                 <option value='-1'>请选择</option>
@@ -49,6 +57,7 @@
             <th>名称</th>
             <th>别名</th>
             <th>父类ID</th>
+            <th>父类名</th>
             <th>排序ID</th>
             <th>类别</th>
             <th>部位</th>
@@ -64,11 +73,12 @@
                 <td>{$vo.cateName}</td>
                 <td>{$vo.shortName}</td>
                 <td>{$vo.parentID}</td>
+                <td>{$vo.pname}</td>
                 <td>{$vo.sort_order}</td>
                 <td><if condition="$vo['gender'] eq 1">女<elseif condition="$vo['gender'] eq 2"/>男<elseif condition="$vo['gender'] eq 3"/>童装<elseif condition="$vo['gender'] eq 4"/>幼儿<elseif condition="$vo['gender'] eq 5"/>婴儿</if></td>
                 <td><if condition="$vo['isud'] eq 1">上装<elseif condition="$vo['isud'] eq 2"/>下装<elseif condition="$vo['isud'] eq 3"/>内衣<elseif condition="$vo['isud'] eq 4"/>配饰<elseif condition="$vo['isud'] eq 5"/>特辑</if></td>
                 <td><if condition="$vo['selected'] eq 1">显示<elseif condition="$vo['selected'] eq 0"/>不显示</if></td>
-                <td><if condition="$vo['isshow'] eq 0">有<elseif condition="$vo['isshow'] eq 2"/>没有</if></td>
+                <td><if condition="$vo['isshow'] eq 0">有<elseif condition="$vo['isshow'] eq 1"/>没有</if></td>
                 <td><a href="{:U('Sellcate/selledit',array('id'=>$vo['ID'],'p'=>$p))}" class="btn btn-primary">编辑</a></td>
             </tr>
         </volist>
