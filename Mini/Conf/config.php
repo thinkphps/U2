@@ -10,7 +10,7 @@ return array(
     'DB_PREFIX'=>'u_',
 	'DATA_CACHE_TIME'=>600,
 	//'TAOAPIKEY'=>'21681612',
-	//'TAOSECRET'=>'044e9485753b6b3a92d4016c3cc6ad71',
+	'URL_CASE_INSENSITIVE'=>true,
 	'TAOAPIKEY'=>'21660143',
 	'TAOSECRET'=>'d7c0a4eee53d638546c816a91c4e0244',
 	'TAOCAABACK'=>'http://phoneicolor.networking.io/uniqlo/mini.php/Index/callback',
