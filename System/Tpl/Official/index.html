@@ -15,8 +15,16 @@
 
     <div id="divedit" style="display: none">
        <div class="form-inline form-group">
+           <label>按性别检索</label>
+           <select name='sex' id='sexid'>
+               <option value='0'>ALL</option>
+               <volist id='volgen' name='genderlist'>
+                   <option value="{$volgen.ID}">{$volgen.description}</option>
+               </volist>
+           </select>
            <label>按风格检索</label>
-           <select name='isstyle'>
+           <select name='isstyle' id='styid'>
+               <option value='0'>ALL</option>
                <volist id='volstyle' name='stylelist'>
                    <option value="{$volstyle.ID}">{$volstyle.description}</option>
                </volist>
@@ -121,7 +129,7 @@
     var indexurl = "{:U('Official/index')}",base_dir = "{:__ROOT__}";
     var savetmpurl = "{:U('Official/savetmp')}",delurl = "{:U('Official/del')}";
     var searchurl = "{:U('Official/search')}";
-    var recourl = "{:U('Official/recommend')}";
+    var recourl = "{:U('Official/recommend')}",getsexstyle = "{:U('Official/getsexstyle')}";
 
     function ckreco(e,dv){
         var cknum = 0;
@@ -328,6 +336,19 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#divedit').on('change','#sexid',function(){
+            $.post(getsexstyle,{sex:$('#sexid option:selected').val()},function(data,status){
+             var str = "<option value='0'>ALL</option>";
+            if(data.code==1){
+                $.each(data.re,function(si,sn){
+                    str+="<option value='"+sn.ID+"'>"+sn.description+"</option>";
+                })
+                $('#styid').html(str);
+            }else{
+                alert(data.msg);
+            }
+            },'json')
+        });
         $('#daterange').daterangepicker(
                 {
                     startDate: new Date(),

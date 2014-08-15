@@ -12,6 +12,7 @@ class OfficialAction extends Action{
         if(!empty($this->aid)){
             $styles = M('settings_suit_style');
             $stylelist = $styles->field('*')->select();
+            $genderlist = M('SettingsSuitGender')->field('*')->select();
             $msuit = M('suits_select u1');
 
             $selsuits1 = $msuit->field('u3.description,u2.suitImageUrl,u2.suitID,u2.suitStyleID as ID,u1.selected,u1.sortid')->
@@ -67,6 +68,7 @@ class OfficialAction extends Action{
             }
 //            $daterange = "2013-04-03";
             $this->assign('stylelist',$stylelist);
+            $this->assign('genderlist',$genderlist);
             $this->assign('tm',$tm);
             $this->assign('selsuits1',$selsuits1);
             $this->assign('selsuits2',$selsuits2);
@@ -79,30 +81,32 @@ class OfficialAction extends Action{
   public function search(){
       if(!empty($this->aid)){
           $style = $this->_post('isstyle');
+          $sex = $this->_post('sex');
           $numiid = $this->_post('numiid');
           $page = $this->_post('page');
           $act = $this->_post('act');
-          if(!empty($style) || !empty($numiid)){
+          $map = array();
+          if(!empty($style)){
+              $map['u1.suitStyleID'] = $style;
+          }
+          if(!empty($sex)){
+              $map['u1.suitGenderID'] = $sex;
+          }
+          $map['u1.approve_status'] = '0';
+          $map['u1.beubeuSuitID'] = array('exp','is not null');
               $suits = M('Suits u1');
               $goodsdetail = M('suits_goodsdetail u3');
               if(empty($numiid)){
                   $count = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                       ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                      ->where(array('u1.suitStyleID'=>$style,'u1.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->count();
+                      ->where($map)->count();
               }else{
-                  if(!empty($style)){
+                  $map['u3.num_iid'] = $numiid;
                       $count = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                           ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
                           ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style,'u1.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->count();
-                  }else{
-                      $count = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
-                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
-                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid,'u1.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->count();
-                  }
+                          ->where($map)->count();
               }
-
               if($count=='0'){
                   echo "";
                   exit;
@@ -127,21 +131,13 @@ class OfficialAction extends Action{
               if(empty($numiid)){
                   $result = $suits->field('u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                       ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                      ->where(array('u1.suitStyleID'=>$style,'u1.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
+                      ->where($map)->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
               }else{
-                  if(!empty($style)){
                       $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
                           ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
                           ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid,'u1.suitStyleID'=>$style,'ul.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
-                  }else{
-                      $result = $goodsdetail->field('distinct u1.suitID,u1.suitStyleID,u1.suitImageUrl,u2.description')
-                          ->join("inner join u_suits u1 on u1.suitID=u3.suitID")
-                          ->join("left join u_settings_suit_style u2 on u1.suitStyleID=u2.ID")
-                          ->where(array('u3.num_iid'=>$numiid,'u1.approve_status'=>0,'u1.beubeuSuitID'=>array('exp','is not null')))->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();;
-                  }
+                          ->where($map)->order('u1.suitID desc')->limit($firstRows.','.$maxRows)->select();
               }
-
               if(empty($result)){
                   echo "";
                   exit;
@@ -169,9 +165,7 @@ class OfficialAction extends Action{
               }
               $stylelist = array($imgs);
               echo json_encode($stylelist);
-          }else{
-              echo "";
-          }
+
       }else{
         $this->display('Login/index');
       }
@@ -248,4 +242,20 @@ class OfficialAction extends Action{
      }
      $this->ajaxReturn($arr, 'JSON');
  }
+    public function getsexstyle(){
+    if(!empty($this->aid)){
+      $sex = trim($this->_post('sex'));
+      $stylemodel = M('SettingsSuitStyle t1');
+      if(!empty($sex)){
+         $result = $stylemodel->field('t1.ID,t1.description')->join('inner join `u_settings_gender_style` as t2 on t2.styleID=t1.ID')->where(array('t2.genderID'=>$sex))->select();
+      }else{
+          $result = $stylemodel->field('*')->select();
+      }
+      $arr = array('code'=>1,'re'=>$result);
+        $this->ajaxReturn($arr, 'JSON');
+    }else{
+     $arr['code'] = 0;
+     $arr['msg'] = '没有登录';
+    }
+    }
 }
