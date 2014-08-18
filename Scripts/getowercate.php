@@ -37,18 +37,18 @@ foreach($oneCate as $k2=>$v2){
               $insql = "update u_sellercats set cateName='".$v3['name']."' where ID=".$v3['cid'];
               $db->mysqlquery($insql);
           }else{
-              $insql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v3['cid']."','".$v3['name']."','".$v3['parent_cid']."','".$v3['sort_order']."')";
+              $insql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v3['cid']."','".$v3['name']."','".$v3['parent_cid']."','999')";
               $db->mysqlquery($insql);
           }
         }
     }else{
-       $csql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v2['cid']."','".$v2['name']."','".$v2['parent_cid']."','".$v2['sort_order']."')";
+       $csql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v2['cid']."','".$v2['name']."','".$v2['parent_cid']."','999')";
        $db->mysqlquery($csql);
         unset($csql);
         foreach($cate as $k3=>$v3){
             $v3 = (array)$v3;
             if($v2['cid']==$v3['parent_cid']){
-             $insql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v3['cid']."','".$v3['name']."','".$v3['parent_cid']."','".$v3['sort_order']."')";
+             $insql = "insert into u_sellercats (`ID`,`cateName`,`parentID`,`sort_order`) values ('".$v3['cid']."','".$v3['name']."','".$v3['parent_cid']."','999')";
              $db->mysqlquery($insql);
             }
         }
