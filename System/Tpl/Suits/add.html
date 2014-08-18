@@ -176,7 +176,9 @@
             }else{
                  that.parent('.numcid').nextAll('.numsty').remove();
                  that.parent('.numcid').after('<div class="numsty" style="color:red;">'+data.msg+'</div>');
+                 if(data.code==-1){
                  $('#emgid').val('1');
+                 }
              }
             },'json');
         });

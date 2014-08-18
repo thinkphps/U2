@@ -270,7 +270,7 @@ public function delsuit(){
 			  if(!empty($benresult)){
                 $returnArr = array('code'=>1,'str'=>$fstr);
 			  }else{
-                $returnArr = array('code'=>0,'msg'=>'商品已下架或者库存小于15');
+                $returnArr = array('code'=>-1,'msg'=>'商品已下架或者库存小于15');
 			  }
           }else{
               $returnArr = array('code'=>0,'msg'=>'此商品没有打标签');
