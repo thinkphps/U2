@@ -116,11 +116,6 @@ class SuitsAction extends Action{
             $sbatchDate = trim($this->_request('sbatchDate'));
             $p = trim($this->_request('p'));
             $suitGenderID = trim($this->_post('pid'));
-            $emg = trim($this->_post('ems'));
-            if($emg==1){
-                $this->error('商品id有错误:(未上架或者库存小于15)',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
-                exit;
-            }
             if(empty($suitGenderID)){
                 $this->error('类别不能为空',U('Suits/add',array('p'=>$p,'pid'=>$ssuitGenderID,'stylevalue'=>$ssuitStyleID,'batchDate'=>$sbatchDate)));
                 exit;
@@ -266,12 +261,7 @@ public function delsuit(){
               $arr[] = $v['description'];
             }
               $fstr = implode('_',$arr);
-			  $benresult = M('BeubeuGoods')->field('num_iid')->where(array('num_iid'=>$num_iid,'approve_status'=>'onsale','num'=>array('egt',15)))->find();
-			  if(!empty($benresult)){
-                $returnArr = array('code'=>1,'str'=>$fstr);
-			  }else{
-                $returnArr = array('code'=>-1,'msg'=>'商品已下架或者库存小于15');
-			  }
+              $returnArr = array('code'=>1,'str'=>$fstr);
           }else{
               $returnArr = array('code'=>0,'msg'=>'此商品没有打标签');
           }
