@@ -70,11 +70,11 @@ class SellcateAction extends Action{
             $count = $sell->where($map)->count();
             $p = new Page($count,20,$pagestr);
             //$sells = $sell->field('*')->where($map)->order('ID desc')->limit($p->firstRows.','.$p->maxRows)->select();
-            $sql = "SELECT s2.*,s3.cateName as pname from u_sellercats as s2 left join (select * from u_sellercats where parentID=0) as s3 on s3.ID=s2.parentID where 1".$sqlwhere." limit ".$p->firstRows.",".$p->maxRows;
+            $sql = "SELECT s2.*,s3.cateName as pname from u_sellercats as s2 left join (select * from u_sellercats where parentID=0) as s3 on s3.ID=s2.parentID where 1".$sqlwhere." order by sort_order asc,gender asc limit ".$p->firstRows.",".$p->maxRows;
             $sells = $sell->query($sql);
             $page = $p->showPage();
             $this->assign('sells',$sells);
-            $this->assign('p',$_GET['p']);
+            $this->assign('p',$_REQUEST['p']);
             $this->assign('page',$page);
             $this->assign('gender',$gender);
             $this->assign('isud',$isud);
@@ -136,5 +136,22 @@ class SellcateAction extends Action{
         }else{
             $this->display('Login/index');
         }
+    }
+    public function uporder(){
+        if(!empty($this->aid)){
+         $otype = trim($this->_post('otype'));
+         $cateid = trim($this->_post('cateid'));
+         if($otype=='up'){
+          $wap['sort_order'] = array('exp','sort_order-1');
+         }else if($otype=='down'){
+          $wap['sort_order'] = array('exp','sort_order+1');
+         }
+          M('Sellercats')->where(array('ID'=>$cateid))->save($wap);
+            $arr['code'] = 1;
+        }else{
+         $arr['code'] = 0;
+         $arr['msg'] = '没有登录';
+        }
+        $this->ajaxReturn($arr, 'JSON');
     }
 }

@@ -4,7 +4,7 @@
         <li><a href="{:U('Index/index')}">首页</a></li>
         <li class="active"><strong>店铺自定义分类管理</strong></li>
     </ol>
-    <form class="form-inline form-group" role="form" action="{:U('Sellcate/index')}" method='post'>
+    <form class="form-inline form-group" role="form" action="{:U('Sellcate/index',array('p'=>$p))}" method='post' id='cateform'>
         <div class="form-group">
             <label class="sr-only" for="exampleInputEmail2">请输入关键字</label>
             <input type="text" class="form-control" id="exampleInputEmail2" placeholder="请输入关键字" name='keyword' value='{$keyword}'>
@@ -74,7 +74,7 @@
                 <td>{$vo.shortName}</td>
                 <td>{$vo.parentID}</td>
                 <td>{$vo.pname}</td>
-                <td>{$vo.sort_order}</td>
+                <td><span>{$vo.sort_order}</span><span class='ot'></span><span><img class='ot' src='__TMPL__Public/images/jiantou_up.png' onclick="updown({$vo.ID},'up');"><img class='ot' src='__TMPL__Public/images/jiantou_down.png' onclick="updown({$vo.ID},'down');"></span></td>
                 <td><if condition="$vo['gender'] eq 1">女<elseif condition="$vo['gender'] eq 2"/>男<elseif condition="$vo['gender'] eq 3"/>童装<elseif condition="$vo['gender'] eq 4"/>幼儿<elseif condition="$vo['gender'] eq 5"/>婴儿</if></td>
                 <td><if condition="$vo['isud'] eq 1">上装<elseif condition="$vo['isud'] eq 2"/>下装<elseif condition="$vo['isud'] eq 3"/>内衣<elseif condition="$vo['isud'] eq 4"/>配饰<elseif condition="$vo['isud'] eq 5"/>特辑</if></td>
                 <td><if condition="$vo['selected'] eq 1">显示<elseif condition="$vo['selected'] eq 0"/>不显示</if></td>
@@ -91,3 +91,15 @@
     </div>
 </div>
 <include file="Public:footer"/>
+<script>
+    var upurl = "{:U('Sellcate/uporder')}";
+    function updown(cateid,otype){
+        $.post(upurl,{otype : otype,cateid : cateid},function(data,status){
+        if(data.code==1){
+          $('#cateform').submit();
+        }else{
+            alert(data.msg);
+        }
+        },'json');
+    }
+</script>
