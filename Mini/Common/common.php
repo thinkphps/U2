@@ -124,5 +124,8 @@ function is_mobile() {
             break;
         }
     }
+    if(strpos($user_agent,'ipad')){
+        $is_mobile = false;
+    }
     return $is_mobile;
 }
