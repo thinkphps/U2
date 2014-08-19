@@ -258,6 +258,7 @@
         $.post(searchurl,{
             isstyle : $('select[name=isstyle]').val(),
             numiid : $('#iptnumiid').val(),
+            sex : $('#sexid option:selected').val(),
             page:page,
             act:act
         },function(data,status){
