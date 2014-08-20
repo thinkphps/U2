@@ -593,9 +593,8 @@ var _mini = {
                 strHtml +=  'data-gendertype="'+ v.type +'" data-isud="'+ v.isud+'"><i></i>';
                 if(v.type == 5){
                     strHtml+= '搭配';
-                }
-                else{
-                    if(v.num==0){
+                }else{
+                    if(v.num==0 || v.approve_status=='instock'){
                         strHtml+= '搭配';
                     }else{
                         strHtml += '试穿';
