@@ -207,7 +207,7 @@ class ProductSynModel extends Model{
             ->field("
                     distinct u_products_beubeu.color as colorid,
                     CONCAT(LEFT(u_products.url,LENGTH(u_products.url)-3), 'jpg')  as url,
-                    left(u_goods.item_bn,8) as uq
+                    left(u_goods.item_bn,8) as uq,u_products.cvalue
                     ")
             ->where(array('u_products_beubeu.uq'=>$id,'u_products_beubeu.status'=>'1'))
             ->group('uq,colorid')

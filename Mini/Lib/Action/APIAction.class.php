@@ -282,6 +282,7 @@ class APIAction extends Action
                 {
                     $returnValue['color'][$i]['uq'] = $returnOjb[$i]['uq'].$returnOjb[$i]['colorid'];
                     $returnValue['color'][$i]['url'] = $preStr.$returnOjb[$i]['url'];
+                    $returnValue['color'][$i]['cvalue'] = $preStr.$returnOjb[$i]['cvalue'];
                 }
             }
         }
