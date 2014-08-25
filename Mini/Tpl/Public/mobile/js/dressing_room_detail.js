@@ -795,7 +795,7 @@ $('#watercontainer').waterfall({
     colWidth: 142,
     gutterWidth: 10,
     gutterHeight: -10,
-    align: 'left',
+    align: 'center',
     minCol: 1,
     //maxCol: 4,
     maxPage: -1,

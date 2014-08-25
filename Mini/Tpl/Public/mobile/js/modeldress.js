@@ -113,19 +113,19 @@ function Model_loadok_callback(){
 
 function change_baiyi_css(){
 //    alert(1);
-    $('#beubeu_copy_c').removeClass('beubeu_copy_c');
-    $('#beubeu_copy_c').css({'right':'3em','left':'','top':'15em','position':'relative','height':'auto'
+   /* $('#beubeu_copy_c').removeClass('beubeu_copy_c');
+    $('#beubeu_copy_c').css({'right':'-2.5em','left':'','top':'4em','position':'relative','height':'auto'
     ,'background-color':'#fff','z-index':'998','text-align':'left','font-size':'12px','float':'right'
     ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'});
     $('#beubeu_copy_lw').css({'top':'23em'});
     $('#beubeu_copy_s').removeClass('beubeu_copy_s');
-    $('#beubeu_copy_s').css({'right':'4em','left':'','top':'17em','position':'relative','height':'102px'
+    $('#beubeu_copy_s').css({'right':'1em','left':'','top':'4em','position':'relative','height':'58px'
        ,'background-color':'#fff','z-index':'998','text-align':'left','font-size':'12px','float':'right'
-       ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'})
+       ,'filter':'alpha(opacity=90)','-moz-opacity':'0.90','-khtml-opacity':'0.90','opacity':'0.9','border':'1px solid #CCC'})*/
 }
 
 function change_baiyi_css_info(){
-    $('.beubeu_list').css({'top':'12em','left':'-1em'});
+    //$('.beubeu_list').css({'top':'12em','left':'-1em'});
 }
 
 (function($, window, document,undefined) {
@@ -146,24 +146,24 @@ function change_baiyi_css_info(){
         showbaiyiModel : function(callback){
             /***新的百衣搭配间****/
             var touchid= 854;
-            var key="8f1a6e3f182904ad22170f56c890e533";
-            loadMymodel(touchid,key);
-//            loadMymodel(858,'165ea085e3da6182e441b472989468fc');
+            /*var key="8f1a6e3f182904ad22170f56c890e533";
+            loadMymodel(touchid,key);*/
+            loadMymodel(854,'8f1a6e3f182904ad22170f56c890e533',0.5);
             Model.CurrClothesCallback = this.beu_getallclothes;
 
             //$('#beu_img_body').css({'width':'28em','height':'36em'});
             //$('#beu_img_head').css({'width':'28em','height':'36em'});
             //$('#beu_img_shose').css({'width':'28em','height':'36em'});
             //$('#beu_img').css({'width':'28em','height':'36em'});
-            $('.beubeu_btns').css({'left':'0em','top':'16.3em'});
+            $('.beubeu_btns').css({'left':'0em','top':'16.3em','margin-left':'1em','margin-top':'19em'});
             $('.beubeu_btns3').css('left','-0em').css('top','13em');
-            $('#showmodelhead').css({'top':'14em','left':'0em'});
-            $('#beubeu_shoes').css({'top':'13em','left':'4em'});
+            $('#showmodelhead').css({'top':'-11em','left':'2.5em'});
+            $('#beubeu_shoes').css({'top':'1.8em','left':'2.5em'});
             $('#beubeu_loading2').css({'height':'24em','left':'5em'});
-            $('#beu_showimg').css({'position':'absolute','top':'-3em'});
-            $('#show_csw').css({'left':'17.9em','top':'15.9em'});
+            $('#beu_showimg').css({'position':'absolute','top':'-1em','left':'-0.8em'});
+            $('#show_csw').css({'margin-left':'161px','top':'15.9em'});
             $('#beubeu_copy_lw').css({'left':'2.4em','top':'2.3em'});
-            $('#beubeu_copy_c').css({'left':'2em'});
+            //$('#beubeu_copy_c').css({'left':'2.5em'});
             $('#beubeu_loading').css({'top':'12em','left':'5em'});
 
             if ( callback ) {
