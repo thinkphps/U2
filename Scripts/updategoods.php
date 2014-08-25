@@ -284,7 +284,12 @@ function getcolor($property_alias){
 	$arr_pro = array();
     foreach($arr_property as $ka=>$va){
     $arr_va = explode(':',$va);
-	$arr_color = explode(' ',$arr_va[2]);
+    $issp = is_int(strpos($arr_va[2],' '));
+    if($issp){
+	    $arr_color = explode(' ',$arr_va[2]);
+    }else{
+        $arr_color[0] = substr($arr_va[2],0,2);
+    }
 	$arr_pro[] = array('id'=>$arr_va[1],'cid'=>$arr_color[0],'cv'=>$arr_va[2]);
 	}
 	return $arr_pro;
