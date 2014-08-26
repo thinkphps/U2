@@ -173,6 +173,7 @@ function Model_loadok_callback(){
             }
         },
         callDressingFunction : function(){
+            $('#shareimg').attr('la',dsn+$(this).find('img').attr('src')).attr('lb','1');
             pageElement.dressByBarcodeList($(this).data('detail'));
         },
         //隐藏显示空间
@@ -303,10 +304,8 @@ function Model_loadok_callback(){
         },
         elementEvent : function(){
             var _this = this;
-
             //点击模特图，将模特身上的衣服穿到白衣的模特身上
             $('#sfid').on('click','.model',_this.callDressingFunction);
-
             pageElement.$btnExpansion.on('click',function(){
                 _this.objShowOrHide(pageElement.$divSyj);
                 var $parentDiv = $(this).parent();
@@ -547,6 +546,7 @@ function Model_loadok_callback(){
                 var gender = $proInfo.data('gender');
                 var isud = $proInfo.data('isud');
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
+                $('#shareimg').attr('lb','2')
                 //kimi
                 var $cselected = $('#watercontainer').find('li.pro-selected').children('a');
                 if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode || $cselected.data('num_iid')==$proInfo.data('num_iid')){
