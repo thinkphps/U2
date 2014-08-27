@@ -152,7 +152,7 @@ function Model_loadok_callback(){
             var _this = this;
             var suitid = pageElement.getUrlParam('suitid');
             if( suitid != -1){
-                $('#changeid').attr('la',1);
+                $('#changeid').attr('la',1);$('#shareimg').attr('lb','2');
                 var sex = pageElement.getUrlParam('gender');
                 var gender = pageElement.getGenderValue(sex);
 
