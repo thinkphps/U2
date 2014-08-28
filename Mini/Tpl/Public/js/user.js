@@ -59,8 +59,10 @@ jQuery(function($) {
                     if(cnum >= 10){
                         UserCenter.youhui_icon.show();
                         if(pageOffset!=-1){
+                           if(fenflag==1){
                             UserCenter.youhuifirst.removeClass('none');
                             UserCenter.youhuifirst.show();
+                        }
                          }
                     }
                     else{
@@ -159,13 +161,15 @@ jQuery(function($) {
     UserCenter.youhui_icon.on('click',function(){
         var isreceive = UserCenter.youhui_icon.data('isreceive');
         var colnum = UserCenter.collocationNum.text();
-        /*if(UserCenter.youhui_msg.hasClass('none')){
+        if(fenflag==0){
+        if(UserCenter.youhui_msg.hasClass('none')){
             UserCenter.youhui_msg.removeClass('none');
             UserCenter.youhui_msg.show();
         }else{
             UserCenter.youhui_msg.addClass('none');
             UserCenter.youhui_msg.hide();
-        }*/
+        }
+       }else if(fenflag==1){
         if(colnum >= 10){
             if( isreceive != 1){
                 $('#youhui_msg').removeClass('none');
@@ -183,7 +187,6 @@ jQuery(function($) {
             }else{
                 $('#youhui_msg').removeClass('none');
                 $('#youhui_msg').show();//目前没有优惠信息，有的话这两句要删掉
-                //$('#youhuim').html('是否立即领取优惠');
             }
         }else{
             if(isreceive==1){
@@ -196,6 +199,7 @@ jQuery(function($) {
                 //$('#youhuim').html('是否立即领取优惠');
            }
         }
+    }
     });
     UserCenter.youhui_msg.on('click',function(){
        if(!$(this).hasClass('none')){
@@ -203,10 +207,11 @@ jQuery(function($) {
            $('#youhui_msg').hide();
        }
     });
+    /*0827有优惠劵注释
     UserCenter.youhuifirst.on('click','#yhfclose',function(){
         UserCenter.youhuifirst.addClass('none');
         UserCenter.youhuifirst.hide();
-    });
+    });*/
     //账户信息
     UserCenter.btnUserInfo.on('click',function(){
         //UserCenter.ulMenu.find('li').removeClass('select');
