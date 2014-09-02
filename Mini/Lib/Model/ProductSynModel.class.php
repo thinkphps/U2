@@ -127,10 +127,10 @@ class ProductSynModel extends Model{
                     unset($map['status']);
                     // get goods title from goods
                     $mapgoods['item_bn'] = array('like',substr($baiyiuq,0,8).'%');
-
                     $goodsResult = $goods->field('title,num_iid')->where($mapgoods)->find();
                     $goodsName = '';
                     $goodsUrl = '';
+                    $returnProduct[$i]['uq'] = $baiyiuq;
                     if(isset($goodsResult) && !empty($goodsResult))
                     {
                     $result = $productsbeubeu->field('*')->where($map)->find();
@@ -142,7 +142,6 @@ class ProductSynModel extends Model{
                     }else{
                         $productsbeubeu->add($map);
                     }
-                    $returnProduct[$i]['uq'] = $baiyiuq;
                         $goodsName = $goodsResult['title'];
 
                         $productUrlResult = $product->field('url')->where(array('num_iid'=>$goodsResult['num_iid'],'left(cvalue,2)'=>substr($baiyiuq,8)))->find();
