@@ -261,7 +261,7 @@ class SuitsSynModel extends Model{
                         $map['tag'] = $tag;
                     }
                 }
-                if(isset($result))
+                if(isset($result) && !empty($result))
                 {
                     $map['uptime'] = $createtime;
                     $suits->where('suitID='.$result['suitID'])->save($map);
