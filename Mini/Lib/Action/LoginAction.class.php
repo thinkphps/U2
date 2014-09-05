@@ -20,7 +20,7 @@ class LoginAction extends Action{
 				cookie('uniq_user_name',$user_name,604800);
 				cookie('uniq_user_id',$user['id'],604800);
 			}
-			$collection = M('Collection');
+			/*$collection = M('Collection');
 			if($user['is_active']){
 				$collection->where(array('uid'=>session("uniq_user_id")))->save(array('is_delete'=>0));
 			}else{
@@ -39,7 +39,7 @@ class LoginAction extends Action{
 			}
 			}	
 			}
-		  }
+		  }*/
 			//用户登陆后吧cookie里的三件商品放进有衣柜
 			$login_arr = array('code'=>1,'msg'=>'登录成功！');
 		}else{
@@ -49,7 +49,6 @@ class LoginAction extends Action{
 	}
 
 	function register(){
-		$user_name	 = isset($_POST['user_name']) && !empty($_POST['user_name']) ? $_POST['user_name'] : '' ;
 		$mobile      = isset($_POST['mobile']) && !empty($_POST['mobile']) ? $_POST['mobile'] : '' ;
 		$taobao_name = isset($_POST['taobao_name']) && !empty($_POST['taobao_name']) ? $_POST['taobao_name'] : '' ;
 		$password    = isset($_POST['password']) && !empty($_POST['password']) ? $_POST['password'] : '' ;
@@ -73,7 +72,7 @@ class LoginAction extends Action{
 			}
 		}
 		$data = array(
-				  'user_name'  =>	$user_name,
+				  'user_name'  =>	$taobao_name,
 	              'mobile'	   =>	$mobile,
 				  'taobao_name'=>	$taobao_name,
 				  'password'   =>	md5($password),
@@ -85,7 +84,7 @@ class LoginAction extends Action{
 		$res = M('user')->add($data);
 		if($res){
 			if($mobile){
-				session("is_active",$user_name);
+				session("is_active",$is_active);
 			}
 			if($mobile){
 				$user_name = $mobile;
@@ -97,7 +96,7 @@ class LoginAction extends Action{
 			session("uniq_user_id",$res);
 			$login_arr = array('code'=>1,'msg'=>'注册成功');
 			//用户登陆后吧cookie里的三件商品放进有衣柜
-			$collection = M('Collection');
+			/*$collection = M('Collection');
 			$cooiid = $this->_post('nologiidu').$this->_post('nologiidd');
 			$time = date('Y-m-d H:i:s');
           if(!empty($cooiid)){
@@ -110,7 +109,7 @@ class LoginAction extends Action{
 			}
 			}	
 			}
-		  }
+		  }*/
 			//用户登陆后吧cookie里的三件商品放进有衣柜		
 		}else{
 			$login_arr = array('code'=>-1,'msg'=>'注册失败');
@@ -206,6 +205,7 @@ class LoginAction extends Action{
 		$where_str = " ( taobao_name = '{$user_name}' OR mobile = '{$user_name}' ) AND password = '{$old_password}' ";
 		$user = M('user')->where($where_str)->find();
 		if($user){
+            if($user['login_type']=='normal'){
 			$data['password'] = md5($new_password);
 			$flag = M('user')->where("taobao_name='{$user_name}' OR mobile = '{$user_name}' ")->save($data);
 			if($flag){
@@ -213,6 +213,9 @@ class LoginAction extends Action{
 			}else{
 				$returnArr = array('code'=>-1,'msg'=>'请输入正确的旧密码');
 			}
+        }else{
+              $returnArr = array('code'=>-1,'msg'=>'第三方用户不能修改密码');
+            }
 		}else{
 			$returnArr = array('code'=>-1,'msg'=>'请输入正确的旧密码');
 		}

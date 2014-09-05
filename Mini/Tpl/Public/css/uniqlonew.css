@@ -2477,11 +2477,16 @@ a.light_box_close{  background:url(../images/mini/close2.png) 0 0 no-repeat; wid
   width: 308px;
   left: 347px;
 }
-
-
 .tsxx1{ width:504px; height:376px; background:url(../images/mini/tsxx1.png) 0 0 no-repeat; position:absolute; top:90px; left:50%; margin-left:11px; z-index:991;  }
 .tsxx1 a{ display:block; background:#dd000a; width:95px; height:39px; line-height:39px; font-size:18px; color:#FFF; text-align:center; margin:220px 0 0 160px;}
 
 .tsxx2{ width:305px; height:227px; position:absolute; top:99px; left:15.5%; z-index:991;  }
 .tsxx2_inf{ float:left; width:305px; height:227px; background:url(../images/newicon.png) 0 0 no-repeat;}
 .tsxx2_inf a{ display:block; background:#dd000a; width:95px; height:39px; line-height:39px; font-size:18px; color:#FFF; text-align:center; margin:125px 0 0 132px;}
+.apidiv{height:30px;}
+.apidiv .qtapi{position: absolute;left:18px;top:243px;}
+.apidiv .apileft{background: url('../images/api/a1.png') no-repeat scroll -2px -2px;display:block;width:30px;height:30px;cursor:pointer;position: absolute;top:237px;left:114px;}
+.apileft p{position: absolute;top:244px;left:24px;top:5px;width:60px;}
+.apidiv .apiright{background: url('../images/api/a1.png') no-repeat scroll -36px -2px;display:block;width:30px;height:30px;position:absolute;top:237px;left:108px;cursor:pointer;left:202px;}
+.apiright p{position:absolute;top:5px;left:25px;}
+.apidiv #cszid{color:red;position:absolute;right:118px;top:241px;}

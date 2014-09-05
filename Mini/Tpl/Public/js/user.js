@@ -46,7 +46,9 @@ jQuery(function($) {
                 var cnum =  data['collcount'];
                 UserCenter.collocationNum.text(cnum);
                 var collflag = data['collflag'];
+                if(!page || page==1){
                 $('#txttbname').val(data['tname']);
+                 }
                 if(collflag == 1){
                     UserCenter.youhui_icon.data('isreceive',1);
 //                    UserCenter.youhui_icon.removeClass('youhui_icon');
@@ -100,7 +102,14 @@ jQuery(function($) {
                         }else{
                            var deurl = detiles[j].detail_url,tar = 'target="_blank"';
                         }
-                        strHtml += '<li><a href="'+ deurl +'" '+tar+' title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
+                        var buy = '',love = '';
+                        if(detiles[j].buyid){
+                          var buy = 'select';
+                        }
+                        if(detiles[j].loveid){
+                            var love = 'select';
+                        }
+                        strHtml += '<li><span class="sou_span none"><a id="sb'+detiles[j].num_iid+'" data-id="'+detiles[j].num_iid+'" class="sou_ym '+buy+'" href="javascript:;"><i></i>已买</a><a id="sl'+detiles[j].num_iid+'" data-id="'+detiles[j].num_iid+'" class="sou_xh '+love+'"" href="javascript:;"><i></i>喜欢</a></span><a class="sou_pic" href="'+ deurl +'" '+tar+' title="'+detiles[j].title+'"><img src="'+ rootPath + '/'+detiles[j].pic_url +'"  /></a></li>'
                     }
                     strHtml += '</ul>';
                     strHtml += '<a href="javascript:;" data-id="'+ list[i].id+'" class="del_sc_btn"><span class="none"></span></a>'
@@ -221,12 +230,23 @@ jQuery(function($) {
         $('div[name=user_l_box]').hide();
         UserCenter.userinfo.show();
         $.post(getUserInfoUrl,function(data){
-            console.log(data);
             if(data['code'] > 0){
                 var info = data['result'];
-                $('#showuserinfo').val(info.user_name);
-                $('#showmobile').val(info.mobile);
-                $('#shoutbname').val(info.taobao_name);
+                if(info.login_type =='normal'){
+                   if(info.mobile){
+                     var zhname = info.mobile;
+                   }
+                   if(info.user_name){
+                       var zhname = info.user_name;
+                   }
+                   if(info.taobao_name){
+                        var zhname = info.taobao_name;
+                    }
+                    $('#showmobile').val(zhname);
+                }else{
+                    $('#showmobile').val(info.user_name);
+                }
+
             }else{
                 return false;
             }
@@ -305,8 +325,13 @@ jQuery(function($) {
             $.post(changeTaoNameUrl,{taobao_name:tbname},function(data){
                 if(data['code'] == '1'){
                     UserCenter.txttbname.val('');
+                    if(data['login_type']=='normal'){
                     $('#lblusername').text(tbname);
+                    $('#lblnick').text(data['tname']);
+                   }
                     $('#txttbname').val(data['tname']);
+                    $('#txttbname').attr('readonly','true').addClass('usclass');
+                    $('#btn_change_tbname2').show();$('#btn_change_tbname').hide();
                     $('#changetbname_msg').html('淘宝登录名已关联成功！');
                 }
                 else{
@@ -317,7 +342,10 @@ jQuery(function($) {
             $('#changetbname_msg').html('淘宝登录名不能为空！');
         }
     });
-
+    $('#btn_change_tbname2').on('click',function(){
+       $(this).hide();$('#btn_change_tbname').show();
+       $('#txttbname').removeAttr('readonly').removeClass('usclass');
+    });
     //穿衣
     UserCenter.centor_con.on('click','.model_yj',function(){
         var $model_yj = $(this);

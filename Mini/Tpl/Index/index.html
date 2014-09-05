@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>优衣库 - 虚拟试衣间  | 一个可以按气温、穿衣场合及风格快速为您推荐搭配组合的智能衣柜</title>
+    <title>优衣库 - 虚拟试衣间</title>
     <meta name="keywords" content="优衣库 虚拟试衣间,搭配,服装搭配,男装搭配,女装搭配,童装搭配,看天气,学搭配" />
     <meta name="description" content="优衣库 - 虚拟试衣间 | 一个可以按气温、穿衣场合及风格快速为您推荐搭配组合的智能衣柜" />
+<meta property="qc:admins" content="3405014465147621774141637563675453044347" />
     <link href="__TMPL__Public/css/dressing_room_detail.css" rel="stylesheet" type="text/css" />
     <link href="__TMPL__Public/css/uniqlonew.css" rel="stylesheet" type="text/css" />
 </head>
@@ -73,7 +74,7 @@
             <a href="javascript:;" class="mini-login-btn">直接登录</a>
             <else />
             <div class="login">
-            <p><span>当前登录号：</span><strong id="lblusername">{$uniq_user_name}</strong></p>
+            <p><span>账号：</span><strong id="lblusername">{$uniq_user_name}</strong></p>
 
             <if condition="$is_mobile_active eq 0">
                 <a href="javascript:;" class="mini-activate-btn mr10 js-click" data-id="#activate_account">激活账号</a>
@@ -323,6 +324,10 @@
     <div class="mini-control tr">
         <input type="button" value="登录" onclick="return do_login();" class="mini-login-submit" />
         <a href="javascript:;" class="mini-login-reg fl">3秒快速注册</a>
+    </div>
+    <div class="mini-control tr apidiv">
+       <span class="qtapi">其他账号登录：</span>
+       <a href="{:U('Openapi/sinaLogin')}"><span class='apileft'><p>新浪微博</p></span></a><a href="{:U('Openapi/qqLogin')}"><span class='apiright'><p>QQ</p></span></a><span id='cszid'>(测试中)</span>
     </div>
 </form>
 
@@ -627,7 +632,7 @@
                 <p id='soucangid'></p>
                 <button type="button" id='scclose'>确定</button>
                 </div>
-            <a href="javascript:;" class="buy_btn"><i></i><p>我要购买</p></a>
+            <a href="javascript:;" class="buy_btn" id='shareimg' la='' lb=''><i></i><p>我要购买</p></a>
             <a href="javascript:;" class="sc_btn"><i></i></i><p>我要收藏</p></a>
             <!--<a href="javascript:;" class="bc_btn">保存此搭配</a>-->
             <!--<a href="javascript:;" class="bc_btn">将此搭配分享到：</a>-->
@@ -652,8 +657,23 @@
                         shortUrl:false,
                         hideMore:false
                     }
+                    var hetu = "{:U('Graph/downpic')}";
                     funcShare = function(){
-                        var src = Model.GetDIY(); // 取出当前搭配图片
+                        var src = $('#shareimg').attr('la'),shlb = $('#shareimg').attr('lb');
+                        //var src = Model.GetDIY(); // 取出当前搭配图片
+                        if(shlb==2){
+                        var bbody = $('#beu_showimg').find('img:eq(0)').attr('src'),bshose = $('#beu_showimg').find('img:eq(1)').attr('src'),bclose = $('#beu_showimg').find('img:eq(2)').attr('src'),bhead = $('#beu_showimg').find('img:eq(3)').attr('src');
+                        $.post(hetu,{bbody:bbody,bshose:bshose,bclose:bclose,bhead:bhead},function(data,status){
+                            jiathis_config={
+                                url:"http://uniqlo.bigodata.com.cn/u2/",
+                                summary:"#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店",
+                                title : " ",
+                                pic:data,
+                                shortUrl:false,
+                                hideMore:false
+                            }
+                        })
+                    }else if(shlb==1){
                         jiathis_config={
                             url:"http://uniqlo.bigodata.com.cn/u2/",
                             summary:"#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店",
@@ -662,6 +682,7 @@
                             shortUrl:false,
                             hideMore:false
                         }
+                    }
                         // 执行分享操作
                     }
                 </script>
@@ -701,13 +722,13 @@
 <include file="Home:user"/>
 <script type='text/javascript'>
     //性别对应的标记
-    var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}';
+    var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}',fenflag = 0,login_type = "{$user.login_type}";
     var addda = '{:U('Index/getdapeijian')}';
     var imgpath = '__TMPL__Public';
     var goodurl = '{:U('Index/getgood')}';
     var addwarurl = '{:U('Index/addwar')}';
     var cityn = '{$cityn}';
-    var provi = '{$provi}',sendurl = '{$uniurl}',styleurl="{:U('Getinfo/sexToStyle')}";
+    var provi = '{$provi}',sendurl = '{$uniurl}',dsn="{$dsn}",styleurl="{:U('Getinfo/sexToStyle')}";
     var addpropurl = '{:U('Lea/addlea')}',midstyleurl = "{:U('Getinfo/midsexToStyle')}";
     var registerurl = '{:U('Login/register')}',uppopo = "{:U('Lea/upShowTag')}",checkrvery = "{:U('Login/check_registr_very')}",regurl = "{:__APP__}";
     var findpwdurl = '{:U('Login/forget_pwd')}';

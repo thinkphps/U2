@@ -601,8 +601,8 @@ var _mini = {
                     }
                 }
                 strHtml += '</a></dt>';
-                strHtml += '<dd><a href="javascript:;" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
-                strHtml += '<dd><a href="javascript:;" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
+                strHtml += '<dd><a href="javascript:;" id="b'+ v.num_iid+'" class="btn_ym'+ buyCss +'" data-id="'+ v.num_iid+'"><i></i>已买</a></dd>';
+                strHtml += '<dd><a href="javascript:;" id="l'+ v.num_iid+'" class="btn_xh'+ loveCss +'" data-id="'+ v.num_iid+'"><i></i>喜欢</a></dd></dl>';
                 //颜色
                 var sty = '';
                 if(v.skunum==0 && v.num!=0){
@@ -706,7 +706,7 @@ $('#changeid').on('click',function(){
 
 $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
     var num_iid = $(this).data('id');
-    $(this).toggleClass('select');
+    $(this).toggleClass('select');$('#conter_con').find('#sl'+num_iid).toggleClass('select');
     if($(this).hasClass('select')){
         addbuy(num_iid,1,1)//添加
     } else {
@@ -715,11 +715,39 @@ $('#watercontainer').on('click','.btn_xh',function(){      //喜欢
 });
 $('#watercontainer').on('click','.btn_ym',function(){    //购买
     var num_iid = $(this).data('id');
-    $(this).toggleClass('select');
+    $(this).toggleClass('select');$('#conter_con').find('#sb'+num_iid).toggleClass('select');
     if($(this).hasClass('select')){
         addbuy(num_iid,2,1)//添加
     } else {
         addbuy(num_iid,2,0)//取消
+    }
+});
+$('#conter_con').on('click','.sou_xh',function(){      //收藏里喜欢
+    var num_iid = $(this).data('id');
+    $(this).toggleClass('select');$('#watercontainer').find('#l'+num_iid).toggleClass('select');
+    if($(this).hasClass('select')){
+        addbuy(num_iid,1,1)//添加
+    } else {
+        addbuy(num_iid,1,0)//取消
+    }
+});
+$('#conter_con').on('click','.sou_ym',function(){    //收藏里购买
+    var num_iid = $(this).data('id');
+    $(this).toggleClass('select');$('#watercontainer').find('#b'+num_iid).toggleClass('select');
+    if($(this).hasClass('select')){
+        addbuy(num_iid,2,1)//添加
+    } else {
+        addbuy(num_iid,2,0)//取消
+    }
+});
+$('#conter_con').on('mouseover','.sou_pic',function(){    //收藏里购买
+    $(this).parent().siblings().find('.sou_span').addClass('none');
+    $(this).parent().parent().parent().siblings().find('.sou_span').addClass('none');
+    $(this).parent().find('.sou_span').removeClass('none');
+});
+$('#conter_con').on('mouseleave','.sou_span',function(){    //收藏里购买
+    if(!$(this).hasClass('none')){
+    $(this).addClass('none');
     }
 });
 $('#watercontainer').on('click','#cldata',function(){         //右侧已收藏
@@ -1371,6 +1399,10 @@ function change_pwd(){
     var old_password = $('#c_old_password').val();
     var new_password = $('#c_new_password').val();
     var reg_new_password = $('#c_reg_new_password').val();
+    if(login_type!='normal'){
+        $('#pwd_error_msg').html('第三方用户不能修改密码');
+        return false;
+    }
     if(old_password.length < 6 || old_password.length > 16){
         $('#pwd_error_msg').html('请输入正确的旧密码');
         return false;

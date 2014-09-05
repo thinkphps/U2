@@ -519,6 +519,7 @@ function Model_loadok_callback(){
            //推荐
             $('#watercontainer').on('click','.tuijian',function(){
               var $this = $(this).parent(),$tuidata = eval($this.data('tuijian')),tuilength = $tuidata.length;
+                $('#shareimg').attr('lb','2');
                 pageElement.IsHide = 1;
                   var tstr = '',$wrapper_box = $this.parent();
                 if(!$(this).hasClass('sel')){
@@ -546,7 +547,7 @@ function Model_loadok_callback(){
                 var gender = $proInfo.data('gender');
                 var isud = $proInfo.data('isud');
                 var sex = $wrapper_box.find('.tryon').data('gendertype');
-                $('#shareimg').attr('lb','2')
+                $('#shareimg').attr('lb','2');
                 //kimi
                 var $cselected = $('#watercontainer').find('li.pro-selected').children('a');
                 if($cselected.data('uqcode')+$cselected.data('colorid')!=barcode || $cselected.data('num_iid')==$proInfo.data('num_iid')){

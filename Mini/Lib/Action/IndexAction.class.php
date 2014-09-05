@@ -13,47 +13,18 @@ class IndexAction extends Action {
         }
         $this->uniq_user_name =  session("uniq_user_name");
         $user = M('User');
-        $num_iid = trim($this->_request('num'));
-        $is_show = 0;
         $is_allow_register = 0;
-        $is_phone = 0;
-        $is_active = 0;
         $is_mobile_active = 0;
         $mobile = '';
         $nick = session("uniq_user_id");
         $result = $user->where(array('id'=>$nick))->find();
-        if(!empty($num_iid)){
-            $_SESSION['num_iid'] = $num_iid;
-            if(empty($this->uniq_user_name)){
-                $is_allow_register = 1;
-            }else{
-                if(!$result['is_active']){
-                    $is_active = 1;
-                }else{
-                    $is_mobile_active = 1;
-                }
-                if($result['mobile']){
-                    $is_phone = 0;
-                    $mobile = $result['mobile'];
-                }else{
-                    $is_active = 0;
-                    $is_phone = 1;
-                }
-            }
-        }else{
-            $is_mobile_active = $result['is_active'];
-            //$is_allow_register = 1;
+        if($result['login_type']!='normal'){
+            $this->uniq_user_name = $result['user_name'];
         }
-
-        if($is_allow_register > 0 || $is_phone > 0 || $is_active > 0){
-            $is_show = 1;
-        }
-        //echo $is_allow_register.$is_phone.$is_active;
-        $this->assign('is_show',$is_show);
-        $collection = M('Collection');
+        $is_mobile_active = $result['is_active'];
+        $mobile = $result['mobile'];
         $goods = M('Goods');
         $goodtag = M('Goodtag');
-        $customcate = M('Customcate');
         $time = date('Y-m-d H:i:s');
         $love = M('Love');
         $buy = M('Buy');
@@ -66,21 +37,8 @@ class IndexAction extends Action {
             $u_id = $result['id'];
         }
         $_SESSION['u_id'] = $u_id;
-        //放到收藏里去
-        $num_iid = $_SESSION['num_iid'];
-        if(!empty($num_iid) && !empty($u_id)){
-            $arr = explode(",",$num_iid);
-            foreach($arr as $numid){
-                $cresult = $collection->field('id')->where(array('num_iid'=>$numid,'uid'=>$u_id))->find();
-                if(empty($cresult)){
-                    if(session("uniq_user_id")){
-                        $collection->add(array('num_iid'=>$numid,'uid'=>$u_id,'cratetime'=>$time));
-                    }
-                }
-            }
-        }
         //kimi 优衣库二期
-        //默认女士上下装自定义分类
+        //默认女士上下装自定义分类,这个不能删
         if(S('cust11')){
             $ucuslist = unserialize(S('cust11'));
         }else{
@@ -90,7 +48,6 @@ class IndexAction extends Action {
         }
         $this->assign('ucuslist',$ucuslist);
         //优衣库二期
-
         $this->assign('nick',$nick);
         $this->assign('newstore',C('NEWSRORE'));
         $this->assign('cityn',cookie('cityn'));
@@ -98,11 +55,10 @@ class IndexAction extends Action {
         $this->assign('uniurl',C('UNIQLOURL'));
         $this->assign('uniq_user_name',$this->uniq_user_name);
         $this->assign('is_allow_register',$is_allow_register);
-        $this->assign('is_phone',$is_phone);
-        $this->assign('is_active',$is_active);
         $this->assign('is_mobile_active',$is_mobile_active);
         $this->assign('mobile',$mobile);
         $this->assign('user',$result);
+        $this->assign('dsn','http://'.$_SERVER['HTTP_HOST']);
         $this->assign('basedir',__ROOT__);
         $this->display();
         //}
