@@ -303,11 +303,11 @@ var _mini = {
                     //}
                     if(data.def){
                         var deflength = data.def.length,str = "";
-//                        if(data['count'] && data['count']>4){
-//                            $('#btn-mask').addClass('none')
-//                        }else{
-//                            $('#btn-mask').removeClass('none');
-//                        }
+                        if(data['count'] && data['count']>4){
+                           $('#btn-mask').addClass('none')
+                        }else{
+                            $('#btn-mask').removeClass('none');
+                        }
 //                        <div class="model">
 //                            <img src="images/1.png" />
 //                            <img src="images/2.png" />
