@@ -64,7 +64,7 @@ class SellcateAction extends Action{
                 $where['shortName']  = array('like','%'.$keyword.'%');
                 $where['_logic'] = 'or';
                 $map['_complex'] = $where;
-                $sqlwhere.=" and (s2.ID=".$keyword." or s2.cateName like '%".$keyword."%' or s2.shortName like '%".$keyword."%')";
+                $sqlwhere.=" and (s2.ID='".$keyword."' or s2.cateName like '%".$keyword."%' or s2.shortName like '%".$keyword."%')";
                 $pagestr.="/keyword/".$keyword;
             }
             $count = $sell->where($map)->count();
