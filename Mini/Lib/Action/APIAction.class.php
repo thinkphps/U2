@@ -336,7 +336,6 @@ class APIAction extends Action
 //dean 同步标签接口
     public function GetTagsByUqID()
     {
-        error_log(print_r($_REQUEST,1),3,'1.txt');
         $returnValue = array(
             'code' => -1,
             'msg' => array(
