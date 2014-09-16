@@ -71,6 +71,10 @@ class LoginAction extends Action{
 				$this->ajaxReturn($login_arr,'JSON');
 			}
 		}
+        if(empty($mobile)){
+            $login_arr = array('code'=>-1,'msg'=>'手机号不能为空');
+            $this->ajaxReturn($login_arr,'JSON');
+        }
 		$data = array(
 				  'user_name'  =>	$taobao_name,
 	              'mobile'	   =>	$mobile,
