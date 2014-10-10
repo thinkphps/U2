@@ -9,8 +9,8 @@
 class ExportinAction extends Action{
     public function exportSuit(){
        set_time_limit(0);
-      $handle = fopen('Upload/1.csv','r');
-      //$handle = fopen('/data/upload/Upload/1.csv','r');
+      //$handle = fopen('Upload/1.csv','r');
+      $handle = fopen('/data/upload/Upload/3.csv','r');
       $i = 0;
       $suit = M('BeubeuSuits');
       while($data = fgetcsv($handle)){
@@ -21,7 +21,7 @@ class ExportinAction extends Action{
                        'suitImageUrlShose'=>$data[6],
                        'suitImageUrlMatch'=>$data[7],
                        'tag'=>$data[8]);*/
-          $sql = "update `u_beubeu_suits` set `suitImageUrlHead`='".$data[1]."',`suitImageUrlBody`='".$data[2]."',`suitImageUrlShose`='".$data[3]."',`suitImageUrlMatch`='".$data[4]."' where `suitID`=".$data[0];
+          $sql = "update `u_beubeu_suits` set `suitImageUrlHead`='".$data[3]."',`suitImageUrlBody`='".$data[4]."',`suitImageUrlShose`='".$data[5]."',`suitImageUrlMatch`='".$data[6]."' where `suitID`=".$data[0];
            $suit->query($sql);
           //$suit->where(array('suitID'=>$data[0]))->save($da);
        }
