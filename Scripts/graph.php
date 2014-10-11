@@ -36,7 +36,7 @@ while($ke>0){
         $white->compositeimage($im3, Imagick::COMPOSITE_OVER, 0, 0);
         $white->thumbnailImage( 400, 533);
         $white->setImageFormat('png');
-        $image = $db->createdir($v['suitid'],$root_dir.'/Upload/suits/','Upload/suits/',$v['pic_head'],2);
+        $image = $db->createdir($v['suitid'],$root_dir.'/Upload/suits/','Upload/suits/',$v['pic_head'],2,$offset+1);
         $white->writeImage($image[0]);
         $white->clear();
         $white->destroy();
@@ -44,7 +44,8 @@ while($ke>0){
         $db->mysqlquery($upsql);
         $upsql2 = "update `u_suit_pic` set `isdown`=1 where suitID=".$v['suitid'];
         $db->mysqlquery($upsql2);
-            sleep(1);
+        $upsql3 = "update `u_suit_order` set `suitImageUrl`='".$image[1]."' where suitID=".$v['suitid'];
+        $db->mysqlquery($upsql3);
         }
     }
     }
