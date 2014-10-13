@@ -13,6 +13,9 @@ class ProductsAction extends Action{
 	$goodmodel = M('Goods');
 	$cate = M('Category');
 	$keyword = trim($this->_request('keyword'));
+    if(is_int(strpos($keyword,'_'))){
+        $keyword = str_replace('_','/',$keyword);
+    }
 	$istag = $this->_request('ist');
 	$cate1 = $this->_request('cate1');
 	$cate2 = $this->_request('cate2');
@@ -35,7 +38,8 @@ class ProductsAction extends Action{
     $where['title']  = array('like','%'.$keyword.'%');
     $where['_logic'] = 'or';
     $map['_complex'] = $where;
-    $pagestr.="/keyword/".$keyword;
+    $keyword3 = str_replace('/','_',$keyword);
+    $pagestr.="/keyword/".$keyword3;
 	}
     if(!empty($istag)){
     $map['istag'] = $istag;
@@ -63,7 +67,8 @@ class ProductsAction extends Action{
 	}
 	$this->assign('goods',$goods);
 	$this->assign('page',$page);
-	$this->assign('keyword',$keyword);
+    $this->assign('keyword',$keyword);
+	$this->assign('keyword2',urlencode($keyword));
 	$this->assign('istag',$istag);
 	$this->assign('onecate',$onecate);
 	$this->assign('twocate',$twocate);

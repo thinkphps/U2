@@ -81,7 +81,7 @@
         <td>￥{$vo.price}</td>
         <td>{$vo.num}</td>
 		<td><if condition="$vo['istag'] eq 2">已打</if></td>
-        <td><a class="btn btn-primary" href="{:U('Productsedit/index',array('id'=>$vo['id'],'p'=>$p,'keyword'=>$keyword,'ist'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt))}">编辑</a></td>
+        <td><a class="btn btn-primary" href="{:U('Productsedit/index',array('id'=>$vo['id'],'p'=>$p,'keyword'=>$keyword2,'ist'=>$istag,'cate1'=>$cate1,'cate2'=>$cate2,'isdoubt'=>$isdoubt))}">编辑</a></td>
       </tr>
      </volist>
     </tbody>
