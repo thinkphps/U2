@@ -29,4 +29,31 @@ class ExportinAction extends Action{
       }
      exit;
     }
+    //获取商品库存
+    public function GetGoodNum(){
+        set_time_limit(0);
+        //$handle = fopen('Upload/good.csv','r');
+        //$fp = fopen('Upload/goodnum.csv','w');
+        $handle = fopen('/data/upload/Upload/good.csv','r');
+        $fp = fopen('/data/upload/Upload/goodnum.csv','w');
+        $i = 0;
+        $goods = M('Goods');
+        $head = array('货号','标题','库存');
+        foreach($head as $k=>$v){
+           $head[$k] = iconv('utf-8', 'gbk',$v);
+        }
+        fputcsv($fp,$head);
+        while($data = fgetcsv($handle)){
+            if($i>0){
+                 $arr = array();
+                 $sql = "select `num` from `u_goods` where `item_bn` ='UQ".$data[0]."'";
+                 $re = $goods->query($sql);
+                 $arr[] = $data[0]."\t";
+                 $arr[] = $data[1];
+                 $arr[] = $re[0]['num'];
+                 fputcsv($fp,$arr);
+            }
+            $i++;
+        }
+    }
 }
