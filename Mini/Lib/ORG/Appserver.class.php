@@ -336,24 +336,24 @@ public function GetUserInfo($udata){
        if(S('midsid'.$sid)){
            $arr = unserialize(S('midsid'.$sid));
        }else{
-           $recomodel = D('Reco');
            if($sid!=4 && $sid!=0){
                $where['gender'] = $sid;
                $where['selected'] = 1;
                $where['shortName'] = array('neq','');
                $where['isshow']= 0;
-               $ucuslist  = $recomodel->getCusData2($where);//上装
+               $ucuslist  = $mac->getCusData2($where);//上装
                $arr['u'] = $ucuslist;
+               $arr['style'] = $mac->getsstyle($sid);
            }else if($sid==4){
                $where['gender'] = array('exp','in(4,5)');
                $where['selected'] = 1;
                $where['shortName'] = array('neq','');
                $where['isshow']= 0;
-               $babylist  = $recomodel->getCusData2($where);//上装
+               $babylist  = $mac->getCusData2($where);//上装
                $arr['u'] = $babylist;
            }else if($sid==0){
                $where = array('selected'=>1,'shortName'=>array('neq',''),'isshow'=>0);
-               $ucuslist = $recomodel->getCateList2($where);
+               $ucuslist = $mac->getCateList2($where);
                $arr['u'] = $ucuslist;
            }
            S('midsid'.$sid,serialize($arr),array('type'=>'file'));
@@ -736,4 +736,29 @@ limit ".$start.",".$page_num;
         }
         return json_encode($arr);
     }
+public function GetSexStyle($data){
+    $cus = json_decode($data,true);
+    $mac = D('Macapp');
+    $flag = $mac->CkeckApp($cus['uname'],$cus['upass']);
+    if(!$flag){
+        $login_arr = array('code'=>0,'msg'=>'无权访问');
+        return json_encode($login_arr);
+    }
+    $sid = trim(htmlspecialchars($cus['sid']));
+    $sid = $sid?$sid:0;
+    $res = $mac->getsstyle($sid);
+    return json_encode($res);
+}
+public function getJackNumiid($data){
+    $cus = json_decode($data,true);
+    $mac = D('Macapp');
+    $flag = $mac->CkeckApp($cus['uname'],$cus['upass']);
+    if(!$flag){
+        $login_arr = array('code'=>0,'msg'=>'无权访问');
+        return json_encode($login_arr);
+    }
+    $uq = trim(htmlspecialchars($cus['uq']));
+    $res = $mac->getUqNum($uq);
+   return json_encode($res);
+}
 }
