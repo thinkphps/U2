@@ -55,5 +55,7 @@ class ExportinAction extends Action{
             }
             $i++;
         }
+        fclose($fp);
+        fclose($handle);
     }
 }
