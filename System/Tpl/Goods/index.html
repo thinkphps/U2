@@ -1,0 +1,80 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>商品库存</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="{:U('Goods/SynNum')}" method='post' enctype='multipart/form-data'>
+        <div class="form-group">
+            <label>上传文件</label>
+            <input type='file' name='upfile' style='display:inline;'>
+        </div>
+        <button type="submit" class="btn btn-success">同步库存</button>
+    </form>
+    <form class="form-inline form-group" role="form" action="{:U('Goods/DownNum')}" method='post'>
+        <button type="submit" class="btn btn-success">下载库存</button>
+    </form>
+    <!--<div class="form-group">
+        <button type="button" class="btn btn-success" onclick="openBrowse('myfile')">同步库存</button>
+        <input style="display:none;" type="file" id="myfile" name="myfile" onchange="UpladFile()" />
+    </div>
+    <form class="form-inline form-group" role="form" action="{:U('Goods/index')}" method='post' enctype='multipart/form-data'>
+        <div class="form-group">
+            <label>上传文件</label>
+            <input type='file' name='upfile' style='display:inline;'>
+        </div>
+        <button type="submit" class="btn btn-success" id='notijiao'>上传并下载库存</button>
+    </form>-->
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+    var httpRequest = false,upfileurl = "{:U('Goods/AddFile')}";
+    function createXMLHttpRequest(){ //创建XMLHTTP对象
+        try{
+            // Firefox, Opera 8.0+, Safari
+            httpRequest = new XMLHttpRequest();    // 实例化对象
+        }catch( e ){
+            // Internet Explorer
+            try{
+                httpRequest = new ActiveXObject( "Msxml2.XMLHTTP" );
+            }catch ( e ){
+                try{
+                    httpRequest = new ActiveXObject( "Microsoft.XMLHTTP" );
+                }catch( e ){
+                    alert("您的浏览器不支持AJAX！");
+                    return false;
+                }
+            }
+        }
+    }
+    function openBrowse(val){
+        $('#notijiao').attr('disabled','disabled');
+        var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
+        if(ie){
+            document.getElementById(val).click();
+        }else{
+            var a=document.createEvent("MouseEvents");
+            a.initEvent("click", true, true);
+            document.getElementById(val).dispatchEvent(a);
+        }
+    }
+    function UpladFile(){
+        var fileObj = document.getElementById("myfile").files[0]; // 获取文件对象
+        var FileController = upfileurl;                    // 接收上传文件的后台地址
+        // FormData 对象
+        var form = new FormData();
+        form.append("myfile", fileObj);                           // 文件对象
+        // XMLHttpRequest 对象
+        createXMLHttpRequest();
+        httpRequest.open("post", FileController, true);
+        httpRequest.onload = function () {
+            var da = eval("("+httpRequest.responseText+")");
+            if(da.k==0){
+            alert(da.msg);
+            }else{
+               $('#notijiao').removeAttr('disabled');
+            }
+        };
+        httpRequest.send(form);
+    }
+</script>
