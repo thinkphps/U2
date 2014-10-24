@@ -9,10 +9,10 @@
             <label>上传文件</label>
             <input type='file' name='upfile' style='display:inline;'>
         </div>
-        <button type="submit" class="btn btn-success">同步库存</button>
+        <button type="submit" class="btn btn-success" id='tbkc'>同步库存</button>
     </form>
     <form class="form-inline form-group" role="form" action="{:U('Goods/DownNum')}" method='post'>
-        <button type="submit" class="btn btn-success">下载库存</button>
+        <button type="submit" class="btn btn-success" id='huiid'>下载库存</button>
     </form>
     <!--<div class="form-group">
         <button type="button" class="btn btn-success" onclick="openBrowse('myfile')">同步库存</button>
@@ -29,6 +29,12 @@
 <include file="Public:footer"/>
 <script type="text/javascript">
     var httpRequest = false,upfileurl = "{:U('Goods/AddFile')}";
+    $('#huiid').removeAttr('disabled');
+    $(function(){
+        $('#tbkc').click(function(){
+            $('#huiid').attr('disabled','disabled');
+        });
+    })
     function createXMLHttpRequest(){ //创建XMLHTTP对象
         try{
             // Firefox, Opera 8.0+, Safari
