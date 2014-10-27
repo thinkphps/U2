@@ -267,13 +267,8 @@ public function GetUserInfo($udata){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
-        $page = trim(htmlspecialchars($ucoll['page']));
-        $page = ($page>0) ? $page : 1;
-        $page_num = 4;
-        $start = ($page-1)*$page_num;
-        $recomodel = D('Reco');
         $where['uid'] = session("uniq_user_id");
-        $defaultResult = $recomodel->getBenebnColl($where,$page,$page_num,$start);
+        $defaultResult = $mac->getBenebnColl($where);
         /*if($page==1){
             //获取用户信息
             $userinfo = $recomodel->getUserInfo();
@@ -281,9 +276,7 @@ public function GetUserInfo($udata){
             $arr['collflag'] = $userinfo[1];
             $arr['collcount'] = $userinfo[2];
         }*/
-        $arr['page'] = $defaultResult['page'];
-        $arr['def'] = $defaultResult['result'];
-        return json_encode($arr);exit;
+        return json_encode($defaultResult);exit;
     }
     public function SexToStyle($data){
         $suit = json_decode($data,true);
@@ -293,6 +286,7 @@ public function GetUserInfo($udata){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
+        $unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
         $sid = trim(htmlspecialchars($suit['sid']));
         $fid = trim(htmlspecialchars($suit['fid']));
         $page = trim(htmlspecialchars($suit['page']));
@@ -301,7 +295,6 @@ public function GetUserInfo($udata){
         $page = $page?$page:1;
         $page_num = 4;
         $start = ($page-1)*$page_num;
-        $recomodel = D('Reco');
         if(!empty($fid)){
             $defaultwhere['suitStyleID'] = $fid;
         }
@@ -309,13 +302,13 @@ public function GetUserInfo($udata){
             case 3 :
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
                 $defaultwhere['approve_status'] = 0;
-                $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
+                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost);
                 break;
             case 1 :
             case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
                 $defaultwhere['approve_status'] = 0;
-                $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
+                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost);
                 break;
         }
         $arr['page'] = $defaultResult['page'];
@@ -371,6 +364,7 @@ public function GetUserInfo($udata){
            $login_arr = array('code'=>0,'msg'=>'无权访问');
            return json_encode($login_arr);
     }
+    $unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
     $sid = trim(htmlspecialchars($parmas['sid']));
     $fid = trim(htmlspecialchars($parmas['fid']));
     $zid = trim(htmlspecialchars($parmas['zid']));
@@ -398,6 +392,16 @@ public function GetUserInfo($udata){
     $love = M('Love');
     $buy = M('Buy');
     if($lid==1 && $bid==1){
+        $sql = "select count(bg.num_iid) as co
+      from u_beubeu_goods bg ,
+(SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
+) bl group by bl.num_iid) li
+where bg.num_iid = li.num_iid";
+        $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
+        unset($sql);
         $sql = "
 select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
@@ -410,6 +414,7 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
+                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
@@ -418,6 +423,16 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
             $result = array();
         }
     }else if($lid==1 && $bid!=1){
+        $sql = "select count(bg.num_iid) as co
+      from u_beubeu_goods bg ,
+(SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
+) bl group by bl.num_iid) li
+where bg.num_iid = li.num_iid and li.loveid is not null";
+        $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
+        unset($sql);
         $sql = "
 select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
@@ -430,6 +445,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
+                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
@@ -438,6 +454,16 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
             $result = array();
         }
     }else if($bid==1 && $lid!=1){
+        $sql = "select count(bg.num_iid) as co
+      from u_beubeu_goods bg ,
+(SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid={$uid}
+)bl group by bl.num_iid)li
+where bg.num_iid = li.num_iid and li.buyid is not null";
+        $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
+        unset($sql);
         $sql = "
 select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
       from u_beubeu_goods bg ,
@@ -450,6 +476,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
+                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
@@ -474,10 +501,14 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             $wherelb = " left join (select id,num_iid from `u_love` where uid={$uid}) as lo on lo.num_iid=ol.num_iid left join (select id,num_iid from `u_buy` where uid={$uid}) bu on bu.num_iid=ol.num_iid";
             $fieldlb = ",lo.id as loveid,bu.id as buyid";
         }
+        $sql = "select count(bg.num_iid) as co from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid";
+        $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
+        unset($sql);
         $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
         $result = M('BeubeuGoods')->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
+                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
@@ -556,6 +587,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         if(!empty($fid) && $fid!='all'){
             $wheret.=" and g.ftag_id='".$fid."'";
         }
+        $sql = "select count(bg.num_iid) as co from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere}";
+        $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
+        unset($sql);
         if(!empty($uid)){
             $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
         }else{
@@ -565,6 +599,7 @@ limit ".$start.",".$page_num;
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
+                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
@@ -574,7 +609,7 @@ limit ".$start.",".$page_num;
         }
     }
        if(!empty($result)){
-           $returnArr = array('code'=>1,'page'=>$page+1,'da'=>$result);
+           $returnArr = array('code'=>1,'page'=>$page+1,'count'=>$gcount,'da'=>$result);
        }else{
            $returnArr = array('code'=>0,'msg'=>'没有数据');
        }
