@@ -93,17 +93,18 @@ class GoodsAction extends Action{
         }
     }
 public function exportxls($data,$baseRow,$i,$objPHPExcel,$good){
-    $sql = "select `num`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."'";
+    $sql = "select `num`,`approve_status`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."'";
     $re = $good->query($sql);
     $row = $baseRow + $i;
     $hz = $re[0]['num']*$re[0]['price'];
     $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValue('A'.$row, $data[0]."\t")
-        ->setCellValue('B'.$row, $re[0]['title'])
-        ->setCellValue('C'.$row, $re[0]['detail_url'])
-        ->setCellValue('D'.$row, $re[0]['num'])
-        ->setCellValue('E'.$row, $re[0]['price'])
-        ->setCellValue('F'.$row, $hz);
+        ->setCellValue('A'.$row, '"'.$data[0].'"'."\t")
+        ->setCellValue('B'.$row, $re[0]['approve_status'])
+        ->setCellValue('C'.$row, $re[0]['title'])
+        ->setCellValue('D'.$row, $re[0]['detail_url'])
+        ->setCellValue('E'.$row, $re[0]['num'])
+        ->setCellValue('F'.$row, $re[0]['price'])
+        ->setCellValue('G'.$row, $hz);
 }
 public function headerxls(){
     $filename = "goods_num_".date('Y-m-d H:i',time()).'.xlsx';
@@ -165,7 +166,7 @@ public function inittaobao(){
     $this->client->appkey = $this->appkey;
     $this->client->secretKey = $this->secretKey;
     $this->products = new ItemGetRequest;//获取商品详细信息
-    $this->products->setFields('num');
+    $this->products->setFields('num,approve_status');
 }
 public function upu($data,$good){
     $data[0] = trim($data[0]);
@@ -176,7 +177,7 @@ public function upu($data,$good){
         $pro = $this->client->execute($this->products, $this->token);
         $product_arr = (array)$pro->item;
         unset($sql);
-        $good->where(array('num_iid'=>$re[0]['num_iid']))->save(array('num'=>$product_arr['num']));
+        $good->where(array('num_iid'=>$re[0]['num_iid']))->save(array('approve_status'=>$product_arr['approve_status'],'num'=>$product_arr['num']));
     }
 }
 public function SynNum(){
@@ -253,11 +254,12 @@ public function DownNum(){
         $objPHPExcel->getActiveSheet()->setTitle(date('Y-m-d',time()));
         $objPHPExcel->setActiveSheetIndex(0)
         ->setCellValue('A1', '货号')
-        ->setCellValue('B1', '标题')
-        ->setCellValue('C1', '商品链接')
-        ->setCellValue('D1', '在线库存')
-        ->setCellValue('E1', '一口价')
-        ->setCellValue('F1', '货值');
+        ->setCellValue('B1', '状态')
+        ->setCellValue('C1', '标题')
+        ->setCellValue('D1', '商品链接')
+        ->setCellValue('E1', '在线库存')
+        ->setCellValue('F1', '一口价')
+        ->setCellValue('G1', '货值');
         $baseRow = 1;
         switch($ext){
             case 'csv':
