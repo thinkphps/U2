@@ -29,7 +29,7 @@ class Appserver{
           $sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
           if($sms_str){
               session("mobileCode",$mobileCode);
-              $login_arr = array('code'=>1,'msg'=>'','vesid'=>session_id());
+              $login_arr = array('code'=>1,'mobileCode'=>$mobileCode);
           }else{
               $login_arr = array('code'=>0,'msg'=>'验证码发送失败');
           }
@@ -38,16 +38,13 @@ class Appserver{
   }
   public function Register($user){
       $userinfo = json_decode($user,true);
-      session_destroy();
-      session_id($userinfo['vesid']);
-      session_start();
       $mac = D('Macapp');
       $flag = $mac->CkeckApp($userinfo['uname'],$userinfo['upass']);
       if(!$flag){
           $login_arr = array('code'=>0,'msg'=>'无权访问');
           return json_encode($login_arr);
       }
-      $mobileCode = session("mobileCode");
+      $mobileCode = trim(htmlspecialchars($userinfo['mobileCode']));
       $verifying_code = trim(htmlspecialchars($userinfo['very_code']));
       if($mobileCode!=$verifying_code){
              $login_arr = array('code'=>0,'msg'=>'验证码错误');
@@ -85,7 +82,7 @@ class Appserver{
           }
           session("uniq_user_name",$user_name);
           session("uniq_user_id",$res);
-          $login_arr = array('code'=>1,'msg'=>'注册成功','sid'=>session_sid());
+          $login_arr = array('code'=>1,'msg'=>'注册成功','uniq_user_id'=>$res,'uniq_user_name'=>$user_name);
           return json_encode($login_arr);
       }else{
           $login_arr = array('code'=>0,'msg'=>'注册失败');
@@ -112,10 +109,7 @@ class Appserver{
          if(!empty($user['taobao_name'])){
              $user_name = $user['taobao_name'];
          }
-         session("uniq_user_name",$user_name);
-         session("uniq_user_id",$user['id']);
-         $df = session_id();
-         $login_arr = array('code'=>1,'msg'=>'登录成功！','sid'=>$df);
+         $login_arr = array('code'=>1,'msg'=>'登录成功！','uniq_user_id'=>$user['id'],'uniq_user_name'=>$user_name);
      }else{
          $login_arr = array('code'=>0,'msg'=>'请输入正确的用户名或密码');
      }
@@ -123,14 +117,17 @@ class Appserver{
  }
     public function change_pwd($cpwd){
         $chpwd = json_decode($cpwd,true);
-        session_destroy();
-        session_id($chpwd['sid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($chpwd['uname'],$chpwd['upass']);
         if(!$flag){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
+        }
+        $chpwd["uniq_user_id"] = trim(htmlspecialchars($chpwd["uniq_user_id"]));
+        $chpwd["uniq_user_name"] = trim(htmlspecialchars($chpwd["uniq_user_name"]));
+        $islo = $mac->IsLogin($chpwd["uniq_user_id"],$chpwd["uniq_user_name"]);
+        if(!$islo){
+            return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
         }
         $old_password	 = trim(htmlspecialchars($chpwd['old_password']));
         $new_password    = trim(htmlspecialchars($chpwd['new_password']));
@@ -161,16 +158,19 @@ class Appserver{
     }
 public function GetUserInfo($udata){
     $use = json_decode($udata,true);
-    session_destroy();
-    session_id($use['sid']);
-    session_start();
     $mac = D('Macapp');
     $flag = $mac->CkeckApp($use['uname'],$use['upass']);
     if(!$flag){
         $login_arr = array('code'=>0,'msg'=>'无权访问');
         return json_encode($login_arr);
     }
-    $uid = session("uniq_user_id");
+    $use["uniq_user_id"] = trim(htmlspecialchars($use["uniq_user_id"]));
+    $use["uniq_user_name"] = trim(htmlspecialchars($use["uniq_user_name"]));
+    $islo = $mac->IsLogin($use["uniq_user_id"],$use["uniq_user_name"]);
+    if(!$islo){
+        return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+    }
+    $uid = $use["uniq_user_id"];
     if($uid){
         $result = M('User')->field('user_name,mobile,taobao_name,login_type')->where(array('id'=>$uid))->find();
         if(!empty($result)){
@@ -188,31 +188,31 @@ public function GetUserInfo($udata){
 }
     public function changeTaoName($udata){
         $use = json_decode($udata,true);
-        session_destroy();
-        session_id($use['sid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($use['uname'],$use['upass']);
         if(!$flag){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
-        $uid = session("uniq_user_id");
+        $use["uniq_user_id"] = trim(htmlspecialchars($use["uniq_user_id"]));
+        $use["uniq_user_name"] = trim(htmlspecialchars($use["uniq_user_name"]));
+        $islo = $mac->IsLogin($use["uniq_user_id"],$use["uniq_user_name"]);
+        if(!$islo){
+            return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+        }
+        $uid = $use["uniq_user_id"];
         if($uid){
             $user = M('User');
-            $taobao_name = trim(htmlspecialchars($use['taobao_name']));
-            $tname = trim($this->_post('taobao_name'));
+            $tname = trim(htmlspecialchars($use['taobao_name']));
             $result = $user->field('mobile,taobao_name,login_type')->where(array('id'=>$uid))->find();
             if(!empty($result)){
                 if($result['login_type']=='app'){
-                    session("uniq_user_name",$tname);
                     $map = array('user_name'=>$tname,'taobao_name'=>$tname);
                 }
                 $re = $user->where(array('id'=>$uid))->save($map);
                 if($re){
                     $arr['code'] = 1;
-                    $arr['tname'] = $tname;
-                    $arr['login_type'] = $result['login_type'];
+                    $arr['uniq_user_name'] = $tname;
                     $arr['msg'] = '编辑成功';
                 }else{
                     $arr['code'] = 0;
@@ -230,9 +230,6 @@ public function GetUserInfo($udata){
     }
     public function Addlea($udata){
         $use = json_decode($udata,true);
-        session_destroy();
-        session_id($use['sid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($use['uname'],$use['upass']);
         if(!$flag){
@@ -258,17 +255,24 @@ public function GetUserInfo($udata){
     }
     public function GetCollData($coll){
         $ucoll = json_decode($coll,true);
-        session_destroy();
-        session_id($ucoll['ssid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($ucoll['uname'],$ucoll['upass']);
         if(!$flag){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
-        $where['uid'] = session("uniq_user_id");
-        $defaultResult = $mac->getBenebnColl($where);
+        $unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        $ucoll["uniq_user_id"] = trim(htmlspecialchars($ucoll["uniq_user_id"]));
+        $ucoll["uniq_user_name"] = trim(htmlspecialchars($ucoll["uniq_user_name"]));
+        $islo = $mac->IsLogin($ucoll["uniq_user_id"],$ucoll["uniq_user_name"]);
+        if(!$islo){
+           return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+        }
+        $where['uid'] = $ucoll["uniq_user_id"];
+        if(empty($where['uid'])){
+            return json_encode(array('code'=>0,'msg'=>'没有登录'));
+        }
+        $defaultResult = $mac->getBenebnColl($where,$unihost);
         /*if($page==1){
             //获取用户信息
             $userinfo = $recomodel->getUserInfo();
@@ -355,9 +359,6 @@ public function GetUserInfo($udata){
    }
    public function GetGoods($data){
     $parmas = json_decode($data,true);
-    session_destroy();
-    session_id($parmas['sid']);
-    session_start();
     $mac = D('Macapp');
     $flag = $mac->CkeckApp($parmas['uname'],$parmas['upass']);
     if(!$flag){
@@ -388,7 +389,7 @@ public function GetUserInfo($udata){
     $start = ($page-1)*$page_num;
     $ostr = $windex->getOrderStr($oid);
     $productSyn = D('ProductSyn');
-    $uid = session("uniq_user_id");
+    $uid = trim(htmlspecialchars($parmas["uniq_user_id"]));
     $love = M('Love');
     $buy = M('Buy');
     if($lid==1 && $bid==1){
@@ -416,7 +417,7 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -447,7 +448,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -478,7 +479,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -510,7 +511,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -601,7 +602,7 @@ limit ".$start.",".$page_num;
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -616,10 +617,6 @@ limit ".$start.",".$page_num;
        return json_encode($returnArr);
    }
    public function AddBeuColl($data){
-       $parmas = json_decode($data);
-       session_destroy();
-       session_id($parmas['sid']);
-       session_start();
        $parmas = json_decode($data,true);
        $mac = D('Macapp');
        $flag = $mac->CkeckApp($parmas['uname'],$parmas['upass']);
@@ -627,7 +624,13 @@ limit ".$start.",".$page_num;
            $login_arr = array('code'=>0,'msg'=>'无权访问');
            return json_encode($login_arr);
        }
-       $uid = session("uniq_user_id");
+       $parmas["uniq_user_id"] = trim(htmlspecialchars($parmas["uniq_user_id"]));
+       $parmas["uniq_user_name"] = trim(htmlspecialchars($parmas["uniq_user_name"]));
+       $islo = $mac->IsLogin($parmas["uniq_user_id"],$parmas["uniq_user_name"]);
+       if(!$islo){
+           return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+       }
+       $uid = $parmas["uniq_user_id"];
        if($uid){
            $headpic = trim(htmlspecialchars($parmas['headpic']));
            $bodypic = trim(htmlspecialchars($parmas['bodypic']));
@@ -686,20 +689,23 @@ limit ".$start.",".$page_num;
    }
     public function Addlove($data){
         $parmas = json_decode($data,true);
-        session_destroy();
-        session_id($parmas['sid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($parmas['uname'],$parmas['upass']);
         if(!$flag){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
+        $parmas["uniq_user_id"] = trim(htmlspecialchars($parmas["uniq_user_id"]));
+        $parmas["uniq_user_name"] = trim(htmlspecialchars($parmas["uniq_user_name"]));
+        $islo = $mac->IsLogin($parmas["uniq_user_id"],$parmas["uniq_user_name"]);
+        if(!$islo){
+            return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+        }
         $id = trim(htmlspecialchars($parmas['id']));
         $flag = trim(htmlspecialchars($parmas['flag']));
         $isdel = trim(htmlspecialchars($parmas['isdel']));
         if($id>0){
-            $uid = session("uniq_user_id");
+            $uid = $parmas["uniq_user_id"];
             if(!empty($uid)){
                 if($flag==1){
                     $love = M('Love');
@@ -743,17 +749,20 @@ limit ".$start.",".$page_num;
     }
     public function DelBeuColl($data){
         $parmas = json_decode($data,true);
-        session_destroy();
-        session_id($parmas['sid']);
-        session_start();
         $mac = D('Macapp');
         $flag = $mac->CkeckApp($parmas['uname'],$parmas['upass']);
         if(!$flag){
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
+        $parmas["uniq_user_id"] = trim(htmlspecialchars($parmas["uniq_user_id"]));
+        $parmas["uniq_user_name"] = trim(htmlspecialchars($parmas["uniq_user_name"]));
+        $islo = $mac->IsLogin($parmas["uniq_user_id"],$parmas["uniq_user_name"]);
+        if(!$islo){
+            return json_encode(array('code'=>0,'msg'=>'此用户不存在'));
+        }
         $id = trim(htmlspecialchars($parmas['id']));//百衣收藏id
-        $uid = session("uniq_user_id");
+        $uid = $parmas["uniq_user_id"];
         if(!empty($uid)){
             $beubeu_coll = M('BeubeuCollection');
             $res = $beubeu_coll->where(array('id'=>$id))->delete();
@@ -793,7 +802,29 @@ public function getJackNumiid($data){
         return json_encode($login_arr);
     }
     $uq = trim(htmlspecialchars($cus['uq']));
+    $uq = substr($uq,0,8);
     $res = $mac->getUqNum($uq);
    return json_encode($res);
+}
+public function SharePic($data){
+    $cus = json_decode($data,true);
+    $mac = D('Macapp');
+    $flag = $mac->CkeckApp($cus['uname'],$cus['upass']);
+    if(!$flag){
+        $login_arr = array('code'=>0,'msg'=>'无权访问');
+        return json_encode($login_arr);
+    }
+    $bbody = trim(htmlspecialchars($cus['bbody']));//身体
+    $bshose = trim(htmlspecialchars($cus['bshose']));
+    $bclose = trim(htmlspecialchars($cus['bclose']));
+    $bhead = trim(htmlspecialchars($cus['bhead']));
+    $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
+    $url = $mac->AppShare($bbody,$bshose,$bclose,$bhead,$root_dir);
+    if($url){
+      $arr['url'] = $url;
+    }else{
+      $arr['url'] = '';
+    }
+    return json_encode($arr);
 }
 }
