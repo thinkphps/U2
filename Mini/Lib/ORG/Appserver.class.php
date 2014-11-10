@@ -827,4 +827,28 @@ public function SharePic($data){
     }
     return json_encode($arr);
 }
+public function SinaQq($data){
+    $cus = json_decode($data,true);
+    $mac = D('Macapp');
+    $flag = $mac->CkeckApp($cus['uname'],$cus['upass']);
+    if(!$flag){
+        $login_arr = array('code'=>0,'msg'=>'无权访问');
+        return json_encode($login_arr);
+    }
+    $cus['type'] = trim(htmlspecialchars($cus['type']));
+    if($cus['type']==1){
+        $cus['openid'] = trim(htmlspecialchars($cus['openid']));
+        $cus['nickname'] = trim(htmlspecialchars($cus['nickname']));
+        $cus['access_token'] = trim(htmlspecialchars($cus['access_token']));
+        $arr = $mac->Qqlogin($cus);
+        unset($cus);
+    }else if($cus['type']==2){
+        $cus['uid'] = trim(htmlspecialchars($cus['uid']));
+        $cus['screen_name'] = trim(htmlspecialchars($cus['screen_name']));
+        $cus['access_token'] = trim(htmlspecialchars($cus['access_token']));
+        $arr = $mac->Sinalogin($cus);
+        unset($cus);
+    }
+    return json_encode($arr);
+}
 }

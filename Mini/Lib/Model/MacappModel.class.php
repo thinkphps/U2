@@ -17,6 +17,7 @@ class MacappModel extends Model{
             }
             $arr_uq = explode('_',$uq);
             foreach($arr_uq as $k=>$v){
+                $v = substr($v,0,8);
                 if($v){
                     $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' order by num desc";
                     $result = $goods->query($sql);
@@ -306,4 +307,41 @@ public function GetProductColorByID($id,$unihost)
             ->order('u_products_beubeu.id')
             ->select();
     }
+public function Qqlogin($user){
+    $userm = M('User');
+    $result = $userm->field('id,user_name,mobile')->where(array('mobile'=>$user['openid']))->find();
+    if(!empty($result)){
+        $data = array('user_name'=>$user['nickname'],'token'=>$user['access_token']);
+        $userm->where(array('mobile'=>$user['openid']))->save($data);
+        $arr = array('code'=>1,'uniq_user_name'=>$user['openid'],'uniq_user_id'=>$result['id']);
+    }else{
+        $pass = md5(123456);$time = date('Y-m-d H:i:s');$ip = 'ios';
+        $data = array('user_name'=>$user['nickname'],'mobile'=>$user['openid'],'password'=>$pass,'token'=>$user['access_token'],'createtime'=>$time,'ip'=>$ip,'is_active'=>'1','login_type'=>'iosqq');
+        $reid = $userm->add($data);
+        if($reid && $reid>0){
+          $arr = array('code'=>1,'uniq_user_name'=>$user['openid'],'uniq_user_id'=>$reid);
+        }else{
+          $arr = array('code'=>0,'msg'=>'登录失败');
+        }
+    }
+    return $arr;
+}
+public function Sinalogin($user){
+    $userm = M('User');
+    $result = $userm->field('id,user_name,mobile')->where(array('mobile'=>$user['uid']))->find();
+    if(!empty($result)){
+        $data = array('user_name'=>$user['screen_name'],'token'=>$user['access_token']);
+        $userm->where(array('mobile'=>$user['uid']))->save($data);
+        $arr = array('code'=>1,'uniq_user_name'=>$user['openid'],'uniq_user_id'=>$result['id']);
+    }else{
+        $pass = md5(123456);$time = date('Y-m-d H:i:s');$ip = 'ios';
+        $data = array('user_name'=>$user['screen_name'],'mobile'=>$user['uid'],'password'=>$pass,'token'=>$user['access_token'],'createtime'=>$time,'ip'=>$ip,'is_active'=>'1','login_type'=>'sina');
+        $reid = $userm->add($data);
+        if($reid && $reid>0){
+            $arr = array('code'=>1,'uniq_user_name'=>$user['openid'],'uniq_user_id'=>$reid);
+        }else{
+            $arr = array('code'=>0,'msg'=>'登录失败');
+        }
+    }
+}
 }
