@@ -119,7 +119,7 @@ class ShopAction extends Action{
 	}
 	$showtag = intval(trim($this->_post('showtag')));
     $message = trim($this->_post('message'));
-    $store_id = intval($this->_post('store_id'));
+    $store_id = $this->_post('store_id');
 	//20140328kimi
 	$time = date('Y-m-d H:i:s');
 	$shop = M('Shop');
