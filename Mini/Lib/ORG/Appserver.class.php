@@ -115,6 +115,36 @@ class Appserver{
      }
         return json_encode($login_arr);exit;
  }
+    public function CreateVery($cpwd){
+        $chpwd = json_decode($cpwd,true);
+        $mac = D('Macapp');
+        $flag = $mac->CkeckApp($chpwd['uname'],$chpwd['upass']);
+        if(!$flag){
+            $login_arr = array('code'=>0,'msg'=>'无权访问');
+            return json_encode($login_arr);
+        }
+        $very = $mac->very_code();
+        $arr = array('very'=>$very,'verycode'=>md5($very));
+        return json_encode($arr);
+    }
+    public function forget_pwd($cpwd){
+        $chpwd = json_decode($cpwd,true);
+        $mac = D('Macapp');
+        $flag = $mac->CkeckApp($chpwd['uname'],$chpwd['upass']);
+        if(!$flag){
+            $login_arr = array('code'=>0,'msg'=>'无权访问');
+            return json_encode($login_arr);
+        }
+        $verify = trim(htmlspecialchars($cpwd['verycode']));
+        $uverify = trim(htmlspecialchars($cpwd['uverify']));
+        if($verify!=md5($uverify)){
+            $login_arr = array('code'=>0,'msg'=>'请填写正确的验证码');
+            return json_encode($login_arr);
+        }
+        $mobile = trim(htmlspecialchars($cpwd['mobile']));
+        $arr = $mac->App_forget_pwd($mobile);
+        return json_encode($arr);
+    }
     public function change_pwd($cpwd){
         $chpwd = json_decode($cpwd,true);
         $mac = D('Macapp');
@@ -404,7 +434,7 @@ where bg.num_iid = li.num_iid";
         $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
         unset($sql);
         $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -435,7 +465,7 @@ where bg.num_iid = li.num_iid and li.loveid is not null";
         $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
         unset($sql);
         $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -466,7 +496,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null";
         $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
         unset($sql);
         $sql = "
-select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url
+select bg.num_iid,li.loveid,li.buyid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time
       from u_beubeu_goods bg ,
 (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
 	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid={$uid}
@@ -505,7 +535,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $sql = "select count(bg.num_iid) as co from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid";
         $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
         unset($sql);
-        $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
+        $sql = "select ol.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time from `u_beubeu_goods` as bg inner join `u_goodtag` as g on g.num_iid=bg.num_iid  where  1 {$liketitle} group by g.num_iid order by {$ostr} limit {$start},{$page_num}) as ol{$wherelb}";
         $result = M('BeubeuGoods')->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
@@ -592,9 +622,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $gcount = $mac->SqlCount($sql,$goodtag,$page_num);
         unset($sql);
         if(!empty($uid)){
-            $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
+            $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc limit ".$start.",".$page_num.") as al ".$wherelb;
         }else{
-            $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc
+            $sql = "select bg.num_iid,bg.type,bg.isud,bg.approve_status,bg.item_bn,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url,bg.list_time from {$goodstable} as bg where EXISTS(select 1 from `u_goodtag` as g where bg.id=g.good_id{$wheret}) and exists(select 1 from `u_catesgoods` as cg where cg.num_iid=bg.num_iid{$catewhere}) {$mwhere} {$ordr}{$ostr},bg.id desc
 limit ".$start.",".$page_num;
         }
         $result = $goodtag->query($sql);

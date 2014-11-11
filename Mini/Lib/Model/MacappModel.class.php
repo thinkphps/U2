@@ -344,4 +344,51 @@ public function Sinalogin($user){
         }
     }
 }
+    static public function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
+        if(function_exists("mb_substr"))
+            $slice = mb_substr($str, $start, $length, $charset);
+        elseif(function_exists('iconv_substr')) {
+            $slice = iconv_substr($str,$start,$length,$charset);
+        }else{
+            $re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+            $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
+            $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
+            $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
+            preg_match_all($re[$charset], $str, $match);
+            $slice = join("",array_slice($match[0], $start, $length));
+        }
+        return $suffix ? $slice.'...' : $slice;
+    }
+public function very_code(){
+    $str = '';
+    $chars= str_repeat('0123456789',3);
+    for($i=0;$i<4;$i++){
+        $str.= $this->msubstr($chars, floor(mt_rand(0,mb_strlen($chars,'utf-8')-1)),1,'utf-8',false);
+    }
+    return $str;
+}
+public function App_forget_pwd($mobile){
+    $use = M('user');
+    $mobileRow = $use->where("mobile = '{$mobile}'")->find();
+    if($mobileRow){
+                    //调用手机短信接口
+                    $new_passwrod = randStr(6,'NUMBER');
+                    $msg="我们为您重置了密码，您的新密码为：{$new_passwrod}【优衣库 虚拟试衣间】";
+                    $sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
+                    if($sms_str){
+                        $data['password'] = md5($new_passwrod);
+                        $flag = $use->where("mobile='{$mobile}'")->save($data);
+                        if($flag){
+                            $login_arr = array('code'=>1,'msg'=>'找回成功');
+                        }else{
+                            $login_arr = array('code'=>0,'msg'=>'密码找回失败');
+                        }
+                    }else{
+                        $login_arr = array('code'=>0,'msg'=>'对不起，短信发送失败');
+                    }
+    }else{
+        $login_arr = array('code'=>0,'msg'=>'请输入正确的手机号码');
+    }
+    return $login_arr;
+}
 }
