@@ -26,9 +26,8 @@ class Appserver{
       }else{
           $mobileCode = randStr(4,'NUMBER');
           $msg="您的验证码为：{$mobileCode}，请登录优衣库虚拟试衣间网站验证您的手机号码【优衣库 虚拟试衣间】";
-          $sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
+          $sms_str = sms_send('2062343','66801','66801',$phone,$msg);
           if($sms_str){
-              session("mobileCode",$mobileCode);
               $login_arr = array('code'=>1,'mobileCode'=>$mobileCode);
           }else{
               $login_arr = array('code'=>0,'msg'=>'验证码发送失败');
@@ -415,7 +414,7 @@ public function GetUserInfo($udata){
     $oid = $oid?$oid:2;
     $goodtag = M();
     $windex = D('Windex');
-    $page_num = 25;
+    $page_num = 10;
     $start = ($page-1)*$page_num;
     $ostr = $windex->getOrderStr($oid);
     $productSyn = D('ProductSyn');
@@ -445,9 +444,10 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
-                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
+                //$result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
+                $result[$k1]['pic_url'] = $result[$k1]['products'][0]['colorcode'];
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -476,9 +476,9 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
-                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
+                $result[$k1]['pic_url'] = $result[$k1]['products'][0]['colorcode'];
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -507,9 +507,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
-                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
+                $result[$k1]['pic_url'] = $result[$k1]['products'][0]['colorcode'];
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -539,9 +539,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         $result = M('BeubeuGoods')->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
-                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
+                $result[$k1]['pic_url'] = $result[$k1]['products'][0]['colorcode'];
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
@@ -630,9 +630,9 @@ limit ".$start.",".$page_num;
         $result = $goodtag->query($sql);
         if(!empty($result)){
             foreach($result as $k1=>$v1){
-                $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $result[$k1]['products'] = $mac->GetProductColorByID($v1['num_iid'],$unihost);
+                $result[$k1]['pic_url'] = $result[$k1]['products'][0]['colorcode'];
                 $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
             }
         }else{
