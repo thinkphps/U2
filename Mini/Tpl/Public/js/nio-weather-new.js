@@ -112,14 +112,6 @@ jQuery(function($){
             /*kimi*/
             $('#nio-city').text(info.cityname);
             $('#cinpinyin').text(info.cbn);
-            if(!option.shopid){
-                if(!info.sname && !info.tradetime){
-                    var tv = '暂时还没有店铺信息，请选择其他地区';
-                }else{
-                    var tv = '<span id="tipshopid" data-shopid="'+info.id+'">'+info.sname+'</span><br>'+info.tradetime;
-                }
-                $('#shopid').html(tv);
-            }
             $.weather.shopid = option.shopid;
             var str = '<option value="0">请选择</option>';
             var scid = {};
@@ -171,9 +163,6 @@ jQuery(function($){
                 //var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid+"&baiduerjiid="+info.baiduerjiid;
                 $.post(sendurl+'mini.php/API/getcity',{pid:scid.selpid,cid:scid.selcid,baiduid:2,shopid:option.shopid,baiduerjiid:info.baiduerjiid},function(data,status){
                  $('#ddlShop').html('<option value="0">请选择</option>');
-                 if(!data.shopid){
-                 $('#a_shopinfo').html('您附近的优衣库门店');
-                 }
                  var str = '<option value="0">请选择</option>';
                  if(data.clist){
                  $('#emptymsg').html('');

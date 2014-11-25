@@ -63,11 +63,8 @@ button,label{cursor:pointer; }
 .preferential ul.preferential_con li.preferential_1{border-top:3px solid #28ACA7;}
 .preferential ul.preferential_con li.preferential_1 i{ background:url(../images/preferential_icon.png) -174px 0 no-repeat;}
 
-.preferential ul.preferential_con li.preferential_2{border-top:3px solid #ff0000;}
-.preferential ul.preferential_con li.preferential_2 i{ background:url(../images/preferential_icon.png) -58px 0 no-repeat;}
-
-.preferential ul.preferential_con li.preferential_3{border-top:3px solid #ffa800;}
-.preferential ul.preferential_con li.preferential_3 i{ background:url(../images/preferential_icon.png) -116px 0 no-repeat;}
+.preferential ul.preferential_con li.preferential_2{border-top:3px solid #ffa800;}
+.preferential ul.preferential_con li.preferential_2 i{ background:url(../images/preferential_icon.png) -116px 0 no-repeat;}
 
 
 /*头部- 链接入口*/

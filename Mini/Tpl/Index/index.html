@@ -33,8 +33,8 @@
                     <label>城市<select class="level_2" id='le2'></select></label>
                     <input type="submit" value="切换" />
                 </form>
-                <div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#" id="a_shopinfo">您附近的优衣库门店</a>
-                <i class="city_wz2 none" id="a_shopinfo2"></i></div>
+                <!--<div class="near_un"><i class="city_wz" id="shopInfo"></i><a href="#" id="a_shopinfo">您附近的优衣库门店</a>
+                <i class="city_wz2 none" id="a_shopinfo2"></i></div>-->
             </div>
         </div>
 
@@ -45,7 +45,6 @@
                     <li class="current" id="tablink1" onmouseover="easytabs('1', '1');"  onfocus="easytabs('1', '1');" onclick="return false;"></li>
                 </if>
                 <li id="tablink2" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');"  onclick="return false;"></li>
-                <li id="tablink3" onmouseover="easytabs('1', '3');" onfocus="easytabs('1', '3');"  onclick="return false;"></li>
             </ul>
 
             <ul class="preferential_con" id='scrollDiv'>
@@ -56,10 +55,6 @@
                 </li>
                 </if>
                 <li class="preferential_2">
-                    <i></i>
-                    <a id='shopid'></a>
-                </li>
-                <li class="preferential_3">
                     <i></i>
                     <p id='nio-tip'></p>
                 </li>
@@ -760,8 +755,8 @@
 <script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
 <script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
-<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>
+<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN"></script>
+<script type="text/javascript" src="__TMPL__Public/js/Map/H.min.js"></script>-->
 <script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
 <script type="text/javascript" src="__TMPL__Public/js/waterfall/handlebars.js"></script>
@@ -984,10 +979,10 @@ $('#moreid').on('click',function(){
 
     var tablink_idname = new Array("tablink"),lilength = $('#scrollDiv').children().length;
     var tabcontent_idname = new Array("preferential_");
-    var tabcount = new Array("3");
+    var tabcount = new Array("2");
     var loadtabs = new Array('1');
-    loadtabs[0] = 3-lilength+1;
-    var autochangemenu = 1,counter = 3-lilength,slength=3-lilength+ 1,timer;
+    loadtabs[0] = 2-lilength+1;
+    var autochangemenu = 1,counter = 2-lilength,slength=2-lilength+ 1,timer;
     var changespeed = 1;
     var stoponhover = 0;
 

@@ -32,11 +32,11 @@ $(function(){
         }
     });
 
-    var jsonpurl = sendurl +"mini.php/API/getshopinfo";
+    /*var jsonpurl = sendurl +"mini.php/API/getshopinfo";
     //获取店铺信息
     $.post(jsonpurl,{},function(data,status){
         H.initData(data);
-    },'json');
+    },'json');*/
     $(".select_city").each(function(){
         var s=$(this);
         var z=parseInt(s.css("z-index"));
@@ -48,22 +48,10 @@ $(function(){
         dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
         $("body").click(function(i){ !$(i.target).parents(".select_city").first().is(s) ? _hide():"";});
     })
-
-    var miniMask = $('div.mini-mask');
-    $("#shopinfo").on("click",function(){
-        $("#mapdiv").show();
-        miniMask.show();
-        H.locateByCity(remote_ip_info);
-    });
-
     $("#closemap").on("click",function(){
         $("#mapdiv").hide();
         miniMask.hide();
     });
-    miniMask.on('click',function(){
-        $("#mapdiv").hide();
-    });
-
 
     $('#mini-activate-succ').click(function(){
         $('.mini-activate-succ').hide();
