@@ -10,8 +10,6 @@ var list = [
     'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/citys.js',
     'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',
     'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/nio-weather-new.js',
-    'http://api.map.baidu.com/api?v=2.0&ak=2TT2TBbLxVUyRGpvY4Bq2gCN',
-    'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/Map/H.min.js',
     'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/home.js',
     'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/CoverScroll/jquery.coverscroll.js',
     'http://uniqlo.bigodata.com.cn/u2/Home/Tpl/Public/jsmao/main.js'

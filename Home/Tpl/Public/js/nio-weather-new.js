@@ -97,17 +97,12 @@ var weather = {
                 $('.preferential_1').remove();
                 $('#tablink1').remove();
             }
-            if(!sname && !tradetime){
-                var tv = '暂时还没有店铺信息，请选择其他地区';
-            }else{
-                var tv = '<span id="tipshopid" data-shopid="'+shopid+'">'+sname+'</span><br>'+tradetime;
-            }
-            $('#shopid').html(tv);
+
             stop_autochange();
             var lilength = $('#scrollDiv').children().length;
-            slength = 3-lilength+1;
-            counter = 3-lilength;
-            loadtabs[0] = 3-lilength+1;
+            slength = 2-lilength+1;
+            counter = 2-lilength;
+            loadtabs[0] = 2-lilength+1;
             do {
                 a = 0;
                 b = 1;

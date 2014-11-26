@@ -276,33 +276,6 @@ var timer,loadid = 0;
 
             $('#btn-city-close').on('click',this.hideCityDiv);
 
-            //点击显示地图
-            $("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
-                //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
-                _this.bindProvinceOrCitys();
-                $("#mapdiv").show();
-                H.init();
-            });
-
-            //tips点击店铺
-            $('#scrollDiv').on('click','.preferential_2',function(){
-                $("#mapdiv").show();
-                stop_autochange();
-                var list =   H.map.getOverlays();
-                _this.bindProvinceOrCitys();
-                $('#a_shopinfo').html($('#tipshopid').text());
-                $('#shopInfo').hide();
-                $('#a_shopinfo2').show();
-                for(var i=1;i<list.length;i++){
-                    if(list[i].title == $('#tipshopid').text() ){
-                        setTimeout(function(){
-                            H.setMarkerCenter(list[i]);
-                        },100);
-                        return;
-                    }
-                }
-            });
-
             $('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
                 $('#div-citys').show();

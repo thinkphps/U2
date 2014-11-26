@@ -21,9 +21,6 @@ var timer,loadid = 0;
             this.controlsEvent();
             this.cityOperator();
 
-            var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=callBackFunction.mapBindMarker";
-            _this.$weather.jsonpFcuntion(jsonpurl);
-
             //天气初始化
             _this.$weather.init({
                 city : remote_ip_info.city || null,
@@ -40,7 +37,7 @@ var timer,loadid = 0;
                 }
             });
 
-            try{
+            /*try{
                 var interval =  setInterval(function(){
                     if($.fn['logoAllocation']){
                         if($(".id_content_blocks>ul").length > 0){
@@ -55,7 +52,7 @@ var timer,loadid = 0;
             }
             catch(e){
                 console.log('interval');
-            }
+            }*/
         },
 
         sendcity :function(pro,city){
@@ -154,16 +151,17 @@ var timer,loadid = 0;
                     window.open('http://uniqlo.bigodata.com.cn/u2/');
                 }else{
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
-                }
+				}
 			});
 
             //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
             $BIGO('#suits-container').on('click','.imgSuits',function(){
                 var suitid = $BIGO(this).data('suitid');
                 var gender = $BIGO(this).data('gender');
+				var ua = window.navigator.userAgent;
                 if(ua.indexOf('MetaSr')>0){
                     window.open('http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
-                }else{   
+                }else{  
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
 				}
 			});
@@ -296,32 +294,6 @@ var timer,loadid = 0;
 
             $BIGO('#btn-city-close').on('click',this.hideCityDiv);
 
-            //点击显示地图
-            $BIGO("#shopInfo,#a_shopinfo,#a_shopinfo2").on("click",function(){
-                //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
-                _this.bindProvinceOrCitys();
-                $BIGO("#mapdiv").show();
-                H.init();
-            });
-
-            //tips点击店铺
-            $BIGO('#scrollDiv').on('click','.preferential_2',function(){
-                $BIGO("#mapdiv").show();
-                stop_autochange();
-                var list =   H.map.getOverlays();
-                _this.bindProvinceOrCitys();
-                $BIGO('#a_shopinfo').html($BIGO('#tipshopid').text());
-                $BIGO('#shopInfo').hide();
-                $BIGO('#a_shopinfo2').show();
-                for(var i=1;i<list.length;i++){
-                    if(list[i].title == $BIGO('#tipshopid').text() ){
-                        setTimeout(function(){
-                            H.setMarkerCenter(list[i]);
-                        },100);
-                        return;
-                    }
-                }
-            });
 
             $BIGO('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
@@ -332,23 +304,6 @@ var timer,loadid = 0;
                 var pvalue = $BIGO('#le1 option:selected').val();
                 var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpGetcity&pid="+pvalue;
                 _this.$weather.jsonpFcuntion(url);
-            });
-            //店铺改变后定位到当前店铺所在位置
-            $BIGO("#ddlShop").on("change",function(){
-                var list =   H.map.getOverlays();
-
-                var strHtml = '<span id="tipshopid" data-shopid="'+$BIGO('#ddlShop').val()+'">'+$BIGO('#ddlShop option:selected').text()+'</span><br>' + $BIGO('#ddlShop option:selected').data('opentime');
-                $BIGO('#a_shopinfo').html($BIGO('#ddlShop option:selected').text());
-                $BIGO('#shopInfo').hide();
-                $BIGO('#a_shopinfo2').show();
-                //tips
-                callBackFunction.tipsfunction(strHtml);
-                for(var i=1;i<list.length;i++){
-                    if(list[i].title == $BIGO('#ddlShop option:selected').text() ){
-                        H.setMarkerCenter(list[i]);
-                        return;
-                    }
-                }
             });
 
             $BIGO('#btn-change').on('click',function(){
@@ -626,7 +581,7 @@ var callBackFunction = {
     tipsfunction : function(strContent){
         //tips
         stop_autochange();
-        for (i = 1; i <=3; i++) {
+        for (i = 1; i <=2; i++) {
             $BIGO('#tablink' + i).removeClass('current');
             $BIGO('.preferential_' + i).css('display','none');
         }
@@ -634,11 +589,7 @@ var callBackFunction = {
         $BIGO('.preferential_2').css('display','block');
         $BIGO('#shopid').html(strContent);
     },
-    //将店铺信息添加到地图中
-    mapBindMarker : function (data){
-        H.initData(data);
-        H.IsAddMarker = 1;
-    },
+
     jsonpCallback3 : function(da){
         if(da.flag1=='p'){
             //如果是婴幼儿走这里
@@ -779,7 +730,7 @@ var callBackFunction = {
 
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
-var tabcount = new Array("3");
+var tabcount = new Array("2");
 var loadtabs = new Array("1");
 var autochangemenu = 1,counter = 0,slength;
 var changespeed = 1;
