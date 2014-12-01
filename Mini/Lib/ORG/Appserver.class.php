@@ -301,7 +301,6 @@ public function GetUserInfo($udata){
         }
         $defaultResult = $mac->getBenebnColl($where,$unihost);
         /*if($page==1){
-            //获取用户信息
             $userinfo = $recomodel->getUserInfo();
             $arr['uname'] = $userinfo[0];
             $arr['collflag'] = $userinfo[1];

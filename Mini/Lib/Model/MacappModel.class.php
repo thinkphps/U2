@@ -125,7 +125,6 @@ public function SqlCount(&$sql,$goodtag,$page_num){
             }else{
                 unset($detailSuit[$k]);
             }
-
        }
         return $detailSuit;
     }
