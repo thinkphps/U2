@@ -235,9 +235,7 @@ public function GetUserInfo($udata){
             $tname = trim(htmlspecialchars($use['taobao_name']));
             $result = $user->field('mobile,taobao_name,login_type')->where(array('id'=>$uid))->find();
             if(!empty($result)){
-                if($result['login_type']=='app'){
-                    $map = array('user_name'=>$tname,'taobao_name'=>$tname);
-                }
+                $map = array('taobao_name'=>$tname);
                 $re = $user->where(array('id'=>$uid))->save($map);
                 if($re){
                     $arr['code'] = 1;

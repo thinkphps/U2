@@ -78,22 +78,20 @@ public function SqlCount(&$sql,$goodtag,$page_num){
 }
     public function getBeubeu($where,$page,$page_num,$start,$unihost){
         $where['suitImageUrl'] = array('neq','');
-        //$beubeu_suits = M('BeubeuSuits');
-        $beubeu_suits = M('SuitOrder');
+        $beubeu_suits = M('BeubeuSuits');
+        $detail = M('BeubeuSuitsGoodsdetail');
         $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
         $num = ceil($count/$page_num);
         if($page>$num){
             $page = 1;
             $start = 0;
         }
-        print_r($where);
-        if(isset($where['suitStyleID']) && !empty($where['suitStyleID'])){
-            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
-        }else{
-            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('all_order asc')->limit($start.','.$page_num)->select();
-        }
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
         foreach($beubeu_suits_list as $k=>$v){
+            $before = substr($v['suitImageUrl'],0,-4);
+            $v['suitImageUrl'] = $before.'a.png';
             $beubeu_suits_list[$k]['suitImageUrl'] = $unihost.$v['suitImageUrl'];
+            $beubeu_suits_list[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost);
             switch($v['suitGenderID']){
                 case 1 :
                     $sex = 15474;
@@ -114,6 +112,22 @@ public function SqlCount(&$sql,$goodtag,$page_num){
         $arr['result'] = $beubeu_suits_list;
         $arr['count'] = $num;
         return $arr;
+    }
+    public function getSuitsDetail($detail,$suitID,$unihost){
+       $detailSuit = $detail->field('item_bn as uq')->where(array('suitID'=>$suitID))->select();
+       foreach($detailSuit as $k=>$v){
+            $cid = substr($v['uq'],-2,2);
+            $uq =  substr($v['uq'],0,-2);
+            $sql = "select concat('".$unihost."',p.`url`) as url from `u_beubeu_goods` as g inner join `u_products` as p on p.goods_id=g.id where g.`item_bn` like '".$uq."%' and p.`cid`='{$cid}' limit 0,1";
+            $result = $detail->query($sql);
+            if(!empty($result)){
+                $detailSuit[$k]['url'] = $result[0]['url'];
+            }else{
+                unset($detailSuit[$k]);
+            }
+
+       }
+        return $detailSuit;
     }
     public function getBenebnColl($where,$unihost){
         $beubeu_coll = M('BeubeuCollection');
