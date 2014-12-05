@@ -7,6 +7,44 @@
  */
 jQuery(function($){
 
+    viedosh = {
+        hidviedo:function(){
+            //点击视频提示知道了
+            $('#zdlid').click(function(){
+                $('#showviedo').addClass('none');
+                $('.mini-mask2').hide();
+                if(luid){
+                $.post(uppopo,{flag:1},function(data,status){
+                });
+                }
+            });
+        },
+        mask2show : function(){
+            if(!luid){
+                $('.mini-mask2').show();
+                $('#showviedo').removeClass('none');
+            }else if(luid && vcount<3){
+                $('.mini-mask2').show();
+                $('#showviedo').removeClass('none');
+            }
+        },
+        lookviedo:function(){
+            $('#gkspid').click(function(){
+                $('#showviedo').addClass('none');
+                $('#uswf').removeClass('none');
+                if(luid){
+                $.post(uppopo,{flag:1},function(data,status){
+                });
+                }
+            });
+        },
+        vclosw:function(){
+            $('#vdown').on('click','#vclose',function(){
+                $('#uswf').addClass('none');$('.mini-mask2').hide();
+            });
+        }
+    }
+    //viedosh.mask2show();viedosh.hidviedo();viedosh.lookviedo();viedosh.vclosw();
     var weather = {
         tips : [
             '请注意防暑降温，宜穿<a href="http://uniqlo.tmall.com/?q=%B6%CC%D0%E4&search=y" target="__blank">短袖</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B1%B3%D0%C4" target="__blank">背心</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B6%CC%BF%E3" target="__blank">短裤</a><a href="http://uniqlo.tmall.com/?q=%D6%D0%BF%E3&type=p&search=y" target="__blank">中裤</a>、薄型<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>',
@@ -129,7 +167,9 @@ jQuery(function($){
                     var sel = "selected='selected'";
                     scid.selpid = pv.region_id;
                 }
+                if(pv.disabled=='false'){
                 str2+="<option value='"+pv.region_id+"' "+sel+">"+pv.local_name+"</option>";
+                }
             });
             $('#spid').html(str2);
 
@@ -140,7 +180,9 @@ jQuery(function($){
                         var csel = "selected='selected'";
                         scid.selcid = pv.region_id;
                     }
+                    if(pv.disabled=='false'){
                     str3+="<option value='"+pv.region_id+"' "+csel+">"+pv.local_name+"</option>";
+                   }
                 });
                 $('#scid').html(str3);
                 if(info.isp){//直辖市
@@ -160,17 +202,17 @@ jQuery(function($){
                 }
                 scid.selpid = scid.selpid?scid.selpid:-1;
                 scid.selcid = scid.selcid?scid.selcid:-1;
-                //var jsonpurl = baseurl+"index.php/Indexnew/getcity?callback=jsonpBaiduCity2&pid="+scid.selpid+"&cid="+scid.selcid+"&baiduid=2&shopid="+option.shopid+"&baiduerjiid="+info.baiduerjiid;
                 $.post(sendurl+'mini.php/API/getcity',{pid:scid.selpid,cid:scid.selcid,baiduid:2,shopid:option.shopid,baiduerjiid:info.baiduerjiid},function(data,status){
                  $('#ddlShop').html('<option value="0">请选择</option>');
                  var str = '<option value="0">请选择</option>';
                  if(data.clist){
                  $('#emptymsg').html('');
+                 var sel = '';
                  $.each(data.clist,function(pin,pv){
                  if(pv.sel == 1){
-                 var sel =  "selected='selected'";
+                 sel =  "selected='selected'";
                  }
-                 str+="<option value='<span id=\"tipshopid\">"+pv.sname+'</span><br>'+pv.tradetime+"' "+sel+">"+pv.sname+"</option>";
+                 str+="<option value='"+pv.store_id+"' "+sel+">"+pv.sname+"</option>";
                  });
                  $('#ddlShop').html(str);
                  }else{
@@ -274,6 +316,12 @@ jQuery(function($){
                 }
             }
         },
+        addlog : function(str){
+            if(str){
+                $.post(logurl,{sq:str},function(data,status){
+                });
+            }
+        },
         init : function(option){
             option = option || {}
             var city = option.city
@@ -293,24 +341,7 @@ jQuery(function($){
         }
     };
 
-//weather.init();
-
-    /*=================================*/
-// $.weather.init({
-// 		city : city,
-// 		callback: function(city, temper, info){
-// 			// city 城市名
-// 			// temper: {
-//			// 	low: 最低气温
-//			// 	high: 最高气温
-//			// }
-// 			// info 整条info数据
-// 		}
-// })
-    /*=================================*/
-
     $.weather = weather;
-
     /*== mini-city ==*/
 
     if(typeof data != 'undefined'){
@@ -342,9 +373,8 @@ jQuery(function($){
             }
             $.uniqlo.lid = 0;
             $.uniqlo.bid = 0;
-            $.weather.nextpage = 0;
+            $.weather.nextpage = 0;$('#a_shopinfo').html('您附近的优衣库门店').addClass('stroecs').attr('href','#').removeAttr('target');
             //$('#nio-tip').text('正在加载天气数据，请稍等...').attr('title', '正在加载天气数据，请稍等...');
-            H.map.centerAndZoom(city, 11);
             $.weather.tipcity = city;
             weather.init({'city' : city, 'province': prov,imgpath : window.imgpath,'subindex':'1',
                 callback: function(city, temper, info){
@@ -354,7 +384,7 @@ jQuery(function($){
                     getgoods($.weather.avg,$.weather.sex,0,0,$.uniqlo.fid,$.uniqlo.zid,0,0);
                     //往index传城市
                     restart_autochange();
-                    sendcity(city,info.city);
+                    //sendcity(city,info.city);
                 }
             });
             //kimi
@@ -367,4 +397,19 @@ jQuery(function($){
     }).on('click', 'a.mini-city-close', function(){
             location.hide();
         });
+    $("#ddlShop").on("change",function(){
+        var store_id = $("#ddlShop option:selected").val();
+        $('#wubaidu').addClass('none');
+        $('#storets').removeClass('none').addClass('near_un');
+        var exturl = '';
+        if(store_id=='276'){
+            exturl = 'http://www.uniqlo.com/cn/shop/'+store_id+'.html'
+        }else{
+            exturl = 'http://www.uniqlo.com/cn/shop/shop'+store_id+'.html'
+        }
+        $('#a_shopinfo').html($("#ddlShop option:selected").text()).attr({'href':''+exturl+'','target':'__blank'}).removeClass('stroecs');
+    })
+    $('#uswf .mini-btn').click(function(){
+        $('#uswf').css('display','none');
+    });
 });

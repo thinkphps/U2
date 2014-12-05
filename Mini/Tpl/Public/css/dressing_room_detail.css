@@ -31,7 +31,7 @@ button,label{cursor:pointer; }
 
 
 /*头部-城市*/
-.dr_city{ float:left; width:355px; height:46px; background:url(../images/line1.png) left 0 no-repeat; padding:18px 30px; overflow:hidden; }
+.dr_city{ float:left; width:500px; height:46px; background:url(../images/line1.png) left 0 no-repeat; padding:18px 0 18px 30px; overflow:hidden; }
 .city_name{ float:left; height:46px; border-right:1px solid #ddd; padding:0 20px 0 0; margin:0 20px 0 0; overflow:hidden;}
 .city_name h2{ font-size:26px; line-height:30px; font-weight:normal; color:#333;}
 .city_name span{ color:#a1a1a1;}
@@ -43,9 +43,10 @@ button,label{cursor:pointer; }
 .city .near_un i{ display:block; float:left; width:20px; height:20px; margin:0 8px 0 0;}
 .city .near_un i.city_wz{ background:url(../images/city_near_icon.png) 0 0 no-repeat;}
 .city .near_un i.city_wz2{ display: none;background:url(../images/city_near_icon.png) 0 -20px no-repeat;}
-.city .near_un a{ float:left; color:#666; margin:0 8px 0 0;}
+.city .near_un a{ float:left; color:#666; margin:0 8px 0 0;width:288px}
 .city .near_un a:hover{ color:#F00;}
-
+#wubaidu{float:left;position:absolute;top:45px;}
+#wubaidu select{border:1px solid #abadb3;margin-right:5px;}
 /*头部-优惠*/
 .preferential{float:right; width:321px; height:82px; background:url(../images/line1.png) left 0 no-repeat; overflow:hidden; position:relative;}
 
@@ -592,15 +593,9 @@ ul.detail_sub_nav li a.detail_sub_btn14.select{ background:#ff0000 url(../images
 .product_more a{ display:block; width:950px; height:65px; background:url(../images/product_more.png) 0 0 no-repeat; margin:20px auto;}
 .product_more a:hover{ background:url(../images/product_more.png) 0 -65px no-repeat;}
 
-
-
-
 /*网站底部*/
 .footer{ width:950px; background:url(../images/line3.png) 0 top repeat-x; margin:50px auto 0 auto;padding:20px 0;}
 .footer p{ color:#333; text-align:center; line-height:22px;}
-
-
-
 
 /*我的试衣间*/
 .syj_btn{ width:64px; height:82px; position:fixed; top:50%; margin-top:-32px; right:10px; z-index:101;}
@@ -811,3 +806,14 @@ div#youhui_msg #youhuit{width:200px;float:left;margin-top:3px;}
 #youhuifirst{background:none repeat scroll 0 0 #f3f3f3;width: 240px;height: 80px;padding: 12px 0;color:#000;z-index:100;text-align: center;left:41%;top:40%;}
 #youhuifirst #youhuimf{width: 200px;font-size: 13px;line-height: 22px; margin: 0 auto 10px;text-align: center;}
 #youhuifirst button{background-position: 0 0;width: 74px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)}
+
+/*视频*/
+#showviedo{background: none repeat scroll 0px 0px rgb(243, 243, 243); width: 210px; height: 101px; border: 2px solid rgb(209, 209, 209);position: absolute; left: 38%; top: 43%; z-index: 1007;}
+#showviedo p{color:#2a2a2a;margin:10px auto;font-size: 13px;line-height: 22px;text-align: center;width:210px;}
+#showviedo button{background-position:0 0;border:0 none;color:#fff;cursor:pointer;height:26px;width:74px;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);margin-left:19px;}
+#uswf{width:540px;height:420px;z-index:1001;position: absolute;padding:18px 10px 10px;background: #fff;left:31%;top:18%;}
+#uswf .vin{width:520px;margin:auto;}
+#uswf #uswfin{height:380px;}
+#uswf #vdown{margin-top:10px;}
+#uswf #vdown p{color:#2a2a2a;font-size:13px;margin-top:3px;width:443px;float:left;line-height: 22px;display:block;}
+#uswf #vdown button{background-position:0 0;border:0 none;color:#fff;cursor:pointer;height:26px;width:74px;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);float:right;}

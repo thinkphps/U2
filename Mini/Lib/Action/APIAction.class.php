@@ -200,10 +200,9 @@ class APIAction extends Action
         if(in_array($cbn['p_region_id'],array(1,21,42,62))){
             $isp = 1;
         }
-        $shop = $Weather->shopinfo($cbn['region_id']);
+
         $pro = $Weather->getpca();//省列表
         $clist = $Weather->getCityList($cbn['region_id'],$cbn['p_region_id']);//城市或者区列表
-
         foreach($pro as $k=>$v){
             if($v['region_id']==$cbn['p_region_id'] && $subindex==1){
                 $pro[$k]['sel'] = 1;
@@ -238,9 +237,6 @@ class APIAction extends Action
         $weatherInfo["weather4"] = json_decode($returnObj[0]['weather4'],true);
         $weatherInfo["weather5"] = json_decode($returnObj[0]['weather5'],true);
         $weatherInfo['cbn'] = $cbn['pinying'];
-        $weatherInfo['tradetime'] = $shop['tradetime'];
-        $weatherInfo['sname'] = $shop['sname'];
-        $weatherInfo['id'] = $shop['id'];
         $weatherInfo['plist'] = $pro;
         $weatherInfo['clist'] = $clist;
         $weatherInfo['indexcity'] = $cbn;
@@ -303,7 +299,7 @@ class APIAction extends Action
             $pid = $Weather->getId($baiduid,$pid,$scid);
         }
         if($baiduid!=2){
-            $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid,'disabled'=>'false'))->select();
+            $list = $area->cache(true)->field('region_id,local_name,disabled')->where(array('p_region_id'=>$pid,'disabled'=>'false'))->select();
             if(empty($baiduid) && count($list)==1){
                 $list[0]['sel'] = 1;
             }
@@ -319,7 +315,8 @@ class APIAction extends Action
                     $where = array('cityid'=>$scid);
                     break;
             }
-            $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
+            $where['flag'] = 0;
+            $list = $shop->field('id,store_id,longitude,latitude,sname,tradetime')->where($where)->select();
             foreach($list as $k=>$v){
                 if($v['id'] == $shopid){
                     $list[$k]['sel'] = 1;

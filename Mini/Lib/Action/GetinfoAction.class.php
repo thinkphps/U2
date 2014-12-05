@@ -26,7 +26,6 @@ class GetinfoAction extends Action{
                 case 3 :
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
-                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
                 case 4 :
@@ -55,7 +54,6 @@ class GetinfoAction extends Action{
                 case 1 :
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
-                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
             }
@@ -165,6 +163,7 @@ public function getCollData(){
         $arr['uname'] = $userinfo[0];
         $arr['collflag'] = $userinfo[1];
         $arr['collcount'] = $userinfo[2];
+        $arr['tname'] = $userinfo[3];
     }
     $arr['page'] = $defaultResult['page'];
     $arr['def'] = $defaultResult['result'];
@@ -274,14 +273,14 @@ public function addBeubenColl(){
         }
     }else{
         $arr['code'] = 0;
-        $arr['msg'] = '没有登录';
+        $arr['msg'] = '登录之后即可收藏此套搭配';
     }
     $this->ajaxReturn($arr, 'JSON');
 }
 public function getUserInfo(){
       $uid = session("uniq_user_id");
       if($uid){
-        $result = M('User')->field('user_name,mobile,taobao_name')->where(array('id'=>$uid))->find();
+        $result = M('User')->field('user_name,mobile,taobao_name,login_type')->where(array('id'=>$uid))->find();
         if(!empty($result)){
             $arr['code'] = 1;
             $arr['result'] = $result;
@@ -328,16 +327,24 @@ public function changeTaoName(){
         if($uid){
             $user = M('User');
             $tname = trim($this->_post('taobao_name'));
-            $result = $user->field('mobile,taobao_name')->where(array('id'=>$uid))->find();
+            $result = $user->field('mobile,taobao_name,login_type')->where(array('id'=>$uid))->find();
             if(!empty($result)){
-                $re = $user->where(array('id'=>$uid))->save(array('taobao_name'=>$tname));
+                if($result['login_type']=='normal'){
+                    session("uniq_user_name",$tname);
+                    cookie('uniq_user_name',$tname,604800);
+                   $map = array('user_name'=>$tname,'taobao_name'=>$tname);
+                }else{
+                   $map = array('taobao_name'=>$tname);
+                }
+                $re = $user->where(array('id'=>$uid))->save($map);
                 if($re){
                     $arr['code'] = 1;
                     $arr['tname'] = $tname;
+                    $arr['login_type'] = $result['login_type'];
                     $arr['msg'] = '编辑成功';
                 }else{
                     $arr['code'] = 0;
-                    $arr['msg'] = '编辑失败';
+                    $arr['msg'] = '关联淘宝登录名没有变化';
                 }
             }else{
                 $arr['code'] = 0;

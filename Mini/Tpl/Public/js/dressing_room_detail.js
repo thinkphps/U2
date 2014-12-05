@@ -3,6 +3,10 @@
  */
 
 $(function(){
+    $('.city').on('click','#shopInfo,#storets .stroecs',function(){
+        $('#storets').removeClass('near_un').addClass('none');
+        $('#wubaidu').removeClass('none');
+    });
     $(".syj_btn").draggable({
         drag:function(event, ui){
             var mleft =  $(".syj").width()+2;
@@ -1539,6 +1543,4 @@ $(function(){
         $(idname).show().siblings('.mini-pop').hide();
         $('.mini-mask').show()
     });
-
-
 })
