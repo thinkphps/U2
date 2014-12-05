@@ -21,9 +21,6 @@ var timer,loadid = 0;
             this.controlsEvent();
             this.cityOperator();
 
-            var jsonpurl = baseurl +"index.php/Indexnew/getshopinfo?callback=callBackFunction.mapBindMarker";
-            _this.$weather.jsonpFcuntion(jsonpurl);
-
             //天气初始化
             _this.$weather.init({
                 city : remote_ip_info.city || null,
@@ -39,6 +36,7 @@ var timer,loadid = 0;
                     }
                 }
             });
+
         },
 
         sendcity :function(pro,city){
@@ -49,7 +47,6 @@ var timer,loadid = 0;
             // 把script标签加入head，此时调用开始
             document.getElementsByTagName('head')[0].appendChild(script);
         },
-
 
 
         //l4推荐模特图绑定
@@ -144,8 +141,12 @@ var timer,loadid = 0;
             $('#suits-container').on('click','.imgSuits',function(){
                 var suitid = $(this).data('suitid');
                 var gender = $(this).data('gender');
-                //jsonpHomeUrl
+                var ua = window.navigator.userAgent;
+                if(ua.indexOf('MetaSr')>0){
+                    window.open('http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
+                }else{              
                 window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
+			}
             });
 
             $('#suits-container').on('click','.dressurl',function(){
@@ -276,6 +277,12 @@ var timer,loadid = 0;
 
             $('#btn-city-close').on('click',this.hideCityDiv);
 
+            $('.city').on('click','#shopInfo,#storets .stroecs',function(){
+                //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
+                _this.bindProvinceOrCitys();
+				$('#storets').removeClass('near_un').addClass('none');
+                $('#wubaidu').removeClass('none');
+            });
             $('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
                 $('#div-citys').show();
@@ -288,20 +295,16 @@ var timer,loadid = 0;
             });
             //店铺改变后定位到当前店铺所在位置
             $("#ddlShop").on("change",function(){
-                var list =   H.map.getOverlays();
-
-                var strHtml = '<span id="tipshopid" data-shopid="'+$('#ddlShop').val()+'">'+$('#ddlShop option:selected').text()+'</span><br>' + $('#ddlShop option:selected').data('opentime');
-                $('#a_shopinfo').html($('#ddlShop option:selected').text());
-                $('#shopInfo').hide();
-                $('#a_shopinfo2').show();
-                //tips
-                callBackFunction.tipsfunction(strHtml);
-                for(var i=1;i<list.length;i++){
-                    if(list[i].title == $('#ddlShop option:selected').text() ){
-                        H.setMarkerCenter(list[i]);
-                        return;
-                    }
+				var store_id = $("#ddlShop option:selected").data('opentime');
+				$('#wubaidu').addClass('none');
+				$('#storets').removeClass('none').addClass('near_un');
+								var exturl = '';
+                if(store_id=='276'){
+                  exturl = 'http://www.uniqlo.com/cn/shop/'+store_id+'.html'
+                }else{
+                 exturl = 'http://www.uniqlo.com/cn/shop/shop'+store_id+'.html'
                 }
+				$('#a_shopinfo').html($("#ddlShop option:selected").text()).attr({'href':''+exturl+'','target':'_blank'}).removeClass('stroecs');
             });
 
             $('#btn-change').on('click',function(){
@@ -309,7 +312,7 @@ var timer,loadid = 0;
                     province = $('#le1 option:selected').text()
                 city = $('#le2 option:selected').text()
                 temp = city.slice(-1);
-
+                $('#a_shopinfo').html('您附近的优衣库门店').addClass('stroecs').attr('href','#').removeAttr('target');
                 if(city !== '请选择'){
                     if(province !== '台湾省'){
                         if( province === '香港' || province === '澳门'){
@@ -372,7 +375,6 @@ var timer,loadid = 0;
                     _this.callGetShops(pid,cid);
                 }else{
 
-                H.map.centerAndZoom($("#scid option:selected").text(), 11);
                 var cityname = $('#scid option:selected').text();
                  _this.callGetShops(pid,cid);
                 //设置切换城市模块的省市选中项
@@ -465,7 +467,7 @@ var callBackFunction = {
         }
 
         $('#suits-container').html(strHtml);
-        $('#suits-container').coverscroll({items:'.item',minfactor:35,  'step':{ // compressed items on the side are steps
+        $('#suits-container').coverscroll({items:'.item',minfactor:15,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
             'limit':6, // how many steps should be shown on each side
             'width':8, // how wide is the visible section of the step in pixels
@@ -541,7 +543,7 @@ var callBackFunction = {
         strItem += '<div class="gotoroom none">';
 
         var url ='http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
-        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank" style="color:#fff;">去虚拟试衣间试穿</a></div></div>';
+        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank">去虚拟试衣间试穿</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
@@ -579,7 +581,7 @@ var callBackFunction = {
     tipsfunction : function(strContent){
         //tips
         stop_autochange();
-        for (i = 1; i <=3; i++) {
+        for (i = 1; i <=2; i++) {
             $('#tablink' + i).removeClass('current');
             $('.preferential_' + i).css('display','none');
         }
@@ -587,11 +589,7 @@ var callBackFunction = {
         $('.preferential_2').css('display','block');
         $('#shopid').html(strContent);
     },
-    //将店铺信息添加到地图中
-    mapBindMarker : function (data){
-        H.initData(data);
-        H.IsAddMarker = 1;
-    },
+
     jsonpCallback3 : function(da){
         if(da.flag1=='p'){
             //如果是婴幼儿走这里
@@ -636,7 +634,9 @@ var callBackFunction = {
     jsonpBaiduCity : function(data){
         var str = '<option value="0">请选择</option>';
         $.each(data.clist,function(pin,pv){
+			if(pv.disabled=='false'){
             str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+			}
         });
         $('#scid').html(str);
         if($('#spid').data('static') == 1){
@@ -665,14 +665,17 @@ var callBackFunction = {
 
         //绑定省份
         var plist = data.plist;
-        var strOptions = '<option value="0">请选择</option>';
+        var strOptions = pstrOptions = '<option value="0">请选择</option>';
         for(var i = 0 ; i < plist.length;i++ ){
             strOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
+			if(plist[i].disabled=='false'){
+            pstrOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
+			}
         }
         $('#le1').html(strOptions);
 
         //绑定地图层中的省份
-        $('#spid').html(strOptions);
+        $('#spid').html(pstrOptions);
 
         //绑定城市
         var clist = data.clist;
@@ -694,7 +697,7 @@ var callBackFunction = {
         var strOption = '<option value="0">请选择</option>';
         if(data != null){
             for(var i = 0; i < data.length;i++){
-                strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].tradetime.replace(/\//g,'') +'">' + data[i].sname + '</option>';
+                strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].store_id +'">' + data[i].sname + '</option>';
             }
         }
         $('#ddlShop').html(strOption);
@@ -732,7 +735,7 @@ var callBackFunction = {
 
 var tablink_idname = new Array("tablink");
 var tabcontent_idname = new Array("preferential_");
-var tabcount = new Array("3");
+var tabcount = new Array("2");
 var loadtabs = new Array("1");
 var autochangemenu = 1,counter = 0,slength;
 var changespeed = 1;

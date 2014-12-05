@@ -75,10 +75,10 @@ class IndexnewAction extends Action{
         }else{
         $shop = M('Shop');
         if($levelid==0){
-            $list = $shop->field('id,sname,tradetime')->where(array('cityid'=>$id))->select();
+            $list = $shop->field('id,store_id,sname,tradetime')->where(array('cityid'=>$id,'flag'=>0))->select();
 
         }else if($levelid==1){
-            $list = $shop->field('id,sname,tradetime')->where(array('aid'=>$id))->select();
+            $list = $shop->field('id,store_id,sname,tradetime')->where(array('aid'=>$id,'flag'=>0))->select();
         }
             S('ca'.$id,serialize($list),array('type'=>'file'));
         }
@@ -183,49 +183,14 @@ class IndexnewAction extends Action{
         $callback=$_GET['callback'];
         $area = M('Areas');
         $levelid= trim($this->_request('levelid'));//省的级别1为直辖市普通为0
-        /*$shopid = trim($this->_request('shopid'));//店铺id
-        $scid = trim($this->_request('cid'));
-        $baiduerjiid = trim($this->_request('baiduerjiid'));//百度地图上的select二级(直辖市)
-        $Weather = D('Getinfo');
-        $shop = M('Shop');
-        if(!empty($baiduid)){
-            $pid = $Weather->getId($baiduid,$pid,$scid);
-        }
-        if($baiduid!=2){*/
             if($levelid==0){
-            $list = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>$pid))->select();
+            $list = $area->cache(true)->field('region_id,local_name,disabled')->where(array('p_region_id'=>$pid))->select();
             }else if($levelid==1){
-            $sql = "select region_id,local_name from u_areas where p_region_id=(select region_id from u_areas where p_region_id={$pid}) and disabled='false'";
+            $sql = "select region_id,local_name,disabled from u_areas where p_region_id=(select region_id from u_areas where p_region_id={$pid}) and disabled='false'";
             $list = $area->query($sql);
             }
-        /* if(empty($baiduid) && count($list)==1){
-             $list[0]['sel'] = 1;
-         }
-     /*}else{
-       switch($pid){
-             case 1 :
-             case 21 :
-             case 42 :
-             case 62 :
-                 $where = array('aid'=>$scid);
-                 break;
-             default :
-                 $where = array('cityid'=>$scid);
-                 break;
-         }
-         $list = $shop->field('id,longitude,latitude,sname,tradetime')->where($where)->select();
-         foreach($list as $k=>$v){
-             if($v['id'] == $shopid){
-                 $list[$k]['sel'] = 1;
-             }
-         }
-     }*/
         $arr['clist'] = $list;
         $re = json_encode($arr);
-        /*$arr['baiduerjiid'] = $baiduerjiid;
-        $arr['shopid'] = $shopid;
-        ;*/
-        //$re = iconv('utf8','gbk',$re);
         echo $callback."($re)";
     }
     //新版获取套图推荐

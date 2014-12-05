@@ -18,7 +18,7 @@ class GetinfoModel extends Action{
             $prolist = unserialize(S('phinfo'));
         }else{
             $area = M('Areas');
-            $prolist = $area->cache(true)->field('region_id,local_name')->where(array('p_region_id'=>array('exp','IS NULL'),'disabled'=>'false'))->select();
+            $prolist = $area->cache(true)->field('region_id,local_name,disabled')->where(array('p_region_id'=>array('exp','IS NULL'),'region_id'=>array('not in',array(3235,3239,3242))))->select();
             S('phinfo',serialize(),array('type'=>'file'));
        }
         return $prolist;
@@ -185,11 +185,13 @@ de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15
       foreach($distslav as $k2=>$v2){
           $chil = array();
           foreach($result as $k=>$v){
+			  if($v){
               if($v2==$v['suitID']){
                   $arr[$j] = array('suitID'=>$v['suitID'],'suitGenderID'=>$v['suitGenderID'],'suitImageUrl'=>$v['suitImageUrl'],'beubeuSuitID'=>$v['beubeuSuitID'],'description'=>$v['description']);
                   $chil[] = array('num_iid'=>$v['num_iid'],'pic_url'=>$v['pic_url'],'detail_url'=>$v['detail_url'],'title'=>$v['title']);
                   $arr[$j]['detail'] = $chil;
               }
+		  }
           }
           $j++;
       }

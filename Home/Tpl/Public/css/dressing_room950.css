@@ -50,8 +50,10 @@ button,label{cursor:pointer; }
 .city .near_un i{  float:left; width:20px; height:20px; margin:0 8px 0 0;cursor:pointer;}
 .city .near_un i.city_wz{ background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2FbdZXW4XXXXXXXXX-196993935.png) 0 0 no-repeat;}
 .city .near_un i.city_wz2{ display: none; background:url(http://img04.taobaocdn.com/imgextra/i4/196993935/T2FbdZXW4XXXXXXXXX-196993935.png) 0 -20px no-repeat;}
-.city .near_un a{ float:left; color:#666; margin:0 8px 0 0;}
+.city .near_un a{ float:left; color:#666; margin:0 8px 0 0;width:210px;}
 .city .near_un a:hover{ color:#F00;}
+#wubaidu{float:left;position:absolute;top:45px;}
+#wubaidu select{border:1px solid #abadb3;margin-right:5px;}
 
 /*头部-优惠*/
 .preferential{float:left; width:321px; height:82px; background:url(http://img03.taobaocdn.com/imgextra/i3/196993935/T2m9tVX_hXXXXXXXXX-196993935.png) left 0 no-repeat; overflow:hidden; position:relative;}

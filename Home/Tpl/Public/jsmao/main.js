@@ -294,6 +294,12 @@ var timer,loadid = 0;
 
             $BIGO('#btn-city-close').on('click',this.hideCityDiv);
 
+            $BIGO('.city').on('click','#shopInfo,#storets .stroecs',function(){
+                //如果切换城市中已绑定省份则copy  le1的省份信息到地图中
+                _this.bindProvinceOrCitys();
+				$BIGO('#storets').removeClass('near_un').addClass('none');
+                $BIGO('#wubaidu').removeClass('none');
+            });
 
             $BIGO('#btn-city-change').on('click',function(){
                 _this.bindProvinceOrCitys();
@@ -305,13 +311,25 @@ var timer,loadid = 0;
                 var url = baseurl+"index.php/Indexnew/getcity?callback=callBackFunction.jsonpGetcity&pid="+pvalue;
                 _this.$weather.jsonpFcuntion(url);
             });
-
+            //店铺改变后定位到当前店铺所在位置
+            $BIGO("#ddlShop").on("change",function(){
+				var store_id = $BIGO("#ddlShop option:selected").data('opentime');
+				$BIGO('#wubaidu').addClass('none');
+				$BIGO('#storets').removeClass('none').addClass('near_un');
+				var exturl = '';
+                if(store_id=='276'){
+                  exturl = 'http://www.uniqlo.com/cn/shop/'+store_id+'.html'
+                }else{
+                 exturl = 'http://www.uniqlo.com/cn/shop/shop'+store_id+'.html'
+                }
+				$BIGO('#a_shopinfo').html($BIGO("#ddlShop option:selected").text()).attr({'href':''+exturl+'','target':'_blank'}).removeClass('stroecs');
+            });
             $BIGO('#btn-change').on('click',function(){
                 var $that = $BIGO(this),
                     province = $BIGO('#le1 option:selected').text()
                 city = $BIGO('#le2 option:selected').text()
                 temp = city.slice(-1);
-
+                $BIGO('#a_shopinfo').html('您附近的优衣库门店').addClass('stroecs').attr('href','#').removeAttr('target');
                 if(city !== '请选择'){
                     if(province !== '台湾省'){
                         if( province === '香港' || province === '澳门'){
@@ -368,13 +386,11 @@ var timer,loadid = 0;
             $BIGO('#scid').on('click',function(){
                 callBackFunction.ISMapOper = 0;
             }).on('change',function(){
-
                 var pid = $BIGO('#spid').val(),cid = $BIGO('#scid').val();
                 if(callBackFunction.ISMapOper == 1){
                     _this.callGetShops(pid,cid);
                 }else{
 
-                H.map.centerAndZoom($BIGO("#scid option:selected").text(), 11);
                 var cityname = $BIGO('#scid option:selected').text();
                  _this.callGetShops(pid,cid);
                 //设置切换城市模块的省市选中项
@@ -634,7 +650,9 @@ var callBackFunction = {
     jsonpBaiduCity : function(data){
         var str = '<option value="0">请选择</option>';
         $BIGO.each(data.clist,function(pin,pv){
+               if(pv.disabled=='false'){
             str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+		    }
         });
         $BIGO('#scid').html(str);
         if($BIGO('#spid').data('static') == 1){
@@ -663,14 +681,17 @@ var callBackFunction = {
 
         //绑定省份
         var plist = data.plist;
-        var strOptions = '<option value="0">请选择</option>';
+        var strOptions = pstrOptions = '<option value="0">请选择</option>';
         for(var i = 0 ; i < plist.length;i++ ){
             strOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
+			if(plist[i].disabled=='false'){
+			pstrOptions += '<option value="'+ plist[i].region_id +'">'+ plist[i].local_name +'</option>';
+		   }
         }
         $BIGO('#le1').html(strOptions);
 
         //绑定地图层中的省份
-        $BIGO('#spid').html(strOptions);
+        $BIGO('#spid').html(pstrOptions);
 
         //绑定城市
         var clist = data.clist;
@@ -692,7 +713,7 @@ var callBackFunction = {
         var strOption = '<option value="0">请选择</option>';
         if(data != null){
             for(var i = 0; i < data.length;i++){
-                strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].tradetime.replace(/\//g,'') +'">' + data[i].sname + '</option>';
+                strOption += '<option value="'+ data[i].id +'" data-opentime="'+ data[i].store_id +'">' + data[i].sname + '</option>';
             }
         }
         $BIGO('#ddlShop').html(strOption);
