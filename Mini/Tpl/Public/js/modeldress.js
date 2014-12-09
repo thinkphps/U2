@@ -197,7 +197,7 @@ function Model_loadok_callback(){
             //清空购买列表
             var $buyUl =  pageElement.$divBuys.find('ul');
             $buyUl.html('');
-            var barcode = '';
+            var barcode = '',logstr = '';
             var strLi = '';
             var title = '';
             pageElement.Ischanged = 1;
@@ -206,6 +206,7 @@ function Model_loadok_callback(){
                 for(var i in o){
                     barcode = o[i].barcode;
                     title = o[i].name;
+                    logstr +=o[i].barcode+',';
                     pageElement.BarcodeList.push(barcode);
 //                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
                     strLi += '<li data-title="'+ title +'" ><div class="buyurl">';
@@ -215,7 +216,7 @@ function Model_loadok_callback(){
                 }
                 $buyUl.append(strLi);
                 pageElement.clearSelected();
-
+                $.weather.addlog(logstr);
             }else{
                 //如果当前模特身上没有衣服，则清空页面上所有点击后
                 if(pageElement.IsHide == 0){

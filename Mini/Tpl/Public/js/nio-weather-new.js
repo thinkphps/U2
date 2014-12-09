@@ -12,7 +12,7 @@ jQuery(function($){
             //点击视频提示知道了
             $('#zdlid').click(function(){
                 $('#showviedo').addClass('none');
-                $('.mini-mask2').hide();
+                $('.mini-mask2').hide();$('#swfvgk').removeClass('none');
                 if(luid){
                 $.post(uppopo,{flag:1},function(data,status){
                 });
@@ -29,7 +29,7 @@ jQuery(function($){
             }
         },
         lookviedo:function(){
-            $('#gkspid').click(function(){
+            $('#swfvgk,#gkspid').click(function(){
                 $('#showviedo').addClass('none');
                 $('#uswf').removeClass('none');
                 if(luid){
@@ -44,7 +44,7 @@ jQuery(function($){
             });
         }
     }
-    //viedosh.mask2show();viedosh.hidviedo();viedosh.lookviedo();viedosh.vclosw();
+    viedosh.mask2show();viedosh.hidviedo();viedosh.lookviedo();viedosh.vclosw();
     var weather = {
         tips : [
             '请注意防暑降温，宜穿<a href="http://uniqlo.tmall.com/?q=%B6%CC%D0%E4&search=y" target="__blank">短袖</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B1%B3%D0%C4" target="__blank">背心</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B6%CC%BF%E3" target="__blank">短裤</a><a href="http://uniqlo.tmall.com/?q=%D6%D0%BF%E3&type=p&search=y" target="__blank">中裤</a>、薄型<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>',
