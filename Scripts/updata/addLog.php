@@ -47,3 +47,4 @@ foreach($fileList as $k=>$v){
     $sql.=$strsql;
     $db->mysqlquery($sql);
 }
+exit;
