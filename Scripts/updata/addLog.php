@@ -32,7 +32,8 @@ function dir_list($path, $exts = '', $list = array()) {
 }
 $time = time()-86400;
 $year = date('Y',$time);$mounth = date('Y-m',$time);$date = date('Y-m-d',$time);
-$path = '/data/upload/Upload/log/fitting/'.$year.'/'.$mounth.'/'.$date;
+//$path = '/data/upload/Upload/log/fitting/'.$year.'/'.$mounth.'/'.$date;
+$path = 'E:\xampp\htdocs\U2\Upload\log\fitting\2014\2014-12/2014-12-15';
 $fileList = dir_list($path);
 foreach($fileList as $k=>$v){
   $fileArr = file($v);
