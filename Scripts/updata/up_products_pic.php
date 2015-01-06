@@ -52,19 +52,12 @@ while($ke>0){
                            mkdir($filepath,777,true);
                         }
                         @file_put_contents($filepath.'/'.$v2['sku_id'].'.'.$extension, file_get_contents($url));
-                        /*$psql = "update `u_products` set `url`='".$p_list[0]['url']."' where `sku_id`='".$v2['sku_id']."'";
-                        $db->mysqlquery($psql);
-                        unset($psql);
-                        if(file_exists($root_dir.'/'.$p_list[0]['url'])){
-                          unlink($root_dir.'/'.$p_list[0]['url']);
-                        }*/
                     }
                 }
             }
         }
     }
     $offset+=$limit;
-    sleep(1);
     unset($result);
    }
 exit;

@@ -16,7 +16,7 @@ while($ke>0){
         foreach($result as $k=>$v){
            switch($v['region_grade']){
                case 1 :
-                 $sql = "select `id` from `u_shop` where `pid`=".$v['region_id'];
+                 $sql = "select `id` from `u_shop` where `pid`=".$v['region_id']." and flag=0";
                  $onelevel = $db->mysqlfetch($sql);
                   unset($sql);
                  if(empty($onelevel)){
@@ -26,7 +26,7 @@ while($ke>0){
                  unset($sql);
                break;
                case 2 :
-                   $sql = "select `id` from `u_shop` where `cityid`=".$v['region_id'];
+                   $sql = "select `id` from `u_shop` where `cityid`=".$v['region_id']." and flag=0";
                    $oneleve2 = $db->mysqlfetch($sql);
                    unset($sql);
                    if(empty($oneleve2)){
@@ -36,7 +36,7 @@ while($ke>0){
                    unset($sql);
                    break;
                case 3 :
-                   $sql = "select `id` from `u_shop` where `aid`=".$v['region_id'];
+                   $sql = "select `id` from `u_shop` where `aid`=".$v['region_id']." and flag=0";
                    $oneleve3 = $db->mysqlfetch($sql);
                    unset($sql);
                    if(empty($oneleve3)){
