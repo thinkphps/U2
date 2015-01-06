@@ -69,9 +69,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputTime" class="col-lg-2 control-label">是否显示</label>
+      <label for="inputTime" class="col-lg-2 control-label">显示顺序</label>
       <div class="col-lg-2">
-        <input type="datetime" class="form-control" placeholder="是否显示" name='showtag' value='{$shop.showtag}'><span id='showid'>目前最大值:{$logmax.showtag}</span>
+        <input type="datetime" class="form-control" placeholder="显示顺序" name='showtag' value='{$shop.showtag}'><span id='showid'>目前最大值:{$logmax.showtag}</span>
       </div>
     </div>
     <div class="form-group">
@@ -93,6 +93,12 @@
       </div>
       <input type='hidden' name='id' value='{$shop.id}'>
     </div>
+      <div class="form-group">
+          <label for="inputTime" class="col-lg-2 control-label">是否显示</label>
+          <div class="col-lg-2">
+              <input type="radio" name="fla" value="0" <if condition="$shop['flag'] eq 0">checked='checked'</if> >显示&nbsp;&nbsp;<input type="radio" name="fla" value="1" <if condition="$shop['flag'] eq 1">checked='checked'</if> >不显示
+          </div>
+      </div>
     <div class="form-group">
       <label for="inputTel" class="col-lg-2 control-label">附加信息</label>
       <div class="col-lg-2">

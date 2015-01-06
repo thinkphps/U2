@@ -120,6 +120,7 @@ class ShopAction extends Action{
 	$showtag = intval(trim($this->_post('showtag')));
     $message = trim($this->_post('message'));
     $store_id = $this->_post('store_id');
+    $fla = $this->_post('fla');
 	//20140328kimi
 	$time = date('Y-m-d H:i:s');
 	$shop = M('Shop');
@@ -137,6 +138,7 @@ class ShopAction extends Action{
 				  'scall'=>$call,
 				  'sange'=>$range,
 		          'message'=>$message,
+                  'flag'=>$fla,
 				  'uptime'=>$time);
     $res = $shop->where(array('id'=>$id))->save($data);		
 	}else{
@@ -153,6 +155,7 @@ class ShopAction extends Action{
 				  'scall'=>$call,
 				  'sange'=>$range,
 		          'message'=>$message,
+                  'flag'=>$fla,
 				  'createtime'=>$time,
 				  'uptime'=>$time,
 				  '__hash__'=>$_POST['__hash__']);
