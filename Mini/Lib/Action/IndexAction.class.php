@@ -66,12 +66,12 @@ class IndexAction extends Action {
 
 
     public function loginout(){
-        $user = M('user')->where(array('id'=>session("uniq_user_id")))->find();
+        /*$user = M('user')->where(array('id'=>session("uniq_user_id")))->find();
         if($user['is_active']){
             M('Collection')->where(array('uid'=>session("uniq_user_id")))->save(array('is_delete'=>1));
         }else{
             M('Collection')->where(array('uid'=>session("uniq_user_id")))->delete();
-        }
+        }*/
         $_SESSION=array();
         if(isset($_COOKIE[session_name()])){
             setCookie(session_name(), '', time()-100, '/');
@@ -105,23 +105,23 @@ class IndexAction extends Action {
                     $love = M('Love');
                     $time = date('Y-m-d H:i:s');
                     if($isdel==1){
-                        $cresult = $love->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
+                        $cresult = $love->field('id')->where(array('num_iid'=>$id,'uid'=>$uid))->find();
                         if(empty($cresult)){
-                            $love->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
+                            $love->add(array('num_iid'=>$id,'uid'=>$uid,'cratetime'=>$time));
                         }
                     }else if($isdel==0){
-                        $love->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();
+                        $love->where(array('num_iid'=>$id,'uid'=>$uid))->delete();
                     }
                 }else if($flag==2){
                     $buy = M('Buy');
                     $time = date('Y-m-d H:i:s');
                     if($isdel==1){
-                        $cresult = $buy->field('id')->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->find();
+                        $cresult = $buy->field('id')->where(array('num_iid'=>$id,'uid'=>$uid))->find();
                         if(empty($cresult)){
-                            $buy->add(array('num_iid'=>$id,'uid'=>session("uniq_user_id"),'cratetime'=>$time));
+                            $buy->add(array('num_iid'=>$id,'uid'=>$uid,'cratetime'=>$time));
                         }
                     }else if($isdel==0){
-                        $buy->where(array('num_iid'=>$id,'uid'=>session("uniq_user_id")))->delete();
+                        $buy->where(array('num_iid'=>$id,'uid'=>$uid))->delete();
                     }
                 }
             }else{
@@ -136,6 +136,7 @@ class IndexAction extends Action {
         if($this->_request('tem')){
             $tem = trim($this->_request('tem'));//平均温度
         }
+        $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
         $sid = trim($this->_request('sid'));//性别id形如1,2,3 all为0
         $lid = trim($this->_request('lid'));//收藏id
         $bid = trim($this->_request('bid'));//购买id
@@ -183,7 +184,9 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $productsValue =  $productSyn->GetProductColorByID($v1['num_iid']);
+                    $windex->Get32Pic($productsValue,$root_dir);
+                    $result[$k1]['products'] = $productsValue;
                     $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
@@ -211,7 +214,9 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $productsValue =  $productSyn->GetProductColorByID($v1['num_iid']);
+                    $windex->Get32Pic($productsValue,$root_dir);
+                    $result[$k1]['products'] = $productsValue;
                     $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
@@ -239,7 +244,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $productsValue =  $productSyn->GetProductColorByID($v1['num_iid']);
+                    $windex->Get32Pic($productsValue,$root_dir);
+                    $result[$k1]['products'] = $productsValue;
                     $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
@@ -276,7 +283,9 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             if(!empty($result)){
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $productsValue =  $productSyn->GetProductColorByID($v1['num_iid']);
+                    $windex->Get32Pic($productsValue,$root_dir);
+                    $result[$k1]['products'] = $productsValue;
                     $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{
@@ -360,14 +369,6 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
             if($oid==1){
                $mwhere = " and bg.approve_status='onsale'";
             }
-              /*if(!empty($uid)){
-                    $sql = "select al.*{$fieldlb} from (select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g where 1 {$where} group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}) as al ".$wherelb;
-                }else{
-                    $sql = "select bg.num_iid,bg.type,bg.isud,bg.title,bg.num,bg.price,bg.pic_url,bg.detail_url from {$goodstable} as bg inner join (select g.num_iid,{$case}{$fi} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid  {$ostr} limit {$start},{$page_num}";
-                }
-                $colorsql = "select bg.num_iid from {$goodstable} as bg inner join (select g.num_iid,{$case} from `u_goodtag` as g  where 1 {$where}  group by g.num_iid {$ordr}) t1 on t1.num_iid=bg.num_iid {$ostr} limit {$start},{$page_num}";
-
-                $colorData = $windex->colorDetail($colorsql);*/
                     //有自定义分类也有其他的条件
          if(isset($tem)){
                     if(!empty($uid)){
@@ -404,10 +405,11 @@ limit ".$start.",".$page_num;
 
             $result = $goodtag->query($sql);
             if(!empty($result)){
-                //$windex->doColor($result,$colorData);
                 foreach($result as $k1=>$v1){
                     $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
-                    $result[$k1]['products'] = $productSyn->GetProductColorByID($v1['num_iid']);
+                    $productsValue =  $productSyn->GetProductColorByID($v1['num_iid']);
+                    $windex->Get32Pic($productsValue,$root_dir);
+                    $result[$k1]['products'] = $productsValue;
                     $result[$k1]['tuijian'] = $windex->GetTuijian($v1['item_bn'],$v1['num_iid']);
                 }
             }else{

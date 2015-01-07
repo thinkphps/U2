@@ -237,4 +237,15 @@ class WindexModel extends Model{
         //}
         return $result;
     }
+    //获取32x32的sku小图
+    public function Get32Pic(&$productsValue,$root_dir){
+        foreach($productsValue as $k=>$v){
+           $before = dirname($v['colorcode']);
+           $filename = pathinfo($v['colorcode'],PATHINFO_FILENAME);
+           $newfilepath = $root_dir.'/'.$before.'/32_32/'.$filename.'.jpg';
+           if(file_exists($newfilepath)){
+               $productsValue[$k]['colorcode'] = $before.'/32_32/'.$filename.'.jpg';
+           }
+        }
+    }
 }
