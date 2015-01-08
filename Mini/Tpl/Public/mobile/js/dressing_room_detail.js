@@ -591,7 +591,7 @@ var _mini = {
 
                 //颜色
                 var sty = '';
-                if(v.skunum==0 && v.num!=0){
+                if(v.skunum==0 && v.approve_status=='onsale'){
                     sty = 'style="background:url('+tmplPath+'/images/icon3.png) no-repeat scroll 96px 0 / 42px 42px #EEEEEE; padding:10px 8px; overflow:hidden;"';
                 }
                 strHtml += '<div class="product_color none" '+sty+'><h5>请选择颜色</h5><dl class="sale-colors"><ul class="color-img"></ul></dl></div>';
