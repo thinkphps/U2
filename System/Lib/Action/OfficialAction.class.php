@@ -158,7 +158,7 @@ class OfficialAction extends Action{
 
                   $result = $suitgoods->field('u1.num_iid,u2.title,u2.detail_url,u2.pic_url')
                       ->join("inner join u_beubeu_goods u2 on u1.num_iid=u2.num_iid")
-                      ->where(array('u1.suitID'=>$dataRow["suitID"],'u2.num'=>array('egt',15)))->select();
+                      ->where(array('u1.suitID'=>$dataRow["suitID"],'u2.approve_status' => 'onsale','u2.num'=>array('egt',5)))->select();
                   if(!empty($result)){
                       $imgs[$r+1]["goods"] = $result;
                   }

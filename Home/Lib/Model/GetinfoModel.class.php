@@ -162,7 +162,7 @@ class GetinfoModel extends Action{
                             ".$arr['sid']." and u_suits.approve_status = 0 and u_suits.beubeuSuitID IS NOT NULL
                             ORDER BY u_suits.suitID DESC limit ".$page_arr[0].",".$page_arr[1].") as suits
                             LEFT join u_suits_goodsdetail as usg1 on suits.suitID = usg1.suitID
-                            left JOIN u_beubeu_goods ug ON usg1.num_iid = ug.num_iid and ug.approve_status = 'onsale' AND ug.num >= '15'";
+                            left JOIN u_beubeu_goods ug ON usg1.num_iid = ug.num_iid and ug.approve_status = 'onsale' AND ug.num >= '5'";
         $result = $suits->query($sql);
         $resultArr = array('code'=>1,'count'=>$count,'da'=>$result);
         }
