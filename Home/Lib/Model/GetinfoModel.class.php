@@ -185,7 +185,7 @@ de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15
       foreach($distslav as $k2=>$v2){
           $chil = array();
           foreach($result as $k=>$v){
-			  if($v){
+			  if($v['num_iid']){
               if($v2==$v['suitID']){
                   $arr[$j] = array('suitID'=>$v['suitID'],'suitGenderID'=>$v['suitGenderID'],'suitImageUrl'=>$v['suitImageUrl'],'beubeuSuitID'=>$v['beubeuSuitID'],'description'=>$v['description']);
                   $chil[] = array('num_iid'=>$v['num_iid'],'pic_url'=>$v['pic_url'],'detail_url'=>$v['detail_url'],'title'=>$v['title']);
