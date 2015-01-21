@@ -17,8 +17,8 @@ class MacappModel extends Model{
             }
             $arr_uq = explode('_',$uq);
             foreach($arr_uq as $k=>$v){
-                $uv = substr($v,0,8);
                 if($v){
+                    $uv = substr($v,0,8);
                     $sql = "select `num_iid` from `u_goods` where item_bn like '".$uv."%' order by num desc";
                     $result = $goods->query($sql);$uqArr = array();
                     $uqArr[] = $result[0]['num_iid'];$uqArr[] = $v;
