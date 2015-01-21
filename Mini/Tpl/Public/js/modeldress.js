@@ -353,7 +353,7 @@ function Model_loadok_callback(){
                     var nu = '';
                     pageElement.$divBuys.find('span').each(function(){
                         var $this = $(this);
-                        nu+=$this.data('barcode').substring(0,8)+'_';
+                        nu+=$this.data('barcode')+'_';
                     });
                 var x = Model.get_baiyi_dp_info();
                 $.post(inCollUrl,{uq:nu,gender: x.modeltype,bodypic: x.pic_body,headpic: x.pic_head,pic_match: x.pic_match,shoespic: x.pic_shoes,suitid: x.by_str},function(data,status){

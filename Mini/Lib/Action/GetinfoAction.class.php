@@ -26,6 +26,7 @@ class GetinfoAction extends Action{
                 case 3 :
                 //取出默认数据
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
+                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
                 case 4 :
@@ -54,6 +55,7 @@ class GetinfoAction extends Action{
                 case 1 :
                 case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
+                $defaultwhere['approve_status'] = 0;
                 $defaultResult = $recomodel->getBeubeu($defaultwhere,$page,$page_num,$start);
                 break;
             }
@@ -136,7 +138,7 @@ where u_suits.approve_status=0 and u_suits.suitID = ".$suitid;
         if(!empty($item_bn)){
 
            $goods = M('Goods');
-           $sql = "select num_iid,title,approve_status,IF(num>0 and approve_status='onsale',detail_url,'') as detail_url,num from u_beubeu_goods where left(item_bn,8)='".$item_bn."' order by num desc";
+           $sql = "select num_iid,title,approve_status,IF(num>0 and approve_status='onsale',detail_url,'') as detail_url,num from u_beubeu_goods where item_bn like '".$item_bn."%' order by num desc";
            $result = $goods->query($sql);
            if(!empty($result[0])){
                  $returnArr = array('code'=>1,'data'=>$result[0]);
@@ -245,12 +247,12 @@ public function addBeubenColl(){
                          'createtime'=>$time);
            $res = $beuben->add($data);
            if($res>0){
-                   $insql = "insert into `u_beubeu_coll_goods` (`bcid`,`num_iid`) values ";
+                   $insql = "insert into `u_beubeu_coll_goods` (`bcid`,`num_iid`,`uq`) values ";
                    $str = '';
                    if(!empty($num_iid)){
                    foreach($num_iid as $k=>$v){
                     if($v){
-                        $str.="('".$res."','".$v."'),";
+                        $str.="('".$res."','".$v[0]."','".$v[1]."'),";
                     }
                    }
                    $str = rtrim($str,',');
@@ -365,12 +367,14 @@ public function changeTaoName(){
             if(!$is_g){
                 $uq = $uq.'_';
             }
-            $arr_uq = explode('_',$uq);
+            $arr_uq = explode('_',$uq);$arr = array();
             foreach($arr_uq as $k=>$v){
                 if($v){
-                    $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' order by num desc";
-                    $result = $goods->query($sql);
-                    $arr[] = $result[0]['num_iid'];
+                    $uv = substr($v,0,8);
+                    $sql = "select `num_iid` from `u_goods` where item_bn like '".$uv."%' order by num desc";
+                    $result = $goods->query($sql);$uqArr = array();
+                    $uqArr[] = $result[0]['num_iid'];$uqArr[] = $v;
+                    $arr[] = $uqArr;
                 }
             }
             return $arr;
