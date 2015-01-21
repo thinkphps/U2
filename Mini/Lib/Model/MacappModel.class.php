@@ -17,11 +17,12 @@ class MacappModel extends Model{
             }
             $arr_uq = explode('_',$uq);
             foreach($arr_uq as $k=>$v){
-                $v = substr($v,0,8);
+                $uv = substr($v,0,8);
                 if($v){
-                    $sql = "select `num_iid` from `u_goods` where left(item_bn,8)='".$v."' order by num desc";
-                    $result = $goods->query($sql);
-                    $arr[] = $result[0]['num_iid'];
+                    $sql = "select `num_iid` from `u_goods` where item_bn like '".$uv."%' order by num desc";
+                    $result = $goods->query($sql);$uqArr = array();
+                    $uqArr[] = $result[0]['num_iid'];$uqArr[] = $v;
+                    $arr[] = $uqArr;
                 }
             }
             return $arr;
@@ -88,8 +89,8 @@ public function SqlCount(&$sql,$goodtag,$page_num){
         }
         $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
         foreach($beubeu_suits_list as $k=>$v){
-            $before = substr($v['suitImageUrl'],0,-4);
-            $v['suitImageUrl'] = $before.'a.png';
+            /*$before = substr($v['suitImageUrl'],0,-4);
+            $v['suitImageUrl'] = $before.'a.png';*/
             $beubeu_suits_list[$k]['suitImageUrl'] = $unihost.$v['suitImageUrl'];
             $beubeu_suits_list[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost);
             switch($v['suitGenderID']){
@@ -128,19 +129,21 @@ public function SqlCount(&$sql,$goodtag,$page_num){
        }
         return $detailSuit;
     }
-    public function getBenebnColl($where,$unihost){
+    public function getBenebnColl($where,$unihost,$page,$page_num,$start){
         $beubeu_coll = M('BeubeuCollection');
-        $result = $beubeu_coll->field('id,gender,suitID,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->select();
+        $count = $beubeu_coll->field('id')->where($where)->count();
+        $num = ceil($count/$page_num);
+        if($page>$num){
+            $page = 1;
+            $start = 0;
+        }
+        $result = $beubeu_coll->field('id,gender,suitID,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
         $str = '';
         foreach($result as $k=>$v){
             $str.=$v['id'].',';
         }
         $str = rtrim($str,',');
-        $sql = "select t1.bcid,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url,li.loveid,li.buyid from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid left join (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
-	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid=".$where['uid']."
-	union all
-	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid=".$where['uid']."
-) bl group by bl.num_iid) as li on li.num_iid=bg.num_iid";
+        $sql = "select t1.bcid,t1.uq,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url from (select `bcid`,`num_iid`,`uq` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
         $detail = $beubeu_coll->query($sql);
         foreach($result as $k1=>$v1){
             $detailArr = array();
@@ -171,7 +174,11 @@ public function SqlCount(&$sql,$goodtag,$page_num){
             }
             $result[$k1]['detail'] = $detailArr;
         }
-        return $result;
+        $arr['page'] = $page+1;
+        $arr['count'] = $num;
+        $arr['result'] = $result;
+        unset($result);
+        return $arr;
     }
     public function collGoodsOrder($title){
         $arr = array('羽绒服','大衣','外套','卫衣','马甲','毛衣','针织衫','衬衫','衫','薄衫','茄克','家居服','套装（连身装）','T恤','背心','内衣','裙子','裤','帽子','坎肩围巾','包','袜子','鞋子','配饰','首饰','其他');
@@ -404,4 +411,68 @@ public function App_forget_pwd($mobile){
     }
     return $login_arr;
 }
+    public function GetTuijian($item_bn,$num_iid,$unihost){
+        if($tui = S('tui'.$item_bn)){
+        $result = unserialize($tui);
+        }else{
+        $item_bn = substr($item_bn,0,8);
+        $sql = "select su.suitID,case when su.suitGenderID = 1 then 15474 when su.suitGenderID =2 then 15478 when su.suitGenderID = 3 then 15583 when su.suitGenderID = 4 then 15581 end as sex,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 order by su.suitID desc";
+        $result = M('Suits')->query($sql);
+        unset($sql);
+        $detail = M('BeubeuSuitsGoodsdetail');
+        foreach($result as $k=>$v){
+            $result[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost);
+        }
+        S('tui'.$item_bn,serialize($result),array('type'=>'file'));
+       }
+        return $result;
+    }
+public function addLockData($parmas){
+    $uq = trim(htmlspecialchars($parmas['uq']));
+    $gender = trim(htmlspecialchars($parmas['gender']));
+    $pic = trim(htmlspecialchars($parmas['picurl']));
+    $lockData = array('uid'=>$parmas["uniq_user_id"],'uq'=>$uq,'gender'=>$gender,'picurl'=>$pic,'createtime'=>date('Y-m-d H:i:s'));
+    $re = M('AppLock')->add($lockData);
+    return $re;
+}
+public function GetLockData($uid){
+   return M('AppLock')->field('id,uq,gender,picurl')->where(array('uid'=>$uid))->select();
+}
+public function addFillterData($parmas){
+    $str = trim(htmlspecialchars($parmas['uqStr']));
+    $appfitt = M('AppFitting');
+    $result = $appfitt->field('id')->where(array('uid'=>$parmas["uniq_user_id"]))->find();
+    if(empty($result)){
+       $fittingData = array('uid'=>$parmas["uniq_user_id"],'uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s'));
+       $appfitt->add($fittingData);
+    }else{
+        $appfitt->where(array('uid'=>$parmas["uniq_user_id"]))->save(array('uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s')));
+    }
+}
+public function GetFillterData($parmas){
+   $find = M('AppFitting')->field('uqstr')->where(array())->find();
+   $arr = array();
+   if(!empty($find)){
+       $Arrstr = explode(',',$find['uqstr']);
+       foreach($Arrstr as $k=>$v){
+       $arr[] = explode('_',$v);
+      }
+  }
+  unset($find);
+  return $arr;
+}
+    //获取32x32的sku小图
+    public function Get32Pic(&$productsValue,$root_dir,$unihost){
+        foreach($productsValue as $k=>$v){
+            $before = dirname($v['colorcode']);
+            $filename = pathinfo($v['colorcode'],PATHINFO_FILENAME);
+            $ext = pathinfo($v['colorcode'], PATHINFO_EXTENSION);
+            $newfilepath = $root_dir.'/'.$before.'/32_32/'.$filename.'.'.$ext;
+            if(file_exists($newfilepath)){
+                $productsValue[$k]['colorcode'] = $unihost.$before.'/32_32/'.$filename.'.'.$ext;
+            }else{
+                $productsValue[$k]['colorcode'] = $unihost.$v['colorcode'];
+            }
+        }
+    }
 }
