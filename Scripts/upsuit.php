@@ -11,7 +11,7 @@ $result = array();
 $tempCurrentTime = time();
 $currentDateTime = date('Y-m-d H:i:s', $tempCurrentTime);
 while($ke>0){
-    $sql = "select `suitID` from `u_beubeu_suits` where `approve_status`=0 limit $offset,$limit";
+    $sql = "select `suitID` from `u_beubeu_suits` where 1 limit $offset,$limit";
     $result = $db->mysqlfetch($sql);
     unset($sql);
     if(empty($result)){
