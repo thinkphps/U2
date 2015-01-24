@@ -33,14 +33,21 @@ while($ke>0){
                 $filepath = $root_dir.'/'.dirname($v2['url']);
                 $ext = pathinfo($v2['url'], PATHINFO_EXTENSION);
                 $newfiledir = $filepath.'/'.'32_32';
+                $macfiledir = $filepath.'/'.'mac100';
                 if(file_exists($filepath)){
                 if(!file_exists($newfiledir)){
                     mkdir($newfiledir,777,true);
                 }
+                if(!file_exists($macfiledir)){
+                    mkdir($macfiledir,777,true);
+                }
                     $oldpath = $root_dir.'/'.$v2['url'];
                     $newfilepath = $newfiledir.'/'.$v2['sku_id'].'.'.$ext;
-                    //exec('/usr/bin/convert -resize 32x32 /var/www/html/uniqlo/Upload/13543275254.jpg /var/www/html/uniqlo/Upload/13543275254.png');
+                    $macfilepath = $macfiledir.'/'.$v2['sku_id'].'.png';
+                    //pc的颜色图
                     exec('convert -resize 32x32 '.$oldpath.' '.$newfilepath.'');
+                    //苹果app颜色图
+                    exec('convert -antialias -transparent white -resize 100x100 '.$oldpath.' '.$macfilepath.'');
                 }
             }
         }
