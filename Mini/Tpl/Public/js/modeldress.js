@@ -206,7 +206,9 @@ function Model_loadok_callback(){
                 for(var i in o){
                     barcode = o[i].barcode;
                     title = o[i].name;
-                    logstr +=o[i].barcode+',';
+                    if(o[i].barcode){
+                      logstr +=o[i].barcode+',';
+                     }
                     pageElement.BarcodeList.push(barcode);
 //                    strLi += '<li data-title="'+ title +'" ><a target="_blank" href="#" data-barcode="'+ barcode +'" title="'+ title+'"> '+ title+'</a></li>'
                     strLi += '<li data-title="'+ title +'" ><div class="buyurl">';
