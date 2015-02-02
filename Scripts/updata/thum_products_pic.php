@@ -37,9 +37,11 @@ while($ke>0){
                 if(file_exists($filepath)){
                 if(!file_exists($newfiledir)){
                     mkdir($newfiledir,777,true);
+                    chmod($newfiledir,0777);
                 }
                 if(!file_exists($macfiledir)){
                     mkdir($macfiledir,777,true);
+                    chmod($macfiledir,0777);
                 }
                     $oldpath = $root_dir.'/'.$v2['url'];
                     $newfilepath = $newfiledir.'/'.$v2['sku_id'].'.'.$ext;
