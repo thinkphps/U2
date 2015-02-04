@@ -77,7 +77,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
     $count = ceil($gcount[0]['co']/$page_num);
     return $count;
 }
-    public function getBeubeu($where,$page,$page_num,$start,$unihost){
+    public function getBeubeu($where,$page,$page_num,$start,$unihost,$root_dir=''){
         $where['suitImageUrl'] = array('neq','');
         $beubeu_suits = M('BeubeuSuits');
         $detail = M('BeubeuSuitsGoodsdetail');
@@ -92,7 +92,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
             /*$before = substr($v['suitImageUrl'],0,-4);
             $v['suitImageUrl'] = $before.'a.png';*/
             $beubeu_suits_list[$k]['suitImageUrl'] = $unihost.$v['suitImageUrl'];
-            $beubeu_suits_list[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost);
+            $beubeu_suits_list[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost,$root_dir);
             switch($v['suitGenderID']){
                 case 1 :
                     $sex = 15474;
@@ -114,17 +114,23 @@ public function SqlCount(&$sql,$goodtag,$page_num){
         $arr['count'] = $num;
         return $arr;
     }
-    public function getSuitsDetail($detail,$suitID,$unihost){
-       $detailSuit = $detail->field('item_bn as uq')->where(array('suitID'=>$suitID))->select();
+    public function getSuitsDetail($detail,$suitID,$unihost,$root_dir){
+       $sql = "select `item_bn` as uq from `u_beubeu_suits_goodsdetail` where `suitID`={$suitID} and left(`item_bn`,2)='UQ'";
+       $detailSuit = $detail->query($sql);unset($sql);
        foreach($detailSuit as $k=>$v){
             $cid = substr($v['uq'],-2,2);
             $uq =  substr($v['uq'],0,-2);
-            $sql = "select concat('".$unihost."',p.`url`) as url from `u_beubeu_goods` as g inner join `u_products` as p on p.goods_id=g.id where g.`item_bn` like '".$uq."%' and p.`cid`='{$cid}' limit 0,1";
+            $sql = "select p.`url` as url from `u_beubeu_goods` as g inner join `u_products` as p on p.goods_id=g.id where g.`item_bn` like '".$uq."%' and p.`cid`='{$cid}' limit 0,1";
             $result = $detail->query($sql);
             if(!empty($result)){
-                $detailSuit[$k]['url'] = $result[0]['url'];
-            }else{
-                unset($detailSuit[$k]);
+                $before = dirname($result[0]['url']);
+                $filename = pathinfo($result[0]['url'],PATHINFO_FILENAME);
+                $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
+                if(file_exists($newfilepath)){
+                    $detailSuit[$k]['url'] = $unihost.$before.'/mac100/'.$filename.'.png';
+                }else{
+                    $detailSuit[$k]['url'] = $unihost.$result[0]['url'];
+                }
             }
        }
         return $detailSuit;
@@ -137,7 +143,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
             $page = 1;
             $start = 0;
         }
-        $result = $beubeu_coll->field('id,gender,suitID,pic_head,pic_body,pic_shoes,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
+        $result = $beubeu_coll->field('id,gender,suitID,pic_clothes')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
         $str = '';
         foreach($result as $k=>$v){
             $str.=$v['id'].',';
@@ -411,7 +417,7 @@ public function App_forget_pwd($mobile){
     }
     return $login_arr;
 }
-    public function GetTuijian($item_bn,$num_iid,$unihost){
+    public function GetTuijian($item_bn,$num_iid,$unihost,$root_dir=''){
         if($tui = S('tui'.$item_bn)){
         $result = unserialize($tui);
         }else{
@@ -421,7 +427,7 @@ public function App_forget_pwd($mobile){
         unset($sql);
         $detail = M('BeubeuSuitsGoodsdetail');
         foreach($result as $k=>$v){
-            $result[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost);
+            $result[$k]['detail'] = $this->getSuitsDetail($detail,$v['suitID'],$unihost,$root_dir);
         }
         S('tui'.$item_bn,serialize($result),array('type'=>'file'));
        }
@@ -439,18 +445,19 @@ public function GetLockData($uid){
    return M('AppLock')->field('id,uq,gender,picurl')->where(array('uid'=>$uid))->select();
 }
 public function addFillterData($parmas){
-    $str = trim(htmlspecialchars($parmas['uqStr']));
+    $str = trim(htmlspecialchars($parmas['uqstr']));
     $appfitt = M('AppFitting');
     $result = $appfitt->field('id')->where(array('uid'=>$parmas["uniq_user_id"]))->find();
     if(empty($result)){
        $fittingData = array('uid'=>$parmas["uniq_user_id"],'uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s'));
-       $appfitt->add($fittingData);
+       $re = $appfitt->add($fittingData);
     }else{
-        $appfitt->where(array('uid'=>$parmas["uniq_user_id"]))->save(array('uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s')));
+       $re = $appfitt->where(array('uid'=>$parmas["uniq_user_id"]))->save(array('uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s')));
     }
+	return $re;
 }
 public function GetFillterData($parmas){
-   $find = M('AppFitting')->field('uqstr')->where(array())->find();
+   $find = M('AppFitting')->field('uqstr')->where(array('uid'=>$parmas['uniq_user_id']))->find();
    $arr = array();
    if(!empty($find)){
        $Arrstr = explode(',',$find['uqstr']);
@@ -461,15 +468,16 @@ public function GetFillterData($parmas){
   unset($find);
   return $arr;
 }
-    //获取32x32的sku小图
+    //获取100x100的sku小图
     public function Get32Pic(&$productsValue,$root_dir,$unihost){
         foreach($productsValue as $k=>$v){
+            $productsValue[$k]['uq'] = $v['uq'].$v['colorid'];
             $before = dirname($v['colorcode']);
             $filename = pathinfo($v['colorcode'],PATHINFO_FILENAME);
             $ext = pathinfo($v['colorcode'], PATHINFO_EXTENSION);
-            $newfilepath = $root_dir.'/'.$before.'/32_32/'.$filename.'.'.$ext;
+            $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
             if(file_exists($newfilepath)){
-                $productsValue[$k]['colorcode'] = $unihost.$before.'/32_32/'.$filename.'.'.$ext;
+                $productsValue[$k]['colorcode'] = $unihost.$before.'/mac100/'.$filename.'.png';
             }else{
                 $productsValue[$k]['colorcode'] = $unihost.$v['colorcode'];
             }

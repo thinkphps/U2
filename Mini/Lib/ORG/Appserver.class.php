@@ -291,6 +291,7 @@ public function GetUserInfo($udata){
             return json_encode($login_arr);
         }
         $unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
         $sid = trim(htmlspecialchars($suit['sid']));
         $fid = trim(htmlspecialchars($suit['fid']));
         $page = trim(htmlspecialchars($suit['page']));
@@ -306,13 +307,13 @@ public function GetUserInfo($udata){
             case 3 :
                 $defaultwhere['suitGenderID'] = array('exp','IN(3,4)');
                 $defaultwhere['approve_status'] = 0;
-                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost);
+                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost,$root_dir);
                 break;
             case 1 :
             case 2 :
                 $defaultwhere['suitGenderID'] = $sid;
                 $defaultwhere['approve_status'] = 0;
-                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost);
+                $defaultResult = $mac->getBeubeu($defaultwhere,$page,$page_num,$start,$unihost,$root_dir);
                 break;
         }
         $arr['page'] = $defaultResult['page'];
@@ -619,7 +620,7 @@ limit ".$start.",".$page_num;
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
                 $result[$k1]['products'] = $productsValue;
-                $result[$k1]['tuijian'] = $mac->GetTuijian($v1['item_bn'],$v1['num_iid'],$unihost);
+                $result[$k1]['tuijian'] = $mac->GetTuijian($v1['item_bn'],$v1['num_iid'],$unihost,$root_dir);
             }
         }else{
             $result = array();
@@ -817,7 +818,7 @@ public function SharePic($data){
     $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
     $url = $mac->AppShare($bbody,$bshose,$bclose,$bhead,$root_dir);
     if($url){
-      $arr['url'] = $url;
+      $arr['url'] = $url;$arr['link'] = 'http://'.$_SERVER['HTTP_HOST'].'/';$arr['text'] = '#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店';
     }else{
       $arr['url'] = '';
     }
@@ -854,8 +855,15 @@ public function addLock($data){
     if(!empty($Isper)){
         return json_encode($Isper);
     }
+    if(empty($parmas['uq'])){
+     return json_encode(array('code'=>0,'msg'=>'UQ不能为空'));
+    }
     $res = $mac->addLockData($parmas);
-    $arr['code'] = $res ? 1:0;
+	if($res){
+      $arr['code'] = $res;$arr['msg'] = '加锁成功';
+	}else{
+      $arr['code'] = 0;$arr['msg'] = '加锁失败';
+	}
     return json_encode($arr);
 }
 public function GetLock($data){
@@ -882,7 +890,11 @@ public function delLock($data){
     }
     $id = trim(htmlspecialchars($parmas["id"]));
     $res = M('AppLock')->where(array('id'=>$id,'uid'=>$parmas["uniq_user_id"]))->delete();
-    $arr['code'] = $res ? 1:0;
+    if($res){
+      $arr['code'] = 1;$arr['msg'] = '解锁成功';
+	}else{
+      $arr['code'] = 0;$arr['msg'] = '解锁失败';
+	}
     return json_encode($arr);
 }
 public function addLastFitting($data){
@@ -892,7 +904,9 @@ public function addLastFitting($data){
     if(!empty($Isper)){
         return json_encode($Isper);
     }
-    $mac->addFillterData($parmas);
+    $re = $mac->addFillterData($parmas);
+	$arr['code'] = $re ? 1:0;
+    return json_encode($arr);
 }
 public function GetLastFitting($data){
     $parmas = json_decode($data,true);
@@ -905,7 +919,7 @@ public function GetLastFitting($data){
     if(!empty($list)){
      return json_encode($list);
     }else{
-     return array('code'=>0);
+     return json_encode(array('code'=>0));
     }
 }
 public function IsPermissions($mac,&$parmas){
