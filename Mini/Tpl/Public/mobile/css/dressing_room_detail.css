@@ -465,7 +465,10 @@ span.quexiao{ display:block; position:absolute; background:url(../images/shaixua
 .product_gender h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:0.5em;}
 .product_gender ul li{ float:left; margin:0.5em 0.25em;}
 .product_gender ul li a{ display:block; background:#F00; width:6em; height:2.5em; line-height:2.5em; text-align:center; color:#FFF;}
-
+.product_gender2{ background:#eee; padding:0.5em 0.4em; overflow:hidden;}
+.product_gender2 h5{ color:#666; font-weight:normal; text-align:center; margin-bottom:0.5em;}
+.product_gender2 ul li{ float:left; margin:0.5em 0.25em;}
+.product_gender2 ul li a{ display:block; background:#F00; width:6em; height:2.5em; line-height:2.5em; text-align:center; color:#FFF;}
 
 /*列表-套装*/
 .product_set{ background:#eee; padding:1em 0.8em; overflow:hidden;}

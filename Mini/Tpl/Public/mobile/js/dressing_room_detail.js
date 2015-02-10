@@ -599,6 +599,10 @@ var _mini = {
                 strHtml += '<li><a href="javascript:;"  data-gender="15581" >男童</a></li>';
                 strHtml += '<li><a href="javascript:;"  data-gender="15583">女童</a></li>';
                 strHtml += '</ul></div>';
+                strHtml += '<div class="product_gender2 none"><h5>请选择性别</h5><ul>';
+                strHtml += '<li><a href="javascript:;"  data-gender="15478" >男</a></li>';
+                strHtml += '<li><a href="javascript:;"  data-gender="15474">女</a></li>';
+                strHtml += '</ul></div>';
                 if(v.num>0){
                     strHtml += '<h3 class="'+color+'"><a href="'+ v.detail_url +'&kid=11727_51912_165824_211542" target="_blank">'+ v.title+'</a></h3>';
                     //strHtml += '<div class="product_inf none"><div class="inf_top"></div>';

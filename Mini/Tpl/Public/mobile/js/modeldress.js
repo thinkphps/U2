@@ -265,6 +265,17 @@ function change_baiyi_css_info(){
                     $(this).data('barcode',barcode);
                 })
 
+            }else if(sex==6){
+                $wrapper_box.find('.product_color').hide();
+                var $product_gender2 = $wrapper_box.find('.product_gender2');
+                $product_gender2.show();
+                $product_gender2.find('li a').each(function(){
+                    $(this).removeClass('select');
+                    if($(this).data('select_barcode') == barcode){
+                        $(this).addClass('select');
+                    }
+                    $(this).data('barcode',barcode);
+                })
             }
             else{
                 pageElement.dressByBarcode(barcode,gender);
@@ -598,6 +609,31 @@ function change_baiyi_css_info(){
             });
             //性格选择层中移出时隐藏该层
             $('#watercontainer').on("mouseleave",".product_gender",function(){
+                var $this = $(this);
+                var $product_color = $this.parent().find('.product_color');
+                $this.hide();
+                $product_color.show();
+            });
+            //点击男、女穿衣上身
+            $('#watercontainer').on("click",".product_gender2 li",function(){
+                var $wrapper_box = $(this).parent().parent().parent();
+                var $a_gender = $(this).find('a');
+                $(this).parent().find('li a').removeClass('select').removeData('select_barcode');
+                $a_gender.addClass('select');
+                var barcode = $a_gender.data("barcode");
+                var gender = $a_gender.data("gender");
+                pageElement.dressByBarcode(barcode,gender);
+                $a_gender.data('select_barcode',barcode);
+                $wrapper_box.find('.color-img li').each(function(){
+                    if($(this).data('barcode') == barcode){
+                        $wrapper_box.find(".color-img li").removeClass("pro-selected");
+                        $(this).addClass('pro-selected');
+                        return;
+                    }
+                });
+            });
+            //性格选择层中移出时隐藏该层
+            $('#watercontainer').on("mouseleave",".product_gender2",function(){
                 var $this = $(this);
                 var $product_color = $this.parent().find('.product_color');
                 $this.hide();
