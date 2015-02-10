@@ -10,7 +10,7 @@ $c->appkey = $db->appkey;
 $c->secretKey = $db->secretKey;
 $c->format = 'json';
 $products = new ItemGetRequest;//获取商品详细信息
-$products->setFields('num,approve_status,sku.quantity,sku.sku_id');
+$products->setFields('num,modified,approve_status,sku.quantity,sku.sku_id,sku.modified');
 //判断是否能取到数据
 
 $req = new ItemsOnsaleGetRequest;
@@ -36,19 +36,15 @@ if(isset($resp->items->item) && !empty($resp->items->item)){
 	$product_arr = (array)$product->item;
     if(!empty($product_arr)){
     $product_arr_sku = (array)$product_arr['skus']->sku;
-	$sql = "update `u_goods` set `approve_status`='".$product_arr['approve_status']."',`num`='".$product_arr['num']."' where `id`='".$v['id']."'";
+	$sql = "update `u_goods` set `approve_status`='".$product_arr['approve_status']."',`num`='".$product_arr['num']."',`sort`='".$v['modified']."' where `id`='".$v['id']."'";
 	$db->mysqlquery($sql);
 	unset($sql);
     //更新products表
     foreach($product_arr_sku as $k2=>$v2){
         $v2 = (array)$v2;
-        $psql = "update `u_products` set `quantity`=".$v2['quantity']." where goods_id=".$v['id']." and sku_id=".$v2['sku_id'];
+        $psql = "update `u_products` set `quantity`=".$v2['quantity'].",`modified`='".$v2['modified']."' where goods_id=".$v['id']." and sku_id=".$v2['sku_id'];
         $db->mysqlquery($psql);
      }
-    }else{
-       $sql = "update `u_goods` set `isdel`=1 where `num_iid`=".$v['num_iid'];
-       $db->mysqlquery($sql);
-        unset($sql);
     }
 	}
 	}
