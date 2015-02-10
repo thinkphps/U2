@@ -156,13 +156,12 @@ class Appserver{
             $login_arr = array('code'=>0,'msg'=>'密码格式错误');
             return json_encode($login_arr);
         }
-        $user_name = session("uniq_user_name");
-        $where_str = " ( taobao_name = '{$user_name}' OR mobile = '{$user_name}' ) AND password = '{$old_password}' ";
+        $where_str = array('id'=>$chpwd['uniq_user_id'],'mobile'=>$chpwd['uniq_user_name'],'password'=>md5($old_password));
         $user = M('user')->where($where_str)->find();
         if($user){
-            if($user['login_type']=='app'){
+            if($user['login_type']=='app' || $user['login_type']=='normal'){
                 $data['password'] = md5($new_password);
-                $flag = M('user')->where("taobao_name='{$user_name}' OR mobile = '{$user_name}' ")->save($data);
+                $flag = M('user')->where(array('id'=>$chpwd['uniq_user_id']))->save($data);
                 if($flag){
                     $login_arr = array('code'=>1,'msg'=>'修改成功');
                 }else{
@@ -899,12 +898,13 @@ public function delLock($data){
 }
 public function addLastFitting($data){
     $parmas = json_decode($data,true);
-    $mac = D('Macapp');
+    $mac = D('Macapp');$unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
+    $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
     $Isper = $this->IsPermissions($mac,$parmas);
     if(!empty($Isper)){
         return json_encode($Isper);
     }
-    $re = $mac->addFillterData($parmas);
+    $re = $mac->addFillterData($parmas,$unihost,$root_dir);
 	$arr['code'] = $re ? 1:0;
     return json_encode($arr);
 }

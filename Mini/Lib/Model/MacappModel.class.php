@@ -187,7 +187,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
         return $arr;
     }
     public function collGoodsOrder($title){
-        $arr = array('羽绒服','大衣','外套','卫衣','马甲','毛衣','针织衫','衬衫','衫','薄衫','茄克','家居服','套装（连身装）','T恤','背心','内衣','裙子','裤','帽子','坎肩围巾','包','袜子','鞋子','配饰','首饰','其他');
+        $arr = array('羽绒服','大衣','外套','卫衣','马甲','毛衣','针织衫','衬衫','开衫','薄衫','POLO衫','茄克','家居服','套装（连身装）','T恤','背心','内衣','裙子','裤','帽子','坎肩围巾','包','袜子','鞋子','配饰','首饰','其他');
         $orid = -1;
         foreach($arr as $k=>$v){
             if(is_int(strpos($title,$v))){
@@ -422,7 +422,7 @@ public function App_forget_pwd($mobile){
         $result = unserialize($tui);
         }else{
         $item_bn = substr($item_bn,0,8);
-        $sql = "select su.suitID,case when su.suitGenderID = 1 then 15474 when su.suitGenderID =2 then 15478 when su.suitGenderID = 3 then 15583 when su.suitGenderID = 4 then 15581 end as sex,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 order by su.suitID desc";
+        $sql = "select su.suitID,case when su.suitGenderID = 1 then 15474 when su.suitGenderID =2 then 15478 when su.suitGenderID = 3 then 15583 when su.suitGenderID = 4 then 15581 end as sex,concat(su.suitImageUrlMatch,'.400x533.png') as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 order by su.suitID desc";
         $result = M('Suits')->query($sql);
         unset($sql);
         $detail = M('BeubeuSuitsGoodsdetail');
@@ -444,17 +444,40 @@ public function addLockData($parmas){
 public function GetLockData($uid){
    return M('AppLock')->field('id,uq,gender,picurl')->where(array('uid'=>$uid))->select();
 }
-public function addFillterData($parmas){
+public function addFillterData($parmas,$unihost,$root_dir){
     $str = trim(htmlspecialchars($parmas['uqstr']));
     $appfitt = M('AppFitting');
     $result = $appfitt->field('id')->where(array('uid'=>$parmas["uniq_user_id"]))->find();
     if(empty($result)){
+        $this->GetUrlIsud($str,$unihost,$appfitt,$root_dir);
        $fittingData = array('uid'=>$parmas["uniq_user_id"],'uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s'));
        $re = $appfitt->add($fittingData);
     }else{
+        $this->GetUrlIsud($str,$unihost,$appfitt,$root_dir);
        $re = $appfitt->where(array('uid'=>$parmas["uniq_user_id"]))->save(array('uqstr'=>$str,'createtime'=>date('Y-m-d H:i:s')));
     }
 	return $re;
+}
+public function GetUrlIsud(&$str,$unihost,$appfitt,$root_dir){
+    $Arrstr = explode(',',$str);
+    foreach($Arrstr as $k=>$v){
+        $ProductArr = explode('_',$v);
+        $cid = substr($ProductArr[0],-2,2);
+        $uq =  substr($ProductArr[0],0,-2);
+        $sql = "select g.`isud`,p.`url` from (select `id`,`isud` from `u_goods` where `item_bn` like 'UQ136819%') as g inner join `u_products` as p on p.`goods_id`=g.`id` and p.`cid` ='02' limit 0,1";
+        $result = $appfitt->query($sql);
+        $before = dirname($result[0]['url']);
+        $filename = pathinfo($result[0]['url'],PATHINFO_FILENAME);
+        $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
+        if(file_exists($newfilepath)){
+            $result[0]['url'] = $unihost.$before.'/mac100/'.$filename.'.png';
+        }else{
+            $result[0]['url'] = $unihost.$result[0]['url'];
+        }
+        $Arrstr[$k].='_'.$result[0]['url'].'_'.$result[0]['isud'];
+        unset($result);
+    }
+    $str = implode(',',$Arrstr);
 }
 public function GetFillterData($parmas){
    $find = M('AppFitting')->field('uqstr')->where(array('uid'=>$parmas['uniq_user_id']))->find();
