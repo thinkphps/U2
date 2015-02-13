@@ -405,7 +405,7 @@ public function App_forget_pwd($mobile){
                         $data['password'] = md5($new_passwrod);
                         $flag = $use->where("mobile='{$mobile}'")->save($data);
                         if($flag){
-                            $login_arr = array('code'=>1,'msg'=>'找回成功');
+                            $login_arr = array('code'=>1,'msg'=>'密码将发送至您的手机请注意查收');
                         }else{
                             $login_arr = array('code'=>0,'msg'=>'密码找回失败');
                         }
