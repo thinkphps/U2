@@ -125,7 +125,7 @@ $(function(){
             formlogin: $('form.mini-login'),
             formfetch: $('form.mini-fetch')
         }
-
+        var miniMask = $('.mini-mask');
         allpopform.formregister.on('click', 'a.mini-form-close', function(){
             allpopform.formregister.hide();
             miniMask.hide();
