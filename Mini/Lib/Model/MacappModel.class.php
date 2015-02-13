@@ -464,7 +464,7 @@ public function GetUrlIsud(&$str,$unihost,$appfitt,$root_dir){
         $ProductArr = explode('_',$v);
         $cid = substr($ProductArr[0],-2,2);
         $uq =  substr($ProductArr[0],0,-2);
-        $sql = "select g.`isud`,p.`url` from (select `id`,`isud` from `u_goods` where `item_bn` like 'UQ136819%') as g inner join `u_products` as p on p.`goods_id`=g.`id` and p.`cid` ='02' limit 0,1";
+        $sql = "select g.`isud`,p.`url` from (select `id`,`isud` from `u_goods` where `item_bn` like '".$uq."%') as g inner join `u_products` as p on p.`goods_id`=g.`id` and p.`cid` ='{$cid}' limit 0,1";
         $result = $appfitt->query($sql);
         $before = dirname($result[0]['url']);
         $filename = pathinfo($result[0]['url'],PATHINFO_FILENAME);
