@@ -125,9 +125,9 @@ public function SqlCount(&$sql,$goodtag,$page_num){
             if(!empty($result)){
                 $before = dirname($result[0]['url']);
                 $filename = pathinfo($result[0]['url'],PATHINFO_FILENAME);
-                $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
+                $newfilepath = $root_dir.'/'.$before.'/mac180/'.$filename.'.png';
                 if(file_exists($newfilepath)){
-                    $detailSuit[$k]['url'] = $unihost.$before.'/mac100/'.$filename.'.png';
+                    $detailSuit[$k]['url'] = $unihost.$before.'/mac180/'.$filename.'.png';
                 }else{
                     $detailSuit[$k]['url'] = $unihost.$result[0]['url'];
                 }
@@ -437,12 +437,20 @@ public function addLockData($parmas){
     $uq = trim(htmlspecialchars($parmas['uq']));
     $gender = trim(htmlspecialchars($parmas['gender']));
     $pic = trim(htmlspecialchars($parmas['picurl']));
-    $lockData = array('uid'=>$parmas["uniq_user_id"],'uq'=>$uq,'gender'=>$gender,'picurl'=>$pic,'createtime'=>date('Y-m-d H:i:s'));
-    $re = M('AppLock')->add($lockData);
+    $num_iid = trim(htmlspecialchars($parmas['num_iid']));
+    $applock = M('AppLock');
+    if($num_iid>0){
+    $result = $applock->field('id')->where(array('uid'=>$parmas["uniq_user_id"],'num_iid'=>$num_iid))->find();
+    if(!empty($result)){
+     return -1;
+    }
+    }
+    $lockData = array('uid'=>$parmas["uniq_user_id"],'num_iid'=>$num_iid,'uq'=>$uq,'gender'=>$gender,'picurl'=>$pic,'createtime'=>date('Y-m-d H:i:s'));
+    $re = $applock->add($lockData);
     return $re;
 }
 public function GetLockData($uid){
-   return M('AppLock')->field('id,uq,gender,picurl')->where(array('uid'=>$uid))->select();
+   return M('AppLock')->field('id,num_iid,uq,gender,picurl')->where(array('uid'=>$uid))->select();
 }
 public function addFillterData($parmas,$unihost,$root_dir){
     $str = trim(htmlspecialchars($parmas['uqstr']));
@@ -468,9 +476,9 @@ public function GetUrlIsud(&$str,$unihost,$appfitt,$root_dir){
         $result = $appfitt->query($sql);
         $before = dirname($result[0]['url']);
         $filename = pathinfo($result[0]['url'],PATHINFO_FILENAME);
-        $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
+        $newfilepath = $root_dir.'/'.$before.'/mac180/'.$filename.'.png';
         if(file_exists($newfilepath)){
-            $result[0]['url'] = $unihost.$before.'/mac100/'.$filename.'.png';
+            $result[0]['url'] = $unihost.$before.'/mac180/'.$filename.'.png';
         }else{
             $result[0]['url'] = $unihost.$result[0]['url'];
         }
@@ -498,12 +506,23 @@ public function GetFillterData($parmas){
             $before = dirname($v['colorcode']);
             $filename = pathinfo($v['colorcode'],PATHINFO_FILENAME);
             $ext = pathinfo($v['colorcode'], PATHINFO_EXTENSION);
-            $newfilepath = $root_dir.'/'.$before.'/mac100/'.$filename.'.png';
+            $newfilepath = $root_dir.'/'.$before.'/mac180/'.$filename.'.png';
             if(file_exists($newfilepath)){
-                $productsValue[$k]['colorcode'] = $unihost.$before.'/mac100/'.$filename.'.png';
+                $productsValue[$k]['colorcode'] = $unihost.$before.'/mac180/'.$filename.'.png';
             }else{
                 $productsValue[$k]['colorcode'] = $unihost.$v['colorcode'];
             }
         }
     }
+	public function GetBigPic($root_dir,$pic_url){
+		 $before = dirname($pic_url);
+         $filename = pathinfo($pic_url,PATHINFO_FILENAME);
+         $newfilepath = $root_dir.'/'.$before.'/'.$filename.'.jpg';
+         if(file_exists($newfilepath)){
+           $pic = $before.'/'.$filename.'.jpg';
+		 }else{
+           $pic = $pic_url;
+		 }
+		 return $pic;
+	}
 }

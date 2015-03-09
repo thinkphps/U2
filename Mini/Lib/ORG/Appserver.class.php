@@ -330,8 +330,8 @@ public function GetUserInfo($udata){
        }
        $sid = trim(htmlspecialchars($cus['sid']));
        $sid = $sid?$sid:0;
-       if(S('midsid'.$sid)){
-           $arr = unserialize(S('midsid'.$sid));
+       if(S('macmidsid'.$sid)){
+           $arr = unserialize(S('macmidsid'.$sid));
        }else{
            if($sid!=4 && $sid!=0){
                $where['gender'] = $sid;
@@ -353,7 +353,7 @@ public function GetUserInfo($udata){
                $ucuslist = $mac->getCateList2($where);
                $arr['u'] = $ucuslist;
            }
-           S('midsid'.$sid,serialize($arr),array('type'=>'file'));
+           S('macmidsid'.$sid,serialize($arr),array('type'=>'file'));
        }
        return json_encode($arr);
    }
@@ -417,7 +417,8 @@ where bg.num_iid = li.num_iid order by ".$ostr." limit ".$start.",".$page_num;
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
-                $result[$k1]['pic_detail_url'] = $result[$k1]['pic_url'];
+                $pic = $mac->GetBigPic($root_dir,$v1['pic_url']);
+                $result[$k1]['pic_detail_url'] = $unihost.$pic;
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
@@ -451,7 +452,8 @@ where bg.num_iid = li.num_iid and li.loveid is not null order by ".$ostr." limit
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
-                $result[$k1]['pic_detail_url'] = $result[$k1]['pic_url'];
+                $pic = $mac->GetBigPic($root_dir,$v1['pic_url']);
+                $result[$k1]['pic_detail_url'] = $unihost.$pic;
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
@@ -485,7 +487,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
-                $result[$k1]['pic_detail_url'] = $result[$k1]['pic_url'];
+                $pic = $mac->GetBigPic($root_dir,$v1['pic_url']);
+                $result[$k1]['pic_detail_url'] = $unihost.$pic;
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
@@ -520,7 +523,8 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
-                $result[$k1]['pic_detail_url'] = $result[$k1]['pic_url'];
+                $pic = $mac->GetBigPic($root_dir,$v1['pic_url']);
+                $result[$k1]['pic_detail_url'] = $unihost.$pic;
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
@@ -614,7 +618,8 @@ limit ".$start.",".$page_num;
         if(!empty($result)){
             foreach($result as $k1=>$v1){
                 $result[$k1]['pic_url'] = $unihost.$v1['pic_url'];
-                $result[$k1]['pic_detail_url'] = $result[$k1]['pic_url'];
+                $pic = $mac->GetBigPic($root_dir,$v1['pic_url']);
+                $result[$k1]['pic_detail_url'] = $unihost.$pic;
                 $result[$k1]['skunum'] = $productSyn->getSkuNum($v1['num_iid']);
                 $productsValue = $productSyn->GetProductColorByID($v1['num_iid']);
                 $mac->Get32Pic($productsValue,$root_dir,$unihost);
@@ -858,11 +863,13 @@ public function addLock($data){
      return json_encode(array('code'=>0,'msg'=>'UQ不能为空'));
     }
     $res = $mac->addLockData($parmas);
-	if($res){
+	if($res>0){
       $arr['code'] = $res;$arr['msg'] = '加锁成功';
+	}else if($res==-1){
+      $arr['code'] = 0;$arr['msg'] = '不能加锁相同的商品';
 	}else{
       $arr['code'] = 0;$arr['msg'] = '加锁失败';
-	}
+    }
     return json_encode($arr);
 }
 public function GetLock($data){
