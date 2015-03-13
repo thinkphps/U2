@@ -259,6 +259,7 @@ public function GetUserInfo($udata){
     public function GetCollData($coll){
         $ucoll = json_decode($coll,true);
         $unihost = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
         $mac = D('Macapp');
         $Isper = $this->IsPermissions($mac,$ucoll);
         if(!empty($Isper)){
@@ -272,7 +273,7 @@ public function GetUserInfo($udata){
         $page = $page?$page:1;
         $page_num = 4;
         $start = ($page-1)*$page_num;
-        $defaultResult = $mac->getBenebnColl($where,$unihost,$page,$page_num,$start);
+        $defaultResult = $mac->getBenebnColl($where,$unihost,$root_dir,$page,$page_num,$start);
         /*if($page==1){
             $userinfo = $recomodel->getUserInfo();
             $arr['uname'] = $userinfo[0];

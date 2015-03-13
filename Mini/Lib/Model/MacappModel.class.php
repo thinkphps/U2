@@ -135,7 +135,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
        }
         return $detailSuit;
     }
-    public function getBenebnColl($where,$unihost,$page,$page_num,$start){
+    public function getBenebnColl($where,$unihost,$root_dir,$page,$page_num,$start){
         $beubeu_coll = M('BeubeuCollection');
         $count = $beubeu_coll->field('id')->where($where)->count();
         $num = ceil($count/$page_num);
@@ -176,6 +176,18 @@ public function SqlCount(&$sql,$goodtag,$page_num){
                     $detailArr[] = $karr2[$v3];
                 }else{
                     array_unshift($detailArr,$karr2[$v3]);
+                }
+            }
+            foreach($detailArr as $kd=>$vd){
+                $sql = "select `url` from `u_products` where `num_iid`=".$vd['num_iid']." and `cid`=right('".$vd['uq']."',2) limit 0,1";
+                $pic = $beubeu_coll->query($sql);
+                $before = dirname($pic[0]['url']);
+                $filename = pathinfo($pic[0]['url'],PATHINFO_FILENAME);
+                $newfilepath = $root_dir.'/'.$before.'/mac180/'.$filename.'.png';
+                if(file_exists($newfilepath)){
+                    $detailArr[$kd]['pic_url'] = $unihost.$before.'/mac180/'.$filename.'.png';
+                }else{
+                    $detailArr[$kd]['pic_url'] = $unihost.$pic[0]['url'];
                 }
             }
             $result[$k1]['detail'] = $detailArr;
@@ -444,6 +456,10 @@ public function addLockData($parmas){
     if(!empty($result)){
      return -1;
     }
+    }
+    $find = $applock->field('id')->where(array('uid'=>$parmas["uniq_user_id"],'uq'=>$uq))->find();
+    if(!empty($find)){
+      return -1;
     }
     $lockData = array('uid'=>$parmas["uniq_user_id"],'num_iid'=>$num_iid,'uq'=>$uq,'gender'=>$gender,'picurl'=>$pic,'createtime'=>date('Y-m-d H:i:s'));
     $re = $applock->add($lockData);
