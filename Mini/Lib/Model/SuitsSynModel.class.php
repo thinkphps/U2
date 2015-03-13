@@ -54,7 +54,7 @@ class SuitsSynModel extends Model{
         $map['appkey'] = $key;
 
         $result = $appKey->field('id,invoketime,counts')->where($map)->find();
-        if(isset($result))
+        if(isset($result) !empty($result))
         {
             $lastInvokeDate = date('Y-m-d',strtotime($result['invoketime']));
             $lastInvokeCounts = $result['counts'];
