@@ -29,11 +29,11 @@
     <a id="ecdownload" class="btn btn-success" href="">导出EXCEL</a>
   </form>
 
-  <table class="table table-striped table-hover text-center table-responsive table-condensed">
+  <table class="table table-striped table-hover text-center table-responsive table-condensed" style="width:1170px;word-break:break-all;">
     <thead>
       <tr>
-        <th>主题</th>
-        <th>内容</th>
+        <th width="100px">主题</th>
+        <th width="700px">内容</th>
         <th>用户</th>
         <th>创建时间</th>
       </tr>
@@ -41,12 +41,12 @@
     <tbody>
     <volist id='vo' name='leaves'>
       <tr>
-        <td>
+        <td width="100px">
             <if condition="$vo.catid eq 1">设计风格</if>
             <if condition="$vo.catid eq 2">使用体验</if>
             <if condition="$vo.catid eq 3">功能建议</if>
             <if condition="$vo.catid eq 4">其他建议</if>
-        <td>{$vo.content}</td>
+        <td width="300px">{$vo.content}</td>
         <td>{$vo.ip}</td>
         <td>{$vo.createtime}</td>
       </tr>
