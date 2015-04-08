@@ -22,6 +22,9 @@ while($ke>0){
                  if(empty($onelevel)){
                    $sql = "update `u_areas` set `disabled`='true' where `region_id`=".$v['region_id'];
                    $db->mysqlquery($sql);
+                 }else{
+                     $sql = "update `u_areas` set `disabled`='false' where `region_id`=".$v['region_id'];
+                     $db->mysqlquery($sql);
                  }
                  unset($sql);
                break;
@@ -32,6 +35,9 @@ while($ke>0){
                    if(empty($oneleve2)){
                        $sql = "update `u_areas` set `disabled`='true' where `region_id`=".$v['region_id'];
                        $db->mysqlquery($sql);
+                   }else{
+                       $sql = "update `u_areas` set `disabled`='false' where `region_id`=".$v['region_id'];
+                       $db->mysqlquery($sql);
                    }
                    unset($sql);
                    break;
@@ -41,6 +47,9 @@ while($ke>0){
                    unset($sql);
                    if(empty($oneleve3)){
                        $sql = "update `u_areas` set `disabled`='true' where `region_id`=".$v['region_id'];
+                       $db->mysqlquery($sql);
+                   }else{
+                       $sql = "update `u_areas` set `disabled`='false' where `region_id`=".$v['region_id'];
                        $db->mysqlquery($sql);
                    }
                    unset($sql);
