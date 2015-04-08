@@ -209,7 +209,8 @@ class WindexModel extends Model{
 
     public function GetTuijian($item_bn,$num_iid){
         $item_bn = substr($item_bn,0,8);
-        $sql = "select su.suitID,su.suitGenderID,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 order by su.suitID desc limit 0,3";
+        //$sql = "select su.suitID,su.suitGenderID,su.suitImageUrlMatch as suitImageUrl from `u_beubeu_suits` as su left join `u_beubeu_suits_goodsdetail` as sg on sg.suitID=su.suitID where sg.item_bn like '".$item_bn."%' and su.approve_status=0 order by su.suitID desc limit 0,3";
+        $sql = "SELECT su.suitID, su.suitGenderID, su.suitImageUrlMatch AS suitImageUrl FROM `u_beubeu_suits` AS su inner JOIN (select t1.suitID from ((select sg.suitID,sg.item_bn from `u_beubeu_suits_goodsdetail` AS sg where sg.item_bn like '".$item_bn."%') as t1 inner join (select DISTINCT p.cid from u_products as p where p.num_iid=".$num_iid.") as t2 on t2.cid=right(t1.item_bn,2))) as t3 ON t3.suitID = su.suitID where su.approve_status =0 ORDER BY su.suitID DESC limit 0,3";
         $result = M('Suits')->query($sql);
         /*if(empty($result)){
             unset($sql);
@@ -232,7 +233,6 @@ class WindexModel extends Model{
                     break;
             }
             $result[$k]['sex'] = $sex;
-            $result[$k]['m'] = 1;
         }
         //}
         return $result;
@@ -242,9 +242,10 @@ class WindexModel extends Model{
         foreach($productsValue as $k=>$v){
            $before = dirname($v['colorcode']);
            $filename = pathinfo($v['colorcode'],PATHINFO_FILENAME);
-           $newfilepath = $root_dir.'/'.$before.'/32_32/'.$filename.'.jpg';
+           $ext = pathinfo($v['colorcode'], PATHINFO_EXTENSION);
+           $newfilepath = $root_dir.'/'.$before.'/32_32/'.$filename.'.'.$ext;
            if(file_exists($newfilepath)){
-               $productsValue[$k]['colorcode'] = $before.'/32_32/'.$filename.'.jpg';
+               $productsValue[$k]['colorcode'] = $before.'/32_32/'.$filename.'.'.$ext;
            }
         }
     }
