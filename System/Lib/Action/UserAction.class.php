@@ -37,7 +37,7 @@ class UserAction extends Action{
                 ."(SELECT DATE(createtime) as dn,count(0) as ucount FROM uniqlo.u_user u WHERE NOT taobao_name = '' GROUP BY DATE(createtime)) tb_taobao "
                 ."ON (tb_taobao.dn=tb_inc.dn) "
                 ."WHERE tb_inc.dn BETWEEN '$startdate' AND '$enddate' "
-                ."ORDER BY tb_inc.dn ";
+                ."ORDER BY tb_inc.dn desc ";
             if (!empty($p)){
                 $sql = $sql."limit $p->firstRows,$p->maxRows";
             }
