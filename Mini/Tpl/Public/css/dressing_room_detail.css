@@ -45,7 +45,7 @@ button,label{cursor:pointer; }
 .city .near_un i.city_wz2{ display: none;background:url(../images/city_near_icon.png) 0 -20px no-repeat;}
 .city .near_un a{ float:left; color:#666; margin:0 8px 0 0;width:230px}
 .city .near_un a:hover{ color:#F00;}
-#wubaidu{float:left;position:absolute;top:45px;}
+#wubaidu{float:left;position:absolute;top:45px;z-index:2;}
 #wubaidu select{border:1px solid #abadb3;margin-right:5px;}
 /*头部-优惠*/
 .preferential{float:right; width:321px; height:82px; background:url(../images/line1.png) left 0 no-repeat; overflow:hidden; position:relative;}
@@ -808,11 +808,10 @@ div#youhui_msg #youhuit{width:200px;float:left;margin-top:3px;}
 #youhuifirst button{background-position: 0 0;width: 74px; height: 26px;border: 0 none;color: #fff;cursor: pointer;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)}
 
 /*视频*/
-#swfvgk{position:absolute;left:47.7%;width:380px;background: url("http://img04.taobaocdn.com/imgextra/i4/196993935/TB2L.NZbpXXXXa0XXXXXXXXXXXX-196993935.jpg");color:#fff;font-size: 15px;height:75px;line-height: 75px;text-align: center;z-index:1;top:1%;cursor:pointer;}
+#swfvgk{position:absolute;left:47.7%;width:380px;background: url("../images/mini/banner_dh.gif");color:#fff;font-size: 15px;height:75px;line-height: 75px;text-align: center;z-index:1;top:0.5%;cursor:pointer;}
 #swfvgk a{color:#fff;}
-#uswf{width:1000px;height:533px;z-index:1001;position: fixed;padding:10px 10px 10px;background: #fff;left:14%;top:5%;}
-#uswf .vin{width:1000px;margin:auto;}
-#uswf #uswfin{height:500px;}
-#uswf #vdown{margin-top:10px;}
-#uswf #vdown p{color:#2a2a2a;font-size:13px;margin-top:3px;width:443px;float:left;line-height: 22px;display:block;}
-#uswf #vdown button{background-position:0 0;border:0 none;color:#fff;cursor:pointer;height:26px;width:74px;background: url("../images/mini/aside-tips.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);float:right;}
+#d4dsyj2{position:absolute;height:227px;left:50%;top:60px;width:305px;z-index:991;}
+#d4dsyj2 .syj2_inf{float:left;height:227px;width:305px;background: url("../images/mini/4D-news.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.syj2_inf #tsClose2{background: none repeat scroll 0 0 #dd000a;color:#fff;display:block;font-size:18px;height:39px;line-height:39px;margin:111px 0 0 104px;text-align: center;width:69px;}
+.syj2_inf #tsClose3{background: none repeat scroll 0 0 #dd000a;color:#fff;display:block;font-size:18px;height:39px;line-height:39px;margin:-39px 0 0 183px;text-align: center;width:69px;}
+#d4dsyj{position: absolute;z-index: 2;left:71%;width:64px;height:64px;text-align:center;top:17px;background: url("../images/mini/go2d.png");cursor:pointer;}

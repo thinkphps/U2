@@ -9,18 +9,37 @@ jQuery(function($){
     viedosh = {
         lookviedo:function(){
             $('#swfvgk').click(function(){
-                $('.mini-mask2').show();
-                $('#uswf').removeClass('none');
-                $('#swfvgk').removeClass('none');
+                var $newsyj = $('#newsyj');
+                $('#d4reflsh').addClass('none');
+                if($newsyj.hasClass('none')){
+                    $(this).css('left','42.6%');
+                    $('#d4dsyj').removeClass('none').css('left','71%');
+                    $newsyj.removeClass('none');
+                    $('#oldsyj').addClass('none');
+                    $('#main_con').addClass('none');
+                    $('.syj_btn').addClass('none');
+                }else{
+                    $newsyj.addClass('none');
+                    $(this).css('left','47.7%');
+                    $('#d4dsyj').addClass('none');
+                    $('#oldsyj').removeClass('none');
+                    $('#main_con').removeClass('none');
+                    $('.syj_btn').removeClass('none');
+                }
             });
-        },
-        vclosw:function(){
-            $('#vdown').on('click','#vclose',function(){
-                $('#uswf').addClass('none');$('.mini-mask2').hide();
+            $('#d4dsyj').click(function(){
+                $('#d4reflsh').addClass('none');
+                $(this).addClass('none');
+                var $newsyj = $('#newsyj');
+                $('#swfvgk').css('left','47.7%');
+                $newsyj.addClass('none');
+                $('#oldsyj').removeClass('none');
+                $('#main_con').removeClass('none');
+                $('.syj_btn').removeClass('none');
             });
         }
     }
-    viedosh.lookviedo();viedosh.vclosw();
+    viedosh.lookviedo();
     var weather = {
         tips : [
             '请注意防暑降温，宜穿<a href="http://uniqlo.tmall.com/?q=%B6%CC%D0%E4&search=y" target="__blank">短袖</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B1%B3%D0%C4" target="__blank">背心</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B6%CC%BF%E3" target="__blank">短裤</a><a href="http://uniqlo.tmall.com/?q=%D6%D0%BF%E3&type=p&search=y" target="__blank">中裤</a>、薄型<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>',
@@ -385,7 +404,4 @@ jQuery(function($){
         }
         $('#a_shopinfo').html($("#ddlShop option:selected").text()).attr({'href':''+exturl+'','target':'__blank'}).removeClass('stroecs');
     })
-    $('#uswf .mini-btn').click(function(){
-        $('#uswf').css('display','none');
-    });
 });

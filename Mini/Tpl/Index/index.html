@@ -106,7 +106,7 @@
     <div class="mini-mask pf"></div>
 </if>
 
-<div class="mini-mask2 pf none"></div>
+<div class="mini-mask2 pf"></div>
 <!-- 注册1、2 -->
 <form class="mini-register mini-pop pf <if condition="$is_allow_register eq 0">none</if>">
 <a href="javascript:;" class="mini-form-close mini-btn">关闭</a><!-- David -->
@@ -373,7 +373,10 @@
     </div>
 </form>
 <!--我的试衣间-->
-<div class="my_yyg changjing1">
+<div class="my_yyg changjing1 none" id='newsyj'>
+    <iframe src="http://uniqlo.4dclothes.net/" width="100%" height="800px" scrolling='no' frameborder='0' style="position: absolute;z-index:1;"></iframe>
+</div>
+<div class="my_yyg changjing1" id='oldsyj'>
     <div class="my_yyg_title">
         <a class='mysyj' href='javascript:;'>我的试衣间</a>
         <a href="javascript:;" class="change_yf" id='changeid' la='1'>换一批</a>
@@ -732,6 +735,32 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </html>
 <script type='text/javascript'>
     $(function(){
+            $('#d4dsyj2').on('click','#tsClose2',function(){
+                $('#d4dsyj').removeClass('none');
+                $('#d4reflsh').addClass('none');
+            var $newsyj = $('#newsyj');
+            if($newsyj.hasClass('none')){
+                $('#swfvgk').css('left','42.6%');
+                $('#d4dsyj').css('left','71%');
+                $newsyj.removeClass('none');
+                $('#oldsyj').addClass('none');
+                $('#main_con').addClass('none');
+                $('.syj_btn').addClass('none');
+                $('.mini-mask2').addClass('none');
+                $('#d4dsyj2').addClass('none');
+            }else{
+                $newsyj.addClass('none');
+                $('#oldsyj').removeClass('none');
+                $('#main_con').removeClass('none');
+                $('.syj_btn').removeClass('none');
+                $('.mini-mask2').removeClass('none');
+            }
+        });
+        $('#d4dsyj2').on('click','#tsClose3',function(){
+            $('#d4reflsh').addClass('none');
+            $('#d4dsyj2').addClass('none');
+            $('.mini-mask2').addClass('none');
+        });
         if(luid && showtag<3){
         $('.tsxx2').removeClass('none');
         }
