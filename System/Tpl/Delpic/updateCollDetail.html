@@ -1,0 +1,41 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li><a href="{:U('Index/index')}">更新收藏明细</a></li>
+        <li class="active"><strong>更新收藏明细</strong></li>
+    </ol>
+</div>
+
+<include file="Public:footer"/>
+<script type="text/javascript" src="http://new.beubeu.com/js/f3c2forUQAPI.js"></script>
+<script type="text/javascript">
+        var touchid= 854,upcolurl = "{:U('Delpic/doupdatecoll')}",bcid = 0;
+        var key="8f1a6e3f182904ad22170f56c890e533";
+        loadMymodel(touchid,key,15474);
+        Model.CurrClothesCallback = beu_getallclothes;
+        var list = '{$list}';
+        list = eval("("+list+")");length = list.length;
+        var i = 0;
+        function al()
+        {
+            i++;
+            if(i<=length){
+                setTimeout(function(){
+                    get_baiyi_dp_bystr(list[i-1].suitID);bcid = list[i-1].id;al();
+                        },3000);
+            }
+        }
+        al();
+        function beu_getallclothes(o){
+            //console.log(o);
+            var length = o.length,struq = '';
+            for(var i in o){
+                struq+=o[i].barcode+'_';
+            }
+            console.log(bcid);
+            $.post(upcolurl,{uq:struq,bcid:bcid},function(data,status){
+
+            });
+        }
+</script>
