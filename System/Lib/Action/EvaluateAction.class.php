@@ -17,6 +17,8 @@ class EvaluateAction extends Action{
     }
     public function index(){
         if(!empty($this->aid)){
+            header("Content-type: text/html; charset=utf-8");
+            set_time_limit(0);
             import("@.ORG.Uniqlo");
             $uniqlo = new Uniqlo();
             $ke = 1;
@@ -34,7 +36,7 @@ class EvaluateAction extends Action{
             fputcsv($fp,$head);
             while($ke>0){
                 $result = array();
-               $result = M('Evaluate')->field('*')->where(array('createtime'=>$date))->limit($offset.','.$step)->select();
+               $result = M('Evaluate')->field('*')->where(array('createtime'=>'2015-05-10'))->limit($offset.','.$step)->select();
                if(empty($result)){
                    $ke = 0;
                }else{
@@ -64,7 +66,8 @@ class EvaluateAction extends Action{
                 $offset+=$step;
             }
             fclose($fp);
-            echo $filepath[1];
+            $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/U2/'.$filepath[1];
+            echo "<a href='".$url."'>下载评论</a>";
             exit;
         }else{
         $this->display('Login/index');
