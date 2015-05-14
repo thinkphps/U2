@@ -36,7 +36,7 @@ class EvaluateAction extends Action{
             fputcsv($fp,$head);
             while($ke>0){
                 $result = array();
-               $result = M('Evaluate')->field('*')->where(array('createtime'=>'2015-05-10'))->limit($offset.','.$step)->select();
+               $result = M('Evaluate')->field('*')->where(array('createtime'=>$date))->limit($offset.','.$step)->select();
                if(empty($result)){
                    $ke = 0;
                }else{
@@ -66,7 +66,7 @@ class EvaluateAction extends Action{
                 $offset+=$step;
             }
             fclose($fp);
-            $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/U2/'.$filepath[1];
+            $url = 'http://'.$_SERVER['HTTP_HOST'].$filepath[1];
             echo "<a href='".$url."'>下载评论</a>";
             exit;
         }else{
