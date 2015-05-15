@@ -1,0 +1,17 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>生成wsdl文件</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="http://localhost:81/U2/mini.php/App/index" method='post'>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">账号</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="账号" name='uua'>
+            <label class="sr-only" for="exampleInputEmail2">密码</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="密码" name='upa'>
+        </div>
+        <button type="submit" class="btn btn-success">搜索</button>
+    </form>
+</div>
+<include file="Public:footer"/>
