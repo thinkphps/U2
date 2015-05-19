@@ -13,8 +13,10 @@ set_time_limit(0);
 $time = time();
 $enddate = date('Y-m-d',$time);
 $endtime = strtotime($enddate);
-$enddate = date('Y-m-d H:i:s',$endtime);
-$startdate = date('Y-m-d H:i:s',$endtime-24*3600);
+//$enddate = date('Y-m-d H:i:s',$endtime);
+//$startdate = date('Y-m-d H:i:s',$endtime-24*3600);
+$startdate = '2015-05-17 00:00:00';
+$enddate = '2015-05-18 00:00:00';
 $db = new DB();
 $c = new TopClient;
 $c->appkey = $db->appkey;
@@ -50,10 +52,10 @@ while($j==0){
         }else{
             $valid_score = 'false';
         }
-        //$tid = (string)NumToStr($v['tid']);
-        //$oid = (string)NumToStr($v['oid']);
-        $tid = (string)$v['tid'];
-        $oid = (string)$v['oid'];
+        $tid = (string)NumToStr($v['tid']);
+        $oid = (string)NumToStr($v['oid']);
+        //$tid = (string)$v['tid'];
+        //$oid = (string)$v['oid'];
         $sql.="('".$tid."','".$oid."','".$v['role']."','".$v['nick']."','".$v['result']."','".$v['created']."','".$v['rated_nick']."','".$v['item_title']."','".$v['item_price']."','".$v['content']."','".$reply."','".$v['num_iid']."','".$v['valid_score']."','".$startdate."'),";
     }
     $sql = rtrim($sql,',');
@@ -88,10 +90,10 @@ while($cj==0){
         }else{
             $valid_score = 'false';
         }
-        //$tid = (string)NumToStr($v['tid']);
-        //$oid = (string)NumToStr($v['oid']);
-        $tid = (string)$v['tid'];
-        $oid = (string)$v['oid'];
+        $tid = (string)NumToStr($v['tid']);
+        $oid = (string)NumToStr($v['oid']);
+        //$tid = (string)$v['tid'];
+        //$oid = (string)$v['oid'];
         $sql.="('".$tid."','".$oid."','".$v['role']."','".$v['nick']."','".$v['result']."','".$v['created']."','".$v['rated_nick']."','".$v['item_title']."','".$v['item_price']."','".$v['content']."','".$reply."','".$v['num_iid']."','".$v['valid_score']."','".$startdate."'),";
     }
     $sql = rtrim($sql,',');
@@ -126,10 +128,10 @@ while($zj==0){
         }else{
             $valid_score = 'false';
         }
-        //$tid = (string)NumToStr($v['tid']);
-        //$oid = (string)NumToStr($v['oid']);
-        $tid = (string)$v['tid'];
-        $oid = (string)$v['oid'];
+        $tid = (string)NumToStr($v['tid']);
+        $oid = (string)NumToStr($v['oid']);
+        //$tid = (string)$v['tid'];
+        //$oid = (string)$v['oid'];
         $sql.="('".$tid."','".$oid."','".$v['role']."','".$v['nick']."','".$v['result']."','".$v['created']."','".$v['rated_nick']."','".$v['item_title']."','".$v['item_price']."','".$v['content']."','".$reply."','".$v['num_iid']."','".$v['valid_score']."','".$startdate."'),";
     }
     $sql = rtrim($sql,',');
