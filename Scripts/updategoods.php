@@ -105,6 +105,7 @@ foreach($goods as $k=>$v){
 	//$kucolor2 = explode(':',$properties[1]);
 	$cid = 0;
 	$cstr = '';
+    if(!empty($product_arr['property_alias'])){
     foreach($arrcolor as $kcc=>$vcc){
     if($vcc['id']==$kucolor[1]){
     $cid = $vcc['cid'];
@@ -112,6 +113,11 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
+    }else{
+        $newcolor = GetColorValue($product_arr['property_alias']);
+        $cid = $newcolor['cid'];
+        $cstr = $newcolor['cv'];
+    }
 
     //20140429
 	$pro_img_url = '';
@@ -240,6 +246,7 @@ foreach($goods as $k=>$v){
     $kucolor = explode(':',$properties[0]);
 	$cid = 0;
 	$cstr = '';
+    if(!empty($product_arr['property_alias'])){
     foreach($arrcolor as $kcc=>$vcc){
     if($vcc['id']==$kucolor[1]){
     $cid = $vcc['cid'];
@@ -247,6 +254,11 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
+    }else{
+        $newcolor = GetColorValue($product_arr['property_alias']);
+        $cid = $newcolor['cid'];
+        $cstr = $newcolor['cv'];
+    }
 	//获取product的图片
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));
@@ -303,5 +315,22 @@ function getcolor($property_alias){
 	}
     }
 	return $arr_pro;
+}
+//如果没有属性别名
+function GetColorValue($properties_name){
+     $arr = array();
+     if(!empty($properties_name)){
+         $arr_property = explode(';',$properties_name);
+         $arr_va = explode(':',$arr_property[0]);
+         $issp = is_int(strpos($arr_va[3],' '));
+             if($issp){
+                 $arr_color = explode(' ',$arr_va[3]);
+             }else{
+                 $arr_color[0] = substr($arr_va[3],0,2);
+                 $arr_color[1] = substr($arr_va[3],3);
+             }
+     $arr[] = array('cid'=>$arr_color[0],'cv'=>$arr_color[1]);
+     }
+    return $arr;
 }
 exit;
