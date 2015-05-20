@@ -17,4 +17,13 @@ class Reds{
     public function delete($key){
         return $this->redis->delete($key);
     }
+    public function llen($key){
+        return $this->redis->LLEN($key);
+    }
+    public function lrange($key,$start,$limit){
+        return $this->redis->LRANGE($key,$start,$limit);
+    }
+    public function ltrim($key,$start,$limit){
+        return $this->redis->LTRIM($key,$start,$limit);
+    }
 }
