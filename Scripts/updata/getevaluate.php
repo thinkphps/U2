@@ -35,7 +35,7 @@ $j = 0;
 while($j==0){
     $req->setPageNo($i);
     $req->setPageSize(150);
-    $req->setResult("bad");
+    $req->setResult("good");
     $resp = $c->execute($req, $db->token);
     if($resp->has_next){
     $result = $resp->trade_rates->trade_rate;
@@ -67,82 +67,7 @@ while($j==0){
         $j = 1;
     }
 }
-//好评
-$ci = 1;
-$cj = 0;
-while($cj==0){
-    $req->setPageNo($ci);
-    $req->setPageSize(150);
-    $req->setResult("good");
-    $resp = $c->execute($req, $db->token);
-    if($resp->has_next){
-    $result = $resp->trade_rates->trade_rate;
-    $sql = "insert into `u_evaluate` (`tid`,`oid`,`role`,`nick`,`result`,`created`,`rated_nick`,`item_title`,`item_price`,`content`,`reply`,`num_iid`,`valid_score`,`createtime`) values ";
-    foreach($result as $k=>$v){
-        $v = (array)$v;
-        if($v['reply']){
-            $reply = $v['reply'];
-        }else{
-            $reply = '';
-        }
-        if($v['valid_score']){
-            $valid_score = 'true';
-        }else{
-            $valid_score = 'false';
-        }
-        $tid = (string)NumToStr($v['tid']);
-        $oid = (string)NumToStr($v['oid']);
-        //$tid = (string)$v['tid'];
-        //$oid = (string)$v['oid'];
-        $sql.="('".$tid."','".$oid."','".$v['role']."','".$v['nick']."','".$v['result']."','".$v['created']."','".$v['rated_nick']."','".$v['item_title']."','".$v['item_price']."','".$v['content']."','".$reply."','".$v['num_iid']."','".$v['valid_score']."','".$startdate."'),";
-    }
-    $sql = rtrim($sql,',');
-    $db->mysqlquery($sql);
-    $sql = '';
-    $ci++;
-    }
-    if(!$resp->has_next){
-        $cj = 1;
-    }
-}
-//中评
-$zi = 1;
-$zj = 0;
-while($zj==0){
-    $req->setPageNo($zi);
-    $req->setPageSize(150);
-    $req->setResult("neutral");
-    $resp = $c->execute($req, $db->token);
-    if($resp->has_next){
-    $result = $resp->trade_rates->trade_rate;
-    $sql = "insert into `u_evaluate` (`tid`,`oid`,`role`,`nick`,`result`,`created`,`rated_nick`,`item_title`,`item_price`,`content`,`reply`,`num_iid`,`valid_score`,`createtime`) values ";
-    foreach($result as $k=>$v){
-        $v = (array)$v;
-        if($v['reply']){
-            $reply = $v['reply'];
-        }else{
-            $reply = '';
-        }
-        if($v['valid_score']){
-            $valid_score = 'true';
-        }else{
-            $valid_score = 'false';
-        }
-        $tid = (string)NumToStr($v['tid']);
-        $oid = (string)NumToStr($v['oid']);
-        //$tid = (string)$v['tid'];
-        //$oid = (string)$v['oid'];
-        $sql.="('".$tid."','".$oid."','".$v['role']."','".$v['nick']."','".$v['result']."','".$v['created']."','".$v['rated_nick']."','".$v['item_title']."','".$v['item_price']."','".$v['content']."','".$reply."','".$v['num_iid']."','".$v['valid_score']."','".$startdate."'),";
-    }
-    $sql = rtrim($sql,',');
-    $db->mysqlquery($sql);
-    $sql = '';
-    $zi++;
-    }
-    if(!$resp->has_next){
-        $zj = 1;
-    }
-}
+
 function NumToStr($num){
     if (stripos($num,'e')===false) return $num;
     $num = trim(preg_replace('/[=\'"]/','',$num,1),'"');//出现科学计数法，还原成字符串
