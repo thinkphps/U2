@@ -17,10 +17,10 @@ class FittingAction extends Action{
         $userpass = trim($this->_post('fittingp'));
         import('@.ORG.FittingServer');
         if($username==C('CREATEU') && $userpass==C('CREATEP')){
+            ini_set('soap.wsdl_cache_enabled', "0");
             $disco = new SoapDiscovery('FittingServer','UniqloApi');
             $disco->getWSDL($this->root_dir.'/Upload/uawsdl/FittingWsdl.wsdl');
         }else{
-            ini_set('soap.wsdl_cache_enabled', "0");
             $servidorSoap = new SoapServer($this->root_dir.'/Upload/uawsdl/FittingWsdl.wsdl');
             $servidorSoap->setClass('FittingServer');
             $servidorSoap->handle();
