@@ -114,9 +114,9 @@ foreach($goods as $k=>$v){
 	}
 	}
     }else{
-        $newcolor = GetColorValue($product_arr['property_alias']);
-        $cid = $newcolor['cid'];
-        $cstr = $newcolor['cv'];
+        $newcolor = GetColorValue($v2['properties_name']);
+        $cid = $newcolor[0]['cid'];
+        $cstr = $newcolor[0]['cv'];
     }
 
     //20140429
@@ -255,9 +255,9 @@ foreach($goods as $k=>$v){
 	}
 	}
     }else{
-        $newcolor = GetColorValue($product_arr['property_alias']);
-        $cid = $newcolor['cid'];
-        $cstr = $newcolor['cv'];
+        $newcolor = GetColorValue($v2['properties_name']);
+        $cid = $newcolor[0]['cid'];
+        $cstr = $newcolor[0]['cv'];
     }
 	//获取product的图片
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
