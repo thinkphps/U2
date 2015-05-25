@@ -131,9 +131,9 @@ var timer,loadid = 0;
             $('.youyigui_btn,.dr_logo').on('click',function(){
                 var ua = window.navigator.userAgent;
                 if(ua.indexOf('MetaSr')>0){
-                    window.open('http://uniqlo.bigodata.com.cn/u2/');
+                    window.open('http://uniqlo.bigodata.com.cn/u2/mini.php/new/?kid=11727_51912_660842_848108');
                 }else{
-                window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/');
+                window.open('http://jump.ztcadx.com/diy?target=http%3A%2F%2Funiqlo.bigodata.com.cn%2Fu2%2Fmini.php%2Fnew&shop_id=57303596&kid=11727_51912_660842_848108');
             }
             });
 

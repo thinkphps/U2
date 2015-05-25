@@ -90,7 +90,7 @@ var weather = {
             if(newstorre){
                 $BIGO('.preferential_1').remove();
                 $BIGO('#tablink1').remove();
-                $BIGO('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/mini.php" target="__blank">'+newstorre+'</a></li>');
+                $BIGO('#scrollDiv').prepend('<li class="preferential_1" style="display:none;"><i></i><a href="http://jump.ztcadx.com/diy?target=http%3A%2F%2Funiqlo.bigodata.com.cn%2Fu2%2Fmini.php%2Fnew&shop_id=57303596&kid=11727_51912_660842_848108" target="_blank">'+newstorre+'</a></li>');
                 $BIGO('.preferential_side_bar').prepend("<li class=\"current\" id=\"tablink1\" onmouseover=\"easytabs('1', '1');\" onfocus=\"easytabs('1','1');\" onclick=\"return false;\"></li>");
 
             }else{
