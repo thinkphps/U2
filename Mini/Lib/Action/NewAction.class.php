@@ -60,4 +60,18 @@ class NewAction extends Action{
         $this->assign('basedir',__ROOT__);
         $this->display();
 	 }
+    public function loginout(){
+        $_SESSION=array();
+        if(isset($_COOKIE[session_name()])){
+            setCookie(session_name(), '', time()-100, '/');
+        }
+        cookie('uniq_user_name',null);
+        cookie('uniq_user_id',null);
+        session_destroy();
+        if(is_mobile()){
+            $this->redirect('Mobile/index');
+        }else{
+            $this->redirect('New/index');
+        }
+    }
 }
