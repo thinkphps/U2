@@ -31,8 +31,9 @@ class Uniqlo{
         if($flag==0){
             $filename = date('YmdHis',$timenow);
             $extension = 'csv';
-        }else{
-
+        }else if($flag==1){
+            $filename = date('YmdHis',$timenow);
+            $extension = 'xlsx';
         }
         $save_image = $dir1.'/'.$filename.'.'.$extension;
         $path.='/'.$filename.'.'.$extension;
