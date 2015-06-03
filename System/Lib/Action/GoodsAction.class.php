@@ -7,8 +7,19 @@ class GoodsAction extends Action{
     private $products;
     private $token = '6201e24b0995f8af686fad9e7cd1d1b0ZZ5338185af9ff5196993935';
     public $dirroot;
+    private $aid;
+    private $nick;
     public function _initialize(){
         $this->dirroot = realpath(dirname($_SERVER['SCRIPT_FILENAME']));
+        $this->aid = session('aid');
+        $this->nick = session('nickn');
+        $level = session('level');
+        if($level!=1){
+            $this->error('权限不够',U('Index/index'));
+            exit;
+        }
+        $this->assign('aid',$this->aid);
+        $this->assign('nick',$this->nick);
     }
     public function index(){
         $dirroot = realpath(dirname($_SERVER['SCRIPT_FILENAME']));

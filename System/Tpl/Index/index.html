@@ -1,14 +1,19 @@
 <include file="Public:header"/>
 <div class="jumbotron text-center">
   <h2>优衣库后台</h2>
+  <if condition="$level eq 1">
   <a href="{:U('Products/index')}" class="btn btn-success btn-lg">商品管理</a>
   <a href="{:U('Shop/index')}" class="btn btn-success btn-lg">门店管理</a>
-  <a href="{:U('Tags/index')}" class="btn btn-success btn-lg">标签管理</a>
+  <!--<a href="{:U('Tags/index')}" class="btn btn-success btn-lg">标签管理</a>-->
   <a href="{:U('Official/index')}" class="btn btn-success btn-lg">官方推送</a>
   <a href="{:U('Feedback/index')}" class="btn btn-success btn-lg">客户反馈</a>
   <a href="{:U('User/index')}" class="btn btn-success btn-lg">注册用户统计</a>
   <a href="{:U('Suits/index')}" class="btn btn-success btn-lg">套图管理</a>
   <a href="{:U('Sellcate/index')}" class="btn btn-success btn-lg">分类管理</a>
-  <!--<a href="{:U('Varible/index')}" class="btn btn-success btn-lg">变量管理</a>-->
+  <a href="{:U('Goods/index')}" class="btn btn-success btn-lg">商品库存</a>
+  </if>
+  <if condition="($level eq 1) OR ($level eq 2)">
+  <a href="{:U('Evaluate/index')}" class="btn btn-success btn-lg">下载评论</a>
+  </if>
 </div>
 <include file="Public:footer"/>

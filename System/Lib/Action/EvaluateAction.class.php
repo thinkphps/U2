@@ -12,6 +12,11 @@ class EvaluateAction extends Action{
     public function _initialize(){
         $this->aid = session('aid');
         $this->nick = session('nickn');
+        $level = session('level');
+        if($level!=1 && $level!=2){
+            $this->error('权限不够',U('Index/index'));
+            exit;
+        }
         $this->assign('aid',$this->aid);
         $this->assign('nick',$this->nick);
     }
@@ -42,6 +47,7 @@ class EvaluateAction extends Action{
                }else{
                    foreach($result as $k=>$v){
                        $pl = array();
+					   $v['item_title'] = stripslashes($v['item_title']);
                        $pl[0] = $v['tid']."\t";
                        $pl[1] = $v['oid']."\t";
                        $pl[2] = $v['role']."\t";

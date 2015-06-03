@@ -1,5 +1,18 @@
 <?php
 class ExportAction extends Action{
+    private $aid;
+    private $nick;
+    public function _initialize(){
+        $this->aid = session('aid');
+        $this->nick = session('nickn');
+        $level = session('level');
+        if($level!=1){
+            $this->error('权限不够',U('Index/index'));
+            exit;
+        }
+        $this->assign('aid',$this->aid);
+        $this->assign('nick',$this->nick);
+    }
 	public function ecportindex(){
            ini_set('memory_limi','200M');
 		   set_time_limit(0);
@@ -165,5 +178,28 @@ echo '完成';
 
     public function iconvfun($v){
         return iconv('GB2312','UTF-8',$v);
+    }
+    public function updateshop(){
+        $handle = fopen('Upload/uniqloShop.csv','r');
+        $i = 0;
+        $shop = M('Shop');
+        while($data = fgetcsv($handle)){
+            if($i>0 && !empty($data)){
+                $data[3] = $this->iconvfun($data[3]);
+                $data[0] = trim($data[0]);
+                $result = $shop->field('id,store_id')->where(array('store_id'=>$data[0]))->find();
+                if(!empty($result)){
+                        $daarr = array('sname'=>$data[3],
+                        'saddress'=>$this->iconvfun($data[4]),
+                        'tradetime'=>$this->iconvfun($data[6]),
+                        'scall'=>$this->iconvfun($data[5]),
+                        'sange'=>$this->iconvfun($data[7]));
+                    $shop->where(array('id'=>$result['id']))->save($daarr);
+                }else{
+                    echo $data[0].'<p>';
+                }
+            }
+            $i++;
+        }
     }
 }

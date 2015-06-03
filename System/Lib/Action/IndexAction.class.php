@@ -5,8 +5,9 @@ class IndexAction extends Action {
     $aid = session('aid');
 	$nick = session('nickn');
     if(!empty($aid)){
+    $this->assign('level',session('level'));
     $this->assign('aid',$aid);
-	$this->assign('nick',$nick);	
+	$this->assign('nick',$nick);
     $this->display();
 		exit;
     }else{
@@ -25,10 +26,12 @@ class IndexAction extends Action {
 		$this->error('密码不能为空',U('Index/index'));
 			exit;	
 		}
-		$res = M('Admin')->field('aid,nickname')->where(array('email'=>$username,'pwd'=>md5($pass)))->find();
+		$res = M('Admin')->field('aid,nickname,level')->where(array('email'=>$username,'pwd'=>md5($pass)))->find();
 		if($res && !empty($res)){
         session('aid',$res['aid']);
 		session('nickn',$res['nickname']);
+        session('level',$res['level']);
+        $this->assign('level',$res['level']);
 		$this->success('登录成功',U('Index/index'));
 		}else{
           $this->error('登录失败',U('Index/index'));
