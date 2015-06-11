@@ -30,7 +30,7 @@ $req->setIsTaobao("true");
 $req->setPageSize(200);
 $result = $c->execute($req, $db->token);
 
-$products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,sku.modified,prop_img');
+$products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,desc,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,sku.modified,prop_img');
 $goods = (array)$result->items->item;
 $goods_arr = array();
 $pstr = '';
@@ -48,13 +48,18 @@ foreach($goods as $k=>$v){
 	$products->setNumIid($v['num_iid']);
 	$product = $c->execute($products, $db->token);
 	$product_arr = (array)$product->item;
+    $des = GetXingXi($product_arr['desc']);
 	//更新goods
+    $xxt = '';
+    if(!empty($des)){
+        $xxt = "`detailpc`='".$des."',";//详细图
+    }
     $proarr = explode(';',$product_arr['props_name']);
 
 	$item_bn = 'UQ'.$product_arr['outer_id'];
 	$v['title'] = addslashes($v['title']);
     $detail_url = 'http://detail.tmall.com/item.htm?id='.$v['num_iid'].'&kid=11727_51912_165824_211542';
-	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`detail_url`='".$detail_url."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`sort`='".$v['modified']."',`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
+	$sql = "update `u_goods` set `approve_status`='".$v['approve_status']."',`item_bn`='".$item_bn."',`outer_id`='".$product_arr['outer_id']."',`title`='".$v['title']."',`num`='".$v['num']."',`price`='".$v['price']."',`detail_url`='".$detail_url."',`props_name`='".$product_arr['props_name']."',`list_time`='".$v['list_time']."',`delist_time`='".$v['delist_time']."',`sort`='".$v['modified']."',".$xxt."`uptime`='".$time."' where `num_iid`='".$v['num_iid']."'";
     $db->mysqlquery($sql);
     unset($sql);
     //0528更新商品开始
@@ -201,6 +206,7 @@ foreach($goods as $k=>$v){
 	$products->setNumIid($v['num_iid']);
 	$product = $c->execute($products, $db->token);
 	$product_arr = (array)$product->item;
+    $des = GetXingXi($product_arr['desc']);
 	//插入goods
 	$cname = '';
 	foreach($catarr as $ck=>$cv){
@@ -211,7 +217,7 @@ foreach($goods as $k=>$v){
 	$v['title'] = addslashes($v['title']);
     $detail_url = 'http://detail.tmall.com/item.htm?id='.$v['num_iid'].'&kid=11727_51912_165824_211542';
 	//$sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$product_arr['detail_url']."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$time."','".$time."')";
-     $sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`sort`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$detail_url."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$v['modified']."','".$time."','".$time."')";
+     $sql = "insert into `u_goods` (`num_iid`,`approve_status`,`catid`,`item_bn`,`outer_id`,`title`,`num`,`price`,`pic_url`,`detail_url`,`cname`,`dname`,`props_name`,`list_time`,`delist_time`,`sort`,`detailpc`,`createtime`,`uptime`) values ('".$v['num_iid']."','".$v['approve_status']."','".$catarr[1]['cid']."','".$item_bn."','".$product_arr['outer_id']."','".$v['title']."','".$v['num']."','".$v['price']."','".$save_image[1]."','".$detail_url."','".$cname."','".$catarr[1]['name']."','".$product_arr['props_name']."','".$v['list_time']."','".$v['delist_time']."','".$v['modified']."','".$des."','".$time."','".$time."')";
     $db->mysqlquery($sql);
     $goods_id = mysql_insert_id();
     //0528插入店铺自定义分类开始
@@ -332,5 +338,26 @@ function GetColorValue($properties_name){
      $arr[] = array('cid'=>$arr_color[0],'cv'=>$arr_color[1]);
      }
     return $arr;
+}
+//获取明细图
+function GetXingXi($desc){
+    $fg = array();$fg2 = array();
+    preg_match_all('/<table width="725" border="0" cellspacing="0" cellpadding="0" style="border-left: 1.0px solid #dcdcdc;border-right: 1.0px solid #dcdcdc;border-top: 1.0px solid #dcdcdc;border-bottom: none medium;">  <tr> <td colspan="4" align="center" style="border-bottom: 1.0px solid #dcdcdc;"> <img src="http:\/\/img02.taobaocdn.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" alt="" width="722" height="59"> <\/td> <\/tr>(.*)<\/table>/iU',$desc,$fg,PREG_SET_ORDER);
+    if(!empty($fg)){
+    preg_match_all('/<img src="(.*)" alt="" width="360" height="360">/iU',$fg[0][1],$fg2,PREG_SET_ORDER);
+    unset($fg);
+        if(!empty($fg2)){
+            $mingxi = array();
+        foreach($fg2 as $mx=>$mv){
+            $mingxi[] = $mv[1];
+        }
+        unset($fg2);
+        return serialize($mingxi);
+       }else{
+            return '';
+        }
+    }else{
+        return '';
+    }
 }
 exit;
