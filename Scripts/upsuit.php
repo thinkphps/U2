@@ -29,18 +29,17 @@ while($ke>0){
                     $item_arr[] = $v['item_bn'];
                 }
             }
-            //只有要一个num_iid不能显示，则这个图片就不能显示
-            $i = 0;//可以显示
+            //只有全部num_iid不能显示，则这个图片就不能显示
+            $i = 0;//不可以显示
             foreach($dresult as $k2=>$v2){
-                if(!in_array($v2['item_bn'],$item_arr)){
-                    $sql123 = "update `u_beubeu_suits` set `approve_status`=1, `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
+                if(in_array($v2['item_bn'],$item_arr)){
+                    $sql123 = "update `u_beubeu_suits` set `approve_status`=0, `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
                     $db->mysqlquery($sql123);
-                    $i = 1;//不能显示
-                    break;
+                    $i = 1;//能显示
                 }
             }
             if($i==0){
-                $sql123 = "update `u_beubeu_suits` set `approve_status`=0, `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
+                $sql123 = "update `u_beubeu_suits` set `approve_status`=1, `uptime`='".$currentDateTime."' where `suitID`=".$suit['suitID'];
                 $db->mysqlquery($sql123);
             }
         }
