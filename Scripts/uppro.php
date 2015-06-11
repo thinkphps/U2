@@ -16,10 +16,12 @@ while($ke>0){
         foreach($gresult as $k=>$v){
             $sql = "select id from u_products where num_iid=".$v['num_iid']." and sku_id in( select p1.sku_id from u_products as p1 where p1.num_iid=".$v['num_iid']." group by p1.sku_id   having  count(p1.sku_id) > 1) and id not in (select min(p2.id) from  u_products as p2 where p2.num_iid=".$v['num_iid']." group by p2.sku_id  having count(p2.sku_id )>1)";
             $result = $db->mysqlfetch($sql);
+            if(!empty($result)){
             foreach($result as $k2=>$v2){
                 $desql = "delete from u_products where id=".$v2['id'];
                 $db->mysqlquery($desql);
             }
+          }
         }
     }
     $offset+=$limit;
