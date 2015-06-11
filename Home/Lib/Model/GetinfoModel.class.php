@@ -120,8 +120,7 @@ class GetinfoModel extends Action{
     }
 
     public function getSutsValue($type){
-        echo $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss.sortid desc";
-        exit;
+        $sql = "select suits.`suitID`,suits.suitGenderID,suits.`suitImageUrl`,suits.beubeuSuitID,ustyle.`description`,ustyle.eglishName from  `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on  suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss.sortid desc";
         $suitSelect = M('SuitsSelect')->query($sql);
         $goodsDetail = M('SuitsGoodsdetail');
         foreach($suitSelect as $k=>$v){
@@ -174,7 +173,7 @@ class GetinfoModel extends Action{
 `u_suits_select` uss inner join `u_suits` suits on uss.suitID=suits.suitID inner join u_settings_suit_style ustyle on
 suits.`suitStyleID`=ustyle.`ID` where suits.`approve_status`=0 and suits.beubeuSuitID is not null and uss.`selected`='1' and  uss.`type`='".$type."' order by uss.sortid desc) as su left JOIN
 u_suits_goodsdetail as de on de.suitID=su.suitID inner join u_beubeu_goods ug on
-de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '15' )";
+de.num_iid=ug.num_iid WHERE ( ug.approve_status = 'onsale' ) AND ( ug.num >= '5' )";
         return M('Suits')->query($sql);
     }
 
