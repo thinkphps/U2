@@ -45,19 +45,27 @@ class FittingModel extends Model{
         }
         return $arr;
     }
-    public function GetGoodsData($page){
+    public function GetGoodsData($where=array()){
+        $page = $where['page'];
         $limit = 500;
+        $wh = array();
+        if(!empty($where['modified'])){
+            $wh['sort'] = array('EGT',$where['modified']);
+        }
         $offset = ($page-1)*$limit;
         $good = M('Goods');
-        $count = $good->count();
+        $count = $good->where($wh)->count();
         $num_page = ceil($count/$limit);
         if($page>$num_page){
             $arr = array('code'=>0,'data'=>'','msg'=>'没有数据','page'=>0);
             return $arr;
         }
-        $list = $good->field('id,num_iid,type,gender,isud,approve_status,item_bn,outer_id,title,num,price,pic_url,detail_url,list_time,delist_time,istag,isdoubt,sort,isdisplay')->where(array())->limit($offset.','.$limit)->select();
+        $list = $good->field('id,num_iid,type,gender,isud,approve_status,item_bn,outer_id,title,num,price,pic_url,detail_url,list_time,delist_time,istag,isdoubt,sort,detailpc,isdisplay')->where($wh)->limit($offset.','.$limit)->select();
         if(!empty($list) && count($list)>0){
             foreach($list as $k=>$v){
+                if($v['detailpc']!='0'){
+                    $list[$k]['detailpc'] = unserialize($v['detailpc']);
+                }
                 $list[$k]['pic_url'] = C('UNIQLOURL').$v['pic_url'];
             }
             $arr = array('code'=>1,'data'=>$list,'page'=>$page+1);
@@ -83,6 +91,26 @@ class FittingModel extends Model{
                 $list[$k]['url'] = C('UNIQLOURL').$v['url'];
             }
             $arr = array('code'=>1,'data'=>$list,'page'=>$page+1);
+            unset($list);
+        }else{
+            $arr = array('code'=>0,'data'=>'','msg'=>'没有数据');
+        }
+        return $arr;
+    }
+    public function GetRedisValue($type='d3good'){
+        import("@.ORG.Reds");
+        $redis = new Reds();
+        $limit = 400;
+        $len = $redis->llen($type);
+        $list = $redis->lrange($type,0,$limit-1);
+        $redis->ltrim($type,$limit,$len);
+        if(!empty($list)){
+        foreach($list as $k=>$v){
+            $list[$k] = unserialize($v);
+        }
+        }
+        if(!empty($list)){
+            $arr = array('code'=>1,'data'=>$list);
             unset($list);
         }else{
             $arr = array('code'=>0,'data'=>'','msg'=>'没有数据');
