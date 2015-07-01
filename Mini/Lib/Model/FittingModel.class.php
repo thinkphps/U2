@@ -117,4 +117,15 @@ class FittingModel extends Model{
         }
         return $arr;
     }
+    public function Add3dlog($data){
+        if(is_array($data)){
+            $time = date('Y-m-d H:i:s');
+            $sql = "insert into `u_fitting3d_log` (`uid`,`taobao_name`,`ip`,`visittime`,`intime`,`isdown`,`fitting_time`,`gender`,`height`,`weight`,`shoulder`,`upper_arm`,`chest`,`cup`,`waist`,`hip`,`leg`,`leg_long`,`num_iid`,`goodsize`,`color`,`isbuy`,`isweibo`,`isweixin`,`createtime`) values ";
+            foreach($data as $k=>$v){
+                $sql.="('".$v['tid']."','".$v['taobao_name']."','".$v['ip']."','".$v['visittime']."','".$v['intime']."','".$v['isdown']."','".$v['fitting_time']."','".$v['gender']."','".$v['height']."','".$v['weight']."','".$v['shoulder']."','".$v['upper_arm']."','".$v['chest']."','".$v['cup']."','".$v['waist']."','".$v['hip']."','".$v['leg']."','".$v['leg_long']."','".$v['num_iid']."','".$v['goodsize']."','".$v['color']."','".$v['isbuy']."','".$v['isweibo']."','".$v['isweixin']."','".$time."'),";
+            }
+            $sql = rtrim($sql,',');
+            M('Fitting3dLog')->query($sql);
+        }
+    }
 }

@@ -93,5 +93,12 @@ class FittingServer{
             $login_arr = array('code'=>0,'msg'=>'无权访问');
             return json_encode($login_arr);
         }
+        if(!empty($parmas['data'])){
+            $d3model->Add3dlog($parmas['data']);
+            unset($parmas);
+            return json_encode(array('code'=>1,'msg'=>'完成'));
+        }else{
+            return json_encode(array('code'=>0,'msg'=>'没数据'));
+        }
     }
 }
