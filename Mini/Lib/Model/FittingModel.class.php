@@ -118,6 +118,7 @@ class FittingModel extends Model{
         return $arr;
     }
     public function Add3dlog($data){
+        $flag = 0;
         if(is_array($data)){
             $time = date('Y-m-d H:i:s');
             $sql = "insert into `u_fitting3d_log` (`uid`,`taobao_name`,`ip`,`visittime`,`intime`,`isdown`,`fitting_time`,`gender`,`height`,`weight`,`shoulder`,`upper_arm`,`chest`,`cup`,`waist`,`hip`,`leg`,`leg_long`,`num_iid`,`goodsize`,`color`,`isbuy`,`isweibo`,`isweixin`,`createtime`) values ";
@@ -126,6 +127,29 @@ class FittingModel extends Model{
             }
             $sql = rtrim($sql,',');
             M('Fitting3dLog')->query($sql);
+        }else{
+            $flag = 1;
         }
+        return $flag;
+    }
+    public function AddTotalLog($data){
+        $flag = 0;
+        if(is_array($data)){
+              $time = time();
+              $day = date('Y-m-d',$time);
+              $nowtime = date('Y-m-d H:i:s',$time);
+              $arr = array('fitting_num'=>$data['fitting_num'],
+                           'fitting_avg_num'=>$data['fitting_avg_num'],
+                           'modify_num'=>$data['modify_num'],
+                           'click_buy_num'=>$data['click_buy_num'],
+                           'sku_num'=>$data['sku_num'],
+                           'download_num'=>$data['download_num'],
+                           'log_day'=>$day,
+                           'createtime'=>$nowtime);
+              M('DayLog')->add($arr);
+        }else{
+            $flag = 1;
+        }
+        return $flag;
     }
 }

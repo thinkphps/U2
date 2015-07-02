@@ -94,9 +94,33 @@ class FittingServer{
             return json_encode($login_arr);
         }
         if(!empty($parmas['data'])){
-            $d3model->Add3dlog($parmas['data']);
+            $re = $d3model->Add3dlog($parmas['data']);
             unset($parmas);
-            return json_encode(array('code'=>1,'msg'=>'完成'));
+            if($re==0){
+               return json_encode(array('code'=>1,'msg'=>'完成'));
+            }else{
+               return json_encode(array('code'=>0,'msg'=>'参数错误'));
+            }
+        }else{
+            return json_encode(array('code'=>0,'msg'=>'没数据'));
+        }
+    }
+    public function TotalDayLog($data){
+        $parmas = json_decode($data,true);
+        $d3model = D('Fitting');
+        $flag = $d3model->CkeckApp($parmas['uname'],$parmas['upass']);
+        if(!$flag){
+            $login_arr = array('code'=>0,'msg'=>'无权访问');
+            return json_encode($login_arr);
+        }
+        if(!empty($parmas['data'])){
+            $re = $d3model->AddTotalLog($parmas['data']);
+            unset($parmas);
+            if($re==0){
+                return json_encode(array('code'=>1,'msg'=>'完成'));
+            }else{
+                return json_encode(array('code'=>0,'msg'=>'参数错误'));
+            }
         }else{
             return json_encode(array('code'=>0,'msg'=>'没数据'));
         }
