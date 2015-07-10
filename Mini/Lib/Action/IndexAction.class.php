@@ -314,7 +314,7 @@ where bg.num_iid = li.num_iid and li.buyid is not null order by ".$ostr." limit 
                     $where.=" and g.gtype='".$sid."'";
                     break;
                 case 3 :
-                    $where.=" and g.gtype in ('3','4')";
+                    $where.=" and g.gtype in ('3','4','7')";
                     break;
                 case 4 :
                     $where.=" and g.gtype='5'";

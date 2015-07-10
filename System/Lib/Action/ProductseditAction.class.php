@@ -31,6 +31,10 @@ public function index(){
 
 	$goodtaglist = M('Goodtag')->field('*')->where(array('good_id'=>$result['id']))->select();
     $adminModel = D('Admin');
+    if($goodtaglist[0]['gtype']==7){
+        //男童跟童装用一样的风格
+        $goodtaglist[0]['gtype'] = 4;
+    }
     $list = $adminModel->getSexStyle($goodtaglist[0]['gtype']);
 	foreach($list as $k=>$v){
        foreach($goodtaglist as $k5=>$v5){
@@ -246,6 +250,7 @@ public function doedit(){
             $gender = 'girl';
             break;
         case 4 :
+        case 7 :
             $gender = 'boy';
             break;
         case 5 :
@@ -563,6 +568,9 @@ public function sexStyle(){
      $sid = trim($this->_post('sid'));
      if($sid>0){
          $adminModel = D('Admin');
+         if($sid==7){
+             $sid = 4;
+         }
          $list = $adminModel->getSexStyle($sid);
          if(!empty($list)){
          $returnArr = array('code'=>1,'data'=>$list);

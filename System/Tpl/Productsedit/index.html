@@ -19,6 +19,7 @@
             <option value="1" <if condition="$gtaglist[0]['gtype'] eq '1'">selected='selected'</if>>女装</option>
             <option value="2" <if condition="$gtaglist[0]['gtype'] eq '2'">selected='selected'</if>>男装</option>
             <option value="3" <if condition="$gtaglist[0]['gtype'] eq '3'">selected='selected'</if>>女童</option>
+            <option value="7" <if condition="$gtaglist[0]['gtype'] eq '7'">selected='selected'</if>>男童</option>
             <option value="4" <if condition="$gtaglist[0]['gtype'] eq '4'">selected='selected'</if>>童装</option>
             <option value="5" <if condition="$gtaglist[0]['gtype'] eq '5'">selected='selected'</if>>婴幼儿</option>
             <option value="6" <if condition="$gtaglist[0]['gtype'] eq '6'">selected='selected'</if>>配件</option>
@@ -289,7 +290,7 @@
         <if condition="$gtaglist eq ''">
 		<label class="checkbox-inline nopdl tags-1"></label>
         <else/>
-            <label class="checkbox-inline nopdl tags-1"><if condition="$gtaglist[0]['gtype'] eq 1">WOMEN<elseif condition="$gtaglist[0]['gtype'] eq 2"/>MAN<elseif condition="$gtaglist[0]['gtype'] eq 3"/>女童<elseif condition="$gtaglist[0]['gtype'] eq 4"/>童装<elseif condition="$gtaglist[0]['gtype'] eq 5"/>婴幼儿<else/>配件</if></label>
+            <label class="checkbox-inline nopdl tags-1"><if condition="$gtaglist[0]['gtype'] eq 1">WOMEN<elseif condition="$gtaglist[0]['gtype'] eq 2"/>MAN<elseif condition="$gtaglist[0]['gtype'] eq 3"/>女童<elseif condition="$gtaglist[0]['gtype'] eq 7"/>男童<elseif condition="$gtaglist[0]['gtype'] eq 4"/>童装<elseif condition="$gtaglist[0]['gtype'] eq 5"/>婴幼儿<else/>配件</if></label>
         </if>
 		<volist id='cvo' name="list">
         <label class="checkbox-inline">
