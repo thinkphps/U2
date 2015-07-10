@@ -567,7 +567,7 @@ var _mini = {
                     color = 'h_pink';
                 }else if(v.type==2){
                     color = 'h_blue';
-                }else if(v.type == 3 || v.type==4 || v.type == 5){
+                }else if(v.type == 3 || v.type==4 || v.type == 5 || v.type== 7){
                     color = 'h_orange';
                 }else if(v.type == 6){
                     color = 'h_grenn';
