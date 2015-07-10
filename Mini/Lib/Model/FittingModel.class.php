@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: yu
- * Date: 15-5-15
- * Time: 下午3:28
- * 3D试衣间webservice模型
- */
 class FittingModel extends Model{
     public function CkeckApp($uname,$upass){
         if($uname==C('FITTU') && $upass==C('FITTP')){
@@ -136,7 +129,6 @@ class FittingModel extends Model{
         $flag = 0;
         if(is_array($data)){
               $time = time();
-              $day = date('Y-m-d',$time);
               $nowtime = date('Y-m-d H:i:s',$time);
               $arr = array('fitting_num'=>$data['fitting_num'],
                            'fitting_avg_num'=>$data['fitting_avg_num'],
@@ -144,7 +136,7 @@ class FittingModel extends Model{
                            'click_buy_num'=>$data['click_buy_num'],
                            'sku_num'=>$data['sku_num'],
                            'download_num'=>$data['download_num'],
-                           'log_day'=>$day,
+                           'log_day'=>$data['log_day'],
                            'createtime'=>$nowtime);
               M('DayLog')->add($arr);
         }else{
