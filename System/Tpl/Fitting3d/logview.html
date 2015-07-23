@@ -1,0 +1,96 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>3D试衣日志</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="{:U('Fitting3d/export')}" method='post'>
+        <input type='hidden' name='log_day' value="{$log_day}">
+        <button type="submit" class="btn btn-success">导出</button>
+        <a href="{:U('Fitting3d/index')}" class="btn btn-success pull-right">返回</a>
+    </form>
+    <table class="table table-striped table-hover text-center table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>用户ID</th>
+            <th>ip</th>
+            <th>访问时间</th>
+            <th>进入时间</th>
+            <th>是否下载</th>
+            <th>性别</th>
+            <th>身高</th>
+            <th>体重</th>
+            <th>肩宽</th>
+            <th>上臂围</th>
+            <th>胸围</th>
+            <th>罩杯</th>
+            <th>腰围</th>
+            <th>臀围</th>
+            <th>腿围</th>
+            <th>腿长</th>
+            <th>货号</th>
+            <th>尺码</th>
+            <th>色号</th>
+            <th>是否购买</th>
+            <th>分享微博</th>
+            <th>分销微信</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id='vo' name='list'>
+            <tr>
+                <td>{$vo.uid}</td>
+                <td>{$vo.ip}</td>
+                <td>{$vo.visittime}</td>
+                <td>{$vo.intime}</td>
+                <td><if condition="$vo['isdown'] eq 1">是<else/>否</if></td>
+                <td>{$vo.gender}</td>
+                <td>{$vo.height}</td>
+                <td>{$vo.weight}</td>
+                <td>{$vo.shoulder}</td>
+                <td>{$vo.upper_arm}</td>
+                <td>{$vo.chest}</td>
+                <td>{$vo.cup}</td>
+                <td>{$vo.waist}</td>
+                <td>{$vo.hip}</td>
+                <td>{$vo.leg}</td>
+                <td>{$vo.leg_long}</td>
+                <td>{$vo.item_bn}</td>
+                <td>{$vo.goodsize}</td>
+                <td>{$vo.color}</td>
+                <td><if condition="$vo['isbuy'] eq 1">是<else/>否</if></td>
+                <td><if condition="$vo['isweibo'] eq 1">是<else/>否</if></td>
+                <td><if condition="$vo['isweixin'] eq 1">是<else/>否</if></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            {$page}
+        </ul>
+    </div>
+</div>
+<include file="Public:footer"/>
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
+<script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
+<script>
+    $(function(){
+        $('#daterange').daterangepicker(
+                {
+                    format: 'YYYY/MM/DD',
+                    locale:{
+                        applyLabel: '选择',
+                        cancelLabel: '取消',
+                        fromLabel: '开始',
+                        toLabel: '截止',
+                        weekLabel: '周',
+                        daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                        monthNames: moment()._lang._monthsShort.slice(),
+                        firstDay: 0
+                    }
+                }
+        );
+    });
+</script>

@@ -1,0 +1,71 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li class="active"><strong>3D试衣日志</strong></li>
+    </ol>
+    <form class="form-inline form-group" role="form" action="{:U('Fitting3d/index')}" method='post'>
+        <div class="form-group">
+            <label>日志日期</label>
+            <input type="text" style="width: 200px" name="daterange" id="daterange"
+                   class="form-control" value="{$daterange}" />
+        </div>
+        <button type="submit" class="btn btn-success">搜索</button>
+    </form>
+    <table class="table table-striped table-hover text-center table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>试衣件数</th>
+            <th>平均试衣件数</th>
+            <th>修改人次</th>
+            <th>点击购买次数</th>
+            <th>sku数</th>
+            <th>下载次数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id='vo' name='list'>
+            <tr>
+                <td>{$vo.log_day}</td>
+                <td>{$vo.fitting_num}</td>
+                <td>{$vo.fitting_avg_num}</td>
+                <td>{$vo.modify_num}</td>
+                <td>{$vo.click_buy_num}</td>
+                <td>{$vo.sku_num}</td>
+                <td>{$vo.download_num}</td>
+                <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">查看</a></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            {$page}
+        </ul>
+    </div>
+</div>
+<include file="Public:footer"/>
+<link rel="stylesheet" type="text/css" href="__TMPL__Public/css/daterangepicker.css" />
+<script type="text/javascript" src="__TMPL__Public/js/moment.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/daterangepicker.js"></script>
+<script>
+    $(function(){
+        $('#daterange').daterangepicker(
+                {
+                    format: 'YYYY/MM/DD',
+                    locale:{
+                        applyLabel: '选择',
+                        cancelLabel: '取消',
+                        fromLabel: '开始',
+                        toLabel: '截止',
+                        weekLabel: '周',
+                        daysOfWeek: moment()._lang._weekdaysMin.slice(),
+                        monthNames: moment()._lang._monthsShort.slice(),
+                        firstDay: 0
+                    }
+                }
+        );
+    });
+</script>
