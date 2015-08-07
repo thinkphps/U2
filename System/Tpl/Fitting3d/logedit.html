@@ -1,0 +1,79 @@
+<include file="Public:header"/>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{:U('Index/index')}">首页</a></li>
+        <li><a href="{:U('Fitting3d/index')}">3D试衣日志</a></li>
+        <li class="active"><strong>编辑</strong></li>
+    </ol>
+    <form class="form-horizontal" role="form" action="{:U('Fitting3d/logedit')}" method='post'>
+        <input type='hidden' value='{$result.id}' name='id'>
+        <input type='hidden' value='{$p}' name='p'>
+        <input type='hidden' value='{$daterange}' name='daterange'>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">日期</label>
+            <div class="col-lg-3">
+                {$result.log_day}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">试衣件数</label>
+            <div class="col-lg-5">
+                {$result.fitting_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">访客数</label>
+            <div class="col-lg-5">
+                <input type="tel" class="form-control" id="inputTel" placeholder="访客数" name='visitnum' value='{$result.visitnum}'>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddr" class="col-lg-2 control-label">总访客平均试衣件数</label>
+            <div class="col-lg-5">
+                {$result.fitting_avg_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">修改身材人次</label>
+            <div class="col-lg-5">
+                {$result.modify_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">修改身材后平均试衣件数</label>
+            <div class="col-lg-5">
+                {$result.c_fitting_avg_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTime" class="col-lg-2 control-label">点击购买人次</label>
+            <div class="col-lg-5">
+                {$result.click_buy_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTel" class="col-lg-2 control-label">当日sku数</label>
+            <div class="col-lg-5">
+                {$result.sku_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTel" class="col-lg-2 control-label">插件下载次数</label>
+            <div class="col-lg-5">
+                {$result.download_num}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTel" class="col-lg-2 control-label">访客下载比</label>
+            <div class="col-lg-5">
+                {$result.avg_download}%
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-success">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public:footer"/>
