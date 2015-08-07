@@ -52,6 +52,7 @@ class Fitting3dAction extends Action{
             $pagestr = '';
             $starttime = $log_day.' 00:00:00';
             $endtime = $log_day.' 23:59:59';
+			$pagestr.="/log_day/".$log_day;
             $where['fitting_time'] = array(array('egt',$starttime),array('elt',$endtime));
             $count = $fittinglog->where($where)->count();
             $p = new Page($count,20,$pagestr);
@@ -62,6 +63,31 @@ class Fitting3dAction extends Action{
             $this->assign('p',$_GET['p']);
             $this->assign('log_day',$log_day);
             $this->display('logview');
+        }else{
+            $this->display('Login/index');
+        }
+    }
+    public function logedit(){
+        if(!empty($this->aid)){
+            $id = $this->_request('id');
+            $daterange = trim($this->_request('daterange'));
+            $p = $this->_request('p');
+            $daylog = M('DayLog');
+            $visitnum = trim($this->_request('visitnum'));
+            $result = $daylog->field('*')->where(array('id'=>$id))->find();
+            if(empty($visitnum)){
+                $this->assign('result',$result);
+                $this->assign('p',$p);
+                $this->assign('daterange',$daterange);
+                $this->display();
+            }else{
+                //总访客平均试衣件数
+                $fitting_avg_num = number_format(($result['fitting_num']/$visitnum),2,'.','');
+                //访客下载比
+                $avg_download = sprintf("%.2f",number_format(($result['download_num']/$visitnum),4,'.','')*100);
+                $daylog->where(array('id'=>$id))->save(array('visitnum'=>$visitnum,'fitting_avg_num'=>$fitting_avg_num,'avg_download'=>$avg_download));
+                $this->redirect('Fitting3d/index',array('p'=>$p,'daterange'=>$daterange));
+            }
         }else{
             $this->display('Login/index');
         }

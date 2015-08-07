@@ -114,9 +114,9 @@ class FittingModel extends Model{
         $flag = 0;
         if(is_array($data)){
             $time = date('Y-m-d H:i:s');
-            $sql = "insert into `u_fitting3d_log` (`uid`,`taobao_name`,`ip`,`visittime`,`intime`,`isdown`,`fitting_time`,`gender`,`height`,`weight`,`shoulder`,`upper_arm`,`chest`,`cup`,`waist`,`hip`,`leg`,`leg_long`,`num_iid`,`goodsize`,`color`,`isbuy`,`isweibo`,`isweixin`,`createtime`) values ";
+            $sql = "insert into `u_fitting3d_log` (`uid`,`taobao_name`,`ip`,`visittime`,`intime`,`isdown`,`fitting_time`,`gender`,`height`,`weight`,`shoulder`,`upper_arm`,`chest`,`cup`,`waist`,`hip`,`leg`,`leg_long`,`item_bn`,`goodsize`,`color`,`isbuy`,`isweibo`,`isweixin`,`createtime`) values ";
             foreach($data as $k=>$v){
-                $sql.="('".$v['tid']."','".$v['taobao_name']."','".$v['ip']."','".$v['visittime']."','".$v['intime']."','".$v['isdown']."','".$v['fitting_time']."','".$v['gender']."','".$v['height']."','".$v['weight']."','".$v['shoulder']."','".$v['upper_arm']."','".$v['chest']."','".$v['cup']."','".$v['waist']."','".$v['hip']."','".$v['leg']."','".$v['leg_long']."','".$v['num_iid']."','".$v['goodsize']."','".$v['color']."','".$v['isbuy']."','".$v['isweibo']."','".$v['isweixin']."','".$time."'),";
+                $sql.="('".$v['tid']."','".$v['taobao_name']."','".$v['ip']."','".$v['visittime']."','".$v['intime']."','".$v['isdown']."','".$v['fitting_time']."','".$v['gender']."','".$v['height']."','".$v['weight']."','".$v['shoulder']."','".$v['upper_arm']."','".$v['chest']."','".$v['cup']."','".$v['waist']."','".$v['hip']."','".$v['leg']."','".$v['leg_long']."','UQ".$v['num_iid']."','".$v['goodsize']."','".$v['color']."','".$v['isbuy']."','".$v['isweibo']."','".$v['isweixin']."','".$time."'),";
             }
             $sql = rtrim($sql,',');
             M('Fitting3dLog')->query($sql);
@@ -131,7 +131,7 @@ class FittingModel extends Model{
               $time = time();
               $nowtime = date('Y-m-d H:i:s',$time);
               $arr = array('fitting_num'=>$data['fitting_num'],
-                           'fitting_avg_num'=>$data['fitting_avg_num'],
+                           'c_fitting_avg_num'=>$data['fitting_avg_num'],
                            'modify_num'=>$data['modify_num'],
                            'click_buy_num'=>$data['click_buy_num'],
                            'sku_num'=>$data['sku_num'],

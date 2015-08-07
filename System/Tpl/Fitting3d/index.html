@@ -17,11 +17,14 @@
         <tr>
             <th>日期</th>
             <th>试衣件数</th>
-            <th>平均试衣件数</th>
-            <th>修改人次</th>
-            <th>点击购买次数</th>
-            <th>sku数</th>
-            <th>下载次数</th>
+            <th>访客数</th>
+            <th>总访客平均试衣件数</th>
+            <th>修改身材人次</th>
+            <th>修改身材后平均试衣件数</th>
+            <th>点击购买人次</th>
+            <th>当日sku数</th>
+            <th>插件下载次数</th>
+            <th>访客下载比</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -30,12 +33,15 @@
             <tr>
                 <td>{$vo.log_day}</td>
                 <td>{$vo.fitting_num}</td>
+                <td>{$vo.visitnum}</td>
                 <td>{$vo.fitting_avg_num}</td>
                 <td>{$vo.modify_num}</td>
+                <td>{$vo.c_fitting_avg_num}</td>
                 <td>{$vo.click_buy_num}</td>
                 <td>{$vo.sku_num}</td>
                 <td>{$vo.download_num}</td>
-                <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">查看</a></td>
+                <td>{$vo.avg_download}%</td>
+                <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">查看</a>&nbsp;<a href="{:U('Fitting3d/logedit',array('id'=>$vo['id'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">编辑</a></td>
             </tr>
         </volist>
         </tbody>
