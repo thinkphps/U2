@@ -342,7 +342,7 @@ function GetColorValue($properties_name){
 //获取明细图
 function GetXingXi($desc){
     $fg = array();$fg2 = array();
-    preg_match_all('/<table width="725" border="0" cellspacing="0" cellpadding="0" style="border-left: 1.0px solid #dcdcdc;border-right: 1.0px solid #dcdcdc;border-top: 1.0px solid #dcdcdc;border-bottom: none medium;">  <tr> <td colspan="4" align="center" style="border-bottom: 1.0px solid #dcdcdc;"> <img src="http:\/\/img02.taobaocdn.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" alt="" width="722" height="59"> <\/td> <\/tr>(.*)<\/table>/iU',$desc,$fg,PREG_SET_ORDER);
+    preg_match_all('/<table width="725" border="0" cellspacing="0" cellpadding="0" style="border-left: 1.0px solid #dcdcdc;border-right: 1.0px solid #dcdcdc;border-top: 1.0px solid #dcdcdc;border-bottom: none medium;">  <tr> <td colspan="4" align="center" style="border-bottom: 1.0px solid #dcdcdc;"> <img src="https:\/\/img.alicdn.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" alt="" width="722" height="59"> <\/td> <\/tr>(.*)<\/table>/iU',$desc,$fg,PREG_SET_ORDER);
     if(!empty($fg)){
     preg_match_all('/<img src="(.*)" alt="" width="360" height="360">/iU',$fg[0][1],$fg2,PREG_SET_ORDER);
     unset($fg);
