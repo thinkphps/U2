@@ -17,7 +17,7 @@ $req->setPageSize(1);
 $resp = $c->execute($req, $db->token);
 $resp = (array)$resp;
 $pagenum = ceil($resp['total_results']/200);
-$products = new ItemGetRequest;//获取商品详细信息
+$products = new ItemSellerGetRequest;//获取商品详细信息
 $ccate = new ItemcatsGetRequest;
 $ccate->setFields('cid,parent_cid,name,is_parent');
 

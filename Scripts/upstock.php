@@ -9,7 +9,7 @@ $c = new TopClient;
 $c->appkey = $db->appkey;
 $c->secretKey = $db->secretKey;
 $c->format = 'json';
-$products = new ItemGetRequest;//获取商品详细信息
+$products = new ItemSellerGetRequest;//获取商品详细信息
 $products->setFields('num,modified,approve_status,sku.quantity,sku.sku_id,sku.modified');
 $offset = 0;
 $limit = 200;
@@ -46,7 +46,7 @@ while($ke>0){
     }
     }
     $offset+=$limit;
-    sleep(2);
+    sleep(1);
     unset($result);
 }
 exit;
