@@ -354,10 +354,25 @@ function GetXingXi($desc){
         unset($fg2);
         return serialize($mingxi);
        }else{
-            return '';
+            return 0;
         }
     }else{
-        return '';
+        preg_match_all('/<tr><td align="center" colspan="4" style="border-bottom: 1.0px solid #dcdcdc;"><img alt="" height="59" src="https:\/\/img.alicdn.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" width="722"><\/td><\/tr><tr>(.*)width="360"><\/td><\/tr><tr><td align="center" colspan="4"/iU',$desc,$fg,PREG_SET_ORDER);
+		if(!empty($fg)){
+           preg_match_all('/<img alt="" height="360" src="(.*)" /iU',$fg[0][1],$fg2,PREG_SET_ORDER);
+           if(!empty($fg2)){
+            $mingxi = array();
+            foreach($fg2 as $mx=>$mv){
+            $mingxi[] = $mv[1];
+            }
+             unset($fg2);
+             return serialize($mingxi);
+          }else{
+            return 0;
+          }
+		}else{
+           return 0;
+		}
     }
 }
 exit;
