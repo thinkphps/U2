@@ -83,9 +83,10 @@ class Fitting3dAction extends Action{
             }else{
                 //总访客平均试衣件数
                 $fitting_avg_num = number_format(($result['fitting_num']/$visitnum),2,'.','');
+                $c_fitting_avg_num = number_format(($result['fitting_num']/$result['modify_num']),2,'.','');
                 //访客下载比
                 $avg_download = sprintf("%.2f",number_format(($result['download_num']/$visitnum),4,'.','')*100);
-                $daylog->where(array('id'=>$id))->save(array('visitnum'=>$visitnum,'fitting_avg_num'=>$fitting_avg_num,'avg_download'=>$avg_download));
+                $daylog->where(array('id'=>$id))->save(array('visitnum'=>$visitnum,'fitting_avg_num'=>$fitting_avg_num,'c_fitting_avg_num'=>$c_fitting_avg_num,'avg_download'=>$avg_download));
                 $this->redirect('Fitting3d/index',array('p'=>$p,'daterange'=>$daterange));
             }
         }else{
