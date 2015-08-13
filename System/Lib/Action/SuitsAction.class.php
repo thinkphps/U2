@@ -266,7 +266,9 @@ public function delsuit(){
               $arr[] = $v['description'];
             }
               $fstr = implode('_',$arr);
-              $returnArr = array('code'=>1,'str'=>$fstr);
+              //获取色号
+              $colorResult = M('Products')->distinct('cid')->field('cid,cvalue')->where(array('num_iid'=>$num_iid))->select();
+              $returnArr = array('code'=>1,'str'=>$fstr,'ccolor'=>$colorResult);
           }else{
               $returnArr = array('code'=>0,'msg'=>'此商品没有打标签');
           }

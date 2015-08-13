@@ -19,14 +19,14 @@
                     <div class="form-group picdiv" id='adddiv'>
                         <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
                         <div class="col-lg-2 numcid">
-                            <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control numright" placeholder="色号ID" name='cid[]' value='{$nvo.cid}'>
+                            <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<select class="form-control numright" name='cid[]'><option value='0'>请选择</option><option value="{$nvo.cid}" selected="selected">{$nvo.cid}</option></select>
                         </div>
                     </div>
                     <else/>
                     <div class="form-group picdiv">
                         <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
                         <div class="col-lg-2 numcid">
-                            <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control numright" placeholder="色号ID" name='cid[]' value='{$nvo.cid}'>
+                            <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value='{$nvo.num_iid}'>&nbsp;&nbsp;色号&nbsp;&nbsp;<select class="form-control numright" name='cid[]'><option value='0'>请选择</option><option value="{$nvo.cid}" selected="selected">{$nvo.cid}</option></select>
                         </div>
                     </div>
                 </if>
@@ -35,7 +35,8 @@
             <div class="form-group picdiv" id='adddiv'>
                 <label for="inputTime" class="col-lg-2 control-label">商品ID</label>
                 <div class="col-lg-2 numcid">
-                    <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value=''>&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control numright" placeholder="色号ID" name='cid[]' value=''>
+                    <input type="text" class="form-control numleft" placeholder="商品ID" name='num_iid[]' value=''>&nbsp;&nbsp;色号&nbsp;&nbsp;<select class="form-control numright" name='cid[]'><option value='0'>请选择</option></select>
+                    <!--<input type="text" class="form-control numright" placeholder="色号ID" name='cid[]' value=''>-->
                 </div>
             </div>
         </if>
@@ -125,7 +126,7 @@
         $('#addpic').on('click',function(){
             var piclength = $('.picdiv').length;
             if(piclength <= 40 ){
-           $('.picdiv:eq('+(piclength-1)+')').after('<div class="form-group picdiv" ><label for="inputTime" class="col-lg-2 control-label">商品ID</label><div class="col-lg-2 numcid"><input type="text" class="form-control numleft" placeholder="商品ID" name="num_iid[]">&nbsp;&nbsp;色号&nbsp;&nbsp;<input type="text" class="form-control numright" placeholder="色号ID" name="cid[]" value="{$nvo.cid}"></div></div>');
+           $('.picdiv:eq('+(piclength-1)+')').after('<div class="form-group picdiv" ><label for="inputTime" class="col-lg-2 control-label">商品ID</label><div class="col-lg-2 numcid"><input type="text" class="form-control numleft" placeholder="商品ID" name="num_iid[]">&nbsp;&nbsp;色号&nbsp;&nbsp;<select class="form-control numright" name="cid[]"><option value="0">请选择</option></select></div></div>');
            }else{
               alert('新增不能超过50个');
             }
@@ -171,6 +172,15 @@
                 that = $(this);
             $.post(numurl,{num_iid:numiidvalue},function(data,status){
              if(data.code==1){
+               if(data.ccolor){
+                 var clength = data.ccolor.length,cstr="<option value='0'>请选择</option>";
+                 for(var i=0;i<clength;i++){
+                     cstr+='<option value="'+data.ccolor[i].cid+'">'+data.ccolor[i].cvalue+'</option>';
+                 }
+             }
+             if(cstr){
+                that.nextAll('.numright').html(cstr);
+             }
              that.parent('.numcid').nextAll('.numsty').remove();
              that.parent('.numcid').after('<div class="numsty" style="color:green;">'+data.str+'</div>');
             }else{
