@@ -371,7 +371,28 @@ function GetXingXi($desc){
             return 0;
           }
 		}else{
-           return 0;
+           preg_match_all('/<table border="0" cellpadding="0" cellspacing="0" style="border-left: 1.0px solid #dcdcdc;border-right: 1.0px solid #dcdcdc;border-top: 1.0px solid #dcdcdc;border-bottom: none medium;" width="725">  <tr> <td colspan="4" align="center" style="border-bottom: 1.0px solid #dcdcdc;"> <img src="https:\/\/img\.alicdn\.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" alt="" width="722" height="59" style="border: 0;"> <\/td> <\/tr>(.*)<\/table>/iU',$desc,$fg,PREG_SET_ORDER);
+		   if(!empty($fg)){
+			$fg[0][1] = preg_replace('/alt="(.*)"/iU','',$fg[0][1]);
+			$fg[0][1] = str_replace('  ',' ',$fg[0][1]);
+			preg_match_all('/<img src="(.*)" width="360"/iU',$fg[0][1],$fg2,PREG_SET_ORDER);
+            if(!empty($fg2)){
+				$extArr = array('jpg','png');
+				$mingxi = array();
+				foreach($fg2 as $k=>$v){
+				   $ext = pathinfo($v[1],PATHINFO_EXTENSION);
+				   if(in_array($ext,$extArr)){
+					 $mingxi[] = $v[1];
+				   }
+				}
+                unset($fg2);
+				return serialize($mingxi);
+			}else{
+              return 0;
+			}
+		   }else{
+             return 0;
+		   }
 		}
     }
 }
