@@ -177,13 +177,22 @@
                  for(var i=0;i<clength;i++){
                      cstr+='<option value="'+data.ccolor[i].cid+'">'+data.ccolor[i].cvalue+'</option>';
                  }
-             }
              if(cstr){
                 that.nextAll('.numright').html(cstr);
+             }
              }
              that.parent('.numcid').nextAll('.numsty').remove();
              that.parent('.numcid').after('<div class="numsty" style="color:green;">'+data.str+'</div>');
             }else{
+               if(data.ccolor){
+                 var clength = data.ccolor.length,cstr="<option value='0'>请选择</option>";
+                 for(var i=0;i<clength;i++){
+                     cstr+='<option value="'+data.ccolor[i].cid+'">'+data.ccolor[i].cvalue+'</option>';
+                 }
+             if(cstr){
+                that.nextAll('.numright').html(cstr);
+             }
+             }                 
                  that.parent('.numcid').nextAll('.numsty').remove();
                  that.parent('.numcid').after('<div class="numsty" style="color:red;">'+data.msg+'</div>');
                  if(data.code==-1){

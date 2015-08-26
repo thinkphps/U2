@@ -270,7 +270,9 @@ public function delsuit(){
               $colorResult = M('Products')->distinct('cid')->field('cid,cvalue')->where(array('num_iid'=>$num_iid))->select();
               $returnArr = array('code'=>1,'str'=>$fstr,'ccolor'=>$colorResult);
           }else{
-              $returnArr = array('code'=>0,'msg'=>'此商品没有打标签');
+			  //获取色号
+              $colorResult = M('Products')->distinct('cid')->field('cid,cvalue')->where(array('num_iid'=>$num_iid))->select();
+              $returnArr = array('code'=>0,'msg'=>'此商品没有打风格标签','ccolor'=>$colorResult);
           }
           }else{
             $returnArr = array('code'=>0,'msg'=>'参数错误');
