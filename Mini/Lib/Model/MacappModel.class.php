@@ -152,6 +152,7 @@ public function SqlCount(&$sql,$goodtag,$page_num){
         $sql = "select t1.bcid,t1.uq,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url from (select `bcid`,`num_iid`,`uq` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
         $detail = $beubeu_coll->query($sql);
         foreach($result as $k1=>$v1){
+            $result[$k1]['pic_clothes'] = $unihost.$v1['pic_clothes'];
             $detailArr = array();
             $karr = array();$karr2 = array();
             foreach($detail as $k2=>$v2){
