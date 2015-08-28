@@ -137,7 +137,7 @@ foreach($goods as $k=>$v){
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));
 	    $pic_md5 = md5_file($save_image[0]);
-        if($pic_md5!='7050e9efe57300e214ad2155f37eb2cd' || $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
+        if($pic_md5!='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
          $pro_img_url = ",url='".$save_image[1]."'";
         }else{
          unlink($save_image[0]);
@@ -173,7 +173,7 @@ foreach($goods as $k=>$v){
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));
 	$pic_md5 = md5_file($save_image[0]);
-    if($pic_md5!='7050e9efe57300e214ad2155f37eb2cd' || $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
+    if($pic_md5!='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
 	$insql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`) values ('".$good_list[0]['id']."','".$good_list[0]['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."')";
 	$db->mysqlquery($insql);
 	unset($insql);
@@ -271,7 +271,7 @@ foreach($goods as $k=>$v){
     $save_image = $db->createdir($v2['sku_id'],$root_dir.'/Upload/products/','Upload/products/',$url,2);
     @file_put_contents($save_image[0], file_get_contents($url));
 	$pic_md5 = md5_file($save_image[0]);
-    if($pic_md5!=='7050e9efe57300e214ad2155f37eb2cd' || $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
+    if($pic_md5!=='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
 	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."'),";
     }else{
         unlink($save_image[0]);
