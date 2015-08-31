@@ -30,7 +30,7 @@ $req->setIsTaobao("true");
 $req->setPageSize(200);
 $result = $c->execute($req, $db->token);
 
-$products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,desc,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,sku.modified,prop_img');
+$products->setFields('detail_url,property_alias,outer_id,change_prop,props_name,desc,sku.properties_name,sku.properties,sku.quantity,sku.sku_id,sku.price,sku.modified,prop_img');
 $goods = (array)$result->items->item;
 $goods_arr = array();
 $pstr = '';
@@ -144,7 +144,7 @@ foreach($goods as $k=>$v){
         }
 	}
 	//20140429
-	$psql = "update `u_products` set `cid`='".$cid."',`cvalue`='".$cstr."',`properties`='".$v2['properties']."',`properties_name`='".$v2['properties_name']."',`quantity`='".$v2['quantity']."' {$pro_img_url},`modified`='".$v2['modified']."' where `sku_id`='".$v2['sku_id']."'";
+	$psql = "update `u_products` set `cid`='".$cid."',`cvalue`='".$cstr."',`properties`='".$v2['properties']."',`properties_name`='".$v2['properties_name']."',`quantity`='".$v2['quantity']."' {$pro_img_url},`modified`='".$v2['modified']."',`price`='".$v2['price']."' where `sku_id`='".$v2['sku_id']."'";
 	$db->mysqlquery($psql);
 	unset($psql);
 	/*if(file_exists($root_dir.'/'.$p_list[0]['url'])){
@@ -174,29 +174,27 @@ foreach($goods as $k=>$v){
     @file_put_contents($save_image[0], file_get_contents($url));
 	$pic_md5 = md5_file($save_image[0]);
     if($pic_md5!='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
-	$insql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`) values ('".$good_list[0]['id']."','".$good_list[0]['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."')";
+	$insql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`,`price`) values ('".$good_list[0]['id']."','".$good_list[0]['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."','".$v2['price']."')";
 	$db->mysqlquery($insql);
 	unset($insql);
     }else{
      unlink($save_image[0]);
     }
 	}
-	/*}else{
-	sku库存等于0
-	$desql = "select `url` from `u_products` where `sku_id`='".$v2['sku_id']."'";
-    $deresult = $db->mysqlfetch($desql);
-	unset($desql);
-    if(file_exists($root_dir.'/'.$deresult[0]['url'])){
-	unlink($root_dir.'/'.$deresult[0]['url']);
-	}
-    $delsql = "delete from `u_products` where `sku_id`='".$v2['sku_id']."'";
-    $db->mysqlquery($delsql);
-    unset($delsql);
-	}*/
+    //更新sku价格历史表
+    $skuHisSql = "select `sku_id` from `u_sku_price_history` where `sku_id`='".$v2['sku_id']."' and `price`='".$v2['price']."'";
+    $skuResult = $db->mysqlfetch($skuHisSql);
+    if(empty($skuResult[0])){
+        $inskusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`price`,`modified`) values ('".$v2['sku_id']."','".$good_list[0]['num_iid']."','".$v2['price']."','".$v2['modified']."')";
+        $db->mysqlquery($inskusql);
+    }
 	}
 	}else{
-	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`) values ";
-     //有新商品
+	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`,`price`) values ";
+     //sku价格历史记录表
+     $skusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`price`,`modified`) values ";
+     $inskusql = '';
+     //插入新商品
 	$ppsql = '';
 	//获取分类
 	$catarr = array();
@@ -272,7 +270,9 @@ foreach($goods as $k=>$v){
     @file_put_contents($save_image[0], file_get_contents($url));
 	$pic_md5 = md5_file($save_image[0]);
     if($pic_md5!=='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
-	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."'),";
+	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."','".$v2['price']."'),";
+     //sku价格历史记录
+     $inskusql.="('".$v2['sku_id']."','".$v['num_iid']."','".$v2['price']."','".$v2['modified']."')";
     }else{
         unlink($save_image[0]);
     }
@@ -283,6 +283,11 @@ foreach($goods as $k=>$v){
     $db->mysqlquery($psql);
 	unset($ppsql);
 	unset($prosql);
+    //插入历史记录表
+    $skusql.=$inskusql;
+    $skusql = rtrim($skusql,',');
+    $db->mysqlquery($skusql);
+    unset($inskusql);unset($skusql);
 	}
 	}
     }
@@ -374,22 +379,16 @@ function GetXingXi($desc){
             return 0;
           }
 		}else{
-           preg_match_all('/<table border="0" cellpadding="0" cellspacing="0" style="border-left: 1.0px solid #dcdcdc;border-right: 1.0px solid #dcdcdc;border-top: 1.0px solid #dcdcdc;border-bottom: none medium;" width="725">  <tr> <td colspan="4" align="center" style="border-bottom: 1.0px solid #dcdcdc;"> <img src="https:\/\/img\.alicdn\.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg" alt="" width="722" height="59" style="border: 0;"> <\/td> <\/tr>(.*)<\/table>/iU',$desc,$fg,PREG_SET_ORDER);
+           preg_match_all('/src="https:\/\/img\.alicdn\.com\/imgextra\/i2\/196993935\/T22SyVXy8aXXXXXXXX-196993935\.jpg"(.*)src="https:\/\/img\.alicdn\.com\/imgextra\/i4\/196993935\/T24JuYXvXXXXXXXXXX-196993935\.jpg"/iU',$desc,$fg,PREG_SET_ORDER);
 		   if(!empty($fg)){
-			$fg[0][1] = preg_replace('/alt="(.*)"/iU','',$fg[0][1]);
-			$fg[0][1] = str_replace('  ',' ',$fg[0][1]);
-			preg_match_all('/<img src="(.*)" width="360"/iU',$fg[0][1],$fg2,PREG_SET_ORDER);
+			preg_match_all('/src="(.*)"/iU',$fg[0][1],$fg2,PREG_SET_ORDER);
             if(!empty($fg2)){
-				$extArr = array('jpg','png');
 				$mingxi = array();
-				foreach($fg2 as $k=>$v){
-				   $ext = pathinfo($v[1],PATHINFO_EXTENSION);
-				   if(in_array($ext,$extArr)){
-					 $mingxi[] = $v[1];
-				   }
+				foreach($fg2 as $mx=>$mv){
+				$mingxi[] = $mv[1];
 				}
-                unset($fg2);
-				return serialize($mingxi);
+				 unset($fg2);
+				 return serialize($mingxi);
 			}else{
               return 0;
 			}
