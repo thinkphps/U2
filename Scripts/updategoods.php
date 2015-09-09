@@ -185,14 +185,14 @@ foreach($goods as $k=>$v){
     $skuHisSql = "select `sku_id` from `u_sku_price_history` where `sku_id`='".$v2['sku_id']."' and `price`='".$v2['price']."'";
     $skuResult = $db->mysqlfetch($skuHisSql);
     if(empty($skuResult[0])){
-        $inskusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`price`,`modified`) values ('".$v2['sku_id']."','".$good_list[0]['num_iid']."','".$v2['price']."','".$v2['modified']."')";
+        $inskusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`item_bn`,`price`,`modified`) values ('".$v2['sku_id']."','".$good_list[0]['num_iid']."','".$item_bn."','".$v2['price']."','".$v2['modified']."')";
         $db->mysqlquery($inskusql);
     }
 	}
 	}else{
 	$prosql = "insert into `u_products` (`goods_id`,`num_iid`,`sku_id`,`cid`,`cvalue`,`properties`,`properties_name`,`quantity`,`url`,`modified`,`price`) values ";
      //sku价格历史记录表
-     $skusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`price`,`modified`) values ";
+     $skusql = "insert into `u_sku_price_history` (`sku_id`,`num_iid`,`item_bn`,`price`,`modified`) values ";
      $inskusql = '';
      //插入新商品
 	$ppsql = '';
@@ -272,7 +272,7 @@ foreach($goods as $k=>$v){
     if($pic_md5!=='7050e9efe57300e214ad2155f37eb2cd' && $pic_md5!='8f5b0194900ce27d4aa09bdf27be2874'){
 	$ppsql.="('".$goods_id."','".$v['num_iid']."','".$v2['sku_id']."','".$cid."','".$cstr."','".$v2['properties']."','".$v2['properties_name']."','".$v2['quantity']."','".$save_image[1]."','".$v2['modified']."','".$v2['price']."'),";
      //sku价格历史记录
-     $inskusql.="('".$v2['sku_id']."','".$v['num_iid']."','".$v2['price']."','".$v2['modified']."')";
+     $inskusql.="('".$v2['sku_id']."','".$v['num_iid']."','".$item_bn."','".$v2['price']."','".$v2['modified']."')";
     }else{
         unlink($save_image[0]);
     }
