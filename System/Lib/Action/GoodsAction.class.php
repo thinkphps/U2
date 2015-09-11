@@ -176,7 +176,7 @@ public function inittaobao(){
     $this->client->format = 'json';
     $this->client->appkey = $this->appkey;
     $this->client->secretKey = $this->secretKey;
-    $this->products = new ItemGetRequest;//获取商品详细信息
+    $this->products = new ItemSellerGetRequest;//获取商品详细信息
     $this->products->setFields('num,approve_status');
 }
 public function upu($data,$good){
@@ -302,8 +302,7 @@ public function DownNum(){
             $currentSheet = $PHPExcel->getSheet(0);
             $allColumn = $currentSheet->getHighestColumn();
             $allRow = $currentSheet->getHighestRow();
-            $i = 0;
-            $baseRow = 1;
+            $i = 1;
             for($currentRow = 2;$currentRow <= $allRow;$currentRow++){
                 $data = array();
                 for($currentColumn= 'A';$currentColumn<= $allColumn; $currentColumn++){
