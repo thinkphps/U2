@@ -104,7 +104,7 @@ class GoodsAction extends Action{
         }
     }
 public function exportxls($data,$baseRow,$i,$objPHPExcel,$good){
-    $sql = "select `num`,`approve_status`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."'";
+    $sql = "select t1.num,t1.approve_status,t1.title,t1.price,t1.detail_url,max(t2.price) as maxprice,min(t2.price) as minprice from (select `num_iid`,`num`,`approve_status`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."') as t1 INNER JOIN `u_sku_price_history` as t2 on t2.num_iid=t1.num_iid";
     $re = $good->query($sql);
     $row = $baseRow + $i;
     $hz = $re[0]['num']*$re[0]['price'];
@@ -115,7 +115,9 @@ public function exportxls($data,$baseRow,$i,$objPHPExcel,$good){
         ->setCellValue('D'.$row, $re[0]['detail_url'])
         ->setCellValue('E'.$row, $re[0]['num'])
         ->setCellValue('F'.$row, $re[0]['price'])
-        ->setCellValue('G'.$row, $hz);
+        ->setCellValue('G'.$row, $re[0]['maxprice'])
+        ->setCellValue('H'.$row, $re[0]['minprice'])
+        ->setCellValue('I'.$row, $hz);
 }
 public function headerxls(){
     $filename = "goods_num_".date('Y-m-d H:i',time()).'.xlsx';
@@ -270,7 +272,9 @@ public function DownNum(){
         ->setCellValue('D1', '商品链接')
         ->setCellValue('E1', '在线库存')
         ->setCellValue('F1', '一口价')
-        ->setCellValue('G1', '货值');
+        ->setCellValue('G1', '最高价')
+        ->setCellValue('H1', '最低价')
+        ->setCellValue('I1', '货值');
         $baseRow = 1;
         switch($ext){
             case 'csv':
