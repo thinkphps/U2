@@ -144,4 +144,14 @@ class FittingModel extends Model{
         }
         return $flag;
     }
+    public function IsLogin($uid,$user_name){
+        $where_str = " id='{$uid}' and ( taobao_name = '{$user_name}' OR mobile = '{$user_name}' )";
+        $user = M('User')->where($where_str)->find();
+        if(!empty($user)){
+            $flag = 1;
+        }else{
+            $flag = 0;
+        }
+        return $flag;
+    }
 }
