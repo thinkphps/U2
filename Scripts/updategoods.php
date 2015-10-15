@@ -118,7 +118,8 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
-    }else{
+    }
+    if(empty($cid) && empty($cstr)){
         $newcolor = GetColorValue($v2['properties_name']);
         $cid = $newcolor[0]['cid'];
         $cstr = $newcolor[0]['cv'];
@@ -260,7 +261,8 @@ foreach($goods as $k=>$v){
 	break;
 	}
 	}
-    }else{
+    }
+    if(empty($cid) && empty($cstr)){
         $newcolor = GetColorValue($v2['properties_name']);
         $cid = $newcolor[0]['cid'];
         $cstr = $newcolor[0]['cv'];
