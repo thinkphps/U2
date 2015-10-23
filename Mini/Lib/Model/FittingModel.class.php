@@ -144,6 +144,88 @@ class FittingModel extends Model{
         }
         return $flag;
     }
+    public function GetAppCollection($uid){
+        $arr = array();
+        $res = M('App3dCollection')->field('id,uid,goodcode,gender')->where(array('uid'=>$uid))->select();
+        if(count($res)>0){
+            $arr['code'] = 1;
+            $arr['data'] = $res;
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '没有收藏衣服';
+        }
+        return $arr;
+    }
+    public function AddAppCollection($data,$uid){
+        $arr = array();
+        if(is_array($data) && count($data)>0){
+            $appCollModel = M('App3dCollection');
+            $count = $appCollModel->field('id')->where(array('uid'=>$uid))->count();
+            if($count<20){
+            $time = date('Y-m-d H:i:s');
+            $sql = "insert into `u_app3d_collection` (`uid`,`goodcode`,`gender`,`createtime`) values ";
+            foreach($data as $k=>$v){
+              $v['gender'] = (string)$v['gender'];
+              $res = $appCollModel->field('id')->where(array('uid'=>$uid,'goodcode'=>$v['goodcode'],'gender'=>$v['gender']))->find();
+              if(empty($res)){
+                  $sql.="('".$uid."','".$v['goodcode']."','".$v['gender']."','".$time."'),";
+              }
+            }
+             $sql = rtrim($sql,',');
+             $appCollModel->query($sql);
+             $arr['code'] = 1;
+             $arr['msg'] = '收藏成功';
+          }else{
+                $arr['code'] = 0;
+                $arr['msg'] = '一个用户最多只能收藏20套';
+            }
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '参数错误';
+        }
+        return $arr;
+    }
+    public function GetAppFigure($uid){
+        $arr = array();
+        $res = M('App3dFigure')->field('id,uid,figure,gender')->where(array('uid'=>$uid))->select();
+        if(count($res)>0){
+            $arr['code'] = 1;
+            $arr['data'] = $res;
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '没有身材数据';
+        }
+        return $arr;
+    }
+    public function AddAppFigure($data,$uid){
+        $arr = array();
+        if(is_array($data) && count($data)>0){
+            $appFigureModel = M('App3dFigure');
+            $count = $appFigureModel->field('id')->where(array('uid'=>$uid))->count();
+            if($count<20){
+                $time = date('Y-m-d H:i:s');
+                $sql = "insert into `u_app3d_figure` (`uid`,`figure`,`gender`,`createtime`) values ";
+                foreach($data as $k=>$v){
+                    $v['gender'] = (string)$v['gender'];
+                    $res = $appFigureModel->field('id')->where(array('uid'=>$uid,'figure'=>$v['figure'],'gender'=>$v['gender']))->find();
+                    if(empty($res)){
+                        $sql.="('".$uid."','".$v['figure']."','".$v['gender']."','".$time."'),";
+                    }
+                }
+                $sql = rtrim($sql,',');
+                $appFigureModel->query($sql);
+                $arr['code'] = 1;
+                $arr['msg'] = '添加成功';
+            }else{
+                $arr['code'] = 0;
+                $arr['msg'] = '一个用户最多只能收藏20套';
+            }
+        }else{
+            $arr['code'] = 0;
+            $arr['msg'] = '参数错误';
+        }
+        return $arr;
+    }
     public function IsLogin($uid,$user_name){
         $where_str = " id='{$uid}' and ( taobao_name = '{$user_name}' OR mobile = '{$user_name}' )";
         $user = M('User')->where($where_str)->find();

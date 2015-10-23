@@ -222,7 +222,7 @@ class FittingServer{
         }else{
             $login_arr = array('code'=>0,'msg'=>'请输入正确的用户名或密码');
         }
-        return json_encode($login_arr);exit;
+        return json_encode($login_arr);
     }
     public function change_pwd($cpwd){
         $chpwd = json_decode($cpwd,true);
@@ -255,7 +255,7 @@ class FittingServer{
         }else{
             $login_arr = array('code'=>0,'msg'=>'请输入正确的旧密码');
         }
-        return json_encode($login_arr);exit;
+        return json_encode($login_arr);
     }
     public function GetUserInfo($udata){
         $use = json_decode($udata,true);
@@ -278,7 +278,7 @@ class FittingServer{
             $login_arr['code'] = 0;
             $login_arr['msg'] = '没有登录';
         }
-        return json_encode($login_arr);exit;
+        return json_encode($login_arr);
     }
     public function changeTaoName($udata){
         $use = json_decode($udata,true);
@@ -311,7 +311,37 @@ class FittingServer{
             $arr['code'] = 0;
             $arr['msg'] = '没有登录';
         }
-        return json_encode($arr);exit;
+        return json_encode($arr);
+    }
+    public function App3dCollection($data){
+        $parmas = json_decode($data,true);
+        $d3model = D('Fitting');
+        $Isper = $this->IsPermissions($d3model,$parmas);
+        if(!empty($Isper)){
+            return json_encode($Isper);
+        }
+        $type = intval(trim(htmlspecialchars($parmas['type'])));
+        if($type==1){
+            $re = $d3model->AddAppCollection($parmas['data'],$parmas["uniq_user_id"]);
+        }else if($type==2){
+            $re = $d3model->GetAppCollection($parmas['uniq_user_id']);
+        }
+        return json_encode($re);
+    }
+    public function App3dFigure($data){
+        $parmas = json_decode($data,true);
+        $d3model = D('Fitting');
+        $Isper = $this->IsPermissions($d3model,$parmas);
+        if(!empty($Isper)){
+            return json_encode($Isper);
+        }
+        $type = intval(trim(htmlspecialchars($parmas['type'])));
+        if($type==1){
+            $re = $d3model->AddAppFigure($parmas['data'],$parmas["uniq_user_id"]);
+        }else if($type==2){
+            $re = $d3model->GetAppFigure($parmas['uniq_user_id']);
+        }
+        return json_encode($re);
     }
     public function IsPermissions($mac,&$parmas){
         $flag = $mac->CkeckApp($parmas['uname'],$parmas['upass']);
