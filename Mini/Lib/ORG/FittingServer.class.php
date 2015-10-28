@@ -320,9 +320,13 @@ class FittingServer{
         if(!empty($Isper)){
             return json_encode($Isper);
         }
+        $parmas['fgoodcode'] = trim(htmlspecialchars($parmas['fgoodcode']));
+        if(empty($parmas['fgoodcode']) || empty($parmas['mgoodcode'])){
+            return json_encode(array('code'=>0,'msg'=>'收藏衣服不能为空'));
+        }
         $type = intval(trim(htmlspecialchars($parmas['type'])));
         if($type==1){
-            $re = $d3model->AddAppCollection($parmas['data'],$parmas["uniq_user_id"]);
+            $re = $d3model->AddAppCollection($parmas);
         }else if($type==2){
             $re = $d3model->GetAppCollection($parmas['uniq_user_id']);
         }
@@ -335,9 +339,13 @@ class FittingServer{
         if(!empty($Isper)){
             return json_encode($Isper);
         }
+        $parmas['ffigure'] = trim(htmlspecialchars($parmas['ffigure']));
+        if(empty($parmas['ffigure'])){
+            return json_encode(array('code'=>0,'msg'=>'身材不能为空'));
+        }
         $type = intval(trim(htmlspecialchars($parmas['type'])));
         if($type==1){
-            $re = $d3model->AddAppFigure($parmas['data'],$parmas["uniq_user_id"]);
+            $re = $d3model->AddAppFigure($parmas);
         }else if($type==2){
             $re = $d3model->GetAppFigure($parmas['uniq_user_id']);
         }

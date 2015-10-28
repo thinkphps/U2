@@ -146,39 +146,40 @@ class FittingModel extends Model{
     }
     public function GetAppCollection($uid){
         $arr = array();
-        $res = M('App3dCollection')->field('id,uid,goodcode,gender')->where(array('uid'=>$uid))->select();
+        $res = M('App3dCollection')->field('id,uid,fgoodcode,mgoodcode')->where(array('uid'=>$uid))->find();
         if(count($res)>0){
             $arr['code'] = 1;
-            $arr['data'] = $res;
+            $arr['id'] = $res['id'];
+            $arr['uid'] = $res['uid'];
+            $arr['fgoodcode'] = $res['fgoodcode'];
+            $arr['mgoodcode'] = $res['mgoodcode'];
         }else{
             $arr['code'] = 0;
             $arr['msg'] = '没有收藏衣服';
         }
         return $arr;
     }
-    public function AddAppCollection($data,$uid){
+    public function AddAppCollection($data){
         $arr = array();
         if(is_array($data) && count($data)>0){
             $appCollModel = M('App3dCollection');
-            $count = $appCollModel->field('id')->where(array('uid'=>$uid))->count();
-            if($count<20){
             $time = date('Y-m-d H:i:s');
-            $sql = "insert into `u_app3d_collection` (`uid`,`goodcode`,`gender`,`createtime`) values ";
-            foreach($data as $k=>$v){
-              $v['gender'] = (string)$v['gender'];
-              $res = $appCollModel->field('id')->where(array('uid'=>$uid,'goodcode'=>$v['goodcode'],'gender'=>$v['gender']))->find();
-              if(empty($res)){
-                  $sql.="('".$uid."','".$v['goodcode']."','".$v['gender']."','".$time."'),";
-              }
+            $data['gender'] = (string)$data['gender'];
+            $res = $appCollModel->field('id')->where(array('uid'=>$data['uniq_user_id']))->find();
+            if(count($res)>0){
+                $da = array('fgoodcode'=>$data['fgoodcode'],'mgoodcode'=>$data['mgoodcode'],'createtime'=>$time);
+                $reid = $appCollModel->where(array('uid'=>$data['uniq_user_id']))->save($da);
+            }else{
+                $da = array('uid'=>$data['uniq_user_id'],'fgoodcode'=>$data['fgoodcode'],'mgoodcode'=>$data['mgoodcode'],'createtime'=>$time);
+                $reid = $appCollModel->add($da);
             }
-             $sql = rtrim($sql,',');
-             $appCollModel->query($sql);
-             $arr['code'] = 1;
-             $arr['msg'] = '收藏成功';
-          }else{
-                $arr['code'] = 0;
-                $arr['msg'] = '一个用户最多只能收藏20套';
-            }
+             if($reid>0){
+                 $arr['code'] = 1;
+                 $arr['msg'] = '收藏成功';
+             }else{
+                 $arr['code'] = 0;
+                 $arr['msg'] = '收藏失败';
+             }
         }else{
             $arr['code'] = 0;
             $arr['msg'] = '参数错误';
@@ -187,38 +188,39 @@ class FittingModel extends Model{
     }
     public function GetAppFigure($uid){
         $arr = array();
-        $res = M('App3dFigure')->field('id,uid,figure,gender')->where(array('uid'=>$uid))->select();
+        $res = M('App3dFigure')->field('id,uid,ffigure,mfigure')->where(array('uid'=>$uid))->find();
         if(count($res)>0){
             $arr['code'] = 1;
-            $arr['data'] = $res;
+            $arr['id'] = $res['id'];
+            $arr['uid'] = $res['uid'];
+            $arr['ffigure'] = $res['ffigure'];
+            $arr['mfigure'] = $res['mfigure'];
         }else{
             $arr['code'] = 0;
             $arr['msg'] = '没有身材数据';
         }
         return $arr;
     }
-    public function AddAppFigure($data,$uid){
+    public function AddAppFigure($data){
         $arr = array();
         if(is_array($data) && count($data)>0){
             $appFigureModel = M('App3dFigure');
-            $count = $appFigureModel->field('id')->where(array('uid'=>$uid))->count();
-            if($count<20){
-                $time = date('Y-m-d H:i:s');
-                $sql = "insert into `u_app3d_figure` (`uid`,`figure`,`gender`,`createtime`) values ";
-                foreach($data as $k=>$v){
-                    $v['gender'] = (string)$v['gender'];
-                    $res = $appFigureModel->field('id')->where(array('uid'=>$uid,'figure'=>$v['figure'],'gender'=>$v['gender']))->find();
-                    if(empty($res)){
-                        $sql.="('".$uid."','".$v['figure']."','".$v['gender']."','".$time."'),";
-                    }
-                }
-                $sql = rtrim($sql,',');
-                $appFigureModel->query($sql);
+            $time = date('Y-m-d H:i:s');
+            $data['gender'] = (string)$data['gender'];
+            $res = $appFigureModel->field('id')->where(array('uid'=>$data['uniq_user_id']))->find();
+            if(count($res)>0){
+                $da = array('ffigure'=>$data['ffigure'],'mfigure'=>$data['mfigure'],'createtime'=>$time);
+                $reid = $appFigureModel->where(array('uid'=>$data['uniq_user_id']))->save($da);
+            }else{
+                $da = array('uid'=>$data['uniq_user_id'],'ffigure'=>$data['ffigure'],'mfigure'=>$data['mfigure'],'createtime'=>$time);
+                $reid = $appFigureModel->add($da);
+            }
+            if($reid>0){
                 $arr['code'] = 1;
                 $arr['msg'] = '添加成功';
-            }else{
+             }else{
                 $arr['code'] = 0;
-                $arr['msg'] = '一个用户最多只能收藏20套';
+                $arr['msg'] = '添加失败';
             }
         }else{
             $arr['code'] = 0;
