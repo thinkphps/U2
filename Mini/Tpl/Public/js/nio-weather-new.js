@@ -12,9 +12,9 @@ jQuery(function($){
             '午时避免在户外久留，穿<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%C6%DF%B7%D6%BF%E3" target="__blank">7分裤</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=T%D0%F4" target="__blank">T恤</a>',
             '<a href="http://uniqlo.tmall.com/search.htm?keyword=%D5%EB%D6%AF%C9%C0" target="__blank">针织衫</a>+<a href="http://uniqlo.tmall.com/search.htm?keyword=%C5%A3%D7%D0%BF%E3" target="__blank">牛仔裤</a>，<a href="http://uniqlo.tmall.com/search.htm?keyword=%B9%A4%D7%B0%BF%E3" target="__blank">工装裤</a>，或<a href="http://uniqlo.tmall.com/search.htm?keyword=%C1%AC%D2%C2%C8%B9" target="__blank">连衣裙</a>是不错的选择',
             '白天穿长袖<a href="http://uniqlo.tmall.com/search.htm?keyword=%B3%C4%C9%C0" target="__blank">衬衫</a>+<a href="http://uniqlo.tmall.com/search.htm?keyword=%D5%EB%D6%AF%C9%C0" target="__blank">针织衫</a>，配<a href="http://uniqlo.tmall.com/search.htm?keyword=%C5%A3%D7%D0%BF%E3" target="__blank">牛仔裤</a>，晚上加件外套吧',
-            '<a href="http://uniqlo.tmall.com/search.htm?keyword=%B7%E7%D2%C2" target="__blank">风衣</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%D5%EB%D6%AF%C9%C0" target="__blank">针织衫</a>、连帽<a href="http://uniqlo.tmall.com/search.htm?keyword=%C7%D1%BF%CB" target="__blank">茄克</a>赶紧穿起来',
-            '羊毛混纺短<a href="http://uniqlo.tmall.com/search.htm?keyword=%B4%F3%D2%C2" target="__blank">大衣</a>，<a href="http://uniqlo.tmall.com/search.htm?keyword=%D3%F0%C8%DE" target="__blank">羽绒</a>服，<a href="http://uniqlo.tmall.com/search.htm?keyword=%B3%A4%C9%C0" target="__blank">长衫</a>+<a href="http://uniqlo.tmall.com/search.htm?keyword=%CE%A7%BD%ED" target="__blank">围巾</a>',
-            '宜穿厚<a href="http://uniqlo.tmall.com/search.htm?keyword=%D3%F0%C8%DE%B7%FE" target="__blank">羽绒服</a>、<a href="http://uniqlo.tmall.com/search.htm?keyword=%D2%A1%C1%A3%C8%DE" target="__blank">摇粒绒</a>外套+羽绒背心，配上<a href="http://uniqlo.tmall.com/search.htm?keyword=%CE%A7%BD%ED" target="__blank">围巾</a>和<a href="http://uniqlo.tmall.com/search.htm?keyword=%CA%D6%CC%D7" target="__blank">手套</a>'
+            '<a href="https://uniqlo.tmall.com/search.htm?keyword=%C3%C0%C0%FB%C5%AB" target="__blank">美利奴毛衣</a>、混纺/羊毛/羊绒衫、<a href="http://uniqlo.tmall.com/search.htm?keyword=%B7%E7%D2%C2" target="__blank">风衣</a>、连帽<a href="http://uniqlo.tmall.com/search.htm?keyword=%C7%D1%BF%CB" target="__blank">茄克</a>赶紧穿起来',
+            '<a href="https://uniqlo.tmall.com/search.htm?keyword=%D3%F0%C8%DE" target="__blank">羽绒服</a>或羊毛混纺短<a href="https://uniqlo.tmall.com/search.htm?keyword=%B4%F3%D2%C2" target="__blank">大衣</a>，内配精纺<a href="https://uniqlo.tmall.com/search.htm?keyword=%C3%C0%C0%FB%C5%AB" target="__blank">美利奴毛衣</a>+<a href="http://uniqlo.tmall.com/search.htm?keyword=%CE%A7%BD%ED" target="__blank">围巾</a>',
+            '宜穿厚<a href="https://uniqlo.tmall.com/search.htm?keyword=%D3%F0%C8%DE" target="__blank">羽绒服</a>、<a href="https://uniqlo.tmall.com/search.htm?keyword=%D2%A1%C1%A3%C8%DE" target="__blank">摇粒绒</a>外套+<a href="https://uniqlo.tmall.com/search.htm?keyword=%D3%F0%C8%DE%B1%B3%D0%C4" target="__blank">羽绒背心</a>，配上<a href="http://uniqlo.tmall.com/search.htm?keyword=%CE%A7%BD%ED" target="__blank">围巾</a>和<a href="http://uniqlo.tmall.com/search.htm?keyword=%CA%D6%CC%D7" target="__blank">手套</a>'
         ],
         time : function(){
             var
@@ -185,14 +185,14 @@ jQuery(function($){
             }
             /*kimi*/
             if(avg >14){
-                if(avg >= 30) arrIndex = 0
-                else if(avg >= 24) arrIndex = 1
+                if(avg >= 24) arrIndex = 0
+                else if(avg >= 19) arrIndex = 1
                 else arrIndex = 2
             } else {
                 if(avg >= 11) arrIndex = 3
                 else if(avg >= 6) arrIndex = 4
-                //else if(avg >= 1) arrIndex = 5
-                else arrIndex = 5
+                else if(avg >= 1) arrIndex = 5
+                else arrIndex = 6
             }
 
             $('#nio-tip').html(this.tips[arrIndex]);
