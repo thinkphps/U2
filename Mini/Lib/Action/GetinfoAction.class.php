@@ -138,7 +138,7 @@ where u_suits.approve_status=0 and u_suits.suitID = ".$suitid;
         if(!empty($item_bn)){
 
            $goods = M('Goods');
-           $sql = "select num_iid,title,approve_status,IF(num>0 and approve_status='onsale',detail_url,'') as detail_url,num from u_beubeu_goods where item_bn like '".$item_bn."%' order by num desc";
+           $sql = "select num_iid,title,approve_status,IF(num>0 and approve_status='onsale',detail_url,'') as detail_url,num from u_beubeu_goods where item_bn like '".$item_bn."%' order by approve_status DESC,num desc limit 0,1";
            $result = $goods->query($sql);
            if(!empty($result[0])){
                  $returnArr = array('code'=>1,'data'=>$result[0]);
