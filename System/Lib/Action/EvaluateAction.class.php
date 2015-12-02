@@ -24,7 +24,10 @@ class EvaluateAction extends Action{
      *
      评论生成csv
     */
-    public function index(){
+	public function index(){
+       $this->display();
+	}
+    public function CreateCsv(){
         if(!empty($this->aid)){
             header("Content-type: text/html; charset=utf-8");
             set_time_limit(0);
@@ -33,7 +36,8 @@ class EvaluateAction extends Action{
             $ke = 1;
             $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
             $time = time();
-            $date = date('Y-m-d',$time-24*3600);
+            //$date = date('Y-m-d',$time-24*3600);
+			echo $date = trim($this->_post('edate'));
             $filepath = $uniqlo->createdir($root_dir.'/Upload/evaluate/','/Upload/evaluate/',$time,'',0,'');
             $step = 500;
             $offset=0;
@@ -77,7 +81,7 @@ class EvaluateAction extends Action{
             }
             fclose($fp);
             $url = 'http://'.$_SERVER['HTTP_HOST'].$filepath[1];
-            echo "<a href='".$url."'>下载评论</a>";
+            echo "<a href='".$url."' style='font-size:20px;'>下载评论</a>";
             exit;
         }else{
         $this->display('Login/index');
