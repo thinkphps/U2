@@ -104,7 +104,7 @@ class GoodsAction extends Action{
         }
     }
 public function exportxls($data,$baseRow,$i,$objPHPExcel,$good){
-    $sql = "select t1.num,t1.approve_status,t1.title,t1.price,t1.detail_url,max(t2.price) as maxprice,min(t2.price) as minprice from (select `num_iid`,`num`,`approve_status`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."') as t1 INNER JOIN `u_sku_price_history` as t2 on t2.num_iid=t1.num_iid";
+    $sql = "select t1.num,t1.approve_status,t1.title,t1.price,t1.detail_url,max(t2.price) as maxprice,min(t2.price) as minprice from (select `num_iid`,`num`,`approve_status`,`title`,`price`,`detail_url` from `u_goods` where `item_bn` ='UQ".$data[0]."' and `approve_status`!='') as t1 INNER JOIN `u_sku_price_history` as t2 on t2.num_iid=t1.num_iid";
     $re = $good->query($sql);
     $row = $baseRow + $i;
     $hz = $re[0]['num']*$re[0]['price'];
