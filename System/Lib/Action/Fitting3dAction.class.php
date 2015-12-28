@@ -18,6 +18,7 @@ class Fitting3dAction extends Action{
            $daylog = M('DayLog');
            $where = array();
            $daterange = trim($this->_request('daterange'));
+           $sourtype = trim($this->_request('sourtype'));
            $pagestr = '';
            if(!empty($daterange)){
                $arr_date = explode('-',$daterange);
@@ -30,6 +31,10 @@ class Fitting3dAction extends Action{
                }
                $pagestr.="/daterange/".$daterange;
            }
+           if(!empty($sourtype)){
+             $where['source_type'] = $sourtype;
+             $pagestr.="sourtype/".$sourtype;
+           }
            import("@.ORG.Pageyu");
            $count = $daylog->where($where)->count();
            $p = new Page($count,20,$pagestr);
@@ -38,6 +43,7 @@ class Fitting3dAction extends Action{
            $this->assign('list',$list);
            $this->assign('page',$page);
            $this->assign('daterange',$daterange);
+           $this->assign('sourtype',$sourtype);
            $this->assign('p',$_GET['p']);
            $this->display();
         }else{
@@ -71,6 +77,7 @@ class Fitting3dAction extends Action{
         if(!empty($this->aid)){
             $id = $this->_request('id');
             $daterange = trim($this->_request('daterange'));
+            $sourtype = trim($this->_request('sourtype'));
             $p = $this->_request('p');
             $daylog = M('DayLog');
             $visitnum = trim($this->_request('visitnum'));
@@ -79,6 +86,7 @@ class Fitting3dAction extends Action{
                 $this->assign('result',$result);
                 $this->assign('p',$p);
                 $this->assign('daterange',$daterange);
+                $this->assign('sourtype',$sourtype);
                 $this->display();
             }else{
                 //总访客平均试衣件数
@@ -87,7 +95,7 @@ class Fitting3dAction extends Action{
                 //访客下载比
                 $avg_download = sprintf("%.2f",number_format(($result['download_num']/$visitnum),4,'.','')*100);
                 $daylog->where(array('id'=>$id))->save(array('visitnum'=>$visitnum,'fitting_avg_num'=>$fitting_avg_num,'c_fitting_avg_num'=>$c_fitting_avg_num,'avg_download'=>$avg_download));
-                $this->redirect('Fitting3d/index',array('p'=>$p,'daterange'=>$daterange));
+                $this->redirect('Fitting3d/index',array('p'=>$p,'daterange'=>$daterange,'sourtype'=>$sourtype));
             }
         }else{
             $this->display('Login/index');

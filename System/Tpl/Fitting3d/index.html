@@ -10,6 +10,14 @@
             <input type="text" style="width: 200px" name="daterange" id="daterange"
                    class="form-control" value="{$daterange}" />
         </div>
+        <div class="form-group">
+            <label>渠道</label>
+            <select name='sourtype'>
+                <option value='0'>请选择</option>
+                    <option value="web" <if condition="$sourtype eq 'web'">selected='selected'</if> >web</option>
+                    <option value="ios" <if condition="$sourtype eq 'ios'">selected='selected'</if> >ios</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-success">搜索</button>
     </form>
     <table class="table table-striped table-hover text-center table-responsive table-condensed">
@@ -43,7 +51,7 @@
                 <td>{$vo.download_num}</td>
                 <td>{$vo.avg_download}%</td>
                 <td>{$vo.source_type}</td>
-                <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">查看</a>&nbsp;<a href="{:U('Fitting3d/logedit',array('id'=>$vo['id'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">编辑</a></td>
+                <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange,'sourtype'=>$sourtype))}" class="btn btn-primary">查看</a>&nbsp;<a href="{:U('Fitting3d/logedit',array('id'=>$vo['id'],'p'=>$p,'daterange'=>$daterange,'sourtype'=>$sourtype))}" class="btn btn-primary">编辑</a></td>
             </tr>
         </volist>
         </tbody>
