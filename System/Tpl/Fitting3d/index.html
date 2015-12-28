@@ -25,6 +25,7 @@
             <th>当日sku数</th>
             <th>插件下载次数</th>
             <th>访客下载比</th>
+            <th>渠道</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -41,6 +42,7 @@
                 <td>{$vo.sku_num}</td>
                 <td>{$vo.download_num}</td>
                 <td>{$vo.avg_download}%</td>
+                <td>{$vo.source_type}</td>
                 <td><a href="{:U('Fitting3d/logview',array('log_day'=>$vo['log_day'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">查看</a>&nbsp;<a href="{:U('Fitting3d/logedit',array('id'=>$vo['id'],'p'=>$p,'daterange'=>$daterange))}" class="btn btn-primary">编辑</a></td>
             </tr>
         </volist>
