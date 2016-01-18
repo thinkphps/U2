@@ -133,8 +133,8 @@
 
     function ckreco(e,dv){
         var cknum = 0;
-        var maxcknum = 6;
-        var msg = "您最多只能推荐6种套装";
+        var maxcknum = 8;
+        var msg = "您最多只能推荐8种套装";
 
         if(!e.val()){
             e.attr("checked",false);
@@ -204,7 +204,7 @@
             }else{
                 var qianz = 'd'
             }
-            if(len<6){
+            if(len<8){
              if(e.prop("checked")==true){
             var sstdiv = "<div class='col-sm-6' style='width:16%' name='divsst" + styid + "' id='"+qianz+"del"+sutid+"'>"+
                 "<div class='thumbnail'>"+ "<div class='caption'>"+
@@ -218,7 +218,7 @@
             $("#" + dv).append(sstdiv);
             }
          }else{
-             alert('每个方案,推荐搭配不能超过6套');
+             alert('每个方案,推荐搭配不能超过8套');
             }
     }
 
