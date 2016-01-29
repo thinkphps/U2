@@ -148,9 +148,9 @@ var timer,loadid = 0;
             $BIGO('.youyigui_btn,.dr_logo').on('click',function(){
                var ua = window.navigator.userAgent;
                 if(ua.indexOf('MetaSr')>0){
-                    window.open('http://uniqlo.bigodata.com.cn/u2/mini.php/new/?kid=11727_51912_660842_848108');
+                    window.open('http://vfr.uniqlo.cn/u2/mini.php/new/?kid=11727_51912_660842_848108');
                 }else{
-                window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2');
+                window.open('http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php');
 				}
 			});
 
@@ -160,9 +160,9 @@ var timer,loadid = 0;
                 var gender = $BIGO(this).data('gender');
 				var ua = window.navigator.userAgent;
                 if(ua.indexOf('MetaSr')>0){
-                    window.open('http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
+                    window.open('http://vfr.uniqlo.cn/u2/mini.php?suitid='+ suitid + '&gender=' + gender);
                 }else{  
-                window.open('http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ suitid + '&gender=' + gender);
+                window.open('http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php?suitid='+ suitid + '&gender=' + gender);
 				}
 			});
 
@@ -451,7 +451,7 @@ var callBackFunction = {
     callbackSuits : function(list){
         this.PageIndex = list.page;
         $BIGO("#div_index-bin,.index-suit").hide();
-        this.CurrentPageSize = 6;
+        this.CurrentPageSize = 8;
         this.CurrentLoadSize = 10;
         if(list.da == null){
             this.setPageButtonDisplay(true);
@@ -460,7 +460,7 @@ var callBackFunction = {
         }
         var strHtml = "";
         var listlength = list.da.length;
-        if( listlength > 6 ){
+        if( listlength > 8 ){
             if( listlength < this.PageSize ){
                 for(var i = 0 ;i < listlength;i++){
                     strHtml += this.getCoverScrollItem(list.da[i]);
@@ -485,7 +485,7 @@ var callBackFunction = {
         $BIGO('#suits-container').html(strHtml);
         $BIGO('#suits-container').coverscroll({items:'.item',minfactor:35,  'step':{ // compressed items on the side are steps
             'begin':0,//first shown step
-            'limit':6, // how many steps should be shown on each side
+            'limit':8, // how many steps should be shown on each side
             'width':8, // how wide is the visible section of the step in pixels
             'scale':true // scale down steps
         }});
@@ -551,14 +551,14 @@ var callBackFunction = {
                 numids[i] = detail[i].num_iid;
                 strItem += '<div class="circle">'
                 strItem += '<a data-numid="'+detail[i].num_iid +'" href="'+ detail[i].detail_url +'" target="_blank" title="'+detail[i].title +'">';
-                strItem += '<img src="http://uniqlo.bigodata.com.cn/'+   detail[i].pic_url +'" ></a></div>';
+                strItem += '<img src="https://vfr.uniqlo.cn/'+   detail[i].pic_url +'" ></a></div>';
             }
         }
         strItem +='</div>';
         strItem += '<div class="itemTitle">'+ this.getStyleByDescription(item.description)+'</div>';//<br><font style="color: #C0C0C0">'+ item.eglishName+'</font>
         strItem += '<div class="gotoroom none">';
 
-        var url ='http://a1761.oadz.com/link/C/1761/727/dbSAtIqGPkyXTaxXq7gPysYowUc_/p020/0/http://uniqlo.bigodata.com.cn/u2/?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
+        var url ='http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
         strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank" style="color:#fff;">»•–Èƒ‚ ‘“¬º‰ ‘¥©</a></div></div>';
         return strItem;
     },

@@ -399,7 +399,7 @@ jQuery(function($){
             cabnet.kvTimer = setTimeout(function(){
 
                 cabnet.kvHover.css({                               // ÏÔÊ¾Í¼Æ¬Ðü¸¡¿ò
-                    left: position.left + 55,
+                    left: position.left + 101,
                     top:  top
                 }).show()
                 cabnet.kvIsOpen = true
