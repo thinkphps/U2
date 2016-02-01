@@ -33,7 +33,7 @@ class Fitting3dAction extends Action{
            }
            if(!empty($sourtype)){
              $where['source_type'] = $sourtype;
-             $pagestr.="sourtype/".$sourtype;
+             $pagestr.="/sourtype/".$sourtype;
            }
            import("@.ORG.Pageyu");
            $count = $daylog->where($where)->count();
