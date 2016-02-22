@@ -412,7 +412,7 @@ public function App_forget_pwd($mobile){
     if($mobileRow){
                     //调用手机短信接口
                     $new_passwrod = randStr(6,'NUMBER');
-                    $msg="我们为您重置了密码，您的新密码为：{$new_passwrod}【优衣库 虚拟试衣间】";
+                    $msg="我们为您重置了密码，您的新密码为：{$new_passwrod}【优衣库 在线虚拟试衣】";
                     $sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
                     if($sms_str){
                         $data['password'] = md5($new_passwrod);

@@ -91,16 +91,20 @@ class RecoModel extends Model{
         return $arr;
     }
     public function getBeubeu($where,$page,$page_num,$start){
-        $where['suitImageUrl'] = array('neq','');
-        $where['approve_status'] = 0;
-        $beubeu_suits = M('BeubeuSuits');
+        $where['suitImageUrl'] = array('exp','IS NOT NULL');
+        //$beubeu_suits = M('BeubeuSuits');
+        $beubeu_suits = M('SuitOrder');
         $count = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->count();
         $num = ceil($count/$page_num);
         if($page>$num){
             $page = 1;
             $start = 0;
         }
-        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('suitID desc')->limit($start.','.$page_num)->select();
+        if(isset($where['suitStyleID']) && !empty($where['suitStyleID'])){
+        $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('id desc')->limit($start.','.$page_num)->select();
+        }else{
+            $beubeu_suits_list = $beubeu_suits->field('suitID,suitGenderID,suitImageUrl')->where($where)->order('all_order asc')->limit($start.','.$page_num)->select();
+        }
         foreach($beubeu_suits_list as $k=>$v){
             switch($v['suitGenderID']){
                 case 1 :
@@ -168,9 +172,9 @@ class RecoModel extends Model{
 }
     public function getCateList2($where){
         $customcate = M('Sellercats');
-        $custom = $customcate->cache(true)->field('ID as id,shortName as name')->where($where)->group('shortName')->order('sort_order asc')->select();
+        $custom = $customcate->field('ID as id,shortName as name')->where($where)->group('shortName')->order('sort_order asc')->select();
         foreach($custom as $k=>$v){
-            $idlist = $customcate->cache(true)->field('ID as id')->where(array('selected'=>1,'shortName'=>$v['name'],'isshow'=>0))->select();
+            $idlist = $customcate->field('ID as id')->where(array('selected'=>1,'shortName'=>$v['name'],'isshow'=>0))->select();
             $idstr = '';
             foreach($idlist as $k1=>$v1){
                 if($v1){
@@ -196,17 +200,43 @@ class RecoModel extends Model{
       $str.=$v['id'].',';
       }
       $str = rtrim($str,',');
-      $sql = "select t1.bcid,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      //$sql = "select t1.bcid,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url from (select `bcid`,`num_iid` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid";
+      $sql = "select t1.bcid,t1.uq,bg.`num_iid`,bg.`approve_status`,bg.`title`,bg.`num`,bg.`pic_url`,IF(bg.num>0 and bg.approve_status='onsale',bg.detail_url,'') as detail_url,li.loveid,li.buyid from (select `bcid`,`num_iid`,`uq` from `u_beubeu_coll_goods` as bc where bc.bcid in ({$str})) as t1 inner join `u_beubeu_goods` as bg on bg.num_iid=t1.num_iid left join (SELECT bl.num_iid,MAX(buyid) buyid,MAX(loveid) loveid from(
+	select lo.num_iid,NULL buyid, lo.id as loveid from u_love lo where lo.uid=".$where['uid']."
+	union all
+	select bu.num_iid,bu.id,NULL from u_buy as bu where bu.uid=".$where['uid']."
+) bl group by bl.num_iid) as li on li.num_iid=bg.num_iid";
       $detail = $beubeu_coll->query($sql);
       foreach($result as $k1=>$v1){
           $detailArr = array();
+		  $karr = array();$karr2 = array();
           foreach($detail as $k2=>$v2){
              if($v1['id']==$v2['bcid']){
                  if($v2['num']<=0 || $v2['approve_status']=='instock'){
                      $v2['title'] = '【已售罄】'.$v2['title'];
                  }
-                 $detailArr[] = $v2;
+                 $orid = $this->collGoodsOrder($v2['title']);
+                 if($orid!=-1){
+                     $karr2[$orid] = $v2;
+					 $karr[] = $orid;
+                 }else{
+                     array_push($detailArr,$v2);
+                 }
+                 //$detailArr[] = $v2;
              }
+          }
+          arsort($karr);      
+          foreach($karr as $k3=>$v3){
+			  if(empty($detailArr)){
+                 $detailArr[] = $karr2[$v3];
+			  }else{		  
+			  array_unshift($detailArr,$karr2[$v3]);
+			  }
+         }
+          foreach($detailArr as $kd=>$vd){
+              $sql = "select `url` from `u_products` where `num_iid`=".$vd['num_iid']." and `cid`=right('".$vd['uq']."',2) limit 0,1";
+              $pic = $beubeu_coll->query($sql);
+              $detailArr[$kd]['pic_url'] = $pic[0]['url'];
           }
           $result[$k1]['detail'] = $detailArr;
       }
@@ -217,16 +247,36 @@ class RecoModel extends Model{
 
 public function getUserInfo(){
     $uid = session("uniq_user_id");
-    $user = M('User')->field('user_name,mobile,taobao_name,collflag')->where(array('id'=>$uid))->find();
+    $user = M('User')->field('user_name,mobile,taobao_name,collflag,login_type')->where(array('id'=>$uid))->find();
     $collcount = M('BeubeuCollection')->field('id')->where(array('uid'=>$uid))->count();
-    if(!empty($user['taobao_name'])){
-        $uname =  $user['taobao_name'];
+    if($user['login_type']=='normal'){
+         if(!empty($user['mobile'])){
+             $uname = $user['mobile'];
+         }
+        if(!empty($user['user_name'])){
+            $uname = $user['user_name'];
+        }
+        if(!empty($user['taobao_name'])){
+            $uname = $user['taobao_name'];
+        }
     }else{
-        $uname = '';
+        $uname = $user['user_name'];
     }
     $arr[] = $uname;
     $arr[] = $user['collflag'];
     $arr[] = $collcount;
+    $arr[] = $user['taobao_name'];
     return $arr;
 }
+   public function collGoodsOrder($title){
+       $arr = array('羽绒服','大衣','外套','卫衣','马甲','毛衣','针织衫','衬衫','衫','薄衫','茄克','家居服','套装（连身装）','T恤','背心','内衣','裙子','裤','帽子','坎肩围巾','包','袜子','鞋子','配饰','首饰','其他');
+       $orid = -1;
+    foreach($arr as $k=>$v){
+       if(is_int(strpos($title,$v))){
+           $orid = $k;
+          break;
+       }
+    }
+       return $orid;
+   }
 }

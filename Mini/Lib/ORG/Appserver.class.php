@@ -25,7 +25,7 @@ class Appserver{
           return json_encode($login_arr);exit;
       }else{
           $mobileCode = randStr(4,'NUMBER');
-          $msg="您的验证码为：{$mobileCode}，请登录优衣库虚拟试衣间网站验证您的手机号码【优衣库 虚拟试衣间】";
+          $msg="您的验证码为：{$mobileCode}，请登录优衣库在线虚拟试衣网站验证您的手机号码【优衣库 在线虚拟试衣】";
           $sms_str = sms_send('2062343','66801','66801',$phone,$msg);
           if($sms_str){
               $login_arr = array('code'=>1,'mobileCode'=>$mobileCode);
@@ -823,7 +823,7 @@ public function SharePic($data){
     $root_dir = realpath(dirname(dirname(dirname(dirname(__FILE__)))));
     $url = $mac->AppShare($bbody,$bshose,$bclose,$bhead,$root_dir);
     if($url){
-      $arr['url'] = $url;$arr['link'] = 'http://'.$_SERVER['HTTP_HOST'].'/';$arr['text'] = '#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。虚拟试衣间，Let’s Go!@优衣库官方网络旗舰店';
+      $arr['url'] = $url;$arr['link'] = 'http://'.$_SERVER['HTTP_HOST'].'/';$arr['text'] = '#优享随心配#想穿什么就试什么！搭配听我的，玩转优衣库。在线虚拟试衣，Let’s Go!@优衣库官方网络旗舰店';
     }else{
       $arr['url'] = '';
     }
