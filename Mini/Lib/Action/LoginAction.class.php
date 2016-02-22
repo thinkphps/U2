@@ -139,7 +139,7 @@ class LoginAction extends Action{
 					if($row){
 						//调用手机短信接口
 						$new_passwrod = randStr(6,'NUMBER');
-						$msg="我们为您重置了密码，您的新密码为：{$new_passwrod}【优衣库 虚拟试衣间】";
+						$msg="我们为您重置了密码，您的新密码为：{$new_passwrod}【优衣库 在线虚拟试衣】";
 						$sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
 						if($sms_str){
 							$data['password'] = md5($new_passwrod);
@@ -171,7 +171,7 @@ class LoginAction extends Action{
 	function active_phone(){
 		$mobile      = isset($_POST['mobile']) && !empty($_POST['mobile']) ? $_POST['mobile'] : '' ;
 		$mobileCode = randStr(4,'NUMBER');
-		$msg="您的验证码为：{$mobileCode}，请登录优衣库虚拟试衣间网站验证您的手机号码【优衣库 虚拟试衣间】";
+		$msg="您的验证码为：{$mobileCode}，请登录优衣库在线虚拟试衣网站验证您的手机号码【优衣库 在线虚拟试衣】";
 		$sms_str = sms_send('2062343','66801','66801',$mobile,$msg);
 		if($sms_str){
 			session("mobileCode",$mobileCode);

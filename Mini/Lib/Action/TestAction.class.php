@@ -30,8 +30,8 @@ class TestAction extends Action {
     }
     public function jk2(){
         ini_set('soap.wsdl_cache_enabled', "0");//注意该选项 soap有缓存
-        $client = new SoapClient('http://uniqlo.bigodata.com.cn/utes8dlkt/mini.php/App/index?wsdl');
         //$client = new SoapClient('http://localhost:81/U2/mini.php/App/index?wsdl');
+        $client = new SoapClient('http://uniqlo.bigodata.com.cn/u2/mini.php/App/index?wsdl');
         try {
             $result = $client->getgoods(json_encode(array('uname'=>'h43bhkjh8702','upass'=>'3nl97s9dj28s02ne','uniq_user_id'=>7,'uniq_user_name'=>'13641946979','sid'=>1)));
             print_r(json_decode($result));
@@ -172,14 +172,39 @@ class TestAction extends Action {
     }
     public function jk10(){
       ini_set("wsdl_cache_enabled",0);
-      //$client = new SoapClient('http://localhost:81/U2/mini.php/Fitting/index?wsdl');
-      $client = new SoapClient('http://uniqlo.bigodata.com.cn/u2/fxuby.php/Fitting/index?wsdl');
+      $client = new SoapClient('http://localhost:81/U2/mini.php/Fitting/index?wsdl');
+      //$client = new SoapClient('http://uniqlo.bigodata.com.cn/u2/fxuby.php/Fitting/index?wsdl');
       try{
-          $result = $client->AddSyLog(json_encode(array('uname'=>'df@s89H2390NL20Y','upass'=>'3sd897Djkkls048HDOs','data'=>array(array('uid'=>1,'taobao_name'=>1,'ip'=>'127.0.0.1','visittime'=>'2015-06-04 12:23:23','intime'=>'2015-06-04 12:23:23','isdown'=>0,'fitting_time'=>'2015-06-04 12:23:23','	gender'=>'Male','height'=>1,'weight'=>1,'shoulder'=>1,'upper_arm'=>1,'chest'=>1,'cup'=>1,'waist'=>1,'hip'=>1,'leg'=>1,'leg_long'=>1,'num_iid'=>1234,'goodsize'=>'L','color'=>'02','isbuy'=>0,'isweibo'=>0,'isweixin'=>0),array('uid'=>1,'taobao_name'=>1,'ip'=>'127.0.0.1','visittime'=>'2015-06-04 12:23:23','intime'=>'2015-06-04 12:23:23','isdown'=>0,'fitting_time'=>'2015-06-04 12:23:23','	gender'=>'Male','height'=>1,'weight'=>1,'shoulder'=>1,'upper_arm'=>1,'chest'=>1,'cup'=>1,'waist'=>1,'hip'=>1,'leg'=>1,'leg_long'=>1,'num_iid'=>1234,'goodsize'=>'L','color'=>'02','isbuy'=>0,'isweibo'=>0,'isweixin'=>0)))));
+          $result = $client->AddSyLog(json_encode(array('uname'=>'df@s89H2390NL20Y','upass'=>'3sd897Djkkls048HDOs','data'=>array(array('uid'=>1,'taobao_name'=>1,'ip'=>'127.0.0.1','visittime'=>'2015-12-14 12:23:23','intime'=>'2015-12-14 12:23:23','isdown'=>0,'fitting_time'=>'2015-12-14 12:23:23','	gender'=>'Male','height'=>1,'weight'=>1,'shoulder'=>1,'upper_arm'=>1,'chest'=>1,'cup'=>1,'waist'=>1,'hip'=>1,'leg'=>1,'leg_long'=>1,'num_iid'=>1234,'goodsize'=>'L','color'=>'02','isbuy'=>0,'isweibo'=>0,'isweixin'=>0,'source'=>'4dweb'),array('uid'=>1,'taobao_name'=>1,'ip'=>'127.0.0.1','visittime'=>'2015-12-04 12:23:23','intime'=>'2015-12-04 12:23:23','isdown'=>0,'fitting_time'=>'2015-12-04 12:23:23','	gender'=>'Male','height'=>1,'weight'=>1,'shoulder'=>1,'upper_arm'=>1,'chest'=>1,'cup'=>1,'waist'=>1,'hip'=>1,'leg'=>1,'leg_long'=>1,'num_iid'=>1234,'goodsize'=>'L','color'=>'02','isbuy'=>0,'isweibo'=>0,'isweixin'=>0,'source'=>'4dweb')))));
           print_r(json_decode($result));
       }catch (SoapFault $f){
           echo "Error Message: {$f->getMessage()}";
           echo '<p>';
       }
+    }
+    public function jk11(){
+        ini_set("wsdl_cache_enabled","0");
+        $client = new SoapClient('http://localhost:81/U2/mini.php/Fitting/index?wsdl');
+        //$client = new SoapClient('http://uniqlo.bigodata.com.cn/u2/fxuby.php/Fitting/index?wsdl');
+        try{
+            $functions = $client->__getFunctions ();
+            var_dump ($functions);
+            //$result = $client->GetUserInfo(json_encode(array('uname'=>'df@s89H2390NL20Y','upass'=>'3sd897Djkkls048HDOs','fitting_num'=>3207,'fitting_avg_num'=>4.5553977272727,'modify_num'=>704,'click_buy_num'=>210,'sku_num'=>17,'download_num'=>0,'log_day'=>'2015-07-15','uniq_user_id'=>7,'uniq_user_name'=>'13641946979')));
+            //$result = $client->App3dFigure(json_encode(array('uname'=>'df@s89H2390NL20Y','upass'=>'3sd897Djkkls048HDOs','uniq_user_id'=>7,'uniq_user_name'=>'13641946979','type'=>2,'ffigure'=>'1_2_4','mfigure'=>'1_4_5')));
+			$result = $client->TotalDayLog('{"uname":"df@s89H2390NL20Y","upass":"3sd897Djkkls048HDOs","data":[{"fitting_num":297,"fitting_avg_num":3.26,"modify_num":91,"click_buy_num":2,"sku_num":3640,"download_num":0,"log_day":"2015-12-27","source":"ios"},{"fitting_num":1018,"fitting_avg_num":4.01,"modify_num":254,"click_buy_num":69,"sku_num":3640,"download_num":360,"log_day":"2015-12-27","source":"web"}]}');
+            var_dump($client->__getLastRequest());
+            var_dump($client->__getLastRequestHeaders());
+            var_dump($client->__getLastResponse());
+            var_dump($client->__getLastResponseHeaders());
+            print_r(json_decode($result));
+        }catch(SoapFault $f){
+            echo "Error Message: {$f->getMessage()}";
+            echo '<p>';
+        }
+    }
+    public function jk12(){
+        $ip = get_client_ip();
+        $str = getIPLoc_sina($ip);
+        echo "var remote_ip_info=".$str.";";
     }
 }
