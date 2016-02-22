@@ -150,11 +150,11 @@ var timer,loadid = 0;
                 if(ua.indexOf('MetaSr')>0){
                     window.open('http://vfr.uniqlo.cn/u2/mini.php/new/?kid=11727_51912_660842_848108');
                 }else{
-                window.open('http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php');
+                window.open('http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php/new/');
 				}
 			});
 
-            //点击模特图跳转到虚拟试衣间并将相关衣服加入收藏夹中
+            //点击模特图跳转到在线虚拟试衣并将相关衣服加入收藏夹中
             $BIGO('#suits-container').on('click','.imgSuits',function(){
                 var suitid = $BIGO(this).data('suitid');
                 var gender = $BIGO(this).data('gender');
@@ -559,7 +559,7 @@ var callBackFunction = {
         strItem += '<div class="gotoroom none">';
 
         var url ='http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php?suitid='+ item.beubeuSuitID + '&gender=' + item.suitGenderID ;
-        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank" style="color:#fff;">去虚拟试衣间试穿</a></div></div>';
+        strItem += '<a href="javascript:;" data-dressurl="'+ url + '" class="dressurl" target="_blank" style="color:#fff;">去在线虚拟试衣试穿</a></div></div>';
         return strItem;
     },
     getStyleByDescription : function(description){
