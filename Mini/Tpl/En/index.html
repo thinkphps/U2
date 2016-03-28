@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优衣库 - 在线虚拟试衣</title>
+    <meta name="keywords" content="优衣库 在线虚拟试衣,搭配,服装搭配,男装搭配,女装搭配,童装搭配,看天气,学搭配" />
+    <meta name="description" content="优衣库 - 在线虚拟试衣 | 一个可以按气温、穿衣场合及风格快速为您推荐搭配组合的智能衣柜" />
+    <meta property="qc:admins" content="3405014465147621774141637563675453044347" />
+    <link href="__TMPL__Public/css/dressing_room_detail.css?1" rel="stylesheet" type="text/css" />
+    <link href="__TMPL__Public/css/uniqlonew.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="header">
+    <div class="header_top">
+        <!--头部-logo-->
+        <h1><a href="javascript:;">优衣库在线虚拟试衣</a></h1>
+
+        <!--头部-城市-->
+        <div class="dr_city">
+            <div class="city_name">
+                <h2 id="nio-city">上海</h2>
+                <span id='cinpinyin'>shanghai</span>
+            </div>
+            <div class="city">
+                <a href="#" class="change_city">切换城市</a>
+                <form class="mini-city linkageselect pa none">
+                    <a href="javascript:;" class="mini-city-close"></a>
+                    <label>省份<select class="level_1" id='le1'></select></label>
+                    <label>城市<select class="level_2" id='le2'></select></label>
+                    <input type="submit" value="切换" />
+                </form>
+                <div id="wubaidu" class='none'>
+                    <select name="" id="spid" style="width:73px;">
+                        <option selected="selected" value="44444">上海</option>
+                        <option value="55555">北京</option>
+                    </select>
+                    <select name="" id="scid" style="width:73px;">
+                        <option selected="selected" value="44444">徐汇区</option>
+                        <option value="55555">闵行区</option>
+                    </select>
+                    <select name="sn" id="ddlShop" style="width:73px;">
+                        <option value='0'>请选择</option>
+                    </select>&nbsp;<span id='emptymsg'  style="font-size:10px;color: #999999;"></span>
+                </div>
+                <div id='storets' class="near_un"><i class="city_wz" id="shopInfo"></i><a class='stroecs' href="#" id="a_shopinfo">您附近的优衣库门店</a><i class="city_wz2 none" id="a_shopinfo2"></i></div>
+            </div>
+        </div>
+
+        <!--头部-优惠-->
+        <div class="preferential">
+            <ul class="preferential_side_bar">
+                <if condition="$newstore neq ''">
+                    <li class="current" id="tablink1" onmouseover="easytabs('1', '1');"  onfocus="easytabs('1', '1');" onclick="return false;"></li>
+                </if>
+                <li id="tablink2" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');"  onclick="return false;"></li>
+            </ul>
+
+            <ul class="preferential_con" id='scrollDiv'>
+                <if condition="$newstore neq ''">
+                    <li class="preferential_1">
+                        <i></i>
+                        <a href='javascript:;'>{$newstore}</a>
+                    </li>
+                </if>
+                <li class="preferential_2">
+                    <i></i>
+                    <p id='nio-tip'></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--头部-链接入口-->
+    <div class="header_bot">
+        <if condition="$uniq_user_name neq ''">
+            <div class="login">
+                <p><span>账号：</span><strong id="lblusername">{$uniq_user_name}</strong></p>
+            </div>
+        </if>
+        <a href="http://a1761.oadz.com/link/C/1761/1512/6IAjATJNexEP90rLxajXtjQdIVk_/p020/0/http://vfr.uniqlo.cn/u2/mini.php" id='utuichu'>返回2D</a>
+        <a href="http://www.uniqlo.cn/?kid=11727_51912_165320_210820" class="tmail2" target='__blank'><i></i>优衣库官方旗舰店</a>
+        <a href="http://uniqlo.tmall.com/?kid=11727_51912_165316_210816" class="tmail" target='__blank'><i></i>优衣库天猫旗舰店</a>
+        <a href="{:U('New/index')}" class="encl" target='__blank'><i></i>中文版</a>
+    </div>
+</div>
+<!--我的试衣间-->
+<div class="my_yyg changjing1" id='newsyj'>
+    <iframe src="http://uniqlo.3dclothes.org/en/?uid={$user.id}&tid={$user.taobao_name}" width="100%" height="800px" scrolling='no' frameborder='0' style="position: absolute;z-index:1;"></iframe>
+</div>
+<!--主体内容-->
+<div class="main_con">
+    <div class="product_more"><a href="javascript:;" id='moreid'></a></div>
+    <div class="footer">
+        <p>2015© Uniqlo.BIGOData.com.cn</p>
+        <p>沪ICP备13035368号  <a href="javascript:;" class="mini-clause-btn">隐私条款</a></p>
+    </div>
+</div>
+<include file="Home:user"/>
+<script type='text/javascript'>
+    //性别对应的标记
+    var buyurl = '{:U('Index/addlove')}',basedir = '{$basedir}',fenflag = 0,login_type = "{$user.login_type}";
+    var addda = '{:U('Index/getdapeijian')}',logurl = "{:U('Lea/addLog')}";
+    var imgpath = '__TMPL__Public';
+    var goodurl = '{:U('Index/getgood')}';
+    var addwarurl = '{:U('Index/addwar')}';
+    var cityn = '{$cityn}';
+    var provi = '{$provi}',sendurl = '{$uniurl}',dsn="{$dsn}",styleurl="{:U('Getinfo/sexToStyle')}";
+    var addpropurl = '{:U('Lea/addlea')}',midstyleurl = "{:U('Getinfo/midsexToStyle')}";
+    var registerurl = '{:U('Login/register')}',uppopo = "{:U('Lea/upShowTag')}",checkrvery = "{:U('Login/check_registr_very')}",regurl = "{:__APP__}";
+    var findpwdurl = '{:U('Login/forget_pwd')}';
+    var changepwdurl = '{:U('Login/change_pwd')}';
+    var activephone = '{:U('Login/active_phone')}';
+    var activesucc = '{:U('Login/activate_succ')}';
+    var ckeckuserurl = '{:U('Login/check_user_exists')}';
+    var ckeckmobileurl = '{:U('Login/check_mobile_exists')}';
+    var ckeckusermobileurl = '{:U('Login/check_user_mobile_exists')}';
+    var loginurl = '{:U('Login/login')}';
+    var activeurl = '{:U('Login/active')}';
+    var relateurl = '{:U('Login/relate')}';
+    var luid = '{$uniq_user_name}',isuturl = '{:U('Getisut/index')}',showtag = "{$user.showtag}";
+    var tmplPath = '{:__TMPL__Public}';
+    var rootPath = '{:__ROOT__}';
+    var getweatherurl = '{:U('API/GetWeatherByCityID')}',getCityUrl = "{:U('API/getcity')}",getCidItembnUrl = '{:U('Getinfo/getCidItembn')}';
+    var getJackNumiidUrl = '{:U('Getinfo/getJackNumiid')}',inCollUrl = "{:U('Getinfo/addBeubenColl')}";
+    var getCollDataUrl = '{:U('Getinfo/getCollData')}';
+    var getIsCollUrl = '{:U('Getinfo/getIsColl')}';
+    var setCollFlagUrl = '{:U('Getinfo/setCollFlag')}';
+</script>
+<script type="text/javascript" src="__TMPL__Public/js/jquery.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/citys.js"></script>
+<script type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/nio-weather-new.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/main.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/reg.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/waterfall/handlebars.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/waterfall/waterfall.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/dressing_room_detail.js"></script>
+<script type="text/javascript" src="__TMPL__Public/js/jquery-ui-draggable/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="http://js.tongji.linezing.com/3457601/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3457601/tongji.gif"/></a></noscript>
+<div class='none'>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?eae23d84704268e7e6a596f327e4ff3f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fcb0acb89a80e5e7b5fc80bc9867650f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+</body>
+</html>
+<script type='text/javascript'>
+$(function(){
+    if(luid && showtag<3){
+        $('.tsxx2').removeClass('none');
+    }
+    $('#le1').on('change',function(){
+        var pvalue = $('#le1 option:selected').val();
+        $.post(getCityUrl,{pid:pvalue},function(data,status){
+            var str = '<option value="0">请选择</option>';
+            $.each(data.clist,function(pin,pv){
+                if(pv.sel==1){
+                    var sel2 = "selected='selected'";
+                }
+                str+="<option value='"+pv.region_id+"' "+sel2+">"+pv.local_name+"</option>";
+            });
+            $('#le2').html(str);
+        });
+    });
+
+    //地图城市切换
+    $('#spid').on('change',function(){
+        var pid = $('#spid option:selected').val();
+        var url = sendurl+"mini.php/API/getcity";
+        $.post(url,{pid:pid,baiduid:1},function(data,status){
+            var str = '<option value="0">请选择</option>';
+            $.each(data.clist,function(pin,pv){
+                str+="<option value='"+pv.region_id+"'>"+pv.local_name+"</option>";
+            });
+            $('#scid').html(str);
+            $('#ddlShop').html('<option value="0">请选择</option>');
+        });
+    });
+});
+
+
+$('#moreid').on('click',function(){
+    //getgoods($.weather.avg);
+});
+$('#scid').on('change',function(){
+    var pid = $('#spid option:selected').val(),cid = $('#scid option:selected').val();
+    var cityname = $('#scid option:selected').text();
+    if(cityname[cityname.length-1]=='市'){
+        var cnm = cityname.replace('市','');
+    }else{
+        var cnm = $('#spid option:selected').text();
+    }
+    $.weather.tipcity = cnm;
+    $.weather.init({'city' : cnm,imgpath : window.imgpath,'subid':'1','baiduerjiid':cid,
+        callback: function(city, temper, info){
+            var avg = getavg(temper.high,temper.low);
+            $.weather.avg = avg;
+            avg = avg?avg:0;
+            $.weather.occasion = $.weather.occasion?$.weather.occasion:0;
+            $.weather.sex = $.weather.sex?$.weather.sex:0;
+            $.weather.set = $.weather.set?$.weather.set:0;
+            //sendcity(city,info.city);
+        }
+    });
+});
+
+function getGenstyleItem(item,i){
+    var strItem = '';
+    if(i==0){
+        var select = "select";
+    }else{
+        var select = "";
+    }
+    strItem += "<li la='"+item.ID+"' class='small_btn'><a href='javascript:;' class='detail_sub_btn"+item.pid+" "+select+"'></a></li>";
+    return strItem;
+}
+function tipsfunction(v){
+    //tips
+    stop_autochange();
+    for (i = 1; i <=3; i++) {
+        $('#tablink' + i).removeClass('current');
+        $('.preferential_' + i).css('display','none');
+    }
+    $('#tablink2').addClass('current');
+    $('.preferential_2').css('display','block');
+    $('#shopid').html(v);
+
+}
+
+
+var tablink_idname = new Array("tablink"),lilength = $('#scrollDiv').children().length;
+var tabcontent_idname = new Array("preferential_");
+var tabcount = new Array("2");
+var loadtabs = new Array('1');
+loadtabs[0] = 2-lilength+1;
+var autochangemenu = 1,counter = 2-lilength,slength=2-lilength+ 1,timer;
+var changespeed = 1;
+var stoponhover = 0;
+
+function easytabs(menunr, active) {
+    if (menunr == autochangemenu) {
+        currenttab = active;
+    }
+    if ((menunr == autochangemenu) && (stoponhover == 1)) {
+        stop_autochange()
+    } else if ((menunr == autochangemenu) && (stoponhover == 0)) {
+        counter = 0;
+    }
+    menunr = menunr - 1;
+    for (i = 1; i <= tabcount[menunr]; i++) {
+        $('#'+tablink_idname[menunr] + i).removeClass('current');
+        $('.'+tabcontent_idname[menunr] + i).css('display','none');
+    }
+
+    if($('#'+tablink_idname[menunr] + active)){
+        $('#'+tablink_idname[menunr] + active).addClass('current');
+        $('.'+tabcontent_idname[menunr] + active).css('display','block');
+    }
+}
+
+var totaltabs = tabcount[autochangemenu - 1];
+var currenttab = loadtabs[autochangemenu - 1];
+
+function start_autochange() {
+    counter = counter + 1;
+    timer = setTimeout("start_autochange()", 3000);
+    if (counter == changespeed + 1) {
+        currenttab++;
+        if (currenttab > totaltabs) {
+            currenttab = slength;
+        }
+        easytabs(autochangemenu, currenttab);
+        restart_autochange();
+    }
+}
+
+function restart_autochange() {
+    clearTimeout(timer);
+    counter = 0;
+    start_autochange();
+}
+function stop_autochange() {
+    clearTimeout(timer);
+    counter = 0;
+}
+
+var menucount = loadtabs.length;
+var a = 0;
+var b = 1;
+do {
+    easytabs(b, loadtabs[a]);
+    a++;
+    b++;
+} while (b <= menucount);
+if (autochangemenu != 0) {
+    start_autochange();
+}
+
+function fleshVerify(id,fver){
+    //重载验证码
+    var time = new Date().getTime();
+    document.getElementById(id).src= '__APP__/Login/'+fver+'/'+time;
+}
+</script>
