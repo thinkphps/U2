@@ -35,7 +35,6 @@ jQuery(function($) {
         bindCollections : function(pageOffset){
             $('ul.detail_sub_nav').css('z-index',1);
             $('ul.mini-aside').css('z-index',1);
-            $('#utuichu').hide();
             var page =  parseInt(UserCenter.change_yf.data('page'));
             page += pageOffset;
             $.post(getCollDataUrl,{page:page},function(data){
@@ -133,7 +132,6 @@ jQuery(function($) {
         UserCenter.myWardrobe.click();
         $('.my_yyg_title,#sfid').show();
         $('.user_center').addClass('none').hide();
-        $('#utuichu').show();
     });
     //衣服换一组显示
     UserCenter.change_yf.on('click',function(){
